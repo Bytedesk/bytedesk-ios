@@ -14,9 +14,11 @@
 		3D48249B21567AB500B50593 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D48249A21567AB500B50593 /* Assets.xcassets */; };
 		3D48249E21567AB500B50593 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D48249C21567AB500B50593 /* LaunchScreen.storyboard */; };
 		3D4824A121567AB500B50593 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4824A021567AB500B50593 /* main.m */; };
+		633CF444D8C8AFA1A6D82FD4 /* libPods-ByteDeskDemo2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69E68DD0023CDF8A13947F78 /* libPods-ByteDeskDemo2.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C20A828CD63D7F1CE63495C /* Pods-ByteDeskDemo2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ByteDeskDemo2.release.xcconfig"; path = "Pods/Target Support Files/Pods-ByteDeskDemo2/Pods-ByteDeskDemo2.release.xcconfig"; sourceTree = "<group>"; };
 		3D48248B21567AB400B50593 /* ByteDeskDemo2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ByteDeskDemo2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D48248E21567AB400B50593 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3D48248F21567AB400B50593 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -29,6 +31,8 @@
 		3D48249D21567AB500B50593 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D48249F21567AB500B50593 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D4824A021567AB500B50593 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		69E68DD0023CDF8A13947F78 /* libPods-ByteDeskDemo2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ByteDeskDemo2.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3C69B0A8C98013616DA8A13 /* Pods-ByteDeskDemo2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ByteDeskDemo2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ByteDeskDemo2/Pods-ByteDeskDemo2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				633CF444D8C8AFA1A6D82FD4 /* libPods-ByteDeskDemo2.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +52,8 @@
 			children = (
 				3D48248D21567AB400B50593 /* ByteDeskDemo2 */,
 				3D48248C21567AB400B50593 /* Products */,
+				9B884EA1340B365871D0B07B /* Pods */,
+				58DB5A58A20265C8F65F1DC9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,6 +83,23 @@
 			path = ByteDeskDemo2;
 			sourceTree = "<group>";
 		};
+		58DB5A58A20265C8F65F1DC9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				69E68DD0023CDF8A13947F78 /* libPods-ByteDeskDemo2.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9B884EA1340B365871D0B07B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E3C69B0A8C98013616DA8A13 /* Pods-ByteDeskDemo2.debug.xcconfig */,
+				2C20A828CD63D7F1CE63495C /* Pods-ByteDeskDemo2.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -83,6 +107,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3D4824A421567AB500B50593 /* Build configuration list for PBXNativeTarget "ByteDeskDemo2" */;
 			buildPhases = (
+				DB06C633B33B3941AC572FC0 /* [CP] Check Pods Manifest.lock */,
 				3D48248721567AB400B50593 /* Sources */,
 				3D48248821567AB400B50593 /* Frameworks */,
 				3D48248921567AB400B50593 /* Resources */,
@@ -140,6 +165,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DB06C633B33B3941AC572FC0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ByteDeskDemo2-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3D48248721567AB400B50593 /* Sources */ = {
@@ -289,15 +335,13 @@
 		};
 		3D4824A521567AB500B50593 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3C69B0A8C98013616DA8A13 /* Pods-ByteDeskDemo2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L5F47963M2;
 				INFOPLIST_FILE = ByteDeskDemo2/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedesk.ByteDeskDemo2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -306,15 +350,13 @@
 		};
 		3D4824A621567AB500B50593 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C20A828CD63D7F1CE63495C /* Pods-ByteDeskDemo2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L5F47963M2;
 				INFOPLIST_FILE = ByteDeskDemo2/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedesk.ByteDeskDemo2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
