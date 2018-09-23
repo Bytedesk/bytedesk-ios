@@ -2,8 +2,8 @@
 //  DetailViewController.m
 //  demo
 //
-//  Created by 宁金鹏 on 2018/9/23.
-//  Copyright © 2018年 宁金鹏. All rights reserved.
+//  Created by 萝卜丝·Bytedesk.com on 2018/9/23.
+//  Copyright © 2018年 萝卜丝·Bytedesk.com. All rights reserved.
 //
 
 #import "DetailViewController.h"

@@ -2,12 +2,18 @@
 //  AppDelegate.m
 //  demo
 //
-//  Created by 宁金鹏 on 2018/9/23.
-//  Copyright © 2018年 宁金鹏. All rights reserved.
+//  Created by 萝卜丝·Bytedesk.com on 2018/9/23.
+//  Copyright © 2018年 萝卜丝·Bytedesk.com. All rights reserved.
 //
 
 #import "AppDelegate.h"
 #import "DetailViewController.h"
+
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+// 需要替换为真实的
+#define DEFAULT_TEST_APPKEY @"201809171553111"
+#define DEFAULT_TEST_SUBDOMAIN @"vip"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 

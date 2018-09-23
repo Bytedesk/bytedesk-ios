@@ -2,8 +2,8 @@
 //  KFDSInputEmotionParser.h
 //  feedback
 //
-//  Created by 宁金鹏 on 2017/2/22.
-//  Copyright © 2017年 宁金鹏. All rights reserved.
+//  Created by 萝卜丝·Bytedesk.com on 2017/2/22.
+//  Copyright © 2017年 萝卜丝·Bytedesk.com. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

@@ -1,0 +1,6 @@
+framework module Pods_bytedesk_ui_bduiTests {
+  umbrella header "Pods-bytedesk-ui-bduiTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
