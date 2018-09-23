@@ -1,10 +1,69 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
 
-target 'ByteDeskDemo' do
-  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
-  # use_frameworks!
 
-  # Pods for ByteDeskDemo
+# Uncomment this line to define a global platform for your project
+# 如果项目中需要用到一个workspace含多个project 公用一个podfile, 直接拷贝此文件放在跟workspace文件同目录 然后修改即可
+# 最后执行 pod update
+
+platform :ios, '9.0'
+workspace 'bytedesk'
+
+
+target 'demo' do
+    # Comment this line if you're not using Swift and don't want to use dynamic frameworks
+    use_frameworks!
+#
+    project 'demo/demo.xcodeproj'
+    
+    pod 'bytedesk-core'
+    
+#   第一种集成方式：直接使用pod
+    pod 'bytedesk-ui'
+
+#   第二种集成方式：将bdui项目集成到自己项目中，并添加依赖
+    pod 'FMDB'
+    pod 'MQTTClient'
+    pod 'AFNetworking'
+    pod 'QMUIKit'
+    pod 'M80AttributedLabel'
+    pod 'HCSStarRatingView'
 
 end
+
+
+
+target 'bytedesk-ui' do
+    # Comment this line if you're not using Swift and don't want to use dynamic frameworks
+    use_frameworks!
+
+    project 'bdui/bdui.xcodeproj'
+
+    # Pods for bdui
+    pod 'FMDB'
+    pod 'MQTTClient'
+    pod 'AFNetworking'
+    pod 'QMUIKit'
+    pod 'M80AttributedLabel'
+    pod 'HCSStarRatingView'
+    
+    #
+    pod 'bytedesk-core'
+
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
