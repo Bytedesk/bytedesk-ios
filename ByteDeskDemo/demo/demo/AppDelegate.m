@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "DetailViewController.h"
 
+#import <bytedesk-core/bdcore.h>
+
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 // 需要替换为真实的
@@ -28,6 +30,17 @@
     UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
     navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     splitViewController.delegate = self;
+    
+    
+    // 访客登录
+    [BDCoreApis visitorLoginWithAppkey:DEFAULT_TEST_APPKEY withSubdomain:DEFAULT_TEST_SUBDOMAIN resultSuccess:^(NSDictionary *dict) {
+        // 登录成功
+        NSLog(@"%s, %@", __PRETTY_FUNCTION__, dict);
+    } resultFailed:^(NSError *error) {
+        // 登录失败
+        NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
+    }];
+    
     return YES;
 }
 

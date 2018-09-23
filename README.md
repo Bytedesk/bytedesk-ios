@@ -7,7 +7,7 @@
 
 - <a href="https://www.bytedesk.com/admin#/register" target="_blank">注册账号</a>
 - <a href="https://www.bytedesk.com/admin#/login" target="_blank">登录后台</a>
-- 分配应用：登录后台->接入设置->移动应用->添加应用
+- 分配应用：登录后台->所有设置->应用管理->APP
 
 
 ## 集成SDK
@@ -34,16 +34,27 @@
 > 第一种方式：完全依赖pod集成，在Podfile中添加如下：
 
 ```c++
+pod 'FMDB'
+pod 'MQTTClient'
+pod 'AFNetworking'
+pod 'QMUIKit'
+pod 'M80AttributedLabel'
+pod 'HCSStarRatingView'
+
 pod 'bytedesk-ui'
 pod 'bytedesk-core'
 ```
 
-> 第二种方式：首先添加bdui到自己项目中，然后将其添加为项目的依赖，在Podfile中添加如下：
+> 第二种方式：支持自定义界面。首先添加bdui到自己项目中，然后将其添加为项目的依赖，在Podfile中添加如下：
 
 ```c++
+pod 'FMDB'
+pod 'MQTTClient'
 pod 'AFNetworking'
 pod 'QMUIKit'
 pod 'M80AttributedLabel'
+pod 'HCSStarRatingView'
+
 pod 'bytedesk-core'
 ```
 
@@ -51,53 +62,32 @@ pod 'bytedesk-core'
 
 ```c++
 pod 'FMDB'
-pod 'Socket.IO-Client-Swift', '~> 13.0.0'
+pod 'MQTTClient'
 pod 'AFNetworking'
 pod 'QMUIKit'
 pod 'M80AttributedLabel'
+pod 'HCSStarRatingView'
 ```
-
 
 ## 登录接口
 
 
-`获取Appkey和Subdomain：登录后台->接入设置->移动应用`
+`获取Appkey和Subdomain：登录后台->所有设置->应用管理->APP`
+
+> 首先引入头文件：
 
 > 接口一：默认用户名登录，系统自动生成一串数字作为用户名
 
 ```c++
-[WXCoreApis visitorLoginWithAppkey:@"Appkey" withSubdomain:@"Subdomain" resultSuccess:^(NSDictionary *dict) {
-    // 登录成功
-    NSLog(@"%s, %@", __PRETTY_FUNCTION__, dict);
-} resultFailed:^(NSError *error) {
-    // 登录失败
-    NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
-}];
+// 访客登录
+[BDCoreApis visitorLoginWithAppkey:DEFAULT_TEST_APPKEY withSubdomain:DEFAULT_TEST_SUBDOMAIN resultSuccess:^(NSDictionary *dict) {
+        // 登录成功
+        NSLog(@"%s, %@", __PRETTY_FUNCTION__, dict);
+    } resultFailed:^(NSError *error) {
+        // 登录失败
+        NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
+    }];
 ```
-
-> 接口二：自定义用户名登录
-
-> 初次登录需要首先调用注册接口：
-
-```c++
-[WXCoreApis visitorRegisterWithUsername:@"username" withAppkey:@"Appkey" withSubdomain:@"Subdomain" resultSuccess:^(NSDictionary *dict) {
-    // 注册成功
-} resultFailed:^(NSError *error) {
-    // 注册失败
-}];
-```
-
-> 注册成功之后调用登录接口：
-
-```c++
-[WXCoreApis visitorLoginWithUsername:@"username" withAppkey:@"Appkey" withSubdomain:@"Subdomain" resultSuccess:^(NSDictionary *dict) {
-    // 登录成功
-} resultFailed:^(NSError *error) {
-    // 登录失败
-}];
-```
-
-
 
 ## 用户信息接口
 
