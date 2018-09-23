@@ -5,31 +5,27 @@
 
 ## 准备工作
 
-- <a href="https://www.bytedesk.com/admin#/register" target="_blank">注册账号</a>
-- <a href="https://www.bytedesk.com/admin#/login" target="_blank">登录后台</a>
+- [注册账号](https://www.bytedesk.com/admin#/register)
+- [登录后台](https://www.bytedesk.com/admin#/login)
 - 分配应用：登录后台->所有设置->应用管理->APP
-
 
 ## 集成SDK
 
-萝卜丝·云客服在经典版<a href="http://www.weikefu.net" target="_blank">微客服</a>基础上面做了重构，将原先一个SDK一分为二为两个sdk：
+萝卜丝·云客服在经典版[微客服](http://www.weikefu.net)基础上面做了重构，将原先一个SDK一分为二为两个sdk：
 
 - 核心库：
 - 界面库，完全开源(Demo中的bdui项目)，方便开发者自定义界面：
-
 
 开发环境：
 
 - Xcode Version 9.3 (9E145)
 - CocoaPods 1.5.0
 
-
 萝卜丝·云客服提供三种集成方法：
 
 - 完全基于pod的方式(推荐，参考：ByteDeskDemo)
 - 半依赖pod集成方式，添加开源bdui项目，方便自定义ui（参考：ByteDeskDemo）
 - 项目中添加framework的方式
-
 
 > 第一种方式：完全依赖pod集成，在Podfile中添加如下：
 
@@ -71,11 +67,9 @@ pod 'HCSStarRatingView'
 
 ## 登录接口
 
-
 `获取Appkey和Subdomain：登录后台->所有设置->应用管理->APP`
 
 > 首先引入头文件：
-
 > 接口一：默认用户名登录，系统自动生成一串数字作为用户名
 
 ```c++
@@ -93,9 +87,9 @@ pod 'HCSStarRatingView'
 
 总共有三个相关接口：
 
- - 获取用户信息接口：获取用户昵称，以及key/value信息对
- - 设置用户昵称接口：设置用户昵称，可在客服端显示
- - 设置用户任意信息接口：自定义key/value设置用户信息，可在客服端显示查看
+- 获取用户信息接口：获取用户昵称，以及key/value信息对
+- 设置用户昵称接口：设置用户昵称，可在客服端显示
+- 设置用户任意信息接口：自定义key/value设置用户信息，可在客服端显示查看
 
 > 获取用户信息
 
@@ -125,7 +119,7 @@ pod 'HCSStarRatingView'
 }];
 ```
 
-> 设置用户任意信息接口 
+> 设置用户任意信息接口
 
 ```c++
 [WXCoreApis visitorSetUserinfo:self.mTagkey withValue:self.mTagvalue resultSuccess:^(NSDictionary *dict) {
@@ -139,9 +133,8 @@ pod 'HCSStarRatingView'
 
 提供两个接口：
 
-  - 查询某个客服账号的在线状态
-  - 查询某个工作组id的在线状态
-
+- 查询某个客服账号的在线状态
+- 查询某个工作组id的在线状态
 
 > 获取某个客服账号的在线状态：online代表在线，offline代表离线
 
