@@ -16,5 +16,5 @@ FOUNDATION_EXPORT const unsigned char bduiVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <bdui/PublicHeader.h>
 
-#import <bdui/BDUIApis.h>
+#import <bytedesk-ui/BDUIApis.h>
 

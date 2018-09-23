@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@import bdcore;
+#import <bytedesk-core/bdcore.h>
 
 @interface BDUIApis : NSObject
 
