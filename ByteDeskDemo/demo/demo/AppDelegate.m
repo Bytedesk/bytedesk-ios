@@ -2,13 +2,16 @@
 //  AppDelegate.m
 //  demo
 //
-//  Created by 萝卜丝·Bytedesk.com on 2018/9/23.
-//  Copyright © 2018年 萝卜丝·Bytedesk.com. All rights reserved.
+//  Created by 宁金鹏 on 2018/9/26.
+//  Copyright © 2018年 宁金鹏. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "DetailViewController.h"
 #import <bytedesk-core/bdcore.h>
+#import "ViewController.h"
+
+#import "KFVisitorApiViewController.h"
+#import "KFNavigationController.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -16,7 +19,7 @@
 #define DEFAULT_TEST_APPKEY @"201809171553111"
 #define DEFAULT_TEST_SUBDOMAIN @"vip"
 
-@interface AppDelegate () <UISplitViewControllerDelegate>
+@interface AppDelegate ()
 
 @end
 
@@ -25,20 +28,25 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-    UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-    navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
-    splitViewController.delegate = self;
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
+    //自定义UINavigationBar
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        // Uncomment to change the background color of navigation bar
+        [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x067AB5)];
+        // Uncomment to change the color of back button
+        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    }
     
-    // 访客登录
-    [BDCoreApis visitorLoginWithAppkey:DEFAULT_TEST_APPKEY withSubdomain:DEFAULT_TEST_SUBDOMAIN resultSuccess:^(NSDictionary *dict) {
-        // 登录成功
-        NSLog(@"%s, %@", __PRETTY_FUNCTION__, dict);
-    } resultFailed:^(NSError *error) {
-        // 登录失败
-        NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
-    }];
+    // Override point for customization after application launch.
+    ViewController *sampleViewController = [[ViewController alloc] init];
+    self.navigationController = [[KFNavigationController alloc] initWithRootViewController:sampleViewController];
+    
+    //适用于全屏App，需要隐藏导航条的情况，比如：游戏类
+    //[self.navigationController setNavigationBarHidden:TRUE animated:FALSE];
+    
+    self.window.rootViewController = self.navigationController;
+    [self.window makeKeyAndVisible];
     
     return YES;
 }
@@ -70,16 +78,5 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-
-#pragma mark - Split view
-
-- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
-    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[DetailViewController class]] && ([(DetailViewController *)[(UINavigationController *)secondaryViewController topViewController] detailItem] == nil)) {
-        // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-        return YES;
-    } else {
-        return NO;
-    }
-}
 
 @end
