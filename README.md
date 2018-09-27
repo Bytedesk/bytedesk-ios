@@ -97,20 +97,16 @@ pod 'HCSStarRatingView'
 ```c++
 [BDCoreApis visitorGetUserinfoWithUid:[BDSettings getUid] resultSuccess:^(NSDictionary *dict) {
     NSLog(@"%s, %@, %@", __PRETTY_FUNCTION__, dict, dict[@"data"][@"nickname"]);
-    self.mNickname = dict[@"data"][@"nickname"];
+    NSString *nickname = dict[@"data"][@"nickname"];
     NSMutableArray *tags = dict[@"data"][@"tags"];
     for (NSDictionary *tag in tags) {
         NSLog(@"%@ %@", tag[@"key"], tag[@"value"]);
         if ([tag[@"key"] isEqualToString:self.mTagkey]) {
-            self.mTagvalue = tag[@"value"];
+            NSString *tagValue = tag[@"value"];
         }
     }
-    //
-    [self.mRefreshControl endRefreshing];
-    [self.tableView reloadData];
 } resultFailed:^(NSError *error) {
     NSLog(@"%@", error);
-    [self.mRefreshControl endRefreshing];
 }];
 ```
 
@@ -157,7 +153,6 @@ pod 'HCSStarRatingView'
     //
 } resultFailed:^(NSError *error) {
     NSLog(@"%@", error);
-    [self.mRefreshControl endRefreshing];
 }];
 ```
 
