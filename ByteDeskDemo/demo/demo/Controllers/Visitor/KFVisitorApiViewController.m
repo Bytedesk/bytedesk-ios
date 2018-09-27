@@ -18,15 +18,6 @@
 //#import "KFVisitorLeavemsgViewController.h"
 #import <bytedesk-core/bdcore.h>
 
-//"0. 吾协简介",
-//"1. 初始化/登录接口",
-//"2. 开始对话接口",
-//"3. 设置用户标签/个人资料接口",
-//"4. 查询客服在线状态接口",
-//"5. 聊天记录接口", // 查询未读消息记录接口, 清空本地聊天记录接口
-//"6. 意见反馈接口",
-//"7. 常见问题接口",
-//"8. 离线留言接口"
 
 @interface KFVisitorApiViewController ()
 
@@ -44,13 +35,7 @@
     self.apisArray = @[ @"1. 开始新会话接口",
                         @"2. 设置用户信息接口",
                         @"3. 查询在线状态接口",
-                        @"4. 会话历史记录接口",
-//                        @"简介",
-//                        @"登录接口",
-//                        @"6. 意见反馈接口",
-//                        @"7. 常见问题接口",
-//                        @"8. 离线留言接口",
-//                        @"9. 未读消息条数接口"
+                        @"4. 会话历史记录接口"
                         ];
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOAuthResult:) name:BD_NOTIFICATION_OAUTH_RESULT object:nil];

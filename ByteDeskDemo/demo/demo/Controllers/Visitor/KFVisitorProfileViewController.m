@@ -91,8 +91,10 @@
         
         QMUIDialogTextFieldViewController *dialogViewController = [[QMUIDialogTextFieldViewController alloc] init];
         dialogViewController.title = self.mTitle;
-        dialogViewController.textField.delegate = self;
-        dialogViewController.textField.placeholder = @"昵称";
+        [dialogViewController addTextFieldWithTitle:@"昵称" configurationHandler:^(QMUILabel *titleLabel, QMUITextField *textField, CALayer *separatorLayer) {
+            textField.placeholder = @"不超过10个字符";
+            textField.maximumTextLength = 10;
+        }];
         [dialogViewController addCancelButtonWithText:@"取消" block:nil];
         [dialogViewController addSubmitButtonWithText:@"确定" block:^(QMUIDialogViewController *aDialogViewController) {
             [aDialogViewController hide];
@@ -106,8 +108,10 @@
         //
         QMUIDialogTextFieldViewController *dialogViewController = [[QMUIDialogTextFieldViewController alloc] init];
         dialogViewController.title = self.mTagkey;
-        dialogViewController.textField.delegate = self;
-        dialogViewController.textField.placeholder = self.mTagkey;
+        [dialogViewController addTextFieldWithTitle:self.mTagkey configurationHandler:^(QMUILabel *titleLabel, QMUITextField *textField, CALayer *separatorLayer) {
+            textField.placeholder = @"不超过10个字符";
+            textField.maximumTextLength = 10;
+        }];
         [dialogViewController addCancelButtonWithText:@"取消" block:nil];
         [dialogViewController addSubmitButtonWithText:@"确定" block:^(QMUIDialogViewController *aDialogViewController) {
             [aDialogViewController hide];
@@ -115,9 +119,9 @@
             [self saveUserinfo];
         }];
         [dialogViewController show];
+        //
         self.currentTextFieldDialogViewController = dialogViewController;
     }
-    
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -127,7 +131,7 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     if ([self.currentTextFieldDialogViewController.title isEqualToString:self.mTitle]) {
         // 设置昵称
-        self.mNickname = self.currentTextFieldDialogViewController.textField.text;
+        self.mNickname = self.currentTextFieldDialogViewController.textFields[0].text;
         [BDCoreApis visitorSetNickname:self.mNickname resultSuccess:^(NSDictionary *dict) {
             //
             [self.tableView reloadData];
@@ -136,7 +140,7 @@
         }];
     } else {
         // 设置自定义标签
-        self.mTagvalue = self.currentTextFieldDialogViewController.textField.text;
+        self.mTagvalue = self.currentTextFieldDialogViewController.textFields[0].text;
         [BDCoreApis visitorSetUserinfo:@"自定义标签" withKey:self.mTagkey withValue:self.mTagvalue resultSuccess:^(NSDictionary *dict) {
             //
             [self.tableView reloadData];

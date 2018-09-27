@@ -30,23 +30,26 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    //自定义UINavigationBar
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        // Uncomment to change the background color of navigation bar
-        [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x067AB5)];
-        // Uncomment to change the color of back button
-        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    }
+    // 修改导航背景色
+    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x007bff)];
+    // 修改导航字体颜色
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     // Override point for customization after application launch.
-    ViewController *sampleViewController = [[ViewController alloc] init];
+    KFVisitorApiViewController *sampleViewController = [[KFVisitorApiViewController alloc] init];
     self.navigationController = [[KFNavigationController alloc] initWithRootViewController:sampleViewController];
-    
-    //适用于全屏App，需要隐藏导航条的情况，比如：游戏类
-    //[self.navigationController setNavigationBarHidden:TRUE animated:FALSE];
-    
+
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
+    
+    // 访客登录
+    [BDCoreApis visitorLoginWithAppkey:DEFAULT_TEST_APPKEY withSubdomain:DEFAULT_TEST_SUBDOMAIN resultSuccess:^(NSDictionary *dict) {
+        // 登录成功
+        NSLog(@"%s, %@", __PRETTY_FUNCTION__, dict);
+    } resultFailed:^(NSError *error) {
+        // 登录失败
+        NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
+    }];
     
     return YES;
 }
@@ -66,6 +69,13 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    
+    // 访客登录
+    [BDCoreApis visitorLoginWithAppkey:DEFAULT_TEST_APPKEY withSubdomain:DEFAULT_TEST_SUBDOMAIN resultSuccess:^(NSDictionary *dict) {
+        NSLog(@"%s, %@", __PRETTY_FUNCTION__, dict);
+    } resultFailed:^(NSError *error) {
+        NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
+    }];
 }
 
 
