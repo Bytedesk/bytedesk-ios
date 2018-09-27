@@ -2,8 +2,8 @@
 //  AppDelegate.m
 //  demo
 //
-//  Created by 宁金鹏 on 2018/9/26.
-//  Copyright © 2018年 宁金鹏. All rights reserved.
+//  Created by 萝卜丝 on 2018/9/26.
+//  Copyright © 2018年 萝卜丝. All rights reserved.
 //
 
 #import "AppDelegate.h"

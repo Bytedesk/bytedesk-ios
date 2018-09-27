@@ -71,11 +71,11 @@ pod 'HCSStarRatingView'
 `获取Appkey和Subdomain：登录后台->所有设置->应用管理->APP`
 
 > 首先引入头文件：
-> 接口一：默认用户名登录，系统自动生成一串数字作为用户名
+> 接口一：默认用户名登录，系统自动生成一串数字作为用户名，其中appkey和企业号需要替换为真实值
 
 ```c++
 // 访客登录
-[BDCoreApis visitorLoginWithAppkey:DEFAULT_TEST_APPKEY withSubdomain:DEFAULT_TEST_SUBDOMAIN resultSuccess:^(NSDictionary *dict) {
+[BDCoreApis visitorLoginWithAppkey:@"appkey" withSubdomain:@"企业号" resultSuccess:^(NSDictionary *dict) {
         // 登录成功
         NSLog(@"%s, %@", __PRETTY_FUNCTION__, dict);
     } resultFailed:^(NSError *error) {
@@ -95,25 +95,29 @@ pod 'HCSStarRatingView'
 > 获取用户信息
 
 ```c++
-[WXCoreApis visitorGetUserinfoSuccess:^(NSDictionary *dict) {
+[BDCoreApis visitorGetUserinfoWithUid:[BDSettings getUid] resultSuccess:^(NSDictionary *dict) {
     NSLog(@"%s, %@, %@", __PRETTY_FUNCTION__, dict, dict[@"data"][@"nickname"]);
     self.mNickname = dict[@"data"][@"nickname"];
     NSMutableArray *tags = dict[@"data"][@"tags"];
     for (NSDictionary *tag in tags) {
         NSLog(@"%@ %@", tag[@"key"], tag[@"value"]);
         if ([tag[@"key"] isEqualToString:self.mTagkey]) {
-            // self.mTagvalue = tag[@"value"];
+            self.mTagvalue = tag[@"value"];
         }
     }
+    //
+    [self.mRefreshControl endRefreshing];
+    [self.tableView reloadData];
 } resultFailed:^(NSError *error) {
     NSLog(@"%@", error);
+    [self.mRefreshControl endRefreshing];
 }];
 ```
 
 > 设置用户昵称接口
 
 ```c++
-[WXCoreApis visitorSetNickname:self.mNickname resultSuccess:^(NSDictionary *dict) {
+[BDCoreApis visitorSetNickname:self.mNickname resultSuccess:^(NSDictionary *dict) {
     //
 } resultFailed:^(NSError *error) {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
@@ -123,7 +127,7 @@ pod 'HCSStarRatingView'
 > 设置用户任意信息接口
 
 ```c++
-[WXCoreApis visitorSetUserinfo:self.mTagkey withValue:self.mTagvalue resultSuccess:^(NSDictionary *dict) {
+[BDCoreApis visitorSetUserinfo:@"自定义标签" withKey:self.mTagkey withValue:self.mTagvalue resultSuccess:^(NSDictionary *dict) {
     //
 } resultFailed:^(NSError *error) {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
@@ -134,33 +138,37 @@ pod 'HCSStarRatingView'
 
 提供两个接口：
 
-- 查询某个客服账号的在线状态
 - 查询某个工作组id的在线状态
+- 查询某个客服账号的在线状态
 
-> 获取某个客服账号的在线状态：online代表在线，offline代表离线
+> 获取某个工作组的在线状态：1代表在线，注意需要替换真实参数
 
 ```c++
 // 查询工作组在线状态
-[WXCoreApis visitorGetWorkgroupStatus:self.mDefaultWorkgroupId resultSuccess:^(NSDictionary *dict) {
-    NSString *workgroupId = dict[@"data"][@"workgroup_id"];
-    // 注：online代表在线，offline代表离线
-    NSString *status = dict[@"data"][@"status"];
-    NSLog(@"id: %@, status:%@", workgroupId, status);
-    self.mWorkgroupStatus = status;
+[BDCoreApis visitorGetWorkGroupStatus:@"201807171659201" resultSuccess:^(NSDictionary *dict) { 
+    NSString *wId = dict[@"data"][@"wid"];
+    NSNumber *status = dict[@"data"][@"status"];
+    NSLog(@"wid: %@, status:%@", wId, status);
+    if ([status isEqual:[NSNumber numberWithInt:1]]) {
+        // self.mWorkgroupStatus = @"在线";
+    } else {
+        // self.mWorkgroupStatus = @"离线";
+    }
+    //
 } resultFailed:^(NSError *error) {
     NSLog(@"%@", error);
+    [self.mRefreshControl endRefreshing];
 }];
 ```
 
-> 获取某个工作组的在线状态：online代表在线，offline代表离线
+> 获取某个客服账号的在线状态：注意需要替换真实参数
 
 ```c++
 // 查询客服账号在线状态
-[WXCoreApis visitorGetAgentStatus:self.mDefaultAgentname resultSuccess:^(NSDictionary *dict) {
-    NSString *agentname = dict[@"data"][@"agent"];
-    // 注：online代表在线，offline代表离线
+[BDCoreApis visitorGetAgentStatus:@"201808221551193" resultSuccess:^(NSDictionary *dict) {
+    //
     NSString *status = dict[@"data"][@"status"];
-    NSLog(@"agent:%@, status:%@", agentname, status);
+    self.mAgentStatus = status;
 } resultFailed:^(NSError *error) {
     NSLog(@"%@", error);
 }];
@@ -171,8 +179,8 @@ pod 'HCSStarRatingView'
 支持获取用户的所有历史会话
 
 ```c++
-[WXCoreApis visitorGetThreadsSuccess:^(NSDictionary *dict) {
-//  NSLog(@"%s, %@", __PRETTY_FUNCTION__, dict);
+[BDCoreApis visitorGetThreadsPage:0 resultSuccess:^(NSDictionary *dict) {
+    //
 } resultFailed:^(NSError *error) {
     NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
 }];

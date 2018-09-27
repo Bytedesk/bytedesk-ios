@@ -2,8 +2,8 @@
 //  BDConstants.h
 //  bdcore
 //
-//  Created by 宁金鹏 on 2017/11/22.
-//  Copyright © 2017年 Bytedesk.com. All rights reserved.
+//  Created by 萝卜丝 on 2018/11/22.
+//  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -147,6 +147,7 @@
 #define BD_MESSAGE_TYPE_EVENT               @"event"  // 事件消息类型
 #define BD_MESSAGE_TYPE_ROBOT               @"robot"
 #define BD_MESSAGE_TYPE_NOTIFICATION        @"notification"    // 通知消息类型
+
 #define BD_MESSAGE_TYPE_NOTIFICATION_NON_WORKINGTIME    @"notification_non_workingtime"    // 非工作时间
 #define BD_MESSAGE_TYPE_NOTIFICATION_OFFLINE            @"notification_offline"    // 客服离线，当前无客服在线
 #define BD_MESSAGE_TYPE_NOTIFICATION_BROWSE             @"notification_browse"  // 访客网页浏览中
@@ -170,9 +171,4 @@
 
 
 #endif /* BDConstants_h */
-
-
-
-
-
 
