@@ -73,12 +73,10 @@ pod 'HCSStarRatingView'
 
 ## AppDelegate.m 中调用登录接口
 
-> 获取appkey：登录后台->所有设置->应用管理->APP->appkey列
-> 获取subDomain，也即企业号：登录后台->所有设置->客服账号->企业号
+- 获取appkey：登录后台->所有设置->应用管理->APP->appkey列
+- 获取subDomain，也即企业号：登录后台->所有设置->客服账号->企业号
 
-登录接口
-
-> 默认用户名登录，系统自动生成一串数字作为用户名，其中appkey和企业号需要替换为真实值
+> 登录接口，默认用户名登录，系统自动生成一串数字作为用户名，其中appkey和企业号需要替换为真实值
 
 ```c++
 // 访客登录
@@ -93,8 +91,8 @@ pod 'HCSStarRatingView'
 
 ## 开始会话
 
-> 获取uId: 登录后台->所有设置->客服账号->超级管理员用户的：唯一ID(uId)
-> 获取wId: 登录后台->所有设置->工作组->超级管理员用户的：唯一ID(wId)
+- 获取uId: 登录后台->所有设置->客服账号->超级管理员用户的：唯一ID(uId)
+- 获取wId: 登录后台->所有设置->工作组->超级管理员用户的：唯一ID(wId)
 
 两种打开窗口方式，
 
@@ -139,7 +137,7 @@ pod 'HCSStarRatingView'
 }];
 ```
 
-## 设置用户昵称接口 (可选)
+> 设置用户昵称接口 (可选)
 
 ```c++
 [BDCoreApis visitorSetNickname:self.mNickname resultSuccess:^(NSDictionary *dict) {
@@ -149,7 +147,7 @@ pod 'HCSStarRatingView'
 }];
 ```
 
-> 设置用户任意信息接口
+> 设置用户任意信息接口 (可选)
 
 ```c++
 [BDCoreApis visitorSetUserinfo:@"自定义标签" withKey:self.mTagkey withValue:self.mTagvalue resultSuccess:^(NSDictionary *dict) {
