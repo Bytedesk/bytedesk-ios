@@ -2,8 +2,8 @@
 //  KFDSHttpApis.h
 //  bdcore
 //
-//  Created by 宁金鹏 on 2017/11/18.
-//  Copyright © 2017年 Bytedesk.com. All rights reserved.
+//  Created by 萝卜丝 on 2018/11/18.
+//  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -73,7 +73,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                      resultFailed:(FailedCallbackBlock)failed;
 
 
-- (void)visitorGetAgentStatus:(NSString *)agentUsername
+- (void)visitorGetAgentStatus:(NSString *)agentUid
                 resultSuccess:(SuccessCallbackBlock)success
                  resultFailed:(FailedCallbackBlock)failed;
 

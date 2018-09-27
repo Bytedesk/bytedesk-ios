@@ -2,8 +2,8 @@
 //  BDConstants.h
 //  bdcore
 //
-//  Created by 宁金鹏 on 2017/11/22.
-//  Copyright © 2017年 Bytedesk.com. All rights reserved.
+//  Created by 萝卜丝 on 2018/11/22.
+//  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -23,18 +23,18 @@
 
 // 测试域名
 // web后台此域名非统一的，而是每一家使用自己独特的二级域名
-#define BD_IS_DEBUG                         true
-#define BD_MQTT_HOST                        @"39.108.244.244"
-#define HTTP_VISITOR_API_BASE_URL           @"http://localhost:8000/visitor/api"
-#define HTTP_API_BASE_URL                   @"http://localhost:8000/api"
-#define CLIENT_OAUTH_TOKEN                  @"http://localhost:8000/oauth/token"
+//#define BD_IS_DEBUG                         true
+//#define BD_MQTT_HOST                        @"39.108.244.244"
+//#define HTTP_VISITOR_API_BASE_URL           @"http://localhost:8000/visitor/api"
+//#define HTTP_API_BASE_URL                   @"http://localhost:8000/api"
+//#define CLIENT_OAUTH_TOKEN                  @"http://localhost:8000/oauth/token"
 
 // 上线发布域名
-//#define BD_IS_DEBUG                         false
-//#define BD_MQTT_HOST                        @"mq.bytedesk.com"
-//#define HTTP_VISITOR_API_BASE_URL           @"https://api.bytedesk.com/visitor/api"
-//#define HTTP_API_BASE_URL                   @"https://api.bytedesk.com/api"
-//#define CLIENT_OAUTH_TOKEN                  @"https://api.bytedesk.com/oauth/token"
+#define BD_IS_DEBUG                         false
+#define BD_MQTT_HOST                        @"mq.bytedesk.com"
+#define HTTP_VISITOR_API_BASE_URL           @"https://api.bytedesk.com/visitor/api"
+#define HTTP_API_BASE_URL                   @"https://api.bytedesk.com/api"
+#define CLIENT_OAUTH_TOKEN                  @"https://api.bytedesk.com/oauth/token"
 
 // 会话类型
 #define BD_THREAD_TYPE_WORKGROUP            @"workgroup"  // 工作组会话

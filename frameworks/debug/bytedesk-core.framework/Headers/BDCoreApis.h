@@ -2,8 +2,8 @@
 //  BDCoreApis.h
 //  bdcore
 //
-//  Created by 宁金鹏 on 2017/7/15.
-//  Copyright © 2017年 Bytedesk.com. All rights reserved.
+//  Created by 萝卜丝 on 2018/7/15.
+//  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -102,7 +102,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success 成功回调
  @param failed 失败回调
  */
-+ (void)visitorGetAgentStatus:(NSString *)username
++ (void)visitorGetAgentStatus:(NSString *)agentUid
                 resultSuccess:(SuccessCallbackBlock)success
                  resultFailed:(FailedCallbackBlock)failed;
 
