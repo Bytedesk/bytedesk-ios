@@ -2,11 +2,12 @@
 //  KFVisitorApiViewController.m
 //  demo
 //
-//  Created by 萝卜丝 on 2017/11/22.
-//  Copyright © 2017年 Bytedesk.com. All rights reserved.
+//  Created by 萝卜丝 on 2018/11/22.
+//  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
 #import "KFVisitorApiViewController.h"
+#import <SafariServices/SafariServices.h>
 
 #import "KFVisitorLoginViewController.h"
 #import "KFVisitorChatViewController.h"
@@ -18,8 +19,7 @@
 //#import "KFVisitorLeavemsgViewController.h"
 #import <bytedesk-core/bdcore.h>
 
-
-@interface KFVisitorApiViewController ()
+@interface KFVisitorApiViewController ()<SFSafariViewControllerDelegate>
 
 @property(nonatomic, strong) NSArray *apisArray;
 
@@ -35,7 +35,8 @@
     self.apisArray = @[ @"1. 开始新会话接口",
                         @"2. 设置用户信息接口",
                         @"3. 查询在线状态接口",
-                        @"4. 会话历史记录接口"
+                        @"4. 会话历史记录接口",
+                        @"5. 网页形式接入"
                         ];
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOAuthResult:) name:BD_NOTIFICATION_OAUTH_RESULT object:nil];
@@ -87,6 +88,15 @@
         viewController = [[KFVisitorStatusViewController alloc] initWithStyle:UITableViewStyleGrouped];
     } else if (indexPath.row == 3) {
         viewController = [[KFVisitorThreadViewController alloc] init];
+    } else if (indexPath.row == 4) {
+        // 注意: 登录后台->所有设置->所有客服->工作组->获取代码 获取相应URL
+        NSURL *url = [NSURL URLWithString:@"https://vip.bytedesk.com/visitor/chat?auid=201808221551193&wid=201807171659201&type=workGroup"];
+        SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:url];
+        safariVC.delegate = self;
+        
+        // 建议
+        [self presentViewController:safariVC animated:YES completion:nil];
+        return;
     }
     viewController.title = [self.apisArray objectAtIndex:indexPath.row];
     viewController.hidesBottomBarWhenPushed = YES;
@@ -99,6 +109,18 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     //
 }
+
+#pragma mark - SFSafariViewControllerDelegate
+//加载完成
+- (void)safariViewController:(SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+//点击左上角的done
+- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
 
 @end
 
