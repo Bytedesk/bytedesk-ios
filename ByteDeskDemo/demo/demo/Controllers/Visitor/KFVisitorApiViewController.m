@@ -90,7 +90,7 @@
         viewController = [[KFVisitorThreadViewController alloc] init];
     } else if (indexPath.row == 4) {
         // 注意: 登录后台->所有设置->所有客服->工作组->获取代码 获取相应URL
-        NSURL *url = [NSURL URLWithString:@"https://vip.bytedesk.com/visitor/chat?auid=201808221551193&wid=201807171659201&type=workGroup"];
+        NSURL *url = [NSURL URLWithString:@"https://vip.bytedesk.com/visitor/chat?uid=201808221551193&wid=201807171659201&type=workGroup"];
         SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:url];
         safariVC.delegate = self;
         

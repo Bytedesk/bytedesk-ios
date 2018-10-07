@@ -210,6 +210,10 @@ pod 'HCSStarRatingView'
 
 ## 更新日志
 
+> 2018-10-06
+
+- 更新wap参数
+
 > 2018-10-02
 
 - 增加APP内嵌入wap演示
