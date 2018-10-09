@@ -15,6 +15,9 @@
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
+//开发文档：https://github.com/pengjinning/bytedesk-ios
+//获取appkey：登录后台->所有设置->应用管理->APP->appkey列
+//获取subDomain，也即企业号：登录后台->所有设置->客服账号->企业号
 // 需要替换为真实的
 #define DEFAULT_TEST_APPKEY @"201809171553111"
 #define DEFAULT_TEST_SUBDOMAIN @"vip"
