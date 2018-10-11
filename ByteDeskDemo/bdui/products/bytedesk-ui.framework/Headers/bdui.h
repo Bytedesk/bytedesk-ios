@@ -2,8 +2,8 @@
 //  bdui.h
 //  bdui
 //
-//  Created by 宁金鹏 on 2017/7/15.
-//  Copyright © 2017年 Bytedesk.com. All rights reserved.
+//  Created by 萝卜丝 on 2018/7/15.
+//  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -16,5 +16,5 @@ FOUNDATION_EXPORT const unsigned char bduiVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <bdui/PublicHeader.h>
 
-#import <bdui/BDUIApis.h>
+#import <bytedesk-ui/BDUIApis.h>
 

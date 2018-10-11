@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		36F0D3A4D3FC436152614230 /* Pods_bytedesk_ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E842883D42BC3384FE575B1E /* Pods_bytedesk_ui.framework */; };
 		3D1996B51FCE2B9600219FEF /* BDChatViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996B31FCE2B9600219FEF /* BDChatViewController.h */; };
 		3D1996B61FCE2B9600219FEF /* BDChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996B41FCE2B9600219FEF /* BDChatViewController.m */; };
 		3D1996BF1FCE5E3500219FEF /* UIView+KFDSUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996B91FCE5E3500219FEF /* UIView+KFDSUI.m */; };
@@ -297,8 +296,10 @@
 		3D57D7121FD00E3F0072823F /* BDFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D57D7101FD00E3F0072823F /* BDFeedbackViewController.m */; };
 		3DABD1B61FE790F600DE473B /* BDUserinfoViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DABD1B41FE790F600DE473B /* BDUserinfoViewController.h */; };
 		3DABD1B71FE790F600DE473B /* BDUserinfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DABD1B51FE790F600DE473B /* BDUserinfoViewController.m */; };
-		99FACE2A7D85F7CD57D1CAFA /* Pods_bytedesk_ui_bduiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FCC91F08FC3C5231C477312 /* Pods_bytedesk_ui_bduiTests.framework */; };
+		81DCA33DE54CCB81B8CA020A /* Pods_bytedesk_ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953A297AD3F39573C972B590 /* Pods_bytedesk_ui.framework */; };
 		BB36EC59B6E4BE64976DB45E /* Pods_bdui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0DE01CE25A433F7C77A32FF /* Pods_bdui.framework */; };
+		DE829B41D540F7AF1BDCAF7F /* Pods_bdui_bduiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE9D3198D64539B03C40CBAF /* Pods_bdui_bduiTests.framework */; };
+		F71E0A2E640D53D647C19446 /* Pods_bytedesk_ui_bduiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CEBFF73F8E899B293D07513 /* Pods_bytedesk_ui_bduiTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -312,9 +313,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1FCC91F08FC3C5231C477312 /* Pods_bytedesk_ui_bduiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bytedesk_ui_bduiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C2BBF675DA2CAC005E0E271 /* Pods-wxui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wxui.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-wxui/Pods-wxui.debug.xcconfig"; sourceTree = "<group>"; };
 		32438A0703C43905086DFD58 /* Pods-wxui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wxui.release.xcconfig"; path = "../Pods/Target Support Files/Pods-wxui/Pods-wxui.release.xcconfig"; sourceTree = "<group>"; };
+		3A92AA90AD96DC8E86B4A69F /* Pods-bytedesk-ui-bduiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bytedesk-ui-bduiTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests.release.xcconfig"; sourceTree = "<group>"; };
+		3AF1CF3234A5985280A3DE30 /* Pods-bytedesk-ui-bduiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bytedesk-ui-bduiTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3D1996B31FCE2B9600219FEF /* BDChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDChatViewController.h; sourceTree = "<group>"; };
 		3D1996B41FCE2B9600219FEF /* BDChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDChatViewController.m; sourceTree = "<group>"; };
 		3D1996B91FCE5E3500219FEF /* UIView+KFDSUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+KFDSUI.m"; sourceTree = "<group>"; };
@@ -612,15 +614,16 @@
 		3DABD1B51FE790F600DE473B /* BDUserinfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDUserinfoViewController.m; sourceTree = "<group>"; };
 		4AFF2CBFAB7AE6AB4F360A63 /* Pods-wxui-wxuiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wxui-wxuiTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-wxui-wxuiTests/Pods-wxui-wxuiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4C57D21EFE3BF46E5EFEBC14 /* Pods-bdui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdui.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-bdui/Pods-bdui.debug.xcconfig"; sourceTree = "<group>"; };
-		5BF342E72DBBDDE23271678E /* Pods-bytedesk-ui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bytedesk-ui.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-bytedesk-ui/Pods-bytedesk-ui.debug.xcconfig"; sourceTree = "<group>"; };
-		89281144B57112D088812D4F /* Pods-bytedesk-ui-bduiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bytedesk-ui-bduiTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests.release.xcconfig"; sourceTree = "<group>"; };
+		68E1819B62F043C68A26C8D7 /* Pods-bdui-bduiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdui-bduiTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-bdui-bduiTests/Pods-bdui-bduiTests.release.xcconfig"; sourceTree = "<group>"; };
+		771383C0F6BD1BAE336079CD /* Pods-bytedesk-ui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bytedesk-ui.release.xcconfig"; path = "../Pods/Target Support Files/Pods-bytedesk-ui/Pods-bytedesk-ui.release.xcconfig"; sourceTree = "<group>"; };
+		7CEBFF73F8E899B293D07513 /* Pods_bytedesk_ui_bduiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bytedesk_ui_bduiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90FA3AAA9DBC3195112D83B4 /* Pods-bdui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdui.release.xcconfig"; path = "../Pods/Target Support Files/Pods-bdui/Pods-bdui.release.xcconfig"; sourceTree = "<group>"; };
+		953A297AD3F39573C972B590 /* Pods_bytedesk_ui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bytedesk_ui.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9843616BE4D9F5EDACD39B8E /* Pods-bytedesk-ui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bytedesk-ui.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-bytedesk-ui/Pods-bytedesk-ui.debug.xcconfig"; sourceTree = "<group>"; };
+		B525D8377F0427CACFA20FCA /* Pods-bdui-bduiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdui-bduiTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-bdui-bduiTests/Pods-bdui-bduiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BE9D3198D64539B03C40CBAF /* Pods_bdui_bduiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdui_bduiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D009D0B1F77F92B7E8A4CE42 /* Pods-bytedesk-ui-bduiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bytedesk-ui-bduiTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E842883D42BC3384FE575B1E /* Pods_bytedesk_ui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bytedesk_ui.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0DE01CE25A433F7C77A32FF /* Pods_bdui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdui.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F40E95B52198654C85E659C0 /* Pods-wxui-wxuiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wxui-wxuiTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-wxui-wxuiTests/Pods-wxui-wxuiTests.release.xcconfig"; sourceTree = "<group>"; };
-		FFE7721CF566C566E20FCD44 /* Pods-bytedesk-ui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bytedesk-ui.release.xcconfig"; path = "../Pods/Target Support Files/Pods-bytedesk-ui/Pods-bytedesk-ui.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -630,7 +633,7 @@
 			files = (
 				3D4824F5215792FA00B50593 /* bytedesk-core.framework in Frameworks */,
 				BB36EC59B6E4BE64976DB45E /* Pods_bdui.framework in Frameworks */,
-				36F0D3A4D3FC436152614230 /* Pods_bytedesk_ui.framework in Frameworks */,
+				81DCA33DE54CCB81B8CA020A /* Pods_bytedesk_ui.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,7 +642,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D3150931F1A1D530005DB6C /* bytedesk-ui.framework in Frameworks */,
-				99FACE2A7D85F7CD57D1CAFA /* Pods_bytedesk_ui_bduiTests.framework in Frameworks */,
+				DE829B41D540F7AF1BDCAF7F /* Pods_bdui_bduiTests.framework in Frameworks */,
+				F71E0A2E640D53D647C19446 /* Pods_bytedesk_ui_bduiTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1074,8 +1078,8 @@
 				3D62021320FC844F00A94F15 /* bdcore.framework */,
 				F0DE01CE25A433F7C77A32FF /* Pods_bdui.framework */,
 				BE9D3198D64539B03C40CBAF /* Pods_bdui_bduiTests.framework */,
-				E842883D42BC3384FE575B1E /* Pods_bytedesk_ui.framework */,
-				1FCC91F08FC3C5231C477312 /* Pods_bytedesk_ui_bduiTests.framework */,
+				953A297AD3F39573C972B590 /* Pods_bytedesk_ui.framework */,
+				7CEBFF73F8E899B293D07513 /* Pods_bytedesk_ui_bduiTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1089,10 +1093,12 @@
 				F40E95B52198654C85E659C0 /* Pods-wxui-wxuiTests.release.xcconfig */,
 				4C57D21EFE3BF46E5EFEBC14 /* Pods-bdui.debug.xcconfig */,
 				90FA3AAA9DBC3195112D83B4 /* Pods-bdui.release.xcconfig */,
-				5BF342E72DBBDDE23271678E /* Pods-bytedesk-ui.debug.xcconfig */,
-				FFE7721CF566C566E20FCD44 /* Pods-bytedesk-ui.release.xcconfig */,
-				D009D0B1F77F92B7E8A4CE42 /* Pods-bytedesk-ui-bduiTests.debug.xcconfig */,
-				89281144B57112D088812D4F /* Pods-bytedesk-ui-bduiTests.release.xcconfig */,
+				B525D8377F0427CACFA20FCA /* Pods-bdui-bduiTests.debug.xcconfig */,
+				68E1819B62F043C68A26C8D7 /* Pods-bdui-bduiTests.release.xcconfig */,
+				9843616BE4D9F5EDACD39B8E /* Pods-bytedesk-ui.debug.xcconfig */,
+				771383C0F6BD1BAE336079CD /* Pods-bytedesk-ui.release.xcconfig */,
+				3AF1CF3234A5985280A3DE30 /* Pods-bytedesk-ui-bduiTests.debug.xcconfig */,
+				3A92AA90AD96DC8E86B4A69F /* Pods-bytedesk-ui-bduiTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1155,11 +1161,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3D3150A01F1A1D530005DB6C /* Build configuration list for PBXNativeTarget "bduiTests" */;
 			buildPhases = (
-				0DEEB6959802C1B7C0452831 /* [CP] Check Pods Manifest.lock */,
+				40E4D3F06829C4C7A96FAE25 /* [CP] Check Pods Manifest.lock */,
 				3D31508E1F1A1D530005DB6C /* Sources */,
 				3D31508F1F1A1D530005DB6C /* Frameworks */,
 				3D3150901F1A1D530005DB6C /* Resources */,
-				36CB7E75526A23951F6A1400 /* [CP] Embed Pods Frameworks */,
+				524589D22CD5F3BC1891A339 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1474,24 +1480,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0DEEB6959802C1B7C0452831 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-bytedesk-ui-bduiTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1A79EF4E7CA26C00848D7C7C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1510,36 +1498,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		36CB7E75526A23951F6A1400 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/../Pods/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
-				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
-				"${BUILT_PRODUCTS_DIR}/M80AttributedLabel/M80AttributedLabel.framework",
-				"${BUILT_PRODUCTS_DIR}/MQTTClient/MQTTClient.framework",
-				"${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework",
-				"${PODS_ROOT}/bytedesk-core/frameworks/cocoapods/bytedesk-core.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M80AttributedLabel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MQTTClient.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QMUIKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bytedesk-core.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3D60DF4D2084C22300B5BE5B /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1552,7 +1510,54 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# 编译的时候\n\nif [ \"${ACTION}\" = \"build\" ]\n\nthen\n\n# 生成通用framework的目录\n\nINSTALL_DIR=${SRCROOT}/products/${PRODUCT_NAME}.framework\n\n# 需要合并的framework\n\nDEVICE_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphoneos/${PRODUCT_NAME}.framework\n\nSIMULATOR_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphonesimulator/${PRODUCT_NAME}.framework\n\n# 如果已经存在，则删除\n\nif [ -d \"${INSTALL_DIR}\"]\n\nthen\n\nrm -rf \"${INSTALL_DIR}\"\n\nfi\n\n# 创建目录\n\nmkdir -p \"${INSTALL_DIR}\"\n\n# 拷贝Header到目标目录\n\ncp -R \"${DEVICE_DIR}/\" \"${INSTALL_DIR}/\"\n\n# 合并framework\n\nlipo -create \"${DEVICE_DIR}/${PRODUCT_NAME}\" \"${SIMULATOR_DIR}/${PRODUCT_NAME}\" -output \"${INSTALL_DIR}/${PRODUCT_NAME}\"\n\n# 编译完成后打开文件夹\n\n#open \"${DEVICE_DIR}\"\n\nopen \"${SRCROOT}/products/${PRODUCT_NAME}.framework\"\n\nfi\n\n";
+			shellScript = "
+";
+		};
+		40E4D3F06829C4C7A96FAE25 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-bytedesk-ui-bduiTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		524589D22CD5F3BC1891A339 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/../Pods/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
+				"${BUILT_PRODUCTS_DIR}/M80AttributedLabel/M80AttributedLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/MQTTClient/MQTTClient.framework",
+				"${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M80AttributedLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MQTTClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QMUIKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1722,7 +1727,7 @@
 		};
 		3D31509E1F1A1D530005DB6C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5BF342E72DBBDDE23271678E /* Pods-bytedesk-ui.debug.xcconfig */;
+			baseConfigurationReference = 9843616BE4D9F5EDACD39B8E /* Pods-bytedesk-ui.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
@@ -1744,7 +1749,7 @@
 		};
 		3D31509F1F1A1D530005DB6C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FFE7721CF566C566E20FCD44 /* Pods-bytedesk-ui.release.xcconfig */;
+			baseConfigurationReference = 771383C0F6BD1BAE336079CD /* Pods-bytedesk-ui.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
@@ -1766,7 +1771,7 @@
 		};
 		3D3150A11F1A1D530005DB6C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D009D0B1F77F92B7E8A4CE42 /* Pods-bytedesk-ui-bduiTests.debug.xcconfig */;
+			baseConfigurationReference = 3AF1CF3234A5985280A3DE30 /* Pods-bytedesk-ui-bduiTests.debug.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = L5F47963M2;
 				INFOPLIST_FILE = wxuiTests/Info.plist;
@@ -1779,7 +1784,7 @@
 		};
 		3D3150A21F1A1D530005DB6C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89281144B57112D088812D4F /* Pods-bytedesk-ui-bduiTests.release.xcconfig */;
+			baseConfigurationReference = 3A92AA90AD96DC8E86B4A69F /* Pods-bytedesk-ui-bduiTests.release.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = L5F47963M2;
 				INFOPLIST_FILE = wxuiTests/Info.plist;

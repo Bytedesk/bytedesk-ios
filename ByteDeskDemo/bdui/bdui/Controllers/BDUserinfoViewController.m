@@ -2,14 +2,12 @@
 //  KFDSUserinfoViewController.m
 //  bdui
 //
-//  Created by 萝卜丝·Bytedesk.com on 2017/12/18.
-//  Copyright © 2017年 Bytedesk.com. All rights reserved.
+//  Created by 萝卜丝 on 2018/12/18.
+//  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
 #import "BDUserinfoViewController.h"
-
-@import bdcore;
-
+#import <bytedesk-core/bdcore.h>
 
 @interface BDUserinfoViewController ()
 
@@ -42,7 +40,7 @@
 }
 
 - (void)setNavigationItemsIsInEditMode:(BOOL)isInEditMode animated:(BOOL)animated {
-    [super setNavigationItemsIsInEditMode:isInEditMode animated:animated];
+//    [super setNavigationItemsIsInEditMode:isInEditMode animated:animated];
     self.title = @"用户信息";
     
 }

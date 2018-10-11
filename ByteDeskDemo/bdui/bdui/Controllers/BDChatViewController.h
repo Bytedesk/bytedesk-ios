@@ -2,13 +2,13 @@
 //  KFDSChatViewController.h
 //  bdui
 //
-//  Created by 萝卜丝·Bytedesk.com on 2017/11/29.
-//  Copyright © 2017年 Bytedesk.com. All rights reserved.
+//  Created by 萝卜丝 on 2018/11/29.
+//  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
 #import <QMUIKit/QMUIKit.h>
+#import <bytedesk-core/bdcore.h>
 
-@import bdcore;
 
 @interface BDChatViewController : QMUICommonTableViewController
 

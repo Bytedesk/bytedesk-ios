@@ -2,8 +2,8 @@
 //  KFDSChatViewController.m
 //  bdui
 //
-//  Created by 萝卜丝·Bytedesk.com on 2017/11/29.
-//  Copyright © 2017年 Bytedesk.com. All rights reserved.
+//  Created by 萝卜丝 on 2018/11/29.
+//  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
 #import "BDChatViewController.h"
@@ -15,6 +15,7 @@
 #import "KFDSUConstants.h"
 
 #import <HCSStarRatingView/HCSStarRatingView.h>
+#import <bytedesk-core/bdcore.h>
 
 #define MaxSelectedImageCount 9
 #define NormalImagePickingTag 1045
@@ -24,8 +25,6 @@
 
 static CGFloat const kToolbarHeight = 56;
 static CGFloat const kEmotionViewHeight = 232;
-
-@import bdcore;
 
 static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPhoto;
 
@@ -71,6 +70,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 //客服端
 @property (nonatomic, strong) UIImagePickerController    *m_imagePickerController;
 
+@property(nonatomic, assign) BOOL forceEnableBackGesture;
+
 @end
 
 @implementation BDChatViewController
@@ -99,12 +100,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.rateNote = @"";
     self.rateInvite = false;
     
-    if (!self.mIsPush) {
-        self.navigationItem.leftBarButtonItem = [QMUINavigationButton barButtonItemWithType:QMUINavigationButtonTypeBack title:@"" tintColor:[UIColor whiteColor] position:QMUINavigationButtonPositionLeft target:self action:@selector(handleLeftBarButtonItemClicked)];
-    }
-    
 //    TODO: title 应该根据状态显示不同内容：机器人（转人工客服），人工客服（结束会话）
-    self.navigationItem.rightBarButtonItem = [QMUINavigationButton barButtonItemWithType:QMUINavigationButtonTypeNormal title:@"评价" position:QMUINavigationButtonPositionRight target:self action:@selector(handleRightBarButtonItemClicked)];
+    UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithButton:[[QMUINavigationButton alloc] initWithType:QMUINavigationButtonTypeNormal title:@"评价"] target:self action:@selector(handleRightBarButtonItemClicked:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
     //
     [BDCoreApis visitorRequestThreadWithUid:uId
                                         wId:wId
@@ -241,12 +239,10 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.mThreadModel = threadModel;
     self.m_imagePickerController = [[UIImagePickerController alloc] init];
     self.m_imagePickerController.delegate = self;
-    //
-    if (!self.mIsPush) {
-        self.navigationItem.leftBarButtonItem = [QMUINavigationButton barButtonItemWithType:QMUINavigationButtonTypeBack title:@"" tintColor:[UIColor whiteColor] position:QMUINavigationButtonPositionLeft target:self action:@selector(handleLeftBarButtonItemClicked)];
-    }
+    
     // 右上角按钮
-    self.navigationItem.rightBarButtonItem =[QMUINavigationButton barButtonItemWithNavigationButton:[QMUINavigationButton buttonWithType:UIButtonTypeInfoLight] position:QMUINavigationButtonPositionRight target:self action:@selector(handleRightBarButtonItemClicked)];
+    UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithButton:[[QMUINavigationButton alloc] initWithType:QMUINavigationButtonTypeNormal title:@"更多"] target:self action:@selector(handleRightBarButtonItemClicked:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 #define UIColorGray5 UIColorMake(133, 140, 150)
@@ -261,7 +257,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     _toolbarView = [[UIView alloc] init];
     self.toolbarView.backgroundColor = UIColorWhite;
     self.toolbarView.qmui_borderColor = UIColorSeparator;
-    self.toolbarView.qmui_borderPosition = QMUIBorderViewPositionTop;
+    self.toolbarView.qmui_borderPosition = QMUIViewBorderPositionTop;
     [self.view addSubview:self.toolbarView];
     
     _toolbarTextField = [[QMUITextField alloc] init];
@@ -342,11 +338,14 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 //    [self.view setQmui_shouldShowDebugColor:YES];
     //
     if (self.mIsPush) {
-        QMUINavigationButton *backButton = [[QMUINavigationButton alloc] initWithType:QMUINavigationButtonTypeBack];
-        self.navigationItem.leftBarButtonItem = [QMUINavigationButton barButtonItemWithNavigationButton:backButton position:QMUINavigationButtonPositionLeft target:self action:@selector(handleLeftBarButtonItemClicked)];
+        UIBarButtonItem *item = [UIBarButtonItem qmui_backItemWithTarget:self action:@selector(handleBackButtonEvent:)];// 自定义返回按钮要自己写代码去 pop 界面
+        self.navigationItem.leftBarButtonItem = item;
+        self.forceEnableBackGesture = YES;// 当系统的返回按钮被屏蔽的时候，系统的手势返回也会跟着失效，所以这里要手动强制打开手势返回
     }
     else {
-        self.navigationItem.leftBarButtonItem = [QMUINavigationButton closeBarButtonItemWithTarget:self action:@selector(handleLeftBarButtonItemClicked)];
+        UIBarButtonItem *item = [UIBarButtonItem qmui_closeItemWithTarget:self action:@selector(handleCloseButtonEvent:)];
+        self.navigationItem.leftBarButtonItem = item;
+        self.forceEnableBackGesture = YES;
     }
     //
     self.mRefreshControl = [[UIRefreshControl alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
@@ -363,25 +362,28 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 }
 
 - (void)setNavigationItemsIsInEditMode:(BOOL)isInEditMode animated:(BOOL)animated {
-    [super setNavigationItemsIsInEditMode:isInEditMode animated:animated];
+//    [super setNavigationItemsIsInEditMode:isInEditMode animated:animated];
 }
 
-/**
-    针对Present打开模式，左上角返回按钮处理action
- */
-- (void)handleLeftBarButtonItemClicked {
+// 针对Present打开模式，左上角返回按钮处理action
+- (void)handleCloseButtonEvent:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    //
-    if (self.mIsPush) {
-        [self.navigationController popViewControllerAnimated:YES];
-    } else {
-        [self.navigationController dismissViewControllerAnimated:YES completion:^{
-            // 善后
-        }];
-    }
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
-- (void)handleRightBarButtonItemClicked {
+// 针对Push打开模式，左上角返回按钮处理action
+- (void)handleBackButtonEvent:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (BOOL)forceEnableInteractivePopGestureRecognizer {
+    return self.forceEnableBackGesture;
+}
+
+- (void)handleRightBarButtonItemClicked:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     // 访客端
@@ -391,60 +393,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         
     } else {
         // 客服端
-        QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertAction *action) {
-            NSLog(@"%s", __PRETTY_FUNCTION__);
+        QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
         }];
-        QMUIAlertAction *closeAction = [QMUIAlertAction actionWithTitle:@"关闭会话" style:QMUIAlertActionStyleDestructive handler:^(QMUIAlertAction *action) {
-            // TODO: 关闭会话
-            NSLog(@"%s", __PRETTY_FUNCTION__);
-//            [BDCoreApis adminCloseThread:self.mThreadModel.mid
-//                resultSuccess:^(NSDictionary *dict) {
-//                    // TODO: 关闭当前会话窗口
-//                    if (self.mIsPush) {
-//                        [self.navigationController popViewControllerAnimated:YES];
-//                    } else {
-//                        [self.navigationController dismissViewControllerAnimated:YES completion:^{
-//                            // 善后
-//                        }];
-//                    }
-//                } resultFailed:^(NSError *error) {
-//                    NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
-//                }];
+        QMUIAlertAction *closeAction = [QMUIAlertAction actionWithTitle:@"关闭" style:QMUIAlertActionStyleDestructive handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
         }];
-        // TODO: <二期开发>
-//        QMUIAlertAction *rateAction = [QMUIAlertAction actionWithTitle:@"评价会话" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertAction *action) {
-//            //TODO: 评价会话
-//            NSLog(@"%s", __PRETTY_FUNCTION__);
-//            //
-//
-//        }];
-//        QMUIAlertAction *inviteAction = [QMUIAlertAction actionWithTitle:@"邀请会话" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertAction *action) {
-//            //TODO: 邀请会话
-//            NSLog(@"%s", __PRETTY_FUNCTION__);
-//            //
-//
-//        }];
-//        QMUIAlertAction *transferAction = [QMUIAlertAction actionWithTitle:@"转接会话" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertAction *action) {
-//            //TODO: 转接会话
-//            NSLog(@"%s", __PRETTY_FUNCTION__);
-//            //
-//        }];
-//        QMUIAlertAction *userInfoAction = [QMUIAlertAction actionWithTitle:@"用户信息" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertAction *action) {
-//            //TODO: 用户信息
-//            NSLog(@"%s", __PRETTY_FUNCTION__);
-//            KFDSUserinfoViewController *userinfoViewController = [[KFDSUserinfoViewController alloc] init];
-//            [userinfoViewController initWithThreadModel:self.mThreadModel];
-//            [self.navigationController pushViewController:userinfoViewController animated:YES];
-//        }];
-        //
-        QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"工具栏" message:@"" preferredStyle:QMUIAlertControllerStyleActionSheet];
-        [alertController addAction:cancelAction]; // 最底部
-        [alertController addAction:closeAction]; // 中间
-        // TODO: <二期开发>
-//        [alertController addAction:rateAction]; //
-//        [alertController addAction:inviteAction];
-//        [alertController addAction:transferAction];
-//        [alertController addAction:userInfoAction];
+        QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"确定关闭会话？" message:@"" preferredStyle:QMUIAlertControllerStyleAlert];
+        [alertController addAction:cancelAction];
+        [alertController addAction:closeAction];
         [alertController showWithAnimated:YES];
     }
     
@@ -810,8 +765,19 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         self.imagePreviewViewController = [[QMUIImagePreviewViewController alloc] init];
         self.imagePreviewViewController.imagePreviewView.delegate = self;
         self.imagePreviewViewController.imagePreviewView.currentImageIndex = 0;// 默认查看的图片的 index
+        
+        // QMUIImagePreviewViewController 对于以 window 的方式展示的情况，默认会开启手势拖拽退出预览功能。
+        // 如果使用了手势拖拽，并且退出预览时需要飞到某个 rect，则需要实现这个 block，在里面自己去 exit，如果不实现这个 block，退出动画会使用 fadeOut 那种
+        __weak __typeof(self)weakSelf = self;
+        self.imagePreviewViewController.customGestureExitBlock = ^(QMUIImagePreviewViewController *aImagePreviewViewController, QMUIZoomImageView *currentZoomImageView) {
+            [weakSelf.currentImageView setImage:currentZoomImageView.image];
+            [aImagePreviewViewController exitPreviewToRectInScreenCoordinate:[weakSelf.currentImageView convertRect:weakSelf.currentImageView.frame toView:nil]];
+        };
     }
-    [self.imagePreviewViewController startPreviewFromRectInScreen:[imageView convertRect:imageView.frame toView:nil] cornerRadius:imageView.layer.cornerRadius];
+    
+//    [self.imagePreviewViewController startPreviewFromRectInScreen:[imageView convertRect:imageView.frame toView:nil] cornerRadius:imageView.layer.cornerRadius];
+    [self.imagePreviewViewController startPreviewFromRectInScreenCoordinate:[imageView convertRect:imageView.frame toView:nil] cornerRadius:imageView.layer.cornerRadius];
+    
 }
 
 #pragma mark - <QMUIImagePreviewViewDelegate>
@@ -832,7 +798,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (void)singleTouchInZoomingImageView:(QMUIZoomImageView *)zoomImageView location:(CGPoint)location {
     [self.currentImageView setImage:zoomImageView.image];
-    [self.imagePreviewViewController endPreviewToRectInScreen:[self.currentImageView convertRect:self.currentImageView.frame toView:nil]];
+    self.imagePreviewViewController.customGestureExitBlock(self.imagePreviewViewController, zoomImageView);
+//    [self.imagePreviewViewController endPreviewToRectInScreen:[self.currentImageView convertRect:self.currentImageView.frame toView:nil]];
 }
 
 
@@ -860,13 +827,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
     QDNavigationController *navigationController = [[QDNavigationController alloc] initWithRootViewController:albumViewController];
     // 获取最近发送图片时使用过的相簿，如果有则直接进入该相簿
-    QMUIAssetsGroup *assetsGroup = [QMUIImagePickerHelper assetsGroupOfLastestPickerAlbumWithUserIdentify:nil];
-    if (assetsGroup) {
-        QMUIImagePickerViewController *imagePickerViewController = [self imagePickerViewControllerForAlbumViewController:albumViewController];
-        [imagePickerViewController refreshWithAssetsGroup:assetsGroup];
-        imagePickerViewController.title = [assetsGroup name];
-        [navigationController pushViewController:imagePickerViewController animated:NO];
-    }
+//    QMUIAssetsGroup *assetsGroup = [QMUIImagePickerHelper assetsGroupOfLastestPickerAlbumWithUserIdentify:nil];
+//    if (assetsGroup) {
+//        QMUIImagePickerViewController *imagePickerViewController = [self imagePickerViewControllerForAlbumViewController:albumViewController];
+//        [imagePickerViewController refreshWithAssetsGroup:assetsGroup];
+//        imagePickerViewController.title = [assetsGroup name];
+//        [navigationController pushViewController:imagePickerViewController animated:NO];
+//    }
     
     [self presentViewController:navigationController animated:YES completion:NULL];
 }
@@ -1125,22 +1092,18 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 - (void)handlePlusButtonEvent:(id)sender {
 //    NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertAction *action) {
-//        NSLog(@"%s", __PRETTY_FUNCTION__);
+    QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
     }];
-    QMUIAlertAction *pickAction = [QMUIAlertAction actionWithTitle:@"照片" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertAction *action) {
-//        NSLog(@"%s", __PRETTY_FUNCTION__);
+    QMUIAlertAction *pickAction = [QMUIAlertAction actionWithTitle:@"照片" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
         [self sharePickPhotoButtonPressed:nil];
     }];
-    QMUIAlertAction *cameraAction = [QMUIAlertAction actionWithTitle:@"拍照" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertAction *action) {
-//        NSLog(@"%s", __PRETTY_FUNCTION__);
+    QMUIAlertAction *cameraAction = [QMUIAlertAction actionWithTitle:@"拍照" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
         [self shareTakePhotoButtonPressed:nil];
     }];
-    //
     QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"工具栏" message:@"" preferredStyle:QMUIAlertControllerStyleActionSheet];
     [alertController addAction:cancelAction];
-    [alertController addAction:pickAction]; //
-    [alertController addAction:cameraAction]; //
+    [alertController addAction:pickAction];
+    [alertController addAction:cameraAction];
     [alertController showWithAnimated:YES];
 }
 

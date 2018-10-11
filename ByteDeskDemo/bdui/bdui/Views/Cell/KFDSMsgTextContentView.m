@@ -2,8 +2,8 @@
 //  KFDSMsgTextContentView.m
 //  feedback
 //
-//  Created by 萝卜丝·Bytedesk.com on 2017/2/18.
-//  Copyright © 2017年 萝卜丝·Bytedesk.com. All rights reserved.
+//  Created by 萝卜丝 on 2018/2/18.
+//  Copyright © 2018年 萝卜丝. All rights reserved.
 //
 
 #import "KFDSMsgTextContentView.h"
@@ -17,7 +17,7 @@
 #import "KFDSInputEmotionManager.h"
 #import "KFDSInputEmotionParser.h"
 
-@import bdcore;
+#import <bytedesk-core/bdcore.h>
 
 NSString *const NIMTextMessageLabelLinkData = @"NIMTextMessageLabelLinkData";
 
