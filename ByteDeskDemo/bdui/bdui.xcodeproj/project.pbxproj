@@ -286,8 +286,6 @@
 		3D3150F11F1A2A410005DB6C /* BDUIApis.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D3150EF1F1A2A410005DB6C /* BDUIApis.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D3150F21F1A2A410005DB6C /* BDUIApis.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3150F01F1A2A410005DB6C /* BDUIApis.m */; };
 		3D4824F5215792FA00B50593 /* bytedesk-core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4824F4215792FA00B50593 /* bytedesk-core.framework */; };
-		3D5606C72057C81A000E770C /* QDUIHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D5606C52057C81A000E770C /* QDUIHelper.h */; };
-		3D5606C82057C81A000E770C /* QDUIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5606C62057C81A000E770C /* QDUIHelper.m */; };
 		3D5606CB2057C875000E770C /* QDSingleImagePickerPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5606C92057C874000E770C /* QDSingleImagePickerPreviewViewController.m */; };
 		3D5606CC2057C875000E770C /* QDSingleImagePickerPreviewViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D5606CA2057C874000E770C /* QDSingleImagePickerPreviewViewController.h */; };
 		3D5606CF2057CF67000E770C /* QDNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5606CD2057CF67000E770C /* QDNavigationController.m */; };
@@ -601,8 +599,6 @@
 		3D4824F4215792FA00B50593 /* bytedesk-core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "bytedesk-core.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D548A731FC55016003117B4 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		3D548A751FC5514B003117B4 /* KFDSUConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFDSUConstants.h; sourceTree = "<group>"; };
-		3D5606C52057C81A000E770C /* QDUIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDUIHelper.h; sourceTree = "<group>"; };
-		3D5606C62057C81A000E770C /* QDUIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDUIHelper.m; sourceTree = "<group>"; };
 		3D5606C92057C874000E770C /* QDSingleImagePickerPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDSingleImagePickerPreviewViewController.m; sourceTree = "<group>"; };
 		3D5606CA2057C874000E770C /* QDSingleImagePickerPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDSingleImagePickerPreviewViewController.h; sourceTree = "<group>"; };
 		3D5606CD2057CF67000E770C /* QDNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDNavigationController.m; sourceTree = "<group>"; };
@@ -983,8 +979,6 @@
 				3D1998F41FCE833900219FEF /* KFDSLoadProgressView.m */,
 				3D1998F71FCE833900219FEF /* KFDSBadgeView.h */,
 				3D1998F51FCE833900219FEF /* KFDSBadgeView.m */,
-				3D5606C52057C81A000E770C /* QDUIHelper.h */,
-				3D5606C62057C81A000E770C /* QDUIHelper.m */,
 				3D5606CA2057C874000E770C /* QDSingleImagePickerPreviewViewController.h */,
 				3D5606C92057C874000E770C /* QDSingleImagePickerPreviewViewController.m */,
 			);
@@ -1116,7 +1110,6 @@
 				3D57D7111FD00E3F0072823F /* BDFeedbackViewController.h in Headers */,
 				3D31509A1F1A1D530005DB6C /* bdui.h in Headers */,
 				3D1996FB1FCE638800219FEF /* KFDSInputEmotionParser.h in Headers */,
-				3D5606C72057C81A000E770C /* QDUIHelper.h in Headers */,
 				3D1996E81FCE638800219FEF /* KFDSMsgTextContentView.h in Headers */,
 				3D1996EB1FCE638800219FEF /* KFDSMsgVoiceContentView.h in Headers */,
 				3D5606D02057CF67000E770C /* QDNavigationController.h in Headers */,
@@ -1510,8 +1503,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
+			shellScript = "# 编译的时候\n\nif [ \"${ACTION}\" = \"build\" ]\n\nthen\n\n# 生成通用framework的目录\n\nINSTALL_DIR=${SRCROOT}/products/${PRODUCT_NAME}.framework\n\n# 需要合并的framework\n\nDEVICE_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphoneos/${PRODUCT_NAME}.framework\n\nSIMULATOR_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphonesimulator/${PRODUCT_NAME}.framework\n\n# 如果已经存在，则删除\n\nif [ -d \"${INSTALL_DIR}\"]\n\nthen\n\nrm -rf \"${INSTALL_DIR}\"\n\nfi\n\n# 创建目录\n\nmkdir -p \"${INSTALL_DIR}\"\n\n# 拷贝Header到目标目录\n\ncp -R \"${DEVICE_DIR}/\" \"${INSTALL_DIR}/\"\n\n# 合并framework\n\nlipo -create \"${DEVICE_DIR}/${PRODUCT_NAME}\" \"${SIMULATOR_DIR}/${PRODUCT_NAME}\" -output \"${INSTALL_DIR}/${PRODUCT_NAME}\"\n\n# 编译完成后打开文件夹\n\nopen \"${DEVICE_DIR}\"\n\nopen \"${SRCROOT}/products/${PRODUCT_NAME}.framework\"\n\nfi\n\n";
 		};
 		40E4D3F06829C4C7A96FAE25 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1581,7 +1573,6 @@
 				3D1996EC1FCE638800219FEF /* KFDSMsgNotificationViewCell.m in Sources */,
 				3D1996F71FCE638800219FEF /* KFDSInputEmotionManager.m in Sources */,
 				3D5606CB2057C875000E770C /* QDSingleImagePickerPreviewViewController.m in Sources */,
-				3D5606C82057C81A000E770C /* QDUIHelper.m in Sources */,
 				3D1996F31FCE638800219FEF /* KFDSInputEmotionParser.m in Sources */,
 				3D1996BF1FCE5E3500219FEF /* UIView+KFDSUI.m in Sources */,
 				3D3150F21F1A2A410005DB6C /* BDUIApis.m in Sources */,

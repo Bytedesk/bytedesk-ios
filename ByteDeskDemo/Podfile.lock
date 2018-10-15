@@ -18,7 +18,7 @@ PODS:
     - AFNetworking
     - FMDB
     - MQTTClient
-  - bytedesk-ui (1.0.3):
+  - bytedesk-ui (1.0.5):
     - AFNetworking
     - bytedesk-core
     - FMDB
@@ -318,7 +318,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   bytedesk-core: 760de17570309e87e9963a81dedf0f9b3ac6048b
-  bytedesk-ui: 6da826986b04c30b8dd6821a01a180b015996158
+  bytedesk-ui: 2b454440dda850b5d7fe721358b625f152c02f69
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   M80AttributedLabel: 7dd017588f524b13149d4cf5c7b1eaf02b0f06a4
