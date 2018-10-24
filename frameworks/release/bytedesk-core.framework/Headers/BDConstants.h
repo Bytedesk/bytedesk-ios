@@ -24,10 +24,10 @@
 // 测试域名
 // web后台此域名非统一的，而是每一家使用自己独特的二级域名
 //#define BD_IS_DEBUG                         true
-//#define BD_MQTT_HOST                        @"39.108.244.244"
-//#define HTTP_VISITOR_API_BASE_URL           @"http://localhost:8000/visitor/api"
-//#define HTTP_API_BASE_URL                   @"http://localhost:8000/api"
-//#define CLIENT_OAUTH_TOKEN                  @"http://localhost:8000/oauth/token"
+//#define BD_MQTT_HOST                        @"mq.bytedesk.com" // @"47.106.239.170"
+//#define HTTP_VISITOR_API_BASE_URL           @"http://vip.kefudashi.cn:8000/visitor/api"
+//#define HTTP_API_BASE_URL                   @"http://vip.kefudashi.cn:8000/api"
+//#define CLIENT_OAUTH_TOKEN                  @"http://vip.kefudashi.cn:8000/oauth/token"
 
 // 上线发布域名
 #define BD_IS_DEBUG                         false
@@ -37,10 +37,10 @@
 #define CLIENT_OAUTH_TOKEN                  @"https://api.bytedesk.com/oauth/token"
 
 // 会话类型
-#define BD_THREAD_TYPE_WORKGROUP            @"workgroup"  // 工作组会话
-#define BD_THREAD_TYPE_PRIVATE              @"private"    // 一对一会话
+#define BD_THREAD_TYPE_WORKGROUP            @"workGroup"  // 工作组会话
+#define BD_THREAD_TYPE_VISITOR              @"visitor"    // 一对一会话
 #define BD_THREAD_TYPE_GROUP                @"group"      // 群组
-#define BD_THREAD_TYPE_DIS_GROUP            @"discussion_group" // 讨论组, 暂未启用
+#define BD_THREAD_TYPE_CONTACT              @"contact" // 讨论组, 暂未启用
 
 // passport 授权访客端参数
 #define CLIENT_ID_VISITOR                   @"ios"

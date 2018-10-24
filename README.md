@@ -210,6 +210,10 @@ pod 'HCSStarRatingView'
 
 ## 更新日志
 
+> 2018-10-24
+
+- 优化消息体
+
 > 2018-10-11
 
 - 优化bytedesk-ui库

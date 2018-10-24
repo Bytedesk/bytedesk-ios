@@ -20,9 +20,9 @@
 @property(nonatomic, strong) NSString *mid;
 @property(nonatomic, strong) NSString *wid;
 
-@property(nonatomic, strong) NSNumber *thread_id;
+@property(nonatomic, strong) NSNumber *thread_tid;
 //@property(nonatomic, strong) NSNumber *queue_id;
-@property(nonatomic, strong) NSNumber *workgroup_id;
+//@property(nonatomic, strong) NSNumber *workgroup_id;
 
 @property(nonatomic, strong) NSString *type;
 @property(nonatomic, strong) NSString *client;
@@ -62,6 +62,7 @@
 @property(nonatomic, strong) NSString *username;
 @property(nonatomic, strong) NSString *nickname;
 @property(nonatomic, strong) NSString *avatar;
+@property(nonatomic, strong) NSNumber *visitor;
 
 @property(nonatomic, strong) NSString *myusername;
 
