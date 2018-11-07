@@ -9,6 +9,7 @@
 #import "KFVisitorApiViewController.h"
 #import <SafariServices/SafariServices.h>
 
+#import "KFIntroViewController.h"
 #import "KFVisitorLoginViewController.h"
 #import "KFVisitorChatViewController.h"
 #import "KFVisitorProfileViewController.h"
@@ -18,6 +19,17 @@
 //#import "KFVisitorFAQViewController.h"
 //#import "KFVisitorLeavemsgViewController.h"
 #import <bytedesk-core/bdcore.h>
+
+//"0. 萝卜丝简介",
+//"1. 初始化/登录接口",
+//"2. 开始对话接口",
+//"3. 设置用户标签/个人资料接口",
+//"4. 查询客服在线状态接口",
+//"5. 聊天记录接口", // 查询未读消息记录接口, 清空本地聊天记录接口
+//"6. 意见反馈接口",
+//"7. 常见问题接口",
+//"8. 离线留言接口",
+//@"9. 未读消息条数接口"
 
 @interface KFVisitorApiViewController ()<SFSafariViewControllerDelegate>
 
@@ -90,7 +102,7 @@
         viewController = [[KFVisitorThreadViewController alloc] init];
     } else if (indexPath.row == 4) {
         // 注意: 登录后台->所有设置->所有客服->工作组->获取代码 获取相应URL
-        NSURL *url = [NSURL URLWithString:@"https://vip.bytedesk.com/visitor/chat?uid=201808221551193&wid=201807171659201&type=workGroup&aid=&placeholder=placeholder"];
+        NSURL *url = [NSURL URLWithString:@"https://vip.bytedesk.com/visitor/chat?uid=201808221551193&wid=201807171659201&type=workGroup&aid=&ph=ph"];
         SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:url];
         safariVC.delegate = self;
         

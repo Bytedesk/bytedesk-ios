@@ -11,7 +11,6 @@
 #import "KFDSMsgNotificationViewCell.h"
 #import "BDUserinfoViewController.h"
 #import "QDSingleImagePickerPreviewViewController.h"
-#import "QDNavigationController.h"
 #import "KFDSUConstants.h"
 
 #import <HCSStarRatingView/HCSStarRatingView.h>
@@ -825,7 +824,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     albumViewController.title = title;
 //    albumViewController.view.tag = SingleImagePickingTag;
     
-    QDNavigationController *navigationController = [[QDNavigationController alloc] initWithRootViewController:albumViewController];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:albumViewController];
     // 获取最近发送图片时使用过的相簿，如果有则直接进入该相簿
 //    QMUIAssetsGroup *assetsGroup = [QMUIImagePickerHelper assetsGroupOfLastestPickerAlbumWithUserIdentify:nil];
 //    if (assetsGroup) {

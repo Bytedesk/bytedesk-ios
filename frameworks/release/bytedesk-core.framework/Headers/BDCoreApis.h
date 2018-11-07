@@ -98,7 +98,6 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 /**
  获取某个客服账号的在线状态
 
- @param username 客服用户名
  @param success 成功回调
  @param failed 失败回调
  */

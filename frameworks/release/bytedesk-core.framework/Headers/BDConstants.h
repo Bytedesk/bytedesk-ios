@@ -24,7 +24,7 @@
 // 测试域名
 // web后台此域名非统一的，而是每一家使用自己独特的二级域名
 //#define BD_IS_DEBUG                         true
-//#define BD_MQTT_HOST                        @"mq.bytedesk.com" // @"47.106.239.170"
+//#define BD_MQTT_HOST                        @"127.0.0.1"
 //#define HTTP_VISITOR_API_BASE_URL           @"http://vip.kefudashi.cn:8000/visitor/api"
 //#define HTTP_API_BASE_URL                   @"http://vip.kefudashi.cn:8000/api"
 //#define CLIENT_OAUTH_TOKEN                  @"http://vip.kefudashi.cn:8000/oauth/token"

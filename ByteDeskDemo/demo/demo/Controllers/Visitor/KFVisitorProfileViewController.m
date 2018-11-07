@@ -2,8 +2,8 @@
 //  KFVisitorProfileViewController.m
 //  demo
 //
-//  Created by 萝卜丝 on 2017/11/22.
-//  Copyright © 2017年 Bytedesk.com. All rights reserved.
+//  Created by 萝卜丝 on 2018/11/22.
+//  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
 #import "KFVisitorProfileViewController.h"
@@ -63,7 +63,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -157,7 +157,7 @@
         [self.currentTextFieldDialogViewController hide];
         
     } else {
-//        [QMUITips showSucceed:@"请输入文字" inView:self.currentTextFieldDialogViewController.modalPresentedViewController.view hideAfterDelay:2.0];
+        //        [QMUITips showSucceed:@"请输入文字" inView:self.currentTextFieldDialogViewController.modalPresentedViewController.view hideAfterDelay:2.0];
     }
     return NO;
 }
@@ -170,11 +170,11 @@
     [BDCoreApis visitorGetUserinfoWithUid:[BDSettings getUid] resultSuccess:^(NSDictionary *dict) {
         NSLog(@"%s, %@, %@", __PRETTY_FUNCTION__, dict, dict[@"data"][@"nickname"]);
         self.mNickname = dict[@"data"][@"nickname"];
-        NSMutableArray *tags = dict[@"data"][@"tags"];
-        for (NSDictionary *tag in tags) {
-            NSLog(@"%@ %@", tag[@"key"], tag[@"value"]);
-            if ([tag[@"key"] isEqualToString:self.mTagkey]) {
-                self.mTagvalue = tag[@"value"];
+        NSMutableArray *fingerPrints = dict[@"data"][@"fingerPrints"];
+        for (NSDictionary *fingerPrint in fingerPrints) {
+            // NSLog(@"%@ %@", fingerPrint[@"key"], fingerPrint[@"value"]);
+            if ([fingerPrint[@"key"] isEqualToString:self.mTagkey]) {
+                self.mTagvalue = fingerPrint[@"value"];
             }
         }
         //

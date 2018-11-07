@@ -51,7 +51,7 @@
 
 - (void)loadUserinfoAndTags {
     //
-    UIView *parentView = self.navigationController.view;
+//    UIView *parentView = self.navigationController.view;
     //
 //    [BDCoreApis adminGetUserinfoWithCompanyId:self.mThreadModel.company_id
 //                                   withUsername:self.mThreadModel.username

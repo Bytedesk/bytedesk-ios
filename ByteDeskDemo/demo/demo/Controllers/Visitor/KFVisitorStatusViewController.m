@@ -99,13 +99,9 @@
     [BDCoreApis visitorGetWorkGroupStatus:@"201807171659201" resultSuccess:^(NSDictionary *dict) {
         
         NSString *wId = dict[@"data"][@"wid"];
-        NSNumber *status = dict[@"data"][@"status"];
+        NSString *status = dict[@"data"][@"status"];
         NSLog(@"wid: %@, status:%@", wId, status);
-        if ([status isEqual:[NSNumber numberWithInt:1]]) {
-            self.mWorkgroupStatus = @"在线";
-        } else {
-            self.mWorkgroupStatus = @"离线";
-        }
+        self.mWorkgroupStatus = status;
         //
         [self.mRefreshControl endRefreshing];
         [self.tableView reloadData];
@@ -117,7 +113,9 @@
     // 查询客服账号在线状态
     [BDCoreApis visitorGetAgentStatus:self.mDefaultAgentUid resultSuccess:^(NSDictionary *dict) {
         //
+        NSString *uId = dict[@"data"][@"uid"];
         NSString *status = dict[@"data"][@"status"];
+        NSLog(@"uid: %@, status:%@", uId, status);
         self.mAgentStatus = status;
         //
         [self.mRefreshControl endRefreshing];

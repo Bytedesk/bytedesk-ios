@@ -2,8 +2,8 @@
 //  KFVisitorInitViewController.m
 //  demo
 //
-//  Created by 萝卜丝 on 2017/11/22.
-//  Copyright © 2017年 Bytedesk.com. All rights reserved.
+//  Created by 萝卜丝 on 2018/11/22.
+//  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
 #import "KFVisitorLoginViewController.h"

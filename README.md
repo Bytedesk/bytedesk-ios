@@ -125,11 +125,11 @@ pod 'HCSStarRatingView'
 [BDCoreApis visitorGetUserinfoWithUid:[BDSettings getUid] resultSuccess:^(NSDictionary *dict) {
     NSLog(@"%s, %@, %@", __PRETTY_FUNCTION__, dict, dict[@"data"][@"nickname"]);
     NSString *nickname = dict[@"data"][@"nickname"];
-    NSMutableArray *tags = dict[@"data"][@"tags"];
-    for (NSDictionary *tag in tags) {
-        NSLog(@"%@ %@", tag[@"key"], tag[@"value"]);
-        if ([tag[@"key"] isEqualToString:self.mTagkey]) {
-            NSString *tagValue = tag[@"value"];
+    NSMutableArray *fingerPrints = dict[@"data"][@"fingerPrints"];
+    for (NSDictionary *fingerPrint in fingerPrints) {
+        // NSLog(@"%@ %@", fingerPrint[@"key"], fingerPrint[@"value"]);
+        if ([fingerPrint[@"key"] isEqualToString:self.mTagkey]) {
+            self.mTagvalue = fingerPrint[@"value"];
         }
     }
 } resultFailed:^(NSError *error) {
@@ -170,13 +170,9 @@ pod 'HCSStarRatingView'
 // 查询工作组在线状态
 [BDCoreApis visitorGetWorkGroupStatus:@"201807171659201" resultSuccess:^(NSDictionary *dict) { 
     NSString *wId = dict[@"data"][@"wid"];
-    NSNumber *status = dict[@"data"][@"status"];
+    NSString *status = dict[@"data"][@"status"];
     NSLog(@"wid: %@, status:%@", wId, status);
-    if ([status isEqual:[NSNumber numberWithInt:1]]) {
-        // self.mWorkgroupStatus = @"在线";
-    } else {
-        // self.mWorkgroupStatus = @"离线";
-    }
+    // self.mWorkgroupStatus = status;
     //
 } resultFailed:^(NSError *error) {
     NSLog(@"%@", error);
@@ -189,8 +185,11 @@ pod 'HCSStarRatingView'
 // 查询客服账号在线状态
 [BDCoreApis visitorGetAgentStatus:@"201808221551193" resultSuccess:^(NSDictionary *dict) {
     //
+    NSString *uId = dict[@"data"][@"uid"];
     NSString *status = dict[@"data"][@"status"];
-    self.mAgentStatus = status;
+    NSLog(@"uid: %@, status:%@", uId, status);
+    // self.mAgentStatus = status;
+    //
 } resultFailed:^(NSError *error) {
     NSLog(@"%@", error);
 }];
@@ -209,6 +208,10 @@ pod 'HCSStarRatingView'
 ```
 
 ## 更新日志
+
+> 2018-11-07
+
+- 优化在线状态接口
 
 > 2018-10-24
 
