@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import <bytedesk-core/bdcore.h>
-#import "ViewController.h"
+//#import "ViewController.h"
 
 #import "KFVisitorApiViewController.h"
 #import "KFNavigationController.h"

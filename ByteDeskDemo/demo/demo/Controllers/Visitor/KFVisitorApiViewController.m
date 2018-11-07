@@ -9,7 +9,6 @@
 #import "KFVisitorApiViewController.h"
 #import <SafariServices/SafariServices.h>
 
-#import "KFIntroViewController.h"
 #import "KFVisitorLoginViewController.h"
 #import "KFVisitorChatViewController.h"
 #import "KFVisitorProfileViewController.h"
