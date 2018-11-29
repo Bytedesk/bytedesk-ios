@@ -2,7 +2,7 @@
 //  KFDSChatViewController.m
 //  bdui
 //
-//  Created by 萝卜丝 on 2018/11/29.
+//  Created by 萝卜丝 · bytedesk.com on 2018/11/29.
 //  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 

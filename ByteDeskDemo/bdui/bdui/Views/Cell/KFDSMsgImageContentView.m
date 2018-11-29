@@ -2,8 +2,8 @@
 //  KFDSMsgImageContentView.m
 //  feedback
 //
-//  Created by 萝卜丝 on 2018/2/18.
-//  Copyright © 2018年 萝卜丝. All rights reserved.
+//  Created by 萝卜丝 · bytedesk.com on 2018/2/18.
+//  Copyright © 2018年 萝卜丝 · bytedesk.com. All rights reserved.
 //
 
 #import "KFDSMsgImageContentView.h"

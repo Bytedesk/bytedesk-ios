@@ -2,7 +2,7 @@
 //  KFThreadViewController.m
 //  linphone
 //
-//  Created by 萝卜丝 on 2018/10/12.
+//  Created by 萝卜丝 · bytedesk.com on 2018/10/12.
 //
 
 #import "KFVisitorThreadViewController.h"

@@ -22,11 +22,12 @@
 - Xcode Version 9.3 (9E145)
 - CocoaPods 1.5.0
 
-萝卜丝·云客服提供三种集成方法：
+萝卜丝·云客服提供四种集成方法：
 
 - 完全基于pod的方式(推荐，参考：ByteDeskDemo)
 - 半依赖pod集成方式，添加开源bdui项目，方便自定义ui（参考：ByteDeskDemo）
 - 项目中添加framework的方式
+- 不依赖于cocoapod方式
 
 > 第一种方式：完全依赖pod集成，在Podfile中添加如下：
 
@@ -65,6 +66,8 @@ pod 'QMUIKit'
 pod 'M80AttributedLabel'
 pod 'HCSStarRatingView'
 ```
+
+> 第四种方式：不依赖于cocoapods, 具体也可参考：示例 ByteDeskDemoFramework
 
 ## 引入头文件
 

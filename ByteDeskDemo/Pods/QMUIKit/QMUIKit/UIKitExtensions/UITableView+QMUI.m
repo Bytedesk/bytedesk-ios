@@ -262,12 +262,10 @@ const NSUInteger kFloatValuePrecision = 4;// 统一一个小数点运算精度
         isIndexPathLegal = NO;
     } else {
         NSInteger rows = [self numberOfRowsInSection:indexPath.section];
-        if (indexPath.row >= rows) {
-            isIndexPathLegal = NO;
-        }
+        isIndexPathLegal = rows > 0 ? indexPath.row < rows : indexPath.row == NSNotFound;
     }
     if (!isIndexPathLegal) {
-        QMUILog(@"UITableView (QMUI)", @"%@ - target indexPath : %@ ，不合法的indexPath。\n%@", self, indexPath, [NSThread callStackSymbols]);
+        QMUILogWarn(@"UITableView (QMUI)", @"%@ - target indexPath : %@ ，不合法的indexPath。\n%@", self, indexPath, [NSThread callStackSymbols]);
         NSAssert(NO, @"出现不合法的indexPath");
     } else {
         [self qmui_scrollToRowAtIndexPath:indexPath atScrollPosition:scrollPosition animated:animated];
@@ -285,7 +283,7 @@ const NSUInteger kFloatValuePrecision = 4;// 统一一个小数点运算精度
 }
 
 - (void)QMUISymbolicUsingTableViewEstimatedHeightMakeWarning {
-    NSLog(@"UITableView 的 estimatedRow(SectionHeader / SectionFooter)Height 属性会影响 contentSize、sizeThatFits:、rectForXxx 等方法的计算，导致计算结果不准确，建议重新考虑是否要使用 estimated。可添加 '%@' 的 Symbolic Breakpoint 以捕捉此类信息\n%@", NSStringFromSelector(_cmd), [NSThread callStackSymbols]);
+    QMUILog(@"UITableView 的 estimatedRow(SectionHeader / SectionFooter)Height 属性会影响 contentSize、sizeThatFits:、rectForXxx 等方法的计算，导致计算结果不准确，建议重新考虑是否要使用 estimated。可添加 '%@' 的 Symbolic Breakpoint 以捕捉此类信息\n%@", NSStringFromSelector(_cmd), [NSThread callStackSymbols]);
 }
 
 @end

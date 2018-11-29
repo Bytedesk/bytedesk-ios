@@ -2,7 +2,7 @@
 //  KFVisitorApiViewController.m
 //  demo
 //
-//  Created by 萝卜丝 on 2018/11/22.
+//  Created by 萝卜丝 · bytedesk.com on 2018/11/22.
 //  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
@@ -19,7 +19,7 @@
 //#import "KFVisitorLeavemsgViewController.h"
 #import <bytedesk-core/bdcore.h>
 
-//"0. 萝卜丝简介",
+//"0. 萝卜丝 · bytedesk.com简介",
 //"1. 初始化/登录接口",
 //"2. 开始对话接口",
 //"3. 设置用户标签/个人资料接口",

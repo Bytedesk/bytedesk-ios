@@ -1,0 +1,514 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3D54755821AFC4BE00B3BB56 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54755721AFC4BE00B3BB56 /* AppDelegate.m */; };
+		3D54755B21AFC4BE00B3BB56 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54755A21AFC4BE00B3BB56 /* ViewController.m */; };
+		3D54755E21AFC4BE00B3BB56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D54755C21AFC4BE00B3BB56 /* Main.storyboard */; };
+		3D54756021AFC4C100B3BB56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D54755F21AFC4C100B3BB56 /* Assets.xcassets */; };
+		3D54756321AFC4C100B3BB56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D54756121AFC4C100B3BB56 /* LaunchScreen.storyboard */; };
+		3D54756621AFC4C100B3BB56 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54756521AFC4C100B3BB56 /* main.m */; };
+		3D54758621AFC5CC00B3BB56 /* KFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54757421AFC5CC00B3BB56 /* KFNavigationController.m */; };
+		3D54758721AFC5CC00B3BB56 /* KFVisitorStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54757821AFC5CC00B3BB56 /* KFVisitorStatusViewController.m */; };
+		3D54758821AFC5CC00B3BB56 /* KFVisitorThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54757921AFC5CC00B3BB56 /* KFVisitorThreadViewController.m */; };
+		3D54758921AFC5CC00B3BB56 /* KFVisitorLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54757A21AFC5CC00B3BB56 /* KFVisitorLoginViewController.m */; };
+		3D54758A21AFC5CC00B3BB56 /* KFVisitorApiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54757C21AFC5CC00B3BB56 /* KFVisitorApiViewController.m */; };
+		3D54758B21AFC5CC00B3BB56 /* KFVisitorChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54757E21AFC5CC00B3BB56 /* KFVisitorChatViewController.m */; };
+		3D54758C21AFC5CC00B3BB56 /* KFVisitorProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54758221AFC5CC00B3BB56 /* KFVisitorProfileViewController.m */; };
+		3D54758D21AFC5CC00B3BB56 /* KFThreadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54758521AFC5CC00B3BB56 /* KFThreadTableViewCell.m */; };
+		3D5475AD21AFCACA00B3BB56 /* M80AttributedLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D54759021AFC82900B3BB56 /* M80AttributedLabel.framework */; };
+		3D5475AE21AFCACA00B3BB56 /* M80AttributedLabel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D54759021AFC82900B3BB56 /* M80AttributedLabel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3D5475AF21AFCACA00B3BB56 /* MQTTClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D54759121AFC82900B3BB56 /* MQTTClient.framework */; };
+		3D5475B021AFCACA00B3BB56 /* MQTTClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D54759121AFC82900B3BB56 /* MQTTClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3D5475B121AFCACA00B3BB56 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D54759221AFC82900B3BB56 /* FMDB.framework */; };
+		3D5475B221AFCACA00B3BB56 /* FMDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D54759221AFC82900B3BB56 /* FMDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3D5475B321AFCACA00B3BB56 /* HCSStarRatingView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D54759321AFC82900B3BB56 /* HCSStarRatingView.framework */; };
+		3D5475B421AFCACA00B3BB56 /* HCSStarRatingView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D54759321AFC82900B3BB56 /* HCSStarRatingView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3D5475B521AFCACA00B3BB56 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D54759421AFC82900B3BB56 /* AFNetworking.framework */; };
+		3D5475B621AFCACA00B3BB56 /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D54759421AFC82900B3BB56 /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3D5475B721AFCACA00B3BB56 /* QMUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D54759521AFC82900B3BB56 /* QMUIKit.framework */; };
+		3D5475B821AFCACA00B3BB56 /* QMUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D54759521AFC82900B3BB56 /* QMUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3D5475B921AFCACA00B3BB56 /* bytedesk-ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D54756D21AFC54900B3BB56 /* bytedesk-ui.framework */; };
+		3D5475BA21AFCACA00B3BB56 /* bytedesk-ui.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D54756D21AFC54900B3BB56 /* bytedesk-ui.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3D5475BB21AFCACA00B3BB56 /* bytedesk-core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D54756E21AFC54900B3BB56 /* bytedesk-core.framework */; };
+		3D5475BC21AFCACA00B3BB56 /* bytedesk-core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D54756E21AFC54900B3BB56 /* bytedesk-core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3D5475BD21AFCACA00B3BB56 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3D5475AE21AFCACA00B3BB56 /* M80AttributedLabel.framework in Embed Frameworks */,
+				3D5475B621AFCACA00B3BB56 /* AFNetworking.framework in Embed Frameworks */,
+				3D5475B221AFCACA00B3BB56 /* FMDB.framework in Embed Frameworks */,
+				3D5475B821AFCACA00B3BB56 /* QMUIKit.framework in Embed Frameworks */,
+				3D5475BC21AFCACA00B3BB56 /* bytedesk-core.framework in Embed Frameworks */,
+				3D5475B021AFCACA00B3BB56 /* MQTTClient.framework in Embed Frameworks */,
+				3D5475BA21AFCACA00B3BB56 /* bytedesk-ui.framework in Embed Frameworks */,
+				3D5475B421AFCACA00B3BB56 /* HCSStarRatingView.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3D54755321AFC4BE00B3BB56 /* ByteDeskDemoFramework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ByteDeskDemoFramework.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D54755621AFC4BE00B3BB56 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3D54755721AFC4BE00B3BB56 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3D54755921AFC4BE00B3BB56 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		3D54755A21AFC4BE00B3BB56 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3D54755D21AFC4BE00B3BB56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3D54755F21AFC4C100B3BB56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3D54756221AFC4C100B3BB56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3D54756421AFC4C100B3BB56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D54756521AFC4C100B3BB56 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3D54756D21AFC54900B3BB56 /* bytedesk-ui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "bytedesk-ui.framework"; sourceTree = "<group>"; };
+		3D54756E21AFC54900B3BB56 /* bytedesk-core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "bytedesk-core.framework"; sourceTree = "<group>"; };
+		3D54757421AFC5CC00B3BB56 /* KFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFNavigationController.m; sourceTree = "<group>"; };
+		3D54757521AFC5CC00B3BB56 /* KFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFNavigationController.h; sourceTree = "<group>"; };
+		3D54757721AFC5CC00B3BB56 /* KFVisitorChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFVisitorChatViewController.h; sourceTree = "<group>"; };
+		3D54757821AFC5CC00B3BB56 /* KFVisitorStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFVisitorStatusViewController.m; sourceTree = "<group>"; };
+		3D54757921AFC5CC00B3BB56 /* KFVisitorThreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFVisitorThreadViewController.m; sourceTree = "<group>"; };
+		3D54757A21AFC5CC00B3BB56 /* KFVisitorLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFVisitorLoginViewController.m; sourceTree = "<group>"; };
+		3D54757B21AFC5CC00B3BB56 /* KFVisitorProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFVisitorProfileViewController.h; sourceTree = "<group>"; };
+		3D54757C21AFC5CC00B3BB56 /* KFVisitorApiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFVisitorApiViewController.m; sourceTree = "<group>"; };
+		3D54757D21AFC5CC00B3BB56 /* KFVisitorStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFVisitorStatusViewController.h; sourceTree = "<group>"; };
+		3D54757E21AFC5CC00B3BB56 /* KFVisitorChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFVisitorChatViewController.m; sourceTree = "<group>"; };
+		3D54757F21AFC5CC00B3BB56 /* KFVisitorThreadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFVisitorThreadViewController.h; sourceTree = "<group>"; };
+		3D54758021AFC5CC00B3BB56 /* KFVisitorLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFVisitorLoginViewController.h; sourceTree = "<group>"; };
+		3D54758121AFC5CC00B3BB56 /* KFVisitorApiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFVisitorApiViewController.h; sourceTree = "<group>"; };
+		3D54758221AFC5CC00B3BB56 /* KFVisitorProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFVisitorProfileViewController.m; sourceTree = "<group>"; };
+		3D54758421AFC5CC00B3BB56 /* KFThreadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFThreadTableViewCell.h; sourceTree = "<group>"; };
+		3D54758521AFC5CC00B3BB56 /* KFThreadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFThreadTableViewCell.m; sourceTree = "<group>"; };
+		3D54758E21AFC67A00B3BB56 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		3D54759021AFC82900B3BB56 /* M80AttributedLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = M80AttributedLabel.framework; sourceTree = "<group>"; };
+		3D54759121AFC82900B3BB56 /* MQTTClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MQTTClient.framework; sourceTree = "<group>"; };
+		3D54759221AFC82900B3BB56 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FMDB.framework; sourceTree = "<group>"; };
+		3D54759321AFC82900B3BB56 /* HCSStarRatingView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HCSStarRatingView.framework; sourceTree = "<group>"; };
+		3D54759421AFC82900B3BB56 /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AFNetworking.framework; sourceTree = "<group>"; };
+		3D54759521AFC82900B3BB56 /* QMUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QMUIKit.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3D54755021AFC4BE00B3BB56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D5475AD21AFCACA00B3BB56 /* M80AttributedLabel.framework in Frameworks */,
+				3D5475B521AFCACA00B3BB56 /* AFNetworking.framework in Frameworks */,
+				3D5475B121AFCACA00B3BB56 /* FMDB.framework in Frameworks */,
+				3D5475B721AFCACA00B3BB56 /* QMUIKit.framework in Frameworks */,
+				3D5475BB21AFCACA00B3BB56 /* bytedesk-core.framework in Frameworks */,
+				3D5475AF21AFCACA00B3BB56 /* MQTTClient.framework in Frameworks */,
+				3D5475B921AFCACA00B3BB56 /* bytedesk-ui.framework in Frameworks */,
+				3D5475B321AFCACA00B3BB56 /* HCSStarRatingView.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3D54754A21AFC4BE00B3BB56 = {
+			isa = PBXGroup;
+			children = (
+				3D54755521AFC4BE00B3BB56 /* ByteDeskDemoFramework */,
+				3D54755421AFC4BE00B3BB56 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3D54755421AFC4BE00B3BB56 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3D54755321AFC4BE00B3BB56 /* ByteDeskDemoFramework.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3D54755521AFC4BE00B3BB56 /* ByteDeskDemoFramework */ = {
+			isa = PBXGroup;
+			children = (
+				3D54757221AFC5CC00B3BB56 /* Controllers */,
+				3D54758321AFC5CC00B3BB56 /* Views */,
+				3D54756C21AFC54900B3BB56 /* frameworks */,
+				3D54755621AFC4BE00B3BB56 /* AppDelegate.h */,
+				3D54755721AFC4BE00B3BB56 /* AppDelegate.m */,
+				3D54755921AFC4BE00B3BB56 /* ViewController.h */,
+				3D54755A21AFC4BE00B3BB56 /* ViewController.m */,
+				3D54755C21AFC4BE00B3BB56 /* Main.storyboard */,
+				3D54755F21AFC4C100B3BB56 /* Assets.xcassets */,
+				3D54756121AFC4C100B3BB56 /* LaunchScreen.storyboard */,
+				3D54756421AFC4C100B3BB56 /* Info.plist */,
+				3D54756521AFC4C100B3BB56 /* main.m */,
+				3D54758E21AFC67A00B3BB56 /* PrefixHeader.pch */,
+			);
+			path = ByteDeskDemoFramework;
+			sourceTree = "<group>";
+		};
+		3D54756C21AFC54900B3BB56 /* frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3D54758F21AFC82900B3BB56 /* vendors */,
+				3D54756D21AFC54900B3BB56 /* bytedesk-ui.framework */,
+				3D54756E21AFC54900B3BB56 /* bytedesk-core.framework */,
+			);
+			path = frameworks;
+			sourceTree = "<group>";
+		};
+		3D54757221AFC5CC00B3BB56 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3D54757321AFC5CC00B3BB56 /* Common */,
+				3D54757621AFC5CC00B3BB56 /* Visitor */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3D54757321AFC5CC00B3BB56 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				3D54757421AFC5CC00B3BB56 /* KFNavigationController.m */,
+				3D54757521AFC5CC00B3BB56 /* KFNavigationController.h */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		3D54757621AFC5CC00B3BB56 /* Visitor */ = {
+			isa = PBXGroup;
+			children = (
+				3D54757721AFC5CC00B3BB56 /* KFVisitorChatViewController.h */,
+				3D54757821AFC5CC00B3BB56 /* KFVisitorStatusViewController.m */,
+				3D54757921AFC5CC00B3BB56 /* KFVisitorThreadViewController.m */,
+				3D54757A21AFC5CC00B3BB56 /* KFVisitorLoginViewController.m */,
+				3D54757B21AFC5CC00B3BB56 /* KFVisitorProfileViewController.h */,
+				3D54757C21AFC5CC00B3BB56 /* KFVisitorApiViewController.m */,
+				3D54757D21AFC5CC00B3BB56 /* KFVisitorStatusViewController.h */,
+				3D54757E21AFC5CC00B3BB56 /* KFVisitorChatViewController.m */,
+				3D54757F21AFC5CC00B3BB56 /* KFVisitorThreadViewController.h */,
+				3D54758021AFC5CC00B3BB56 /* KFVisitorLoginViewController.h */,
+				3D54758121AFC5CC00B3BB56 /* KFVisitorApiViewController.h */,
+				3D54758221AFC5CC00B3BB56 /* KFVisitorProfileViewController.m */,
+			);
+			path = Visitor;
+			sourceTree = "<group>";
+		};
+		3D54758321AFC5CC00B3BB56 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3D54758421AFC5CC00B3BB56 /* KFThreadTableViewCell.h */,
+				3D54758521AFC5CC00B3BB56 /* KFThreadTableViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3D54758F21AFC82900B3BB56 /* vendors */ = {
+			isa = PBXGroup;
+			children = (
+				3D54759021AFC82900B3BB56 /* M80AttributedLabel.framework */,
+				3D54759121AFC82900B3BB56 /* MQTTClient.framework */,
+				3D54759221AFC82900B3BB56 /* FMDB.framework */,
+				3D54759321AFC82900B3BB56 /* HCSStarRatingView.framework */,
+				3D54759421AFC82900B3BB56 /* AFNetworking.framework */,
+				3D54759521AFC82900B3BB56 /* QMUIKit.framework */,
+			);
+			path = vendors;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3D54755221AFC4BE00B3BB56 /* ByteDeskDemoFramework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D54756921AFC4C100B3BB56 /* Build configuration list for PBXNativeTarget "ByteDeskDemoFramework" */;
+			buildPhases = (
+				3D54754F21AFC4BE00B3BB56 /* Sources */,
+				3D54755021AFC4BE00B3BB56 /* Frameworks */,
+				3D54755121AFC4BE00B3BB56 /* Resources */,
+				3D5475BD21AFCACA00B3BB56 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ByteDeskDemoFramework;
+			productName = ByteDeskDemoFramework;
+			productReference = 3D54755321AFC4BE00B3BB56 /* ByteDeskDemoFramework.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3D54754B21AFC4BE00B3BB56 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "宁金鹏";
+				TargetAttributes = {
+					3D54755221AFC4BE00B3BB56 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 3D54754E21AFC4BE00B3BB56 /* Build configuration list for PBXProject "ByteDeskDemoFramework" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3D54754A21AFC4BE00B3BB56;
+			productRefGroup = 3D54755421AFC4BE00B3BB56 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3D54755221AFC4BE00B3BB56 /* ByteDeskDemoFramework */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3D54755121AFC4BE00B3BB56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D54756321AFC4C100B3BB56 /* LaunchScreen.storyboard in Resources */,
+				3D54756021AFC4C100B3BB56 /* Assets.xcassets in Resources */,
+				3D54755E21AFC4BE00B3BB56 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3D54754F21AFC4BE00B3BB56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D54758C21AFC5CC00B3BB56 /* KFVisitorProfileViewController.m in Sources */,
+				3D54758921AFC5CC00B3BB56 /* KFVisitorLoginViewController.m in Sources */,
+				3D54758A21AFC5CC00B3BB56 /* KFVisitorApiViewController.m in Sources */,
+				3D54758621AFC5CC00B3BB56 /* KFNavigationController.m in Sources */,
+				3D54758D21AFC5CC00B3BB56 /* KFThreadTableViewCell.m in Sources */,
+				3D54758721AFC5CC00B3BB56 /* KFVisitorStatusViewController.m in Sources */,
+				3D54758821AFC5CC00B3BB56 /* KFVisitorThreadViewController.m in Sources */,
+				3D54758B21AFC5CC00B3BB56 /* KFVisitorChatViewController.m in Sources */,
+				3D54755B21AFC4BE00B3BB56 /* ViewController.m in Sources */,
+				3D54756621AFC4C100B3BB56 /* main.m in Sources */,
+				3D54755821AFC4BE00B3BB56 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3D54755C21AFC4BE00B3BB56 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D54755D21AFC4BE00B3BB56 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3D54756121AFC4C100B3BB56 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D54756221AFC4C100B3BB56 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3D54756721AFC4C100B3BB56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3D54756821AFC4C100B3BB56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3D54756A21AFC4C100B3BB56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L5F47963M2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ByteDeskDemoFramework/frameworks",
+					"$(PROJECT_DIR)/ByteDeskDemoFramework/frameworks/vendors",
+				);
+				GCC_PREFIX_HEADER = "$(SRCROOT)/ByteDeskDemoFramework/PrefixHeader.pch";
+				INFOPLIST_FILE = ByteDeskDemoFramework/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytedesk.ByteDeskDemoFramework;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3D54756B21AFC4C100B3BB56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L5F47963M2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ByteDeskDemoFramework/frameworks",
+					"$(PROJECT_DIR)/ByteDeskDemoFramework/frameworks/vendors",
+				);
+				GCC_PREFIX_HEADER = "$(SRCROOT)/ByteDeskDemoFramework/PrefixHeader.pch";
+				INFOPLIST_FILE = ByteDeskDemoFramework/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bytedesk.ByteDeskDemoFramework;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3D54754E21AFC4BE00B3BB56 /* Build configuration list for PBXProject "ByteDeskDemoFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D54756721AFC4C100B3BB56 /* Debug */,
+				3D54756821AFC4C100B3BB56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3D54756921AFC4C100B3BB56 /* Build configuration list for PBXNativeTarget "ByteDeskDemoFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D54756A21AFC4C100B3BB56 /* Debug */,
+				3D54756B21AFC4C100B3BB56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3D54754B21AFC4BE00B3BB56 /* Project object */;
+}
