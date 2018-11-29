@@ -20,7 +20,7 @@
 开发环境：
 
 - Xcode Version 9.3 (9E145)
-- CocoaPods 1.5.0
+- CocoaPods 1.5.0 
 
 萝卜丝·云客服提供四种集成方法：
 
