@@ -184,17 +184,17 @@
 		3D54757621AFC5CC00B3BB56 /* Visitor */ = {
 			isa = PBXGroup;
 			children = (
+				3D54758121AFC5CC00B3BB56 /* KFVisitorApiViewController.h */,
+				3D54757C21AFC5CC00B3BB56 /* KFVisitorApiViewController.m */,
 				3D54757721AFC5CC00B3BB56 /* KFVisitorChatViewController.h */,
+				3D54757E21AFC5CC00B3BB56 /* KFVisitorChatViewController.m */,
+				3D54757D21AFC5CC00B3BB56 /* KFVisitorStatusViewController.h */,
 				3D54757821AFC5CC00B3BB56 /* KFVisitorStatusViewController.m */,
+				3D54757F21AFC5CC00B3BB56 /* KFVisitorThreadViewController.h */,
 				3D54757921AFC5CC00B3BB56 /* KFVisitorThreadViewController.m */,
+				3D54758021AFC5CC00B3BB56 /* KFVisitorLoginViewController.h */,
 				3D54757A21AFC5CC00B3BB56 /* KFVisitorLoginViewController.m */,
 				3D54757B21AFC5CC00B3BB56 /* KFVisitorProfileViewController.h */,
-				3D54757C21AFC5CC00B3BB56 /* KFVisitorApiViewController.m */,
-				3D54757D21AFC5CC00B3BB56 /* KFVisitorStatusViewController.h */,
-				3D54757E21AFC5CC00B3BB56 /* KFVisitorChatViewController.m */,
-				3D54757F21AFC5CC00B3BB56 /* KFVisitorThreadViewController.h */,
-				3D54758021AFC5CC00B3BB56 /* KFVisitorLoginViewController.h */,
-				3D54758121AFC5CC00B3BB56 /* KFVisitorApiViewController.h */,
 				3D54758221AFC5CC00B3BB56 /* KFVisitorProfileViewController.m */,
 			);
 			path = Visitor;
