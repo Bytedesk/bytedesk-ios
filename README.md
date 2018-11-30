@@ -67,8 +67,7 @@ pod 'M80AttributedLabel'
 pod 'HCSStarRatingView'
 ```
 
-> 第四种方式：不依赖于cocoapods, 具体也可参考：示例 ByteDeskDemoFramework，注：默认demo可以运行在模拟器，如果要在真机运行，请在ByteDeskDemoFramework/vendors-device文件夹下复制相关frameworks替换到ByteDeskDemoFramework/frameworks/vendors; 如果要在
-模拟器运行，请复制ByteDeskDemoFramework/vendors-simulator文件夹下复制相关frameworks到替换到ByteDeskDemoFramework/frameworks/vendors
+> 第四种方式：不依赖于cocoapods, 具体也可参考：示例 ByteDeskDemoFramework，注：默认demo可以运行在模拟器，如果要在真机运行，请在ByteDeskDemoFramework/vendors-device文件夹下复制相关frameworks替换到ByteDeskDemoFramework/frameworks/vendors; 如果要在模拟器运行，请复制ByteDeskDemoFramework/vendors-simulator文件夹下复制相关frameworks到替换到ByteDeskDemoFramework/frameworks/vendors
 
 ## 引入头文件
 
