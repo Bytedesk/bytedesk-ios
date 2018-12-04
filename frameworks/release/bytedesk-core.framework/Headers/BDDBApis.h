@@ -11,7 +11,8 @@
 @class BDThreadModel;
 @class BDQueueModel;
 @class BDMessageModel;
-@class BDProfileModel;
+@class BDGroupModel;
+@class BDWorkGroupModel;
 @class BDContactModel;
 
 typedef void (^SuccessCallbackBlock)(NSDictionary *dict);
@@ -27,34 +28,34 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 #pragma mark - 客服端接口
 
 - (BOOL) insertThread:(BDThreadModel *)thread;
-- (BOOL) deleteThread:(NSNumber *)threadId;
+- (BOOL) deleteThread:(NSString *)tId;
 - (NSMutableArray *) getThreads;
 - (BOOL) clearThreads;
 
 - (BOOL) insertQueue:(BDQueueModel *)queue;
-- (BOOL) deleteQueue:(NSNumber *)queueId;
+- (BOOL) deleteQueue:(NSString *)qId;
 - (NSMutableArray *) getQueues;
 - (NSNumber *) getQueueCount;
 - (BOOL) clearQueues;
 
 - (BOOL) insertMessage:(BDMessageModel *)message;
-- (NSNumber *) insertSendTextMessageToThread:(NSNumber *)threadId withContent:(NSString *)content;
-- (NSNumber *) insertSendImageMessageToThread:(NSNumber *)threadId withImageUrl:(NSString *)imageUrl;
-- (NSNumber *) insertSendVoiceMessageToThread:(NSNumber *)threadId withVoiceUrl:(NSString *)voiceUrl;
+- (NSMutableArray *)getMessagesWithType:(NSString *)type withUid:(NSString *)uid;
+
 - (BOOL) updateMessage:(NSNumber *)localId withStatus:(NSString *)status;
 - (BOOL) updateMessage:(NSNumber *)localId withMessageId:(NSNumber *)messageId;
 - (BOOL) deleteMessage:(NSString *)mid;
 
-// TODO: 分页查询
-- (NSMutableArray *)getMessagesWithThread:(NSNumber *)threadId;
-- (NSMutableArray *)getMessagesWithWorkgroup:(NSString *)wId;
-
-- (BOOL) insertProfile:(BDProfileModel *)profile;
-- (BDProfileModel *) getProfile;
-
 - (BOOL) insertContact:(BDContactModel *)contact;
 - (NSMutableArray *) getContacts;
 - (BOOL) clearContacts;
+
+- (BOOL) insertGroup:(BDGroupModel *)group;
+- (NSMutableArray *) getGroups;
+- (BOOL) clearGroups;
+
+- (BOOL) insertWorkGroup:(BDWorkGroupModel *)workGroup;
+- (NSMutableArray *) getWorkGroups;
+- (BOOL) clearWorkGroups;
 
 #pragma mark - 公共接口
 

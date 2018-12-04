@@ -135,7 +135,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success <#success description#>
  @param failed <#failed description#>
  */
-+ (void) adminLoginWithUsername:(NSString *)username
++ (void) agentLoginWithUsername:(NSString *)username
                    withPassword:(NSString *)password
                      withAppkey:(NSString *)appkey
                   withSubdomain:(NSString *)subdomain
@@ -148,7 +148,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success <#success description#>
  @param failed <#failed description#>
  */
-+ (void) adminLoginResultSuccess:(SuccessCallbackBlock)success
++ (void) agentLoginResultSuccess:(SuccessCallbackBlock)success
                     resultFailed:(FailedCallbackBlock)failed;
 
 /**
@@ -166,70 +166,16 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success 成功回调
  @param failed 失败回调
  */
-+ (void)adminInitResultSuccess:(SuccessCallbackBlock)success
++ (void)agentInitResultSuccess:(SuccessCallbackBlock)success
                   resultFailed:(FailedCallbackBlock)failed;
 
 /**
  <#Description#>
-
- @param threadId <#threadId description#>
- @param success <#success description#>
- @param failed <#failed description#>
  */
-+ (void)adminCloseThread:(NSNumber *)threadId
++ (void)agentCloseThread:(NSString *)tid
            resultSuccess:(SuccessCallbackBlock)success
             resultFailed:(FailedCallbackBlock)failed;
 
-/**
- 手动接入会话
- 
- @param success success description
- @param failed <#failed description#>
- */
-+ (void)adminManualAcceptQueueWithQueueId:(NSNumber *)queueId
-                            resultSuccess:(SuccessCallbackBlock)success
-                             resultFailed:(FailedCallbackBlock)failed;
-
-/**
- 自动接入会话
- 
- @param queueId <#queueId description#>
- @param success <#success description#>
- @param failed <#failed description#>
- */
-+ (void)adminAutoAcceptQueueWithQueueId:(NSNumber *)queueId
-                          resultSuccess:(SuccessCallbackBlock)success
-                           resultFailed:(FailedCallbackBlock)failed;
-
-/**
- <#Description#>
-
- @param companyId <#companyId description#>
- @param username <#username description#>
- @param client <#client description#>
- @param success <#success description#>
- @param failed <#failed description#>
- */
-+ (void)adminGetUserinfoWithCompanyId:(NSNumber *)companyId
-                         withUsername:(NSString *)username
-                           withClient:(NSString *)client
-                        resultSuccess:(SuccessCallbackBlock)success
-                         resultFailed:(FailedCallbackBlock)failed;
-
-/**
- <#Description#>
-
- @param companyId <#companyId description#>
- @param username <#username description#>
- @param client <#client description#>
- @param success <#success description#>
- @param failed <#failed description#>
- */
-+ (void)adminGetTagWithCompanyId:(NSNumber *)companyId
-                    withUsername:(NSString *)username
-                      withClient:(NSString *)client
-                   resultSuccess:(SuccessCallbackBlock)success
-                    resultFailed:(FailedCallbackBlock)failed;
 
 #pragma mark - 公共接口
 
@@ -239,13 +185,6 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @return <#return value description#>
  */
 + (BOOL)isVisitor;
-
-/**
- <#Description#>
-
- @return <#return value description#>
- */
-+ (BDProfileModel *)getProfile;
 
 /**
  <#Description#>
@@ -302,36 +241,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 + (void)getContactResultSuccess:(SuccessCallbackBlock)success
                   resultFailed:(FailedCallbackBlock)failed;
 
-/**
- <#Description#>
++ (NSMutableArray *)getMessagesWithThread:(NSString *)uid;
 
- @param threadId <#threadId description#>
- @return <#return value description#>
- */
-+ (NSMutableArray *)getMessagesWithThread:(NSNumber *)threadId;
++ (NSMutableArray *)getMessagesWithContact:(NSString *)cid;
 
-/**
- <#Description#>
-
- @return <#return value description#>
- */
-+ (NSMutableArray *)getMessagesWithWorkgroup:(NSString *)wId;
-
-/**
- <#Description#>
-
- @param threadId <#threadId description#>
- @param offset <#offset description#>
- @param length <#length description#>
- @param success <#success description#>
- @param failed <#failed description#>
- */
-+ (void)getMessageWithThread:(NSNumber *)threadId
-                  withOffset:(NSInteger)offset
-              withStepLength:(NSInteger)length
-                resultSuccess:(SuccessCallbackBlock)success
-                 resultFailed:(FailedCallbackBlock)failed;
-
++ (NSMutableArray *)getMessagesWithGroup:(NSString *)gid;
 
 + (void)getMessageWithUser:(NSString *)uid
                   withPage:(NSInteger)page

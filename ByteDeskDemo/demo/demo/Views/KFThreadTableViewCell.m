@@ -2,8 +2,8 @@
 //  KFThreadTableViewCell.m
 //  kefu
 //
-//  Created by 萝卜丝 · bytedesk.com on 2017/11/28.
-//  Copyright © 2017年 Bytedesk.com. All rights reserved.
+//  Created by 萝卜丝 on 2018/11/28.
+//  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
 #import "KFThreadTableViewCell.h"
@@ -73,8 +73,8 @@
     [mAvatarImageView setImageWithURL:[NSURL URLWithString:threadModel.avatar] placeholderImage:[UIImage imageNamed:@"android_default_avatar"]];
     mTimestampLabel.text = threadModel.timestamp;
     //
-    if (threadModel.unreadcount.intValue > 0) {
-        mUnReadLabel.text = [NSString stringWithFormat:@"%@", threadModel.unreadcount];
+    if (threadModel.unread_count.intValue > 0) {
+        mUnReadLabel.text = [NSString stringWithFormat:@"%@", threadModel.unread_count];
     }
     else {
         mUnReadLabel.hidden  = true;

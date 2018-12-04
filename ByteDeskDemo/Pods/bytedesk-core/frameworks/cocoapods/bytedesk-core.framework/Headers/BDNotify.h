@@ -15,7 +15,9 @@
 
 @interface BDNotify : NSObject
 
+
 + (void)registerOAuthResult:(id)observer;
+
 + (void)unregisterOAuthResult:(id)observer;
 
 
@@ -23,29 +25,31 @@
 
 + (void)notifyInitStatus:(NSString *)status;
 
++ (void)notifyConnnectionStatus:(NSString *)status;
 
 //
+
 + (void)notifyThreadAdd:(BDThreadModel *)threadModel;
 
-+ (void)notifyThreadDelete:(NSNumber *)threadId;
++ (void)notifyThreadDelete:(NSString *)tid;
 
-+ (void)notifyThreadClose:(NSNumber *)threadId;
++ (void)notifyThreadClose:(NSString *)tid;
 
 
 //
 + (void)notifyQueueAdd:(BDQueueModel *)queueModel;
 
-+ (void)notifyQueueDelete:(NSNumber *)queueId;
++ (void)notifyQueueDelete:(NSString *)qid;
 
-+ (void)notifyQueueAccept:(NSNumber *)queueId;
++ (void)notifyQueueAccept:(NSString *)qid;
 
 
 //
 + (void)notifyMessageAdd:(BDMessageModel *)messageModel;
 
-+ (void)notifyMessageTextSend:(NSNumber *)threadId withContent:(NSString *)content withLocalId:(NSNumber *)localId;
++ (void)notifyMessageTextSend:(NSString *)tid withContent:(NSString *)content withLocalId:(NSNumber *)localId;
 
-+ (void)notifyMessageImageSend:(NSNumber *)threadId withImageUrl:(NSString *)imageUrl withLocalId:(NSNumber *)localId;
++ (void)notifyMessageImageSend:(NSString *)tid withImageUrl:(NSString *)imageUrl withLocalId:(NSNumber *)localId;
 
 + (void)notifyMessageDelete:(NSNumber *)messageId;
 
@@ -53,6 +57,14 @@
 
 + (void)notifyMessage:(NSNumber *)localId withStatus:(NSString *)status;
 
+//
++ (void)notifyThreadUpdate;
+
++ (void)notifyContactUpdate;
+
++ (void)notifyQueueUpdate;
+
++ (void)notifyProfileUpdate;
 
 @end
 

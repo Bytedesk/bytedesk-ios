@@ -14,29 +14,31 @@
 
 // 本地表主键id
 @property(nonatomic, strong) NSNumber *local_id;
-
+// 服务器端主键
 @property(nonatomic, strong) NSNumber *server_id;
+// 唯一数字id，保证唯一性
 @property(nonatomic, strong) NSString *qid;
-
-@property(nonatomic, strong) NSNumber *visitor_id;
-@property(nonatomic, strong) NSString *visitor_client;
-
-@property(nonatomic, strong) NSString *username;
+// 访客昵称
 @property(nonatomic, strong) NSString *nickname;
+// 访客头像
 @property(nonatomic, strong) NSString *avatar;
-@property(nonatomic, strong) NSString *client;
-
-@property(nonatomic, strong) NSNumber *agent_id;
+// 访客uid
+@property(nonatomic, strong) NSString *visitor_uid;
+// 访客来源客户端
+@property(nonatomic, strong) NSString *visitor_client;
+// 客服uid
+@property(nonatomic, strong) NSString *agent_uid;
+// 客服接入端
 @property(nonatomic, strong) NSString *agent_client;
-
-@property(nonatomic, strong) NSNumber *workgroup_id;
-
-@property(nonatomic, strong) NSString *createdAt;
-@property(nonatomic, strong) NSString *acceptedAt;
-@property(nonatomic, strong) NSString *leavedAt;
-
+// 所属thread tid
+@property(nonatomic, strong) NSString *thread_tid;
+// 所属工作组 wid
+@property(nonatomic, strong) NSString *workgroup_wid;
+// 接入客服时间
+@property(nonatomic, strong) NSString *actioned_at;
+// queuing/accepted/leaved
 @property(nonatomic, strong) NSString *status;
-
-@property(nonatomic, strong) NSString *myusername;
+// 当前登录用户Uid
+@property(nonatomic, strong) NSString *current_uid;
 
 @end

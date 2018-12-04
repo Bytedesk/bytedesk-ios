@@ -2,13 +2,14 @@
 //  KFVisitorApiViewController.m
 //  demo
 //
-//  Created by 萝卜丝 · bytedesk.com on 2018/11/22.
+//  Created by 萝卜丝 on 2018/11/22.
 //  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
 #import "KFVisitorApiViewController.h"
 #import <SafariServices/SafariServices.h>
 
+#import "KFIntroViewController.h"
 #import "KFVisitorLoginViewController.h"
 #import "KFVisitorChatViewController.h"
 #import "KFVisitorProfileViewController.h"
@@ -19,7 +20,7 @@
 //#import "KFVisitorLeavemsgViewController.h"
 #import <bytedesk-core/bdcore.h>
 
-//"0. 萝卜丝 · bytedesk.com简介",
+//"0. 萝卜丝简介",
 //"1. 初始化/登录接口",
 //"2. 开始对话接口",
 //"3. 设置用户标签/个人资料接口",
@@ -51,6 +52,8 @@
                         ];
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOAuthResult:) name:BD_NOTIFICATION_OAUTH_RESULT object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyConnectionStatus:) name:BD_NOTIFICATION_CONNECTION_STATUS object:nil];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -119,6 +122,19 @@
 - (void)notifyOAuthResult:(NSNotification *)notification {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     //
+}
+
+- (void)notifyConnectionStatus:(NSNotification *)notification {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSString *status = [notification object];
+    //
+    if ([status isEqualToString:BD_USER_STATUS_CONNECTING]) {
+        self.title = @"访客端接口(连接中...)";
+    } else if ([status isEqualToString:BD_USER_STATUS_CONNECTED]){
+        self.title = @"访客端接口";
+    } else {
+        self.title = @"访客端接口(未连接)";
+    }
 }
 
 #pragma mark - SFSafariViewControllerDelegate

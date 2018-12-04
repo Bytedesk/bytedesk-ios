@@ -14,13 +14,13 @@
 
 萝卜丝·云客服在经典版[微客服](http://www.weikefu.net)基础上面做了重构，将原先一个SDK一分为二为两个sdk：
 
-- 核心库：[![bytedesk-core](https://img.shields.io/badge/bytedesk--core-1.0.6-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-core)
-- 界面库，完全开源(Demo中的bdui项目)，方便开发者自定义界面：[![bytedesk--ui](https://img.shields.io/badge/bytedesk--ui-1.0.7-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-ui#bytedesk-ui-pod)
+- 核心库：[![bytedesk-core](https://img.shields.io/badge/bytedesk--core-1.1.0-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-core)
+- 界面库，完全开源(Demo中的bdui项目)，方便开发者自定义界面：[![bytedesk--ui](https://img.shields.io/badge/bytedesk--ui-1.1.0-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-ui#bytedesk-ui-pod)
 
 开发环境：
 
 - Xcode Version 9.3 (9E145)
-- CocoaPods 1.5.0 
+- CocoaPods 1.5.0
 
 萝卜丝·云客服提供四种集成方法：
 
@@ -211,6 +211,10 @@ pod 'HCSStarRatingView'
 ```
 
 ## 更新日志
+
+> 2018-12-04
+
+- 增加客服端接口
 
 > 2018-11-07
 

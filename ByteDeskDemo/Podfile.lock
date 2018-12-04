@@ -14,11 +14,11 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - bytedesk-core (1.0.6):
+  - bytedesk-core (1.1.0):
     - AFNetworking
     - FMDB
     - MQTTClient
-  - bytedesk-ui (1.0.7):
+  - bytedesk-ui (1.1.0):
     - AFNetworking
     - bytedesk-core
     - FMDB
@@ -30,7 +30,7 @@ PODS:
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - HCSStarRatingView (1.5)
-  - M80AttributedLabel (1.8.0)
+  - M80AttributedLabel (1.8.1)
   - MQTTClient (0.15.2):
     - MQTTClient/Core (= 0.15.2)
   - MQTTClient/Core (0.15.2):
@@ -324,11 +324,11 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  bytedesk-core: 960cfc7673ba1f5399df254c2445e8d207f78764
-  bytedesk-ui: 76f4a43cc766e5d4b665468ab74e6b2227d50a1a
+  bytedesk-core: 6983e0292401d4579bd599cd362bb035e38746be
+  bytedesk-ui: a8c7cc83e7a259d3fd574b2147fefd53c3615ed9
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
-  M80AttributedLabel: 8a48c4b0e52ee269192a0132fd1267e7e39668f3
+  M80AttributedLabel: 56905e0d2cf50d4550ba181dd15f992f7f4e21e8
   MQTTClient: 902c7bcac1501595f3d0b15178c7205b40331fb0
   QMUIKit: 8b16b24a75dc6c97310120ba06abc9d92a253ff4
 

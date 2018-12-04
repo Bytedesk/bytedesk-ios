@@ -12,18 +12,18 @@
 
 + (BDMQTTApis *)sharedInstance;
 
-- (void)login;
+- (void)connect;
 
-- (void)login:(NSString *)clientId;
+- (void)connect:(NSString *)clientId;
 
 - (void)subscribeTopic:(NSString *)topic;
 
 - (void)unsubscribeTopic:(NSString *)topic;
 
-- (void)sendTextMessage:(NSString *)content toTid:(NSString *)tId;
-- (void)sendImageMessage:(NSString *)content toTid:(NSString *)tId;
-- (void)sendVoiceMessage:(NSString *)content toTid:(NSString *)tId;
-- (void)sendMessage:(NSString *)content type:(NSString *)type toTid:(NSString *)tId;
+- (void)sendTextMessage:(NSString *)content toTid:(NSString *)tId sessionType:(NSString *)stype;
+- (void)sendImageMessage:(NSString *)content toTid:(NSString *)tId sessionType:(NSString *)stype;
+- (void)sendVoiceMessage:(NSString *)content toTid:(NSString *)tId sessionType:(NSString *)stype;
+- (void)sendMessage:(NSString *)content type:(NSString *)type toTid:(NSString *)tId sessionType:(NSString *)stype;
 
 - (void)setStatus:(NSString *)status;
 

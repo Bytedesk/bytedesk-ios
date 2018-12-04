@@ -11,10 +11,17 @@
 #define BD_USERNAME               @"bd_username"
 #define BD_UID                    @"bd_uid"
 #define BD_NICKNAME               @"bd_nickname"
+#define BD_REALNAME               @"bd_realname"
+#define BD_PASSWORD               @"bd_password"
 #define BD_AVATAR                 @"bd_avatar"
 #define BD_ROLE                   @"bd_role"
 #define BD_APPKEY                 @"bd_appkey"
 #define BD_SUBDOMAIN              @"bd_subdomain"
+#define BD_DESCRIPTION            @"bd_description"
+#define BD_AUTOREPLY              @"bd_autoreply"
+#define BD_STATUS                 @"bd_status"
+
+#define BD_IS_ALREADY_LOGIN       @"bd_is_already_login"
 
 #define BD_PASSPORT_ACCESS_TOKEN  @"bd_access_token"
 #define BD_PASSPORT_EXPIRES_IN    @"bd_expires_in"
@@ -25,6 +32,8 @@
 @interface BDSettings : NSObject
 
 + (BOOL)isVisitor;
+
++ (BOOL)getIsAlreadyLogin;
 
 + (NSString *)getClient;
 
@@ -39,6 +48,14 @@
 + (NSString *)getNickname;
 
 + (void)setNickname:(NSString *)nickname;
+
++ (NSString *)getRealname;
+
++ (void)setRealname:(NSString *)realname;
+
++ (NSString *)getPassword;
+
++ (void)setPassword:(NSString *)password;
 
 + (NSString *)getAvatar;
 
@@ -55,6 +72,18 @@
 + (NSString *)getSubdomain;
 
 + (void)setSubdomain:(NSString *)subdomain;
+
++ (NSString *)getDescription;
+
++ (void)setDescription:(NSString *)description;
+
++ (NSString *)getAutoReply;
+
++ (void)setAutoReply:(NSString *)autoreply;
+
++ (NSString *)getStatus;
+
++ (void)setStatus:(NSString *)status;
 
 + (NSString *)getPassportAccessToken;
 
