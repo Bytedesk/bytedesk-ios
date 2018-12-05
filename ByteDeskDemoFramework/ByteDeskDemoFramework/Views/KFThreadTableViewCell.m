@@ -73,8 +73,8 @@
     [mAvatarImageView setImageWithURL:[NSURL URLWithString:threadModel.avatar] placeholderImage:[UIImage imageNamed:@"android_default_avatar"]];
     mTimestampLabel.text = threadModel.timestamp;
     //
-    if (threadModel.unreadcount.intValue > 0) {
-        mUnReadLabel.text = [NSString stringWithFormat:@"%@", threadModel.unreadcount];
+    if (threadModel.unread_count.intValue > 0) {
+        mUnReadLabel.text = [NSString stringWithFormat:@"%@", threadModel.unread_count];
     }
     else {
         mUnReadLabel.hidden  = true;

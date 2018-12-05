@@ -14,11 +14,11 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - bytedesk-core (1.1.0):
+  - bytedesk-core (1.1.1):
     - AFNetworking
     - FMDB
     - MQTTClient
-  - bytedesk-ui (1.1.0):
+  - bytedesk-ui (1.1.4):
     - AFNetworking
     - bytedesk-core
     - FMDB
@@ -324,14 +324,14 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  bytedesk-core: 6983e0292401d4579bd599cd362bb035e38746be
-  bytedesk-ui: a8c7cc83e7a259d3fd574b2147fefd53c3615ed9
+  bytedesk-core: 666434564b4627f41b0cb2ab1845c8b663acea9a
+  bytedesk-ui: 4958eb7e108e6d816ef3e6632bcad8420a309e30
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   M80AttributedLabel: 56905e0d2cf50d4550ba181dd15f992f7f4e21e8
   MQTTClient: 902c7bcac1501595f3d0b15178c7205b40331fb0
   QMUIKit: 8b16b24a75dc6c97310120ba06abc9d92a253ff4
 
-PODFILE CHECKSUM: 558beeb4e146131e25995ed9f03c6788487ce53c
+PODFILE CHECKSUM: 3f505700b30ebb861a7d7296c66f88b325928026
 
 COCOAPODS: 1.5.3
