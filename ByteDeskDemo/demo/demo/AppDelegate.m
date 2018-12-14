@@ -9,9 +9,8 @@
 #import "AppDelegate.h"
 #import <bytedesk-core/bdcore.h>
 
-#import "KFVisitorApiViewController.h"
-#import "KFAgentApiViewController.h"
-#import "KFSocialApiViewController.h"
+#import "KFKeFuApiViewController.h"
+#import "KFIMApiViewController.h"
 
 #import "KFNavigationController.h"
 
@@ -33,43 +32,37 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    // 添加DDASLLogger，你的日志语句将被发送到Xcode控制台
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    // 添加DDTTYLogger，你的日志语句将被发送到Console.app
+    // [DDLog addLogger:[DDASLLogger sharedInstance]];
+    
     [self initQMUI];
     
     // 修改导航背景色
-//    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x007bff)];
+    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x007bff)];
     // 修改导航字体颜色
-//    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     // 界面
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     //
-    UITabBarController *tabBarViewController = [[UITabBarController alloc] init];
+    QMUITabBarViewController *tabBarViewController = [[QMUITabBarViewController alloc] init];
     //
-    KFVisitorApiViewController *visitorApiViewController = [[KFVisitorApiViewController alloc] init];
-    visitorApiViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"访客端接口", nil) image:[UIImage imageNamed:@"icon_tabbar_recent"] tag:0];
+    KFKeFuApiViewController *visitorApiViewController = [[KFKeFuApiViewController alloc] init];
     KFNavigationController *visitorNavigationController = [[KFNavigationController alloc] initWithRootViewController:visitorApiViewController];
+    visitorNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"客服接口", nil) image:[UIImage imageNamed:@"icon_tabbar_recent"] tag:0];
     //
-    KFAgentApiViewController *agentApiViewController = [[KFAgentApiViewController alloc] init];
-    agentApiViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"客服端接口(即将上线)", nil) image:[UIImage imageNamed:@"icon_tabbar_keypad"] tag:1];
-    KFNavigationController *agentNavigationController = [[KFNavigationController alloc] initWithRootViewController:agentApiViewController];
-    //
-    KFSocialApiViewController *socialApiViewController = [[KFSocialApiViewController alloc] init];
-    socialApiViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"IM接口(即将上线)", nil) image:[UIImage imageNamed:@"icon_tabbar_keypad"] tag:2];
-    KFNavigationController *socialNavigationController = [[KFNavigationController alloc] initWithRootViewController:socialApiViewController];
-
+    KFIMApiViewController *imApiViewController = [[KFIMApiViewController alloc] init];
+    KFNavigationController *imNavigationController = [[KFNavigationController alloc] initWithRootViewController:imApiViewController];
+    imNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"IM接口", nil) image:[UIImage imageNamed:@"icon_tabbar_keypad"] tag:2];
     // window root controller
-    tabBarViewController.viewControllers = @[visitorNavigationController, agentNavigationController, socialNavigationController];
+    tabBarViewController.viewControllers = @[visitorNavigationController, imNavigationController];
     self.window.rootViewController = tabBarViewController;
     [self.window makeKeyAndVisible];
     
-    // 访客登录
-    [BDCoreApis visitorLoginWithAppkey:DEFAULT_TEST_APPKEY withSubdomain:DEFAULT_TEST_SUBDOMAIN resultSuccess:^(NSDictionary *dict) {
-        // 登录成功
-        NSLog(@"%s, %@", __PRETTY_FUNCTION__, dict);
-    } resultFailed:^(NSError *error) {
-        // 登录失败
-        NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
-    }];
+    // 建立长连接
+    [BDCoreApis connect];
     
     return YES;
 }
@@ -90,12 +83,8 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     
-    // 访客登录
-    [BDCoreApis visitorLoginWithAppkey:DEFAULT_TEST_APPKEY withSubdomain:DEFAULT_TEST_SUBDOMAIN resultSuccess:^(NSDictionary *dict) {
-        NSLog(@"%s, %@", __PRETTY_FUNCTION__, dict);
-    } resultFailed:^(NSError *error) {
-        NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
-    }];
+    // 建立长连接
+    [BDCoreApis connect];
 }
 
 
@@ -117,12 +106,12 @@
     QMUICMI.navBarButtonFontBold = UIFontBoldMake(17);                          // NavBarButtonFontBold : QMUINavigationButtonTypeBold 的字体
     //    QMUICMI.navBarBackgroundImage = UIImageMake(@"navigationbar_background");   // NavBarBackgroundImage : UINavigationBar 的背景图
     //    QMUICMI.navBarShadowImage = [UIImage new];                                  // NavBarShadowImage : UINavigationBar.shadowImage，也即导航栏底部那条分隔线
-   QMUICMI.navBarBarTintColor = UIColorFromRGB(0x007bff);                       // NavBarBarTintColor : UINavigationBar.barTintColor，也即背景色
-    QMUICMI.navBarTintColor = NavBarTintColor;                                     // NavBarTintColor : QMUINavigationBar 的 tintColor，也即导航栏上面的按钮颜色
-    QMUICMI.navBarTitleColor = UIColorWhite;                                 // NavBarTitleColor : UINavigationBar 的标题颜色，以及 QMUINavigationTitleView 的默认文字颜色
+    QMUICMI.navBarBarTintColor = UIColorFromRGB(0x007bff);                      // NavBarBarTintColor : UINavigationBar.barTintColor，也即背景色
+    QMUICMI.navBarTintColor = UIColorWhite;                                     // NavBarTintColor : QMUINavigationBar 的 tintColor，也即导航栏上面的按钮颜色
+    QMUICMI.navBarTitleColor = NavBarTintColor;                                 // NavBarTitleColor : UINavigationBar 的标题颜色，以及 QMUINavigationTitleView 的默认文字颜色
     QMUICMI.navBarTitleFont = UIFontBoldMake(17);                               // NavBarTitleFont : UINavigationBar 的标题字体，以及 QMUINavigationTitleView 的默认字体
-    QMUICMI.navBarLargeTitleColor = nil;                                        // NavBarLargeTitleColor : UINavigationBar 在大标题模式下的标题颜色，仅在 iOS 11 之后才有效
-    QMUICMI.navBarLargeTitleFont = nil;                                         // NavBarLargeTitleFont : UINavigationBar 在大标题模式下的标题字体，仅在 iOS 11 之后才有效
+    //    QMUICMI.navBarLargeTitleColor = nil;                                        // NavBarLargeTitleColor : UINavigationBar 在大标题模式下的标题颜色，仅在 iOS 11 之后才有效
+    //    QMUICMI.navBarLargeTitleFont = nil;                                         // NavBarLargeTitleFont : UINavigationBar 在大标题模式下的标题字体，仅在 iOS 11 之后才有效
     QMUICMI.navBarBackButtonTitlePositionAdjustment = UIOffsetZero;             // NavBarBarBackButtonTitlePositionAdjustment : 导航栏返回按钮的文字偏移
     QMUICMI.navBarBackIndicatorImage = [UIImage qmui_imageWithShape:QMUIImageShapeNavBack size:CGSizeMake(12, 20) tintColor:NavBarTintColor];                                     // NavBarBackIndicatorImage : 导航栏的返回按钮的图片
     QMUICMI.navBarCloseButtonImage = [UIImage qmui_imageWithShape:QMUIImageShapeNavClose size:CGSizeMake(16, 16) tintColor:NavBarTintColor];     // NavBarCloseButtonImage : QMUINavigationButton 用到的 × 的按钮图片
@@ -131,6 +120,10 @@
     QMUICMI.navBarAccessoryViewMarginLeft = 5;                                  // NavBarAccessoryViewMarginLeft : QMUINavigationTitleView 里右边 accessoryView 的左边距
     QMUICMI.navBarActivityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;// NavBarActivityIndicatorViewStyle : QMUINavigationTitleView 里左边 loading 的主题
     QMUICMI.navBarAccessoryViewTypeDisclosureIndicatorImage = [UIImage qmui_imageWithShape:QMUIImageShapeTriangle size:CGSizeMake(8, 5) tintColor:UIColorWhite];     // NavBarAccessoryViewTypeDisclosureIndicatorImage : QMUINavigationTitleView 右边箭头的图片
+    
+    QMUICMI.statusbarStyleLightInitially = YES;                                 // StatusbarStyleLightInitially : 默认的状态栏内容是否使用白色，默认为 NO，也即黑色
+    QMUICMI.needsBackBarButtonItemTitle = NO;                                   // NeedsBackBarButtonItemTitle : 全局是否需要返回按钮的 title，不需要则只显示一个返回image
+
 }
 
 @end

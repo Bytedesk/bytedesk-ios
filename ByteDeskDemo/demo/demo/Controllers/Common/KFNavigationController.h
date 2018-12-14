@@ -6,8 +6,6 @@
 //  Copyright (c) 2014年 appkefu.com. All rights reserved.
 //
 
-//#import <UIKit/UIKit.h>
-
 @interface KFNavigationController : UINavigationController
 
 @end

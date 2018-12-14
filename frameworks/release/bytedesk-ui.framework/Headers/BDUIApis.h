@@ -21,16 +21,24 @@
 #pragma mark - 访客端接口
 
 
-+ (void)visitorPushChat:(UINavigationController *)navigationController
-                    uId:(NSString *)uId
-                    wId:(NSString *)wId
++ (void)visitorPushWorkGroupChat:(UINavigationController *)navigationController
+                    withWorkGroupWid:(NSString *)wId
               withTitle:(NSString *)title;
 
 
-+ (void)visitorPresentChat:(UINavigationController *)navigationController
-                       uId:(NSString *)uId
-                       wId:(NSString *)wId
++ (void)visitorPresentWorkGroupChat:(UINavigationController *)navigationController
+                       withWorkGroupWid:(NSString *)wId
               withTitle:(NSString *)title;
+
+
++ (void)visitorPushAppointChat:(UINavigationController *)navigationController
+                  withAgentUid:(NSString *)uId
+                    withTitle:(NSString *)title;
+
+
++ (void)visitorPresentAppointChat:(UINavigationController *)navigationController
+                     withAgentUid:(NSString *)uId
+                        withTitle:(NSString *)title;
 
 
 

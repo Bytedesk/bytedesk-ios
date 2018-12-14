@@ -12,21 +12,84 @@
 
 + (BDMQTTApis *)sharedInstance;
 
+/**
+ 建立连接
+ */
 - (void)connect;
 
+/**
+ 建立连接
+
+ @param clientId <#clientId description#>
+ */
 - (void)connect:(NSString *)clientId;
 
+/**
+ 订阅主题
+
+ @param topic <#topic description#>
+ */
 - (void)subscribeTopic:(NSString *)topic;
 
+/**
+ 取消订阅
+
+ @param topic <#topic description#>
+ */
 - (void)unsubscribeTopic:(NSString *)topic;
 
-- (void)sendTextMessage:(NSString *)content toTid:(NSString *)tId sessionType:(NSString *)stype;
-- (void)sendImageMessage:(NSString *)content toTid:(NSString *)tId sessionType:(NSString *)stype;
-- (void)sendVoiceMessage:(NSString *)content toTid:(NSString *)tId sessionType:(NSString *)stype;
-- (void)sendMessage:(NSString *)content type:(NSString *)type toTid:(NSString *)tId sessionType:(NSString *)stype;
+/**
+ 发送文本消息
 
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param stype <#stype description#>
+ */
+- (void)sendTextMessage:(NSString *)content toTid:(NSString *)tId sessionType:(NSString *)stype;
+
+/**
+ 发送图片消息
+
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param stype <#stype description#>
+ */
+- (void)sendImageMessage:(NSString *)content toTid:(NSString *)tId sessionType:(NSString *)stype;
+
+/**
+ 发送语音消息
+
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param stype <#stype description#>
+ */
+- (void)sendVoiceMessage:(NSString *)content toTid:(NSString *)tId sessionType:(NSString *)stype;
+
+/**
+ 发送消息
+
+ @param content <#content description#>
+ @param type <#type description#>
+ @param tId <#tId description#>
+ @param sessiontype <#stype description#>
+ */
+- (void)sendMessage:(NSString *)content type:(NSString *)type toTid:(NSString *)tId sessionType:(NSString *)sessiontype;
+
+/**
+ 设置在线状态
+
+ @param status <#status description#>
+ */
 - (void)setStatus:(NSString *)status;
 
-- (void)logout;
+/**
+ 断开连接
+ */
+- (void)disconnect;
+
+
+- (BOOL)isConnected;
+
+
 
 @end

@@ -6,12 +6,12 @@
 //  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <MGSwipeTableCell/MGSwipeTableCell.h>
+
 #import <bytedesk-core/bdcore.h>
 
-@interface KFThreadTableViewCell : UITableViewCell
+@interface KFThreadTableViewCell : MGSwipeTableCell
 
 - (void)initWithThreadModel:(BDThreadModel *)threadModel;
-
 
 @end

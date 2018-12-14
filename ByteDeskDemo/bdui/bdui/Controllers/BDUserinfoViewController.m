@@ -2,7 +2,7 @@
 //  KFDSUserinfoViewController.m
 //  bdui
 //
-//  Created by 萝卜丝 · bytedesk.com on 2018/12/18.
+//  Created by 萝卜丝 on 2018/12/18.
 //  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
@@ -57,9 +57,9 @@
 //                                   withUsername:self.mThreadModel.username
 //                                     withClient:self.mThreadModel.client
 //                                  resultSuccess:^(NSDictionary *dict) {
-//                                      NSLog(@"%s, %@", __PRETTY_FUNCTION__, dict);
+//                                      DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
 //                                  } resultFailed:^(NSError *error) {
-//                                      NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
+//                                      DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, error);
 //                                      [QMUITips showError:@"加载用户信息失败" inView:parentView hideAfterDelay:2.0f];
 //                                  }];
 //    //
@@ -67,9 +67,9 @@
 //                              withUsername:self.mThreadModel.username
 //                                withClient:self.mThreadModel.client
 //                             resultSuccess:^(NSDictionary *dict) {
-//                                 NSLog(@"%s, %@", __PRETTY_FUNCTION__, dict);
+//                                 DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
 //                             } resultFailed:^(NSError *error) {
-//                                 NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
+//                                 DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, error);
 //                                 [QMUITips showError:@"加载用户标签失败" inView:parentView hideAfterDelay:2.0f];
 //                             }];
 }
@@ -77,7 +77,7 @@
 #pragma mark - Selectors
 
 - (void)refreshControlSelector {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
 
     [self loadUserinfoAndTags];
 }

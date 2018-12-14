@@ -2,7 +2,7 @@
 //  KFDSUIApis.m
 //  bdui
 //
-//  Created by 萝卜丝 · bytedesk.com on 2018/7/15.
+//  Created by 萝卜丝 on 2018/7/15.
 //  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
@@ -24,24 +24,48 @@ static BDUIApis *sharedInstance = nil;
 
 #pragma mark - 访客端接口
 
-+ (void)visitorPushChat:(UINavigationController *)navigationController
-                    uId:(NSString *)uId
-                    wId:(NSString *)wId
-              withTitle:(NSString *)title{
++ (void)visitorPushWorkGroupChat:(UINavigationController *)navigationController
+                withWorkGroupWid:(NSString *)wId
+                       withTitle:(NSString *)title {
     //
     BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
     chatViewController.navigationItem.backBarButtonItem.title = @"";
-    [chatViewController initWithUid:uId wId:wId withTitle:title withPush:YES];
+    //
+    [chatViewController initWithWorkGroupWid:wId withTitle:title withPush:YES];
     [navigationController pushViewController:chatViewController animated:YES];
 }
 
-+ (void)visitorPresentChat:(UINavigationController *)navigationController
-                       uId:(NSString *)uId
-                       wId:(NSString *)wId
-                 withTitle:(NSString *)title{
++ (void)visitorPresentWorkGroupChat:(UINavigationController *)navigationController
+                   withWorkGroupWid:(NSString *)wId
+                          withTitle:(NSString *)title{
     
     BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
-    [chatViewController initWithUid:uId wId:wId withTitle:title withPush:NO];
+    [chatViewController initWithWorkGroupWid:wId withTitle:title withPush:NO];
+    //
+    QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    [navigationController presentViewController:chatNavigationController animated:YES completion:^{
+        
+    }];
+}
+
++ (void)visitorPushAppointChat:(UINavigationController *)navigationController
+                  withAgentUid:(NSString *)uId
+                     withTitle:(NSString *)title {
+    //
+    BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
+    chatViewController.navigationItem.backBarButtonItem.title = @"";
+    //
+    [chatViewController initWithAgentUid:uId withTitle:title withPush:YES];
+    [navigationController pushViewController:chatViewController animated:YES];
+}
+
+
++ (void)visitorPresentAppointChat:(UINavigationController *)navigationController
+                     withAgentUid:(NSString *)uId
+                        withTitle:(NSString *)title {
+    //
+    BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
+    [chatViewController initWithAgentUid:uId withTitle:title withPush:NO];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
@@ -51,7 +75,7 @@ static BDUIApis *sharedInstance = nil;
 
 #pragma mark - 客服端接口
 
-+ (void)adminPushChat:(UINavigationController *)navigationController
++ (void)agentPushChat:(UINavigationController *)navigationController
       withThreadModel:(BDThreadModel *)threadModel {
     //
     BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
@@ -59,7 +83,7 @@ static BDUIApis *sharedInstance = nil;
     [navigationController pushViewController:chatViewController animated:YES];
 }
 
-+ (void)adminPresentChat:(UINavigationController *)navigationController
++ (void)agentPresentChat:(UINavigationController *)navigationController
          withThreadModel:(BDThreadModel *)threadModel {
     //
     BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
@@ -71,6 +95,45 @@ static BDUIApis *sharedInstance = nil;
     }];
 }
 
++ (void)agentPushChat:(UINavigationController *)navigationController
+     withContactModel:(BDContactModel *)contactModel {
+    //
+    BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
+    [chatViewController initWithContactModel:contactModel withPush:YES];
+    [navigationController pushViewController:chatViewController animated:YES];
+}
+
++ (void)agentPresentChat:(UINavigationController *)navigationController
+        withContactModel:(BDContactModel *)contactModel {
+    //
+    BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
+    [chatViewController initWithContactModel:contactModel withPush:NO];
+    //
+    QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    [navigationController presentViewController:chatNavigationController animated:YES completion:^{
+        
+    }];
+}
+
++ (void)agentPushChat:(UINavigationController *)navigationController
+       withGroupModel:(BDGroupModel *)groupModel {
+    //
+    BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
+    [chatViewController initWithGroupModel:groupModel withPush:YES];
+    [navigationController pushViewController:chatViewController animated:YES];
+}
+
++ (void)agentPresentChat:(UINavigationController *)navigationController
+          withGroupModel:(BDGroupModel *)groupModel {
+    //
+    BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
+    [chatViewController initWithGroupModel:groupModel withPush:NO];
+    //
+    QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    [navigationController presentViewController:chatNavigationController animated:YES completion:^{
+        
+    }];
+}
 
 #pragma mark - 公共接口
 

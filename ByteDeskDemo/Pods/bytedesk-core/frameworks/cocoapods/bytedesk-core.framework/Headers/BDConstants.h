@@ -25,9 +25,9 @@
 // web后台此域名非统一的，而是每一家使用自己独特的二级域名
 //#define BD_IS_DEBUG                         true
 //#define BD_MQTT_HOST                        @"127.0.0.1"
-//#define HTTP_VISITOR_API_BASE_URL           @"http://vip.kefudashi.cn:8000/visitor/api"
-//#define HTTP_API_BASE_URL                   @"http://vip.kefudashi.cn:8000/api"
-//#define CLIENT_OAUTH_TOKEN                  @"http://vip.kefudashi.cn:8000/oauth/token"
+//#define HTTP_VISITOR_API_BASE_URL           @"http://127.0.0.1:8000/visitor/api"
+//#define HTTP_API_BASE_URL                   @"http://127.0.0.1:8000/api"
+//#define CLIENT_OAUTH_TOKEN                  @"http://127.0.0.1:8000/oauth/token"
 
 // 上线发布域名
 #define BD_IS_DEBUG                         false
@@ -35,6 +35,16 @@
 #define HTTP_VISITOR_API_BASE_URL           @"https://api.bytedesk.com/visitor/api"
 #define HTTP_API_BASE_URL                   @"https://api.bytedesk.com/api"
 #define CLIENT_OAUTH_TOKEN                  @"https://api.bytedesk.com/oauth/token"
+
+// 加载聊天记录
+#define BD_GET_MESSAGE_TYPE_WORKGROUP            @"workGroup"  // 加载工作组会话
+#define BD_GET_MESSAGE_TYPE_USER                 @"user"  // 加载所有访客会话
+#define BD_GET_MESSAGE_TYPE_THREAD               @"thread"  // 加载thread会话
+#define BD_GET_MESSAGE_TYPE_CONTACT              @"contact" // 一对一
+#define BD_GET_MESSAGE_TYPE_GROUP                @"group"   // 群组
+
+#define BD_THREAD_REQUEST_TYPE_WORK_GROUP   @"workGroup"
+#define BD_THREAD_REQUEST_TYPE_APPOINTED    @"appointed"
 
 // 会话类型
 #define BD_THREAD_TYPE_THREAD               @"thread"  // 访客会话
@@ -98,6 +108,7 @@
 #define BD_NOTIFICATION_INIT_STATUS_ERROR   @"bd_notification_init_status_error"
 
 //
+#define BD_NOTIFICATION_GROUP_UPDATE        @"bd_notification_group_update"
 #define BD_NOTIFICATION_CONTACT_UPDATE      @"bd_notification_contact_update"
 #define BD_NOTIFICATION_PROFILE_UPDATE      @"bd_notification_profile_update"
 
@@ -163,8 +174,13 @@
 
 #define BD_MESSAGE_TYPE_NOTIFICATION_NON_WORKINGTIME    @"notification_non_workingtime"    // 非工作时间
 #define BD_MESSAGE_TYPE_NOTIFICATION_OFFLINE            @"notification_offline"    // 客服离线，当前无客服在线
-#define BD_MESSAGE_TYPE_NOTIFICATION_BROWSE             @"notification_browse"  // 访客网页浏览中
+#define BD_MESSAGE_TYPE_NOTIFICATION_BROWSE_START       @"notification_browse_start" // 开始浏览页面
+#define BD_MESSAGE_TYPE_NOTIFICATION_BROWSE_END         @"notification_browse_end" // 浏览页面结束
+#define BD_MESSAGE_TYPE_NOTIFICATION_BROWSE_INVITE      @"notification_browse_invite" // 邀请访客
+#define BD_MESSAGE_TYPE_NOTIFICATION_BROWSE_INVITE_ACCEPT @"notification_browse_invite_accept" // 访客接受邀请
+#define BD_MESSAGE_TYPE_NOTIFICATION_BROWSE_INVITE_REJECT @"notification_browse_invite_reject" // 访客拒绝邀请
 #define BD_MESSAGE_TYPE_NOTIFICATION_THREAD             @"notification_thread"  // 新会话thread
+#define BD_MESSAGE_TYPE_NOTIFICATION_THREAD_REENTRY     @"notification_thread_reentry" // 重新进入会话
 #define BD_MESSAGE_TYPE_NOTIFICATION_QUEUE              @"notification_queue"    // 排队通知类型
 // 排队中离开
 #define BD_MESSAGE_TYPE_NOTIFICATION_QUEUE_LEAVE        @"notification_queue_leave"
@@ -175,7 +191,8 @@
 #define BD_MESSAGE_TYPE_NOTIFICATION_CONNECT            @"notification_connect"    // 上线
 #define BD_MESSAGE_TYPE_NOTIFICATION_DISCONNECT         @"notification_disconnect"  // 离线
 #define BD_MESSAGE_TYPE_NOTIFICATION_LEAVE              @"notification_leave"    // 离开会话页面
-#define BD_MESSAGE_TYPE_NOTIFICATION_CLOSE              @"notification_close"    // 关闭会话
+#define BD_MESSAGE_TYPE_NOTIFICATION_AGENT_CLOSE        @"notification_agent_close"    // 客服关闭会话
+#define BD_MESSAGE_TYPE_NOTIFICATION_VISITOR_CLOSE      @"notification_visitor_close"    // 访客关闭会话
 #define BD_MESSAGE_TYPE_NOTIFICATION_AUTO_CLOSE         @"notification_auto_close" // 自动关闭会话
 #define BD_MESSAGE_TYPE_NOTIFICATION_INVITE_RATE        @"notification_invite_rate"    // 邀请评价
 #define BD_MESSAGE_TYPE_NOTIFICATION_INVITE             @"notification_invite"  // 邀请会话

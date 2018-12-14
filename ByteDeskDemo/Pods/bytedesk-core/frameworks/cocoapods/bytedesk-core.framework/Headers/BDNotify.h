@@ -35,6 +35,8 @@
 
 + (void)notifyThreadClose:(NSString *)tid;
 
++ (void)notifyThreadUpdate;
+
 
 //
 + (void)notifyQueueAdd:(BDQueueModel *)queueModel;
@@ -43,6 +45,7 @@
 
 + (void)notifyQueueAccept:(NSString *)qid;
 
++ (void)notifyQueueUpdate;
 
 //
 + (void)notifyMessageAdd:(BDMessageModel *)messageModel;
@@ -58,13 +61,12 @@
 + (void)notifyMessage:(NSNumber *)localId withStatus:(NSString *)status;
 
 //
-+ (void)notifyThreadUpdate;
-
 + (void)notifyContactUpdate;
 
-+ (void)notifyQueueUpdate;
++ (void)notifyGroupUpdate;
 
 + (void)notifyProfileUpdate;
+
 
 @end
 

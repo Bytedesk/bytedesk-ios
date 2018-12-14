@@ -21,26 +21,48 @@
 #pragma mark - 访客端接口
 
 
-+ (void)visitorPushChat:(UINavigationController *)navigationController
-                    uId:(NSString *)uId
-                    wId:(NSString *)wId
++ (void)visitorPushWorkGroupChat:(UINavigationController *)navigationController
+                    withWorkGroupWid:(NSString *)wId
               withTitle:(NSString *)title;
 
 
-+ (void)visitorPresentChat:(UINavigationController *)navigationController
-                       uId:(NSString *)uId
-                       wId:(NSString *)wId
++ (void)visitorPresentWorkGroupChat:(UINavigationController *)navigationController
+                       withWorkGroupWid:(NSString *)wId
               withTitle:(NSString *)title;
+
+
++ (void)visitorPushAppointChat:(UINavigationController *)navigationController
+                  withAgentUid:(NSString *)uId
+                    withTitle:(NSString *)title;
+
+
++ (void)visitorPresentAppointChat:(UINavigationController *)navigationController
+                     withAgentUid:(NSString *)uId
+                        withTitle:(NSString *)title;
 
 
 
 #pragma mark - 客服端接口
 
-+ (void)adminPushChat:(UINavigationController *)navigationController
++ (void)agentPushChat:(UINavigationController *)navigationController
        withThreadModel:(BDThreadModel *)threadModel;
 
-+ (void)adminPresentChat:(UINavigationController *)navigationController
++ (void)agentPresentChat:(UINavigationController *)navigationController
       withThreadModel:(BDThreadModel *)threadModel;
+
++ (void)agentPushChat:(UINavigationController *)navigationController
+      withContactModel:(BDContactModel *)contactModel;
+
++ (void)agentPresentChat:(UINavigationController *)navigationController
+      withContactModel:(BDContactModel *)contactModel;
+
++ (void)agentPushChat:(UINavigationController *)navigationController
+      withGroupModel:(BDGroupModel *)groupModel;
+
++ (void)agentPresentChat:(UINavigationController *)navigationController
+      withGroupModel:(BDGroupModel *)groupModel;
+
+
 
 
 #pragma mark - 公共接口

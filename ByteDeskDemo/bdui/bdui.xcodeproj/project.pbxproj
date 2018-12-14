@@ -9,24 +9,20 @@
 /* Begin PBXBuildFile section */
 		3D1996B51FCE2B9600219FEF /* BDChatViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996B31FCE2B9600219FEF /* BDChatViewController.h */; };
 		3D1996B61FCE2B9600219FEF /* BDChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996B41FCE2B9600219FEF /* BDChatViewController.m */; };
-		3D1996BF1FCE5E3500219FEF /* UIView+KFDSUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996B91FCE5E3500219FEF /* UIView+KFDSUI.m */; };
 		3D1996C01FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996BA1FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.m */; };
-		3D1996C11FCE5E3500219FEF /* NSString+KFDSUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996BB1FCE5E3500219FEF /* NSString+KFDSUI.h */; };
-		3D1996C21FCE5E3500219FEF /* UIView+KFDSUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996BC1FCE5E3500219FEF /* UIView+KFDSUI.h */; };
 		3D1996C31FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996BD1FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.h */; };
-		3D1996C41FCE5E3500219FEF /* NSString+KFDSUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996BE1FCE5E3500219FEF /* NSString+KFDSUI.m */; };
-		3D1996E51FCE638800219FEF /* KFDSMsgNotificationViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996C61FCE638700219FEF /* KFDSMsgNotificationViewCell.h */; };
-		3D1996E61FCE638800219FEF /* KFDSMsgVoiceContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996C71FCE638700219FEF /* KFDSMsgVoiceContentView.m */; };
-		3D1996E71FCE638800219FEF /* KFDSMsgViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996C81FCE638700219FEF /* KFDSMsgViewCell.h */; };
-		3D1996E81FCE638800219FEF /* KFDSMsgTextContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996C91FCE638700219FEF /* KFDSMsgTextContentView.h */; };
-		3D1996E91FCE638800219FEF /* KFDSMsgImageContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996CA1FCE638700219FEF /* KFDSMsgImageContentView.h */; };
-		3D1996EA1FCE638800219FEF /* KFDSMsgBaseContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996CB1FCE638700219FEF /* KFDSMsgBaseContentView.m */; };
-		3D1996EB1FCE638800219FEF /* KFDSMsgVoiceContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996CC1FCE638700219FEF /* KFDSMsgVoiceContentView.h */; };
-		3D1996EC1FCE638800219FEF /* KFDSMsgNotificationViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996CD1FCE638700219FEF /* KFDSMsgNotificationViewCell.m */; };
-		3D1996ED1FCE638800219FEF /* KFDSMsgTextContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996CE1FCE638700219FEF /* KFDSMsgTextContentView.m */; };
-		3D1996EE1FCE638800219FEF /* KFDSMsgViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996CF1FCE638700219FEF /* KFDSMsgViewCell.m */; };
-		3D1996EF1FCE638800219FEF /* KFDSMsgImageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996D01FCE638700219FEF /* KFDSMsgImageContentView.m */; };
-		3D1996F01FCE638800219FEF /* KFDSMsgBaseContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996D11FCE638700219FEF /* KFDSMsgBaseContentView.h */; };
+		3D1996E51FCE638800219FEF /* BDMsgNotificationViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996C61FCE638700219FEF /* BDMsgNotificationViewCell.h */; };
+		3D1996E61FCE638800219FEF /* BDMsgVoiceContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996C71FCE638700219FEF /* BDMsgVoiceContentView.m */; };
+		3D1996E71FCE638800219FEF /* BDMsgViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996C81FCE638700219FEF /* BDMsgViewCell.h */; };
+		3D1996E81FCE638800219FEF /* BDMsgTextContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996C91FCE638700219FEF /* BDMsgTextContentView.h */; };
+		3D1996E91FCE638800219FEF /* BDMsgImageContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996CA1FCE638700219FEF /* BDMsgImageContentView.h */; };
+		3D1996EA1FCE638800219FEF /* BDMsgBaseContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996CB1FCE638700219FEF /* BDMsgBaseContentView.m */; };
+		3D1996EB1FCE638800219FEF /* BDMsgVoiceContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996CC1FCE638700219FEF /* BDMsgVoiceContentView.h */; };
+		3D1996EC1FCE638800219FEF /* BDMsgNotificationViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996CD1FCE638700219FEF /* BDMsgNotificationViewCell.m */; };
+		3D1996ED1FCE638800219FEF /* BDMsgTextContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996CE1FCE638700219FEF /* BDMsgTextContentView.m */; };
+		3D1996EE1FCE638800219FEF /* BDMsgViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996CF1FCE638700219FEF /* BDMsgViewCell.m */; };
+		3D1996EF1FCE638800219FEF /* BDMsgImageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996D01FCE638700219FEF /* BDMsgImageContentView.m */; };
+		3D1996F01FCE638800219FEF /* BDMsgBaseContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996D11FCE638700219FEF /* BDMsgBaseContentView.h */; };
 		3D1996F31FCE638800219FEF /* KFDSInputEmotionParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996D51FCE638700219FEF /* KFDSInputEmotionParser.m */; };
 		3D1996F71FCE638800219FEF /* KFDSInputEmotionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996D91FCE638700219FEF /* KFDSInputEmotionManager.m */; };
 		3D1996FB1FCE638800219FEF /* KFDSInputEmotionParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996DD1FCE638700219FEF /* KFDSInputEmotionParser.h */; };
@@ -285,6 +281,12 @@
 		3D31509A1F1A1D530005DB6C /* bdui.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D31508C1F1A1D530005DB6C /* bdui.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D3150F11F1A2A410005DB6C /* BDUIApis.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D3150EF1F1A2A410005DB6C /* BDUIApis.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D3150F21F1A2A410005DB6C /* BDUIApis.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3150F01F1A2A410005DB6C /* BDUIApis.m */; };
+		3D3928D921BF9BEE001E1257 /* icon_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D3928D821BF9BEE001E1257 /* icon_about.png */; };
+		3D3928DB21BF9D9B001E1257 /* icon_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D3928DA21BF9D9B001E1257 /* icon_more.png */; };
+		3D3928DE21BF9ED7001E1257 /* BDGroupProfileViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D3928DC21BF9ED7001E1257 /* BDGroupProfileViewController.h */; };
+		3D3928DF21BF9ED7001E1257 /* BDGroupProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928DD21BF9ED7001E1257 /* BDGroupProfileViewController.m */; };
+		3D3928E521C07B81001E1257 /* BDContactSelectViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D3928E321C07B81001E1257 /* BDContactSelectViewController.h */; };
+		3D3928E621C07B81001E1257 /* BDContactSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928E421C07B81001E1257 /* BDContactSelectViewController.m */; };
 		3D4824F5215792FA00B50593 /* bytedesk-core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4824F4215792FA00B50593 /* bytedesk-core.framework */; };
 		3D5606CB2057C875000E770C /* QDSingleImagePickerPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5606C92057C874000E770C /* QDSingleImagePickerPreviewViewController.m */; };
 		3D5606CC2057C875000E770C /* QDSingleImagePickerPreviewViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D5606CA2057C874000E770C /* QDSingleImagePickerPreviewViewController.h */; };
@@ -292,8 +294,9 @@
 		3D57D7121FD00E3F0072823F /* BDFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D57D7101FD00E3F0072823F /* BDFeedbackViewController.m */; };
 		3DABD1B61FE790F600DE473B /* BDUserinfoViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DABD1B41FE790F600DE473B /* BDUserinfoViewController.h */; };
 		3DABD1B71FE790F600DE473B /* BDUserinfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DABD1B51FE790F600DE473B /* BDUserinfoViewController.m */; };
+		3DC58F7421BE6B9D008BE85D /* BDMsgListContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DC58F7221BE6B9D008BE85D /* BDMsgListContentView.h */; };
+		3DC58F7521BE6B9D008BE85D /* BDMsgListContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC58F7321BE6B9D008BE85D /* BDMsgListContentView.m */; };
 		81DCA33DE54CCB81B8CA020A /* Pods_bytedesk_ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953A297AD3F39573C972B590 /* Pods_bytedesk_ui.framework */; };
-		BB36EC59B6E4BE64976DB45E /* Pods_bdui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0DE01CE25A433F7C77A32FF /* Pods_bdui.framework */; };
 		DE829B41D540F7AF1BDCAF7F /* Pods_bdui_bduiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE9D3198D64539B03C40CBAF /* Pods_bdui_bduiTests.framework */; };
 		F71E0A2E640D53D647C19446 /* Pods_bytedesk_ui_bduiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CEBFF73F8E899B293D07513 /* Pods_bytedesk_ui_bduiTests.framework */; };
 /* End PBXBuildFile section */
@@ -315,24 +318,20 @@
 		3AF1CF3234A5985280A3DE30 /* Pods-bytedesk-ui-bduiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bytedesk-ui-bduiTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3D1996B31FCE2B9600219FEF /* BDChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDChatViewController.h; sourceTree = "<group>"; };
 		3D1996B41FCE2B9600219FEF /* BDChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDChatViewController.m; sourceTree = "<group>"; };
-		3D1996B91FCE5E3500219FEF /* UIView+KFDSUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+KFDSUI.m"; sourceTree = "<group>"; };
 		3D1996BA1FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "M80AttributedLabel+KFDSUI.m"; sourceTree = "<group>"; };
-		3D1996BB1FCE5E3500219FEF /* NSString+KFDSUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+KFDSUI.h"; sourceTree = "<group>"; };
-		3D1996BC1FCE5E3500219FEF /* UIView+KFDSUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+KFDSUI.h"; sourceTree = "<group>"; };
 		3D1996BD1FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "M80AttributedLabel+KFDSUI.h"; sourceTree = "<group>"; };
-		3D1996BE1FCE5E3500219FEF /* NSString+KFDSUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+KFDSUI.m"; sourceTree = "<group>"; };
-		3D1996C61FCE638700219FEF /* KFDSMsgNotificationViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFDSMsgNotificationViewCell.h; sourceTree = "<group>"; };
-		3D1996C71FCE638700219FEF /* KFDSMsgVoiceContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFDSMsgVoiceContentView.m; sourceTree = "<group>"; };
-		3D1996C81FCE638700219FEF /* KFDSMsgViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFDSMsgViewCell.h; sourceTree = "<group>"; };
-		3D1996C91FCE638700219FEF /* KFDSMsgTextContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFDSMsgTextContentView.h; sourceTree = "<group>"; };
-		3D1996CA1FCE638700219FEF /* KFDSMsgImageContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFDSMsgImageContentView.h; sourceTree = "<group>"; };
-		3D1996CB1FCE638700219FEF /* KFDSMsgBaseContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFDSMsgBaseContentView.m; sourceTree = "<group>"; };
-		3D1996CC1FCE638700219FEF /* KFDSMsgVoiceContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFDSMsgVoiceContentView.h; sourceTree = "<group>"; };
-		3D1996CD1FCE638700219FEF /* KFDSMsgNotificationViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFDSMsgNotificationViewCell.m; sourceTree = "<group>"; };
-		3D1996CE1FCE638700219FEF /* KFDSMsgTextContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFDSMsgTextContentView.m; sourceTree = "<group>"; };
-		3D1996CF1FCE638700219FEF /* KFDSMsgViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFDSMsgViewCell.m; sourceTree = "<group>"; };
-		3D1996D01FCE638700219FEF /* KFDSMsgImageContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFDSMsgImageContentView.m; sourceTree = "<group>"; };
-		3D1996D11FCE638700219FEF /* KFDSMsgBaseContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFDSMsgBaseContentView.h; sourceTree = "<group>"; };
+		3D1996C61FCE638700219FEF /* BDMsgNotificationViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMsgNotificationViewCell.h; sourceTree = "<group>"; };
+		3D1996C71FCE638700219FEF /* BDMsgVoiceContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDMsgVoiceContentView.m; sourceTree = "<group>"; };
+		3D1996C81FCE638700219FEF /* BDMsgViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMsgViewCell.h; sourceTree = "<group>"; };
+		3D1996C91FCE638700219FEF /* BDMsgTextContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMsgTextContentView.h; sourceTree = "<group>"; };
+		3D1996CA1FCE638700219FEF /* BDMsgImageContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMsgImageContentView.h; sourceTree = "<group>"; };
+		3D1996CB1FCE638700219FEF /* BDMsgBaseContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDMsgBaseContentView.m; sourceTree = "<group>"; };
+		3D1996CC1FCE638700219FEF /* BDMsgVoiceContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMsgVoiceContentView.h; sourceTree = "<group>"; };
+		3D1996CD1FCE638700219FEF /* BDMsgNotificationViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDMsgNotificationViewCell.m; sourceTree = "<group>"; };
+		3D1996CE1FCE638700219FEF /* BDMsgTextContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDMsgTextContentView.m; sourceTree = "<group>"; };
+		3D1996CF1FCE638700219FEF /* BDMsgViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDMsgViewCell.m; sourceTree = "<group>"; };
+		3D1996D01FCE638700219FEF /* BDMsgImageContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDMsgImageContentView.m; sourceTree = "<group>"; };
+		3D1996D11FCE638700219FEF /* BDMsgBaseContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMsgBaseContentView.h; sourceTree = "<group>"; };
 		3D1996D51FCE638700219FEF /* KFDSInputEmotionParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFDSInputEmotionParser.m; sourceTree = "<group>"; };
 		3D1996D91FCE638700219FEF /* KFDSInputEmotionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFDSInputEmotionManager.m; sourceTree = "<group>"; };
 		3D1996DD1FCE638700219FEF /* KFDSInputEmotionParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFDSInputEmotionParser.h; sourceTree = "<group>"; };
@@ -594,6 +593,12 @@
 		3D3150991F1A1D530005DB6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D3150EF1F1A2A410005DB6C /* BDUIApis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BDUIApis.h; path = apis/BDUIApis.h; sourceTree = "<group>"; };
 		3D3150F01F1A2A410005DB6C /* BDUIApis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BDUIApis.m; path = apis/BDUIApis.m; sourceTree = "<group>"; };
+		3D3928D821BF9BEE001E1257 /* icon_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_about.png; sourceTree = "<group>"; };
+		3D3928DA21BF9D9B001E1257 /* icon_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_more.png; sourceTree = "<group>"; };
+		3D3928DC21BF9ED7001E1257 /* BDGroupProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDGroupProfileViewController.h; sourceTree = "<group>"; };
+		3D3928DD21BF9ED7001E1257 /* BDGroupProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDGroupProfileViewController.m; sourceTree = "<group>"; };
+		3D3928E321C07B81001E1257 /* BDContactSelectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDContactSelectViewController.h; sourceTree = "<group>"; };
+		3D3928E421C07B81001E1257 /* BDContactSelectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDContactSelectViewController.m; sourceTree = "<group>"; };
 		3D4824F4215792FA00B50593 /* bytedesk-core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "bytedesk-core.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D548A731FC55016003117B4 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		3D548A751FC5514B003117B4 /* KFDSUConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFDSUConstants.h; sourceTree = "<group>"; };
@@ -604,6 +609,8 @@
 		3D62021320FC844F00A94F15 /* bdcore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = bdcore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DABD1B41FE790F600DE473B /* BDUserinfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDUserinfoViewController.h; sourceTree = "<group>"; };
 		3DABD1B51FE790F600DE473B /* BDUserinfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDUserinfoViewController.m; sourceTree = "<group>"; };
+		3DC58F7221BE6B9D008BE85D /* BDMsgListContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMsgListContentView.h; sourceTree = "<group>"; };
+		3DC58F7321BE6B9D008BE85D /* BDMsgListContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMsgListContentView.m; sourceTree = "<group>"; };
 		4AFF2CBFAB7AE6AB4F360A63 /* Pods-wxui-wxuiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wxui-wxuiTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-wxui-wxuiTests/Pods-wxui-wxuiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4C57D21EFE3BF46E5EFEBC14 /* Pods-bdui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdui.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-bdui/Pods-bdui.debug.xcconfig"; sourceTree = "<group>"; };
 		68E1819B62F043C68A26C8D7 /* Pods-bdui-bduiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdui-bduiTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-bdui-bduiTests/Pods-bdui-bduiTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -624,7 +631,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D4824F5215792FA00B50593 /* bytedesk-core.framework in Frameworks */,
-				BB36EC59B6E4BE64976DB45E /* Pods_bdui.framework in Frameworks */,
 				81DCA33DE54CCB81B8CA020A /* Pods_bytedesk_ui.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -653,12 +659,8 @@
 		3D1996B81FCE5E3500219FEF /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				3D1996BC1FCE5E3500219FEF /* UIView+KFDSUI.h */,
-				3D1996B91FCE5E3500219FEF /* UIView+KFDSUI.m */,
 				3D1996BD1FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.h */,
 				3D1996BA1FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.m */,
-				3D1996BE1FCE5E3500219FEF /* NSString+KFDSUI.m */,
-				3D1996BB1FCE5E3500219FEF /* NSString+KFDSUI.h */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -666,18 +668,20 @@
 		3D1996C51FCE638700219FEF /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				3D1996C81FCE638700219FEF /* KFDSMsgViewCell.h */,
-				3D1996CF1FCE638700219FEF /* KFDSMsgViewCell.m */,
-				3D1996D11FCE638700219FEF /* KFDSMsgBaseContentView.h */,
-				3D1996CB1FCE638700219FEF /* KFDSMsgBaseContentView.m */,
-				3D1996C91FCE638700219FEF /* KFDSMsgTextContentView.h */,
-				3D1996CE1FCE638700219FEF /* KFDSMsgTextContentView.m */,
-				3D1996CA1FCE638700219FEF /* KFDSMsgImageContentView.h */,
-				3D1996D01FCE638700219FEF /* KFDSMsgImageContentView.m */,
-				3D1996CC1FCE638700219FEF /* KFDSMsgVoiceContentView.h */,
-				3D1996C71FCE638700219FEF /* KFDSMsgVoiceContentView.m */,
-				3D1996C61FCE638700219FEF /* KFDSMsgNotificationViewCell.h */,
-				3D1996CD1FCE638700219FEF /* KFDSMsgNotificationViewCell.m */,
+				3D1996C81FCE638700219FEF /* BDMsgViewCell.h */,
+				3D1996CF1FCE638700219FEF /* BDMsgViewCell.m */,
+				3D1996D11FCE638700219FEF /* BDMsgBaseContentView.h */,
+				3D1996CB1FCE638700219FEF /* BDMsgBaseContentView.m */,
+				3D1996C91FCE638700219FEF /* BDMsgTextContentView.h */,
+				3D1996CE1FCE638700219FEF /* BDMsgTextContentView.m */,
+				3D1996CA1FCE638700219FEF /* BDMsgImageContentView.h */,
+				3D1996D01FCE638700219FEF /* BDMsgImageContentView.m */,
+				3D1996CC1FCE638700219FEF /* BDMsgVoiceContentView.h */,
+				3D1996C71FCE638700219FEF /* BDMsgVoiceContentView.m */,
+				3DC58F7221BE6B9D008BE85D /* BDMsgListContentView.h */,
+				3DC58F7321BE6B9D008BE85D /* BDMsgListContentView.m */,
+				3D1996C61FCE638700219FEF /* BDMsgNotificationViewCell.h */,
+				3D1996CD1FCE638700219FEF /* BDMsgNotificationViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -689,6 +693,7 @@
 				3D1997241FCE817E00219FEF /* FromWeixin */,
 				3D19976C1FCE817E00219FEF /* CellImage */,
 				3D1997921FCE817E00219FEF /* Emotions */,
+				3D3928D721BF9BEE001E1257 /* other */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1034,11 +1039,25 @@
 			name = apis;
 			sourceTree = "<group>";
 		};
+		3D3928D721BF9BEE001E1257 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				3D3928DA21BF9D9B001E1257 /* icon_more.png */,
+				3D3928D821BF9BEE001E1257 /* icon_about.png */,
+			);
+			name = other;
+			path = bdui/Resources/other;
+			sourceTree = SOURCE_ROOT;
+		};
 		3D548A671FC52DAE003117B4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				3D1996B31FCE2B9600219FEF /* BDChatViewController.h */,
 				3D1996B41FCE2B9600219FEF /* BDChatViewController.m */,
+				3D3928DC21BF9ED7001E1257 /* BDGroupProfileViewController.h */,
+				3D3928DD21BF9ED7001E1257 /* BDGroupProfileViewController.m */,
+				3D3928E321C07B81001E1257 /* BDContactSelectViewController.h */,
+				3D3928E421C07B81001E1257 /* BDContactSelectViewController.m */,
 				3DABD1B41FE790F600DE473B /* BDUserinfoViewController.h */,
 				3DABD1B51FE790F600DE473B /* BDUserinfoViewController.m */,
 				3D57D70F1FD00E3F0072823F /* BDFeedbackViewController.h */,
@@ -1099,24 +1118,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D3150F11F1A2A410005DB6C /* BDUIApis.h in Headers */,
-				3D1996C11FCE5E3500219FEF /* NSString+KFDSUI.h in Headers */,
 				3D1996C31FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.h in Headers */,
 				3D57D7111FD00E3F0072823F /* BDFeedbackViewController.h in Headers */,
 				3D31509A1F1A1D530005DB6C /* bdui.h in Headers */,
 				3D1996FB1FCE638800219FEF /* KFDSInputEmotionParser.h in Headers */,
-				3D1996E81FCE638800219FEF /* KFDSMsgTextContentView.h in Headers */,
-				3D1996EB1FCE638800219FEF /* KFDSMsgVoiceContentView.h in Headers */,
+				3D1996E81FCE638800219FEF /* BDMsgTextContentView.h in Headers */,
+				3D1996EB1FCE638800219FEF /* BDMsgVoiceContentView.h in Headers */,
 				3D1998FB1FCE833900219FEF /* KFDSBadgeView.h in Headers */,
-				3D1996C21FCE5E3500219FEF /* UIView+KFDSUI.h in Headers */,
 				3D1996FE1FCE638800219FEF /* KFDSInputEmotionManager.h in Headers */,
-				3D1996E51FCE638800219FEF /* KFDSMsgNotificationViewCell.h in Headers */,
+				3D1996E51FCE638800219FEF /* BDMsgNotificationViewCell.h in Headers */,
+				3D3928E521C07B81001E1257 /* BDContactSelectViewController.h in Headers */,
 				3D1998FA1FCE833900219FEF /* KFDSLoadProgressView.h in Headers */,
 				3D5606CC2057C875000E770C /* QDSingleImagePickerPreviewViewController.h in Headers */,
-				3D1996F01FCE638800219FEF /* KFDSMsgBaseContentView.h in Headers */,
+				3D1996F01FCE638800219FEF /* BDMsgBaseContentView.h in Headers */,
+				3DC58F7421BE6B9D008BE85D /* BDMsgListContentView.h in Headers */,
 				3D1996B51FCE2B9600219FEF /* BDChatViewController.h in Headers */,
 				3DABD1B61FE790F600DE473B /* BDUserinfoViewController.h in Headers */,
-				3D1996E71FCE638800219FEF /* KFDSMsgViewCell.h in Headers */,
-				3D1996E91FCE638800219FEF /* KFDSMsgImageContentView.h in Headers */,
+				3D3928DE21BF9ED7001E1257 /* BDGroupProfileViewController.h in Headers */,
+				3D1996E71FCE638800219FEF /* BDMsgViewCell.h in Headers */,
+				3D1996E91FCE638800219FEF /* BDMsgImageContentView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1375,6 +1395,7 @@
 				3D19981A1FCE817E00219FEF /* SenderVoiceNodePlaying003@2x.png in Resources */,
 				3D1998851FCE817E00219FEF /* read@2x.png in Resources */,
 				3D1998301FCE817E00219FEF /* SenderVoiceNodePlaying002_ios7@2x.png in Resources */,
+				3D3928DB21BF9D9B001E1257 /* icon_more.png in Resources */,
 				3D1998001FCE817E00219FEF /* SenderTextNodeBkg@3x.png in Resources */,
 				3D1998921FCE817E00219FEF /* Expression_8@2x.png in Resources */,
 				3D19982C1FCE817E00219FEF /* ReceiverTextNodeBkgHL_ios7@2x.png in Resources */,
@@ -1442,6 +1463,7 @@
 				3D1998771FCE817E00219FEF /* avatar.png in Resources */,
 				3D1998811FCE817E00219FEF /* status@2x.png in Resources */,
 				3D1998B91FCE817E00219FEF /* Expression_58@2x.png in Resources */,
+				3D3928D921BF9BEE001E1257 /* icon_about.png in Resources */,
 				3D1997FE1FCE817E00219FEF /* ReceiverTextNodeBkgHL@2x.png in Resources */,
 				3D19983D1FCE817E00219FEF /* ReceiverVoiceNodePlaying003_ios7@2x.png in Resources */,
 				3D1998D41FCE817E00219FEF /* Expression_69@2x.png in Resources */,
@@ -1524,6 +1546,7 @@
 			inputPaths = (
 				"${SRCROOT}/../Pods/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
 				"${BUILT_PRODUCTS_DIR}/M80AttributedLabel/M80AttributedLabel.framework",
@@ -1534,6 +1557,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M80AttributedLabel.framework",
@@ -1553,24 +1577,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D1996EE1FCE638800219FEF /* KFDSMsgViewCell.m in Sources */,
-				3D1996EA1FCE638800219FEF /* KFDSMsgBaseContentView.m in Sources */,
-				3D1996C41FCE5E3500219FEF /* NSString+KFDSUI.m in Sources */,
-				3D1996EF1FCE638800219FEF /* KFDSMsgImageContentView.m in Sources */,
-				3D1996E61FCE638800219FEF /* KFDSMsgVoiceContentView.m in Sources */,
+				3D1996EE1FCE638800219FEF /* BDMsgViewCell.m in Sources */,
+				3D1996EA1FCE638800219FEF /* BDMsgBaseContentView.m in Sources */,
+				3D1996EF1FCE638800219FEF /* BDMsgImageContentView.m in Sources */,
+				3D1996E61FCE638800219FEF /* BDMsgVoiceContentView.m in Sources */,
 				3D1998F91FCE833900219FEF /* KFDSBadgeView.m in Sources */,
 				3D57D7121FD00E3F0072823F /* BDFeedbackViewController.m in Sources */,
+				3D3928DF21BF9ED7001E1257 /* BDGroupProfileViewController.m in Sources */,
+				3D3928E621C07B81001E1257 /* BDContactSelectViewController.m in Sources */,
+				3DC58F7521BE6B9D008BE85D /* BDMsgListContentView.m in Sources */,
 				3D1996B61FCE2B9600219FEF /* BDChatViewController.m in Sources */,
 				3DABD1B71FE790F600DE473B /* BDUserinfoViewController.m in Sources */,
 				3D1996C01FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.m in Sources */,
 				3D1998F81FCE833900219FEF /* KFDSLoadProgressView.m in Sources */,
-				3D1996EC1FCE638800219FEF /* KFDSMsgNotificationViewCell.m in Sources */,
+				3D1996EC1FCE638800219FEF /* BDMsgNotificationViewCell.m in Sources */,
 				3D1996F71FCE638800219FEF /* KFDSInputEmotionManager.m in Sources */,
 				3D5606CB2057C875000E770C /* QDSingleImagePickerPreviewViewController.m in Sources */,
 				3D1996F31FCE638800219FEF /* KFDSInputEmotionParser.m in Sources */,
-				3D1996BF1FCE5E3500219FEF /* UIView+KFDSUI.m in Sources */,
 				3D3150F21F1A2A410005DB6C /* BDUIApis.m in Sources */,
-				3D1996ED1FCE638800219FEF /* KFDSMsgTextContentView.m in Sources */,
+				3D1996ED1FCE638800219FEF /* BDMsgTextContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1716,6 +1741,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = L5F47963M2;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1725,6 +1751,36 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-iquote",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking/AFNetworking.framework/Headers\"",
+					"-iquote",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FMDB/FMDB.framework/Headers\"",
+					"-iquote",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/HCSStarRatingView/HCSStarRatingView.framework/Headers\"",
+					"-iquote",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/M80AttributedLabel/M80AttributedLabel.framework/Headers\"",
+					"-iquote",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MQTTClient/MQTTClient.framework/Headers\"",
+					"-iquote",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/QMUIKit/QMUIKit.framework/Headers\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"FMDB\"",
+					"-framework",
+					"\"HCSStarRatingView\"",
+					"-framework",
+					"\"M80AttributedLabel\"",
+					"-framework",
+					"\"MQTTClient\"",
+					"-framework",
+					"\"QMUIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedesk.ui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1738,6 +1794,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = L5F47963M2;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1747,6 +1804,37 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-iquote",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking/AFNetworking.framework/Headers\"",
+					"-iquote",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FMDB/FMDB.framework/Headers\"",
+					"-iquote",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/HCSStarRatingView/HCSStarRatingView.framework/Headers\"",
+					"-iquote",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/M80AttributedLabel/M80AttributedLabel.framework/Headers\"",
+					"-iquote",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MQTTClient/MQTTClient.framework/Headers\"",
+					"-iquote",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/QMUIKit/QMUIKit.framework/Headers\"",
+					"-fembed-bitcode",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"FMDB\"",
+					"-framework",
+					"\"HCSStarRatingView\"",
+					"-framework",
+					"\"M80AttributedLabel\"",
+					"-framework",
+					"\"MQTTClient\"",
+					"-framework",
+					"\"QMUIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedesk.ui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

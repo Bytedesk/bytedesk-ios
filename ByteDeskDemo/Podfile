@@ -18,8 +18,10 @@ target 'demo' do
     pod 'MQTTClient'
     pod 'AFNetworking'
     pod 'QMUIKit'
+    pod 'MGSwipeTableCell'
     pod 'M80AttributedLabel'
     pod 'HCSStarRatingView'
+    pod 'CocoaLumberjack'
     
     # 集成核心协议库core
     pod 'bytedesk-core'
@@ -47,6 +49,7 @@ target 'bytedesk-ui' do
     pod 'QMUIKit'
     pod 'M80AttributedLabel'
     pod 'HCSStarRatingView'
+    pod 'CocoaLumberjack'
     
     # 集成核心协议库core
     pod 'bytedesk-core'

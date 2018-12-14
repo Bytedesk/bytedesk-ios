@@ -18,8 +18,10 @@
 #define BD_APPKEY                 @"bd_appkey"
 #define BD_SUBDOMAIN              @"bd_subdomain"
 #define BD_DESCRIPTION            @"bd_description"
-#define BD_AUTOREPLY              @"bd_autoreply"
+#define BD_ACCEPTSTATUS           @"bd_acceptstatus"
+#define BD_AUTOREPLYCONTENT       @"bd_autoreplycontent"
 #define BD_STATUS                 @"bd_status"
+#define BD_CURRENT_TID            @"bd_current_tid"
 
 #define BD_IS_ALREADY_LOGIN       @"bd_is_already_login"
 
@@ -31,7 +33,7 @@
 
 @interface BDSettings : NSObject
 
-+ (BOOL)isVisitor;
++ (BOOL)loginAsVisitor;
 
 + (BOOL)getIsAlreadyLogin;
 
@@ -77,13 +79,21 @@
 
 + (void)setDescription:(NSString *)description;
 
-+ (NSString *)getAutoReply;
++ (NSString *)getAcceptStatus;
 
-+ (void)setAutoReply:(NSString *)autoreply;
++ (void)setAcceptStatus:(NSString *)acceptStatus;
+
++ (NSString *)getAutoReplyContent;
+
++ (void)setAutoReplyContent:(NSString *)autoreply;
 
 + (NSString *)getStatus;
 
 + (void)setStatus:(NSString *)status;
+
++ (NSString *)getCurrentTid;
+
++ (void)setCurrentTid:(NSString *)tid;
 
 + (NSString *)getPassportAccessToken;
 
@@ -100,6 +110,8 @@
 + (NSString *)getPassportTokenType;
 
 + (void)setPassportTokenType:(NSString *)tokenType;
+
++ (void)clear;
 
 @end
 

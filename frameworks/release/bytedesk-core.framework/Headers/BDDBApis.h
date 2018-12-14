@@ -29,8 +29,17 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
 - (BOOL) insertThread:(BDThreadModel *)thread;
 - (BOOL) deleteThread:(NSString *)tId;
+
+/**
+ 为保证会话列表中同一个访客、联系人、群组，只保留一条记录
+
+ @param uId <#uId description#>
+ @return <#return value description#>
+ */
+- (BOOL) deleteThreadUser:(NSString *)uId;
 - (NSMutableArray *) getThreads;
 - (BOOL) clearThreads;
+- (BOOL) clearThreadUnreadCount:(NSString *)tId;
 
 - (BOOL) insertQueue:(BDQueueModel *)queue;
 - (BOOL) deleteQueue:(NSString *)qId;

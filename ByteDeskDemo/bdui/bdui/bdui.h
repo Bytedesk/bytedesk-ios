@@ -2,7 +2,7 @@
 //  bdui.h
 //  bdui
 //
-//  Created by 萝卜丝 · bytedesk.com on 2018/7/15.
+//  Created by 萝卜丝 on 2018/7/15.
 //  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 

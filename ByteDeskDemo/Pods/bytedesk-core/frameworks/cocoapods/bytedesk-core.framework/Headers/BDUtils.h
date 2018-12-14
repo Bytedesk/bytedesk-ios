@@ -18,6 +18,8 @@
 
 + (NSString *)getCurrentTimeString;
 
-+ (NSString*)deviceVersion;
++ (NSString *)deviceVersion;
+
++ (NSString *)dictToJson:(NSDictionary *)dict;
 
 @end

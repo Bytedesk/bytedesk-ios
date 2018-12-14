@@ -67,6 +67,8 @@
 @property(nonatomic, strong) NSString *username;
 @property(nonatomic, strong) NSString *nickname;
 @property(nonatomic, strong) NSString *avatar;
+// 消息所属会话tid
+@property(nonatomic, strong) NSString *thread_tid;
 // 消息对应会话的visitor uid
 @property(nonatomic, strong) NSString *visitor_uid;
 // 当前登录用户Uid

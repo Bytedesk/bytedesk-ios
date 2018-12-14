@@ -7,17 +7,14 @@
 //
 
 #import "KFThreadTableViewCell.h"
+#import "KFUtils.h"
 
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
-
 #define AVATAR_HEIGHT_WIDTH   40
-#define TITLE_LABEL_HEIGHT 20
-#define TIMESTAMP_LABEL_HEIGHT 20
-#define TIMESTAMP_LABEL_WIDTH 150
+#define TIMESTAMP_LABEL_WIDTH 100
 #define MARGIN                8
 #define CONTENT_LABEL_HEIGHT  20
-#define CONTENT_LABEL_WIDTH   250
 #define UNREAD_LABEL_HEIGHT   16
 
 
@@ -71,9 +68,15 @@
     mContentLabel.text = threadModel.content;
     // TODO: 根据来源不同显示不同的placeholder image
     [mAvatarImageView setImageWithURL:[NSURL URLWithString:threadModel.avatar] placeholderImage:[UIImage imageNamed:@"android_default_avatar"]];
-    mTimestampLabel.text = threadModel.timestamp;
+    //
+//    UIImage *redDotImage = [UIImage qmui_imageWithColor:UIColorRed size:CGSizeMake(6, 6) cornerRadius:6.0 / 2.0];
+//    UIImage *afterDotImage = [mAvatarImageView.image qmui_imageWithImageAbove:redDotImage atPoint:CGPointMake(mAvatarImageView.image.size.width - redDotImage.size.width - 1, 1)];
+//    [mAvatarImageView setImage:afterDotImage];
+    mTimestampLabel.text =  [KFUtils getOptimizedTimestamp:threadModel.timestamp];
     //
     if (threadModel.unread_count.intValue > 0) {
+        // todo: 优化显示、隐藏未读数目
+        mUnReadLabel.hidden = false;
         mUnReadLabel.text = [NSString stringWithFormat:@"%@", threadModel.unread_count];
     }
     else {
@@ -153,7 +156,7 @@
 #pragma mark - Section
 
 - (void)initViewConstraints {
-//    NSLog(@"height:%f", self.frame.size.height); // 默认行高：44
+//    DDLogInfo(@"height:%f", self.frame.size.height); // 默认行高：44
     
     mAvatarImageView.qmui_left = MARGIN;
     mAvatarImageView.qmui_top = MARGIN;
@@ -162,17 +165,17 @@
     
     mTitleLabel.qmui_left = mAvatarImageView.qmui_right + MARGIN;
     mTitleLabel.qmui_top = MARGIN;
-    mTitleLabel.qmui_height = TITLE_LABEL_HEIGHT;
+    mTitleLabel.qmui_height = CONTENT_LABEL_HEIGHT;
     mTitleLabel.qmui_width = mScreenWidth - AVATAR_HEIGHT_WIDTH - MARGIN * 2 - TIMESTAMP_LABEL_WIDTH;
     
     mContentLabel.qmui_left = mAvatarImageView.qmui_right + MARGIN;
     mContentLabel.qmui_top = mTitleLabel.qmui_bottom;
     mContentLabel.qmui_height = CONTENT_LABEL_HEIGHT;
-    mContentLabel.qmui_width = CONTENT_LABEL_WIDTH;
+    mContentLabel.qmui_width = TIMESTAMP_LABEL_WIDTH;
     
     mTimestampLabel.qmui_right = mScreenWidth - MARGIN - TIMESTAMP_LABEL_WIDTH;
     mTimestampLabel.qmui_top = MARGIN;
-    mTimestampLabel.qmui_height = TIMESTAMP_LABEL_HEIGHT;
+    mTimestampLabel.qmui_height = CONTENT_LABEL_HEIGHT;
     mTimestampLabel.qmui_width = TIMESTAMP_LABEL_WIDTH;
     
     mUnReadLabel.qmui_right = mScreenWidth - MARGIN * 4;
