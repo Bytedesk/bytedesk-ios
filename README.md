@@ -21,3 +21,12 @@
 
 - [在线客服开发文档](https://github.com/pengjinning/bytedesk-ios/wiki/%E5%9C%A8%E7%BA%BF%E5%AE%A2%E6%9C%8D%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3)
 - [IM开发文档](https://github.com/pengjinning/bytedesk-ios/wiki/IM%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3)
+
+## 其他
+
+- [iOS SDK](https://github.com/pengjinning/bytedesk-ios)
+- [Android SDK](https://github.com/pengjinning/bytedesk-android)
+- [Web端接口](https://github.com/pengjinning/bytedesk-web)
+- [微信公众号/小程序接口](https://github.com/pengjinning/bytedesk-wechat)
+- [服务器端接口](https://github.com/pengjinning/bytedesk-server)
+- [机器人](https://github.com/pengjinning/bytedesk-chatbot)
