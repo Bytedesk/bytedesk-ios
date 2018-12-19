@@ -5,20 +5,20 @@
 //  Created by bytedesk.com on 2017/10/12.
 //
 
-#import "KFSettingsViewController.h"
+#import "KFProfileViewController.h"
 #import "QDNavigationController.h"
 
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 #import <bytedesk-core/bdcore.h>
 
-@interface KFSettingsViewController ()
+@interface KFProfileViewController ()
 
 @property(nonatomic, strong) UIRefreshControl *mRefreshControl;
 
 @end
 
-@implementation KFSettingsViewController
+@implementation KFProfileViewController
 
 - (instancetype)init {
     self = [super init];
@@ -45,7 +45,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -78,18 +78,6 @@
             cell.detailTextLabel.text = [BDSettings getStatus];
         }
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    } else if (indexPath.section == 2) {
-        NSString *cellIndentifier = @"exitcellIndentifier";
-        cell = [tableView dequeueReusableCellWithIdentifier:cellIndentifier];
-        
-        // Configure the cell...
-        if (cell == nil) {
-            cell = [[QMUITableViewCell alloc] initForTableView:self.tableView withStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIndentifier];
-        }
-        
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.textLabel.text = NSLocalizedString(@"退出登录", nil);
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
     }
     [cell updateCellAppearanceWithIndexPath:indexPath];
     return cell;
@@ -108,8 +96,8 @@
     //    UIViewController *viewController = nil;
     if (indexPath.section == 0) {
         //
-        //        viewController = [[KFProfileViewController alloc] init];
-        //        [self.navigationController pushViewController:viewController animated:YES];
+    //        viewController = [[KFProfileViewController alloc] init];
+    //        [self.navigationController pushViewController:viewController animated:YES];
         
     } else if (indexPath.section == 1) {
         //
@@ -221,28 +209,6 @@
             [alertController addAction:restAction];
             [alertController showWithAnimated:YES];
         }
-    }
-    else if (indexPath.section == 2) {
-        // 退出登录
-        QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
-            //
-            
-        }];
-        QMUIAlertAction *closeAction = [QMUIAlertAction actionWithTitle:@"退出" style:QMUIAlertActionStyleDestructive handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
-            // 调用服务器接口
-            [BDCoreApis logoutResultSuccess:^(NSDictionary *dict) {
-                
-            } resultFailed:^(NSError *error) {
-                DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-            }];
-        }];
-        QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"确定要退出登录？" message:@"" preferredStyle:QMUIAlertControllerStyleAlert];
-        [alertController addAction:cancelAction];
-        [alertController addAction:closeAction];
-        [alertController showWithAnimated:YES];
-    }
-    else {
-        
     }
 }
 

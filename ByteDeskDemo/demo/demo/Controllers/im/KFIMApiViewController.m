@@ -11,7 +11,7 @@
 #import "KFGroupViewController.h"
 #import "KFQueueViewController.h"
 #import "KFThreadViewController.h"
-#import "KFSettingsViewController.h"
+#import "KFProfileViewController.h"
 
 #import <bytedesk-core/bdcore.h>
 
@@ -34,13 +34,14 @@
     self.navigationItem.title = @"IM接口(未连接)";
     self.mLoginItemDetailText = @"当前未连接，点我建立连接";
     //
-    self.apisArray = @[@"1. 接口说明",
-                       @"2. 登录接口",
-                       @"3. 联系人接口",
-                       @"4. 群组接口",
-                       @"5. 会话接口",
-                       @"6. 排队接口",
-                       @"7. 设置接口",
+    self.apisArray = @[@"接口说明",
+                       @"注册接口",
+                       @"登录接口",
+                       @"联系人接口",
+                       @"群组接口",
+                       @"会话接口",
+                       @"排队接口",
+                       @"设置接口",
                        ];
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOAuthResult:) name:BD_NOTIFICATION_OAUTH_RESULT object:nil];
@@ -75,8 +76,8 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    [cell.textLabel setText:[self.apisArray objectAtIndex:indexPath.row]];
-    if (indexPath.row == 1) {
+    [cell.textLabel setText:[NSString stringWithFormat:@"%ld. %@", indexPath.row+1, [self.apisArray objectAtIndex:indexPath.row]]];
+    if (indexPath.row == 2) {
         [cell.detailTextLabel setText:self.mLoginItemDetailText];
     }
     
@@ -92,29 +93,31 @@
         
         return;
     } else if (indexPath.row == 1) {
+
+    } else if (indexPath.row == 2) {
         
         if ([BDCoreApis isConnected]) {
             [self logout];
         } else {
             [self login];
         }
-
         return;
-    } else if (indexPath.row == 2) {
         
-        viewController = [[KFContactViewController alloc] init];
     } else if (indexPath.row == 3) {
         
-        viewController = [[KFGroupViewController alloc] init];
+        viewController = [[KFContactViewController alloc] init];
     } else if (indexPath.row == 4) {
         
-        viewController = [[KFThreadViewController alloc] init];
+        viewController = [[KFGroupViewController alloc] init];
     } else if (indexPath.row == 5) {
         
-        viewController = [[KFQueueViewController alloc] init];
+        viewController = [[KFThreadViewController alloc] init];
     } else if (indexPath.row == 6) {
         
-        viewController = [[KFSettingsViewController alloc] init];
+        viewController = [[KFQueueViewController alloc] init];
+    } else if (indexPath.row == 7) {
+        
+        viewController = [[KFProfileViewController alloc] init];
     }
     
     viewController.title = [self.apisArray objectAtIndex:indexPath.row];
@@ -124,9 +127,8 @@
 
 - (void)login {
     // 测试账号：test1，密码：123456
-    // 测试账号：test2，密码：123456
-    // 测试账号：test3，密码：123456
-    NSString *username = @"test2";
+    // 或者：test1~test15 共15个测试账号，密码均为：123456
+    NSString *username = @"test16";
     NSString *password = @"123456";
     NSString *subDomain = @"vip";
     // 登录
@@ -151,7 +153,6 @@
 - (void)notifyOAuthResult:(NSNotification *)notification {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     //
-    
 }
 
 

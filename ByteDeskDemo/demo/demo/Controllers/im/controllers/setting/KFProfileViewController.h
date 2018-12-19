@@ -7,6 +7,6 @@
 
 #import "QDCommonGroupListViewController.h"
 
-@interface KFSettingsViewController : QDCommonGroupListViewController
+@interface KFProfileViewController : QDCommonGroupListViewController
 
 @end

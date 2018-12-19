@@ -194,7 +194,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     BDDetailViewController *detailViewController = [[BDDetailViewController alloc] init];
-    // 群组
     [detailViewController initWithGroupModel:[self.mGroupArray objectAtIndex:indexPath.row]];
     //
     [self.navigationController pushViewController:detailViewController animated:YES];
@@ -310,7 +309,7 @@
         [self reloadTableData];
         [self.mRefreshControl endRefreshing];
     } resultFailed:^(NSError *error) {
-        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, error);
+        DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
         [QMUITips showError:@"加载群组失败" inView:parentView hideAfterDelay:2.0f];
         [self.mRefreshControl endRefreshing];
     }];

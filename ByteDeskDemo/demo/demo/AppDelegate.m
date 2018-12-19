@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <bytedesk-core/bdcore.h>
 
+#import "BDApisTableViewController.h"
 #import "KFKeFuApiViewController.h"
 #import "KFIMApiViewController.h"
 
@@ -47,18 +48,9 @@
     // 界面
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     //
-    QMUITabBarViewController *tabBarViewController = [[QMUITabBarViewController alloc] init];
-    //
-    KFKeFuApiViewController *visitorApiViewController = [[KFKeFuApiViewController alloc] init];
-    KFNavigationController *visitorNavigationController = [[KFNavigationController alloc] initWithRootViewController:visitorApiViewController];
-    visitorNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"客服接口", nil) image:[UIImage imageNamed:@"icon_tabbar_recent"] tag:0];
-    //
-    KFIMApiViewController *imApiViewController = [[KFIMApiViewController alloc] init];
-    KFNavigationController *imNavigationController = [[KFNavigationController alloc] initWithRootViewController:imApiViewController];
-    imNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"IM接口", nil) image:[UIImage imageNamed:@"icon_tabbar_keypad"] tag:2];
-    // window root controller
-    tabBarViewController.viewControllers = @[visitorNavigationController, imNavigationController];
-    self.window.rootViewController = tabBarViewController;
+    BDApisTableViewController *apisTableViewController = [[BDApisTableViewController alloc] init];
+    KFNavigationController *aipNavigationController = [[KFNavigationController alloc] initWithRootViewController:apisTableViewController];
+    self.window.rootViewController = aipNavigationController;
     [self.window makeKeyAndVisible];
     
     // 建立长连接

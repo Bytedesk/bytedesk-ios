@@ -29,6 +29,24 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                              resultFailed:(FailedCallbackBlock)failed;
 
 /**
+注册自定义普通用户：用于IM
+
+ @param username <#username description#>
+ @param nickname <#nickname description#>
+ @param password <#password description#>
+ @param subDomain <#subDomain description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)visitorRegister:(NSString *)username
+           withNickname:(NSString *)nickname
+           withPassword:(NSString *)password
+          withSubDomain:(NSString *)subDomain
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
+
+/**
  工作组会话
  */
 - (void)visitorRequestThreadWithWorkGroupWid:(NSString *)wId

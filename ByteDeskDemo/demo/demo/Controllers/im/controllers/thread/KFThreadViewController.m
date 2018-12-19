@@ -193,16 +193,16 @@
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     // TODO: 打开聊天页面之后，根据thread类型区分会话类型：一对一、群组、工作组
     BDThreadModel *threadModel = [self.mThreadArray objectAtIndex:indexPath.row];
-    if ([threadModel.type isEqualToString:BD_THREAD_TYPE_THREAD]) {
-        
-        [BDUIApis agentPushChat:self.navigationController withThreadModel:threadModel];
-    } else if ([threadModel.type isEqualToString:BD_THREAD_TYPE_CONTACT]) {
-        
-        [BDUIApis agentPushChat:self.navigationController withThreadModel:threadModel];
-    } else if ([threadModel.type isEqualToString:BD_THREAD_TYPE_GROUP]) {
-        
-        [BDUIApis agentPushChat:self.navigationController withThreadModel:threadModel];
-    }
+    [BDUIApis agentPushChat:self.navigationController withThreadModel:threadModel];
+    
+//    if ([threadModel.type isEqualToString:BD_THREAD_TYPE_THREAD]) {
+//        [BDUIApis agentPushChat:self.navigationController withThreadModel:threadModel];
+//    } else if ([threadModel.type isEqualToString:BD_THREAD_TYPE_CONTACT]) {
+//        [BDUIApis agentPushChat:self.navigationController withThreadModel:threadModel];
+//    } else if ([threadModel.type isEqualToString:BD_THREAD_TYPE_GROUP]) {
+//        [BDUIApis agentPushChat:self.navigationController withThreadModel:threadModel];
+//    }
+
     // 清空未读数目
     [[BDDBApis sharedInstance] clearThreadUnreadCount:threadModel.tid];
     [self reloadTableData];

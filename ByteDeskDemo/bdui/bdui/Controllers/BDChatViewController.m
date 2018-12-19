@@ -313,15 +313,16 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         self.mUid = self.mThreadModel.visitor_uid;
     } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_CONTACT]) {
         // 联系人会话
+        self.mThreadTid = self.mThreadModel.contact_uid;
         self.mUid = self.mThreadModel.contact_uid;
     } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_GROUP]) {
         // 群组会话
+        self.mThreadTid = self.mThreadModel.group_gid;
         self.mUid = self.mThreadModel.group_gid;
         // 右上角按钮
         UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithImage:[UIImage imageNamed:@"icon_about" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] target:self action:@selector(handleRightBarButtonItemClicked:)];
         self.navigationItem.rightBarButtonItem = rightItem;
     }
-    
 }
 
 - (void) initWithContactModel:(BDContactModel *)contactModel withPush:(BOOL)isPush {
@@ -330,6 +331,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.mIsVisitor = NO;
     self.mIsPush = isPush;
     self.mContactModel = contactModel;
+    self.mThreadTid = self.mContactModel.uid;
     self.mUid = self.mContactModel.uid;
     self.mThreadType = BD_THREAD_TYPE_CONTACT;
     self.mTitle = self.mContactModel.real_name;
@@ -344,6 +346,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.mIsVisitor = NO;
     self.mIsPush = isPush;
     self.mGroupModel = groupModel;
+    self.mThreadTid = self.mGroupModel.gid;
     self.mUid = self.mGroupModel.gid;
     self.mThreadType = BD_THREAD_TYPE_GROUP;
     self.mTitle = self.mGroupModel.nickname;
@@ -620,7 +623,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         DDLogInfo(@"4. 客服端：群组聊天记录 %@", self.mUid);
         self.mMessageArray = [BDCoreApis getMessagesWithGroup:self.mUid];
     }
-    
     //
     if ([self.mMessageArray count] == 0) {
         //
@@ -782,16 +784,10 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 // TODO: 区分发送消息
 -(void)sendMessage:(NSString *)content {
-    DDLogInfo(@"%s, content:%@ ", __PRETTY_FUNCTION__, content);
+    DDLogInfo(@"%s, content:%@, tid:%@, sessionType:%@ ",
+              __PRETTY_FUNCTION__, content, self.mThreadTid,  self.mThreadType);
     
-    // 1. 访客端
-    
-    // 2. 客服端：客服会话
-    // 3. 客服端：联系人
-    // 4. 客服端：群组
-    //
     [[BDMQTTApis sharedInstance] sendTextMessage:content toTid:self.mThreadTid sessionType:self.mThreadType];
-    
 }
 
 //
@@ -800,13 +796,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     NSString *imageName = [NSString stringWithFormat:@"%@_%@.png", [BDSettings getUsername], [BDUtils getCurrentTimeString]];
     [BDCoreApis uploadImageData:imageData withImageName:imageName resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
-        
-        // 1. 访客端
-        
-        // 2. 客服端：客服会话
-        // 3. 客服端：联系人
-        // 4. 客服端：群组
-        
         // 发送图片消息
         NSString *imageUrl = dict[@"data"];
         [[BDMQTTApis sharedInstance] sendImageMessage:imageUrl toTid:self.mThreadTid sessionType:self.mThreadType];
@@ -1293,20 +1282,22 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     // 1. 访客端
     if (self.mIsVisitor) {
         DDLogInfo(@"1. 访客端拉取服务器聊天记录");
-//        [BDCoreApis getMessageWithUser:[BDSettings getUid]
-//                              withPage:self.mGetMessageFromChannelPage
-//                         resultSuccess:^(NSDictionary *dict) {
-//
-//                             self.mGetMessageFromChannelPage += 1;
-//                             [self reloadTableData];
-//                             [self.mRefreshControl endRefreshing];
-//
-//                         } resultFailed:^(NSError *error) {
-//                             DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, error);
-//
-//                             [QMUITips showError:@"加载失败" inView:self.parentView hideAfterDelay:2.0f];
-//                             [self.mRefreshControl endRefreshing];
-//                         }];
+    
+        [BDCoreApis getMessageWithUser:[BDSettings getUid]
+                              withPage:self.mGetMessageFromChannelPage
+                         resultSuccess:^(NSDictionary *dict) {
+
+                             self.mGetMessageFromChannelPage += 1;
+                             [self reloadTableData];
+                             [self.mRefreshControl endRefreshing];
+
+                         } resultFailed:^(NSError *error) {
+                             DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, error);
+
+                             [QMUITips showError:@"加载失败" inView:self.parentView hideAfterDelay:2.0f];
+                             [self.mRefreshControl endRefreshing];
+                         }];
+        
     } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_THREAD]) {
         DDLogInfo(@"2. 客服端拉取服务器访客聊天记录 %@", self.mUid);
         
@@ -1326,7 +1317,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                          }];
         
     } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_CONTACT]) {
-        DDLogInfo(@"3. 客服端拉取服务器联系人聊天记录 %@", self.mThreadTid);
+        DDLogInfo(@"3. 客服端拉取服务器联系人聊天记录 %@", self.mUid);
         
         [BDCoreApis getMessageWithContact:self.mUid withPage:self.mGetMessageFromChannelPage resultSuccess:^(NSDictionary *dict) {
             
@@ -1339,7 +1330,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         }];
         
     } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_GROUP]) {
-        DDLogInfo(@"4. 客服端拉取服务器群组聊天记录 %@", self.mThreadTid);
+        DDLogInfo(@"4. 客服端拉取服务器群组聊天记录 %@", self.mUid);
         
         [BDCoreApis getMessageWithGroup:self.mUid withPage:self.mGetMessageFromChannelPage resultSuccess:^(NSDictionary *dict) {
             

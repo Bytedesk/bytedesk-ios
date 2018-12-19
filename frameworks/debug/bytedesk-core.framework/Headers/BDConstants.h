@@ -172,7 +172,7 @@
 #define BD_MESSAGE_TYPE_ROBOT               @"robot"
 #define BD_MESSAGE_TYPE_NOTIFICATION        @"notification"    // 通知消息类型
 
-#define BD_MESSAGE_TYPE_NOTIFICATION_NON_WORKINGTIME    @"notification_non_workingtime"    // 非工作时间
+#define BD_MESSAGE_TYPE_NOTIFICATION_NON_WORKING_TIME    @"notification_non_working_time"    // 非工作时间
 #define BD_MESSAGE_TYPE_NOTIFICATION_OFFLINE            @"notification_offline"    // 客服离线，当前无客服在线
 #define BD_MESSAGE_TYPE_NOTIFICATION_BROWSE_START       @"notification_browse_start" // 开始浏览页面
 #define BD_MESSAGE_TYPE_NOTIFICATION_BROWSE_END         @"notification_browse_end" // 浏览页面结束
@@ -248,6 +248,8 @@
 #define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_INVITE_ACCEPT     @"notification_group_invite_accept"
 // 受邀请：拒绝
 #define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_INVITE_REJECT     @"notification_group_invite_reject"
+// 不需要审核加入群组
+#define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_JOIN     @"notification_group_join"
 // 主动申请加入群组
 #define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_APPLY     @"notification_group_apply"
 // 同意：主动申请加群

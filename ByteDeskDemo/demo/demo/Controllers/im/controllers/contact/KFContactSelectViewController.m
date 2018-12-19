@@ -287,17 +287,6 @@
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     UIView *parentView = self.navigationController.view;
     
-    // 群组
-    [BDCoreApis getGroupsResultSuccess:^(NSDictionary *dict) {
-        //
-        [self reloadTableData];
-        [self.mRefreshControl endRefreshing];
-    } resultFailed:^(NSError *error) {
-        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, error);
-        [QMUITips showError:@"加载群组失败" inView:parentView hideAfterDelay:2.0f];
-        [self.mRefreshControl endRefreshing];
-    }];
-    
     // 联系人
     [BDCoreApis getContactsResultSuccess:^(NSDictionary *dict) {
         //

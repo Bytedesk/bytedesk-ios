@@ -19,6 +19,13 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
 #pragma mark - 访客端接口
 
++ (void)registerUser:(NSString *)username
+           withNickname:(NSString *)nickname
+           withPassword:(NSString *)password
+          withSubDomain:(NSString *)subDomain
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
 /**
  访客登录
 

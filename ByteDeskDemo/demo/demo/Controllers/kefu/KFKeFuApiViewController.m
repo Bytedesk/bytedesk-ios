@@ -55,13 +55,14 @@
     self.navigationItem.title = @"客服接口(未连接)";
     self.mLoginItemDetailText = @"当前未连接，点我建立连接";
     //
-    self.apisArray = @[ @"1. 接口说明",
-                        @"2. 登录接口",
-                        @"3. 开始新会话接口",
-                        @"4. 用户信息接口",
-                        @"5. 在线状态接口",
-                        @"6. 历史会话记录接口",
-                        @"7. 网页形式接入"
+    self.apisArray = @[ @"接口说明",
+                        @"注册接口",
+                        @"登录接口",
+                        @"开始新会话接口",
+                        @"用户信息接口",
+                        @"在线状态接口",
+                        @"历史会话记录接口",
+                        @"网页形式接入"
                         ];
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOAuthResult:) name:BD_NOTIFICATION_OAUTH_RESULT object:nil];
@@ -98,8 +99,8 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    [cell.textLabel setText:[self.apisArray objectAtIndex:indexPath.row]];
-    if (indexPath.row == 1) {
+    [cell.textLabel setText:[NSString stringWithFormat:@"%ld. %@", indexPath.row+1, [self.apisArray objectAtIndex:indexPath.row]]];
+    if (indexPath.row == 2) {
         [cell.detailTextLabel setText:self.mLoginItemDetailText];
     }
     
@@ -113,23 +114,24 @@
     if (indexPath.row == 0) {
         viewController = [[KFIntroViewController alloc] initWithStyle:UITableViewStyleGrouped];
     } else if (indexPath.row == 1) {
+        
+    } else if (indexPath.row == 2) {
         //
         if ([BDCoreApis isConnected]) {
             [self logout];
         } else {
             [self login];
         }
-        
         return;
-    } else if (indexPath.row == 2) {
-        viewController = [[KFVisitorChatViewController alloc] initWithStyle:UITableViewStyleGrouped];
     } else if (indexPath.row == 3) {
-        viewController = [[KFVisitorProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        viewController = [[KFVisitorChatViewController alloc] initWithStyle:UITableViewStyleGrouped];
     } else if (indexPath.row == 4) {
-        viewController = [[KFVisitorStatusViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        viewController = [[KFVisitorProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
     } else if (indexPath.row == 5) {
-        viewController = [[KFVisitorThreadViewController alloc] init];
+        viewController = [[KFVisitorStatusViewController alloc] initWithStyle:UITableViewStyleGrouped];
     } else if (indexPath.row == 6) {
+        viewController = [[KFVisitorThreadViewController alloc] init];
+    } else if (indexPath.row == 7) {
         // 注意: 登录后台->所有设置->所有客服->工作组->获取代码 获取相应URL
         NSURL *url = [NSURL URLWithString:@"https://vip.bytedesk.com/chat?uid=201808221551193&wid=201807171659201&type=workGroup&aid=&ph=ph"];
         SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:url];
