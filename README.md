@@ -2,7 +2,7 @@
 
 - 致力于提供稳定、可扩展、定制化的客户服务一站式平台
 - [官方网站](https://www.bytedesk.com)
-- [开发文档](https://github.com/pengjinning/bytedesk-ios/wiki)
+- [开发文档](https://github.com/bytedesk/bytedesk-ios/wiki)
 
 ## 准备工作
 
@@ -19,14 +19,14 @@
 
 ## 开发文档
 
-- [在线客服开发文档](https://github.com/pengjinning/bytedesk-ios/wiki/%E5%9C%A8%E7%BA%BF%E5%AE%A2%E6%9C%8D%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3)
-- [IM开发文档](https://github.com/pengjinning/bytedesk-ios/wiki/IM%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3)
+- [在线客服开发文档](https://github.com/bytedesk/bytedesk-ios/wiki/%E5%9C%A8%E7%BA%BF%E5%AE%A2%E6%9C%8D%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3)
+- [IM开发文档](https://github.com/bytedesk/bytedesk-ios/wiki/IM%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3)
 
 ## 其他
 
-- [iOS SDK](https://github.com/pengjinning/bytedesk-ios)
-- [Android SDK](https://github.com/pengjinning/bytedesk-android)
-- [Web端接口](https://github.com/pengjinning/bytedesk-web)
-- [微信公众号/小程序接口](https://github.com/pengjinning/bytedesk-wechat)
-- [服务器端接口](https://github.com/pengjinning/bytedesk-server)
-- [机器人](https://github.com/pengjinning/bytedesk-chatbot)
+- [iOS SDK](https://github.com/bytedesk/bytedesk-ios)
+- [Android SDK](https://github.com/bytedesk/bytedesk-android)
+- [Web端接口](https://github.com/bytedesk/bytedesk-web)
+- [微信公众号/小程序接口](https://github.com/bytedesk/bytedesk-wechat)
+- [服务器端接口](https://github.com/bytedesk/bytedesk-server)
+- [机器人](https://github.com/bytedesk/bytedesk-chatbot)
