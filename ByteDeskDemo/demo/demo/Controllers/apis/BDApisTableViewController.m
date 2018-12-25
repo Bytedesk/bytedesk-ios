@@ -17,11 +17,12 @@
 
 // IM接口演示
 #import "KFContactViewController.h"
+#import "KFFriendViewController.h"
 #import "KFGroupViewController.h"
 #import "KFQueueViewController.h"
 #import "KFThreadViewController.h"
 #import "KFProfileViewController.h"
-
+#import "KFNoticeViewController.h"
 
 #import <bytedesk-core/bdcore.h>
 
@@ -64,15 +65,17 @@
                            @"联系客服接口",
                            @"自定义用户信息接口",
                            @"在线状态接口",
-                           @"历史会话记录接口",
+                           @"历史会话接口",
                            @"网页形式接入"
                            ];
     // IM接口
     self.imApisArray = @[
+                       @"好友接口",
                        @"联系人接口",
                        @"群组接口",
                        @"会话接口",
                        @"排队接口",
+                       @"通知接口",
                        @"设置接口",
                        ];
     //
@@ -140,6 +143,12 @@
     } else if (indexPath.section == 2) {
         
         [cell.textLabel setText:[NSString stringWithFormat:@"%ld. %@", indexPath.row+1, [self.imApisArray objectAtIndex:indexPath.row]]];
+        
+        if (indexPath.row == 0) {
+            cell.detailTextLabel.text = @"社交: 关注/粉丝/好友/拉黑";
+        } else if (indexPath.row == 1) {
+            cell.detailTextLabel.text = @"客服同事";
+        }
     }
 
     return cell;
@@ -195,18 +204,24 @@
         // IM接口
         UIViewController *viewController = nil;
         if (indexPath.row == 0) {
+            // 好友接口
+            viewController = [[KFFriendViewController alloc] init];
+        } else if (indexPath.row == 1) {
             // 联系人接口
             viewController = [[KFContactViewController alloc] init];
-        } else if (indexPath.row == 1) {
+        } else if (indexPath.row == 2) {
             // 群组接口
             viewController = [[KFGroupViewController alloc] init];
-        } else if (indexPath.row == 2) {
+        } else if (indexPath.row == 3) {
             // 会话接口
             viewController = [[KFThreadViewController alloc] init];
-        } else if (indexPath.row == 3) {
+        } else if (indexPath.row == 4) {
             // 排队接口
             viewController = [[KFQueueViewController alloc] init];
-        } else if (indexPath.row == 4) {
+        } else if (indexPath.row == 5) {
+            // 通知接口
+            viewController = [[KFNoticeViewController alloc] init];
+        } else if (indexPath.row == 6) {
             // 设置接口
             viewController = [[KFProfileViewController alloc] init];
         }
@@ -270,7 +285,7 @@
     // 获取subDomain，也即企业号：登录后台->所有设置->客服账号->企业号
     NSString *subDomain = @"vip";
     // 登录
-    [BDCoreApis agentLoginWithUsername:username withPassword:password withAppkey:DEFAULT_TEST_APPKEY withSubdomain:subDomain resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis loginWithUsername:username withPassword:password withAppkey:DEFAULT_TEST_APPKEY withSubdomain:subDomain resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
     } resultFailed:^(NSError *error) {
         DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
@@ -303,8 +318,8 @@
 
 - (void)registerUser {
     
-    NSString *username = @"iostest1";
-    NSString *nickname = @"iOS测试1";
+    NSString *username = @"iostest2";
+    NSString *nickname = @"iOS测试2";
     NSString *password = @"123456";
     // 获取subDomain，也即企业号：登录后台->所有设置->客服账号->企业号
     NSString *subDomain = @"vip";

@@ -2,7 +2,7 @@
 //  BDGroupProfileViewController.m
 //  bytedesk-ui
 //
-//  Created by 宁金鹏 on 2018/12/11.
+//  Created by 萝卜丝 on 2018/12/11.
 //  Copyright © 2018 KeFuDaShi. All rights reserved.
 //
 
@@ -86,10 +86,13 @@
         } else if (indexPath.row == 1) {
             cell.textLabel.text = @"群简介";
             cell.detailTextLabel.text = self.mDescription;
-        } else {
+        } else if (indexPath.row == 2) {
             cell.textLabel.text = @"群公告";
             cell.detailTextLabel.text = self.mAnnouncement;
+        } else {
+            cell.textLabel.text = @"群成员";
         }
+        
     } else {
         if (!self.mIsAdmin) {
             cell.textLabel.text = @"退出群";
@@ -142,7 +145,7 @@
             }];
             [dialogViewController show];
             self.currentTextFieldDialogViewController = dialogViewController;
-        } else {
+        } else if (indexPath.row == 2) {
             //
             QMUIDialogTextFieldViewController *dialogViewController = [[QMUIDialogTextFieldViewController alloc] init];
             dialogViewController.title = @"群公告";
@@ -158,6 +161,13 @@
             }];
             [dialogViewController show];
             self.currentTextFieldDialogViewController = dialogViewController;
+        } else {
+            // 群成员
+            [BDCoreApis getGroupMembers:self.mGid resultSuccess:^(NSDictionary *dict) {
+                
+            } resultFailed:^(NSError *error) {
+                
+            }];
         }
     } else {
         if (!self.mIsAdmin) {
@@ -168,7 +178,7 @@
             QMUIAlertAction *closeAction = [QMUIAlertAction actionWithTitle:@"退出" style:QMUIAlertActionStyleDestructive handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
                 //
                 // TODO: 调用服务器接口, 并删除本地群组、删除会话thread
-                [[BDCoreApis sharedInstance] agentGroupWithdraw:self.mGid resultSuccess:^(NSDictionary *dict) {
+                [BDCoreApis withdrawGroup:self.mGid resultSuccess:^(NSDictionary *dict) {
                     
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
@@ -187,7 +197,7 @@
             QMUIAlertAction *closeAction = [QMUIAlertAction actionWithTitle:@"解散" style:QMUIAlertActionStyleDestructive handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
                 //
                 // TODO: 调用服务器接口, 并删除本地群组、删除会话thread
-                [[BDCoreApis sharedInstance] agentGroupDismiss:self.mGid resultSuccess:^(NSDictionary *dict) {
+                [BDCoreApis dismissGroup:self.mGid resultSuccess:^(NSDictionary *dict) {
                     
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
@@ -223,7 +233,7 @@
         // 设置昵称
         self.mNickname = self.currentTextFieldDialogViewController.textFields[0].text;
         //
-        [[BDCoreApis sharedInstance] agentGroupUpdateNickname:self.mNickname withGroupGid:self.mGid resultSuccess:^(NSDictionary *dict) {
+        [BDCoreApis updateGroupNickname:self.mNickname withGroupGid:self.mGid resultSuccess:^(NSDictionary *dict) {
             // TODO: 更新本地群组信息、更新本地会话信息
             
             [self.tableView reloadData];
@@ -234,7 +244,7 @@
         // 设置群简介
         self.mDescription = self.currentTextFieldDialogViewController.textFields[0].text;
         //
-        [[BDCoreApis sharedInstance] agentGroupUpdateDescription:self.mDescription withGroupGid:self.mGid resultSuccess:^(NSDictionary *dict) {
+        [BDCoreApis updateGroupDescription:self.mDescription withGroupGid:self.mGid resultSuccess:^(NSDictionary *dict) {
             [self.tableView reloadData];
         } resultFailed:^(NSError *error) {
             DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
@@ -243,7 +253,7 @@
         // 设置群公告
         self.mAnnouncement = self.currentTextFieldDialogViewController.textFields[0].text;
         //
-        [[BDCoreApis sharedInstance] agentGroupUpdateAnnouncement:self.mAnnouncement withGroupGid:self.mGid resultSuccess:^(NSDictionary *dict) {
+        [BDCoreApis updateGroupAnnouncement:self.mAnnouncement withGroupGid:self.mGid resultSuccess:^(NSDictionary *dict) {
             [self.tableView reloadData];
         } resultFailed:^(NSError *error) {
             DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
@@ -253,7 +263,7 @@
 
 - (void)fetchGroupDetail {
     
-    [[BDCoreApis sharedInstance] agentGroupDetail:self.mGid resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis getGroupDetail:self.mGid resultSuccess:^(NSDictionary *dict) {
         
         self.mNickname = dict[@"data"][@"nickname"];
         self.mDescription = dict[@"data"][@"description"];

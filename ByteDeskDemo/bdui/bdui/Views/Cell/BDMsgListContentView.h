@@ -2,7 +2,7 @@
 //  BDMsgListContentView.h
 //  bytedesk-ui
 //
-//  Created by 宁金鹏 on 2018/12/10.
+//  Created by 萝卜丝 on 2018/12/10.
 //  Copyright © 2018 KeFuDaShi. All rights reserved.
 //
 

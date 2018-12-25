@@ -2,8 +2,8 @@
 //  KFContactSelectViewController.m
 //  bytedesk
 //
-//  Created by 宁金鹏 on 2018/12/11.
-//  Copyright © 2018 宁金鹏. All rights reserved.
+//  Created by 萝卜丝 on 2018/12/11.
+//  Copyright © 2018 萝卜丝. All rights reserved.
 //
 
 #import "KFContactSelectViewController.h"
@@ -326,8 +326,10 @@
         [selectedContactUids addObject:contactModel.uid];
     }
     //
-    [[BDCoreApis sharedInstance] agentGroupCreate:nickname selectedContacts:selectedContactUids resultSuccess:^(NSDictionary *dict) {
-        // TODO: 本地存储group
+    [BDCoreApis createGroup:nickname selectedContacts:selectedContactUids resultSuccess:^(NSDictionary *dict) {
+        // sdk内部已经本地存储group，下面演示用途：
+//        BDGroupModel *groupModel = [[BDGroupModel alloc] initWithDictionary:dict];
+//        [[BDDBApis sharedInstance] insertGroup:groupModel];
         // 关闭页面
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
         }];

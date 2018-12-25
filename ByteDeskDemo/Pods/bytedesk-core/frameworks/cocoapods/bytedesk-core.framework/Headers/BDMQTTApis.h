@@ -43,27 +43,27 @@
 
  @param content <#content description#>
  @param tId <#tId description#>
- @param stype <#stype description#>
+ @param sessiontype <#stype description#>
  */
-- (void)sendTextMessage:(NSString *)content toTid:(NSString *)tId sessionType:(NSString *)stype;
+- (void)sendTextMessage:(NSString *)content toTid:(NSString *)tId localId:(NSString *)localId sessionType:(NSString *)sessiontype;
 
 /**
  发送图片消息
 
  @param content <#content description#>
  @param tId <#tId description#>
- @param stype <#stype description#>
+ @param sessiontype <#stype description#>
  */
-- (void)sendImageMessage:(NSString *)content toTid:(NSString *)tId sessionType:(NSString *)stype;
+- (void)sendImageMessage:(NSString *)content toTid:(NSString *)tId localId:(NSString *)localId sessionType:(NSString *)sessiontype;
 
 /**
  发送语音消息
 
  @param content <#content description#>
  @param tId <#tId description#>
- @param stype <#stype description#>
+ @param sessiontype <#stype description#>
  */
-- (void)sendVoiceMessage:(NSString *)content toTid:(NSString *)tId sessionType:(NSString *)stype;
+- (void)sendVoiceMessage:(NSString *)content toTid:(NSString *)tId localId:(NSString *)localId sessionType:(NSString *)sessiontype;
 
 /**
  发送消息
@@ -73,7 +73,7 @@
  @param tId <#tId description#>
  @param sessiontype <#stype description#>
  */
-- (void)sendMessage:(NSString *)content type:(NSString *)type toTid:(NSString *)tId sessionType:(NSString *)sessiontype;
+- (void)sendMessage:(NSString *)content type:(NSString *)type toTid:(NSString *)tId localId:(NSString *)localId sessionType:(NSString *)sessiontype;
 
 /**
  设置在线状态

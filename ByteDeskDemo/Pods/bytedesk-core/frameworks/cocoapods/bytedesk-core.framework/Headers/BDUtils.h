@@ -11,7 +11,7 @@
 @interface BDUtils : NSObject
 
 +(NSString *)getCurrentDate;
-//
+
 + (NSDate *)stringToDate:(NSString *)string;
 
 + (NSString *) getOptimizedTimestamp:(NSString *)date;

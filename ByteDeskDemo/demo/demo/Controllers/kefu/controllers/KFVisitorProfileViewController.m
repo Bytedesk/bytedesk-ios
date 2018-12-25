@@ -132,7 +132,7 @@
     if ([self.currentTextFieldDialogViewController.title isEqualToString:self.mTitle]) {
         // 设置昵称
         self.mNickname = self.currentTextFieldDialogViewController.textFields[0].text;
-        [BDCoreApis visitorSetNickname:self.mNickname resultSuccess:^(NSDictionary *dict) {
+        [BDCoreApis setNickname:self.mNickname resultSuccess:^(NSDictionary *dict) {
             //
             [self.tableView reloadData];
         } resultFailed:^(NSError *error) {
@@ -141,7 +141,7 @@
     } else {
         // 设置自定义标签
         self.mTagvalue = self.currentTextFieldDialogViewController.textFields[0].text;
-        [BDCoreApis visitorSetUserinfo:@"自定义标签" withKey:self.mTagkey withValue:self.mTagvalue resultSuccess:^(NSDictionary *dict) {
+        [BDCoreApis setFingerPrint:@"自定义标签" withKey:self.mTagkey withValue:self.mTagvalue resultSuccess:^(NSDictionary *dict) {
             //
             [self.tableView reloadData];
         } resultFailed:^(NSError *error) {
@@ -167,7 +167,7 @@
 - (void)refreshControlSelector {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     //
-    [BDCoreApis visitorGetUserinfoWithUid:[BDSettings getUid] resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis getFingerPrintWithUid:[BDSettings getUid] resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s, %@, %@", __PRETTY_FUNCTION__, dict, dict[@"data"][@"nickname"]);
         self.mNickname = dict[@"data"][@"nickname"];
         NSMutableArray *fingerPrints = dict[@"data"][@"fingerPrints"];

@@ -96,7 +96,7 @@
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
     // 查询工作组在线状态
-    [BDCoreApis visitorGetWorkGroupStatus:@"201807171659201" resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis getWorkGroupStatus:@"201807171659201" resultSuccess:^(NSDictionary *dict) {
         
         NSString *wId = dict[@"data"][@"wid"];
         NSString *status = dict[@"data"][@"status"];
@@ -111,7 +111,7 @@
     }];
     
     // 查询客服账号在线状态
-    [BDCoreApis visitorGetAgentStatus:self.mDefaultAgentUid resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis getAgentStatus:self.mDefaultAgentUid resultSuccess:^(NSDictionary *dict) {
         //
         NSString *uId = dict[@"data"][@"uid"];
         NSString *status = dict[@"data"][@"status"];

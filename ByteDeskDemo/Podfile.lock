@@ -14,12 +14,12 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - bytedesk-core (1.2.1):
+  - bytedesk-core (1.3.0):
     - AFNetworking
     - CocoaLumberjack
     - FMDB
     - MQTTClient
-  - bytedesk-ui (1.2.1):
+  - bytedesk-ui (1.3.0):
     - AFNetworking
     - bytedesk-core
     - CocoaLumberjack
@@ -320,7 +320,7 @@ DEPENDENCIES:
   - M80AttributedLabel
   - MGSwipeTableCell
   - MQTTClient
-  - QMUIKit
+  - QMUIKit (= 2.9.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -337,8 +337,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  bytedesk-core: 99546b4f0e7d6a2f8f179017770dff7b2efc2954
-  bytedesk-ui: 8a7c0ca19ddce0caa35d031a7dd81acd65878987
+  bytedesk-core: 1ed31ea33d6386542d907c201dc8e6f5b2c35228
+  bytedesk-ui: c781a0137f759150df2deafc98be0ecdef6f861c
   CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
@@ -347,6 +347,6 @@ SPEC CHECKSUMS:
   MQTTClient: 902c7bcac1501595f3d0b15178c7205b40331fb0
   QMUIKit: 8b16b24a75dc6c97310120ba06abc9d92a253ff4
 
-PODFILE CHECKSUM: 1311e4fc041d298cc5d51722c6c4d89f88f274d0
+PODFILE CHECKSUM: 9baa1bdb36aff5c62f4c7664dc8eceaffea10ce5
 
 COCOAPODS: 1.5.3

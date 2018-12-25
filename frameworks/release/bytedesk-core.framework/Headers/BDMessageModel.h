@@ -14,7 +14,9 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 // 本地表主键id
-@property(nonatomic, strong) NSNumber *local_id;
+@property(nonatomic, strong) NSNumber *uu_id;
+// 客户端本地id
+@property(nonatomic, strong) NSString *local_id;
 // 服务器端主键
 @property(nonatomic, strong) NSNumber *server_id;
 // 唯一数字id，保证唯一性
@@ -35,14 +37,20 @@
 @property(nonatomic, strong) NSString *content; // 文本消息
 // 图片消息:
 @property(nonatomic, strong) NSString *pic_url; // 微信pic_url，web版容易引起跨域访问问题，所以要使用image_url
-//
-@property(nonatomic, strong) NSString *image_url; // 存储在自己服务器之后的url
+// 存储在自己服务器之后的url
+@property(nonatomic, strong) NSString *image_url;
+// 发送图片本地路径，仅用于本地存储，首先判断是否为空，非空则可使用
+@property(nonatomic, strong) NSString *local_image_path;
 // 文件消息类型：文件url, 文件类型通过format标示
 @property(nonatomic, strong) NSString *file_url;
+// 发送文件本地路径，仅用于本地存储，首先判断是否为空，非空则可使用
+@property(nonatomic, strong) NSString *local_file_path;
 // 语音消息
 @property(nonatomic, strong) NSString *media_id; // 图片+语音+视频+短视频 公用字段
 @property(nonatomic, strong) NSString *format; // 语音格式amr等
 @property(nonatomic, strong) NSString *voice_url; // 语音url
+// 发送语音本地路径，仅用于本地存储，首先判断是否为空，非空则可使用
+@property(nonatomic, strong) NSString *local_voice_path;
 @property(nonatomic, strong) NSNumber *length; // 时间长度
 @property(nonatomic, strong) NSNumber *played; // 是否播放过
 // 视频消息 & 短视频消息
@@ -75,12 +83,16 @@
 @property(nonatomic, strong) NSString *current_uid;
 // 是否是访客
 @property(nonatomic, strong) NSNumber *visitor;
-//
+// content boundingRectWithSize 内容长、宽
 @property(nonatomic, assign) CGSize     contentSize;
+// UIEdgeInsetsMake(10, 13, 13, 10)
 @property(nonatomic, assign) UIEdgeInsets  contentViewInsets;
 //@property(nonatomic, assign) UIEdgeInsets  bubbleViewInsets;
-//
+
+// 是否是当前登录用户发送的消息
 - (BOOL)isSend;
+
+// 是否是系统通知类型消息
 - (BOOL)isNotification;
 
 @end

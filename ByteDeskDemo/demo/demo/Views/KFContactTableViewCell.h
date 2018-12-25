@@ -16,4 +16,6 @@
 
 - (void)initWithContactModel:(BDContactModel *)contactModel;
 
+- (void)initWithRelationModel:(BDContactModel *)contactModel;
+
 @end

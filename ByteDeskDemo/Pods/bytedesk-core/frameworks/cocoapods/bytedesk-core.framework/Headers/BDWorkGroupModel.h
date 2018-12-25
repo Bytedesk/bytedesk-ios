@@ -13,7 +13,7 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 // 本地表主键id
-@property(nonatomic, strong) NSNumber *local_id;
+@property(nonatomic, strong) NSNumber *uu_id;
 // 服务器端主键
 @property(nonatomic, strong) NSNumber *server_id;
 // 唯一数字id，保证唯一性

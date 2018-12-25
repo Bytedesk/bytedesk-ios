@@ -110,7 +110,7 @@
             QMUIAlertAction *phoneAction = [QMUIAlertAction actionWithTitle:@"接听电话中" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
                 
                 // 调用服务器接口
-                [BDCoreApis agentUpdateAutoReply:TRUE withContent:@"接听电话中" resultSuccess:^(NSDictionary *dict) {
+                [BDCoreApis updateAutoReply:TRUE withContent:@"接听电话中" resultSuccess:^(NSDictionary *dict) {
                     [BDSettings setAutoReplyContent:@"接听电话中"];
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
@@ -120,7 +120,7 @@
             QMUIAlertAction *backAction = [QMUIAlertAction actionWithTitle:@"马上回来" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
                 
                 // 调用服务器接口
-                [BDCoreApis agentUpdateAutoReply:TRUE withContent:@"马上回来" resultSuccess:^(NSDictionary *dict) {
+                [BDCoreApis updateAutoReply:TRUE withContent:@"马上回来" resultSuccess:^(NSDictionary *dict) {
                     [BDSettings setAutoReplyContent:@"马上回来"];
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
@@ -130,7 +130,7 @@
             QMUIAlertAction *leaveAction = [QMUIAlertAction actionWithTitle:@"不在电脑旁，请稍后" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
                 
                 // 调用服务器接口
-                [BDCoreApis agentUpdateAutoReply:TRUE withContent:@"不在电脑旁，请稍后" resultSuccess:^(NSDictionary *dict) {
+                [BDCoreApis updateAutoReply:TRUE withContent:@"不在电脑旁，请稍后" resultSuccess:^(NSDictionary *dict) {
                     [BDSettings setAutoReplyContent:@"不在电脑旁，请稍后"];
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
@@ -140,7 +140,7 @@
             QMUIAlertAction *eatAction = [QMUIAlertAction actionWithTitle:@"外出就餐，请稍后" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
                 
                 // 调用服务器接口
-                [BDCoreApis agentUpdateAutoReply:TRUE withContent:@"外出就餐，请稍后" resultSuccess:^(NSDictionary *dict) {
+                [BDCoreApis updateAutoReply:TRUE withContent:@"外出就餐，请稍后" resultSuccess:^(NSDictionary *dict) {
                     [BDSettings setAutoReplyContent:@"外出就餐，请稍后"];
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
@@ -150,7 +150,7 @@
             QMUIAlertAction *noAction = [QMUIAlertAction actionWithTitle:@"无自动回复" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
                 
                 // 调用服务器接口
-                [BDCoreApis agentUpdateAutoReply:FALSE withContent:@"无自动回复" resultSuccess:^(NSDictionary *dict) {
+                [BDCoreApis updateAutoReply:FALSE withContent:@"无自动回复" resultSuccess:^(NSDictionary *dict) {
                     [BDSettings setAutoReplyContent:@"无自动回复"];
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
@@ -175,7 +175,7 @@
             QMUIAlertAction *restAction = [QMUIAlertAction actionWithTitle:@"小休" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
                 
                 // TODO: 调用服务器接口
-                [BDCoreApis agentSetAcceptStatus:BD_USER_STATUS_REST resultSuccess:^(NSDictionary *dict) {
+                [BDCoreApis setAcceptStatus:BD_USER_STATUS_REST resultSuccess:^(NSDictionary *dict) {
                     [BDSettings setAcceptStatus:@"小休"];
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
@@ -185,7 +185,7 @@
             QMUIAlertAction *busyAction = [QMUIAlertAction actionWithTitle:@"忙线" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
                 
                 // TODO: 调用服务器接口
-                [BDCoreApis agentSetAcceptStatus:BD_USER_STATUS_BUSY resultSuccess:^(NSDictionary *dict) {
+                [BDCoreApis setAcceptStatus:BD_USER_STATUS_BUSY resultSuccess:^(NSDictionary *dict) {
                     [BDSettings setAcceptStatus:@"忙线"];
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
@@ -195,7 +195,7 @@
             QMUIAlertAction *onlineAction = [QMUIAlertAction actionWithTitle:@"在线" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
                 
                 // 调用服务器接口
-                [BDCoreApis agentSetAcceptStatus:BD_USER_STATUS_ONLINE resultSuccess:^(NSDictionary *dict) {
+                [BDCoreApis setAcceptStatus:BD_USER_STATUS_ONLINE resultSuccess:^(NSDictionary *dict) {
                     [BDSettings setAcceptStatus:@"在线"];
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);

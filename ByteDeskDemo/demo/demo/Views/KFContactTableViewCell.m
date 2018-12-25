@@ -19,11 +19,10 @@
 
 @interface KFContactTableViewCell()
 
-@property(nonatomic, assign)  NSInteger     mScreenWidth;
-@property (nonatomic, strong) UIImageView   *mAvatarImageView;
-@property (nonatomic, strong) UILabel       *mTitleLabel;
-
-@property(nonatomic, assign) BOOL mIsSelect;
+@property(nonatomic, assign) NSInteger     mScreenWidth;
+@property(nonatomic, strong) UIImageView   *mAvatarImageView;
+@property(nonatomic, strong) UILabel       *mTitleLabel;
+@property(nonatomic, strong) UILabel       *mDescriptionLabel;
 
 @end
 
@@ -32,7 +31,7 @@
 
 @synthesize mScreenWidth,
             mAvatarImageView,
-            mTitleLabel;
+            mTitleLabel, mDescriptionLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -42,6 +41,7 @@
         
         [self.contentView addSubview:[self mAvatarImageView]];
         [self.contentView addSubview:[self mTitleLabel]];
+        [self.contentView addSubview:[self mDescriptionLabel]];
         
         [self initViewConstraints];
     }
@@ -59,6 +59,15 @@
 - (void)initWithContactModel:(BDContactModel *)contactModel {
     //
     mTitleLabel.text = contactModel.real_name;
+    mDescriptionLabel.text = contactModel.mdescription;
+    // TODO: 根据来源不同显示不同的placeholder image
+    [mAvatarImageView setImageWithURL:[NSURL URLWithString:contactModel.avatar] placeholderImage:[UIImage imageNamed:@"android_default_avatar"]];
+}
+
+- (void)initWithRelationModel:(BDContactModel *)contactModel {
+    //
+    mTitleLabel.text = contactModel.real_name;
+    mDescriptionLabel.text = contactModel.mdescription;
     // TODO: 根据来源不同显示不同的placeholder image
     [mAvatarImageView setImageWithURL:[NSURL URLWithString:contactModel.avatar] placeholderImage:[UIImage imageNamed:@"android_default_avatar"]];
 }
@@ -96,6 +105,15 @@
     return mTitleLabel;
 }
 
+-(UILabel *)mDescriptionLabel {
+    if (!mDescriptionLabel) {
+        
+        mDescriptionLabel = [UILabel new];
+        mDescriptionLabel.font = [UIFont systemFontOfSize:10.0f];
+    }
+    return mDescriptionLabel;
+}
+
 #pragma mark - Section
 
 - (void)initViewConstraints {
@@ -107,10 +125,14 @@
     mAvatarImageView.qmui_width = AVATAR_HEIGHT_WIDTH;
     
     mTitleLabel.qmui_left = mAvatarImageView.qmui_right + MARGIN;
-    mTitleLabel.qmui_top = MARGIN + 2;
+    mTitleLabel.qmui_top = MARGIN;
     mTitleLabel.qmui_height = CONTENT_LABEL_HEIGHT;
     mTitleLabel.qmui_width = mScreenWidth - AVATAR_HEIGHT_WIDTH - MARGIN * 2 - TIMESTAMP_LABEL_WIDTH;
    
+    mDescriptionLabel.qmui_left = mAvatarImageView.qmui_right + MARGIN;
+    mDescriptionLabel.qmui_top = MARGIN + CONTENT_LABEL_HEIGHT;
+    mDescriptionLabel.qmui_height = CONTENT_LABEL_HEIGHT;
+    mDescriptionLabel.qmui_width = mScreenWidth - AVATAR_HEIGHT_WIDTH - MARGIN * 2 - TIMESTAMP_LABEL_WIDTH;
 }
 
 

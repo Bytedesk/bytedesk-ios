@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D0DB22B21CC607C002ACB3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D0DB22D21CC607C002ACB3E /* InfoPlist.strings */; };
+		3D3823D921CF5BE800AB12AD /* KFFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3823D821CF5BE800AB12AD /* KFFriendViewController.m */; };
 		3D3928CD21BF8F20001E1257 /* KFContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928CC21BF8F20001E1257 /* KFContactViewController.m */; };
 		3D3928D021BF8F31001E1257 /* KFGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928CF21BF8F31001E1257 /* KFGroupViewController.m */; };
 		3D3928EB21C25E9E001E1257 /* KFQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928EA21C25E9E001E1257 /* KFQueueViewController.m */; };
@@ -32,6 +34,7 @@
 		3D39293A21C2831A001E1257 /* KFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D39293821C2831A001E1257 /* KFUtils.m */; };
 		3D39294121C28595001E1257 /* KFProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D39294021C28595001E1257 /* KFProfileViewController.m */; };
 		3D3B7C3021CA3613001FE199 /* BDApisTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3B7C2F21CA3613001FE199 /* BDApisTableViewController.m */; };
+		3D47629921D1CA190034BF83 /* KFNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D47629821D1CA190034BF83 /* KFNoticeViewController.m */; };
 		3D4C0B0E213131500083C8F9 /* KFIMApiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4C0B0C2131314F0083C8F9 /* KFIMApiViewController.m */; };
 		3D5489D21FC515CF003117B4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5489D11FC515CF003117B4 /* AppDelegate.m */; };
 		3D5489D81FC515CF003117B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D5489D61FC515CF003117B4 /* Main.storyboard */; };
@@ -66,6 +69,10 @@
 
 /* Begin PBXFileReference section */
 		3ABA9625A7F4C1A519864722 /* Pods_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D0DB22C21CC607C002ACB3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3D0DB22E21CC607E002ACB3E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		3D3823D721CF5BE800AB12AD /* KFFriendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFFriendViewController.h; sourceTree = "<group>"; };
+		3D3823D821CF5BE800AB12AD /* KFFriendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFFriendViewController.m; sourceTree = "<group>"; };
 		3D3928CB21BF8F20001E1257 /* KFContactViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFContactViewController.h; sourceTree = "<group>"; };
 		3D3928CC21BF8F20001E1257 /* KFContactViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFContactViewController.m; sourceTree = "<group>"; };
 		3D3928CE21BF8F31001E1257 /* KFGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFGroupViewController.h; sourceTree = "<group>"; };
@@ -117,6 +124,8 @@
 		3D39294021C28595001E1257 /* KFProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFProfileViewController.m; sourceTree = "<group>"; };
 		3D3B7C2E21CA3613001FE199 /* BDApisTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDApisTableViewController.h; sourceTree = "<group>"; };
 		3D3B7C2F21CA3613001FE199 /* BDApisTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDApisTableViewController.m; sourceTree = "<group>"; };
+		3D47629721D1CA190034BF83 /* KFNoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFNoticeViewController.h; sourceTree = "<group>"; };
+		3D47629821D1CA190034BF83 /* KFNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFNoticeViewController.m; sourceTree = "<group>"; };
 		3D4C0B0C2131314F0083C8F9 /* KFIMApiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFIMApiViewController.m; sourceTree = "<group>"; };
 		3D4C0B0D2131314F0083C8F9 /* KFIMApiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFIMApiViewController.h; sourceTree = "<group>"; };
 		3D5489CD1FC515CF003117B4 /* demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +182,7 @@
 		3D3928E721C25E50001E1257 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3D47629621D1CA020034BF83 /* notice */,
 				3D39293E21C2846A001E1257 /* setting */,
 				3D39293D21C28464001E1257 /* thread */,
 				3D39293C21C2845F001E1257 /* queue */,
@@ -208,6 +218,8 @@
 				3D3928F521C280C8001E1257 /* KFContactSelectViewController.m */,
 				3D3928CB21BF8F20001E1257 /* KFContactViewController.h */,
 				3D3928CC21BF8F20001E1257 /* KFContactViewController.m */,
+				3D3823D721CF5BE800AB12AD /* KFFriendViewController.h */,
+				3D3823D821CF5BE800AB12AD /* KFFriendViewController.m */,
 			);
 			path = contact;
 			sourceTree = "<group>";
@@ -316,6 +328,15 @@
 			path = apis;
 			sourceTree = "<group>";
 		};
+		3D47629621D1CA020034BF83 /* notice */ = {
+			isa = PBXGroup;
+			children = (
+				3D47629721D1CA190034BF83 /* KFNoticeViewController.h */,
+				3D47629821D1CA190034BF83 /* KFNoticeViewController.m */,
+			);
+			path = notice;
+			sourceTree = "<group>";
+		};
 		3D4C0B0B2131314F0083C8F9 /* im */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +378,7 @@
 				3D5489DB1FC515CF003117B4 /* LaunchScreen.storyboard */,
 				3D548A3C1FC51795003117B4 /* demo.entitlements */,
 				3D5489DE1FC515CF003117B4 /* Info.plist */,
+				3D0DB22D21CC607C002ACB3E /* InfoPlist.strings */,
 				3DE1AA7620039A7C00A32B20 /* Localizable.strings */,
 				3D5489DF1FC515CF003117B4 /* main.m */,
 				3D548A3B1FC51719003117B4 /* PrefixHeader.pch */,
@@ -403,11 +425,11 @@
 			isa = PBXGroup;
 			children = (
 				3D5606EA205FB699000E770C /* KFThreadTableViewCell.h */,
+				3D5606EB205FB699000E770C /* KFThreadTableViewCell.m */,
 				3D39293221C28310001E1257 /* KFContactTableViewCell.h */,
 				3D39293421C28310001E1257 /* KFContactTableViewCell.m */,
 				3D39293121C28310001E1257 /* KFQueueTableViewCell.h */,
 				3D39293321C28310001E1257 /* KFQueueTableViewCell.m */,
-				3D5606EB205FB699000E770C /* KFThreadTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -503,6 +525,7 @@
 				3DE1AA7420039A7C00A32B20 /* Localizable.strings in Resources */,
 				3D5489DA1FC515CF003117B4 /* Assets.xcassets in Resources */,
 				3D5489D81FC515CF003117B4 /* Main.storyboard in Resources */,
+				3D0DB22B21CC607C002ACB3E /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,6 +602,7 @@
 				3D548A5D1FC5251B003117B4 /* KFVisitorThreadViewController.m in Sources */,
 				3D39291A21C28116001E1257 /* QDCommonViewController.m in Sources */,
 				3D39293521C28310001E1257 /* KFQueueTableViewCell.m in Sources */,
+				3D47629921D1CA190034BF83 /* KFNoticeViewController.m in Sources */,
 				3D39293621C28310001E1257 /* KFContactTableViewCell.m in Sources */,
 				3D39291B21C28116001E1257 /* QDCommonGridViewController.m in Sources */,
 				3D39291C21C28116001E1257 /* QDTabBarViewController.m in Sources */,
@@ -589,6 +613,7 @@
 				3D3928D021BF8F31001E1257 /* KFGroupViewController.m in Sources */,
 				3D39293A21C2831A001E1257 /* KFUtils.m in Sources */,
 				3D5606EC205FB699000E770C /* KFThreadTableViewCell.m in Sources */,
+				3D3823D921CF5BE800AB12AD /* KFFriendViewController.m in Sources */,
 				3D548A4E1FC523F1003117B4 /* KFVisitorLoginViewController.m in Sources */,
 				3D548A431FC51906003117B4 /* KFKeFuApiViewController.m in Sources */,
 				3D39292021C28116001E1257 /* QDThemeManager.m in Sources */,
@@ -613,6 +638,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		3D0DB22D21CC607C002ACB3E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D0DB22C21CC607C002ACB3E /* en */,
+				3D0DB22E21CC607E002ACB3E /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		3D5489D61FC515CF003117B4 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

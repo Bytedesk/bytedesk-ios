@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
 	<string>萝卜丝Demo</string>
 	<key>CFBundleExecutable</key>
@@ -28,13 +28,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>$(PRODUCT_NAME) 想要使用摄像头</string>
+	<string>$(PRODUCT_NAME) 拍照并发送图片</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>$(PRODUCT_NAME) 想要使用麦克风</string>
+	<string>$(PRODUCT_NAME) 发送语音</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>$(PRODUCT_NAME) 想要访问照片库</string>
+	<string>$(PRODUCT_NAME) 发送图片</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(PRODUCT_NAME) 想要访问照片库</string>
+	<string>$(PRODUCT_NAME) 发送图片</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

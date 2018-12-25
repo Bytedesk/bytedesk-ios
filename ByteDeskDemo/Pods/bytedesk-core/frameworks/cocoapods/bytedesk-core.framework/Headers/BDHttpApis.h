@@ -23,7 +23,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 /**
  从服务器请求用户名
  */
-- (void)visitorGenerateUsernameWithAppkey:(NSString *)appkey
+- (void)registerAnonymousUserWithAppkey:(NSString *)appkey
                             withSubdomain:(NSString *)subdomain
                             resultSuccess:(SuccessCallbackBlock)success
                              resultFailed:(FailedCallbackBlock)failed;
@@ -38,7 +38,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success <#success description#>
  @param failed <#failed description#>
  */
-- (void)visitorRegister:(NSString *)username
+- (void)registerUser:(NSString *)username
            withNickname:(NSString *)nickname
            withPassword:(NSString *)password
           withSubDomain:(NSString *)subDomain
@@ -49,11 +49,9 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 /**
  工作组会话
  */
-- (void)visitorRequestThreadWithWorkGroupWid:(NSString *)wId
+- (void)requestThreadWithWorkGroupWid:(NSString *)wId
                       resultSuccess:(SuccessCallbackBlock)success
                        resultFailed:(FailedCallbackBlock)failed;
-
-
 /**
  指定坐席
 
@@ -61,34 +59,34 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success <#success description#>
  @param failed <#failed description#>
  */
-- (void)visitorRequestThreadWithAgentUid:(NSString *)uid
+- (void)requestThreadWithAgentUid:(NSString *)uid
                               resultSuccess:(SuccessCallbackBlock)success
                                resultFailed:(FailedCallbackBlock)failed;
 
 
-- (void)visitorSetNickname:(NSString *)nickname
+- (void)setNickname:(NSString *)nickname
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
 
-- (void)visitorGetUserinfoWithUid:(NSString *)uid
+- (void)getFingerPrintWithUid:(NSString *)uid
                     resultSuccess:(SuccessCallbackBlock)success
                      resultFailed:(FailedCallbackBlock)failed;
 
 
-- (void)visitorSetUserinfo:(NSString *)name
+- (void)setFingerPrint:(NSString *)name
                    withKey:(NSString *)key
                  withValue:(NSString *)value
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
 
-- (void)visitorGetWorkGroupStatus:(NSString *)wId
+- (void)getWorkGroupStatus:(NSString *)wId
                     resultSuccess:(SuccessCallbackBlock)success
                      resultFailed:(FailedCallbackBlock)failed;
 
 
-- (void)visitorGetAgentStatus:(NSString *)agentUid
+- (void)getAgentStatus:(NSString *)agentUid
                 resultSuccess:(SuccessCallbackBlock)success
                  resultFailed:(FailedCallbackBlock)failed;
 
@@ -117,7 +115,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success <#success description#>
  @param failed <#failed description#>
  */
-- (void)agentInitResultSuccess:(SuccessCallbackBlock)success
+- (void)initDataResultSuccess:(SuccessCallbackBlock)success
                   resultFailed:(FailedCallbackBlock)failed;
 
 /**
@@ -129,16 +127,16 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (void)agentThreadsResultSuccess:(SuccessCallbackBlock)success
                        resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentUpdateProfile:(NSString *)nickname
+- (void)updateProfile:(NSString *)nickname
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentUpdateAutoReply:(BOOL)isAutoReply
+- (void)updateAutoReply:(BOOL)isAutoReply
                  withContent:(NSString *)content
                resultSuccess:(SuccessCallbackBlock)success
                 resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentSetAcceptStatus:(NSString *)acceptStatus
+- (void)setAcceptStatus:(NSString *)acceptStatus
                resultSuccess:(SuccessCallbackBlock)success
                 resultFailed:(FailedCallbackBlock)failed;
 
@@ -155,7 +153,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success success description
  @param failed <#failed description#>
  */
-- (void)agentContactsResultSuccess:(SuccessCallbackBlock)success
+- (void)getContactsResultSuccess:(SuccessCallbackBlock)success
                       resultFailed:(FailedCallbackBlock)failed;
 
 /**
@@ -164,12 +162,12 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success <#success description#>
  @param failed <#failed description#>
  */
-- (void)agentQueuesPage:(NSUInteger)page
+- (void)getQueuesPage:(NSUInteger)page
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
 
-- (void)agentUpdateCurrentThread:(NSString *)preTid
+- (void)updateCurrentThread:(NSString *)preTid
                       currentTid:(NSString *)tid
                    resultSuccess:(SuccessCallbackBlock)success
                     resultFailed:(FailedCallbackBlock)failed;
@@ -182,87 +180,150 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success <#success description#>
  @param failed <#failed description#>
  */
-- (void)agentGroupsResultSuccess:(SuccessCallbackBlock)success
+- (void)getGroupsResultSuccess:(SuccessCallbackBlock)success
                       resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupDetail:(NSString *)gid
+- (void)getGroupDetail:(NSString *)gid
        resultSuccess:(SuccessCallbackBlock)success
         resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupMembers:(NSString *)gid
+- (void)getGroupMembers:(NSString *)gid
         resultSuccess:(SuccessCallbackBlock)success
          resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupCreate:(NSString *)nickname
+- (void)createGroup:(NSString *)nickname
         selectedContacts:(NSArray *)selectedContacts
            resultSuccess:(SuccessCallbackBlock)success
             resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupUpdateNickname:(NSString *)nickname
+- (void)updateGroupNickname:(NSString *)nickname
                     withGroupGid:(NSString *)gid
                    resultSuccess:(SuccessCallbackBlock)success
                     resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupUpdateAnnouncement:(NSString *)announcement
+- (void)updateGroupAnnouncement:(NSString *)announcement
                         withGroupGid:(NSString *)gid
                        resultSuccess:(SuccessCallbackBlock)success
                         resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupUpdateDescription:(NSString *)description
+- (void)updateGroupDescription:(NSString *)description
                        withGroupGid:(NSString *)gid
                       resultSuccess:(SuccessCallbackBlock)success
                        resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupInvite:(NSString *)uid
+- (void)inviteToGroup:(NSString *)uid
             withGroupGid:(NSString *)gid
            resultSuccess:(SuccessCallbackBlock)success
             resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupApply:(NSString *)gid
+- (void)joinGroup:(NSString *)gid
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupApplyApprove:(NSString *)nid
+- (void)applyGroup:(NSString *)gid
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
+- (void)approveGroupApply:(NSString *)nid
                  resultSuccess:(SuccessCallbackBlock)success
                   resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupApplyDeny:(NSString *)nid
+- (void)denyGroupApply:(NSString *)nid
               resultSuccess:(SuccessCallbackBlock)success
                resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupKick:(NSString *)uid
+- (void)kickGroupMember:(NSString *)uid
           withGroupGid:(NSString *)gid
          resultSuccess:(SuccessCallbackBlock)success
           resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupMute:(NSString *)uid
+- (void)muteGroupMember:(NSString *)uid
           withGroupGid:(NSString *)gid
          resultSuccess:(SuccessCallbackBlock)success
           resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupTransfer:(NSString *)uid
+- (void)transferGroup:(NSString *)uid
               withGroupGid:(NSString *)gid
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupTransferAccept:(NSString *)nid
+- (void)acceptGroupTransfer:(NSString *)nid
                    resultSuccess:(SuccessCallbackBlock)success
                     resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupTransferReject:(NSString *)nid
+- (void)rejectGroupTransfer:(NSString *)nid
                    resultSuccess:(SuccessCallbackBlock)success
                     resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupWithdraw:(NSString *)gid
+- (void)withdrawGroup:(NSString *)gid
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupDismiss:(NSString *)gid
+- (void)dismissGroup:(NSString *)gid
             resultSuccess:(SuccessCallbackBlock)success
              resultFailed:(FailedCallbackBlock)failed;
 
+- (void)filterGroup:(NSString *)keyword
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
 
+- (void)filterGroupMembers:(NSString *)gid
+        withKeyword:(NSString *)keyword
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
 
+#pragma mark - 社交关系
+
+- (void)getStrangersPage:(NSUInteger)page
+                withSize:(NSUInteger)size
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+
+- (void)getFollowsPage:(NSUInteger)page
+              withSize:(NSUInteger)size
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
+
+- (void)getFansPage:(NSUInteger)page
+           withSize:(NSUInteger)size
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
+- (void)getFriendsPage:(NSUInteger)page
+              withSize:(NSUInteger)size
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
+
+- (void)getBlocksPage:(NSUInteger)page
+             withSize:(NSUInteger)size
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+- (void)addFollow:(NSString *)uid
+    resultSuccess:(SuccessCallbackBlock)success
+     resultFailed:(FailedCallbackBlock)failed;
+
+- (void)unFollow:(NSString *)uid
+   resultSuccess:(SuccessCallbackBlock)success
+    resultFailed:(FailedCallbackBlock)failed;
+
+- (void)isFollowed:(NSString *)uid
+     resultSuccess:(SuccessCallbackBlock)success
+      resultFailed:(FailedCallbackBlock)failed;
+
+- (void)getRelation:(NSString *)uid
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
+- (void)addBlock:(NSString *)uid
+        withType:(NSString *)type
+        withNote:(NSString *)note
+   resultSuccess:(SuccessCallbackBlock)success
+    resultFailed:(FailedCallbackBlock)failed;
+
+- (void)unBlock:(NSString *)bid
+  resultSuccess:(SuccessCallbackBlock)success
+   resultFailed:(FailedCallbackBlock)failed;
 
 #pragma mark - 公共接口
 
@@ -282,6 +343,65 @@ typedef void (^FailedCallbackBlock)(NSError *error);
        withSubdomain:(NSString *)subdomain
        resultSuccess:(SuccessCallbackBlock)success
         resultFailed:(FailedCallbackBlock)failed;
+
+
+/**
+ 同步发送文本消息
+ 
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param sessiontype <#stype description#>
+ */
+- (void)sendTextMessage:(NSString *)content
+                  toTid:(NSString *)tId
+                localId:(NSString *)localId
+            sessionType:(NSString *)sessiontype
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 同步发送图片消息
+ 
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param sessiontype <#stype description#>
+ */
+- (void)sendImageMessage:(NSString *)content
+                   toTid:(NSString *)tId
+                 localId:(NSString *)localId
+             sessionType:(NSString *)sessiontype
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 同步发送语音消息
+ 
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param sessiontype <#stype description#>
+ */
+- (void)sendVoiceMessage:(NSString *)content
+                   toTid:(NSString *)tId
+                 localId:(NSString *)localId
+             sessionType:(NSString *)sessiontype
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 同步发送消息
+ 
+ @param content <#content description#>
+ @param type <#type description#>
+ @param tId <#tId description#>
+ @param sessiontype <#stype description#>
+ */
+- (void)sendMessage:(NSString *)content
+               type:(NSString *)type
+              toTid:(NSString *)tId
+            localId:(NSString *)localId
+        sessionType:(NSString *)sessiontype
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
 
 /**
  获取某个访客的聊天记录

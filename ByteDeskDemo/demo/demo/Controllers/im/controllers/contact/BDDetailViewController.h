@@ -2,8 +2,8 @@
 //  BDDetailViewController.h
 //  bytedesk
 //
-//  Created by 宁金鹏 on 2018/11/30.
-//  Copyright © 2018 宁金鹏. All rights reserved.
+//  Created by 萝卜丝 on 2018/11/30.
+//  Copyright © 2018 萝卜丝. All rights reserved.
 //
 
 #import "QDCommonGroupListViewController.h"

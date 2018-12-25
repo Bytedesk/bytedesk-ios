@@ -47,11 +47,25 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (NSNumber *) getQueueCount;
 - (BOOL) clearQueues;
 
+- (BDMessageModel *) insertTextMessageLocal:(NSString *)tid withWorkGroupWid:(NSString *)wid
+                withContent:(NSString *)content withLocalId:(NSString *)localId
+                withSessionType:(NSString *)sessionType;
+- (BDMessageModel *) insertImageMessageLocal:(NSString *)tid withWorkGroupWid:(NSString *)wid
+                    withContent:(NSString *)content withLocalId:(NSString *)localId
+                withSessionType:(NSString *)sessionType;
+- (BDMessageModel *) insertMessageLocal:(NSString *)tid withWorkGroupWid:(NSString *)wid
+                withContent:(NSString *)content withLocalId:(NSString *)localId
+                   withType:(NSString *)type withSessionType:(NSString *)sessionType;
+
 - (BOOL) insertMessage:(BDMessageModel *)message;
+- (BOOL) insertMessageLocal:(BDMessageModel *)message;
+
 - (NSMutableArray *)getMessagesWithType:(NSString *)type withUid:(NSString *)uid;
 
-- (BOOL) updateMessage:(NSNumber *)localId withStatus:(NSString *)status;
-- (BOOL) updateMessage:(NSNumber *)localId withMessageId:(NSNumber *)messageId;
+
+- (BOOL) updateMessage:(NSString *)localId withServerId:(NSNumber *)serverId withMid:(NSString *)mid withStatus:(NSString *)status;
+- (BOOL) updateMessageError:(NSString *)localId;
+- (BOOL) updateMessage:(NSString *)localId withStatus:(NSString *)status;
 - (BOOL) deleteMessage:(NSString *)mid;
 
 - (BOOL) insertContact:(BDContactModel *)contact;

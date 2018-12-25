@@ -111,7 +111,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithButton:[[QMUINavigationButton alloc] initWithType:QMUINavigationButtonTypeNormal title:@"评价"] target:self action:@selector(handleRightBarButtonItemClicked:)];
     self.navigationItem.rightBarButtonItem = rightItem;
     //
-    [BDCoreApis visitorRequestThreadWithWorkGroupWid:wId resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis requestThreadWithWorkGroupWid:wId resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
         //
         [self dealWithRequestThreadResult:dict];
@@ -142,7 +142,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.rateNote = @"";
     self.rateInvite = false;
     //
-    [BDCoreApis visitorRequestThreadWithAgentUid:uId resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis requestThreadWithAgentUid:uId resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
         //
         [self dealWithRequestThreadResult:dict];
@@ -775,7 +775,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                      }];
 
     [self tableViewScrollToBottom:YES];
-
 }
 
 #pragma mark - KFDSInputViewDelegate
@@ -783,25 +782,86 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 #pragma mark - 发送消息
 
 // TODO: 区分发送消息
--(void)sendMessage:(NSString *)content {
-    DDLogInfo(@"%s, content:%@, tid:%@, sessionType:%@ ",
-              __PRETTY_FUNCTION__, content, self.mThreadTid,  self.mThreadType);
+-(void)sendTextMessage:(NSString *)content {
+    DDLogInfo(@"%s, content:%@, tid:%@, sessionType:%@ ", __PRETTY_FUNCTION__, content, self.mThreadTid,  self.mThreadType);
     
-    [[BDMQTTApis sharedInstance] sendTextMessage:content toTid:self.mThreadTid sessionType:self.mThreadType];
+    // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
+    NSString *localId = [[NSUUID UUID] UUIDString];
+    
+    // 插入本地消息, 可通过返回的messageModel首先更新本地UI，然后再发送消息
+    BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertTextMessageLocal:self.mThreadTid withWorkGroupWid:self.mWorkGroupWid withContent:content withLocalId:localId withSessionType:self.mThreadType];
+    DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.content);
+    
+    // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
+    
+    // 异步发送消息
+//     [[BDMQTTApis sharedInstance] sendTextMessage:content toTid:self.mThreadTid localId:localId sessionType:self.mThreadType];
+    
+    // 同步发送消息
+    [BDCoreApis sendTextMessage:content toTid:self.mThreadTid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {
+        // DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+        // 服务器返回自定义消息本地id
+        NSString *localId = dict[@"data"][@"localId"];
+        DDLogInfo(@"callback localId: %@", localId);
+        //
+        NSNumber *status_code = [dict objectForKey:@"status_code"];
+        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            // 发送成功
+        } else {
+            // 修改本地消息发送状态为error
+            [[BDDBApis sharedInstance] updateMessageError:localId];
+            //
+            NSString *message = dict[@"message"];
+            DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
+        }
+    } resultFailed:^(NSError *error) {
+        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+    }];
 }
 
 //
-- (void)sendImage:(NSData *)imageData {
+- (void)sendImageMessage:(NSData *)imageData {
     //
     NSString *imageName = [NSString stringWithFormat:@"%@_%@.png", [BDSettings getUsername], [BDUtils getCurrentTimeString]];
     [BDCoreApis uploadImageData:imageData withImageName:imageName resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
-        // 发送图片消息
+        
+        // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
+        NSString *localId = [[NSUUID UUID] UUIDString];
         NSString *imageUrl = dict[@"data"];
-        [[BDMQTTApis sharedInstance] sendImageMessage:imageUrl toTid:self.mThreadTid sessionType:self.mThreadType];
+        
+        // 插入本地消息
+        BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertImageMessageLocal:self.mThreadTid withWorkGroupWid:self.mWorkGroupWid withContent:imageUrl withLocalId:localId withSessionType:self.mThreadType];
+        DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.image_url);
+        
+        // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
+        
+        // 异步发送图片消息
+//         [[BDMQTTApis sharedInstance] sendImageMessage:imageUrl toTid:self.mThreadTid localId:localId sessionType:self.mThreadType];
+        
+        // 同步发送图片消息
+        [BDCoreApis sendImageMessage:imageUrl toTid:self.mThreadTid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {
+            // DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+            // 服务器返回自定义消息本地id
+            NSString *localId = dict[@"data"][@"localId"];
+            DDLogInfo(@"callback localId: %@", localId);
+            //
+            NSNumber *status_code = [dict objectForKey:@"status_code"];
+            if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                // 发送成功
+            } else {
+                // 修改本地消息发送状态为error
+                [[BDDBApis sharedInstance] updateMessageError:localId];
+                //
+                NSString *message = dict[@"message"];
+                DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
+            }
+        } resultFailed:^(NSError *error) {
+            DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+        }];
         
     } resultFailed:^(NSError *error) {
-        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, error);
+        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
     }];
 }
 
@@ -855,7 +915,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             }
         }];
         
-    }else {
+    } else {
         DDLogInfo(@"Unknown authorization status");
     }
 }
@@ -1035,7 +1095,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             targetImage = [UIImage imageWithData:UIImageJPEGRepresentation(targetImage, 1)];
         }
         NSData *imageData2 = UIImageJPEGRepresentation(targetImage, 0);
-        [self sendImage:imageData2];
+        [self sendImageMessage:imageData2];
     }];
     
 }
@@ -1055,8 +1115,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 - (void)dealWithImage:(NSDictionary *)info {
     
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    if([mediaType isEqualToString:@"public.movie"])            //被选中的是视频
-    {
+    if([mediaType isEqualToString:@"public.movie"]) {
+        //被选中的是视频
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
                                                             message:@"请选择图片"
                                                            delegate:self
@@ -1065,8 +1125,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         
         [alertView show];
     }
-    else if([mediaType isEqualToString:@"public.image"])    //被选中的是图片
-    {
+    else if([mediaType isEqualToString:@"public.image"]) {
         //获取照片实例
         UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
         UIImageOrientation imageOrientation = image.imageOrientation;
@@ -1079,7 +1138,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         }
         
         NSData *imageData = UIImageJPEGRepresentation(image, 0);
-        [self sendImage:imageData];
+        [self sendImageMessage:imageData];
     }
 }
 
@@ -1260,7 +1319,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
     NSString *content = self.toolbarTextField.text;
     if ([content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length > 0) {
-        [self sendMessage:content];
+        [self sendTextMessage:content];
         [self.toolbarTextField setText:@""];
     }
 }
