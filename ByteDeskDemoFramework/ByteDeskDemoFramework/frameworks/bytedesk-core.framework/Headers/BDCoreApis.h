@@ -52,7 +52,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success 成功回调
  @param failed 失败回调
  */
-+ (void)visitorRequestThreadWithWorkGroupWid:(NSString *)wId
++ (void)requestThreadWithWorkGroupWid:(NSString *)wId
                       resultSuccess:(SuccessCallbackBlock)success
                        resultFailed:(FailedCallbackBlock)failed;
 
@@ -64,7 +64,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success <#success description#>
  @param failed <#failed description#>
  */
-+ (void)visitorRequestThreadWithAgentUid:(NSString *)uid
++ (void)requestThreadWithAgentUid:(NSString *)uid
                         resultSuccess:(SuccessCallbackBlock)success
                          resultFailed:(FailedCallbackBlock)failed;
 
@@ -75,7 +75,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success 成功回调
  @param failed 失败回调
  */
-+ (void)visitorSetNickname:(NSString *)nickname
++ (void)setNickname:(NSString *)nickname
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
@@ -85,14 +85,14 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success 成功回调
  @param failed 失败回调
  */
-+ (void)visitorGetUserinfoWithUid:(NSString *)uid
++ (void)getFingerPrintWithUid:(NSString *)uid
                     resultSuccess:(SuccessCallbackBlock)success
                      resultFailed:(FailedCallbackBlock)failed;
 
 /**
  自定义设置用户属性
  */
-+ (void)visitorSetUserinfo:(NSString *)name
++ (void)setFingerPrint:(NSString *)name
                    withKey:(NSString *)key
                  withValue:(NSString *)value
              resultSuccess:(SuccessCallbackBlock)success
@@ -101,7 +101,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 /**
  获取工作组在线状态
  */
-+ (void)visitorGetWorkGroupStatus:(NSString *)wId
++ (void)getWorkGroupStatus:(NSString *)wId
                     resultSuccess:(SuccessCallbackBlock)success
                      resultFailed:(FailedCallbackBlock)failed;
 
@@ -111,7 +111,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success 成功回调
  @param failed 失败回调
  */
-+ (void)visitorGetAgentStatus:(NSString *)agentUid
++ (void)getAgentStatus:(NSString *)agentUid
                 resultSuccess:(SuccessCallbackBlock)success
                  resultFailed:(FailedCallbackBlock)failed;
 
@@ -126,6 +126,16 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                  resultFailed:(FailedCallbackBlock)failed;
 
 
+/**
+ 满意度评价
+
+ @param tId <#tId description#>
+ @param score <#score description#>
+ @param note <#note description#>
+ @param invite <#invite description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)visitorRate:(NSString *)tId
           withScore:(NSInteger)score
            withNote:(NSString *)note
@@ -145,7 +155,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success 成功回调
  @param failed 失败回调
  */
-+ (void) agentLoginWithUsername:(NSString *)username
++ (void) loginWithUsername:(NSString *)username
                    withPassword:(NSString *)password
                      withAppkey:(NSString *)appkey
                   withSubdomain:(NSString *)subDomain
@@ -158,7 +168,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success <#success description#>
  @param failed <#failed description#>
  */
-+ (void) agentLoginResultSuccess:(SuccessCallbackBlock)success
++ (void) loginResultSuccess:(SuccessCallbackBlock)success
                     resultFailed:(FailedCallbackBlock)failed;
 
 /**
@@ -176,21 +186,44 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success 成功回调
  @param failed 失败回调
  */
-+ (void)agentInitResultSuccess:(SuccessCallbackBlock)success
++ (void)initDataResultSuccess:(SuccessCallbackBlock)success
                   resultFailed:(FailedCallbackBlock)failed;
 
-+ (void)agentUpdateProfile:(NSString *)nickname
-             resultSuccess:(SuccessCallbackBlock)success
-              resultFailed:(FailedCallbackBlock)failed;
+/**
+ 更新个人资料，目前仅开放nickname
 
-+ (void)agentUpdateAutoReply:(BOOL)isAutoReply
-                 withContent:(NSString *)content
-               resultSuccess:(SuccessCallbackBlock)success
-                resultFailed:(FailedCallbackBlock)failed;
+ @param nickname <#nickname description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)updateProfile:(NSString *)nickname
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
 
-+ (void)agentSetAcceptStatus:(NSString *)acceptStatus
-               resultSuccess:(SuccessCallbackBlock)success
-                resultFailed:(FailedCallbackBlock)failed;
+/**
+ 更新自动回复内容，和是否启用自动回复
+ 客服专用
+
+ @param isAutoReply <#isAutoReply description#>
+ @param content <#content description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)updateAutoReply:(BOOL)isAutoReply
+            withContent:(NSString *)content
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 设置接待状态
+
+ @param acceptStatus <#acceptStatus description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)setAcceptStatus:(NSString *)acceptStatus
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
 
 /**
  <#Description#>
@@ -208,86 +241,387 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success <#success description#>
  @param failed <#failed description#>
  */
-- (void)agentGroupsResultSuccess:(SuccessCallbackBlock)success
-                    resultFailed:(FailedCallbackBlock)failed;
++ (void)getGroupsResultSuccess:(SuccessCallbackBlock)success
+                  resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupDetail:(NSString *)gid
-           resultSuccess:(SuccessCallbackBlock)success
-            resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupMembers:(NSString *)gid
-            resultSuccess:(SuccessCallbackBlock)success
-             resultFailed:(FailedCallbackBlock)failed;
+/**
+ 查询群组详情
 
-- (void)agentGroupCreate:(NSString *)nickname
-        selectedContacts:(NSArray *)selectedContacts
-           resultSuccess:(SuccessCallbackBlock)success
-            resultFailed:(FailedCallbackBlock)failed;
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)getGroupDetail:(NSString *)gid
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupUpdateNickname:(NSString *)nickname
-                    withGroupGid:(NSString *)gid
-                   resultSuccess:(SuccessCallbackBlock)success
-                    resultFailed:(FailedCallbackBlock)failed;
+/**
+ 获取群组成员
 
-- (void)agentGroupUpdateAnnouncement:(NSString *)announcement
-                        withGroupGid:(NSString *)gid
-                       resultSuccess:(SuccessCallbackBlock)success
-                        resultFailed:(FailedCallbackBlock)failed;
-
-- (void)agentGroupUpdateDescription:(NSString *)description
-                       withGroupGid:(NSString *)gid
-                      resultSuccess:(SuccessCallbackBlock)success
-                       resultFailed:(FailedCallbackBlock)failed;
-
-- (void)agentGroupInvite:(NSString *)uid
-            withGroupGid:(NSString *)gid
-           resultSuccess:(SuccessCallbackBlock)success
-            resultFailed:(FailedCallbackBlock)failed;
-
-- (void)agentGroupApply:(NSString *)gid
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)getGroupMembers:(NSString *)gid
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupApplyApprove:(NSString *)nid
-                 resultSuccess:(SuccessCallbackBlock)success
-                  resultFailed:(FailedCallbackBlock)failed;
+/**
+ 创建群组
 
-- (void)agentGroupApplyDeny:(NSString *)nid
+ @param nickname <#nickname description#>
+ @param selectedContacts <#selectedContacts description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)createGroup:(NSString *)nickname
+   selectedContacts:(NSArray *)selectedContacts
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 更新群组昵称
+
+ @param nickname <#nickname description#>
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)updateGroupNickname:(NSString *)nickname
+               withGroupGid:(NSString *)gid
               resultSuccess:(SuccessCallbackBlock)success
                resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupKick:(NSString *)uid
-          withGroupGid:(NSString *)gid
-         resultSuccess:(SuccessCallbackBlock)success
-          resultFailed:(FailedCallbackBlock)failed;
+/**
+ 更新群组公告
 
-- (void)agentGroupMute:(NSString *)uid
-          withGroupGid:(NSString *)gid
-         resultSuccess:(SuccessCallbackBlock)success
-          resultFailed:(FailedCallbackBlock)failed;
+ @param announcement <#announcement description#>
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)updateGroupAnnouncement:(NSString *)announcement
+                   withGroupGid:(NSString *)gid
+                  resultSuccess:(SuccessCallbackBlock)success
+                   resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupTransfer:(NSString *)uid
-              withGroupGid:(NSString *)gid
-             resultSuccess:(SuccessCallbackBlock)success
-              resultFailed:(FailedCallbackBlock)failed;
+/**
+ 更新群组描述
 
-- (void)agentGroupTransferAccept:(NSString *)nid
-                   resultSuccess:(SuccessCallbackBlock)success
-                    resultFailed:(FailedCallbackBlock)failed;
+ @param description <#description description#>
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)updateGroupDescription:(NSString *)description
+                  withGroupGid:(NSString *)gid
+                 resultSuccess:(SuccessCallbackBlock)success
+                  resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupTransferReject:(NSString *)nid
-                   resultSuccess:(SuccessCallbackBlock)success
-                    resultFailed:(FailedCallbackBlock)failed;
+/**
+ 邀请某个用户到群组
 
-- (void)agentGroupWithdraw:(NSString *)gid
-             resultSuccess:(SuccessCallbackBlock)success
-              resultFailed:(FailedCallbackBlock)failed;
+ @param uid <#uid description#>
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)inviteToGroup:(NSString *)uid
+         withGroupGid:(NSString *)gid
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
 
-- (void)agentGroupDismiss:(NSString *)gid
+/**
+ 主动申请加群，无需要群主审核
+
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)joinGroup:(NSString *)gid
+    resultSuccess:(SuccessCallbackBlock)success
+     resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 主动申请加群，需要群主审核
+
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)applyGroup:(NSString *)gid
+     resultSuccess:(SuccessCallbackBlock)success
+      resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 同意加群请求
+
+ @param nid <#nid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)approveGroupApply:(NSString *)nid
             resultSuccess:(SuccessCallbackBlock)success
              resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ 拒绝加群请求
 
+ @param nid <#nid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)denyGroupApply:(NSString *)nid
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 将某用户踢出群组
+
+ @param uid <#uid description#>
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)kickGroupMember:(NSString *)uid
+          withGroupGid:(NSString *)gid
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 禁言群内某用户
+
+ @param uid <#uid description#>
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)muteGroupMember:(NSString *)uid
+          withGroupGid:(NSString *)gid
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 移交群组
+
+ @param uid <#uid description#>
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)transferGroup:(NSString *)uid
+         withGroupGid:(NSString *)gid
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 同意移交群组
+
+ @param nid <#nid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)acceptGroupTransfer:(NSString *)nid
+              resultSuccess:(SuccessCallbackBlock)success
+               resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 拒绝移交群组
+
+ @param nid <#nid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)rejectGroupTransfer:(NSString *)nid
+              resultSuccess:(SuccessCallbackBlock)success
+               resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 退出群组
+
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)withdrawGroup:(NSString *)gid
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 解散群组
+
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)dismissGroup:(NSString *)gid
+       resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 搜索群组
+
+ @param keyword <#keyword description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)filterGroup:(NSString *)keyword
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 搜索群组成员
+
+ @param gid <#gid description#>
+ @param keyword <#keyword description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)filterGroupMembers:(NSString *)gid
+               withKeyword:(NSString *)keyword
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
+
+#pragma mark - 社交关系
+
+/**
+ 获取陌生人列表（暂未上线）
+
+ @param page <#page description#>
+ @param size <#size description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)getStrangersPage:(NSUInteger)page
+                withSize:(NSUInteger)size
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 获取关注列表
+ 分页
+
+ @param page <#page description#>
+ @param size <#size description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)getFollowsPage:(NSUInteger)page
+              withSize:(NSUInteger)size
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 获取粉丝列表
+ 分页
+
+ @param page <#page description#>
+ @param size <#size description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)getFansPage:(NSUInteger)page
+           withSize:(NSUInteger)size
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 获取好友列表
+ 分页
+
+ @param page <#page description#>
+ @param size <#size description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)getFriendsPage:(NSUInteger)page
+              withSize:(NSUInteger)size
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 获取黑名单
+ 分页
+
+ @param page <#page description#>
+ @param size <#size description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)getBlocksPage:(NSUInteger)page
+             withSize:(NSUInteger)size
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 添加关注
+
+ @param uid <#uid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)addFollow:(NSString *)uid
+    resultSuccess:(SuccessCallbackBlock)success
+     resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 取消关注
+
+ @param uid <#uid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)unFollow:(NSString *)uid
+   resultSuccess:(SuccessCallbackBlock)success
+    resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 判断是否已经关注
+
+ @param uid <#uid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)isFollowed:(NSString *)uid
+     resultSuccess:(SuccessCallbackBlock)success
+      resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 获取关系（暂未上线）
+
+ @param uid <#uid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)getRelation:(NSString *)uid
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 拉黑用户
+
+ @param uid <#uid description#>
+ @param note <#note description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)addBlock:(NSString *)uid
+        withNote:(NSString *)note
+   resultSuccess:(SuccessCallbackBlock)success
+    resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 取消拉黑
+
+ @param uid <#uid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)unBlock:(NSString *)uid
+  resultSuccess:(SuccessCallbackBlock)success
+   resultFailed:(FailedCallbackBlock)failed;
 
 
 #pragma mark - 公共接口
@@ -356,13 +690,69 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 + (void)getContactsResultSuccess:(SuccessCallbackBlock)success
                   resultFailed:(FailedCallbackBlock)failed;
 
-+ (void)getGroupsResultSuccess:(SuccessCallbackBlock)success
-                   resultFailed:(FailedCallbackBlock)failed;
-
 + (void)updateCurrentThread:(NSString *)preTid
                   currentTid:(NSString *)tid
                resultSuccess:(SuccessCallbackBlock)success
                 resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 同步发送文本消息
+ 
+ @param content content description
+ @param tId <#tId description#>
+ @param sessiontype <#stype description#>
+ */
++ (void)sendTextMessage:(NSString *)content
+                  toTid:(NSString *)tId
+                localId:(NSString *)localId
+            sessionType:(NSString *)sessiontype
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 同步发送图片消息
+ 
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param sessiontype <#stype description#>
+ */
++ (void)sendImageMessage:(NSString *)content
+                   toTid:(NSString *)tId
+                 localId:(NSString *)localId
+             sessionType:(NSString *)sessiontype
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 同步发送语音消息
+ 
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param sessiontype <#stype description#>
+ */
++ (void)sendVoiceMessage:(NSString *)content
+                   toTid:(NSString *)tId
+                 localId:(NSString *)localId
+             sessionType:(NSString *)sessiontype
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 同步发送消息
+ 
+ @param content <#content description#>
+ @param type <#type description#>
+ @param tId <#tId description#>
+ @param sessiontype <#stype description#>
+ */
++ (void)sendMessage:(NSString *)content
+               type:(NSString *)type
+              toTid:(NSString *)tId
+            localId:(NSString *)localId
+        sessionType:(NSString *)sessiontype
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
 
 /**
  访客端调用，查询当前访客自己的所有聊天记录
@@ -441,11 +831,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
 #pragma mark - Application
 
-- (void)applicationWillResignActive;
-- (void)applicationDidEnterBackground;
-- (void)applicationWillEnterForeground;
-- (void)applicationDidBecomeActive;
-- (void)applicationWillTerminate;
++ (void)applicationWillResignActive;
++ (void)applicationDidEnterBackground;
++ (void)applicationWillEnterForeground;
++ (void)applicationDidBecomeActive;
++ (void)applicationWillTerminate;
 
 
 @end
