@@ -2,7 +2,7 @@
 //  QDThemeManager.m
 //  qmuidemo
 //
-//  Created by MoLice on 2017/5/9.
+//  Created by QMUI Team on 2017/5/9.
 //  Copyright © 2017年 QMUI Team. All rights reserved.
 //
 
@@ -62,9 +62,10 @@ NSString *const QDThemeAfterChangedName = @"QDThemeAfterChangedName";
 
 - (void)themeBeforeChanged:(NSObject<QDThemeProtocol> *)themeBeforeChanged afterChanged:(NSObject<QDThemeProtocol> *)themeAfterChanged {
     // 主题发生变化，在这里更新全局 UI 控件的 appearance
-//    [QDCommonUI renderGlobalAppearances];
+    [QDCommonUI renderGlobalAppearances];
+    
     // 更新表情 icon 的颜色
-//    [QDUIHelper updateEmotionImages];
+    [QDUIHelper updateEmotionImages];
 }
 
 @end

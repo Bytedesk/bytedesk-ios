@@ -1,9 +1,16 @@
+/*****
+ * Tencent is pleased to support the open source community by making QMUI_iOS available.
+ * Copyright (C) 2016-2018 THL A29 Limited, a Tencent company. All rights reserved.
+ * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ * http://opensource.org/licenses/MIT
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ *****/
+
 //
 //  UITableView+QMUI.m
 //  qmui
 //
-//  Created by ZhoonChen on 15/7/20.
-//  Copyright (c) 2015年 QMUI Team. All rights reserved.
+//  Created by QMUI Team on 15/7/20.
 //
 
 #import "UITableView+QMUI.h"
@@ -69,6 +76,18 @@ const NSUInteger kFloatValuePrecision = 4;// 统一一个小数点运算精度
     self.sectionIndexColor = TableSectionIndexColor;
     self.sectionIndexTrackingBackgroundColor = TableSectionIndexTrackingBackgroundColor;
     self.sectionIndexBackgroundColor = TableSectionIndexBackgroundColor;
+}
+
+static char kAssociatedObjectKey_initialContentInset;
+- (void)setQmui_initialContentInset:(UIEdgeInsets)qmui_initialContentInset {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_initialContentInset, [NSValue valueWithUIEdgeInsets:qmui_initialContentInset], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    self.contentInset = qmui_initialContentInset;
+    self.scrollIndicatorInsets = qmui_initialContentInset;
+    [self qmui_scrollToTopUponContentInsetTopChange];
+}
+
+- (UIEdgeInsets)qmui_initialContentInset {
+    return [((NSValue *)objc_getAssociatedObject(self, &kAssociatedObjectKey_initialContentInset)) UIEdgeInsetsValue];
 }
 
 - (NSIndexPath *)qmui_indexPathForRowAtView:(UIView *)view {
@@ -208,6 +227,9 @@ const NSUInteger kFloatValuePrecision = 4;// 统一一个小数点运算精度
     }
     
     CGRect rectForRow = [self rectForRowAtIndexPath:indexPath];
+    if (CGRectEqualToRect(rectForRow, CGRectZero)) {
+        return;
+    }
     
     // 如果要滚到的row在列表尾部，则这个row是不可能滚到顶部的（因为列表尾部已经不够空间了），所以要判断一下
     BOOL canScrollRowToTop = CGRectGetMaxY(rectForRow) + CGRectGetHeight(self.frame) - (offsetY + CGRectGetHeight(rectForRow)) <= self.contentSize.height;
@@ -256,6 +278,10 @@ const NSUInteger kFloatValuePrecision = 4;// 统一一个小数点运算精度
 
 // 防止 release 版本滚动到不合法的 indexPath 会 crash
 - (void)qmui_scrollToRowAtIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UITableViewScrollPosition)scrollPosition animated:(BOOL)animated {
+    if (!indexPath) {
+        return;
+    }
+    
     BOOL isIndexPathLegal = YES;
     NSInteger numberOfSections = [self numberOfSections];
     if (indexPath.section >= numberOfSections) {

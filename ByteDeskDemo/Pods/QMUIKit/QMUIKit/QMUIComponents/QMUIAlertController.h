@@ -1,9 +1,16 @@
+/*****
+ * Tencent is pleased to support the open source community by making QMUI_iOS available.
+ * Copyright (C) 2016-2018 THL A29 Limited, a Tencent company. All rights reserved.
+ * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ * http://opensource.org/licenses/MIT
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ *****/
+
 //
 //  QMUIAlertController.h
 //  qmui
 //
 //  Created by QMUI Team on 15/7/20.
-//  Copyright (c) 2015年 QMUI Team. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -265,6 +272,9 @@ typedef NS_ENUM(NSInteger, QMUIAlertControllerStyle) {
 /// 在 iPhoneX 机器上是否延伸底部背景色。因为在 iPhoneX 上我们会把整个面板往上移动 safeArea 的距离，如果你的面板本来就配置成撑满全屏的样式，那么就会露出底部的空隙，isExtendBottomLayout 可以帮助你把空暇填补上。默认为NO。
 /// @warning: 只对 sheet 类型有效
 @property(nonatomic, assign) BOOL isExtendBottomLayout UI_APPEARANCE_SELECTOR;
+
+/// 在显示 alert 之前先降下键盘，默认为 YES。系统的 UIAlertController 也会在显示时降下键盘，但它能在消失后把键盘自动升起，并且这个过程不会触发 becomeFirstResponder/resignFirstResponder，QMUIAlertController 暂时做不到这样的效果，只负责降下，不负责恢复。
+@property(nonatomic, assign) BOOL dismissKeyboardAutomatically;
 
 @end
 

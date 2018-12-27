@@ -1,9 +1,16 @@
+/*****
+ * Tencent is pleased to support the open source community by making QMUI_iOS available.
+ * Copyright (C) 2016-2018 THL A29 Limited, a Tencent company. All rights reserved.
+ * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ * http://opensource.org/licenses/MIT
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ *****/
+
 //
 //  QMUIPopupContainerView.m
 //  qmui
 //
-//  Created by MoLice on 15/12/17.
-//  Copyright © 2015年 QMUI Team. All rights reserved.
+//  Created by QMUI Team on 15/12/17.
 //
 
 #import "QMUIPopupContainerView.h"
@@ -11,6 +18,7 @@
 #import "QMUICommonViewController.h"
 #import "UIViewController+QMUI.h"
 #import "QMUILog.h"
+#import "UIWindow+QMUI.h"
 
 @interface QMUIPopupContainerViewWindow : UIWindow
 
@@ -200,7 +208,7 @@
     BOOL isTextLabelShowing = [self isSubviewShowing:_textLabel];
     if (isImageViewShowing) {
         [_imageView sizeToFit];
-        _imageView.frame = CGRectSetXY(_imageView.frame, self.imageEdgeInsets.left, flat(CGFloatGetCenter(CGRectGetHeight(self.contentView.bounds), CGRectGetHeight(_imageView.frame)) + self.imageEdgeInsets.top));
+        _imageView.frame = CGRectSetXY(_imageView.frame, self.imageEdgeInsets.left, CGFloatGetCenter(CGRectGetHeight(self.contentView.bounds), CGRectGetHeight(_imageView.frame) + self.imageEdgeInsets.top));
     }
     if (isTextLabelShowing) {
         CGFloat textLabelMinX = (isImageViewShowing ? ceil(CGRectGetMaxX(_imageView.frame) + self.imageEdgeInsets.right) : 0) + self.textEdgeInsets.left;
@@ -463,6 +471,9 @@
 - (void)initPopupContainerViewWindowIfNeeded {
     if (!self.popupWindow) {
         self.popupWindow = [[QMUIPopupContainerViewWindow alloc] init];
+        if (@available(iOS 10, *)) {
+            self.popupWindow.qmui_capturesStatusBarAppearance = NO;
+        }
         self.popupWindow.backgroundColor = UIColorClear;
         self.popupWindow.windowLevel = UIWindowLevelQMUIAlertView;
         QMUIPopContainerViewController *viewController = [[QMUIPopContainerViewController alloc] init];

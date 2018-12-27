@@ -67,11 +67,13 @@
 
 @property(nonatomic, strong) NSMutableArray<NSString *> *searchResultsKeywords;
 @property(nonatomic, strong) QMUISearchController *mySearchController;
+@property(nonatomic, assign) UIStatusBarStyle statusBarStyle;
 
 @property(nonatomic, strong) UIRefreshControl                  *mRefreshControl;
 @property(nonatomic, strong) NSMutableArray<BDContactModel *>  *mContactArray;
 
 @property(nonatomic, strong) NSMutableArray<BDContactModel *> *mSelectedContactsArray;
+
 
 @end
 
@@ -219,11 +221,11 @@
 - (void)searchController:(QMUISearchController *)searchController updateResultsForSearchString:(NSString *)searchString {
     [self.searchResultsKeywords removeAllObjects];
     
-    //    for (WXContactModel *rosterModel in self.mRosterArray) {
-    //        if ([rosterModel.nickname containsString:searchString]) {
-    //            [self.searchResultsKeywords addObject:rosterModel.nickname];
-    //        }
-    //    }
+    for (NSString *keyword in self.searchResultsKeywords) {
+        if ([keyword containsString:searchString]) {
+            [self.searchResultsKeywords addObject:keyword];
+        }
+    }
     
     [searchController.tableView reloadData];
     
@@ -235,21 +237,14 @@
 }
 
 - (void)willPresentSearchController:(QMUISearchController *)searchController {
-    [QMUIHelper renderStatusBarStyleDark];
+    self.statusBarStyle = UIStatusBarStyleDefault;
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)willDismissSearchController:(QMUISearchController *)searchController {
-    BOOL oldStatusbarLight = NO;
-    if ([self respondsToSelector:@selector(shouldSetStatusBarStyleLight)]) {
-        oldStatusbarLight = [self shouldSetStatusBarStyleLight];
-    }
-    if (oldStatusbarLight) {
-        [QMUIHelper renderStatusBarStyleLight];
-    } else {
-        [QMUIHelper renderStatusBarStyleDark];
-    }
+    self.statusBarStyle = [super preferredStatusBarStyle];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
-
 #pragma mark - MGSwipeTableCellDelegate
 
 -(NSArray*) swipeTableCell:(MGSwipeTableCell*) cell swipeButtonsForDirection:(MGSwipeDirection)direction

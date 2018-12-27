@@ -1,9 +1,16 @@
+/*****
+ * Tencent is pleased to support the open source community by making QMUI_iOS available.
+ * Copyright (C) 2016-2018 THL A29 Limited, a Tencent company. All rights reserved.
+ * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ * http://opensource.org/licenses/MIT
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ *****/
+
 //
 //  QMUIImagePickerPreviewViewController.m
 //  qmui
 //
-//  Created by Kayo Lee on 15/5/3.
-//  Copyright (c) 2015年 QMUI Team. All rights reserved.
+//  Created by QMUI Team on 15/5/3.
 //
 
 #import "QMUIImagePickerPreviewViewController.h"
@@ -97,18 +104,32 @@ static QMUIImagePickerPreviewViewController *imagePickerPreviewViewControllerApp
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
     if (!_singleCheckMode) {
         QMUIAsset *imageAsset = self.imagesAssetArray[self.imagePreviewView.currentImageIndex];
         self.checkboxButton.selected = [self.selectedImageAssetArray containsObject:imageAsset];
+    }
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    if ([self conformsToProtocol:@protocol(QMUICustomNavigationBarTransitionDelegate)]) {
+        UIViewController<QMUICustomNavigationBarTransitionDelegate> *vc = (UIViewController<QMUICustomNavigationBarTransitionDelegate> *)self;
+        if ([vc respondsToSelector:@selector(shouldCustomizeNavigationBarTransitionIfHideable)] &&
+            [vc shouldCustomizeNavigationBarTransitionIfHideable]) {
+        } else {
+            [self.navigationController setNavigationBarHidden:YES animated:NO];
+        }
     }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    if ([self conformsToProtocol:@protocol(QMUICustomNavigationBarTransitionDelegate)]) {
+        UIViewController<QMUICustomNavigationBarTransitionDelegate> *vc = (UIViewController<QMUICustomNavigationBarTransitionDelegate> *)self;
+        if ([vc respondsToSelector:@selector(shouldCustomizeNavigationBarTransitionIfHideable)] &&
+            [vc shouldCustomizeNavigationBarTransitionIfHideable]) {
+        } else {
+            [self.navigationController setNavigationBarHidden:NO animated:NO];
+        }
+    }
 }
 
 - (void)viewDidLayoutSubviews {
@@ -120,6 +141,10 @@ static QMUIImagePickerPreviewViewController *imagePickerPreviewViewControllerApp
     if (!self.checkboxButton.hidden) {
         self.checkboxButton.frame = CGRectSetXY(self.checkboxButton.frame, CGRectGetWidth(self.topToolBarView.frame) - 10 - self.view.qmui_safeAreaInsets.right - CGRectGetWidth(self.checkboxButton.frame), topToolbarPaddingTop + CGFloatGetCenter(topToolbarContentHeight, CGRectGetHeight(self.checkboxButton.frame)));
     }
+}
+
+- (BOOL)preferredNavigationBarHidden {
+    return YES;
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -210,7 +235,7 @@ static QMUIImagePickerPreviewViewController *imagePickerPreviewViewControllerApp
     if (self.navigationController) {
         [self.navigationController popViewControllerAnimated:YES];
     } else {
-        [self exitPreviewAutomatically];
+//        [self exitPreviewAutomatically];
     }
     if (self.delegate && [self.delegate respondsToSelector:@selector(imagePickerPreviewViewControllerDidCancel:)]) {
         [self.delegate imagePickerPreviewViewControllerDidCancel:self];

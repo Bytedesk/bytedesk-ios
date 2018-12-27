@@ -973,20 +973,40 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
     if (!self.imagePreviewViewController) {
         self.imagePreviewViewController = [[QMUIImagePreviewViewController alloc] init];
+        self.imagePreviewViewController.presentingStyle = QMUIImagePreviewViewControllerTransitioningStyleZoom;// 将 present 动画改为 zoom，也即从某个位置放大到屏幕中央。默认样式为 fade。
         self.imagePreviewViewController.imagePreviewView.delegate = self;
         self.imagePreviewViewController.imagePreviewView.currentImageIndex = 0;// 默认查看的图片的 index
         
         // QMUIImagePreviewViewController 对于以 window 的方式展示的情况，默认会开启手势拖拽退出预览功能。
         // 如果使用了手势拖拽，并且退出预览时需要飞到某个 rect，则需要实现这个 block，在里面自己去 exit，如果不实现这个 block，退出动画会使用 fadeOut 那种
+//        __weak __typeof(self)weakSelf = self;
+//        self.imagePreviewViewController.customGestureExitBlock = ^(QMUIImagePreviewViewController *aImagePreviewViewController, QMUIZoomImageView *currentZoomImageView) {
+//            [weakSelf.currentImageView setImage:currentZoomImageView.image];
+//            [aImagePreviewViewController exitPreviewToRectInScreenCoordinate:[weakSelf.currentImageView convertRect:weakSelf.currentImageView.frame toView:nil]];
+//        };
+        
         __weak __typeof(self)weakSelf = self;
-        self.imagePreviewViewController.customGestureExitBlock = ^(QMUIImagePreviewViewController *aImagePreviewViewController, QMUIZoomImageView *currentZoomImageView) {
-            [weakSelf.currentImageView setImage:currentZoomImageView.image];
-            [aImagePreviewViewController exitPreviewToRectInScreenCoordinate:[weakSelf.currentImageView convertRect:weakSelf.currentImageView.frame toView:nil]];
+        
+        // 如果使用 zoom 动画，则需要在 sourceImageView 里返回一个 UIView，由这个 UIView 的布局位置决定动画的起点/终点，如果用 fade 则不需要使用 sourceImageView。
+        // 另外当 sourceImageView 返回 nil 时会强制使用 fade 动画，常见的使用场景是 present 时 sourceImageView 还在屏幕内，但 dismiss 时 sourceImageView 已经不在可视区域，即可通过返回 nil 来改用 fade 动画。
+        self.imagePreviewViewController.sourceImageView = ^UIView *{
+//            return weakSelf.imageButton;
+            return weakSelf.currentImageView;
+        };
+        
+        // 当需要在退出大图预览时做一些事情的时候，可配合 UIViewController (QMUI) 的 qmui_visibleStateDidChangeBlock 来实现。
+        self.imagePreviewViewController.qmui_visibleStateDidChangeBlock = ^(QMUIImagePreviewViewController *viewController, QMUIViewControllerVisibleState visibleState) {
+            if (visibleState == QMUIViewControllerWillDisappear) {
+                UIImage *currentImage = [viewController.imagePreviewView zoomImageViewAtIndex:viewController.imagePreviewView.currentImageIndex].image;
+                if (currentImage) {
+                    [weakSelf.currentImageView setImage:currentImage];
+                }
+            }
         };
     }
     
-//    [self.imagePreviewViewController startPreviewFromRectInScreen:[imageView convertRect:imageView.frame toView:nil] cornerRadius:imageView.layer.cornerRadius];
-    [self.imagePreviewViewController startPreviewFromRectInScreenCoordinate:[imageView convertRect:imageView.frame toView:nil] cornerRadius:imageView.layer.cornerRadius];
+//    [self.imagePreviewViewController startPreviewFromRectInScreenCoordinate:[imageView convertRect:imageView.frame toView:nil] cornerRadius:imageView.layer.cornerRadius];
+    [self presentViewController:self.imagePreviewViewController animated:YES completion:nil];
     
 }
 
@@ -1008,7 +1028,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (void)singleTouchInZoomingImageView:(QMUIZoomImageView *)zoomImageView location:(CGPoint)location {
     [self.currentImageView setImage:zoomImageView.image];
-    self.imagePreviewViewController.customGestureExitBlock(self.imagePreviewViewController, zoomImageView);
+    // 退出图片预览
+    [self dismissViewControllerAnimated:YES completion:nil];
+//    self.imagePreviewViewController.customGestureExitBlock(self.imagePreviewViewController, zoomImageView);
 //    [self.imagePreviewViewController endPreviewToRectInScreen:[self.currentImageView convertRect:self.currentImageView.frame toView:nil]];
 }
 
@@ -1117,13 +1139,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if([mediaType isEqualToString:@"public.movie"]) {
         //被选中的是视频
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
-                                                            message:@"请选择图片"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"确定"
-                                                  otherButtonTitles:nil, nil];
-        
-        [alertView show];
+        [QMUITips showError:@"请选择图片" inView:self.view hideAfterDelay:2];
     }
     else if([mediaType isEqualToString:@"public.image"]) {
         //获取照片实例

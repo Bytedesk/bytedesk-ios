@@ -170,7 +170,7 @@
         return 54;// 修改默认的行高，默认为 TableViewCellNormalHeight
     };
     dialogViewController.didSelectItemBlock = ^(QMUIDialogSelectionViewController *aDialogViewController, NSUInteger itemIndex) {
-        DDLogInfo(@"%s %@ %ld", __PRETTY_FUNCTION__, contactModel.real_name, itemIndex);
+        DDLogInfo(@"%s %@ %lu", __PRETTY_FUNCTION__, contactModel.real_name, (unsigned long)itemIndex);
         
         if (itemIndex == 0) {
             // 添加关注

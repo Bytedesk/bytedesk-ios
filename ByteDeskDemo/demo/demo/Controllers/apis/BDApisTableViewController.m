@@ -42,6 +42,7 @@
 @property(nonatomic, strong) NSArray *imApisArray;
 
 @property(nonatomic, strong) NSString *mLoginItemDetailText;
+@property(nonatomic, weak) QMUIDialogTextFieldViewController *currentTextFieldDialogViewController;
 
 @end
 
@@ -239,7 +240,7 @@
     QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {}];
     QMUIAlertAction *registerAction = [QMUIAlertAction actionWithTitle:@"自定义用户名" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
         // 注册用户
-        [self registerUser];
+        [self showRegisterDialogViewController];
     }];
     
     QMUIAlertAction *anonymouseAction = [QMUIAlertAction actionWithTitle:@"匿名用户" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
@@ -254,12 +255,48 @@
     [alertController showWithAnimated:YES];
 }
 
+
+/**
+ 自定义用户名注册弹框
+ */
+- (void)showRegisterDialogViewController {
+    QMUIDialogTextFieldViewController *dialogViewController = [[QMUIDialogTextFieldViewController alloc] init];
+    dialogViewController.title = @"自定义用户名注册";
+    [dialogViewController addTextFieldWithTitle:@"用户名" configurationHandler:^(QMUILabel *titleLabel, QMUITextField *textField, CALayer *separatorLayer) {
+        textField.placeholder = @"仅允许字母、数字";
+//        textField.maximumTextLength = 10;
+    }];
+    [dialogViewController addTextFieldWithTitle:@"密码" configurationHandler:^(QMUILabel *titleLabel, QMUITextField *textField, CALayer *separatorLayer) {
+        textField.placeholder = @"6位数字";
+        textField.keyboardType = UIKeyboardTypeNumberPad;
+        textField.maximumTextLength = 6;
+        textField.secureTextEntry = YES;
+    }];
+    dialogViewController.enablesSubmitButtonAutomatically = NO;// 为了演示效果与第二个 cell 的区分开，这里手动置为 NO，平时的默认值为 YES
+    [dialogViewController addCancelButtonWithText:@"取消" block:nil];
+    [dialogViewController addSubmitButtonWithText:@"确定" block:^(QMUIDialogTextFieldViewController *aDialogViewController) {
+        if (aDialogViewController.textFields.firstObject.text.length > 0) {
+            [aDialogViewController hide];
+            
+            // 自定义用户名、密码注册
+            NSString *username = aDialogViewController.textFields.firstObject.text;
+            NSString *password = aDialogViewController.textFields.lastObject.text;
+            [self registerUser:username withPassword:password];
+            
+        } else {
+            [QMUITips showInfo:@"请填写内容" inView:self.view hideAfterDelay:1.2];
+        }
+    }];
+    [dialogViewController show];
+    self.currentTextFieldDialogViewController = dialogViewController;
+}
+
 - (void)showLoginSheet {
     
     QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {}];
     QMUIAlertAction *loginAction = [QMUIAlertAction actionWithTitle:@"自定义用户名" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
         // 自定义用户名登录
-        [self login];
+        [self showLoginDialogViewController];
     }];
     
     QMUIAlertAction *anonymouseAction = [QMUIAlertAction actionWithTitle:@"匿名用户" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
@@ -274,14 +311,46 @@
     [alertController showWithAnimated:YES];
 }
 
+
+/**
+ 显示登录自定义用户名弹框
+ */
+- (void)showLoginDialogViewController {
+    QMUIDialogTextFieldViewController *dialogViewController = [[QMUIDialogTextFieldViewController alloc] init];
+    dialogViewController.title = @"自定义用户名登录";
+    [dialogViewController addTextFieldWithTitle:@"用户名" configurationHandler:^(QMUILabel *titleLabel, QMUITextField *textField, CALayer *separatorLayer) {
+        textField.placeholder = @"仅允许字母、数字";
+        //        textField.maximumTextLength = 10;
+    }];
+    [dialogViewController addTextFieldWithTitle:@"密码" configurationHandler:^(QMUILabel *titleLabel, QMUITextField *textField, CALayer *separatorLayer) {
+        textField.placeholder = @"6位数字";
+        textField.keyboardType = UIKeyboardTypeNumberPad;
+        textField.maximumTextLength = 6;
+        textField.secureTextEntry = YES;
+    }];
+    dialogViewController.enablesSubmitButtonAutomatically = NO;// 为了演示效果与第二个 cell 的区分开，这里手动置为 NO，平时的默认值为 YES
+    [dialogViewController addCancelButtonWithText:@"取消" block:nil];
+    [dialogViewController addSubmitButtonWithText:@"确定" block:^(QMUIDialogTextFieldViewController *aDialogViewController) {
+        if (aDialogViewController.textFields.firstObject.text.length > 0) {
+            [aDialogViewController hide];
+            
+            // 自定义用户名、密码登录
+            NSString *username = aDialogViewController.textFields.firstObject.text;
+            NSString *password = aDialogViewController.textFields.lastObject.text;
+            [self login:username withPassword:password];
+            
+        } else {
+            [QMUITips showInfo:@"请填写内容" inView:self.view hideAfterDelay:1.2];
+        }
+    }];
+    [dialogViewController show];
+    self.currentTextFieldDialogViewController = dialogViewController;
+}
+
 #pragma mark - 登录、退出登录
 
-- (void)login {
+- (void)login:(NSString *)username withPassword:(NSString *)password {
     // 参考文档：https://github.com/pengjinning/bytedesk-ios
-    // 测试账号：test1，密码：123456
-    // 或者：test1~test15 共15个测试账号，密码均为：123456
-    NSString *username = @"test1";
-    NSString *password = @"123456";
     // 获取subDomain，也即企业号：登录后台->所有设置->客服账号->企业号
     NSString *subDomain = @"vip";
     // 登录
@@ -316,11 +385,9 @@
 
 #pragma mark - 注册
 
-- (void)registerUser {
+- (void)registerUser:(NSString *)username withPassword:(NSString *)password {
     
-    NSString *username = @"iostest2";
-    NSString *nickname = @"iOS测试2";
-    NSString *password = @"123456";
+    NSString *nickname = [NSString stringWithFormat:@"自定义测试%@", username];
     // 获取subDomain，也即企业号：登录后台->所有设置->客服账号->企业号
     NSString *subDomain = @"vip";
     //

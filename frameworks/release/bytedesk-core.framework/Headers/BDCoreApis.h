@@ -761,9 +761,15 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  */
 + (NSMutableArray *)getMessagesWithUser;
 
++ (NSMutableArray *)getMessagesWithUserPage:(NSUInteger)page;
+
 + (NSMutableArray *)getMessagesWithThread:(NSString *)tid;
 
++ (NSMutableArray *)getMessagesWithThread:(NSString *)tid withPage:(NSUInteger)page;
+
 + (NSMutableArray *)getMessagesWithWorkGroup:(NSString *)wid;
+
++ (NSMutableArray *)getMessagesWithWorkGroup:(NSString *)wid withPage:(NSUInteger)page;
 
 /**
  客服端调用
@@ -773,9 +779,15 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  */
 + (NSMutableArray *)getMessagesWithUser:(NSString *)uid;
 
++ (NSMutableArray *)getMessagesWithUser:(NSString *)uid withPage:(NSUInteger)page;
+
 + (NSMutableArray *)getMessagesWithContact:(NSString *)cid;
 
++ (NSMutableArray *)getMessagesWithContact:(NSString *)cid withPage:(NSUInteger)page;
+
 + (NSMutableArray *)getMessagesWithGroup:(NSString *)gid;
+
++ (NSMutableArray *)getMessagesWithGroup:(NSString *)gid withPage:(NSUInteger)page;
 
 + (void)getMessageWithUser:(NSString *)uid
                   withPage:(NSInteger)page

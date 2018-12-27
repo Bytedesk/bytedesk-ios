@@ -1,9 +1,16 @@
+/*****
+ * Tencent is pleased to support the open source community by making QMUI_iOS available.
+ * Copyright (C) 2016-2018 THL A29 Limited, a Tencent company. All rights reserved.
+ * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ * http://opensource.org/licenses/MIT
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ *****/
+
 //
 //  UIImage+QMUI.m
 //  qmui
 //
-//  Created by ZhoonChen on 15/7/20.
-//  Copyright (c) 2015年 QMUI Team. All rights reserved.
+//  Created by QMUI Team on 15/7/20.
 //
 
 #import "UIImage+QMUI.h"
@@ -29,27 +36,27 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
         };
         for (NSUInteger index = 0; index < sizeof(selectors) / sizeof(SEL); index++) {
             SEL originalSelector = selectors[index];
-            SEL swizzledSelector = NSSelectorFromString([@"qmui_" stringByAppendingString:NSStringFromSelector(originalSelector)]);
+            SEL swizzledSelector = NSSelectorFromString([@"qmuiimage_" stringByAppendingString:NSStringFromSelector(originalSelector)]);
             ExchangeImplementations([self class], originalSelector, swizzledSelector);
         }
     });
 }
 
-- (NSString *)qmui_description {
-    return [NSString stringWithFormat:@"%@, scale = %@", [self qmui_description], @(self.scale)];
+- (NSString *)qmuiimage_description {
+    return [NSString stringWithFormat:@"%@, scale = %@", [self qmuiimage_description], @(self.scale)];
 }
 
-- (UIImage *)qmui_resizableImageWithCapInsets:(UIEdgeInsets)capInsets resizingMode:(UIImageResizingMode)resizingMode {
+- (UIImage *)qmuiimage_resizableImageWithCapInsets:(UIEdgeInsets)capInsets resizingMode:(UIImageResizingMode)resizingMode {
     if (!CGSizeIsEmpty(self.size) && (UIEdgeInsetsGetHorizontalValue(capInsets) >= self.size.width || UIEdgeInsetsGetVerticalValue(capInsets) >= self.size.height)) {
         // 如果命中这个判断，请减小 capInsets 的值
-        NSString *text = @"UIImage (QMUI) resizableImageWithCapInsets 传进来的 capInsets 的水平/垂直方向的和应该小于图片本身的大小，否则会导致 render 时出现 invalid context 0x0 的错误";
+        NSString *text = @"UIImage (QMUI) resizableImageWithCapInsets 传进来的 capInsets 的水平/垂直方向的和应该小于图片本身的大小，否则会导致 render 时出现 invalid context 0x0 的错误。若不希望以 NSAssert 方式提醒，请修改配置表的开关 ShouldAssertResizableImageCapInsetsError";
         if (ShouldAssertResizableImageCapInsetsError) {
             NSAssert(NO, text);
         } else {
             QMUILogWarn(@"UIImage (QMUI)", @"%@", text);
         }
     }
-    return [self qmui_resizableImageWithCapInsets:capInsets resizingMode:resizingMode];
+    return [self qmuiimage_resizableImageWithCapInsets:capInsets resizingMode:resizingMode];
 }
 
 + (UIImage *)qmui_imageWithSize:(CGSize)size opaque:(BOOL)opaque scale:(CGFloat)scale actions:(void (^)(CGContextRef contextRef))actionBlock {

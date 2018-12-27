@@ -1,9 +1,16 @@
+/*****
+ * Tencent is pleased to support the open source community by making QMUI_iOS available.
+ * Copyright (C) 2016-2018 THL A29 Limited, a Tencent company. All rights reserved.
+ * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ * http://opensource.org/licenses/MIT
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ *****/
+
 //
 //  QMUINavigationButton.m
 //  QMUIKit
 //
-//  Created by MoLice on 2018/4/9.
-//  Copyright © 2018年 QMUI Team. All rights reserved.
+//  Created by QMUI Team on 2018/4/9.
 //
 
 #import "QMUINavigationButton.h"
@@ -359,7 +366,7 @@ typedef NS_ENUM(NSInteger, QMUINavigationButtonPosition) {
         if (self.qmui_navigationBar && [self.qmui_navigationBar.delegate isKindOfClass:[UINavigationController class]]) {
             UINavigationController *navController = (UINavigationController *)self.qmui_navigationBar.delegate;
             
-            QMUILog(@"UINavigationItem (QMUINavigationButton)", @"navigationController is %@, topViewController is %@, viewControllers is %@, willAppearByInteractivePopGestureRecognizer is %@, navigationControllerPopGestureRecognizerChanging is %@", navController, navController.topViewController, navController.viewControllers, StringFromBOOL(navController.topViewController.qmui_willAppearByInteractivePopGestureRecognizer), StringFromBOOL(navController.topViewController.qmui_navigationControllerPopGestureRecognizerChanging));
+//            QMUILog(@"UINavigationItem (QMUINavigationButton)", @"navigationController is %@, topViewController is %@, viewControllers is %@, willAppearByInteractivePopGestureRecognizer is %@, navigationControllerPopGestureRecognizerChanging is %@", navController, navController.topViewController, navController.viewControllers, StringFromBOOL(navController.topViewController.qmui_willAppearByInteractivePopGestureRecognizer), StringFromBOOL(navController.topViewController.qmui_navigationControllerPopGestureRecognizerChanging));
             
             if (navController.topViewController.qmui_willAppearByInteractivePopGestureRecognizer && navController.topViewController.qmui_navigationControllerPopGestureRecognizerChanging) {
                 // 注意，判断条件里的 qmui_navigationControllerPopGestureRecognizerChanging 关键在于，它是在 viewWillAppear: 执行后才被置为 YES，而 QMUICommonViewController 是在 viewWillAppear: 里调用 setNavigationItems:，所以刚好过滤了这种场景。因为测试过，在 viewWillAppear: 里操作 items 是没问题的，但在那之后的操作就会有问题。
@@ -529,12 +536,12 @@ static char kAssociatedObjectKey_tempRightBarButtonItems;
 - (void)navigationButton_viewDidAppear:(BOOL)animated {
     [self navigationButton_viewDidAppear:animated];
     if (self.navigationItem.tempLeftBarButtonItems) {
-        QMUILog(@"UIViewController (QMUINavigationButton)", @"%@ 在 viewDidAppear: 重新设置了 leftBarButtonItems: %@", NSStringFromClass(self.class), self.navigationItem.tempLeftBarButtonItems);
+//        QMUILog(@"UIViewController (QMUINavigationButton)", @"%@ 在 viewDidAppear: 重新设置了 leftBarButtonItems: %@", NSStringFromClass(self.class), self.navigationItem.tempLeftBarButtonItems);
         self.navigationItem.leftBarButtonItems = self.navigationItem.tempLeftBarButtonItems;
         self.navigationItem.tempLeftBarButtonItems = nil;
     }
     if (self.navigationItem.tempRightBarButtonItems) {
-        QMUILog(@"UIViewController (QMUINavigationButton)", @"%@ 在 viewDidAppear: 重新设置了 rightBarButtonItems: %@", NSStringFromClass(self.class), self.navigationItem.tempRightBarButtonItems);
+//        QMUILog(@"UIViewController (QMUINavigationButton)", @"%@ 在 viewDidAppear: 重新设置了 rightBarButtonItems: %@", NSStringFromClass(self.class), self.navigationItem.tempRightBarButtonItems);
         self.navigationItem.rightBarButtonItems = self.navigationItem.tempRightBarButtonItems;
         self.navigationItem.tempRightBarButtonItems = nil;
     }

@@ -99,7 +99,7 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    [cell.textLabel setText:[NSString stringWithFormat:@"%ld. %@", indexPath.row+1, [self.apisArray objectAtIndex:indexPath.row]]];
+    [cell.textLabel setText:[NSString stringWithFormat:@"%d. %@", indexPath.row+1, [self.apisArray objectAtIndex:indexPath.row]]];
     if (indexPath.row == 2) {
         [cell.detailTextLabel setText:self.mLoginItemDetailText];
     }

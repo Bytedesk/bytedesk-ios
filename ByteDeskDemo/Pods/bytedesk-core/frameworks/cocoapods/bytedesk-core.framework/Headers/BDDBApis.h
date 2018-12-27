@@ -61,6 +61,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (BOOL) insertMessageLocal:(BDMessageModel *)message;
 
 - (NSMutableArray *)getMessagesWithType:(NSString *)type withUid:(NSString *)uid;
+- (NSMutableArray *)getMessagesPage:(NSUInteger)page withSize:(NSUInteger)size withType:(NSString *)type withUid:(NSString *)uid;
 
 
 - (BOOL) updateMessage:(NSString *)localId withServerId:(NSNumber *)serverId withMid:(NSString *)mid withStatus:(NSString *)status;

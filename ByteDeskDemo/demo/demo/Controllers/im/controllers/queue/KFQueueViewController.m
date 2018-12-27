@@ -70,6 +70,7 @@
 
 @property(nonatomic, strong) NSMutableArray<NSString *> *searchResultsKeywords;
 @property(nonatomic, strong) QMUISearchController *mySearchController;
+@property(nonatomic, assign) UIStatusBarStyle statusBarStyle;
 
 @property(nonatomic, strong) UIRefreshControl *mRefreshControl;
 @property(nonatomic, strong) NSMutableArray<BDQueueModel *> *mQueueArray;
@@ -216,11 +217,11 @@
 - (void)searchController:(QMUISearchController *)searchController updateResultsForSearchString:(NSString *)searchString {
     [self.searchResultsKeywords removeAllObjects];
     
-//    for (WXQueueModel *queueModel in self.mQueueArray) {
-//        if ([queueModel.nickname containsString:searchString]) {
-//            [self.searchResultsKeywords addObject:queueModel.nickname];
-//        }
-//    }
+    for (NSString *keyword in self.searchResultsKeywords) {
+        if ([keyword containsString:searchString]) {
+            [self.searchResultsKeywords addObject:keyword];
+        }
+    }
     
     [searchController.tableView reloadData];
     
@@ -232,19 +233,13 @@
 }
 
 - (void)willPresentSearchController:(QMUISearchController *)searchController {
-    [QMUIHelper renderStatusBarStyleDark];
+    self.statusBarStyle = UIStatusBarStyleDefault;
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)willDismissSearchController:(QMUISearchController *)searchController {
-    BOOL oldStatusbarLight = NO;
-    if ([self respondsToSelector:@selector(shouldSetStatusBarStyleLight)]) {
-        oldStatusbarLight = [self shouldSetStatusBarStyleLight];
-    }
-    if (oldStatusbarLight) {
-        [QMUIHelper renderStatusBarStyleLight];
-    } else {
-        [QMUIHelper renderStatusBarStyleDark];
-    }
+    self.statusBarStyle = [super preferredStatusBarStyle];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 #pragma mark - MGSwipeTableCellDelegate

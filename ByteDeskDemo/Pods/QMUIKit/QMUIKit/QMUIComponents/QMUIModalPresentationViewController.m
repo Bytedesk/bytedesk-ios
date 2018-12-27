@@ -1,9 +1,16 @@
+/*****
+ * Tencent is pleased to support the open source community by making QMUI_iOS available.
+ * Copyright (C) 2016-2018 THL A29 Limited, a Tencent company. All rights reserved.
+ * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ * http://opensource.org/licenses/MIT
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ *****/
+
 //
 //  QMUIModalPresentationViewController.m
 //  qmui
 //
-//  Created by MoLice on 16/7/6.
-//  Copyright © 2016年 QMUI Team. All rights reserved.
+//  Created by QMUI Team on 16/7/6.
 //
 
 #import "QMUIModalPresentationViewController.h"
@@ -11,6 +18,7 @@
 #import "UIViewController+QMUI.h"
 #import "UIView+QMUI.h"
 #import "QMUIKeyboardManager.h"
+#import "UIWindow+QMUI.h"
 
 @interface UIViewController ()
 
@@ -462,6 +470,9 @@ static QMUIModalPresentationViewController *appearance;
     self.previousKeyWindow = [UIApplication sharedApplication].keyWindow;
     if (!self.containerWindow) {
         self.containerWindow = [[QMUIModalPresentationWindow alloc] init];
+        if (@available(iOS 10, *)) {
+            self.containerWindow.qmui_capturesStatusBarAppearance = NO;// modalPrensetationViewController.contentViewController 默认无权管理状态栏的样式，如需修改状态栏，请业务自己将这个属性改为 YES
+        }
         self.containerWindow.windowLevel = UIWindowLevelQMUIAlertView;
         self.containerWindow.backgroundColor = UIColorClear;// 避免横竖屏旋转时出现黑色
     }
@@ -599,10 +610,25 @@ static QMUIModalPresentationViewController *appearance;
     return self.supportedOrientationMask;
 }
 
-#pragma mark - 状态栏
+- (UIViewController *)childViewControllerForStatusBarStyle {
+    if (self.shownInPresentedMode) {
+        return self.contentViewController;
+    }
+    return [super childViewControllerForStatusBarStyle];
+}
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return StatusbarStyleLightInitially ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
+- (UIViewController *)childViewControllerForStatusBarHidden {
+    if (self.shownInPresentedMode) {
+        return self.contentViewController;
+    }
+    return [super childViewControllerForStatusBarHidden];
+}
+
+- (UIViewController *)childViewControllerForHomeIndicatorAutoHidden {
+    if (self.shownInPresentedMode) {
+        return self.contentViewController;
+    }
+    return [super childViewControllerForHomeIndicatorAutoHidden];
 }
 
 @end

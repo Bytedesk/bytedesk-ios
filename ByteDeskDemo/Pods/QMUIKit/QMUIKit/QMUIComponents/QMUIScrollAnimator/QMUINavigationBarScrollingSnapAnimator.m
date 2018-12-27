@@ -1,9 +1,16 @@
+/*****
+ * Tencent is pleased to support the open source community by making QMUI_iOS available.
+ * Copyright (C) 2016-2018 THL A29 Limited, a Tencent company. All rights reserved.
+ * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ * http://opensource.org/licenses/MIT
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ *****/
+
 //
 //  QMUINavigationBarScrollingSnapAnimator.m
 //  QMUIKit
 //
-//  Created by MoLice on 2018/S/30.
-//  Copyright © 2018 QMUI Team. All rights reserved.
+//  Created by QMUI Team on 2018/S/30.
 //
 
 #import "QMUINavigationBarScrollingSnapAnimator.h"
@@ -59,8 +66,31 @@
 
 - (BOOL)offsetYReached {
     UIScrollView *scrollView = self.scrollView;
-    CGFloat offsetYToStartAnimation = self.offsetYToStartAnimation + (self.adjustsOffsetYWithInsetTopAutomatically ? -scrollView.qmui_contentInset.top : 0);
-    return scrollView.contentOffset.y > offsetYToStartAnimation;
+    CGFloat contentOffsetY = flat(scrollView.contentOffset.y);
+    CGFloat offsetYToStartAnimation = flat(self.offsetYToStartAnimation + (self.adjustsOffsetYWithInsetTopAutomatically ? -scrollView.qmui_contentInset.top : 0));
+    return contentOffsetY > offsetYToStartAnimation;
+}
+
+- (void)setOffsetYToStartAnimation:(CGFloat)offsetYToStartAnimation {
+    BOOL valueChanged = _offsetYToStartAnimation != offsetYToStartAnimation;
+    _offsetYToStartAnimation = offsetYToStartAnimation;
+    if (valueChanged) {
+        [self resetState];
+    }
+}
+
+- (void)setScrollView:(__kindof UIScrollView *)scrollView {
+    BOOL scrollViewChanged = self.scrollView != scrollView;
+    [super setScrollView:scrollView];
+    if (scrollViewChanged) {
+        [self resetState];
+    }
+}
+
+- (void)resetState {
+    self.alreadyCalledScrollUpAnimation = NO;
+    self.alreadyCalledScrollDownAnimation = NO;
+    [self updateScroll];
 }
 
 @end

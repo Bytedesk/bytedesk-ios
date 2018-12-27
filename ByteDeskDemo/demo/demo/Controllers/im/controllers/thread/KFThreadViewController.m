@@ -71,6 +71,7 @@
 
 @property(nonatomic, strong) NSMutableArray<NSString *> *searchResultsKeywords;
 @property(nonatomic, strong) QMUISearchController *mySearchController;
+@property(nonatomic, assign) UIStatusBarStyle statusBarStyle;
 
 @property(nonatomic, strong) UIRefreshControl *mRefreshControl;
 @property(nonatomic, strong) NSMutableArray<BDThreadModel *> *mThreadArray;
@@ -212,17 +213,16 @@
 #pragma mark - <QMUISearchControllerDelegate>
 
 - (void)searchController:(QMUISearchController *)searchController updateResultsForSearchString:(NSString *)searchString {
-    //
     [self.searchResultsKeywords removeAllObjects];
-    //
-    for (BDThreadModel *threadModel in self.mThreadArray) {
-        if ([threadModel.nickname containsString:searchString]) {
-            [self.searchResultsKeywords addObject:threadModel.nickname];
+    
+    for (NSString *keyword in self.searchResultsKeywords) {
+        if ([keyword containsString:searchString]) {
+            [self.searchResultsKeywords addObject:keyword];
         }
     }
-    //
+    
     [searchController.tableView reloadData];
-    //
+    
     if (self.searchResultsKeywords.count == 0) {
         [searchController showEmptyViewWithText:@"没有匹配结果" detailText:nil buttonTitle:nil buttonAction:NULL];
     } else {
@@ -231,19 +231,13 @@
 }
 
 - (void)willPresentSearchController:(QMUISearchController *)searchController {
-    [QMUIHelper renderStatusBarStyleDark];
+    self.statusBarStyle = UIStatusBarStyleDefault;
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)willDismissSearchController:(QMUISearchController *)searchController {
-    BOOL oldStatusbarLight = NO;
-    if ([self respondsToSelector:@selector(shouldSetStatusBarStyleLight)]) {
-        oldStatusbarLight = [self shouldSetStatusBarStyleLight];
-    }
-    if (oldStatusbarLight) {
-        [QMUIHelper renderStatusBarStyleLight];
-    } else {
-        [QMUIHelper renderStatusBarStyleDark];
-    }
+    self.statusBarStyle = [super preferredStatusBarStyle];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 #pragma mark - MGSwipeTableCellDelegate
