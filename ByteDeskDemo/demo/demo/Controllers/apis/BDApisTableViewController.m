@@ -67,6 +67,7 @@
                            @"自定义用户信息接口",
                            @"在线状态接口",
                            @"历史会话接口",
+                           @"意见反馈",
                            @"网页形式接入"
                            ];
     // IM接口
@@ -187,6 +188,9 @@
             // 历史会话接口
             viewController = [[KFVisitorThreadViewController alloc] init];
         } else if (indexPath.row == 4) {
+            // TODO: 意见反馈
+            
+        } else if (indexPath.row == 5) {
             // 网页形式接入
             // 注意: 登录后台->所有设置->所有客服->工作组->获取代码 获取相应URL
             NSURL *url = [NSURL URLWithString:@"https://vip.bytedesk.com/chat?uid=201808221551193&wid=201807171659201&type=workGroup&aid=&ph=ph"];
@@ -220,7 +224,7 @@
             // 排队接口
             viewController = [[KFQueueViewController alloc] init];
         } else if (indexPath.row == 5) {
-            // 通知接口
+            // TODO: 通知接口
             viewController = [[KFNoticeViewController alloc] init];
         } else if (indexPath.row == 6) {
             // 设置接口

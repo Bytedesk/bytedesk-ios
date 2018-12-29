@@ -361,7 +361,7 @@
 		3D548A3E1FC518A3003117B4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3D548A481FC52125003117B4 /* Common */,
+				3D548A481FC52125003117B4 /* common */,
 				3D3B7C2D21CA35E2001FE199 /* apis */,
 				3D4C0B0B2131314F0083C8F9 /* im */,
 				3D548A401FC518AF003117B4 /* kefu */,
@@ -379,7 +379,7 @@
 			path = kefu;
 			sourceTree = "<group>";
 		};
-		3D548A481FC52125003117B4 /* Common */ = {
+		3D548A481FC52125003117B4 /* common */ = {
 			isa = PBXGroup;
 			children = (
 				3D39290821C28116001E1257 /* Configuration */,
@@ -390,7 +390,7 @@
 				3D548A491FC52374003117B4 /* KFIntroViewController.h */,
 				3D548A4A1FC52374003117B4 /* KFIntroViewController.m */,
 			);
-			path = Common;
+			path = common;
 			sourceTree = "<group>";
 		};
 		3D5606E9205FB662000E770C /* Views */ = {
