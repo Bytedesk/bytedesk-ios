@@ -39,14 +39,14 @@
         self.floatLayoutView.minimumItemSize = CGSizeMake(69, 29);
         [self addSubview:self.floatLayoutView];
         
-        NSArray<NSString *> *suggestions = @[@"Helps", @"Maintain", @"Liver", @"Health", @"Function", @"Supports", @"Healthy", @"Fat"];
-        for (NSInteger i = 0; i < suggestions.count; i++) {
-            QMUIGhostButton *button = [[QMUIGhostButton alloc] initWithGhostType:QMUIGhostButtonColorGray];
-            [button setTitle:suggestions[i] forState:UIControlStateNormal];
-            button.titleLabel.font = UIFontMake(14);
-            button.contentEdgeInsets = UIEdgeInsetsMake(6, 20, 6, 20);
-            [self.floatLayoutView addSubview:button];
-        }
+//        NSArray<NSString *> *suggestions = @[@"Helps", @"Maintain", @"Liver", @"Health", @"Function", @"Supports", @"Healthy", @"Fat"];
+//        for (NSInteger i = 0; i < suggestions.count; i++) {
+//            QMUIGhostButton *button = [[QMUIGhostButton alloc] initWithGhostType:QMUIGhostButtonColorGray];
+//            [button setTitle:suggestions[i] forState:UIControlStateNormal];
+//            button.titleLabel.font = UIFontMake(14);
+//            button.contentEdgeInsets = UIEdgeInsetsMake(6, 20, 6, 20);
+//            [self.floatLayoutView addSubview:button];
+//        }
     }
     return self;
 }
@@ -189,7 +189,7 @@
         
     } else {
         //
-        NSString *keyword = self.searchResultsKeywords[indexPath.row-1];
+        NSString *keyword = self.searchResultsKeywords[indexPath.row];
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:keyword attributes:@{NSForegroundColorAttributeName: [UIColor blackColor]}];
         NSRange range = [keyword rangeOfString:self.mySearchController.searchBar.text];
         if (range.location != NSNotFound) {

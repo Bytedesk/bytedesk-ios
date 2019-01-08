@@ -41,14 +41,14 @@
         self.floatLayoutView.minimumItemSize = CGSizeMake(69, 29);
         [self addSubview:self.floatLayoutView];
         
-        NSArray<NSString *> *suggestions = @[@"Helps", @"Maintain", @"Liver", @"Health", @"Function", @"Supports", @"Healthy", @"Fat"];
-        for (NSInteger i = 0; i < suggestions.count; i++) {
-            QMUIGhostButton *button = [[QMUIGhostButton alloc] initWithGhostType:QMUIGhostButtonColorGray];
-            [button setTitle:suggestions[i] forState:UIControlStateNormal];
-            button.titleLabel.font = UIFontMake(14);
-            button.contentEdgeInsets = UIEdgeInsetsMake(6, 20, 6, 20);
-            [self.floatLayoutView addSubview:button];
-        }
+//        NSArray<NSString *> *suggestions = @[@"Helps", @"Maintain", @"Liver", @"Health", @"Function", @"Supports", @"Healthy", @"Fat"];
+//        for (NSInteger i = 0; i < suggestions.count; i++) {
+//            QMUIGhostButton *button = [[QMUIGhostButton alloc] initWithGhostType:QMUIGhostButtonColorGray];
+//            [button setTitle:suggestions[i] forState:UIControlStateNormal];
+//            button.titleLabel.font = UIFontMake(14);
+//            button.contentEdgeInsets = UIEdgeInsetsMake(6, 20, 6, 20);
+//            [self.floatLayoutView addSubview:button];
+//        }
     }
     return self;
 }

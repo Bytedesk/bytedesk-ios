@@ -23,6 +23,7 @@
 @property(nonatomic, strong) UIImageView   *mAvatarImageView;
 @property(nonatomic, strong) UILabel       *mTitleLabel;
 @property(nonatomic, strong) UILabel       *mDescriptionLabel;
+@property(nonatomic, strong) NSString      *mType;
 
 @end
 
@@ -31,7 +32,7 @@
 
 @synthesize mScreenWidth,
             mAvatarImageView,
-            mTitleLabel, mDescriptionLabel;
+            mTitleLabel, mDescriptionLabel, mType;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -52,6 +53,7 @@
 - (void)initWithGroupModel:(BDGroupModel *)groupModel {
     //
     mTitleLabel.text = groupModel.nickname;
+    mType = @"group";
     // TODO: 根据来源不同显示不同的placeholder image
     [mAvatarImageView setImageWithURL:[NSURL URLWithString:groupModel.avatar] placeholderImage:[UIImage imageNamed:@"android_default_avatar"]];
 }
@@ -60,6 +62,7 @@
     //
     mTitleLabel.text = contactModel.real_name;
     mDescriptionLabel.text = contactModel.mdescription;
+    mType = @"contact";
     // TODO: 根据来源不同显示不同的placeholder image
     [mAvatarImageView setImageWithURL:[NSURL URLWithString:contactModel.avatar] placeholderImage:[UIImage imageNamed:@"android_default_avatar"]];
 }

@@ -10,10 +10,9 @@
 #import <SafariServices/SafariServices.h>
 
 #import "KFIntroViewController.h"
-#import "KFVisitorLoginViewController.h"
-#import "KFVisitorChatViewController.h"
-#import "KFVisitorProfileViewController.h"
-#import "KFVisitorStatusViewController.h"
+#import "KFChatViewController.h"
+#import "KFUserinfoViewController.h"
+#import "KFStatusViewController.h"
 #import "KFVisitorThreadViewController.h"
 //#import "KFVisitorFeedbackViewController.h"
 //#import "KFVisitorFAQViewController.h"
@@ -99,7 +98,7 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    [cell.textLabel setText:[NSString stringWithFormat:@"%d. %@", indexPath.row+1, [self.apisArray objectAtIndex:indexPath.row]]];
+    [cell.textLabel setText:[NSString stringWithFormat:@"%ld. %@", (long)(indexPath.row+1), [self.apisArray objectAtIndex:indexPath.row]]];
     if (indexPath.row == 2) {
         [cell.detailTextLabel setText:self.mLoginItemDetailText];
     }
@@ -124,11 +123,11 @@
         }
         return;
     } else if (indexPath.row == 3) {
-        viewController = [[KFVisitorChatViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        viewController = [[KFChatViewController alloc] initWithStyle:UITableViewStyleGrouped];
     } else if (indexPath.row == 4) {
-        viewController = [[KFVisitorProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        viewController = [[KFUserinfoViewController alloc] initWithStyle:UITableViewStyleGrouped];
     } else if (indexPath.row == 5) {
-        viewController = [[KFVisitorStatusViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        viewController = [[KFStatusViewController alloc] initWithStyle:UITableViewStyleGrouped];
     } else if (indexPath.row == 6) {
         viewController = [[KFVisitorThreadViewController alloc] init];
     } else if (indexPath.row == 7) {

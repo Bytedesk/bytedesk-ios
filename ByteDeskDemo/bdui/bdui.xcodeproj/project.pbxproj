@@ -304,6 +304,10 @@
 		3D4824F5215792FA00B50593 /* bytedesk-core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4824F4215792FA00B50593 /* bytedesk-core.framework */; };
 		3D5606CB2057C875000E770C /* QDSingleImagePickerPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5606C92057C874000E770C /* QDSingleImagePickerPreviewViewController.m */; };
 		3D5606CC2057C875000E770C /* QDSingleImagePickerPreviewViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D5606CA2057C874000E770C /* QDSingleImagePickerPreviewViewController.h */; };
+		3D57D7111FD00E3F0072823F /* BDFeedbackViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D57D70F1FD00E3F0072823F /* BDFeedbackViewController.h */; };
+		3D57D7121FD00E3F0072823F /* BDFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D57D7101FD00E3F0072823F /* BDFeedbackViewController.m */; };
+		3D8A626021DE598600935617 /* BDGroupMemberTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D8A625E21DE598600935617 /* BDGroupMemberTableViewCell.h */; };
+		3D8A626121DE598600935617 /* BDGroupMemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8A625F21DE598600935617 /* BDGroupMemberTableViewCell.m */; };
 		3DABD1B61FE790F600DE473B /* BDUserinfoViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DABD1B41FE790F600DE473B /* BDUserinfoViewController.h */; };
 		3DABD1B71FE790F600DE473B /* BDUserinfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DABD1B51FE790F600DE473B /* BDUserinfoViewController.m */; };
 		3DC58F7421BE6B9D008BE85D /* BDMsgListContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DC58F7221BE6B9D008BE85D /* BDMsgListContentView.h */; };
@@ -617,7 +621,11 @@
 		3D548A751FC5514B003117B4 /* KFDSUConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFDSUConstants.h; sourceTree = "<group>"; };
 		3D5606C92057C874000E770C /* QDSingleImagePickerPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDSingleImagePickerPreviewViewController.m; sourceTree = "<group>"; };
 		3D5606CA2057C874000E770C /* QDSingleImagePickerPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDSingleImagePickerPreviewViewController.h; sourceTree = "<group>"; };
+		3D57D70F1FD00E3F0072823F /* BDFeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDFeedbackViewController.h; sourceTree = "<group>"; };
+		3D57D7101FD00E3F0072823F /* BDFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDFeedbackViewController.m; sourceTree = "<group>"; };
 		3D62021320FC844F00A94F15 /* bdcore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = bdcore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D8A625E21DE598600935617 /* BDGroupMemberTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDGroupMemberTableViewCell.h; sourceTree = "<group>"; };
+		3D8A625F21DE598600935617 /* BDGroupMemberTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDGroupMemberTableViewCell.m; sourceTree = "<group>"; };
 		3DABD1B41FE790F600DE473B /* BDUserinfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDUserinfoViewController.h; sourceTree = "<group>"; };
 		3DABD1B51FE790F600DE473B /* BDUserinfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDUserinfoViewController.m; sourceTree = "<group>"; };
 		3DC58F7221BE6B9D008BE85D /* BDMsgListContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMsgListContentView.h; sourceTree = "<group>"; };
@@ -693,6 +701,8 @@
 				3DC58F7321BE6B9D008BE85D /* BDMsgListContentView.m */,
 				3D1996C61FCE638700219FEF /* BDMsgNotificationViewCell.h */,
 				3D1996CD1FCE638700219FEF /* BDMsgNotificationViewCell.m */,
+				3D8A625E21DE598600935617 /* BDGroupMemberTableViewCell.h */,
+				3D8A625F21DE598600935617 /* BDGroupMemberTableViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1072,6 +1082,8 @@
 				3D3928E421C07B81001E1257 /* BDContactSelectViewController.m */,
 				3DABD1B41FE790F600DE473B /* BDUserinfoViewController.h */,
 				3DABD1B51FE790F600DE473B /* BDUserinfoViewController.m */,
+				3D57D70F1FD00E3F0072823F /* BDFeedbackViewController.h */,
+				3D57D7101FD00E3F0072823F /* BDFeedbackViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1129,10 +1141,12 @@
 			files = (
 				3D3150F11F1A2A410005DB6C /* BDUIApis.h in Headers */,
 				3D1996C31FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.h in Headers */,
+				3D57D7111FD00E3F0072823F /* BDFeedbackViewController.h in Headers */,
 				3D31509A1F1A1D530005DB6C /* bdui.h in Headers */,
 				3D1996FB1FCE638800219FEF /* KFDSInputEmotionParser.h in Headers */,
 				3D1996E81FCE638800219FEF /* BDMsgTextContentView.h in Headers */,
 				3D1996EB1FCE638800219FEF /* BDMsgVoiceContentView.h in Headers */,
+				3D8A626021DE598600935617 /* BDGroupMemberTableViewCell.h in Headers */,
 				3D1998FB1FCE833900219FEF /* KFDSBadgeView.h in Headers */,
 				3D1996FE1FCE638800219FEF /* KFDSInputEmotionManager.h in Headers */,
 				3D1996E51FCE638800219FEF /* BDMsgNotificationViewCell.h in Headers */,
@@ -1550,8 +1564,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
+			shellScript = "\n";
 		};
 		40E4D3F06829C4C7A96FAE25 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1615,9 +1628,11 @@
 				3D1996EF1FCE638800219FEF /* BDMsgImageContentView.m in Sources */,
 				3D1996E61FCE638800219FEF /* BDMsgVoiceContentView.m in Sources */,
 				3D1998F91FCE833900219FEF /* KFDSBadgeView.m in Sources */,
+				3D57D7121FD00E3F0072823F /* BDFeedbackViewController.m in Sources */,
 				3D3928DF21BF9ED7001E1257 /* BDGroupProfileViewController.m in Sources */,
 				3D3928E621C07B81001E1257 /* BDContactSelectViewController.m in Sources */,
 				3DC58F7521BE6B9D008BE85D /* BDMsgListContentView.m in Sources */,
+				3D8A626121DE598600935617 /* BDGroupMemberTableViewCell.m in Sources */,
 				3D1996B61FCE2B9600219FEF /* BDChatViewController.m in Sources */,
 				3DABD1B71FE790F600DE473B /* BDUserinfoViewController.m in Sources */,
 				3D1996C01FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.m in Sources */,

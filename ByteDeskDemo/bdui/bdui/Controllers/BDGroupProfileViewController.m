@@ -7,6 +7,8 @@
 //
 
 #import "BDGroupProfileViewController.h"
+#import "BDGroupMemberTableViewCell.h"
+
 #import <bytedesk-core/bdcore.h>
 
 @interface BDGroupProfileViewController ()<QMUITextFieldDelegate>
@@ -29,6 +31,7 @@
 @implementation BDGroupProfileViewController
 
 - (void)initWithGroupGid:(NSString *)gid {
+    //
     self.mGid = gid;
     self.mNickname = @"未设置";
     self.mDescription = @"未设置";
@@ -54,31 +57,52 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
+        return 1;
+    } else if (section == 1) {
         return 3;
-    }else {
+    } else {
         return 1;
     }
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Configure the cell...
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    // Configure the cell...
-    if (!cell){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     //
     if (indexPath.section == 0) {
+        return ([self.mMembersArray count]/5 + 1) * 60;
+    } else {
+        return 40;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == 0) {
+        static NSString *CellIdentifier = @"MemberCell";
+        BDGroupMemberTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+        // Configure the cell...
+        if (!cell){
+            cell = [[BDGroupMemberTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        }
+        
+        [cell initWithMembers:self.mMembersArray];
+        
+        return cell;
+    }
+    else if (indexPath.section == 1) {
+        static NSString *CellIdentifier = @"Cell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        // Configure the cell...
+        if (!cell){
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
         //
         if (indexPath.row == 0) {
             cell.textLabel.text = @"群名称";
@@ -91,23 +115,37 @@
             cell.detailTextLabel.text = self.mAnnouncement;
         } else {
             cell.textLabel.text = @"群成员";
+            // TODO: 邀请入群、踢人、禁言
         }
         
+        return cell;
     } else {
+        static NSString *CellIdentifier = @"ExitCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        // Configure the cell...
+        if (!cell){
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        
         if (!self.mIsAdmin) {
             cell.textLabel.text = @"退出群";
         } else {
             cell.textLabel.text = @"解散群";
         }
+        
+        return cell;
     }
-    
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.section == 0) {
+        
+    }
+    else if (indexPath.section == 1) {
         //
         if (!self.mIsAdmin) {
             return;
@@ -215,6 +253,7 @@
 #pragma mark - <QMUITextFieldDelegate>
 
 - (BOOL)textFieldShouldReturn:(QMUITextField *)textField {
+    //
     if (self.currentTextFieldDialogViewController.submitButton.enabled) {
         [self.currentTextFieldDialogViewController hide];
         
@@ -269,19 +308,20 @@
         self.mDescription = dict[@"data"][@"description"];
         self.mAnnouncement = dict[@"data"][@"announcement"];
         //
-        self.mMembersArray = dict[@"data"][@"members"];
-        for (NSDictionary *membersDict in self.mMembersArray) {
-             NSString *realName = [membersDict objectForKey:@"realName"];
-             NSString *avatar = [membersDict objectForKey:@"avatar"];
-            DDLogInfo(@"realName:%@, avatar:%@", realName, avatar);
+        NSMutableArray *membersArray = dict[@"data"][@"members"];
+        for (NSDictionary *memberDict in membersArray) {
+            BDContactModel *memberModel = [[BDContactModel alloc] initWithDictionary:memberDict];
+            [self.mMembersArray addObject:memberModel];
         }
         //
-        self.mAdminsArray = dict[@"data"][@"admins"];
-        for (NSDictionary *adminDict in self.mAdminsArray) {
+        NSMutableArray *adminsArray = dict[@"data"][@"admins"];
+        for (NSDictionary *adminDict in adminsArray) {
             NSString *uid = adminDict[@"uid"];
             if ([uid isEqualToString:[BDSettings getUid]]) {
                 self.mIsAdmin = TRUE;
             }
+            BDContactModel *adminModel = [[BDContactModel alloc] initWithDictionary:adminDict];
+            [self.mAdminsArray addObject:adminModel];
         }
         //
         [self.tableView reloadData];

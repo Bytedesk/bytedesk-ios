@@ -604,6 +604,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 - (void)reloadTableData {
     //
     if (self.mIsVisitor) {
+        //
         if ([self.mRequestType isEqualToString:BD_THREAD_REQUEST_TYPE_APPOINTED]) {
             DDLogInfo(@"1. 访客端获取聊天记录: 指定坐席 %@", self.mThreadTid);
             self.mMessageArray = [BDCoreApis getMessagesWithThread:self.mThreadTid];
@@ -631,7 +632,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         //
         [self hideEmptyView];
     }
-    
     // 刷新tableView
     [self.tableView reloadData];
     [self tableViewScrollToBottom:NO];
@@ -676,6 +676,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyMessageDelete:) name:BD_NOTIFICATION_MESSAGE_DELETE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyMessageRetract:) name:BD_NOTIFICATION_MESSAGE_RETRACT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyMessageStatus:) name:BD_NOTIFICATION_MESSAGE_STATUS object:nil];
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyKickoff:) name:BD_NOTIFICATION_KICKOFF object:nil];
+
 }
 
 - (void)unregisterNotifications {
@@ -1514,7 +1517,21 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 }
 
 
-
+- (void)notifyKickoff:(NSNotification *)notification {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    NSString *content = [notification object];
+    
+    // __weak __typeof(self)weakSelf = self;
+    QMUIAlertAction *okAction = [QMUIAlertAction actionWithTitle:@"确定" style:QMUIAlertActionStyleDefault handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+        
+        // 开发者可以根据自己需要决定是否调用退出登录
+        // 注意: 同一账号同时登录多个客户端不影响正常会话
+        
+    }];
+    QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"账号异地登录提示" message:content preferredStyle:QMUIAlertControllerStyleAlert];
+    [alertController addAction:okAction];
+    [alertController showWithAnimated:YES];
+}
 
 
 @end

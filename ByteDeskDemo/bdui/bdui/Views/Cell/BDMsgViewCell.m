@@ -150,6 +150,7 @@
         //
         _bubbleView = [[BDMsgVoiceContentView  alloc] initMessageContentView];
     } else {
+        // TODO: 当前版本暂不支持查看此消息, 请升级
         // 暂未处理的类型，全部当做text类型处理
         _bubbleView = [[BDMsgTextContentView alloc] initMessageContentView];
     }

@@ -40,12 +40,16 @@
 		3D5489E01FC515CF003117B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5489DF1FC515CF003117B4 /* main.m */; };
 		3D548A431FC51906003117B4 /* KFKeFuApiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A421FC51906003117B4 /* KFKeFuApiViewController.m */; };
 		3D548A4B1FC52374003117B4 /* KFIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A4A1FC52374003117B4 /* KFIntroViewController.m */; };
-		3D548A4E1FC523F1003117B4 /* KFVisitorLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A4D1FC523F1003117B4 /* KFVisitorLoginViewController.m */; };
-		3D548A541FC524B1003117B4 /* KFVisitorChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A531FC524B1003117B4 /* KFVisitorChatViewController.m */; };
-		3D548A571FC524D6003117B4 /* KFVisitorProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A561FC524D6003117B4 /* KFVisitorProfileViewController.m */; };
-		3D548A5A1FC524EC003117B4 /* KFVisitorStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A591FC524EC003117B4 /* KFVisitorStatusViewController.m */; };
+		3D548A541FC524B1003117B4 /* KFChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A531FC524B1003117B4 /* KFChatViewController.m */; };
+		3D548A571FC524D6003117B4 /* KFUserinfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A561FC524D6003117B4 /* KFUserinfoViewController.m */; };
+		3D548A5A1FC524EC003117B4 /* KFStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A591FC524EC003117B4 /* KFStatusViewController.m */; };
 		3D548A5D1FC5251B003117B4 /* KFVisitorThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A5C1FC5251B003117B4 /* KFVisitorThreadViewController.m */; };
 		3D5606EC205FB699000E770C /* KFThreadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5606EB205FB699000E770C /* KFThreadTableViewCell.m */; };
+		3D5E996F21D904AC006D37CC /* KFFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E996E21D904AC006D37CC /* KFFeedbackViewController.m */; };
+		3D5E997621D908E7006D37CC /* KFFormPhoneViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E997121D908E7006D37CC /* KFFormPhoneViewCell.m */; };
+		3D5E997721D908E7006D37CC /* KFFormSubmitViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E997321D908E7006D37CC /* KFFormSubmitViewCell.m */; };
+		3D5E997821D908E7006D37CC /* KFFormContentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E997421D908E7006D37CC /* KFFormContentViewCell.m */; };
+		3D5E997B21D90B33006D37CC /* KFFormImageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E997921D90B33006D37CC /* KFFormImageViewCell.m */; };
 		3D9A14782081F629008C6DA2 /* KFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9A14772081F629008C6DA2 /* KFNavigationController.m */; };
 		3DE1AA7420039A7C00A32B20 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DE1AA7620039A7C00A32B20 /* Localizable.strings */; };
 		AF07A2BB176935FE7FE9041E /* Pods_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA9625A7F4C1A519864722 /* Pods_demo.framework */; };
@@ -120,18 +124,26 @@
 		3D548A421FC51906003117B4 /* KFKeFuApiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFKeFuApiViewController.m; sourceTree = "<group>"; };
 		3D548A491FC52374003117B4 /* KFIntroViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFIntroViewController.h; sourceTree = "<group>"; };
 		3D548A4A1FC52374003117B4 /* KFIntroViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFIntroViewController.m; sourceTree = "<group>"; };
-		3D548A4C1FC523F1003117B4 /* KFVisitorLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFVisitorLoginViewController.h; sourceTree = "<group>"; };
-		3D548A4D1FC523F1003117B4 /* KFVisitorLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFVisitorLoginViewController.m; sourceTree = "<group>"; };
-		3D548A521FC524B1003117B4 /* KFVisitorChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFVisitorChatViewController.h; sourceTree = "<group>"; };
-		3D548A531FC524B1003117B4 /* KFVisitorChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFVisitorChatViewController.m; sourceTree = "<group>"; };
-		3D548A551FC524D6003117B4 /* KFVisitorProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFVisitorProfileViewController.h; sourceTree = "<group>"; };
-		3D548A561FC524D6003117B4 /* KFVisitorProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFVisitorProfileViewController.m; sourceTree = "<group>"; };
-		3D548A581FC524EC003117B4 /* KFVisitorStatusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFVisitorStatusViewController.h; sourceTree = "<group>"; };
-		3D548A591FC524EC003117B4 /* KFVisitorStatusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFVisitorStatusViewController.m; sourceTree = "<group>"; };
+		3D548A521FC524B1003117B4 /* KFChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFChatViewController.h; sourceTree = "<group>"; };
+		3D548A531FC524B1003117B4 /* KFChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFChatViewController.m; sourceTree = "<group>"; };
+		3D548A551FC524D6003117B4 /* KFUserinfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFUserinfoViewController.h; sourceTree = "<group>"; };
+		3D548A561FC524D6003117B4 /* KFUserinfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFUserinfoViewController.m; sourceTree = "<group>"; };
+		3D548A581FC524EC003117B4 /* KFStatusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFStatusViewController.h; sourceTree = "<group>"; };
+		3D548A591FC524EC003117B4 /* KFStatusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFStatusViewController.m; sourceTree = "<group>"; };
 		3D548A5B1FC5251B003117B4 /* KFVisitorThreadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFVisitorThreadViewController.h; sourceTree = "<group>"; };
 		3D548A5C1FC5251B003117B4 /* KFVisitorThreadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFVisitorThreadViewController.m; sourceTree = "<group>"; };
 		3D5606EA205FB699000E770C /* KFThreadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFThreadTableViewCell.h; sourceTree = "<group>"; };
 		3D5606EB205FB699000E770C /* KFThreadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFThreadTableViewCell.m; sourceTree = "<group>"; };
+		3D5E996D21D904AC006D37CC /* KFFeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFFeedbackViewController.h; sourceTree = "<group>"; };
+		3D5E996E21D904AC006D37CC /* KFFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFFeedbackViewController.m; sourceTree = "<group>"; };
+		3D5E997021D908E7006D37CC /* KFFormPhoneViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFFormPhoneViewCell.h; sourceTree = "<group>"; };
+		3D5E997121D908E7006D37CC /* KFFormPhoneViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFFormPhoneViewCell.m; sourceTree = "<group>"; };
+		3D5E997221D908E7006D37CC /* KFFormSubmitViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFFormSubmitViewCell.h; sourceTree = "<group>"; };
+		3D5E997321D908E7006D37CC /* KFFormSubmitViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFFormSubmitViewCell.m; sourceTree = "<group>"; };
+		3D5E997421D908E7006D37CC /* KFFormContentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFFormContentViewCell.m; sourceTree = "<group>"; };
+		3D5E997521D908E7006D37CC /* KFFormContentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFFormContentViewCell.h; sourceTree = "<group>"; };
+		3D5E997921D90B33006D37CC /* KFFormImageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFFormImageViewCell.m; sourceTree = "<group>"; };
+		3D5E997A21D90B33006D37CC /* KFFormImageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFFormImageViewCell.h; sourceTree = "<group>"; };
 		3D9A14762081F629008C6DA2 /* KFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFNavigationController.h; sourceTree = "<group>"; };
 		3D9A14772081F629008C6DA2 /* KFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFNavigationController.m; sourceTree = "<group>"; };
 		3DE1AA7520039A7C00A32B20 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -173,16 +185,16 @@
 		3D3928E821C25E5F001E1257 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3D548A4C1FC523F1003117B4 /* KFVisitorLoginViewController.h */,
-				3D548A4D1FC523F1003117B4 /* KFVisitorLoginViewController.m */,
-				3D548A521FC524B1003117B4 /* KFVisitorChatViewController.h */,
-				3D548A531FC524B1003117B4 /* KFVisitorChatViewController.m */,
-				3D548A551FC524D6003117B4 /* KFVisitorProfileViewController.h */,
-				3D548A561FC524D6003117B4 /* KFVisitorProfileViewController.m */,
-				3D548A581FC524EC003117B4 /* KFVisitorStatusViewController.h */,
-				3D548A591FC524EC003117B4 /* KFVisitorStatusViewController.m */,
+				3D548A521FC524B1003117B4 /* KFChatViewController.h */,
+				3D548A531FC524B1003117B4 /* KFChatViewController.m */,
+				3D548A551FC524D6003117B4 /* KFUserinfoViewController.h */,
+				3D548A561FC524D6003117B4 /* KFUserinfoViewController.m */,
+				3D548A581FC524EC003117B4 /* KFStatusViewController.h */,
+				3D548A591FC524EC003117B4 /* KFStatusViewController.m */,
 				3D548A5B1FC5251B003117B4 /* KFVisitorThreadViewController.h */,
 				3D548A5C1FC5251B003117B4 /* KFVisitorThreadViewController.m */,
+				3D5E996D21D904AC006D37CC /* KFFeedbackViewController.h */,
+				3D5E996E21D904AC006D37CC /* KFFeedbackViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -361,7 +373,7 @@
 		3D548A3E1FC518A3003117B4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3D548A481FC52125003117B4 /* common */,
+				3D548A481FC52125003117B4 /* Common */,
 				3D3B7C2D21CA35E2001FE199 /* apis */,
 				3D4C0B0B2131314F0083C8F9 /* im */,
 				3D548A401FC518AF003117B4 /* kefu */,
@@ -379,7 +391,7 @@
 			path = kefu;
 			sourceTree = "<group>";
 		};
-		3D548A481FC52125003117B4 /* common */ = {
+		3D548A481FC52125003117B4 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				3D39290821C28116001E1257 /* Configuration */,
@@ -390,7 +402,7 @@
 				3D548A491FC52374003117B4 /* KFIntroViewController.h */,
 				3D548A4A1FC52374003117B4 /* KFIntroViewController.m */,
 			);
-			path = common;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		3D5606E9205FB662000E770C /* Views */ = {
@@ -402,6 +414,14 @@
 				3D39293421C28310001E1257 /* KFContactTableViewCell.m */,
 				3D39293121C28310001E1257 /* KFQueueTableViewCell.h */,
 				3D39293321C28310001E1257 /* KFQueueTableViewCell.m */,
+				3D5E997521D908E7006D37CC /* KFFormContentViewCell.h */,
+				3D5E997421D908E7006D37CC /* KFFormContentViewCell.m */,
+				3D5E997A21D90B33006D37CC /* KFFormImageViewCell.h */,
+				3D5E997921D90B33006D37CC /* KFFormImageViewCell.m */,
+				3D5E997021D908E7006D37CC /* KFFormPhoneViewCell.h */,
+				3D5E997121D908E7006D37CC /* KFFormPhoneViewCell.m */,
+				3D5E997221D908E7006D37CC /* KFFormSubmitViewCell.h */,
+				3D5E997321D908E7006D37CC /* KFFormSubmitViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -566,31 +586,35 @@
 			files = (
 				3D39291D21C28116001E1257 /* QDCommonListViewController.m in Sources */,
 				3D39292621C28116001E1257 /* QDCommonUI.m in Sources */,
-				3D548A571FC524D6003117B4 /* KFVisitorProfileViewController.m in Sources */,
+				3D548A571FC524D6003117B4 /* KFUserinfoViewController.m in Sources */,
 				3D3928F821C280C8001E1257 /* KFContactSelectViewController.m in Sources */,
 				3D39291F21C28116001E1257 /* QDCommonTableViewController.m in Sources */,
+				3D5E997621D908E7006D37CC /* KFFormPhoneViewCell.m in Sources */,
 				3D548A5D1FC5251B003117B4 /* KFVisitorThreadViewController.m in Sources */,
 				3D39291A21C28116001E1257 /* QDCommonViewController.m in Sources */,
 				3D39293521C28310001E1257 /* KFQueueTableViewCell.m in Sources */,
 				3D47629921D1CA190034BF83 /* KFNoticeViewController.m in Sources */,
+				3D5E997B21D90B33006D37CC /* KFFormImageViewCell.m in Sources */,
 				3D39293621C28310001E1257 /* KFContactTableViewCell.m in Sources */,
 				3D39291B21C28116001E1257 /* QDCommonGridViewController.m in Sources */,
 				3D39291C21C28116001E1257 /* QDTabBarViewController.m in Sources */,
 				3D39292421C28116001E1257 /* QMUIConfigurationTemplate.m in Sources */,
 				3D3928F721C280C8001E1257 /* BDDetailViewController.m in Sources */,
-				3D548A5A1FC524EC003117B4 /* KFVisitorStatusViewController.m in Sources */,
+				3D548A5A1FC524EC003117B4 /* KFStatusViewController.m in Sources */,
+				3D5E997721D908E7006D37CC /* KFFormSubmitViewCell.m in Sources */,
 				3D3928D021BF8F31001E1257 /* KFGroupViewController.m in Sources */,
 				3D39293A21C2831A001E1257 /* KFUtils.m in Sources */,
 				3D5606EC205FB699000E770C /* KFThreadTableViewCell.m in Sources */,
 				3D3823D921CF5BE800AB12AD /* KFFriendViewController.m in Sources */,
-				3D548A4E1FC523F1003117B4 /* KFVisitorLoginViewController.m in Sources */,
+				3D5E996F21D904AC006D37CC /* KFFeedbackViewController.m in Sources */,
 				3D548A431FC51906003117B4 /* KFKeFuApiViewController.m in Sources */,
 				3D39292021C28116001E1257 /* QDThemeManager.m in Sources */,
 				3D39291921C28116001E1257 /* QDCommonGroupListViewController.m in Sources */,
 				3D548A4B1FC52374003117B4 /* KFIntroViewController.m in Sources */,
+				3D5E997821D908E7006D37CC /* KFFormContentViewCell.m in Sources */,
 				3D5489E01FC515CF003117B4 /* main.m in Sources */,
 				3D9A14782081F629008C6DA2 /* KFNavigationController.m in Sources */,
-				3D548A541FC524B1003117B4 /* KFVisitorChatViewController.m in Sources */,
+				3D548A541FC524B1003117B4 /* KFChatViewController.m in Sources */,
 				3D3928EE21C25EAB001E1257 /* KFThreadViewController.m in Sources */,
 				3D3B7C3021CA3613001FE199 /* BDApisTableViewController.m in Sources */,
 				3D39292521C28116001E1257 /* QDUIHelper.m in Sources */,

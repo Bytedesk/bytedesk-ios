@@ -626,6 +626,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
 #pragma mark - 公共接口
 
++ (void)registerAdmin:(NSString *)email
+         withPassword:(NSString *)password
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
 /**
  <#Description#>
 

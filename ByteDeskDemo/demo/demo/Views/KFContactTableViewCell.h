@@ -18,4 +18,6 @@
 
 - (void)initWithRelationModel:(BDContactModel *)contactModel;
 
+- (NSString *)getType;
+
 @end

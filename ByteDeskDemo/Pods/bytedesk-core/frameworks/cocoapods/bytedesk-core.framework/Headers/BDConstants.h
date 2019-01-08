@@ -112,6 +112,9 @@
 #define BD_NOTIFICATION_CONTACT_UPDATE      @"bd_notification_contact_update"
 #define BD_NOTIFICATION_PROFILE_UPDATE      @"bd_notification_profile_update"
 
+// 账号异地登录
+#define BD_NOTIFICATION_KICKOFF             @"bd_notification_kickoff"
+
 // 通知UI thread状态
 #define BD_NOTIFICATION_THREAD              @"bd_notification_thread"
 #define BD_NOTIFICATION_THREAD_ADD          @"bd_notification_thread_add"

@@ -10,10 +10,11 @@
 #import <SafariServices/SafariServices.h>
 
 // 客服接口演示
-#import "KFVisitorChatViewController.h"
-#import "KFVisitorProfileViewController.h"
-#import "KFVisitorStatusViewController.h"
+#import "KFChatViewController.h"
+#import "KFUserinfoViewController.h"
+#import "KFStatusViewController.h"
 #import "KFVisitorThreadViewController.h"
+#import "KFFeedbackViewController.h"
 
 // IM接口演示
 #import "KFContactViewController.h"
@@ -67,7 +68,8 @@
                            @"自定义用户信息接口",
                            @"在线状态接口",
                            @"历史会话接口",
-                           @"意见反馈",
+                           @"意见反馈(TODO)",
+                           @"帮助中心(TODO)",
                            @"网页形式接入"
                            ];
     // IM接口
@@ -77,12 +79,13 @@
                        @"群组接口",
                        @"会话接口",
                        @"排队接口",
-                       @"通知接口",
+                       @"通知接口(TODO)",
                        @"设置接口",
                        ];
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOAuthResult:) name:BD_NOTIFICATION_OAUTH_RESULT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyConnectionStatus:) name:BD_NOTIFICATION_CONNECTION_STATUS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyKickoff:) name:BD_NOTIFICATION_KICKOFF object:nil];
     
 }
 
@@ -132,7 +135,7 @@
     
     if (indexPath.section == 0) {
         
-        [cell.textLabel setText:[NSString stringWithFormat:@"%ld. %@", indexPath.row+1, [self.commonApisArray objectAtIndex:indexPath.row]]];
+        [cell.textLabel setText:[NSString stringWithFormat:@"%ld. %@", (long)(indexPath.row+1), [self.commonApisArray objectAtIndex:indexPath.row]]];
         
         if (indexPath.row == 1) {
             [cell.detailTextLabel setText:self.mLoginItemDetailText];
@@ -140,11 +143,11 @@
 
     } else if (indexPath.section == 1) {
         
-        [cell.textLabel setText:[NSString stringWithFormat:@"%ld. %@", indexPath.row+1, [self.kefuApisArray objectAtIndex:indexPath.row]]];
+        [cell.textLabel setText:[NSString stringWithFormat:@"%ld. %@", (long)(indexPath.row+1), [self.kefuApisArray objectAtIndex:indexPath.row]]];
 
     } else if (indexPath.section == 2) {
         
-        [cell.textLabel setText:[NSString stringWithFormat:@"%ld. %@", indexPath.row+1, [self.imApisArray objectAtIndex:indexPath.row]]];
+        [cell.textLabel setText:[NSString stringWithFormat:@"%ld. %@", (long)(indexPath.row+1), [self.imApisArray objectAtIndex:indexPath.row]]];
         
         if (indexPath.row == 0) {
             cell.detailTextLabel.text = @"社交: 关注/粉丝/好友/拉黑";
@@ -177,20 +180,23 @@
         UIViewController *viewController = nil;
         if (indexPath.row == 0) {
             // 客服会话接口
-            viewController = [[KFVisitorChatViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            viewController = [[KFChatViewController alloc] initWithStyle:UITableViewStyleGrouped];
         } else if (indexPath.row == 1) {
             // 自定义用户信息接口
-            viewController = [[KFVisitorProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            viewController = [[KFUserinfoViewController alloc] initWithStyle:UITableViewStyleGrouped];
         } else if (indexPath.row == 2) {
             // 在线状态接口
-            viewController = [[KFVisitorStatusViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            viewController = [[KFStatusViewController alloc] initWithStyle:UITableViewStyleGrouped];
         } else if (indexPath.row == 3) {
             // 历史会话接口
             viewController = [[KFVisitorThreadViewController alloc] init];
         } else if (indexPath.row == 4) {
             // TODO: 意见反馈
-            
+            viewController = [[KFFeedbackViewController alloc] initWithStyle:UITableViewStyleGrouped];
         } else if (indexPath.row == 5) {
+            // TODO: 帮助中心
+            // viewController = [[KFFeedbackViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        } else if (indexPath.row == 6) {
             // 网页形式接入
             // 注意: 登录后台->所有设置->所有客服->工作组->获取代码 获取相应URL
             NSURL *url = [NSURL URLWithString:@"https://vip.bytedesk.com/chat?uid=201808221551193&wid=201807171659201&type=workGroup&aid=&ph=ph"];
@@ -237,7 +243,7 @@
     
 }
 
-#pragma mark - j扩展面板
+#pragma mark - 扩展面板
 
 - (void)showRegisterSheet {
     
@@ -418,6 +424,12 @@
     //
 }
 
+
+/**
+ 监听连接状态通知
+
+ @param notification <#notification description#>
+ */
 - (void)notifyConnectionStatus:(NSNotification *)notification {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     NSString *status = [notification object];
@@ -434,6 +446,27 @@
     [self.tableView reloadData];
 }
 
+
+/**
+ 监听账号异地登录通知
+
+ @param notification <#notification description#>
+ */
+- (void)notifyKickoff:(NSNotification *)notification {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    NSString *content = [notification object];
+    
+    __weak __typeof(self)weakSelf = self;
+    QMUIAlertAction *okAction = [QMUIAlertAction actionWithTitle:@"确定" style:QMUIAlertActionStyleDefault handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+        
+        // 开发者可以根据自己需要决定是否调用退出登录
+        // 注意: 同一账号同时登录多个客户端不影响正常会话
+        [weakSelf logout];
+    }];
+    QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"账号异地登录提示" message:content preferredStyle:QMUIAlertControllerStyleAlert];
+    [alertController addAction:okAction];
+    [alertController showWithAnimated:YES];
+}
 
 
 @end

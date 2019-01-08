@@ -80,13 +80,9 @@ static NSString * const kAssetInfoSize = @"size";
     phImageRequestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
     phImageRequestOptions.networkAccessAllowed = YES;
     phImageRequestOptions.synchronous = YES;
-    [[[QMUIAssetsManager sharedInstance] phCachingImageManager] requestImageForAsset:_phAsset
-                                                                          targetSize:PHImageManagerMaximumSize
-                                                                         contentMode:PHImageContentModeDefault
-                                                                             options:phImageRequestOptions
-                                                                       resultHandler:^(UIImage *result, NSDictionary *info) {
-                                                                           resultImage = result;
-                                                                       }];
+    [[[QMUIAssetsManager sharedInstance] phCachingImageManager] requestImageDataForAsset:_phAsset options:phImageRequestOptions resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+        resultImage = [UIImage imageWithData:imageData];
+    }];
     return resultImage;
 }
 
@@ -124,9 +120,9 @@ static NSString * const kAssetInfoSize = @"size";
     PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
     imageRequestOptions.networkAccessAllowed = YES; // 允许访问网络
     imageRequestOptions.progressHandler = phProgressHandler;
-    return [[[QMUIAssetsManager sharedInstance] phCachingImageManager] requestImageForAsset:_phAsset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeDefault options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
+    return [[[QMUIAssetsManager sharedInstance] phCachingImageManager] requestImageDataForAsset:_phAsset options:imageRequestOptions resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
         if (completion) {
-            completion(result, info);
+            completion([UIImage imageWithData:imageData], info);
         }
     }];
 }

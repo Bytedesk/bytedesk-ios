@@ -67,6 +67,10 @@
 
 + (void)notifyProfileUpdate;
 
+//
++ (void)notifyKickoff:(NSString *)content;
+
+
 
 @end
 
