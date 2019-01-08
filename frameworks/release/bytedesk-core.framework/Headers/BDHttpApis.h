@@ -45,6 +45,18 @@ typedef void (^FailedCallbackBlock)(NSError *error);
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ 注册管理员账号，客服管理员
+
+ @param email <#email description#>
+ @param password <#password description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)registerAdmin:(NSString *)email
+         withPassword:(NSString *)password
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
 
 /**
  工作组会话
@@ -381,6 +393,40 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param sessiontype <#stype description#>
  */
 - (void)sendVoiceMessage:(NSString *)content
+                   toTid:(NSString *)tId
+                 localId:(NSString *)localId
+             sessionType:(NSString *)sessiontype
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 同步发送预知消息
+
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param localId <#localId description#>
+ @param sessiontype <#sessiontype description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)sendPreviewMessage:(NSString *)content
+                   toTid:(NSString *)tId
+                 localId:(NSString *)localId
+             sessionType:(NSString *)sessiontype
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 同步发送消息回执
+
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param localId <#localId description#>
+ @param sessiontype <#sessiontype description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)sendReceiptMessage:(NSString *)content
                    toTid:(NSString *)tId
                  localId:(NSString *)localId
              sessionType:(NSString *)sessiontype
