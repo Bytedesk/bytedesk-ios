@@ -31,12 +31,12 @@
 - [服务器端接口](https://github.com/bytedesk/bytedesk-server)
 - [机器人](https://github.com/bytedesk/bytedesk-chatbot)
 
-## 截图
+<!-- ## 截图 -->
 
-<!-- - ![截图1](1.png)
-- ![截图2](2.png)
-- ![截图3](3.png)
-- ![截图4](4.png)
-- ![截图5](5.png)
-- ![截图6](6.png)
-- ![截图7](7.png) -->
+<!-- - ![截图1](img/1.png)
+- ![截图2](img/2.png)
+- ![截图3](img/3.png)
+- ![截图4](img/4.png)
+- ![截图5](img/5.png)
+- ![截图6](img/6.png)
+- ![截图7](img/7.png) -->
