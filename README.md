@@ -33,7 +33,7 @@
 
 <!-- ## 截图 -->
 
-<img src="./img/1.png" width="50%" height="50%" />
+<img src="./img/1.png" width="25%" height="25%" />
 
 <!-- - ![截图1](img/1.png)
 - ![截图2](img/2.png)
