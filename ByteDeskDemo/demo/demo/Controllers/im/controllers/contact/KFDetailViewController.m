@@ -6,14 +6,14 @@
 //  Copyright © 2018 萝卜丝. All rights reserved.
 //
 
-#import "BDDetailViewController.h"
+#import "KFDetailViewController.h"
 
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 #import <bytedesk-ui/bdui.h>
 #import <bytedesk-core/bdcore.h>
 
-@interface BDDetailViewController ()
+@interface KFDetailViewController ()
 
 @property(nonatomic, strong) NSString *mType;
 
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation BDDetailViewController
+@implementation KFDetailViewController
 
 - (instancetype)init {
     self = [super init];

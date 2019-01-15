@@ -69,6 +69,7 @@
         _timestampLabel.textColor = [UIColor grayColor];
         _timestampLabel.font = [UIFont systemFontOfSize:11.0f];
         _timestampLabel.canPerformCopyAction = YES;
+        _timestampLabel.textAlignment = NSTextAlignmentCenter;
         [_timestampLabel sizeToFit];
     }
     return _timestampLabel;
@@ -78,9 +79,12 @@
     //
     if (!_contentLabel) {
         _contentLabel = [[QMUILabel alloc] init];
+        _contentLabel.numberOfLines = 0;
+        _contentLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _contentLabel.textColor = [UIColor grayColor];
         _contentLabel.font = [UIFont systemFontOfSize:11.0f];
         _contentLabel.canPerformCopyAction = YES;
+        _contentLabel.textAlignment = NSTextAlignmentCenter;
         [_contentLabel sizeToFit];
     }
     return _contentLabel;
@@ -106,9 +110,12 @@
 
 - (void)layoutContentLabel {
     //
-    CGSize contentSize = [_messageModel.content sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11.0f]}];
-    _contentLabel.frame = CGRectMake((self.bounds.size.width - contentSize.width - 10)/2, 20.5f, contentSize.width, contentSize.height);
     [_contentLabel setText:_messageModel.content];
+    CGSize contentSize = [_contentLabel sizeThatFits:CGSizeMake(300, CGFLOAT_MAX)];
+//    CGSize contentSize = [_messageModel.content sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11.0f]}];
+//    DDLogInfo(@"contentSize:%fld, %fld", contentSize.width, contentSize.height);
+    
+    _contentLabel.frame = CGRectMake((self.bounds.size.width - contentSize.width - 10)/2, 20.5f, contentSize.width, contentSize.height);
 }
 
 

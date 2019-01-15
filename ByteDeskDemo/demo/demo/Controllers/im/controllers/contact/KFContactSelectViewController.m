@@ -8,7 +8,7 @@
 
 #import "KFContactSelectViewController.h"
 #import "KFContactTableViewCell.h"
-#import "BDDetailViewController.h"
+#import "KFDetailViewController.h"
 
 @interface KFContactSearchView : UIView
 

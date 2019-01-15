@@ -258,22 +258,116 @@
         
         CGFloat padding = 15;
         
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        BDThreadModel *threadModel = [self.mThreadArray objectAtIndex:indexPath.row];
+        
         MGSwipeButton * closeButton = [MGSwipeButton buttonWithTitle:@"删除" backgroundColor:[UIColor colorWithRed:1.0 green:59/255.0 blue:50/255.0 alpha:1.0] padding:padding callback:^BOOL(MGSwipeTableCell *sender) {
-            DDLogInfo(@"close");
-            
-            //
-            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-            BDThreadModel *threadModel = [self.mThreadArray objectAtIndex:indexPath.row];
-            [[BDDBApis sharedInstance] deleteThreadUser:threadModel.tid];
-            
-            // TODO: 直接在表中删除此记录，待优化
-            [self reloadTableData];
+            DDLogInfo(@"delete");
+            // 删除
+            [BDCoreApis markDeletedThread:threadModel.tid resultSuccess:^(NSDictionary *dict) {
+                
+                NSNumber *status_code = [dict objectForKey:@"status_code"];
+                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    
+                    [[BDDBApis sharedInstance] deleteThreadUser:threadModel.tid];
+                    [self.mThreadArray removeObjectAtIndex:indexPath.row];
+                    //
+                    [self.tableView beginUpdates];
+                    [self.tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
+                    [self.tableView endUpdates];
+                }
+                
+                // TODO: 待优化
+                //                [self reloadTableData];
+            } resultFailed:^(NSError *error) {
+                [QMUITips showError:@"删除失败" inView:self.view hideAfterDelay:2.0f];
+            }];
             
             return NO;
         }];
         
-        // markReadButton
-        return @[closeButton];
+        // TODO: 标记未读 or 取消标记未读
+        NSString *titleUnread = [threadModel.is_mark_unread boolValue] ? @"取消标记未读" : @"标记未读";
+        MGSwipeButton * markUnreadButton = [MGSwipeButton buttonWithTitle:titleUnread backgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0] padding:padding callback:^BOOL(MGSwipeTableCell *sender) {
+            DDLogInfo(@"mark unread");
+            
+            if ([threadModel.is_mark_unread boolValue]) {
+                // 取消标记未读
+                [BDCoreApis unmarkUnreadThread:threadModel.tid resultSuccess:^(NSDictionary *dict) {
+                    
+                    // TODO: reloadRowsAtIndexPaths
+                    NSNumber *status_code = [dict objectForKey:@"status_code"];
+                    if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                        
+                        // TODO: 待优化
+                        [self reloadTableData];
+                    }
+                    
+                } resultFailed:^(NSError *error) {
+                    [QMUITips showError:@"取消标记未读失败" inView:self.view hideAfterDelay:2.0f];
+                }];
+            } else {
+                // 标记未读
+                [BDCoreApis markUnreadThread:threadModel.tid resultSuccess:^(NSDictionary *dict) {
+                    
+                    // TODO: reloadRowsAtIndexPaths
+                    NSNumber *status_code = [dict objectForKey:@"status_code"];
+                    if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                        
+                        // TODO: 待优化
+                        [self reloadTableData];
+                    }
+                    
+                } resultFailed:^(NSError *error) {
+                    [QMUITips showError:@"标记未读失败" inView:self.view hideAfterDelay:2.0f];
+                }];
+            }
+            
+            return YES;
+        }];
+        
+        // TODO: 置顶 or 取消指定
+        NSString *titleTop = [threadModel.is_mark_top boolValue] ? @"取消置顶" : @"置顶";
+        MGSwipeButton * markTopButton = [MGSwipeButton buttonWithTitle:titleTop backgroundColor:[UIColor colorWithRed:1.0 green:149/255.0 blue:0.05 alpha:1.0] padding:padding callback:^BOOL(MGSwipeTableCell *sender) {
+            DDLogInfo(@"mark top");
+            
+            if ([threadModel.is_mark_top boolValue]) {
+                // 取消置顶
+                [BDCoreApis unmarkTopThread:threadModel.tid resultSuccess:^(NSDictionary *dict) {
+                    
+                    // TODO: reloadRowsAtIndexPaths
+                    NSNumber *status_code = [dict objectForKey:@"status_code"];
+                    if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                        
+                    }
+                    
+                    // TODO: 待优化
+                    [self reloadTableData];
+                } resultFailed:^(NSError *error) {
+                    [QMUITips showError:@"取消置顶失败" inView:self.view hideAfterDelay:2.0f];
+                }];
+            } else {
+                // 置顶
+                [BDCoreApis markTopThread:threadModel.tid resultSuccess:^(NSDictionary *dict) {
+                    
+                    // TODO: reloadRowsAtIndexPaths
+                    NSNumber *status_code = [dict objectForKey:@"status_code"];
+                    if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                        
+                    }
+                    
+                    // TODO: 待优化
+                    [self reloadTableData];
+                } resultFailed:^(NSError *error) {
+                    [QMUITips showError:@"置顶失败" inView:self.view hideAfterDelay:2.0f];
+                }];
+            }
+            
+            return YES;
+        }];
+        
+        //
+        return @[closeButton, markTopButton, markUnreadButton];
     }
     
     return nil;

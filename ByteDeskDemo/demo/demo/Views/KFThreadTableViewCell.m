@@ -33,18 +33,18 @@
 @implementation KFThreadTableViewCell
 
 @synthesize mScreenWidth,
-            mAvatarImageView,
-            mUnReadLabel,
-            mContentLabel,
-            mTimestampLabel,
-            mTitleLabel;
+mAvatarImageView,
+mUnReadLabel,
+mContentLabel,
+mTimestampLabel,
+mTitleLabel;
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-//        [self qmui_shouldShowDebugColor];
+        //        [self qmui_shouldShowDebugColor];
         mScreenWidth = [UIScreen mainScreen].bounds.size.width;
         
         [self.contentView addSubview:[self mAvatarImageView]];
@@ -69,9 +69,9 @@
     // TODO: 根据来源不同显示不同的placeholder image
     [mAvatarImageView setImageWithURL:[NSURL URLWithString:threadModel.avatar] placeholderImage:[UIImage imageNamed:@"android_default_avatar"]];
     //
-//    UIImage *redDotImage = [UIImage qmui_imageWithColor:UIColorRed size:CGSizeMake(6, 6) cornerRadius:6.0 / 2.0];
-//    UIImage *afterDotImage = [mAvatarImageView.image qmui_imageWithImageAbove:redDotImage atPoint:CGPointMake(mAvatarImageView.image.size.width - redDotImage.size.width - 1, 1)];
-//    [mAvatarImageView setImage:afterDotImage];
+    //    UIImage *redDotImage = [UIImage qmui_imageWithColor:UIColorRed size:CGSizeMake(6, 6) cornerRadius:6.0 / 2.0];
+    //    UIImage *afterDotImage = [mAvatarImageView.image qmui_imageWithImageAbove:redDotImage atPoint:CGPointMake(mAvatarImageView.image.size.width - redDotImage.size.width - 1, 1)];
+    //    [mAvatarImageView setImage:afterDotImage];
     mTimestampLabel.text =  [KFUtils getOptimizedTimestamp:threadModel.timestamp];
     //
     if (threadModel.unread_count.intValue > 0) {
@@ -82,6 +82,15 @@
     else {
         mUnReadLabel.hidden  = true;
     }
+    //
+    if ([threadModel.is_mark_top boolValue]) {
+        //        self.backgroundColor = [UIColor grayColor];
+    }
+    //
+    if ([threadModel.is_mark_unread boolValue]) {
+        mUnReadLabel.hidden = false;
+    }
+    
 }
 
 - (void)awakeFromNib {
@@ -92,7 +101,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -156,7 +165,7 @@
 #pragma mark - Section
 
 - (void)initViewConstraints {
-//    DDLogInfo(@"height:%f", self.frame.size.height); // 默认行高：44
+    //    DDLogInfo(@"height:%f", self.frame.size.height); // 默认行高：44
     
     mAvatarImageView.qmui_left = MARGIN;
     mAvatarImageView.qmui_top = MARGIN;
@@ -171,7 +180,7 @@
     mContentLabel.qmui_left = mAvatarImageView.qmui_right + MARGIN;
     mContentLabel.qmui_top = mTitleLabel.qmui_bottom;
     mContentLabel.qmui_height = CONTENT_LABEL_HEIGHT;
-    mContentLabel.qmui_width = TIMESTAMP_LABEL_WIDTH;
+    mContentLabel.qmui_width = mScreenWidth - AVATAR_HEIGHT_WIDTH - MARGIN * 2 - TIMESTAMP_LABEL_WIDTH;
     
     mTimestampLabel.qmui_right = mScreenWidth - MARGIN - TIMESTAMP_LABEL_WIDTH;
     mTimestampLabel.qmui_top = MARGIN;

@@ -41,6 +41,21 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (BOOL) clearThreads;
 - (BOOL) clearThreadUnreadCount:(NSString *)tId;
 
+- (BOOL) markTopThread:(NSString *)tId;
+- (BOOL) unmarkTopThread:(NSString *)tId;
+
+- (BOOL) markDisturbThread:(NSString *)tId;
+- (BOOL) unmarkDisturbThread:(NSString *)tId;
+
+- (BOOL) markUnreadThread:(NSString *)tId;
+- (BOOL) unmarkUnreadThread:(NSString *)tId;
+
+- (BOOL) markDeletedThread:(NSString *)tId;
+
+- (BOOL) markDeletedMessage:(NSString *)mId;
+// TODO: 根据tid标记所有消息已删除
+- (BOOL) markClearMessage:(NSString *)tId;
+
 - (BOOL) insertQueue:(BDQueueModel *)queue;
 - (BOOL) deleteQueue:(NSString *)qId;
 - (NSMutableArray *) getQueues;

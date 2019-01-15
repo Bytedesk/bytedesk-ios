@@ -84,12 +84,10 @@
     if (indexPath.section == 0) {
         static NSString *CellIdentifier = @"MemberCell";
         BDGroupMemberTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-        // Configure the cell...
+        
         if (!cell){
             cell = [[BDGroupMemberTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         }
-        
         [cell initWithMembers:self.mMembersArray];
         
         return cell;
@@ -98,7 +96,6 @@
         static NSString *CellIdentifier = @"Cell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
-        // Configure the cell...
         if (!cell){
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -115,7 +112,7 @@
             cell.detailTextLabel.text = self.mAnnouncement;
         } else {
             cell.textLabel.text = @"群成员";
-            // TODO: 邀请入群、踢人、禁言
+            // TODO: 邀请入群
         }
         
         return cell;
@@ -123,7 +120,6 @@
         static NSString *CellIdentifier = @"ExitCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
-        // Configure the cell...
         if (!cell){
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -132,6 +128,7 @@
         if (!self.mIsAdmin) {
             cell.textLabel.text = @"退出群";
         } else {
+            // TODO: 踢人、禁言
             cell.textLabel.text = @"解散群";
         }
         
@@ -304,24 +301,33 @@
     
     [BDCoreApis getGroupDetail:self.mGid resultSuccess:^(NSDictionary *dict) {
         
-        self.mNickname = dict[@"data"][@"nickname"];
-        self.mDescription = dict[@"data"][@"description"];
-        self.mAnnouncement = dict[@"data"][@"announcement"];
-        //
-        NSMutableArray *membersArray = dict[@"data"][@"members"];
-        for (NSDictionary *memberDict in membersArray) {
-            BDContactModel *memberModel = [[BDContactModel alloc] initWithDictionary:memberDict];
-            [self.mMembersArray addObject:memberModel];
-        }
-        //
-        NSMutableArray *adminsArray = dict[@"data"][@"admins"];
-        for (NSDictionary *adminDict in adminsArray) {
-            NSString *uid = adminDict[@"uid"];
-            if ([uid isEqualToString:[BDSettings getUid]]) {
-                self.mIsAdmin = TRUE;
+        NSNumber *status_code = [dict objectForKey:@"status_code"];
+        DDLogWarn(@"dict:%@", dict);
+        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            // 成功
+            self.mNickname = dict[@"data"][@"nickname"];
+            self.mDescription = dict[@"data"][@"description"];
+            self.mAnnouncement = dict[@"data"][@"announcement"];
+            //
+            NSMutableArray *membersArray = dict[@"data"][@"members"];
+            for (NSDictionary *memberDict in membersArray) {
+                BDContactModel *memberModel = [[BDContactModel alloc] initWithDictionary:memberDict];
+                [self.mMembersArray addObject:memberModel];
             }
-            BDContactModel *adminModel = [[BDContactModel alloc] initWithDictionary:adminDict];
-            [self.mAdminsArray addObject:adminModel];
+            //
+            NSMutableArray *adminsArray = dict[@"data"][@"admins"];
+            for (NSDictionary *adminDict in adminsArray) {
+                NSString *uid = adminDict[@"uid"];
+                if ([uid isEqualToString:[BDSettings getUid]]) {
+                    self.mIsAdmin = TRUE;
+                }
+                BDContactModel *adminModel = [[BDContactModel alloc] initWithDictionary:adminDict];
+                [self.mAdminsArray addObject:adminModel];
+            }
+        } else {
+            //
+            NSString *message = dict[@"message"];
+            [QMUITips showError:message inView:self.view hideAfterDelay:2];
         }
         //
         [self.tableView reloadData];

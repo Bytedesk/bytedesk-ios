@@ -50,23 +50,30 @@
     //
     for (NSUInteger i = 0; i < [membersArray count]; i++) {
         BDContactModel *contactModel = [membersArray objectAtIndex:i];
-        DDLogInfo(@"realName: %@", contactModel.nickname);
+//        DDLogInfo(@"realName: %@", contactModel.nickname);
         //
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 5, 35, 35)];
         [imageView setImageWithURL:[NSURL URLWithString:contactModel.avatar] placeholderImage:[UIImage imageNamed:@"avatar"]];
         //
-        QMUILabel *label = [[QMUILabel alloc] initWithFrame:CGRectMake(0, 25, 25, 20)];
+        QMUILabel *label = [[QMUILabel alloc] initWithFrame:CGRectMake(12, 40, 50, 20)];
+        [label setFont:[UIFont systemFontOfSize:10]];
+        [label setTextAlignment:NSTextAlignmentCenter];
         [label setText:contactModel.nickname];
         //
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         [view addSubview:imageView];
         [view addSubview:label];
+//        [view setQmui_shouldShowDebugColor:true];
+        
+        // TODO: 拉人
+        
+        // TODO: 踢人
+        
         //
         [self.gridView addSubview:view];
     }
     
-    CGFloat height = ([self.mMembersArray count]/5 + 1) * 60;
-    [self.gridView setRowHeight:height];
+    [self.gridView setRowHeight:60];
 }
 
 

@@ -88,6 +88,8 @@
 // UIEdgeInsetsMake(10, 13, 13, 10)
 @property(nonatomic, assign) UIEdgeInsets  contentViewInsets;
 //@property(nonatomic, assign) UIEdgeInsets  bubbleViewInsets;
+// 是否标记删除
+@property(nonatomic, strong) NSNumber *is_mark_deleted;
 
 // 是否是当前登录用户发送的消息
 - (BOOL)isSend;

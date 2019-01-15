@@ -7,7 +7,7 @@
 
 #import "KFContactViewController.h"
 #import "KFContactTableViewCell.h"
-#import "BDDetailViewController.h"
+#import "KFDetailViewController.h"
 #import "KFContactSelectViewController.h"
 
 @interface KFRosterSearchView : UIView
@@ -194,7 +194,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    BDDetailViewController *detailViewController = [[BDDetailViewController alloc] init];
+    KFDetailViewController *detailViewController = [[KFDetailViewController alloc] init];
     // 联系人
     [detailViewController initWithContactModel:[self.mContactArray objectAtIndex:indexPath.row]];
     //

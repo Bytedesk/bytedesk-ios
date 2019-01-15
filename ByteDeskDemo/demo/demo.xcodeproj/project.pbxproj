@@ -13,7 +13,7 @@
 		3D3928D021BF8F31001E1257 /* KFGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928CF21BF8F31001E1257 /* KFGroupViewController.m */; };
 		3D3928EB21C25E9E001E1257 /* KFQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928EA21C25E9E001E1257 /* KFQueueViewController.m */; };
 		3D3928EE21C25EAB001E1257 /* KFThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928ED21C25EAB001E1257 /* KFThreadViewController.m */; };
-		3D3928F721C280C8001E1257 /* BDDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928F321C280C8001E1257 /* BDDetailViewController.m */; };
+		3D3928F721C280C8001E1257 /* KFDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928F321C280C8001E1257 /* KFDetailViewController.m */; };
 		3D3928F821C280C8001E1257 /* KFContactSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928F521C280C8001E1257 /* KFContactSelectViewController.m */; };
 		3D39291921C28116001E1257 /* QDCommonGroupListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928FA21C28116001E1257 /* QDCommonGroupListViewController.m */; };
 		3D39291A21C28116001E1257 /* QDCommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928FD21C28116001E1257 /* QDCommonViewController.m */; };
@@ -55,6 +55,19 @@
 		AF07A2BB176935FE7FE9041E /* Pods_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA9625A7F4C1A519864722 /* Pods_demo.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3D48250321579E3E00B50593 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		3ABA9625A7F4C1A519864722 /* Pods_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D0DB22C21CC607C002ACB3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -69,10 +82,10 @@
 		3D3928EA21C25E9E001E1257 /* KFQueueViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFQueueViewController.m; sourceTree = "<group>"; };
 		3D3928EC21C25EAB001E1257 /* KFThreadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFThreadViewController.h; sourceTree = "<group>"; };
 		3D3928ED21C25EAB001E1257 /* KFThreadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFThreadViewController.m; sourceTree = "<group>"; };
-		3D3928F321C280C8001E1257 /* BDDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDDetailViewController.m; sourceTree = "<group>"; };
+		3D3928F321C280C8001E1257 /* KFDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFDetailViewController.m; sourceTree = "<group>"; };
 		3D3928F421C280C8001E1257 /* KFContactSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFContactSelectViewController.h; sourceTree = "<group>"; };
 		3D3928F521C280C8001E1257 /* KFContactSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFContactSelectViewController.m; sourceTree = "<group>"; };
-		3D3928F621C280C8001E1257 /* BDDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDDetailViewController.h; sourceTree = "<group>"; };
+		3D3928F621C280C8001E1257 /* KFDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFDetailViewController.h; sourceTree = "<group>"; };
 		3D3928FA21C28116001E1257 /* QDCommonGroupListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDCommonGroupListViewController.m; sourceTree = "<group>"; };
 		3D3928FB21C28116001E1257 /* QDTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDTabBarViewController.h; sourceTree = "<group>"; };
 		3D3928FC21C28116001E1257 /* QDCommonListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDCommonListViewController.h; sourceTree = "<group>"; };
@@ -202,8 +215,8 @@
 		3D3928F221C2806E001E1257 /* contact */ = {
 			isa = PBXGroup;
 			children = (
-				3D3928F621C280C8001E1257 /* BDDetailViewController.h */,
-				3D3928F321C280C8001E1257 /* BDDetailViewController.m */,
+				3D3928F621C280C8001E1257 /* KFDetailViewController.h */,
+				3D3928F321C280C8001E1257 /* KFDetailViewController.m */,
 				3D3928F421C280C8001E1257 /* KFContactSelectViewController.h */,
 				3D3928F521C280C8001E1257 /* KFContactSelectViewController.m */,
 				3D3928CB21BF8F20001E1257 /* KFContactViewController.h */,
@@ -458,6 +471,7 @@
 				3D5489CA1FC515CF003117B4 /* Frameworks */,
 				3D5489CB1FC515CF003117B4 /* Resources */,
 				D375F745768394A0078AADDE /* [CP] Embed Pods Frameworks */,
+				3D48250321579E3E00B50593 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -599,7 +613,7 @@
 				3D39291B21C28116001E1257 /* QDCommonGridViewController.m in Sources */,
 				3D39291C21C28116001E1257 /* QDTabBarViewController.m in Sources */,
 				3D39292421C28116001E1257 /* QMUIConfigurationTemplate.m in Sources */,
-				3D3928F721C280C8001E1257 /* BDDetailViewController.m in Sources */,
+				3D3928F721C280C8001E1257 /* KFDetailViewController.m in Sources */,
 				3D548A5A1FC524EC003117B4 /* KFStatusViewController.m in Sources */,
 				3D5E997721D908E7006D37CC /* KFFormSubmitViewCell.m in Sources */,
 				3D3928D021BF8F31001E1257 /* KFGroupViewController.m in Sources */,

@@ -7,7 +7,7 @@
 
 #import "KFGroupViewController.h"
 #import "KFContactTableViewCell.h"
-#import "BDDetailViewController.h"
+//#import "KFDetailViewController.h"
 #import "KFContactSelectViewController.h"
 
 @interface KFGroupSearchView : UIView
@@ -194,10 +194,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    BDDetailViewController *detailViewController = [[BDDetailViewController alloc] init];
-    [detailViewController initWithGroupModel:[self.mGroupArray objectAtIndex:indexPath.row]];
-    //
-    [self.navigationController pushViewController:detailViewController animated:YES];
+//    KFDetailViewController *detailViewController = [[KFDetailViewController alloc] init];
+//    [detailViewController initWithGroupModel:[self.mGroupArray objectAtIndex:indexPath.row]];
+//    //
+//    [self.navigationController pushViewController:detailViewController animated:YES];
     
 }
 

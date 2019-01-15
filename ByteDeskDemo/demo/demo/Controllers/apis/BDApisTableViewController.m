@@ -70,6 +70,7 @@
                            @"历史会话接口",
                            @"意见反馈(TODO)",
                            @"帮助中心(TODO)",
+                           @"常见问题(TODO)",
                            @"网页形式接入"
                            ];
     // IM接口
@@ -197,6 +198,9 @@
             // TODO: 帮助中心
             // viewController = [[KFFeedbackViewController alloc] initWithStyle:UITableViewStyleGrouped];
         } else if (indexPath.row == 6) {
+            // TODO: 常见问题
+            // viewController = [[KFFeedbackViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        } else if (indexPath.row == 7) {
             // 网页形式接入
             // 注意: 登录后台->所有设置->所有客服->工作组->获取代码 获取相应URL
             NSURL *url = [NSURL URLWithString:@"https://vip.bytedesk.com/chatvue?uid=201808221551193&wid=201807171659201&type=workGroup&aid=&ph=ph"];

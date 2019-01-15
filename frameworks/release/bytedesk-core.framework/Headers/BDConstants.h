@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+// TODO: 支持自定义，1. 首先读取NSUserdefault, 2. 自定义plist配置，3. 读取sdk自带配置参数
+
 #ifndef BDConstants_h
 #define BDConstants_h
 //
@@ -25,6 +27,7 @@
 // web后台此域名非统一的，而是每一家使用自己独特的二级域名
 //#define BD_IS_DEBUG                         true
 //#define BD_MQTT_HOST                        @"127.0.0.1"
+//#define BD_HTTP_HOST_ADDRESS                @"http://127.0.0.1:8000"
 //#define HTTP_VISITOR_API_BASE_URL           @"http://127.0.0.1:8000/visitor/api"
 //#define HTTP_API_BASE_URL                   @"http://127.0.0.1:8000/api"
 //#define CLIENT_OAUTH_TOKEN                  @"http://127.0.0.1:8000/oauth/token"
@@ -32,6 +35,7 @@
 // 上线发布域名
 #define BD_IS_DEBUG                         false
 #define BD_MQTT_HOST                        @"mq.bytedesk.com"
+#define BD_HTTP_HOST_ADDRESS                @"https://api.bytedesk.com"
 #define HTTP_VISITOR_API_BASE_URL           @"https://api.bytedesk.com/visitor/api"
 #define HTTP_API_BASE_URL                   @"https://api.bytedesk.com/api"
 #define CLIENT_OAUTH_TOKEN                  @"https://api.bytedesk.com/oauth/token"

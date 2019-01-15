@@ -62,6 +62,15 @@
 @property(nonatomic, strong) NSString *current_uid;
 // 输入草稿
 @property(nonatomic, strong) NSString *craft; // 草稿, TODO: 暂定保存在content字段中
+// 是否置顶
+@property(nonatomic, strong) NSNumber *is_mark_top;
+// 是否设置消息免打扰
+@property(nonatomic, strong) NSNumber *is_mark_disturb;
+// 是否标记未读
+@property(nonatomic, strong) NSNumber *is_mark_unread;
+// 是否标记删除
+@property(nonatomic, strong) NSNumber *is_mark_deleted;
+
 
 @end
 

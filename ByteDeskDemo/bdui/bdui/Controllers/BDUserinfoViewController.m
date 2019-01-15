@@ -28,6 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"用户信息";
+    
     // Do any additional setup after loading the view.
     self.mRefreshControl = [[UIRefreshControl alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
     [self.tableView addSubview:self.mRefreshControl];
@@ -39,11 +41,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setNavigationItemsIsInEditMode:(BOOL)isInEditMode animated:(BOOL)animated {
-//    [super setNavigationItemsIsInEditMode:isInEditMode animated:animated];
-    self.title = @"用户信息";
-    
-}
 
 - (void)initWithThreadModel:(BDThreadModel *)threadModel {
     self.mThreadModel = threadModel;
@@ -72,6 +69,7 @@
 //                                 DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, error);
 //                                 [QMUITips showError:@"加载用户标签失败" inView:parentView hideAfterDelay:2.0f];
 //                             }];
+    
 }
 
 #pragma mark - Selectors
