@@ -15,6 +15,9 @@
 #import "KFStatusViewController.h"
 #import "KFVisitorThreadViewController.h"
 #import "KFFeedbackViewController.h"
+#import "KFHelpCenterViewController.h"
+#import "KFFAQViewController.h"
+#import "KFTicketViewController.h"
 
 // IM接口演示
 #import "KFContactViewController.h"
@@ -71,7 +74,8 @@
                            @"意见反馈(TODO)",
                            @"帮助中心(TODO)",
                            @"常见问题(TODO)",
-                           @"网页形式接入"
+                           @"网页形式接入",
+                           @"提交工单(TODO)"
                            ];
     // IM接口
     self.imApisArray = @[
@@ -140,11 +144,14 @@
         
         if (indexPath.row == 1) {
             [cell.detailTextLabel setText:self.mLoginItemDetailText];
+        } else {
+            cell.detailTextLabel.text = @"";
         }
 
     } else if (indexPath.section == 1) {
         
         [cell.textLabel setText:[NSString stringWithFormat:@"%ld. %@", (long)(indexPath.row+1), [self.kefuApisArray objectAtIndex:indexPath.row]]];
+        cell.detailTextLabel.text = @"";
 
     } else if (indexPath.section == 2) {
         
@@ -154,6 +161,8 @@
             cell.detailTextLabel.text = @"社交: 关注/粉丝/好友/拉黑";
         } else if (indexPath.row == 1) {
             cell.detailTextLabel.text = @"客服同事";
+        } else {
+            cell.detailTextLabel.text = @"";
         }
     }
 
@@ -192,14 +201,14 @@
             // 历史会话接口
             viewController = [[KFVisitorThreadViewController alloc] init];
         } else if (indexPath.row == 4) {
-            // TODO: 意见反馈
+            // 意见反馈
             viewController = [[KFFeedbackViewController alloc] initWithStyle:UITableViewStyleGrouped];
         } else if (indexPath.row == 5) {
             // TODO: 帮助中心
-            // viewController = [[KFFeedbackViewController alloc] initWithStyle:UITableViewStyleGrouped];
+             viewController = [[KFHelpCenterViewController alloc] initWithStyle:UITableViewStyleGrouped];
         } else if (indexPath.row == 6) {
-            // TODO: 常见问题
-            // viewController = [[KFFeedbackViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            // 常见问题
+             viewController = [[KFFAQViewController alloc] init];
         } else if (indexPath.row == 7) {
             // 网页形式接入
             // 注意: 登录后台->所有设置->所有客服->工作组->获取代码 获取相应URL
@@ -209,6 +218,9 @@
             // 建议
             [self presentViewController:safariVC animated:YES completion:nil];
             return;
+        } else {
+            // TODO: 提交工单
+            viewController = [[KFTicketViewController alloc] initWithStyle:UITableViewStyleGrouped];
         }
         viewController.title = [self.kefuApisArray objectAtIndex:indexPath.row];
         viewController.hidesBottomBarWhenPushed = YES;
@@ -391,6 +403,21 @@
     // 退出登录
     [BDCoreApis logoutResultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
+        
+        NSNumber *status_code = [dict objectForKey:@"status_code"];
+        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            
+        } else {
+            
+            if ([status_code isEqualToNumber:[NSNumber numberWithInt:401]]) {
+                // TOKEN过期
+            }
+            
+            NSString *message = dict[@"message"];
+            DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
+            [QMUITips showError:message inView:self.view hideAfterDelay:2];
+        }
+        
     } resultFailed:^(NSError *error) {
         DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
     }];
@@ -406,6 +433,7 @@
     NSString *subDomain = @"vip";
     //
     [BDCoreApis registerUser:username withNickname:nickname withPassword:password withSubDomain:subDomain resultSuccess:^(NSDictionary *dict) {
+        
         NSString *message = dict[@"message"];
         NSNumber *status_code = dict[@"status_code"];
         DDLogInfo(@"%s, %@, message:%@, status_code:%@", __PRETTY_FUNCTION__, dict, message, status_code);
@@ -415,6 +443,7 @@
         } else {
             [QMUITips showError:message inView:self.navigationController.view hideAfterDelay:4];
         }
+        
     } resultFailed:^(NSError *error) {
         DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
         [QMUITips showError:@"注册失败" inView:self.navigationController.view hideAfterDelay:4];

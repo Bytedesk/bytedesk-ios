@@ -7,6 +7,7 @@
 //
 
 #import "KFFormContentViewCell.h"
+#import "UIView+FeedBack.h"
 
 #define LBScreen [UIScreen mainScreen].bounds.size
 
@@ -52,8 +53,8 @@
     countTipLabel.text = @"0/200";
     countTipLabel.font = [UIFont systemFontOfSize:13.0f];
     countTipLabel.textColor = [UIColor grayColor];
-//    countTipLabel.fb_bottom = 100 - 30;
-//    countTipLabel.fb_right = LBScreen.width - 45;
+    countTipLabel.fb_bottom = 70;
+    countTipLabel.fb_right = LBScreen.width - 45;
     [self.contentView addSubview:countTipLabel];
     [countTipLabel sizeToFit];
     

@@ -37,7 +37,7 @@
 - (void)setupSubviews {
     
     UIButton *submitBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 0, LBScreen.width-40, 40)];
-    [submitBtn setTitle:NSLocalizedString(@"submit", nil) forState:UIControlStateNormal];
+    [submitBtn setTitle:NSLocalizedString(@"提交", nil) forState:UIControlStateNormal];
     [submitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [submitBtn setBackgroundColor:[UIColor colorWithRed:255/255.0f green:104/255.0f blue:0/255.0f alpha:1]];
     [submitBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];

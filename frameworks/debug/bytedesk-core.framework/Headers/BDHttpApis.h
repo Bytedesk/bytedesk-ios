@@ -564,6 +564,17 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                resultFailed:(FailedCallbackBlock)failed;
 
 
+/**
+ 错误处理
+
+ @param error error
+ @param success 成功回调
+ @param failed 失败回调
+ */
+- (void)failError:(NSError *)error
+    resultSuccess:(SuccessCallbackBlock)success
+     resultFailed:(FailedCallbackBlock)failed;
+
 @end
 
 

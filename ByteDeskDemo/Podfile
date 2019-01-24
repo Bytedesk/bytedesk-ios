@@ -22,6 +22,7 @@ target 'demo' do
     pod 'M80AttributedLabel'
     pod 'HCSStarRatingView'
     pod 'CocoaLumberjack'
+    pod 'TZImagePickerController'
     
     # 集成核心协议库core
     pod 'bytedesk-core'

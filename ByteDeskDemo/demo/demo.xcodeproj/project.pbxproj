@@ -51,6 +51,12 @@
 		3D5E997821D908E7006D37CC /* KFFormContentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E997421D908E7006D37CC /* KFFormContentViewCell.m */; };
 		3D5E997B21D90B33006D37CC /* KFFormImageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E997921D90B33006D37CC /* KFFormImageViewCell.m */; };
 		3D9A14782081F629008C6DA2 /* KFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9A14772081F629008C6DA2 /* KFNavigationController.m */; };
+		3DCA9C5E21F605C300E63998 /* UIView+FeedBack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C5D21F605C300E63998 /* UIView+FeedBack.m */; };
+		3DCA9C6521F6097E00E63998 /* TZTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6121F6097E00E63998 /* TZTestCell.m */; };
+		3DCA9C6621F6097E00E63998 /* LxGridViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6421F6097E00E63998 /* LxGridViewFlowLayout.m */; };
+		3DCA9C6A21F60F7C00E63998 /* KFFAQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6921F60F7C00E63998 /* KFFAQViewController.m */; };
+		3DCA9C6D21F60FE800E63998 /* KFHelpCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6C21F60FE800E63998 /* KFHelpCenterViewController.m */; };
+		3DCA9C7021F6109600E63998 /* KFTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6F21F6109600E63998 /* KFTicketViewController.m */; };
 		3DE1AA7420039A7C00A32B20 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DE1AA7620039A7C00A32B20 /* Localizable.strings */; };
 		AF07A2BB176935FE7FE9041E /* Pods_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA9625A7F4C1A519864722 /* Pods_demo.framework */; };
 /* End PBXBuildFile section */
@@ -159,6 +165,18 @@
 		3D5E997A21D90B33006D37CC /* KFFormImageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFFormImageViewCell.h; sourceTree = "<group>"; };
 		3D9A14762081F629008C6DA2 /* KFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFNavigationController.h; sourceTree = "<group>"; };
 		3D9A14772081F629008C6DA2 /* KFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFNavigationController.m; sourceTree = "<group>"; };
+		3DCA9C5C21F605C300E63998 /* UIView+FeedBack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FeedBack.h"; sourceTree = "<group>"; };
+		3DCA9C5D21F605C300E63998 /* UIView+FeedBack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FeedBack.m"; sourceTree = "<group>"; };
+		3DCA9C6121F6097E00E63998 /* TZTestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZTestCell.m; sourceTree = "<group>"; };
+		3DCA9C6221F6097E00E63998 /* LxGridViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridViewFlowLayout.h; sourceTree = "<group>"; };
+		3DCA9C6321F6097E00E63998 /* TZTestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZTestCell.h; sourceTree = "<group>"; };
+		3DCA9C6421F6097E00E63998 /* LxGridViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridViewFlowLayout.m; sourceTree = "<group>"; };
+		3DCA9C6821F60F7C00E63998 /* KFFAQViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFFAQViewController.h; sourceTree = "<group>"; };
+		3DCA9C6921F60F7C00E63998 /* KFFAQViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFFAQViewController.m; sourceTree = "<group>"; };
+		3DCA9C6B21F60FE800E63998 /* KFHelpCenterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFHelpCenterViewController.h; sourceTree = "<group>"; };
+		3DCA9C6C21F60FE800E63998 /* KFHelpCenterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFHelpCenterViewController.m; sourceTree = "<group>"; };
+		3DCA9C6E21F6109600E63998 /* KFTicketViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFTicketViewController.h; sourceTree = "<group>"; };
+		3DCA9C6F21F6109600E63998 /* KFTicketViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFTicketViewController.m; sourceTree = "<group>"; };
 		3DE1AA7520039A7C00A32B20 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3DE1AA7C20039AB300A32B20 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		3DE1AA7D20039AB300A32B20 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -208,6 +226,12 @@
 				3D548A5C1FC5251B003117B4 /* KFVisitorThreadViewController.m */,
 				3D5E996D21D904AC006D37CC /* KFFeedbackViewController.h */,
 				3D5E996E21D904AC006D37CC /* KFFeedbackViewController.m */,
+				3DCA9C6821F60F7C00E63998 /* KFFAQViewController.h */,
+				3DCA9C6921F60F7C00E63998 /* KFFAQViewController.m */,
+				3DCA9C6B21F60FE800E63998 /* KFHelpCenterViewController.h */,
+				3DCA9C6C21F60FE800E63998 /* KFHelpCenterViewController.m */,
+				3DCA9C6E21F6109600E63998 /* KFTicketViewController.h */,
+				3DCA9C6F21F6109600E63998 /* KFTicketViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -271,13 +295,13 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		3D39293721C2831A001E1257 /* Utils */ = {
+		3D39293721C2831A001E1257 /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				3D39293821C2831A001E1257 /* KFUtils.m */,
 				3D39293921C2831A001E1257 /* KFUtils.h */,
+				3D39293821C2831A001E1257 /* KFUtils.m */,
 			);
-			path = Utils;
+			path = utils;
 			sourceTree = "<group>";
 		};
 		3D39293B21C28452001E1257 /* group */ = {
@@ -365,9 +389,11 @@
 		3D5489CF1FC515CF003117B4 /* demo */ = {
 			isa = PBXGroup;
 			children = (
-				3D39293721C2831A001E1257 /* Utils */,
-				3D5606E9205FB662000E770C /* Views */,
-				3D548A3E1FC518A3003117B4 /* Controllers */,
+				3DCA9C5F21F6094700E63998 /* vendors */,
+				3DCA9C5B21F6059E00E63998 /* category */,
+				3D39293721C2831A001E1257 /* utils */,
+				3D5606E9205FB662000E770C /* views */,
+				3D548A3E1FC518A3003117B4 /* controllers */,
 				3D5489D01FC515CF003117B4 /* AppDelegate.h */,
 				3D5489D11FC515CF003117B4 /* AppDelegate.m */,
 				3D5489D61FC515CF003117B4 /* Main.storyboard */,
@@ -383,15 +409,15 @@
 			path = demo;
 			sourceTree = "<group>";
 		};
-		3D548A3E1FC518A3003117B4 /* Controllers */ = {
+		3D548A3E1FC518A3003117B4 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3D548A481FC52125003117B4 /* Common */,
+				3D548A481FC52125003117B4 /* common */,
 				3D3B7C2D21CA35E2001FE199 /* apis */,
 				3D4C0B0B2131314F0083C8F9 /* im */,
 				3D548A401FC518AF003117B4 /* kefu */,
 			);
-			path = Controllers;
+			path = controllers;
 			sourceTree = "<group>";
 		};
 		3D548A401FC518AF003117B4 /* kefu */ = {
@@ -404,7 +430,7 @@
 			path = kefu;
 			sourceTree = "<group>";
 		};
-		3D548A481FC52125003117B4 /* Common */ = {
+		3D548A481FC52125003117B4 /* common */ = {
 			isa = PBXGroup;
 			children = (
 				3D39290821C28116001E1257 /* Configuration */,
@@ -415,10 +441,10 @@
 				3D548A491FC52374003117B4 /* KFIntroViewController.h */,
 				3D548A4A1FC52374003117B4 /* KFIntroViewController.m */,
 			);
-			path = Common;
+			path = common;
 			sourceTree = "<group>";
 		};
-		3D5606E9205FB662000E770C /* Views */ = {
+		3D5606E9205FB662000E770C /* views */ = {
 			isa = PBXGroup;
 			children = (
 				3D5606EA205FB699000E770C /* KFThreadTableViewCell.h */,
@@ -436,7 +462,35 @@
 				3D5E997221D908E7006D37CC /* KFFormSubmitViewCell.h */,
 				3D5E997321D908E7006D37CC /* KFFormSubmitViewCell.m */,
 			);
-			path = Views;
+			path = views;
+			sourceTree = "<group>";
+		};
+		3DCA9C5B21F6059E00E63998 /* category */ = {
+			isa = PBXGroup;
+			children = (
+				3DCA9C5C21F605C300E63998 /* UIView+FeedBack.h */,
+				3DCA9C5D21F605C300E63998 /* UIView+FeedBack.m */,
+			);
+			path = category;
+			sourceTree = "<group>";
+		};
+		3DCA9C5F21F6094700E63998 /* vendors */ = {
+			isa = PBXGroup;
+			children = (
+				3DCA9C6021F6097E00E63998 /* pickImage */,
+			);
+			path = vendors;
+			sourceTree = "<group>";
+		};
+		3DCA9C6021F6097E00E63998 /* pickImage */ = {
+			isa = PBXGroup;
+			children = (
+				3DCA9C6321F6097E00E63998 /* TZTestCell.h */,
+				3DCA9C6121F6097E00E63998 /* TZTestCell.m */,
+				3DCA9C6221F6097E00E63998 /* LxGridViewFlowLayout.h */,
+				3DCA9C6421F6097E00E63998 /* LxGridViewFlowLayout.m */,
+			);
+			path = pickImage;
 			sourceTree = "<group>";
 		};
 		9C7149EBC449A684C32A715E /* Pods */ = {
@@ -570,6 +624,7 @@
 				"${BUILT_PRODUCTS_DIR}/MGSwipeTableCell/MGSwipeTableCell.framework",
 				"${BUILT_PRODUCTS_DIR}/MQTTClient/MQTTClient.framework",
 				"${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework",
+				"${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework",
 				"${PODS_ROOT}/bytedesk-core/frameworks/cocoapods/bytedesk-core.framework",
 				"${PODS_ROOT}/bytedesk-ui/frameworks/cocoapods/bytedesk-ui.framework",
 			);
@@ -583,6 +638,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGSwipeTableCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MQTTClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QMUIKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TZImagePickerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bytedesk-core.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bytedesk-ui.framework",
 			);
@@ -600,6 +656,7 @@
 			files = (
 				3D39291D21C28116001E1257 /* QDCommonListViewController.m in Sources */,
 				3D39292621C28116001E1257 /* QDCommonUI.m in Sources */,
+				3DCA9C6621F6097E00E63998 /* LxGridViewFlowLayout.m in Sources */,
 				3D548A571FC524D6003117B4 /* KFUserinfoViewController.m in Sources */,
 				3D3928F821C280C8001E1257 /* KFContactSelectViewController.m in Sources */,
 				3D39291F21C28116001E1257 /* QDCommonTableViewController.m in Sources */,
@@ -608,6 +665,7 @@
 				3D39291A21C28116001E1257 /* QDCommonViewController.m in Sources */,
 				3D39293521C28310001E1257 /* KFQueueTableViewCell.m in Sources */,
 				3D47629921D1CA190034BF83 /* KFNoticeViewController.m in Sources */,
+				3DCA9C5E21F605C300E63998 /* UIView+FeedBack.m in Sources */,
 				3D5E997B21D90B33006D37CC /* KFFormImageViewCell.m in Sources */,
 				3D39293621C28310001E1257 /* KFContactTableViewCell.m in Sources */,
 				3D39291B21C28116001E1257 /* QDCommonGridViewController.m in Sources */,
@@ -626,12 +684,16 @@
 				3D39291921C28116001E1257 /* QDCommonGroupListViewController.m in Sources */,
 				3D548A4B1FC52374003117B4 /* KFIntroViewController.m in Sources */,
 				3D5E997821D908E7006D37CC /* KFFormContentViewCell.m in Sources */,
+				3DCA9C6521F6097E00E63998 /* TZTestCell.m in Sources */,
 				3D5489E01FC515CF003117B4 /* main.m in Sources */,
+				3DCA9C6A21F60F7C00E63998 /* KFFAQViewController.m in Sources */,
 				3D9A14782081F629008C6DA2 /* KFNavigationController.m in Sources */,
 				3D548A541FC524B1003117B4 /* KFChatViewController.m in Sources */,
 				3D3928EE21C25EAB001E1257 /* KFThreadViewController.m in Sources */,
 				3D3B7C3021CA3613001FE199 /* BDApisTableViewController.m in Sources */,
 				3D39292521C28116001E1257 /* QDUIHelper.m in Sources */,
+				3DCA9C6D21F60FE800E63998 /* KFHelpCenterViewController.m in Sources */,
+				3DCA9C7021F6109600E63998 /* KFTicketViewController.m in Sources */,
 				3D39294121C28595001E1257 /* KFProfileViewController.m in Sources */,
 				3D5489D21FC515CF003117B4 /* AppDelegate.m in Sources */,
 				3D39291E21C28116001E1257 /* QDNavigationController.m in Sources */,

@@ -151,6 +151,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/MGSwipeTableCell/MGSwipeTableCell.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MQTTClient/MQTTClient.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework"
   install_framework "${PODS_ROOT}/bytedesk-core/frameworks/cocoapods/bytedesk-core.framework"
   install_framework "${PODS_ROOT}/bytedesk-ui/frameworks/cocoapods/bytedesk-ui.framework"
 fi
@@ -163,6 +164,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/MGSwipeTableCell/MGSwipeTableCell.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MQTTClient/MQTTClient.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework"
   install_framework "${PODS_ROOT}/bytedesk-core/frameworks/cocoapods/bytedesk-core.framework"
   install_framework "${PODS_ROOT}/bytedesk-ui/frameworks/cocoapods/bytedesk-ui.framework"
 fi

@@ -27,7 +27,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
            resultFailed:(FailedCallbackBlock)failed;
 
 /**
- 访客登录
+ 访客登录: 包含自动注册默认用户
 
  @param appkey appkey
  @param subdomain 二级域名
@@ -40,6 +40,14 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                    resultFailed:(FailedCallbackBlock)failed;
 
 
+/**
+ 利用本地缓存信息登录
+
+ @param appkey appkey
+ @param subdomain 企业号
+ @param success 成功回调
+ @param failed 失败回调
+ */
 + (void) visitorOAuthWithAppkey:(NSString *)appkey
                   withSubdomain:(NSString *)subdomain
                   resultSuccess:(SuccessCallbackBlock)success
