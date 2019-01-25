@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>BDMQTTApis Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">bytedesk-core </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">bytedesk.com</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/connect">- connect</option>
+		
+		<option value="//api/name/connect:">- connect:</option>
+		
+		<option value="//api/name/disconnect">- disconnect</option>
+		
+		<option value="//api/name/sendImageMessage:toTid:localId:sessionType:">- sendImageMessage:toTid:localId:sessionType:</option>
+		
+		<option value="//api/name/sendMessage:type:toTid:localId:sessionType:">- sendMessage:type:toTid:localId:sessionType:</option>
+		
+		<option value="//api/name/sendPreviewMessage:toTid:localId:sessionType:">- sendPreviewMessage:toTid:localId:sessionType:</option>
+		
+		<option value="//api/name/sendReceiptMessage:toTid:localId:sessionType:">- sendReceiptMessage:toTid:localId:sessionType:</option>
+		
+		<option value="//api/name/sendTextMessage:toTid:localId:sessionType:">- sendTextMessage:toTid:localId:sessionType:</option>
+		
+		<option value="//api/name/sendVoiceMessage:toTid:localId:sessionType:">- sendVoiceMessage:toTid:localId:sessionType:</option>
+		
+		<option value="//api/name/setStatus:">- setStatus:</option>
+		
+		<option value="//api/name/subscribeTopic:">- subscribeTopic:</option>
+		
+		<option value="//api/name/unsubscribeTopic:">- unsubscribeTopic:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">BDMQTTApis Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>BDMQTTApis.h<br />BDMQTTApis.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/connect" title="connect"></a>
+	<h3 class="method-title"><code><a href="#//api/name/connect">&ndash;&nbsp;connect</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>建立连接</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)connect</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>建立连接</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDMQTTApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/connect:" title="connect:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/connect:">&ndash;&nbsp;connect:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>建立连接</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)connect:(NSString *)<em>clientId</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>clientId</code></th>
+						<td><p>&lt;#clientId description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>建立连接</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDMQTTApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/subscribeTopic:" title="subscribeTopic:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/subscribeTopic:">&ndash;&nbsp;subscribeTopic:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>订阅主题</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)subscribeTopic:(NSString *)<em>topic</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>topic</code></th>
+						<td><p>&lt;#topic description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>订阅主题</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDMQTTApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/unsubscribeTopic:" title="unsubscribeTopic:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/unsubscribeTopic:">&ndash;&nbsp;unsubscribeTopic:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>取消订阅</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)unsubscribeTopic:(NSString *)<em>topic</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>topic</code></th>
+						<td><p>&lt;#topic description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>取消订阅</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDMQTTApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/sendTextMessage:toTid:localId:sessionType:" title="sendTextMessage:toTid:localId:sessionType:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/sendTextMessage:toTid:localId:sessionType:">&ndash;&nbsp;sendTextMessage:toTid:localId:sessionType:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>发送文本消息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)sendTextMessage:(NSString *)<em>content</em> toTid:(NSString *)<em>tId</em> localId:(NSString *)<em>localId</em> sessionType:(NSString *)<em>sessiontype</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>content</code></th>
+						<td><p>&lt;#content description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tId</code></th>
+						<td><p>&lt;#tId description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sessiontype</code></th>
+						<td><p>&lt;#stype description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>发送文本消息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDMQTTApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/sendImageMessage:toTid:localId:sessionType:" title="sendImageMessage:toTid:localId:sessionType:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/sendImageMessage:toTid:localId:sessionType:">&ndash;&nbsp;sendImageMessage:toTid:localId:sessionType:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>发送图片消息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)sendImageMessage:(NSString *)<em>content</em> toTid:(NSString *)<em>tId</em> localId:(NSString *)<em>localId</em> sessionType:(NSString *)<em>sessiontype</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>content</code></th>
+						<td><p>&lt;#content description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tId</code></th>
+						<td><p>&lt;#tId description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sessiontype</code></th>
+						<td><p>&lt;#stype description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>发送图片消息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDMQTTApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/sendVoiceMessage:toTid:localId:sessionType:" title="sendVoiceMessage:toTid:localId:sessionType:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/sendVoiceMessage:toTid:localId:sessionType:">&ndash;&nbsp;sendVoiceMessage:toTid:localId:sessionType:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>发送语音消息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)sendVoiceMessage:(NSString *)<em>content</em> toTid:(NSString *)<em>tId</em> localId:(NSString *)<em>localId</em> sessionType:(NSString *)<em>sessiontype</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>content</code></th>
+						<td><p>&lt;#content description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tId</code></th>
+						<td><p>&lt;#tId description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sessiontype</code></th>
+						<td><p>&lt;#stype description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>发送语音消息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDMQTTApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/sendPreviewMessage:toTid:localId:sessionType:" title="sendPreviewMessage:toTid:localId:sessionType:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/sendPreviewMessage:toTid:localId:sessionType:">&ndash;&nbsp;sendPreviewMessage:toTid:localId:sessionType:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>发送消息预知通知</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)sendPreviewMessage:(NSString *)<em>content</em> toTid:(NSString *)<em>tId</em> localId:(NSString *)<em>localId</em> sessionType:(NSString *)<em>sessiontype</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>content</code></th>
+						<td><p>&lt;#content description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tId</code></th>
+						<td><p>&lt;#tId description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>localId</code></th>
+						<td><p>&lt;#localId description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sessiontype</code></th>
+						<td><p>&lt;#sessiontype description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>发送消息预知通知</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDMQTTApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/sendReceiptMessage:toTid:localId:sessionType:" title="sendReceiptMessage:toTid:localId:sessionType:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/sendReceiptMessage:toTid:localId:sessionType:">&ndash;&nbsp;sendReceiptMessage:toTid:localId:sessionType:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>发送消息回执通知</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)sendReceiptMessage:(NSString *)<em>content</em> toTid:(NSString *)<em>tId</em> localId:(NSString *)<em>localId</em> sessionType:(NSString *)<em>sessiontype</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>content</code></th>
+						<td><p>&lt;#content description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tId</code></th>
+						<td><p>&lt;#tId description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>localId</code></th>
+						<td><p>&lt;#localId description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sessiontype</code></th>
+						<td><p>&lt;#sessiontype description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>发送消息回执通知</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDMQTTApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/sendMessage:type:toTid:localId:sessionType:" title="sendMessage:type:toTid:localId:sessionType:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/sendMessage:type:toTid:localId:sessionType:">&ndash;&nbsp;sendMessage:type:toTid:localId:sessionType:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>发送消息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)sendMessage:(NSString *)<em>content</em> type:(NSString *)<em>type</em> toTid:(NSString *)<em>tId</em> localId:(NSString *)<em>localId</em> sessionType:(NSString *)<em>sessiontype</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>content</code></th>
+						<td><p>&lt;#content description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>type</code></th>
+						<td><p>&lt;#type description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tId</code></th>
+						<td><p>&lt;#tId description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sessiontype</code></th>
+						<td><p>&lt;#stype description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>发送消息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDMQTTApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setStatus:" title="setStatus:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setStatus:">&ndash;&nbsp;setStatus:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设置在线状态</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setStatus:(NSString *)<em>status</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>status</code></th>
+						<td><p>&lt;#status description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>设置在线状态</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDMQTTApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/disconnect" title="disconnect"></a>
+	<h3 class="method-title"><code><a href="#//api/name/disconnect">&ndash;&nbsp;disconnect</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>断开连接</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)disconnect</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>断开连接</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDMQTTApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2019 bytedesk.com. All rights reserved. Updated: 2019-01-25</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,4787 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>BDCoreApis Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">bytedesk-core </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">bytedesk.com</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/acceptGroupTransfer:resultSuccess:resultFailed:">+ acceptGroupTransfer:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/addBlock:withNote:resultSuccess:resultFailed:">+ addBlock:withNote:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/addFollow:resultSuccess:resultFailed:">+ addFollow:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/agentCloseThread:resultSuccess:resultFailed:">+ agentCloseThread:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/applyGroup:resultSuccess:resultFailed:">+ applyGroup:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/approveGroupApply:resultSuccess:resultFailed:">+ approveGroupApply:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/connect">+ connect</option>
+		
+		<option value="//api/name/createGroup:selectedContacts:resultSuccess:resultFailed:">+ createGroup:selectedContacts:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/denyGroupApply:resultSuccess:resultFailed:">+ denyGroupApply:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/disconnect">+ disconnect</option>
+		
+		<option value="//api/name/dismissGroup:resultSuccess:resultFailed:">+ dismissGroup:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/getAgentStatus:resultSuccess:resultFailed:">+ getAgentStatus:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/getBlocksPage:withSize:resultSuccess:resultFailed:">+ getBlocksPage:withSize:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/getContacts">+ getContacts</option>
+		
+		<option value="//api/name/getContactsResultSuccess:resultFailed:">+ getContactsResultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/getFansPage:withSize:resultSuccess:resultFailed:">+ getFansPage:withSize:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/getFingerPrintWithUid:resultSuccess:resultFailed:">+ getFingerPrintWithUid:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/getFollowsPage:withSize:resultSuccess:resultFailed:">+ getFollowsPage:withSize:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/getFriendsPage:withSize:resultSuccess:resultFailed:">+ getFriendsPage:withSize:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/getGroupDetail:resultSuccess:resultFailed:">+ getGroupDetail:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/getGroupMembers:resultSuccess:resultFailed:">+ getGroupMembers:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/getGroupsResultSuccess:resultFailed:">+ getGroupsResultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/getMessagesWithUser">+ getMessagesWithUser</option>
+		
+		<option value="//api/name/getMessagesWithUser:">+ getMessagesWithUser:</option>
+		
+		<option value="//api/name/getQueueCount">+ getQueueCount</option>
+		
+		<option value="//api/name/getQueueResultSuccess:resultFailed:">+ getQueueResultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/getQueues">+ getQueues</option>
+		
+		<option value="//api/name/getRelation:resultSuccess:resultFailed:">+ getRelation:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/getStrangersPage:withSize:resultSuccess:resultFailed:">+ getStrangersPage:withSize:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/getThreadResultSuccess:resultFailed:">+ getThreadResultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/getThreads">+ getThreads</option>
+		
+		<option value="//api/name/getWorkGroupStatus:resultSuccess:resultFailed:">+ getWorkGroupStatus:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/initDataResultSuccess:resultFailed:">+ initDataResultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/inviteToGroup:withGroupGid:resultSuccess:resultFailed:">+ inviteToGroup:withGroupGid:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/isFollowed:resultSuccess:resultFailed:">+ isFollowed:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/joinGroup:resultSuccess:resultFailed:">+ joinGroup:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/kickGroupMember:withGroupGid:resultSuccess:resultFailed:">+ kickGroupMember:withGroupGid:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/loginAsVisitor">+ loginAsVisitor</option>
+		
+		<option value="//api/name/loginResultSuccess:resultFailed:">+ loginResultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/loginWithUsername:withPassword:withAppkey:withSubdomain:resultSuccess:resultFailed:">+ loginWithUsername:withPassword:withAppkey:withSubdomain:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/logoutResultSuccess:resultFailed:">+ logoutResultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/muteGroupMember:withGroupGid:resultSuccess:resultFailed:">+ muteGroupMember:withGroupGid:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/rejectGroupTransfer:resultSuccess:resultFailed:">+ rejectGroupTransfer:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/requestThreadWithAgentUid:resultSuccess:resultFailed:">+ requestThreadWithAgentUid:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/requestThreadWithWorkGroupWid:resultSuccess:resultFailed:">+ requestThreadWithWorkGroupWid:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/sendImageMessage:toTid:localId:sessionType:resultSuccess:resultFailed:">+ sendImageMessage:toTid:localId:sessionType:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/sendMessage:type:toTid:localId:sessionType:resultSuccess:resultFailed:">+ sendMessage:type:toTid:localId:sessionType:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/sendTextMessage:toTid:localId:sessionType:resultSuccess:resultFailed:">+ sendTextMessage:toTid:localId:sessionType:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/sendVoiceMessage:toTid:localId:sessionType:resultSuccess:resultFailed:">+ sendVoiceMessage:toTid:localId:sessionType:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/setAcceptStatus:resultSuccess:resultFailed:">+ setAcceptStatus:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/setFingerPrint:withKey:withValue:resultSuccess:resultFailed:">+ setFingerPrint:withKey:withValue:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/setNickname:resultSuccess:resultFailed:">+ setNickname:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/transferGroup:withGroupGid:resultSuccess:resultFailed:">+ transferGroup:withGroupGid:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/unBlock:resultSuccess:resultFailed:">+ unBlock:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/unFollow:resultSuccess:resultFailed:">+ unFollow:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/updateAutoReply:withContent:resultSuccess:resultFailed:">+ updateAutoReply:withContent:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/updateGroupAnnouncement:withGroupGid:resultSuccess:resultFailed:">+ updateGroupAnnouncement:withGroupGid:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/updateGroupDescription:withGroupGid:resultSuccess:resultFailed:">+ updateGroupDescription:withGroupGid:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/updateGroupNickname:withGroupGid:resultSuccess:resultFailed:">+ updateGroupNickname:withGroupGid:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/updateProfile:resultSuccess:resultFailed:">+ updateProfile:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/uploadImageData:withImageName:resultSuccess:resultFailed:">+ uploadImageData:withImageName:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/visitorGetThreadsPage:resultSuccess:resultFailed:">+ visitorGetThreadsPage:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/visitorLoginWithAppkey:withSubdomain:resultSuccess:resultFailed:">+ visitorLoginWithAppkey:withSubdomain:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/visitorOAuthWithAppkey:withSubdomain:resultSuccess:resultFailed:">+ visitorOAuthWithAppkey:withSubdomain:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/visitorRate:withScore:withNote:withInvite:resultSuccess:resultFailed:">+ visitorRate:withScore:withNote:withInvite:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/withdrawGroup:resultSuccess:resultFailed:">+ withdrawGroup:resultSuccess:resultFailed:</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/filterGroup:resultSuccess:resultFailed:">- filterGroup:resultSuccess:resultFailed:</option>
+		
+		<option value="//api/name/filterGroupMembers:withKeyword:resultSuccess:resultFailed:">- filterGroupMembers:withKeyword:resultSuccess:resultFailed:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">BDCoreApis Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>BDCoreApis.h<br />BDCoreApis.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/visitorLoginWithAppkey:withSubdomain:resultSuccess:resultFailed:" title="visitorLoginWithAppkey:withSubdomain:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/visitorLoginWithAppkey:withSubdomain:resultSuccess:resultFailed:">+&nbsp;visitorLoginWithAppkey:withSubdomain:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>访客登录: 包含自动注册默认用户</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)visitorLoginWithAppkey:(NSString *)<em>appkey</em> withSubdomain:(NSString *)<em>subdomain</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>appkey</code></th>
+						<td><p>appkey</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>subdomain</code></th>
+						<td><p>二级域名</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>成功回调</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>失败回调</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>访客登录: 包含自动注册默认用户</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/visitorOAuthWithAppkey:withSubdomain:resultSuccess:resultFailed:" title="visitorOAuthWithAppkey:withSubdomain:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/visitorOAuthWithAppkey:withSubdomain:resultSuccess:resultFailed:">+&nbsp;visitorOAuthWithAppkey:withSubdomain:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>利用本地缓存信息登录</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)visitorOAuthWithAppkey:(NSString *)<em>appkey</em> withSubdomain:(NSString *)<em>subdomain</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>appkey</code></th>
+						<td><p>appkey</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>subdomain</code></th>
+						<td><p>企业号</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>成功回调</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>失败回调</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>利用本地缓存信息登录</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/requestThreadWithWorkGroupWid:resultSuccess:resultFailed:" title="requestThreadWithWorkGroupWid:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/requestThreadWithWorkGroupWid:resultSuccess:resultFailed:">+&nbsp;requestThreadWithWorkGroupWid:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>工作组会话</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)requestThreadWithWorkGroupWid:(NSString *)<em>wId</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>wId</code></th>
+						<td><p>工作组id</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>成功回调</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>失败回调</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>工作组会话</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/requestThreadWithAgentUid:resultSuccess:resultFailed:" title="requestThreadWithAgentUid:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/requestThreadWithAgentUid:resultSuccess:resultFailed:">+&nbsp;requestThreadWithAgentUid:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>指定坐席会话</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)requestThreadWithAgentUid:(NSString *)<em>uid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>uid</code></th>
+						<td><p>&lt;#uid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>指定坐席会话</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setNickname:resultSuccess:resultFailed:" title="setNickname:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setNickname:resultSuccess:resultFailed:">+&nbsp;setNickname:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设置昵称</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)setNickname:(NSString *)<em>nickname</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nickname</code></th>
+						<td><p>昵称</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>成功回调</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>失败回调</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>设置昵称</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getFingerPrintWithUid:resultSuccess:resultFailed:" title="getFingerPrintWithUid:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getFingerPrintWithUid:resultSuccess:resultFailed:">+&nbsp;getFingerPrintWithUid:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取用户信息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)getFingerPrintWithUid:(NSString *)<em>uid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>成功回调</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>失败回调</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>获取用户信息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setFingerPrint:withKey:withValue:resultSuccess:resultFailed:" title="setFingerPrint:withKey:withValue:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setFingerPrint:withKey:withValue:resultSuccess:resultFailed:">+&nbsp;setFingerPrint:withKey:withValue:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>自定义设置用户属性</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)setFingerPrint:(NSString *)<em>name</em> withKey:(NSString *)<em>key</em> withValue:(NSString *)<em>value</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>自定义设置用户属性</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getWorkGroupStatus:resultSuccess:resultFailed:" title="getWorkGroupStatus:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getWorkGroupStatus:resultSuccess:resultFailed:">+&nbsp;getWorkGroupStatus:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取工作组在线状态</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)getWorkGroupStatus:(NSString *)<em>wId</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>获取工作组在线状态</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getAgentStatus:resultSuccess:resultFailed:" title="getAgentStatus:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getAgentStatus:resultSuccess:resultFailed:">+&nbsp;getAgentStatus:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取某个客服账号的在线状态</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)getAgentStatus:(NSString *)<em>agentUid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>成功回调</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>失败回调</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>获取某个客服账号的在线状态</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/visitorGetThreadsPage:resultSuccess:resultFailed:" title="visitorGetThreadsPage:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/visitorGetThreadsPage:resultSuccess:resultFailed:">+&nbsp;visitorGetThreadsPage:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取用户的所有会话历史</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)visitorGetThreadsPage:(NSInteger)<em>page</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>成功回调</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>失败回调</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>获取用户的所有会话历史</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/visitorRate:withScore:withNote:withInvite:resultSuccess:resultFailed:" title="visitorRate:withScore:withNote:withInvite:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/visitorRate:withScore:withNote:withInvite:resultSuccess:resultFailed:">+&nbsp;visitorRate:withScore:withNote:withInvite:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>满意度评价</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)visitorRate:(NSString *)<em>tId</em> withScore:(NSInteger)<em>score</em> withNote:(NSString *)<em>note</em> withInvite:(BOOL)<em>invite</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tId</code></th>
+						<td><p>&lt;#tId description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>score</code></th>
+						<td><p>&lt;#score description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>note</code></th>
+						<td><p>&lt;#note description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>invite</code></th>
+						<td><p>&lt;#invite description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>满意度评价</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/loginWithUsername:withPassword:withAppkey:withSubdomain:resultSuccess:resultFailed:" title="loginWithUsername:withPassword:withAppkey:withSubdomain:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/loginWithUsername:withPassword:withAppkey:withSubdomain:resultSuccess:resultFailed:">+&nbsp;loginWithUsername:withPassword:withAppkey:withSubdomain:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>客服首次登录，需要提供相关信息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)loginWithUsername:(NSString *)<em>username</em> withPassword:(NSString *)<em>password</em> withAppkey:(NSString *)<em>appkey</em> withSubdomain:(NSString *)<em>subDomain</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>username</code></th>
+						<td><p>用户名</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>password</code></th>
+						<td><p>密码</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>appkey</code></th>
+						<td><p>appkey</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>subDomain</code></th>
+						<td><p>企业号</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>成功回调</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>失败回调</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>客服首次登录，需要提供相关信息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/loginResultSuccess:resultFailed:" title="loginResultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/loginResultSuccess:resultFailed:">+&nbsp;loginResultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>非首次客服登录，利用首次登录保存在本地的token请求数据</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)loginResultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>非首次客服登录，利用首次登录保存在本地的token请求数据</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initDataResultSuccess:resultFailed:" title="initDataResultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initDataResultSuccess:resultFailed:">+&nbsp;initDataResultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>数据初始化：
+{
+     message: &ldquo;success&rdquo;
+     status_code: 200,
+     data: {
+         agent: &lsquo;&rsquo;, // 个人资料
+         queues: &lsquo;&rsquo;, // 排队列表
+         rosters: &lsquo;&rsquo;, // 好友信息
+         threads: &lsquo;&rsquo; // 当前会话列表
+     }
+}</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)initDataResultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>成功回调</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>失败回调</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>数据初始化：
+{
+     message: &ldquo;success&rdquo;
+     status_code: 200,
+     data: {
+         agent: &lsquo;&rsquo;, // 个人资料
+         queues: &lsquo;&rsquo;, // 排队列表
+         rosters: &lsquo;&rsquo;, // 好友信息
+         threads: &lsquo;&rsquo; // 当前会话列表
+     }
+}</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/updateProfile:resultSuccess:resultFailed:" title="updateProfile:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/updateProfile:resultSuccess:resultFailed:">+&nbsp;updateProfile:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>更新个人资料，目前仅开放nickname</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)updateProfile:(NSString *)<em>nickname</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nickname</code></th>
+						<td><p>&lt;#nickname description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>更新个人资料，目前仅开放nickname</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/updateAutoReply:withContent:resultSuccess:resultFailed:" title="updateAutoReply:withContent:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/updateAutoReply:withContent:resultSuccess:resultFailed:">+&nbsp;updateAutoReply:withContent:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>更新自动回复内容，和是否启用自动回复
+客服专用</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)updateAutoReply:(BOOL)<em>isAutoReply</em> withContent:(NSString *)<em>content</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>isAutoReply</code></th>
+						<td><p>&lt;#isAutoReply description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>content</code></th>
+						<td><p>&lt;#content description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>更新自动回复内容，和是否启用自动回复
+客服专用</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setAcceptStatus:resultSuccess:resultFailed:" title="setAcceptStatus:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setAcceptStatus:resultSuccess:resultFailed:">+&nbsp;setAcceptStatus:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设置接待状态</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)setAcceptStatus:(NSString *)<em>acceptStatus</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>acceptStatus</code></th>
+						<td><p>&lt;#acceptStatus description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>设置接待状态</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/agentCloseThread:resultSuccess:resultFailed:" title="agentCloseThread:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/agentCloseThread:resultSuccess:resultFailed:">+&nbsp;agentCloseThread:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>&lt;#Description#></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)agentCloseThread:(NSString *)<em>tid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>&lt;#Description#></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getGroupsResultSuccess:resultFailed:" title="getGroupsResultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getGroupsResultSuccess:resultFailed:">+&nbsp;getGroupsResultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取群组</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)getGroupsResultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>获取群组</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getGroupDetail:resultSuccess:resultFailed:" title="getGroupDetail:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getGroupDetail:resultSuccess:resultFailed:">+&nbsp;getGroupDetail:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>查询群组详情</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)getGroupDetail:(NSString *)<em>gid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>gid</code></th>
+						<td><p>&lt;#gid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>查询群组详情</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getGroupMembers:resultSuccess:resultFailed:" title="getGroupMembers:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getGroupMembers:resultSuccess:resultFailed:">+&nbsp;getGroupMembers:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取群组成员</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)getGroupMembers:(NSString *)<em>gid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>gid</code></th>
+						<td><p>&lt;#gid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>获取群组成员</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/createGroup:selectedContacts:resultSuccess:resultFailed:" title="createGroup:selectedContacts:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/createGroup:selectedContacts:resultSuccess:resultFailed:">+&nbsp;createGroup:selectedContacts:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>创建群组</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)createGroup:(NSString *)<em>nickname</em> selectedContacts:(NSArray *)<em>selectedContacts</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nickname</code></th>
+						<td><p>&lt;#nickname description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>selectedContacts</code></th>
+						<td><p>&lt;#selectedContacts description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>创建群组</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/updateGroupNickname:withGroupGid:resultSuccess:resultFailed:" title="updateGroupNickname:withGroupGid:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/updateGroupNickname:withGroupGid:resultSuccess:resultFailed:">+&nbsp;updateGroupNickname:withGroupGid:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>更新群组昵称</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)updateGroupNickname:(NSString *)<em>nickname</em> withGroupGid:(NSString *)<em>gid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nickname</code></th>
+						<td><p>&lt;#nickname description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>gid</code></th>
+						<td><p>&lt;#gid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>更新群组昵称</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/updateGroupAnnouncement:withGroupGid:resultSuccess:resultFailed:" title="updateGroupAnnouncement:withGroupGid:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/updateGroupAnnouncement:withGroupGid:resultSuccess:resultFailed:">+&nbsp;updateGroupAnnouncement:withGroupGid:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>更新群组公告</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)updateGroupAnnouncement:(NSString *)<em>announcement</em> withGroupGid:(NSString *)<em>gid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>announcement</code></th>
+						<td><p>&lt;#announcement description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>gid</code></th>
+						<td><p>&lt;#gid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>更新群组公告</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/updateGroupDescription:withGroupGid:resultSuccess:resultFailed:" title="updateGroupDescription:withGroupGid:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/updateGroupDescription:withGroupGid:resultSuccess:resultFailed:">+&nbsp;updateGroupDescription:withGroupGid:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>更新群组描述</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)updateGroupDescription:(NSString *)<em>description</em> withGroupGid:(NSString *)<em>gid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>description</code></th>
+						<td><p>&lt;#description description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>gid</code></th>
+						<td><p>&lt;#gid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>更新群组描述</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/inviteToGroup:withGroupGid:resultSuccess:resultFailed:" title="inviteToGroup:withGroupGid:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/inviteToGroup:withGroupGid:resultSuccess:resultFailed:">+&nbsp;inviteToGroup:withGroupGid:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>邀请某个用户到群组</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)inviteToGroup:(NSString *)<em>uid</em> withGroupGid:(NSString *)<em>gid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>uid</code></th>
+						<td><p>&lt;#uid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>gid</code></th>
+						<td><p>&lt;#gid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>邀请某个用户到群组</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/joinGroup:resultSuccess:resultFailed:" title="joinGroup:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/joinGroup:resultSuccess:resultFailed:">+&nbsp;joinGroup:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>主动申请加群，无需要群主审核</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)joinGroup:(NSString *)<em>gid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>gid</code></th>
+						<td><p>&lt;#gid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>主动申请加群，无需要群主审核</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/applyGroup:resultSuccess:resultFailed:" title="applyGroup:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/applyGroup:resultSuccess:resultFailed:">+&nbsp;applyGroup:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>主动申请加群，需要群主审核</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)applyGroup:(NSString *)<em>gid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>gid</code></th>
+						<td><p>&lt;#gid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>主动申请加群，需要群主审核</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/approveGroupApply:resultSuccess:resultFailed:" title="approveGroupApply:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/approveGroupApply:resultSuccess:resultFailed:">+&nbsp;approveGroupApply:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>同意加群请求</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)approveGroupApply:(NSString *)<em>nid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nid</code></th>
+						<td><p>&lt;#nid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>同意加群请求</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/denyGroupApply:resultSuccess:resultFailed:" title="denyGroupApply:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/denyGroupApply:resultSuccess:resultFailed:">+&nbsp;denyGroupApply:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>拒绝加群请求</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)denyGroupApply:(NSString *)<em>nid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nid</code></th>
+						<td><p>&lt;#nid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>拒绝加群请求</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/kickGroupMember:withGroupGid:resultSuccess:resultFailed:" title="kickGroupMember:withGroupGid:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/kickGroupMember:withGroupGid:resultSuccess:resultFailed:">+&nbsp;kickGroupMember:withGroupGid:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>将某用户踢出群组</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)kickGroupMember:(NSString *)<em>uid</em> withGroupGid:(NSString *)<em>gid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>uid</code></th>
+						<td><p>&lt;#uid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>gid</code></th>
+						<td><p>&lt;#gid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>将某用户踢出群组</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/muteGroupMember:withGroupGid:resultSuccess:resultFailed:" title="muteGroupMember:withGroupGid:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/muteGroupMember:withGroupGid:resultSuccess:resultFailed:">+&nbsp;muteGroupMember:withGroupGid:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>禁言群内某用户</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)muteGroupMember:(NSString *)<em>uid</em> withGroupGid:(NSString *)<em>gid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>uid</code></th>
+						<td><p>&lt;#uid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>gid</code></th>
+						<td><p>&lt;#gid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>禁言群内某用户</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/transferGroup:withGroupGid:resultSuccess:resultFailed:" title="transferGroup:withGroupGid:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/transferGroup:withGroupGid:resultSuccess:resultFailed:">+&nbsp;transferGroup:withGroupGid:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>移交群组</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)transferGroup:(NSString *)<em>uid</em> withGroupGid:(NSString *)<em>gid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>uid</code></th>
+						<td><p>&lt;#uid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>gid</code></th>
+						<td><p>&lt;#gid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>移交群组</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/acceptGroupTransfer:resultSuccess:resultFailed:" title="acceptGroupTransfer:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/acceptGroupTransfer:resultSuccess:resultFailed:">+&nbsp;acceptGroupTransfer:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>同意移交群组</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)acceptGroupTransfer:(NSString *)<em>nid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nid</code></th>
+						<td><p>&lt;#nid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>同意移交群组</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/rejectGroupTransfer:resultSuccess:resultFailed:" title="rejectGroupTransfer:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/rejectGroupTransfer:resultSuccess:resultFailed:">+&nbsp;rejectGroupTransfer:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>拒绝移交群组</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)rejectGroupTransfer:(NSString *)<em>nid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nid</code></th>
+						<td><p>&lt;#nid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>拒绝移交群组</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/withdrawGroup:resultSuccess:resultFailed:" title="withdrawGroup:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/withdrawGroup:resultSuccess:resultFailed:">+&nbsp;withdrawGroup:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>退出群组</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)withdrawGroup:(NSString *)<em>gid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>gid</code></th>
+						<td><p>&lt;#gid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>退出群组</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/dismissGroup:resultSuccess:resultFailed:" title="dismissGroup:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/dismissGroup:resultSuccess:resultFailed:">+&nbsp;dismissGroup:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>解散群组</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)dismissGroup:(NSString *)<em>gid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>gid</code></th>
+						<td><p>&lt;#gid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>解散群组</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/filterGroup:resultSuccess:resultFailed:" title="filterGroup:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/filterGroup:resultSuccess:resultFailed:">&ndash;&nbsp;filterGroup:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>搜索群组</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)filterGroup:(NSString *)<em>keyword</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>keyword</code></th>
+						<td><p>&lt;#keyword description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>搜索群组</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/filterGroupMembers:withKeyword:resultSuccess:resultFailed:" title="filterGroupMembers:withKeyword:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/filterGroupMembers:withKeyword:resultSuccess:resultFailed:">&ndash;&nbsp;filterGroupMembers:withKeyword:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>搜索群组成员</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)filterGroupMembers:(NSString *)<em>gid</em> withKeyword:(NSString *)<em>keyword</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>gid</code></th>
+						<td><p>&lt;#gid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>keyword</code></th>
+						<td><p>&lt;#keyword description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>搜索群组成员</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getStrangersPage:withSize:resultSuccess:resultFailed:" title="getStrangersPage:withSize:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getStrangersPage:withSize:resultSuccess:resultFailed:">+&nbsp;getStrangersPage:withSize:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取陌生人列表（暂未上线）</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)getStrangersPage:(NSUInteger)<em>page</em> withSize:(NSUInteger)<em>size</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>page</code></th>
+						<td><p>&lt;#page description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>size</code></th>
+						<td><p>&lt;#size description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>获取陌生人列表（暂未上线）</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getFollowsPage:withSize:resultSuccess:resultFailed:" title="getFollowsPage:withSize:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getFollowsPage:withSize:resultSuccess:resultFailed:">+&nbsp;getFollowsPage:withSize:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取关注列表
+分页</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)getFollowsPage:(NSUInteger)<em>page</em> withSize:(NSUInteger)<em>size</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>page</code></th>
+						<td><p>&lt;#page description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>size</code></th>
+						<td><p>&lt;#size description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>获取关注列表
+分页</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getFansPage:withSize:resultSuccess:resultFailed:" title="getFansPage:withSize:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getFansPage:withSize:resultSuccess:resultFailed:">+&nbsp;getFansPage:withSize:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取粉丝列表
+分页</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)getFansPage:(NSUInteger)<em>page</em> withSize:(NSUInteger)<em>size</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>page</code></th>
+						<td><p>&lt;#page description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>size</code></th>
+						<td><p>&lt;#size description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>获取粉丝列表
+分页</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getFriendsPage:withSize:resultSuccess:resultFailed:" title="getFriendsPage:withSize:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getFriendsPage:withSize:resultSuccess:resultFailed:">+&nbsp;getFriendsPage:withSize:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取好友列表
+分页</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)getFriendsPage:(NSUInteger)<em>page</em> withSize:(NSUInteger)<em>size</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>page</code></th>
+						<td><p>&lt;#page description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>size</code></th>
+						<td><p>&lt;#size description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>获取好友列表
+分页</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getBlocksPage:withSize:resultSuccess:resultFailed:" title="getBlocksPage:withSize:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getBlocksPage:withSize:resultSuccess:resultFailed:">+&nbsp;getBlocksPage:withSize:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取黑名单
+分页</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)getBlocksPage:(NSUInteger)<em>page</em> withSize:(NSUInteger)<em>size</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>page</code></th>
+						<td><p>&lt;#page description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>size</code></th>
+						<td><p>&lt;#size description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>获取黑名单
+分页</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/addFollow:resultSuccess:resultFailed:" title="addFollow:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addFollow:resultSuccess:resultFailed:">+&nbsp;addFollow:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>添加关注</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)addFollow:(NSString *)<em>uid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>uid</code></th>
+						<td><p>&lt;#uid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>添加关注</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/unFollow:resultSuccess:resultFailed:" title="unFollow:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/unFollow:resultSuccess:resultFailed:">+&nbsp;unFollow:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>取消关注</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)unFollow:(NSString *)<em>uid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>uid</code></th>
+						<td><p>&lt;#uid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>取消关注</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/isFollowed:resultSuccess:resultFailed:" title="isFollowed:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/isFollowed:resultSuccess:resultFailed:">+&nbsp;isFollowed:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>判断是否已经关注</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)isFollowed:(NSString *)<em>uid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>uid</code></th>
+						<td><p>&lt;#uid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>判断是否已经关注</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getRelation:resultSuccess:resultFailed:" title="getRelation:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getRelation:resultSuccess:resultFailed:">+&nbsp;getRelation:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取关系（暂未上线）</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)getRelation:(NSString *)<em>uid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>uid</code></th>
+						<td><p>&lt;#uid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>获取关系（暂未上线）</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/addBlock:withNote:resultSuccess:resultFailed:" title="addBlock:withNote:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addBlock:withNote:resultSuccess:resultFailed:">+&nbsp;addBlock:withNote:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>拉黑用户</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)addBlock:(NSString *)<em>uid</em> withNote:(NSString *)<em>note</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>uid</code></th>
+						<td><p>&lt;#uid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>note</code></th>
+						<td><p>&lt;#note description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>拉黑用户</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/unBlock:resultSuccess:resultFailed:" title="unBlock:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/unBlock:resultSuccess:resultFailed:">+&nbsp;unBlock:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>取消拉黑</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)unBlock:(NSString *)<em>uid</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>uid</code></th>
+						<td><p>&lt;#uid description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>取消拉黑</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/loginAsVisitor" title="loginAsVisitor"></a>
+	<h3 class="method-title"><code><a href="#//api/name/loginAsVisitor">+&nbsp;loginAsVisitor</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>&lt;#Description#></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (BOOL)loginAsVisitor</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>&lt;#return value description#></p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>&lt;#Description#></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getThreads" title="getThreads"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getThreads">+&nbsp;getThreads</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>&lt;#Description#></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSMutableArray *)getThreads</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>&lt;#return value description#></p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>&lt;#Description#></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getThreadResultSuccess:resultFailed:" title="getThreadResultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getThreadResultSuccess:resultFailed:">+&nbsp;getThreadResultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>&lt;#Description#></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)getThreadResultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>&lt;#Description#></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getQueues" title="getQueues"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getQueues">+&nbsp;getQueues</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>&lt;#Description#></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSMutableArray *)getQueues</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>&lt;#return value description#></p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>&lt;#Description#></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getQueueCount" title="getQueueCount"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getQueueCount">+&nbsp;getQueueCount</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>&lt;#Description#></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSNumber *)getQueueCount</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>&lt;#return value description#></p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>&lt;#Description#></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getQueueResultSuccess:resultFailed:" title="getQueueResultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getQueueResultSuccess:resultFailed:">+&nbsp;getQueueResultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>&lt;#Description#></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)getQueueResultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>&lt;#Description#></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getContacts" title="getContacts"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getContacts">+&nbsp;getContacts</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>&lt;#Description#></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSMutableArray *)getContacts</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>&lt;#return value description#></p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>&lt;#Description#></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getContactsResultSuccess:resultFailed:" title="getContactsResultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getContactsResultSuccess:resultFailed:">+&nbsp;getContactsResultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>&lt;#Description#></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)getContactsResultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>&lt;#Description#></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/sendTextMessage:toTid:localId:sessionType:resultSuccess:resultFailed:" title="sendTextMessage:toTid:localId:sessionType:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/sendTextMessage:toTid:localId:sessionType:resultSuccess:resultFailed:">+&nbsp;sendTextMessage:toTid:localId:sessionType:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>同步发送文本消息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)sendTextMessage:(NSString *)<em>content</em> toTid:(NSString *)<em>tId</em> localId:(NSString *)<em>localId</em> sessionType:(NSString *)<em>sessiontype</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>content</code></th>
+						<td><p>content description</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tId</code></th>
+						<td><p>&lt;#tId description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sessiontype</code></th>
+						<td><p>&lt;#stype description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>同步发送文本消息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/sendImageMessage:toTid:localId:sessionType:resultSuccess:resultFailed:" title="sendImageMessage:toTid:localId:sessionType:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/sendImageMessage:toTid:localId:sessionType:resultSuccess:resultFailed:">+&nbsp;sendImageMessage:toTid:localId:sessionType:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>同步发送图片消息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)sendImageMessage:(NSString *)<em>content</em> toTid:(NSString *)<em>tId</em> localId:(NSString *)<em>localId</em> sessionType:(NSString *)<em>sessiontype</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>content</code></th>
+						<td><p>&lt;#content description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tId</code></th>
+						<td><p>&lt;#tId description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sessiontype</code></th>
+						<td><p>&lt;#stype description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>同步发送图片消息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/sendVoiceMessage:toTid:localId:sessionType:resultSuccess:resultFailed:" title="sendVoiceMessage:toTid:localId:sessionType:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/sendVoiceMessage:toTid:localId:sessionType:resultSuccess:resultFailed:">+&nbsp;sendVoiceMessage:toTid:localId:sessionType:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>同步发送语音消息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)sendVoiceMessage:(NSString *)<em>content</em> toTid:(NSString *)<em>tId</em> localId:(NSString *)<em>localId</em> sessionType:(NSString *)<em>sessiontype</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>content</code></th>
+						<td><p>&lt;#content description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tId</code></th>
+						<td><p>&lt;#tId description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sessiontype</code></th>
+						<td><p>&lt;#stype description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>同步发送语音消息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/sendMessage:type:toTid:localId:sessionType:resultSuccess:resultFailed:" title="sendMessage:type:toTid:localId:sessionType:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/sendMessage:type:toTid:localId:sessionType:resultSuccess:resultFailed:">+&nbsp;sendMessage:type:toTid:localId:sessionType:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>同步发送消息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)sendMessage:(NSString *)<em>content</em> type:(NSString *)<em>type</em> toTid:(NSString *)<em>tId</em> localId:(NSString *)<em>localId</em> sessionType:(NSString *)<em>sessiontype</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>content</code></th>
+						<td><p>&lt;#content description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>type</code></th>
+						<td><p>&lt;#type description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tId</code></th>
+						<td><p>&lt;#tId description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sessiontype</code></th>
+						<td><p>&lt;#stype description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>同步发送消息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getMessagesWithUser" title="getMessagesWithUser"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getMessagesWithUser">+&nbsp;getMessagesWithUser</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>访客端调用，查询当前访客自己的所有聊天记录</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSMutableArray *)getMessagesWithUser</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>&lt;#return value description#></p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>访客端调用，查询当前访客自己的所有聊天记录</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getMessagesWithUser:" title="getMessagesWithUser:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getMessagesWithUser:">+&nbsp;getMessagesWithUser:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>客服端调用</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSMutableArray *)getMessagesWithUser:(NSString *)<em>uid</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>uid</code></th>
+						<td><p>&lt;#uid description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>&lt;#return value description#></p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>客服端调用</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/uploadImageData:withImageName:resultSuccess:resultFailed:" title="uploadImageData:withImageName:resultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/uploadImageData:withImageName:resultSuccess:resultFailed:">+&nbsp;uploadImageData:withImageName:resultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>&lt;#Description#></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)uploadImageData:(NSData *)<em>imageData</em> withImageName:(NSString *)<em>imageName</em> resultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>imageData</code></th>
+						<td><p>&lt;#imageData description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>imageName</code></th>
+						<td><p>&lt;#imageName description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>&lt;#Description#></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/logoutResultSuccess:resultFailed:" title="logoutResultSuccess:resultFailed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/logoutResultSuccess:resultFailed:">+&nbsp;logoutResultSuccess:resultFailed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>&lt;#Description#></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)logoutResultSuccess:(SuccessCallbackBlock)<em>success</em> resultFailed:(FailedCallbackBlock)<em>failed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>&lt;#success description#></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failed</code></th>
+						<td><p>&lt;#failed description#></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>&lt;#Description#></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/connect" title="connect"></a>
+	<h3 class="method-title"><code><a href="#//api/name/connect">+&nbsp;connect</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>建立长连接</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)connect</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>建立长连接</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/disconnect" title="disconnect"></a>
+	<h3 class="method-title"><code><a href="#//api/name/disconnect">+&nbsp;disconnect</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>断开连接</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)disconnect</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>断开连接</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BDCoreApis.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2019 bytedesk.com. All rights reserved. Updated: 2019-01-25</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>
