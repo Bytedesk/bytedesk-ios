@@ -75,6 +75,14 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                               resultSuccess:(SuccessCallbackBlock)success
                                resultFailed:(FailedCallbackBlock)failed;
 
+- (void)requestQuestionnairWithTid:(NSString *)tid
+                           itemQid:(NSString *)qid
+                     resultSuccess:(SuccessCallbackBlock)success
+                      resultFailed:(FailedCallbackBlock)failed;
+
+- (void)requestChooseWorkGroup:(NSString *)wid
+                 resultSuccess:(SuccessCallbackBlock)success
+                  resultFailed:(FailedCallbackBlock)failed;
 
 - (void)setNickname:(NSString *)nickname
              resultSuccess:(SuccessCallbackBlock)success
@@ -293,6 +301,21 @@ typedef void (^FailedCallbackBlock)(NSError *error);
           withGroupGid:(NSString *)gid
          resultSuccess:(SuccessCallbackBlock)success
           resultFailed:(FailedCallbackBlock)failed;
+
+- (void)unmuteGroupMember:(NSString *)uid
+             withGroupGid:(NSString *)gid
+            resultSuccess:(SuccessCallbackBlock)success
+             resultFailed:(FailedCallbackBlock)failed;
+
+- (void)setGroupAdmin:(NSString *)uid
+         withGroupGid:(NSString *)gid
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+- (void)unsetGroupAdmin:(NSString *)uid
+           withGroupGid:(NSString *)gid
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
 
 - (void)transferGroup:(NSString *)uid
               withGroupGid:(NSString *)gid
@@ -535,6 +558,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
+- (void)uploadAvatarData:(NSData *)imageData
+          withImageName:(NSString *)imageName
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
 
 /**
  <#Description#>
@@ -547,6 +575,43 @@ typedef void (^FailedCallbackBlock)(NSError *error);
       resultSuccess:(SuccessCallbackBlock)success
        resultFailed:(FailedCallbackBlock)failed;
 
+
+#pragma mark - 机器人
+
+- (void)getInitAnswer:(NSString *)uid
+        withThreadTid:(NSString *)tid
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+- (void)getTopAnswer:(NSString *)uid
+       withThreadTid:(NSString *)tid
+       resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
+
+- (void)queryAnswer:(NSString *)uid
+      withThreadTid:(NSString *)tid
+     withQuestinQid:(NSString *)aid
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
+- (void)messageAnswer:(NSString *)uid
+        withThreadTid:(NSString *)tid
+          withMessage:(NSString *)content
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+
+#pragma mark - 意见反馈
+
+- (void)getFeedbackCategoriesWithResultSuccess:(SuccessCallbackBlock)success
+                                  resultFailed:(FailedCallbackBlock)failed;
+
+- (void)createFeedback:(NSString *)uid
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
+
+- (void)getFeedbackHistoriesWithResultSuccess:(SuccessCallbackBlock)success
+                                 resultFailed:(FailedCallbackBlock)failed;
 
 /**
  <#Description#>

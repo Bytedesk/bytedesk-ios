@@ -39,6 +39,10 @@
 
 + (NSString *)getClient;
 
++ (NSString *)getSubdomain;
+
++ (void)setSubdomain:(NSString *)subdomain;
+
 + (NSString *)getUsername;
 
 + (void)setUsername:(NSString *)username;
@@ -70,10 +74,6 @@
 + (NSString *)getAppkey;
 
 + (void)setAppkey:(NSString *)appkey;
-
-+ (NSString *)getSubdomain;
-
-+ (void)setSubdomain:(NSString *)subdomain;
 
 + (NSString *)getDescription;
 
@@ -112,6 +112,30 @@
 + (void)setPassportTokenType:(NSString *)tokenType;
 
 + (void)clear;
+
+
+
+#pragma mark - 服务器配置
+
++ (NSString *) getOAuthHostAddress;
+
++ (void) setOAuthHostAddress:(NSString *)address;
+
++ (NSString *) getMessageHostAddress;
+
++ (void) setMessageHostAddress:(NSString *)address;
+
++ (NSUInteger) getMessageHostPort;
+
++ (void) setMessageHostPort:(NSUInteger)port;
+
++ (NSString *) getMessageHostUsername;
+
++ (void) setMessageHostUsername:(NSString *)username;
+
++ (NSString *) getMessageHostPassword;
+
++ (void) setMessageHostPassword:(NSString *)password;
 
 @end
 

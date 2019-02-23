@@ -40,6 +40,7 @@
                      withAgentUid:(NSString *)uId
                         withTitle:(NSString *)title;
 
++ (void)visitorPushFeedback:(UINavigationController *)navigationController;
 
 
 #pragma mark - 客服端接口

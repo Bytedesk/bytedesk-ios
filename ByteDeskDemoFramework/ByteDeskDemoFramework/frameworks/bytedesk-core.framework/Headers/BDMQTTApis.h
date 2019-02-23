@@ -66,6 +66,26 @@
 - (void)sendVoiceMessage:(NSString *)content toTid:(NSString *)tId localId:(NSString *)localId sessionType:(NSString *)sessiontype;
 
 /**
+ 发送消息预知通知
+
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param localId <#localId description#>
+ @param sessiontype <#sessiontype description#>
+ */
+- (void)sendPreviewMessage:(NSString *)content toTid:(NSString *)tId localId:(NSString *)localId sessionType:(NSString *)sessiontype;
+
+/**
+ 发送消息回执通知
+
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param localId <#localId description#>
+ @param sessiontype <#sessiontype description#>
+ */
+- (void)sendReceiptMessage:(NSString *)content toTid:(NSString *)tId localId:(NSString *)localId sessionType:(NSString *)sessiontype;
+
+/**
  发送消息
 
  @param content <#content description#>
@@ -89,7 +109,6 @@
 
 
 - (BOOL)isConnected;
-
 
 
 @end

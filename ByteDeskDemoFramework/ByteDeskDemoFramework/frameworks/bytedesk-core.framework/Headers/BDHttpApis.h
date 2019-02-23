@@ -45,6 +45,18 @@ typedef void (^FailedCallbackBlock)(NSError *error);
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ 注册管理员账号，客服管理员
+
+ @param email <#email description#>
+ @param password <#password description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)registerAdmin:(NSString *)email
+         withPassword:(NSString *)password
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
 
 /**
  工作组会话
@@ -63,6 +75,14 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                               resultSuccess:(SuccessCallbackBlock)success
                                resultFailed:(FailedCallbackBlock)failed;
 
+- (void)requestQuestionnairWithTid:(NSString *)tid
+                           itemQid:(NSString *)qid
+                     resultSuccess:(SuccessCallbackBlock)success
+                      resultFailed:(FailedCallbackBlock)failed;
+
+- (void)requestChooseWorkGroup:(NSString *)wid
+                 resultSuccess:(SuccessCallbackBlock)success
+                  resultFailed:(FailedCallbackBlock)failed;
 
 - (void)setNickname:(NSString *)nickname
              resultSuccess:(SuccessCallbackBlock)success
@@ -147,6 +167,10 @@ typedef void (^FailedCallbackBlock)(NSError *error);
            resultSuccess:(SuccessCallbackBlock)success
             resultFailed:(FailedCallbackBlock)failed;
 
+- (void)visitorCloseThread:(NSString *)tid
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
 /**
  获取好友列表
  
@@ -171,6 +195,42 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                       currentTid:(NSString *)tid
                    resultSuccess:(SuccessCallbackBlock)success
                     resultFailed:(FailedCallbackBlock)failed;
+
+- (void)markTopThread:(NSString *)tid
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+- (void)unmarkTopThread:(NSString *)tid
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
+- (void)markDisturbThread:(NSString *)tid
+            resultSuccess:(SuccessCallbackBlock)success
+             resultFailed:(FailedCallbackBlock)failed;
+
+- (void)unmarkDisturbThread:(NSString *)tid
+              resultSuccess:(SuccessCallbackBlock)success
+               resultFailed:(FailedCallbackBlock)failed;
+
+- (void)markUnreadThread:(NSString *)tid
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+
+- (void)unmarkUnreadThread:(NSString *)tid
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
+- (void)markDeletedThread:(NSString *)tid
+            resultSuccess:(SuccessCallbackBlock)success
+             resultFailed:(FailedCallbackBlock)failed;
+
+- (void)markDeletedMessage:(NSString *)mid
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
+- (void)markClearMessage:(NSString *)tid
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
 
 #pragma mark - 群组接口
 
@@ -241,6 +301,21 @@ typedef void (^FailedCallbackBlock)(NSError *error);
           withGroupGid:(NSString *)gid
          resultSuccess:(SuccessCallbackBlock)success
           resultFailed:(FailedCallbackBlock)failed;
+
+- (void)unmuteGroupMember:(NSString *)uid
+             withGroupGid:(NSString *)gid
+            resultSuccess:(SuccessCallbackBlock)success
+             resultFailed:(FailedCallbackBlock)failed;
+
+- (void)setGroupAdmin:(NSString *)uid
+         withGroupGid:(NSString *)gid
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+- (void)unsetGroupAdmin:(NSString *)uid
+           withGroupGid:(NSString *)gid
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
 
 - (void)transferGroup:(NSString *)uid
               withGroupGid:(NSString *)gid
@@ -388,6 +463,40 @@ typedef void (^FailedCallbackBlock)(NSError *error);
             resultFailed:(FailedCallbackBlock)failed;
 
 /**
+ 同步发送预知消息
+
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param localId <#localId description#>
+ @param sessiontype <#sessiontype description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)sendPreviewMessage:(NSString *)content
+                   toTid:(NSString *)tId
+                 localId:(NSString *)localId
+             sessionType:(NSString *)sessiontype
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 同步发送消息回执
+
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param localId <#localId description#>
+ @param sessiontype <#sessiontype description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)sendReceiptMessage:(NSString *)content
+                   toTid:(NSString *)tId
+                 localId:(NSString *)localId
+             sessionType:(NSString *)sessiontype
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+
+/**
  同步发送消息
  
  @param content <#content description#>
@@ -411,15 +520,30 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                resultSuccess:(SuccessCallbackBlock)success
                 resultFailed:(FailedCallbackBlock)failed;
 
+- (void)getMessageWithUser:(NSString *)uid
+                    withId:(NSInteger)messageid
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
 - (void)getMessageWithContact:(NSString *)cid
                   withPage:(NSInteger)page
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
+- (void)getMessageWithContact:(NSString *)cid
+                       withId:(NSInteger)messageid
+                resultSuccess:(SuccessCallbackBlock)success
+                 resultFailed:(FailedCallbackBlock)failed;
+
 - (void)getMessageWithGroup:(NSString *)gid
                   withPage:(NSInteger)page
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
+
+- (void)getMessageWithGroup:(NSString *)gid
+                     withId:(NSInteger)messageid
+              resultSuccess:(SuccessCallbackBlock)success
+               resultFailed:(FailedCallbackBlock)failed;
 
 /**
  <#Description#>
@@ -430,6 +554,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param failed <#failed description#>
  */
 - (void)uploadImageData:(NSData *)imageData
+          withImageName:(NSString *)imageName
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
+- (void)uploadAvatarData:(NSData *)imageData
           withImageName:(NSString *)imageName
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
@@ -447,6 +576,43 @@ typedef void (^FailedCallbackBlock)(NSError *error);
        resultFailed:(FailedCallbackBlock)failed;
 
 
+#pragma mark - 机器人
+
+- (void)getInitAnswer:(NSString *)uid
+        withThreadTid:(NSString *)tid
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+- (void)getTopAnswer:(NSString *)uid
+       withThreadTid:(NSString *)tid
+       resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
+
+- (void)queryAnswer:(NSString *)uid
+      withThreadTid:(NSString *)tid
+     withQuestinQid:(NSString *)aid
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
+- (void)messageAnswer:(NSString *)uid
+        withThreadTid:(NSString *)tid
+          withMessage:(NSString *)content
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+
+#pragma mark - 意见反馈
+
+- (void)getFeedbackCategoriesWithResultSuccess:(SuccessCallbackBlock)success
+                                  resultFailed:(FailedCallbackBlock)failed;
+
+- (void)createFeedback:(NSString *)uid
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
+
+- (void)getFeedbackHistoriesWithResultSuccess:(SuccessCallbackBlock)success
+                                 resultFailed:(FailedCallbackBlock)failed;
+
 /**
  <#Description#>
  */
@@ -462,6 +628,17 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (void)logoutResultSuccess:(SuccessCallbackBlock)success
                resultFailed:(FailedCallbackBlock)failed;
 
+
+/**
+ 错误处理
+
+ @param error error
+ @param success 成功回调
+ @param failed 失败回调
+ */
+- (void)failError:(NSError *)error
+    resultSuccess:(SuccessCallbackBlock)success
+     resultFailed:(FailedCallbackBlock)failed;
 
 @end
 

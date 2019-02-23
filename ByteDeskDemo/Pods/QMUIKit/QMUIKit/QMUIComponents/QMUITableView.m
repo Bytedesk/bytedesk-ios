@@ -15,6 +15,7 @@
 
 #import "QMUITableView.h"
 #import "UITableView+QMUI.h"
+#import "UIView+QMUI.h"
 
 @implementation QMUITableView
 

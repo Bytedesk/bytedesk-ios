@@ -74,6 +74,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    // TODO: 增加网络检测，如果无网络则提示
     
     // 建立长连接
     [BDCoreApis connect];

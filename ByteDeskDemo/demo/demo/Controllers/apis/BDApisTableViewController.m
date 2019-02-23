@@ -29,6 +29,7 @@
 #import "KFNoticeViewController.h"
 
 #import <bytedesk-core/bdcore.h>
+#import <bytedesk-ui/bdui.h>
 
 //开发文档：https://github.com/pengjinning/bytedesk-ios
 //获取appkey：登录后台->所有设置->应用管理->APP->appkey列
@@ -63,7 +64,8 @@
     self.commonApisArray = @[
                              @"注册接口",
                              @"登录接口",
-                             @"退出登录接口"
+                             @"退出登录接口",
+                             @"扫一扫(TODO)"
                              ];
     // 客服接口
     self.kefuApisArray = @[
@@ -202,7 +204,9 @@
             viewController = [[KFVisitorThreadViewController alloc] init];
         } else if (indexPath.row == 4) {
             // 意见反馈
-            viewController = [[KFFeedbackViewController alloc] initWithStyle:UITableViewStyleGrouped];
+//            viewController = [[KFFeedbackViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [BDUIApis visitorPushFeedback:self.navigationController];
+            return;
         } else if (indexPath.row == 5) {
             // TODO: 帮助中心
              viewController = [[KFHelpCenterViewController alloc] initWithStyle:UITableViewStyleGrouped];
@@ -212,7 +216,7 @@
         } else if (indexPath.row == 7) {
             // 网页形式接入
             // 注意: 登录后台->所有设置->所有客服->工作组->获取代码 获取相应URL
-            NSURL *url = [NSURL URLWithString:@"https://vip.bytedesk.com/chatvue?uid=201808221551193&wid=201807171659201&type=workGroup&aid=&ph=ph"];
+            NSURL *url = [NSURL URLWithString:@"https://vip.bytedesk.com/chat?uid=201808221551193&wid=201807171659201&type=workGroup&aid=&ph=ph"];
             SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:url];
             safariVC.delegate = self;
             // 建议

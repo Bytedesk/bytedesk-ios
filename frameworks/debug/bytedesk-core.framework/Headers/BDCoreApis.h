@@ -76,6 +76,32 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                         resultSuccess:(SuccessCallbackBlock)success
                          resultFailed:(FailedCallbackBlock)failed;
 
+
+/**
+ 选择问卷答案
+
+ @param tid <#tid description#>
+ @param qid <#qid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)requestQuestionnairWithTid:(NSString *)tid
+                           itemQid:(NSString *)qid
+                     resultSuccess:(SuccessCallbackBlock)success
+                      resultFailed:(FailedCallbackBlock)failed;
+
+
+/**
+ 选择工作组
+
+ @param wid <#wid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)requestChooseWorkGroup:(NSString *)wid
+                 resultSuccess:(SuccessCallbackBlock)success
+                  resultFailed:(FailedCallbackBlock)failed;
+
 /**
  设置昵称
 
@@ -412,6 +438,48 @@ typedef void (^FailedCallbackBlock)(NSError *error);
           withGroupGid:(NSString *)gid
          resultSuccess:(SuccessCallbackBlock)success
           resultFailed:(FailedCallbackBlock)failed;
+
+
+/**
+ 将某人取消禁言
+
+ @param uid <#uid description#>
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)unmuteGroupMember:(NSString *)uid
+             withGroupGid:(NSString *)gid
+            resultSuccess:(SuccessCallbackBlock)success
+             resultFailed:(FailedCallbackBlock)failed;
+
+
+/**
+ 将某人设置为群组管理员
+
+ @param uid <#uid description#>
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)setGroupAdmin:(NSString *)uid
+         withGroupGid:(NSString *)gid
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+
+/**
+ 取消某人群组管理员身份
+
+ @param uid <#uid description#>
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)unsetGroupAdmin:(NSString *)uid
+           withGroupGid:(NSString *)gid
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
 
 /**
  移交群组
@@ -880,6 +948,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param failed <#failed description#>
  */
 + (void)uploadImageData:(NSData *)imageData
+          withImageName:(NSString *)imageName
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
++ (void)uploadAvatarData:(NSData *)imageData
           withImageName:(NSString *)imageName
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;

@@ -27,7 +27,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
            resultFailed:(FailedCallbackBlock)failed;
 
 /**
- 访客登录
+ 访客登录: 包含自动注册默认用户
 
  @param appkey appkey
  @param subdomain 二级域名
@@ -40,6 +40,14 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                    resultFailed:(FailedCallbackBlock)failed;
 
 
+/**
+ 利用本地缓存信息登录
+
+ @param appkey appkey
+ @param subdomain 企业号
+ @param success 成功回调
+ @param failed 失败回调
+ */
 + (void) visitorOAuthWithAppkey:(NSString *)appkey
                   withSubdomain:(NSString *)subdomain
                   resultSuccess:(SuccessCallbackBlock)success
@@ -67,6 +75,32 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 + (void)requestThreadWithAgentUid:(NSString *)uid
                         resultSuccess:(SuccessCallbackBlock)success
                          resultFailed:(FailedCallbackBlock)failed;
+
+
+/**
+ 选择问卷答案
+
+ @param tid <#tid description#>
+ @param qid <#qid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)requestQuestionnairWithTid:(NSString *)tid
+                           itemQid:(NSString *)qid
+                     resultSuccess:(SuccessCallbackBlock)success
+                      resultFailed:(FailedCallbackBlock)failed;
+
+
+/**
+ 选择工作组
+
+ @param wid <#wid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)requestChooseWorkGroup:(NSString *)wid
+                 resultSuccess:(SuccessCallbackBlock)success
+                  resultFailed:(FailedCallbackBlock)failed;
 
 /**
  设置昵称
@@ -232,6 +266,9 @@ typedef void (^FailedCallbackBlock)(NSError *error);
            resultSuccess:(SuccessCallbackBlock)success
             resultFailed:(FailedCallbackBlock)failed;
 
++ (void)visitorCloseThread:(NSString *)tid
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
 
 #pragma mark - 群组接口
 
@@ -401,6 +438,48 @@ typedef void (^FailedCallbackBlock)(NSError *error);
           withGroupGid:(NSString *)gid
          resultSuccess:(SuccessCallbackBlock)success
           resultFailed:(FailedCallbackBlock)failed;
+
+
+/**
+ 将某人取消禁言
+
+ @param uid <#uid description#>
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)unmuteGroupMember:(NSString *)uid
+             withGroupGid:(NSString *)gid
+            resultSuccess:(SuccessCallbackBlock)success
+             resultFailed:(FailedCallbackBlock)failed;
+
+
+/**
+ 将某人设置为群组管理员
+
+ @param uid <#uid description#>
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)setGroupAdmin:(NSString *)uid
+         withGroupGid:(NSString *)gid
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+
+/**
+ 取消某人群组管理员身份
+
+ @param uid <#uid description#>
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)unsetGroupAdmin:(NSString *)uid
+           withGroupGid:(NSString *)gid
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
 
 /**
  移交群组
@@ -626,6 +705,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
 #pragma mark - 公共接口
 
++ (void)registerAdmin:(NSString *)email
+         withPassword:(NSString *)password
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
 /**
  <#Description#>
 
@@ -694,6 +778,42 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                   currentTid:(NSString *)tid
                resultSuccess:(SuccessCallbackBlock)success
                 resultFailed:(FailedCallbackBlock)failed;
+
++ (void)markTopThread:(NSString *)tid
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
++ (void)unmarkTopThread:(NSString *)tid
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
++ (void)markDisturbThread:(NSString *)tid
+            resultSuccess:(SuccessCallbackBlock)success
+             resultFailed:(FailedCallbackBlock)failed;
+
++ (void)unmarkDisturbThread:(NSString *)tid
+              resultSuccess:(SuccessCallbackBlock)success
+               resultFailed:(FailedCallbackBlock)failed;
+
++ (void)markUnreadThread:(NSString *)tid
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+
++ (void)unmarkUnreadThread:(NSString *)tid
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
++ (void)markDeletedThread:(NSString *)tid
+            resultSuccess:(SuccessCallbackBlock)success
+             resultFailed:(FailedCallbackBlock)failed;
+
++ (void)markDeletedMessage:(NSString *)mid
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
++ (void)markClearMessage:(NSString *)tid
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
 
 /**
  同步发送文本消息
@@ -794,15 +914,30 @@ typedef void (^FailedCallbackBlock)(NSError *error);
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
++ (void)getMessageWithUser:(NSString *)uid
+                    withId:(NSInteger)messageid
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
 + (void)getMessageWithContact:(NSString *)cid
                   withPage:(NSInteger)page
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
++ (void)getMessageWithContact:(NSString *)cid
+                       withId:(NSInteger)messageid
+                resultSuccess:(SuccessCallbackBlock)success
+                 resultFailed:(FailedCallbackBlock)failed;
+
 + (void)getMessageWithGroup:(NSString *)gid
                   withPage:(NSInteger)page
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
+
++ (void)getMessageWithGroup:(NSString *)gid
+                     withId:(NSInteger)messageid
+              resultSuccess:(SuccessCallbackBlock)success
+               resultFailed:(FailedCallbackBlock)failed;
 
 /**
  <#Description#>
@@ -813,6 +948,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param failed <#failed description#>
  */
 + (void)uploadImageData:(NSData *)imageData
+          withImageName:(NSString *)imageName
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
++ (void)uploadAvatarData:(NSData *)imageData
           withImageName:(NSString *)imageName
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;

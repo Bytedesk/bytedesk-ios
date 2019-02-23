@@ -19,7 +19,10 @@
 #define BD_MQTT_PORT                        1883
 #define BD_MQTT_AUTH_USERNAME               @"mqtt_ios"
 #define BD_MQTT_AUTH_PASSWORD               @"mqtt_ios"
+// 默认json格式
 #define BD_MQTT_TOPIC_MESSAGE               @"message/mqtt"
+// 发送protobuf格式
+#define BD_MQTT_TOPIC_MESSAGE_PROTOBUF      @"message/mqtt/protobuf"
 #define BD_MQTT_TOPIC_STATUS                @"status/mqtt"
 #define BD_MQTT_TOPIC_LASTWILL              @"lastWill/mqtt"
 
@@ -177,6 +180,8 @@
 #define BD_MESSAGE_TYPE_LINK                @"link"    // 链接消息类型
 #define BD_MESSAGE_TYPE_EVENT               @"event"  // 事件消息类型
 #define BD_MESSAGE_TYPE_ROBOT               @"robot"
+#define BD_MESSAGE_TYPE_QUESTIONNAIRE       @"questionnaire"   // 调查问卷
+#define BD_MESSAGE_TYPE_WORKGROUP           @"workGroup"   // 选择工作组
 #define BD_MESSAGE_TYPE_NOTIFICATION        @"notification"    // 通知消息类型
 
 #define BD_MESSAGE_TYPE_NOTIFICATION_NON_WORKING_TIME    @"notification_non_working_time"    // 非工作时间
@@ -267,6 +272,12 @@
 #define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_KICK     @"notification_group_kick"
 // 禁言
 #define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_MUTE     @"notification_group_mute"
+// 取消禁言
+#define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_UNMUTE   @"notification_group_unmute"
+// 设置管理员
+#define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_SET_ADMIN    @"notification_group_set_admin"
+// 取消设置管理员
+#define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_UNSET_ADMIN  @"notification_group_unset_admin"
 // 移交群组
 #define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_TRANSFER     @"notification_group_transfer"
 // 移交群组：同意、接受

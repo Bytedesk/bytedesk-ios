@@ -44,6 +44,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"群组详情";
+    
+    // TODO: 群链接
+    // TODO: 群二维码
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -64,7 +67,7 @@
     if (section == 0) {
         return 1;
     } else if (section == 1) {
-        return 3;
+        return 4;
     } else {
         return 1;
     }
@@ -110,6 +113,8 @@
         } else if (indexPath.row == 2) {
             cell.textLabel.text = @"群公告";
             cell.detailTextLabel.text = self.mAnnouncement;
+        } else if (indexPath.row == 3) {
+            cell.textLabel.text = @"二维码";
         } else {
             cell.textLabel.text = @"群成员";
             // TODO: 邀请入群
@@ -196,6 +201,9 @@
             }];
             [dialogViewController show];
             self.currentTextFieldDialogViewController = dialogViewController;
+        } else if (indexPath.row == 3) {
+            // TODO: 生成群二维码
+            
         } else {
             // 群成员
             [BDCoreApis getGroupMembers:self.mGid resultSuccess:^(NSDictionary *dict) {

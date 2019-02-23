@@ -52,7 +52,7 @@
     if (section == 0) {
         return 1;
     } else if (section == 1) {
-        return 2;
+        return 3;
     }
     return 1;
 }
@@ -76,6 +76,8 @@
         } else if (indexPath.row == 1) {
             cell.textLabel.text = @"接待状态";
             cell.detailTextLabel.text = [BDSettings getStatus];
+        } else if (indexPath.row == 2) {
+            cell.textLabel.text = @"二维码";
         }
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
@@ -208,6 +210,9 @@
             [alertController addAction:busyAction];
             [alertController addAction:restAction];
             [alertController showWithAnimated:YES];
+        } else if (indexPath.row == 2) {
+            // TODO: 二维码
+            
         }
     }
 }
@@ -235,7 +240,6 @@
 //        [[NSUserDefaults standardUserDefaults] setObject:newTitle forKey:specifier.key];
 //    }
 //}
-
 
 #pragma mark - Selectors
 

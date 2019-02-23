@@ -8,6 +8,7 @@
 
 #import "BDUIApis.h"
 #import "BDChatViewController.h"
+#import "BDFeedbackCategoryViewController.h"
 
 static BDUIApis *sharedInstance = nil;
 
@@ -59,7 +60,6 @@ static BDUIApis *sharedInstance = nil;
     [navigationController pushViewController:chatViewController animated:YES];
 }
 
-
 + (void)visitorPresentAppointChat:(UINavigationController *)navigationController
                      withAgentUid:(NSString *)uId
                         withTitle:(NSString *)title {
@@ -71,6 +71,12 @@ static BDUIApis *sharedInstance = nil;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
         
     }];
+}
+
++ (void)visitorPushFeedback:(UINavigationController *)navigationController {
+    //
+    BDFeedbackCategoryViewController *categoryViewController = [[BDFeedbackCategoryViewController alloc] init];
+    [navigationController pushViewController:categoryViewController animated:YES];
 }
 
 #pragma mark - 客服端接口

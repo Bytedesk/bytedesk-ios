@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+// TODO: 支持自定义，1. 首先读取NSUserdefault, 2. 自定义plist配置，3. 读取sdk自带配置参数
+
 #ifndef BDConstants_h
 #define BDConstants_h
 //
@@ -17,7 +19,10 @@
 #define BD_MQTT_PORT                        1883
 #define BD_MQTT_AUTH_USERNAME               @"mqtt_ios"
 #define BD_MQTT_AUTH_PASSWORD               @"mqtt_ios"
+// 默认json格式
 #define BD_MQTT_TOPIC_MESSAGE               @"message/mqtt"
+// 发送protobuf格式
+#define BD_MQTT_TOPIC_MESSAGE_PROTOBUF      @"message/mqtt/protobuf"
 #define BD_MQTT_TOPIC_STATUS                @"status/mqtt"
 #define BD_MQTT_TOPIC_LASTWILL              @"lastWill/mqtt"
 
@@ -25,6 +30,7 @@
 // web后台此域名非统一的，而是每一家使用自己独特的二级域名
 //#define BD_IS_DEBUG                         true
 //#define BD_MQTT_HOST                        @"127.0.0.1"
+//#define BD_HTTP_HOST_ADDRESS                @"http://127.0.0.1:8000"
 //#define HTTP_VISITOR_API_BASE_URL           @"http://127.0.0.1:8000/visitor/api"
 //#define HTTP_API_BASE_URL                   @"http://127.0.0.1:8000/api"
 //#define CLIENT_OAUTH_TOKEN                  @"http://127.0.0.1:8000/oauth/token"
@@ -32,6 +38,7 @@
 // 上线发布域名
 #define BD_IS_DEBUG                         false
 #define BD_MQTT_HOST                        @"mq.bytedesk.com"
+#define BD_HTTP_HOST_ADDRESS                @"https://api.bytedesk.com"
 #define HTTP_VISITOR_API_BASE_URL           @"https://api.bytedesk.com/visitor/api"
 #define HTTP_API_BASE_URL                   @"https://api.bytedesk.com/api"
 #define CLIENT_OAUTH_TOKEN                  @"https://api.bytedesk.com/oauth/token"
@@ -112,6 +119,9 @@
 #define BD_NOTIFICATION_CONTACT_UPDATE      @"bd_notification_contact_update"
 #define BD_NOTIFICATION_PROFILE_UPDATE      @"bd_notification_profile_update"
 
+// 账号异地登录
+#define BD_NOTIFICATION_KICKOFF             @"bd_notification_kickoff"
+
 // 通知UI thread状态
 #define BD_NOTIFICATION_THREAD              @"bd_notification_thread"
 #define BD_NOTIFICATION_THREAD_ADD          @"bd_notification_thread_add"
@@ -170,6 +180,8 @@
 #define BD_MESSAGE_TYPE_LINK                @"link"    // 链接消息类型
 #define BD_MESSAGE_TYPE_EVENT               @"event"  // 事件消息类型
 #define BD_MESSAGE_TYPE_ROBOT               @"robot"
+#define BD_MESSAGE_TYPE_QUESTIONNAIRE       @"questionnaire"   // 调查问卷
+#define BD_MESSAGE_TYPE_WORKGROUP           @"workGroup"   // 选择工作组
 #define BD_MESSAGE_TYPE_NOTIFICATION        @"notification"    // 通知消息类型
 
 #define BD_MESSAGE_TYPE_NOTIFICATION_NON_WORKING_TIME    @"notification_non_working_time"    // 非工作时间
@@ -260,6 +272,12 @@
 #define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_KICK     @"notification_group_kick"
 // 禁言
 #define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_MUTE     @"notification_group_mute"
+// 取消禁言
+#define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_UNMUTE   @"notification_group_unmute"
+// 设置管理员
+#define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_SET_ADMIN    @"notification_group_set_admin"
+// 取消设置管理员
+#define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_UNSET_ADMIN  @"notification_group_unset_admin"
 // 移交群组
 #define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_TRANSFER     @"notification_group_transfer"
 // 移交群组：同意、接受

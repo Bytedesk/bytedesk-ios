@@ -66,6 +66,10 @@
     return self;
 }
 
+- (void)dealloc {
+    _sourceView.qmui_frameDidChangeBlock = nil;
+}
+
 - (UIImageView *)imageView {
     if (!_imageView) {
         _imageView = [[UIImageView alloc] init];
@@ -228,14 +232,12 @@
 - (void)setSourceView:(__kindof UIView *)sourceView {
     _sourceView = sourceView;
     __weak __typeof(self)weakSelf = self;
-    if (!sourceView.qmui_frameDidChangeBlock) {
-        sourceView.qmui_frameDidChangeBlock = ^(__kindof UIView * _Nonnull view, CGRect precedingFrame) {
-            if (!view.window || !weakSelf.superview) return;
-            UIView *convertToView = weakSelf.popupWindow ? UIApplication.sharedApplication.delegate.window : weakSelf.superview;// 对于以 window 方式显示的情况，由于横竖屏旋转时，不同 window 的旋转顺序不同，所以可能导致 sourceBarItem 所在的 window 已经旋转了但 popupWindow 还没旋转（iOS 11 及以后），那么计算出来的坐标就错了，所以这里改为用 UIApplication window
-            CGRect rect = [view qmui_convertRect:view.bounds toView:convertToView];
-            weakSelf.sourceRect = rect;
-        };
-    }
+    sourceView.qmui_frameDidChangeBlock = ^(__kindof UIView * _Nonnull view, CGRect precedingFrame) {
+        if (!view.window || !weakSelf.superview) return;
+        UIView *convertToView = weakSelf.popupWindow ? UIApplication.sharedApplication.delegate.window : weakSelf.superview;// 对于以 window 方式显示的情况，由于横竖屏旋转时，不同 window 的旋转顺序不同，所以可能导致 sourceBarItem 所在的 window 已经旋转了但 popupWindow 还没旋转（iOS 11 及以后），那么计算出来的坐标就错了，所以这里改为用 UIApplication window
+        CGRect rect = [view qmui_convertRect:view.bounds toView:convertToView];
+        weakSelf.sourceRect = rect;
+    };
     sourceView.qmui_frameDidChangeBlock(sourceView, sourceView.frame);// update layout immediately
 }
 
@@ -455,13 +457,13 @@
 
 - (void)hideCompletionWithWindowMode:(BOOL)windowMode completion:(void (^)(BOOL))completion {
     if (windowMode) {
-        // 恢复 keyWindow 之前做一下检查，避免类似问题 https://github.com/QMUI/QMUI_iOS/issues/90
+        // 恢复 keyWindow 之前做一下检查，避免类似问题 https://github.com/Tencent/QMUI_iOS/issues/90
         if ([[UIApplication sharedApplication] keyWindow] == self.popupWindow) {
             [self.previousKeyWindow makeKeyWindow];
         }
         
         // iOS 9 下（iOS 8 和 10 都没问题）需要主动移除，才能令 rootViewController 和 popupWindow 立即释放，不影响后续的 layout 判断，如果不加这两句，虽然 popupWindow 指针被置为 nil，但其实对象还存在，View 层级关系也还在
-        // https://github.com/QMUI/QMUI_iOS/issues/75
+        // https://github.com/Tencent/QMUI_iOS/issues/75
         [self removeFromSuperview];
         self.popupWindow.rootViewController = nil;
         

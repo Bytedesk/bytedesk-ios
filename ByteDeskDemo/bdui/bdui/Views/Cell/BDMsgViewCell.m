@@ -14,6 +14,7 @@
 #import "BDMsgTextContentView.h"
 #import "BDMsgImageContentView.h"
 #import "BDMsgVoiceContentView.h"
+#import "BDMsgQuestionnairViewCell.h"
 
 @import AFNetworking;
 //#import <AFNetworking/UIImageView+AFNetworking.h>
@@ -88,9 +89,12 @@
         else if (_messageModel.pic_url){
             [[UIPasteboard generalPasteboard] setString:_messageModel.pic_url];
         }
+    } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_VOICE]) {
+        
+    } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_QUESTIONNAIRE]) {
+        
     }
     // TODO：其他类型消息记录
-    
     //
     [self resignFirstResponder];
     _bubbleView.highlighted = NO;
@@ -149,6 +153,9 @@
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_VOICE]) {
         //
         _bubbleView = [[BDMsgVoiceContentView  alloc] initMessageContentView];
+    } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_QUESTIONNAIRE]) {
+        //
+        _bubbleView = [[BDMsgQuestionnairViewCell alloc] initMessageContentView];
     } else {
         // TODO: 当前版本暂不支持查看此消息, 请升级
         // 暂未处理的类型，全部当做text类型处理
