@@ -162,7 +162,7 @@
     
     QMUIDialogSelectionViewController *dialogViewController = [[QMUIDialogSelectionViewController alloc] init];
     dialogViewController.title = @"请选择操作";
-    dialogViewController.items = @[@"添加关注", @"取消关注", @"拉黑", @"取消拉黑"];
+    dialogViewController.items = @[@"添加关注", @"取消关注", @"拉黑", @"取消拉黑", @"添加好友", @"删除好友"];
     dialogViewController.cellForItemBlock = ^(QMUIDialogSelectionViewController *aDialogViewController, QMUITableViewCell *cell, NSUInteger itemIndex) {
         cell.accessoryType = UITableViewCellAccessoryNone;// 移除点击时默认加上右边的checkbox
     };
@@ -225,9 +225,44 @@
             } resultFailed:^(NSError *error) {
                 DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
             }];
-        } else {
+        } else if (itemIndex == 3) {
             // 取消拉黑
             [BDCoreApis unBlock:contactModel.uid resultSuccess:^(NSDictionary *dict) {
+                DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+                //
+                NSString *message = [dict objectForKey:@"message"];
+                NSNumber *status_code = [dict objectForKey:@"status_code"];
+                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    //
+                    [QMUITips showInfo:message inView:weakSelf.view hideAfterDelay:1.2];
+                } else {
+                    //
+                    [QMUITips showError:message inView:weakSelf.view hideAfterDelay:1.2];
+                }
+            } resultFailed:^(NSError *error) {
+                DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+            }];
+        } else if (itemIndex == 4) {
+            // 添加好友
+            [BDCoreApis addFriend:contactModel.uid resultSuccess:^(NSDictionary *dict) {
+                DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+                //
+                NSString *message = [dict objectForKey:@"message"];
+                NSNumber *status_code = [dict objectForKey:@"status_code"];
+                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    //
+                    [QMUITips showInfo:message inView:weakSelf.view hideAfterDelay:1.2];
+                } else {
+                    //
+                    [QMUITips showError:message inView:weakSelf.view hideAfterDelay:1.2];
+                }
+            } resultFailed:^(NSError *error) {
+                DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+            }];
+            
+        } else if (itemIndex == 5) {
+            // 删除好友
+            [BDCoreApis removeFriend:contactModel.uid resultSuccess:^(NSDictionary *dict) {
                 DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
                 //
                 NSString *message = [dict objectForKey:@"message"];

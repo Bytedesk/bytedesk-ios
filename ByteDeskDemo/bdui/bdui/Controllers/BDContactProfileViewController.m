@@ -29,7 +29,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-#pragma mark - Table view data source
+#pragma mark -
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
@@ -103,7 +103,7 @@
     if (indexPath.section == 1) {
         DDLogInfo(@"清空聊天记录");
         //
-        [BDCoreApis markClearMessage:self.mThreadModel.tid resultSuccess:^(NSDictionary *dict) {
+        [BDCoreApis markClearThreadMessage:self.mThreadModel.tid resultSuccess:^(NSDictionary *dict) {
             //
             NSNumber *status_code = [dict objectForKey:@"status_code"];
             if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
@@ -134,7 +134,7 @@
             //
             if (self.mThreadModel) {
                 // 设置免打扰
-                [BDCoreApis markDisturbThread:self.mThreadModel.tid resultSuccess:^(NSDictionary *dict) {
+                [BDCoreApis markNoDisturbThread:self.mThreadModel.tid resultSuccess:^(NSDictionary *dict) {
                     //
                     NSNumber *status_code = [dict objectForKey:@"status_code"];
                     if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
@@ -153,7 +153,7 @@
             //
             if (self.mThreadModel) {
                 // 取消免打扰
-                [BDCoreApis unmarkDisturbThread:self.mThreadModel.tid resultSuccess:^(NSDictionary *dict) {
+                [BDCoreApis unmarkNoDisturbThread:self.mThreadModel.tid resultSuccess:^(NSDictionary *dict) {
                     //
                     NSNumber *status_code = [dict objectForKey:@"status_code"];
                     if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {

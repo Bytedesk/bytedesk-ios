@@ -54,6 +54,13 @@
         //
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 5, 35, 35)];
         [imageView setImageWithURL:[NSURL URLWithString:contactModel.avatar] placeholderImage:[UIImage imageNamed:@"avatar"]];
+        [imageView setUserInteractionEnabled:TRUE];
+        imageView.tag = i;
+        //
+        UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleAvatarClicked:)];
+        [singleTap setNumberOfTapsRequired:1];
+        [imageView addGestureRecognizer:singleTap];
+        
         //
         QMUILabel *label = [[QMUILabel alloc] initWithFrame:CGRectMake(12, 40, 50, 20)];
         [label setFont:[UIFont systemFontOfSize:10]];
@@ -73,6 +80,20 @@
         [self.gridView addSubview:view];
     }
     
+    //
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 5, 35, 35)];
+//    [imageView setImage:[UIImage imageNamed:@"bytedesk_plus" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
+//    [imageView setUserInteractionEnabled:TRUE];
+//    //
+//    UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleInviteClicked:)];
+//    [singleTap setNumberOfTapsRequired:1];
+//    [imageView addGestureRecognizer:singleTap];
+//
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+//    [view addSubview:imageView];
+//
+//    [self.gridView addSubview:view];
+    
     [self.gridView setRowHeight:60];
 }
 
@@ -86,9 +107,24 @@
     self.gridView.separatorColor = UIColorSeparator;
     self.gridView.separatorDashed = NO;
     [self.contentView addSubview:self.gridView];
-    
 }
 
+- (void)handleAvatarClicked:(UIGestureRecognizer *)recognizer {
+    
+    UIView *avatarView = recognizer.view;
+    BDContactModel *contactModel = [_mMembersArray objectAtIndex:avatarView.tag];
+
+    if ([_delegate respondsToSelector:@selector(avatarClicked:)]) {
+        [_delegate avatarClicked:contactModel];
+    }
+}
+
+- (void)handleInviteClicked:(UIGestureRecognizer *)recognizer {
+    
+    if ([_delegate respondsToSelector:@selector(inviteClicked)]) {
+        [_delegate inviteClicked];
+    }
+}
 
 
 @end

@@ -9,6 +9,8 @@
 #import "BDApisTableViewController.h"
 #import <SafariServices/SafariServices.h>
 
+#import "KFQRCodeViewController.h"
+
 // 客服接口演示
 #import "KFChatViewController.h"
 #import "KFUserinfoViewController.h"
@@ -65,7 +67,8 @@
                              @"注册接口",
                              @"登录接口",
                              @"退出登录接口",
-                             @"扫一扫(TODO)"
+                             @"扫一扫",
+                             @"多账号管理(TODO)"
                              ];
     // 客服接口
     self.kefuApisArray = @[
@@ -86,14 +89,13 @@
                        @"群组接口",
                        @"会话接口",
                        @"排队接口",
-                       @"通知接口(TODO)",
+                       @"通知接口",
                        @"设置接口",
                        ];
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOAuthResult:) name:BD_NOTIFICATION_OAUTH_RESULT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyConnectionStatus:) name:BD_NOTIFICATION_CONNECTION_STATUS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyKickoff:) name:BD_NOTIFICATION_KICKOFF object:nil];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -185,6 +187,13 @@
         } else if (indexPath.row == 2) {
             // 退出登录
             [self logout];
+        } else if (indexPath.row == 3) {
+            // TODO: 二维码、扫一扫
+            KFQRCodeViewController *qrcodeViewController = [[KFQRCodeViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [self.navigationController pushViewController:qrcodeViewController animated:YES];
+        } else if (indexPath.row == 4) {
+            // TODO: 多账号管理
+            
         }
         
     } else if (indexPath.section == 1) {

@@ -7,6 +7,7 @@
 
 #import "KFProfileViewController.h"
 #import "QDNavigationController.h"
+#import "KFQRCodeViewController.h"
 
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
@@ -65,7 +66,7 @@
     }
     if (indexPath.section == 0) {
         [cell.imageView setImageWithURL:[NSURL URLWithString:[BDSettings getAvatar]] placeholderImage:[UIImage imageNamed:@"admin_default_avatar"]];
-        cell.textLabel.text = [BDSettings getRealname];
+        cell.textLabel.text = [BDSettings getNickname];
         cell.detailTextLabel.text = [BDSettings getDescription];
 //        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if (indexPath.section == 1) {
@@ -100,6 +101,24 @@
         //
     //        viewController = [[KFProfileViewController alloc] init];
     //        [self.navigationController pushViewController:viewController animated:YES];
+        
+        QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+        }];
+        QMUIAlertAction *avatarAction = [QMUIAlertAction actionWithTitle:@"修改头像TODO" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+            
+        }];
+        QMUIAlertAction *nicknameAction = [QMUIAlertAction actionWithTitle:@"修改昵称TODO" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+            
+        }];
+        QMUIAlertAction *descriptionAction = [QMUIAlertAction actionWithTitle:@"修改签名TODO" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+            
+        }];
+        QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"设置在线状态" message:@"" preferredStyle:QMUIAlertControllerStyleActionSheet];
+        [alertController addAction:cancelAction];
+        [alertController addAction:avatarAction];
+        [alertController addAction:nicknameAction];
+        [alertController addAction:descriptionAction];
+        [alertController showWithAnimated:YES];
         
     } else if (indexPath.section == 1) {
         //
@@ -212,7 +231,9 @@
             [alertController showWithAnimated:YES];
         } else if (indexPath.row == 2) {
             // TODO: 二维码
-            
+            KFQRCodeViewController *qrcodeViewController = [[KFQRCodeViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [qrcodeViewController initWithUid:[BDSettings getUid]];
+            [self.navigationController pushViewController:qrcodeViewController animated:YES];
         }
     }
 }

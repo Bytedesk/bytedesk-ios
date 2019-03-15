@@ -292,6 +292,7 @@
 		3D1998FB1FCE833900219FEF /* KFDSBadgeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1998F71FCE833900219FEF /* KFDSBadgeView.h */; };
 		3D1A9776221D3CD300DBEC28 /* BDMsgQuestionnairViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1A9774221D3CD300DBEC28 /* BDMsgQuestionnairViewCell.h */; };
 		3D1A9777221D3CD300DBEC28 /* BDMsgQuestionnairViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A9775221D3CD300DBEC28 /* BDMsgQuestionnairViewCell.m */; };
+		3D2DF6772227F1FA00BE76C1 /* bytedesk_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2DF6762227F1F900BE76C1 /* bytedesk_plus.png */; };
 		3D3150931F1A1D530005DB6C /* bytedesk-ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3150891F1A1D530005DB6C /* bytedesk-ui.framework */; };
 		3D3150981F1A1D530005DB6C /* bduiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3150971F1A1D530005DB6C /* bduiTests.swift */; };
 		3D31509A1F1A1D530005DB6C /* bdui.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D31508C1F1A1D530005DB6C /* bdui.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -303,6 +304,12 @@
 		3D3928DF21BF9ED7001E1257 /* BDGroupProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928DD21BF9ED7001E1257 /* BDGroupProfileViewController.m */; };
 		3D3928E521C07B81001E1257 /* BDContactSelectViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D3928E321C07B81001E1257 /* BDContactSelectViewController.h */; };
 		3D3928E621C07B81001E1257 /* BDContactSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928E421C07B81001E1257 /* BDContactSelectViewController.m */; };
+		3D3C28DE2236804700E288AF /* BDChatBaseViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D3C28DC2236804700E288AF /* BDChatBaseViewController.h */; };
+		3D3C28DF2236804700E288AF /* BDChatBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C28DD2236804700E288AF /* BDChatBaseViewController.m */; };
+		3D46C221223B895F00BA41C4 /* BDCommodityTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D46C21F223B895F00BA41C4 /* BDCommodityTableViewCell.h */; };
+		3D46C222223B895F00BA41C4 /* BDCommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D46C220223B895F00BA41C4 /* BDCommodityTableViewCell.m */; };
+		3D46C225223B897200BA41C4 /* BDRedPacketTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D46C223223B897200BA41C4 /* BDRedPacketTableViewCell.h */; };
+		3D46C226223B897200BA41C4 /* BDRedPacketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D46C224223B897200BA41C4 /* BDRedPacketTableViewCell.m */; };
 		3D4824F5215792FA00B50593 /* bytedesk-core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4824F4215792FA00B50593 /* bytedesk-core.framework */; };
 		3D4C5C9A2201E8510056BC63 /* BDFeedbackCategoryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D4C5C982201E8510056BC63 /* BDFeedbackCategoryViewController.h */; };
 		3D4C5C9B2201E8510056BC63 /* BDFeedbackCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4C5C992201E8510056BC63 /* BDFeedbackCategoryViewController.m */; };
@@ -312,6 +319,8 @@
 		3D5606CC2057C875000E770C /* BDSingleImagePickerPreviewViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D5606CA2057C874000E770C /* BDSingleImagePickerPreviewViewController.h */; };
 		3D57D7111FD00E3F0072823F /* BDFeedbackViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D57D70F1FD00E3F0072823F /* BDFeedbackViewController.h */; };
 		3D57D7121FD00E3F0072823F /* BDFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D57D7101FD00E3F0072823F /* BDFeedbackViewController.m */; };
+		3D86FF5A22295F8A00477E76 /* BDGroupInviteTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D86FF5822295F8A00477E76 /* BDGroupInviteTableViewController.h */; };
+		3D86FF5B22295F8A00477E76 /* BDGroupInviteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D86FF5922295F8A00477E76 /* BDGroupInviteTableViewController.m */; };
 		3D8A626021DE598600935617 /* BDGroupMemberTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D8A625E21DE598600935617 /* BDGroupMemberTableViewCell.h */; };
 		3D8A626121DE598600935617 /* BDGroupMemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8A625F21DE598600935617 /* BDGroupMemberTableViewCell.m */; };
 		3DABD1B61FE790F600DE473B /* BDUserinfoViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DABD1B41FE790F600DE473B /* BDUserinfoViewController.h */; };
@@ -320,6 +329,22 @@
 		3DAF8CB121EC1B4E0000E73D /* BDContactProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF8CAF21EC1B4E0000E73D /* BDContactProfileViewController.m */; };
 		3DC58F7421BE6B9D008BE85D /* BDMsgListContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DC58F7221BE6B9D008BE85D /* BDMsgListContentView.h */; };
 		3DC58F7521BE6B9D008BE85D /* BDMsgListContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC58F7321BE6B9D008BE85D /* BDMsgListContentView.m */; };
+		3DD5C6A42238F0B1002C4693 /* KFEmotionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5C6982238F0AF002C4693 /* KFEmotionView.m */; };
+		3DD5C6A52238F0B1002C4693 /* KFPlusView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD5C6992238F0AF002C4693 /* KFPlusView.h */; };
+		3DD5C6A62238F0B1002C4693 /* KFPlusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5C69A2238F0AF002C4693 /* KFPlusView.m */; };
+		3DD5C6A72238F0B1002C4693 /* KFInputView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD5C69B2238F0AF002C4693 /* KFInputView.h */; };
+		3DD5C6A82238F0B1002C4693 /* KFStarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD5C69C2238F0AF002C4693 /* KFStarView.h */; };
+		3DD5C6A92238F0B1002C4693 /* KFStarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5C69D2238F0AF002C4693 /* KFStarView.m */; };
+		3DD5C6AA2238F0B1002C4693 /* KFInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5C69E2238F0B0002C4693 /* KFInputView.m */; };
+		3DD5C6AB2238F0B1002C4693 /* KFEmotionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD5C69F2238F0B1002C4693 /* KFEmotionView.h */; };
+		3DD5C6AC2238F0B1002C4693 /* KFRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5C6A02238F0B1002C4693 /* KFRateView.m */; };
+		3DD5C6AD2238F0B1002C4693 /* KFRecordVoiceViewHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD5C6A12238F0B1002C4693 /* KFRecordVoiceViewHUD.h */; };
+		3DD5C6AE2238F0B1002C4693 /* KFRecordVoiceViewHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5C6A22238F0B1002C4693 /* KFRecordVoiceViewHUD.m */; };
+		3DD5C6AF2238F0B1002C4693 /* KFRateView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD5C6A32238F0B1002C4693 /* KFRateView.h */; };
+		3DD5C6B72238FBA9002C4693 /* BDChatWxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5C6B52238FBA7002C4693 /* BDChatWxViewController.m */; };
+		3DD5C6B82238FBA9002C4693 /* BDChatWxViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD5C6B62238FBA8002C4693 /* BDChatWxViewController.h */; };
+		3DE6FD832234F3C3006F1329 /* BDQRCodeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DE6FD812234F3C2006F1329 /* BDQRCodeViewController.h */; };
+		3DE6FD842234F3C3006F1329 /* BDQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6FD822234F3C2006F1329 /* BDQRCodeViewController.m */; };
 		81DCA33DE54CCB81B8CA020A /* Pods_bytedesk_ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953A297AD3F39573C972B590 /* Pods_bytedesk_ui.framework */; };
 		DE829B41D540F7AF1BDCAF7F /* Pods_bdui_bduiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE9D3198D64539B03C40CBAF /* Pods_bdui_bduiTests.framework */; };
 		F71E0A2E640D53D647C19446 /* Pods_bytedesk_ui_bduiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CEBFF73F8E899B293D07513 /* Pods_bytedesk_ui_bduiTests.framework */; };
@@ -612,6 +637,7 @@
 		3D1998F71FCE833900219FEF /* KFDSBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFDSBadgeView.h; sourceTree = "<group>"; };
 		3D1A9774221D3CD300DBEC28 /* BDMsgQuestionnairViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMsgQuestionnairViewCell.h; sourceTree = "<group>"; };
 		3D1A9775221D3CD300DBEC28 /* BDMsgQuestionnairViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMsgQuestionnairViewCell.m; sourceTree = "<group>"; };
+		3D2DF6762227F1F900BE76C1 /* bytedesk_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bytedesk_plus.png; path = bdui/resources/other/bytedesk_plus.png; sourceTree = SOURCE_ROOT; };
 		3D3150891F1A1D530005DB6C /* bytedesk-ui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "bytedesk-ui.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D31508C1F1A1D530005DB6C /* bdui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bdui.h; sourceTree = "<group>"; };
 		3D31508D1F1A1D530005DB6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -626,6 +652,12 @@
 		3D3928DD21BF9ED7001E1257 /* BDGroupProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDGroupProfileViewController.m; sourceTree = "<group>"; };
 		3D3928E321C07B81001E1257 /* BDContactSelectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDContactSelectViewController.h; sourceTree = "<group>"; };
 		3D3928E421C07B81001E1257 /* BDContactSelectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDContactSelectViewController.m; sourceTree = "<group>"; };
+		3D3C28DC2236804700E288AF /* BDChatBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDChatBaseViewController.h; sourceTree = "<group>"; };
+		3D3C28DD2236804700E288AF /* BDChatBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDChatBaseViewController.m; sourceTree = "<group>"; };
+		3D46C21F223B895F00BA41C4 /* BDCommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDCommodityTableViewCell.h; sourceTree = "<group>"; };
+		3D46C220223B895F00BA41C4 /* BDCommodityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDCommodityTableViewCell.m; sourceTree = "<group>"; };
+		3D46C223223B897200BA41C4 /* BDRedPacketTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDRedPacketTableViewCell.h; sourceTree = "<group>"; };
+		3D46C224223B897200BA41C4 /* BDRedPacketTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDRedPacketTableViewCell.m; sourceTree = "<group>"; };
 		3D4824F4215792FA00B50593 /* bytedesk-core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "bytedesk-core.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D4C5C982201E8510056BC63 /* BDFeedbackCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDFeedbackCategoryViewController.h; sourceTree = "<group>"; };
 		3D4C5C992201E8510056BC63 /* BDFeedbackCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDFeedbackCategoryViewController.m; sourceTree = "<group>"; };
@@ -638,6 +670,8 @@
 		3D57D70F1FD00E3F0072823F /* BDFeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDFeedbackViewController.h; sourceTree = "<group>"; };
 		3D57D7101FD00E3F0072823F /* BDFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDFeedbackViewController.m; sourceTree = "<group>"; };
 		3D62021320FC844F00A94F15 /* bdcore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = bdcore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D86FF5822295F8A00477E76 /* BDGroupInviteTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDGroupInviteTableViewController.h; sourceTree = "<group>"; };
+		3D86FF5922295F8A00477E76 /* BDGroupInviteTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDGroupInviteTableViewController.m; sourceTree = "<group>"; };
 		3D8A625E21DE598600935617 /* BDGroupMemberTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDGroupMemberTableViewCell.h; sourceTree = "<group>"; };
 		3D8A625F21DE598600935617 /* BDGroupMemberTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDGroupMemberTableViewCell.m; sourceTree = "<group>"; };
 		3DABD1B41FE790F600DE473B /* BDUserinfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDUserinfoViewController.h; sourceTree = "<group>"; };
@@ -646,6 +680,22 @@
 		3DAF8CAF21EC1B4E0000E73D /* BDContactProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDContactProfileViewController.m; sourceTree = "<group>"; };
 		3DC58F7221BE6B9D008BE85D /* BDMsgListContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMsgListContentView.h; sourceTree = "<group>"; };
 		3DC58F7321BE6B9D008BE85D /* BDMsgListContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMsgListContentView.m; sourceTree = "<group>"; };
+		3DD5C6982238F0AF002C4693 /* KFEmotionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEmotionView.m; sourceTree = "<group>"; };
+		3DD5C6992238F0AF002C4693 /* KFPlusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFPlusView.h; sourceTree = "<group>"; };
+		3DD5C69A2238F0AF002C4693 /* KFPlusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFPlusView.m; sourceTree = "<group>"; };
+		3DD5C69B2238F0AF002C4693 /* KFInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFInputView.h; sourceTree = "<group>"; };
+		3DD5C69C2238F0AF002C4693 /* KFStarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFStarView.h; sourceTree = "<group>"; };
+		3DD5C69D2238F0AF002C4693 /* KFStarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFStarView.m; sourceTree = "<group>"; };
+		3DD5C69E2238F0B0002C4693 /* KFInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFInputView.m; sourceTree = "<group>"; };
+		3DD5C69F2238F0B1002C4693 /* KFEmotionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFEmotionView.h; sourceTree = "<group>"; };
+		3DD5C6A02238F0B1002C4693 /* KFRateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFRateView.m; sourceTree = "<group>"; };
+		3DD5C6A12238F0B1002C4693 /* KFRecordVoiceViewHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFRecordVoiceViewHUD.h; sourceTree = "<group>"; };
+		3DD5C6A22238F0B1002C4693 /* KFRecordVoiceViewHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFRecordVoiceViewHUD.m; sourceTree = "<group>"; };
+		3DD5C6A32238F0B1002C4693 /* KFRateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFRateView.h; sourceTree = "<group>"; };
+		3DD5C6B52238FBA7002C4693 /* BDChatWxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDChatWxViewController.m; sourceTree = "<group>"; };
+		3DD5C6B62238FBA8002C4693 /* BDChatWxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDChatWxViewController.h; sourceTree = "<group>"; };
+		3DE6FD812234F3C2006F1329 /* BDQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDQRCodeViewController.h; sourceTree = "<group>"; };
+		3DE6FD822234F3C2006F1329 /* BDQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDQRCodeViewController.m; sourceTree = "<group>"; };
 		4AFF2CBFAB7AE6AB4F360A63 /* Pods-wxui-wxuiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wxui-wxuiTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-wxui-wxuiTests/Pods-wxui-wxuiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4C57D21EFE3BF46E5EFEBC14 /* Pods-bdui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdui.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-bdui/Pods-bdui.debug.xcconfig"; sourceTree = "<group>"; };
 		68E1819B62F043C68A26C8D7 /* Pods-bdui-bduiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdui-bduiTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-bdui-bduiTests/Pods-bdui-bduiTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -721,6 +771,10 @@
 				3D1996CD1FCE638700219FEF /* BDMsgNotificationViewCell.m */,
 				3D8A625E21DE598600935617 /* BDGroupMemberTableViewCell.h */,
 				3D8A625F21DE598600935617 /* BDGroupMemberTableViewCell.m */,
+				3D46C21F223B895F00BA41C4 /* BDCommodityTableViewCell.h */,
+				3D46C220223B895F00BA41C4 /* BDCommodityTableViewCell.m */,
+				3D46C223223B897200BA41C4 /* BDRedPacketTableViewCell.h */,
+				3D46C224223B897200BA41C4 /* BDRedPacketTableViewCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -1082,6 +1136,7 @@
 		3D3928D721BF9BEE001E1257 /* other */ = {
 			isa = PBXGroup;
 			children = (
+				3D2DF6762227F1F900BE76C1 /* bytedesk_plus.png */,
 				3D3928DA21BF9D9B001E1257 /* icon_more.png */,
 				3D3928D821BF9BEE001E1257 /* icon_about.png */,
 			);
@@ -1094,8 +1149,14 @@
 			children = (
 				3D1996B31FCE2B9600219FEF /* BDChatViewController.h */,
 				3D1996B41FCE2B9600219FEF /* BDChatViewController.m */,
+				3DD5C6B62238FBA8002C4693 /* BDChatWxViewController.h */,
+				3DD5C6B52238FBA7002C4693 /* BDChatWxViewController.m */,
+				3D3C28DC2236804700E288AF /* BDChatBaseViewController.h */,
+				3D3C28DD2236804700E288AF /* BDChatBaseViewController.m */,
 				3D3928DC21BF9ED7001E1257 /* BDGroupProfileViewController.h */,
 				3D3928DD21BF9ED7001E1257 /* BDGroupProfileViewController.m */,
+				3D86FF5822295F8A00477E76 /* BDGroupInviteTableViewController.h */,
+				3D86FF5922295F8A00477E76 /* BDGroupInviteTableViewController.m */,
 				3DAF8CAE21EC1B4E0000E73D /* BDContactProfileViewController.h */,
 				3DAF8CAF21EC1B4E0000E73D /* BDContactProfileViewController.m */,
 				3D3928E321C07B81001E1257 /* BDContactSelectViewController.h */,
@@ -1108,6 +1169,8 @@
 				3D4C5C992201E8510056BC63 /* BDFeedbackCategoryViewController.m */,
 				3D4C5C9C2201E8680056BC63 /* BDFeedbackHistoryViewController.h */,
 				3D4C5C9D2201E8680056BC63 /* BDFeedbackHistoryViewController.m */,
+				3DE6FD812234F3C2006F1329 /* BDQRCodeViewController.h */,
+				3DE6FD822234F3C2006F1329 /* BDQRCodeViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -1119,6 +1182,18 @@
 				3D1996D91FCE638700219FEF /* KFDSInputEmotionManager.m */,
 				3D1996D51FCE638700219FEF /* KFDSInputEmotionParser.m */,
 				3D1996DD1FCE638700219FEF /* KFDSInputEmotionParser.h */,
+				3DD5C69F2238F0B1002C4693 /* KFEmotionView.h */,
+				3DD5C6982238F0AF002C4693 /* KFEmotionView.m */,
+				3DD5C69B2238F0AF002C4693 /* KFInputView.h */,
+				3DD5C69E2238F0B0002C4693 /* KFInputView.m */,
+				3DD5C6992238F0AF002C4693 /* KFPlusView.h */,
+				3DD5C69A2238F0AF002C4693 /* KFPlusView.m */,
+				3DD5C6A32238F0B1002C4693 /* KFRateView.h */,
+				3DD5C6A02238F0B1002C4693 /* KFRateView.m */,
+				3DD5C6A12238F0B1002C4693 /* KFRecordVoiceViewHUD.h */,
+				3DD5C6A22238F0B1002C4693 /* KFRecordVoiceViewHUD.m */,
+				3DD5C69C2238F0AF002C4693 /* KFStarView.h */,
+				3DD5C69D2238F0AF002C4693 /* KFStarView.m */,
 				3D548A751FC5514B003117B4 /* KFDSUConstants.h */,
 			);
 			path = util;
@@ -1163,16 +1238,24 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D46C225223B897200BA41C4 /* BDRedPacketTableViewCell.h in Headers */,
+				3DE6FD832234F3C3006F1329 /* BDQRCodeViewController.h in Headers */,
 				3DAF8CB021EC1B4E0000E73D /* BDContactProfileViewController.h in Headers */,
+				3D86FF5A22295F8A00477E76 /* BDGroupInviteTableViewController.h in Headers */,
 				3D4C5C9E2201E8680056BC63 /* BDFeedbackHistoryViewController.h in Headers */,
 				3D3150F11F1A2A410005DB6C /* BDUIApis.h in Headers */,
 				3D4C5C9A2201E8510056BC63 /* BDFeedbackCategoryViewController.h in Headers */,
 				3D1996C31FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.h in Headers */,
 				3D57D7111FD00E3F0072823F /* BDFeedbackViewController.h in Headers */,
+				3DD5C6A82238F0B1002C4693 /* KFStarView.h in Headers */,
 				3D31509A1F1A1D530005DB6C /* bdui.h in Headers */,
+				3DD5C6AB2238F0B1002C4693 /* KFEmotionView.h in Headers */,
 				3D1996FB1FCE638800219FEF /* KFDSInputEmotionParser.h in Headers */,
 				3D1996E81FCE638800219FEF /* BDMsgTextContentView.h in Headers */,
 				3D1996EB1FCE638800219FEF /* BDMsgVoiceContentView.h in Headers */,
+				3DD5C6B82238FBA9002C4693 /* BDChatWxViewController.h in Headers */,
+				3DD5C6A72238F0B1002C4693 /* KFInputView.h in Headers */,
+				3DD5C6AF2238F0B1002C4693 /* KFRateView.h in Headers */,
 				3D1A9776221D3CD300DBEC28 /* BDMsgQuestionnairViewCell.h in Headers */,
 				3D8A626021DE598600935617 /* BDGroupMemberTableViewCell.h in Headers */,
 				3D1998FB1FCE833900219FEF /* KFDSBadgeView.h in Headers */,
@@ -1184,7 +1267,11 @@
 				3D1996F01FCE638800219FEF /* BDMsgBaseContentView.h in Headers */,
 				3DC58F7421BE6B9D008BE85D /* BDMsgListContentView.h in Headers */,
 				3D1996B51FCE2B9600219FEF /* BDChatViewController.h in Headers */,
+				3DD5C6A52238F0B1002C4693 /* KFPlusView.h in Headers */,
+				3D3C28DE2236804700E288AF /* BDChatBaseViewController.h in Headers */,
+				3D46C221223B895F00BA41C4 /* BDCommodityTableViewCell.h in Headers */,
 				3DABD1B61FE790F600DE473B /* BDUserinfoViewController.h in Headers */,
+				3DD5C6AD2238F0B1002C4693 /* KFRecordVoiceViewHUD.h in Headers */,
 				3D3928DE21BF9ED7001E1257 /* BDGroupProfileViewController.h in Headers */,
 				3D1996E71FCE638800219FEF /* BDMsgViewCell.h in Headers */,
 				3D1996E91FCE638800219FEF /* BDMsgImageContentView.h in Headers */,
@@ -1383,6 +1470,7 @@
 				3D1998B31FCE817E00219FEF /* Expression_91@2x.png in Resources */,
 				3D19987C1FCE817E00219FEF /* web.png in Resources */,
 				3D1998571FCE817E00219FEF /* RecordingSignal004@2x.png in Resources */,
+				3D2DF6772227F1FA00BE76C1 /* bytedesk_plus.png in Resources */,
 				3D1998391FCE817E00219FEF /* search_icon.png in Resources */,
 				3D1998EC1FCE817E00219FEF /* Expression_1@2x.png in Resources */,
 				3D1998EF1FCE817E00219FEF /* Expression_71@2x.png in Resources */,
@@ -1592,7 +1680,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		40E4D3F06829C4C7A96FAE25 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1626,7 +1715,6 @@
 				"${BUILT_PRODUCTS_DIR}/M80AttributedLabel/M80AttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/MQTTClient/MQTTClient.framework",
 				"${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework",
-				"${PODS_ROOT}/bytedesk-core/frameworks/cocoapods/bytedesk-core.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1637,7 +1725,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M80AttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MQTTClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QMUIKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bytedesk-core.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1655,22 +1742,34 @@
 				3D1996EE1FCE638800219FEF /* BDMsgViewCell.m in Sources */,
 				3D1996EA1FCE638800219FEF /* BDMsgBaseContentView.m in Sources */,
 				3D1996EF1FCE638800219FEF /* BDMsgImageContentView.m in Sources */,
+				3DD5C6AA2238F0B1002C4693 /* KFInputView.m in Sources */,
+				3DD5C6AC2238F0B1002C4693 /* KFRateView.m in Sources */,
 				3D1996E61FCE638800219FEF /* BDMsgVoiceContentView.m in Sources */,
+				3DD5C6A92238F0B1002C4693 /* KFStarView.m in Sources */,
 				3D1998F91FCE833900219FEF /* KFDSBadgeView.m in Sources */,
+				3D46C226223B897200BA41C4 /* BDRedPacketTableViewCell.m in Sources */,
+				3DE6FD842234F3C3006F1329 /* BDQRCodeViewController.m in Sources */,
 				3D57D7121FD00E3F0072823F /* BDFeedbackViewController.m in Sources */,
 				3DAF8CB121EC1B4E0000E73D /* BDContactProfileViewController.m in Sources */,
 				3D3928DF21BF9ED7001E1257 /* BDGroupProfileViewController.m in Sources */,
 				3D3928E621C07B81001E1257 /* BDContactSelectViewController.m in Sources */,
 				3DC58F7521BE6B9D008BE85D /* BDMsgListContentView.m in Sources */,
+				3DD5C6B72238FBA9002C4693 /* BDChatWxViewController.m in Sources */,
+				3DD5C6AE2238F0B1002C4693 /* KFRecordVoiceViewHUD.m in Sources */,
 				3D8A626121DE598600935617 /* BDGroupMemberTableViewCell.m in Sources */,
+				3D46C222223B895F00BA41C4 /* BDCommodityTableViewCell.m in Sources */,
 				3D1996B61FCE2B9600219FEF /* BDChatViewController.m in Sources */,
+				3D86FF5B22295F8A00477E76 /* BDGroupInviteTableViewController.m in Sources */,
 				3DABD1B71FE790F600DE473B /* BDUserinfoViewController.m in Sources */,
 				3D1996C01FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.m in Sources */,
 				3D1998F81FCE833900219FEF /* KFDSLoadProgressView.m in Sources */,
 				3D1996EC1FCE638800219FEF /* BDMsgNotificationViewCell.m in Sources */,
+				3DD5C6A62238F0B1002C4693 /* KFPlusView.m in Sources */,
 				3D1996F71FCE638800219FEF /* KFDSInputEmotionManager.m in Sources */,
 				3D4C5C9B2201E8510056BC63 /* BDFeedbackCategoryViewController.m in Sources */,
+				3D3C28DF2236804700E288AF /* BDChatBaseViewController.m in Sources */,
 				3D5606CB2057C875000E770C /* BDSingleImagePickerPreviewViewController.m in Sources */,
+				3DD5C6A42238F0B1002C4693 /* KFEmotionView.m in Sources */,
 				3D1996F31FCE638800219FEF /* KFDSInputEmotionParser.m in Sources */,
 				3D4C5C9F2201E8680056BC63 /* BDFeedbackHistoryViewController.m in Sources */,
 				3D3150F21F1A2A410005DB6C /* BDUIApis.m in Sources */,

@@ -45,6 +45,26 @@ typedef void (^FailedCallbackBlock)(NSError *error);
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
+
+/**
+ 注册自定义普通用户, 自定义uid
+
+ @param username <#username description#>
+ @param nickname <#nickname description#>
+ @param uid <#uid description#>
+ @param password <#password description#>
+ @param subDomain <#subDomain description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)registerUser:(NSString *)username
+        withNickname:(NSString *)nickname
+             withUid:(NSString *)uid
+        withPassword:(NSString *)password
+       withSubDomain:(NSString *)subDomain
+       resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
+
 /**
  注册管理员账号，客服管理员
 
@@ -204,11 +224,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
-- (void)markDisturbThread:(NSString *)tid
+- (void)markNoDisturbThread:(NSString *)tid
             resultSuccess:(SuccessCallbackBlock)success
              resultFailed:(FailedCallbackBlock)failed;
 
-- (void)unmarkDisturbThread:(NSString *)tid
+- (void)unmarkNoDisturbThread:(NSString *)tid
               resultSuccess:(SuccessCallbackBlock)success
                resultFailed:(FailedCallbackBlock)failed;
 
@@ -228,9 +248,17 @@ typedef void (^FailedCallbackBlock)(NSError *error);
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
-- (void)markClearMessage:(NSString *)tid
+- (void)markClearThreadMessage:(NSString *)tid
            resultSuccess:(SuccessCallbackBlock)success
             resultFailed:(FailedCallbackBlock)failed;
+
+- (void)markClearContactMessage:(NSString *)uid
+                  resultSuccess:(SuccessCallbackBlock)success
+                   resultFailed:(FailedCallbackBlock)failed;
+
+- (void)markClearGroupMessage:(NSString *)gid
+                resultSuccess:(SuccessCallbackBlock)success
+                 resultFailed:(FailedCallbackBlock)failed;
 
 #pragma mark - 群组接口
 
@@ -252,6 +280,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
          resultFailed:(FailedCallbackBlock)failed;
 
 - (void)createGroup:(NSString *)nickname
+               type:(NSString *)type
         selectedContacts:(NSArray *)selectedContacts
            resultSuccess:(SuccessCallbackBlock)success
             resultFailed:(FailedCallbackBlock)failed;
@@ -275,6 +304,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
             withGroupGid:(NSString *)gid
            resultSuccess:(SuccessCallbackBlock)success
             resultFailed:(FailedCallbackBlock)failed;
+
+- (void)inviteListToGroup:(NSArray *)uidList
+         withGroupGid:(NSString *)gid
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
 
 - (void)joinGroup:(NSString *)gid
           resultSuccess:(SuccessCallbackBlock)success
@@ -347,6 +381,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
       resultSuccess:(SuccessCallbackBlock)success
        resultFailed:(FailedCallbackBlock)failed;
 
+- (void)getNoticesPage:(NSUInteger)page
+              withSize:(NSUInteger)size
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
+
 #pragma mark - 社交关系
 
 - (void)getStrangersPage:(NSUInteger)page
@@ -381,6 +420,14 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (void)unFollow:(NSString *)uid
    resultSuccess:(SuccessCallbackBlock)success
     resultFailed:(FailedCallbackBlock)failed;
+
+- (void)addFriend:(NSString *)uid
+    resultSuccess:(SuccessCallbackBlock)success
+     resultFailed:(FailedCallbackBlock)failed;
+
+- (void)removeFriend:(NSString *)uid
+       resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
 
 - (void)isFollowed:(NSString *)uid
      resultSuccess:(SuccessCallbackBlock)success
@@ -461,6 +508,23 @@ typedef void (^FailedCallbackBlock)(NSError *error);
              sessionType:(NSString *)sessiontype
            resultSuccess:(SuccessCallbackBlock)success
             resultFailed:(FailedCallbackBlock)failed;
+
+
+- (void)sendCommodityMessage:(NSString *)content
+                   toTid:(NSString *)tId
+                 localId:(NSString *)localId
+             sessionType:(NSString *)sessiontype
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+
+
+- (void)sendRedPacketMessage:(NSString *)content
+                       toTid:(NSString *)tId
+                     localId:(NSString *)localId
+                 sessionType:(NSString *)sessiontype
+               resultSuccess:(SuccessCallbackBlock)success
+                resultFailed:(FailedCallbackBlock)failed;
+
 
 /**
  同步发送预知消息

@@ -6,7 +6,7 @@
 //  Copyright © 2018年 萝卜丝. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
 #import <QMUIKit/QMUIKit.h>
 #import <bytedesk-core/bdcore.h>
 

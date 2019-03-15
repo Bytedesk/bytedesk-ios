@@ -21,7 +21,7 @@
 #define BD_MQTT_AUTH_PASSWORD               @"mqtt_ios"
 // 默认json格式
 #define BD_MQTT_TOPIC_MESSAGE               @"message/mqtt"
-// 发送protobuf格式
+// 发送protobuf格式: TODO
 #define BD_MQTT_TOPIC_MESSAGE_PROTOBUF      @"message/mqtt/protobuf"
 #define BD_MQTT_TOPIC_STATUS                @"status/mqtt"
 #define BD_MQTT_TOPIC_LASTWILL              @"lastWill/mqtt"
@@ -183,6 +183,10 @@
 #define BD_MESSAGE_TYPE_QUESTIONNAIRE       @"questionnaire"   // 调查问卷
 #define BD_MESSAGE_TYPE_WORKGROUP           @"workGroup"   // 选择工作组
 #define BD_MESSAGE_TYPE_NOTIFICATION        @"notification"    // 通知消息类型
+#define BD_MESSAGE_TYPE_CUSTOM              @"custom"   // 自定义消息类型：内容放在content字段
+#define BD_MESSAGE_TYPE_RED_PACKET          @"red_packet" // 红包
+#define BD_MESSAGE_TYPE_COMMODITY           @"commodity" // 商品
+
 
 #define BD_MESSAGE_TYPE_NOTIFICATION_NON_WORKING_TIME    @"notification_non_working_time"    // 非工作时间
 #define BD_MESSAGE_TYPE_NOTIFICATION_OFFLINE            @"notification_offline"    // 客服离线，当前无客服在线
@@ -288,6 +292,9 @@
 #define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_WITHDRAW     @"notification_group_withdraw"
 // 解散群组
 #define BD_MESSAGE_TYPE_NOTIFICATION_GROUP_DISMISS     @"notification_group_dismiss"
+
+#define BD_GROUP_TYPE_GROUP @"group"
+#define BD_GROUP_TYPE_DISCUSS @"discuss"
 
 #endif /* BDConstants_h */
 

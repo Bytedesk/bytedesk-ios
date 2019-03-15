@@ -23,6 +23,8 @@
  */
 - (void) initWithWorkGroupWid:(NSString *)wId withTitle:(NSString *)title withPush:(BOOL)isPush;
 
+- (void) initWithWorkGroupWid:(NSString *)wId withTitle:(NSString *)title withPush:(BOOL)isPush withCustom:(NSDictionary *)custom;
+
 /**
  指定坐席会话
 
@@ -31,6 +33,8 @@
  @param isPush <#isPush description#>
  */
 - (void) initWithAgentUid:(NSString *)uId withTitle:(NSString *)title withPush:(BOOL)isPush;
+
+- (void) initWithAgentUid:(NSString *)uId withTitle:(NSString *)title withPush:(BOOL)isPush withCustom:(NSDictionary *)custom;
 
 #pragma mark - 客服端接口
 
@@ -42,6 +46,8 @@
  */
 - (void) initWithThreadModel:(BDThreadModel *)threadModel withPush:(BOOL)isPush;
 
+- (void) initWithThreadModel:(BDThreadModel *)threadModel withPush:(BOOL)isPush withCustom:(NSDictionary *)custom;
+
 /**
  联系人会话
 
@@ -50,6 +56,8 @@
  */
 - (void) initWithContactModel:(BDContactModel *)contactModel withPush:(BOOL)isPush;
 
+- (void) initWithContactModel:(BDContactModel *)contactModel withPush:(BOOL)isPush withCustom:(NSDictionary *)custom;
+
 /**
  群组会话
 
@@ -57,6 +65,8 @@
  @param isPush <#isPush description#>
  */
 - (void) initWithGroupModel:(BDGroupModel *)groupModel withPush:(BOOL)isPush;
+
+- (void) initWithGroupModel:(BDGroupModel *)groupModel withPush:(BOOL)isPush withCustom:(NSDictionary *)custom;
 
 #pragma mark - 公共接口
 

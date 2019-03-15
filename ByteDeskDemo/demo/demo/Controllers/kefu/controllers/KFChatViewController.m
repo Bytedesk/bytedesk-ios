@@ -32,8 +32,8 @@
                        @"工作组会话Present:",
                        @"指定坐席Push:",
                        @"指定坐席Present:",
-                       @"电商客服Push(TODO):",
-                       @"电商客服Present(TODO):",
+                       @"电商客服Push:",
+                       @"电商客服Present:",
                        @"工作组会话Push:",
                        @"工作组会话Present:",];
 }
@@ -121,9 +121,27 @@
     } else if (indexPath.section == 2) {
         //
         if (indexPath.row == 0) {
-            
+            // 携带商品信息工作组会话
+            NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                  BD_MESSAGE_TYPE_COMMODITY, @"type",
+                                  @"商品标题", @"title",
+                                  @"商品详情", @"content",
+                                  @"¥9.99", @"price",
+                                  @"https://item.m.jd.com/product/12172344.html", @"url",
+                                  @"https://m.360buyimg.com/mobilecms/s750x750_jfs/t4483/332/2284794111/122812/4bf353/58ed7f42Nf16d6b20.jpg!q80.dpg", @"imageUrl",
+                                  nil];
+            [BDUIApis visitorPushWorkGroupChat:self.navigationController withWorkGroupWid:kDefaultWorkGroupWid withTitle:kDefaultTitle withCustom:dict];
         } else {
-            
+            // 携带商品信息指定坐席
+            NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                  BD_MESSAGE_TYPE_COMMODITY, @"type",
+                                  @"商品标题", @"title",
+                                  @"商品详情", @"content",
+                                  @"¥9.99", @"price",
+                                  @"https://item.m.jd.com/product/12172344.html", @"url",
+                                  @"https://m.360buyimg.com/mobilecms/s750x750_jfs/t4483/332/2284794111/122812/4bf353/58ed7f42Nf16d6b20.jpg!q80.dpg", @"imageUrl",
+                                  nil];
+            [BDUIApis visitorPushAppointChat:self.navigationController withAgentUid:kDefaultAgentUid withTitle:kDefaultTitle withCustom:dict];
         }
     } else  {
         //

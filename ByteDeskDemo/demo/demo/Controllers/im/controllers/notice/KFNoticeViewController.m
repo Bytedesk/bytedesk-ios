@@ -8,9 +8,14 @@
 
 #import "KFNoticeViewController.h"
 
+#import <bytedesk-core/bdcore.h>
+
 #pragma mark - 暂未上线
 
 @interface KFNoticeViewController ()
+
+@property(nonatomic, strong) UIRefreshControl *mRefreshControl;
+@property(nonatomic, strong) NSMutableArray<BDNoticeModel *> *mNoticeArray;
 
 @end
 
@@ -24,72 +29,119 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.mNoticeArray = [[NSMutableArray alloc] init];
+    //
+    self.mRefreshControl = [[UIRefreshControl alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [self.tableView addSubview:self.mRefreshControl];
+    [self.mRefreshControl addTarget:self action:@selector(refreshControlSelector) forControlEvents:UIControlEventValueChanged];
+    //
+    [self refreshControlSelector];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return [self.mNoticeArray count];
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    //
+    static NSString *identifier = @"threadCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     // Configure the cell...
-    
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+    }
+    //
+    BDNoticeModel *noticeModel = [self.mNoticeArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = noticeModel.title;
+    if ([noticeModel.processed boolValue]) {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@(已处理)", noticeModel.content];
+    } else {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@(待处理)", noticeModel.content];
+    }
+    //
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+    QMUIDialogSelectionViewController *dialogViewController = [[QMUIDialogSelectionViewController alloc] init];
+    dialogViewController.title = @"请选择操作";
+    dialogViewController.items = @[@"同意", @"拒绝"];
+    dialogViewController.cellForItemBlock = ^(QMUIDialogSelectionViewController *aDialogViewController, QMUITableViewCell *cell, NSUInteger itemIndex) {
+        cell.accessoryType = UITableViewCellAccessoryNone;// 移除点击时默认加上右边的checkbox
+    };
+    dialogViewController.heightForItemBlock = ^CGFloat (QMUIDialogSelectionViewController *aDialogViewController, NSUInteger itemIndex) {
+        return 54;
+    };
+    dialogViewController.didSelectItemBlock = ^(QMUIDialogSelectionViewController *aDialogViewController, NSUInteger itemIndex) {
+        BDNoticeModel *noticeModel = [self.mNoticeArray objectAtIndex:itemIndex];
+        DDLogInfo(@"%s %@ %lu", __PRETTY_FUNCTION__, noticeModel.title, (unsigned long)itemIndex);
+        
+        if (itemIndex == 0) {
+            DDLogInfo(@"同意");
+            
+            [BDCoreApis acceptGroupTransfer:noticeModel.nid resultSuccess:^(NSDictionary *dict) {
+                
+            } resultFailed:^(NSError *error) {
+                
+            }];
+            
+        } else {
+            DDLogInfo(@"拒绝");
+            
+            [BDCoreApis rejectGroupTransfer:noticeModel.nid resultSuccess:^(NSDictionary *dict) {
+                
+            } resultFailed:^(NSError *error) {
+                
+            }];
+        }
+        [aDialogViewController hide];
+    };
+    [dialogViewController show];
+    
+    
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+#pragma mark - 下拉刷新
+
+- (void)refreshControlSelector {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+    [BDCoreApis getNoticesPage:0 withSize:20 resultSuccess:^(NSDictionary *dict) {
+        
+        NSNumber *status_code = [dict objectForKey:@"status_code"];
+        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            //
+            NSMutableArray *noticeArray = dict[@"data"][@"content"];
+            for (NSDictionary *noticeDict in noticeArray) {
+                //
+                BDNoticeModel *noticeModel = [[BDNoticeModel alloc] initWithDictionary:noticeDict];
+                if (![self.mNoticeArray containsObject:noticeModel]) {
+                    [self.mNoticeArray addObject:noticeModel];
+                }
+            }
+            //
+            [self.tableView reloadData];
+            [self.mRefreshControl endRefreshing];
+        } else {
+            [QMUITips showError:dict[@"message"] inView:self.view hideAfterDelay:2.0f];
+            [self.mRefreshControl endRefreshing];
+        }
+    } resultFailed:^(NSError *error) {
+        // 请求会话失败
+        [QMUITips showError:@"拉取通知失败" inView:self.view hideAfterDelay:2.0f];
+    }];
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

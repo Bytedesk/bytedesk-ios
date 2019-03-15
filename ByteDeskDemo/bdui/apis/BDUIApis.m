@@ -8,6 +8,7 @@
 
 #import "BDUIApis.h"
 #import "BDChatViewController.h"
+#import "BDChatWxViewController.h"
 #import "BDFeedbackCategoryViewController.h"
 
 static BDUIApis *sharedInstance = nil;
@@ -36,6 +37,19 @@ static BDUIApis *sharedInstance = nil;
     [navigationController pushViewController:chatViewController animated:YES];
 }
 
++ (void)visitorPushWorkGroupChat:(UINavigationController *)navigationController
+                withWorkGroupWid:(NSString *)wId
+                       withTitle:(NSString *)title
+                      withCustom:(NSDictionary *)custom {
+    //
+    //
+    BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
+    chatViewController.navigationItem.backBarButtonItem.title = @"";
+    //
+    [chatViewController initWithWorkGroupWid:wId withTitle:title withPush:YES withCustom:custom];
+    [navigationController pushViewController:chatViewController animated:YES];
+}
+
 + (void)visitorPresentWorkGroupChat:(UINavigationController *)navigationController
                    withWorkGroupWid:(NSString *)wId
                           withTitle:(NSString *)title{
@@ -49,6 +63,21 @@ static BDUIApis *sharedInstance = nil;
     }];
 }
 
+
++ (void)visitorPresentWorkGroupChat:(UINavigationController *)navigationController
+                   withWorkGroupWid:(NSString *)wId
+                          withTitle:(NSString *)title
+                         withCustom:(NSDictionary *)custom {
+    BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
+    [chatViewController initWithWorkGroupWid:wId withTitle:title withPush:NO withCustom:custom];
+    //
+    QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    [navigationController presentViewController:chatNavigationController animated:YES completion:^{
+        
+    }];
+}
+
+
 + (void)visitorPushAppointChat:(UINavigationController *)navigationController
                   withAgentUid:(NSString *)uId
                      withTitle:(NSString *)title {
@@ -60,12 +89,38 @@ static BDUIApis *sharedInstance = nil;
     [navigationController pushViewController:chatViewController animated:YES];
 }
 
++ (void)visitorPushAppointChat:(UINavigationController *)navigationController
+                  withAgentUid:(NSString *)uId
+                     withTitle:(NSString *)title
+                    withCustom:(NSDictionary *)custom {
+    //
+    BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
+    chatViewController.navigationItem.backBarButtonItem.title = @"";
+    //
+    [chatViewController initWithAgentUid:uId withTitle:title withPush:YES withCustom:custom];
+    [navigationController pushViewController:chatViewController animated:YES];
+}
+
 + (void)visitorPresentAppointChat:(UINavigationController *)navigationController
                      withAgentUid:(NSString *)uId
                         withTitle:(NSString *)title {
     //
     BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
     [chatViewController initWithAgentUid:uId withTitle:title withPush:NO];
+    //
+    QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    [navigationController presentViewController:chatNavigationController animated:YES completion:^{
+        
+    }];
+}
+
++ (void)visitorPresentAppointChat:(UINavigationController *)navigationController
+                     withAgentUid:(NSString *)uId
+                        withTitle:(NSString *)title
+                       withCustom:(NSDictionary *)custom {
+    //
+    BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
+    [chatViewController initWithAgentUid:uId withTitle:title withPush:NO withCustom:custom];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
@@ -84,16 +139,38 @@ static BDUIApis *sharedInstance = nil;
 + (void)agentPushChat:(UINavigationController *)navigationController
       withThreadModel:(BDThreadModel *)threadModel {
     //
-    BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithThreadModel:threadModel withPush:YES];
+    [navigationController pushViewController:chatViewController animated:YES];
+}
+
++ (void)agentPushChat:(UINavigationController *)navigationController
+      withThreadModel:(BDThreadModel *)threadModel
+           withCustom:(NSDictionary *)custom {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithThreadModel:threadModel withPush:YES withCustom:custom];
     [navigationController pushViewController:chatViewController animated:YES];
 }
 
 + (void)agentPresentChat:(UINavigationController *)navigationController
          withThreadModel:(BDThreadModel *)threadModel {
     //
-    BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithThreadModel:threadModel withPush:NO];
+    //
+    QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    [navigationController presentViewController:chatNavigationController animated:YES completion:^{
+        
+    }];
+}
+
++ (void)agentPresentChat:(UINavigationController *)navigationController
+         withThreadModel:(BDThreadModel *)threadModel
+              withCustom:(NSDictionary *)custom {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithThreadModel:threadModel withPush:NO withCustom:custom];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
@@ -104,16 +181,38 @@ static BDUIApis *sharedInstance = nil;
 + (void)agentPushChat:(UINavigationController *)navigationController
      withContactModel:(BDContactModel *)contactModel {
     //
-    BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithContactModel:contactModel withPush:YES];
+    [navigationController pushViewController:chatViewController animated:YES];
+}
+
++ (void)agentPushChat:(UINavigationController *)navigationController
+     withContactModel:(BDContactModel *)contactModel
+           withCustom:(NSDictionary *)custom {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithContactModel:contactModel withPush:YES withCustom:custom];
     [navigationController pushViewController:chatViewController animated:YES];
 }
 
 + (void)agentPresentChat:(UINavigationController *)navigationController
         withContactModel:(BDContactModel *)contactModel {
     //
-    BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithContactModel:contactModel withPush:NO];
+    //
+    QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    [navigationController presentViewController:chatNavigationController animated:YES completion:^{
+        
+    }];
+}
+
++ (void)agentPresentChat:(UINavigationController *)navigationController
+        withContactModel:(BDContactModel *)contactModel
+              withCustom:(NSDictionary *)custom {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithContactModel:contactModel withPush:NO withCustom:custom];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
@@ -124,16 +223,38 @@ static BDUIApis *sharedInstance = nil;
 + (void)agentPushChat:(UINavigationController *)navigationController
        withGroupModel:(BDGroupModel *)groupModel {
     //
-    BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithGroupModel:groupModel withPush:YES];
+    [navigationController pushViewController:chatViewController animated:YES];
+}
+
++ (void)agentPushChat:(UINavigationController *)navigationController
+       withGroupModel:(BDGroupModel *)groupModel
+           withCustom:(NSDictionary *)custom {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithGroupModel:groupModel withPush:YES withCustom:custom];
     [navigationController pushViewController:chatViewController animated:YES];
 }
 
 + (void)agentPresentChat:(UINavigationController *)navigationController
           withGroupModel:(BDGroupModel *)groupModel {
     //
-    BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithGroupModel:groupModel withPush:NO];
+    //
+    QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    [navigationController presentViewController:chatNavigationController animated:YES completion:^{
+        
+    }];
+}
+
++ (void)agentPresentChat:(UINavigationController *)navigationController
+          withGroupModel:(BDGroupModel *)groupModel
+              withCustom:(NSDictionary *)custom {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithGroupModel:groupModel withPush:NO withCustom:custom];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{

@@ -95,7 +95,6 @@
         else {
             imageName = @"SenderTextNodeBkgHL";
         }
-        
     }
     else {
         if (state == UIControlStateNormal) {

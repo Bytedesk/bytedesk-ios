@@ -10,6 +10,8 @@
 //#import "KFDetailViewController.h"
 #import "KFContactSelectViewController.h"
 
+#import <bytedesk-ui/bdui.h>
+
 @interface KFGroupSearchView : UIView
 
 @property(nonatomic, strong) QMUILabel *titleLabel;
@@ -193,11 +195,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-//    KFDetailViewController *detailViewController = [[KFDetailViewController alloc] init];
-//    [detailViewController initWithGroupModel:[self.mGroupArray objectAtIndex:indexPath.row]];
-//    //
-//    [self.navigationController pushViewController:detailViewController animated:YES];
+
+    // 群组会话
+    [BDUIApis agentPushChat:self.navigationController withGroupModel:[self.mGroupArray objectAtIndex:indexPath.row]];
     
 }
 

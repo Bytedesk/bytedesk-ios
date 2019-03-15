@@ -8,12 +8,15 @@
 
 #import "BDGroupProfileViewController.h"
 #import "BDGroupMemberTableViewCell.h"
+#import "BDGroupInviteTableViewController.h"
+#import "BDQRCodeViewController.h"
 
 #import <bytedesk-core/bdcore.h>
 
-@interface BDGroupProfileViewController ()<QMUITextFieldDelegate>
+@interface BDGroupProfileViewController ()<QMUITextFieldDelegate, BDGroupMemberTableViewCellDelegate>
 
 @property(nonatomic, strong) NSString *mGid;
+@property(nonatomic, strong) NSString *mTid;
 
 @property(nonatomic, strong) NSString *mNickname;
 @property(nonatomic, strong) NSString *mDescription;
@@ -23,6 +26,8 @@
 @property(nonatomic, strong) NSMutableArray *mAdminsArray;
 
 @property(nonatomic, assign) BOOL mIsAdmin;
+@property(nonatomic, assign) BOOL mIsTopThread;
+@property(nonatomic, assign) BOOL mIsNoDisturb;
 
 @property(nonatomic, weak) QMUIDialogTextFieldViewController *currentTextFieldDialogViewController;
 
@@ -30,7 +35,7 @@
 
 @implementation BDGroupProfileViewController
 
-- (void)initWithGroupGid:(NSString *)gid {
+- (void)initWithGroupGid:(NSString *)gid{
     //
     self.mGid = gid;
     self.mNickname = @"未设置";
@@ -39,6 +44,8 @@
     self.mMembersArray = [[NSMutableArray alloc] init];
     self.mAdminsArray = [[NSMutableArray alloc] init];
     self.mIsAdmin = FALSE;
+    self.mIsTopThread = FALSE;
+    self.mIsNoDisturb = FALSE;
 }
 
 - (void)viewDidLoad {
@@ -60,14 +67,16 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 1;
     } else if (section == 1) {
-        return 4;
+        return 5;
+    } else if (section == 2) {
+        return 3;
     } else {
         return 1;
     }
@@ -92,15 +101,16 @@
             cell = [[BDGroupMemberTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         }
         [cell initWithMembers:self.mMembersArray];
+        cell.delegate = self;
         
         return cell;
     }
     else if (indexPath.section == 1) {
         static NSString *CellIdentifier = @"Cell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        QMUITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell){
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+            cell = [[QMUITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         //
@@ -116,11 +126,40 @@
         } else if (indexPath.row == 3) {
             cell.textLabel.text = @"二维码";
         } else {
-            cell.textLabel.text = @"群成员";
+            cell.textLabel.text = @"邀请";
             // TODO: 邀请入群
         }
         
         return cell;
+    } else if (indexPath.section == 2) {
+        
+        static NSString *CellIdentifier = @"ClearCell";
+        QMUITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell){
+            cell = [[QMUITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        //
+        if (indexPath.row == 0) {
+            cell.textLabel.text = @"消息免打扰";
+            UISwitch* noDisturbSwitch = [[UISwitch alloc] init];
+            noDisturbSwitch.tag = 100;
+            [noDisturbSwitch addTarget:self action:@selector(switchNoDisturbChanged:) forControlEvents:UIControlEventValueChanged];
+            noDisturbSwitch.on = self.mIsNoDisturb;
+            cell.accessoryView = noDisturbSwitch;
+        }else if (indexPath.row == 1) {
+            cell.textLabel.text = @"清空聊天记录";
+        } else if (indexPath.row == 2) {
+            cell.textLabel.text = @"会话置顶";
+            UISwitch* topThreadSwitch = [[UISwitch alloc] init];
+            topThreadSwitch.tag = 101;
+            [topThreadSwitch addTarget:self action:@selector(switchTopThreadChanged:) forControlEvents:UIControlEventValueChanged];
+            topThreadSwitch.on = self.mIsTopThread;
+            cell.accessoryView = topThreadSwitch;
+        }
+        
+        return cell;
+        
     } else {
         static NSString *CellIdentifier = @"ExitCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -149,11 +188,11 @@
     }
     else if (indexPath.section == 1) {
         //
-        if (!self.mIsAdmin) {
-            return;
-        }
-        //
         if (indexPath.row == 0) {
+            //
+            if (!self.mIsAdmin) {
+                return;
+            }
             //
             QMUIDialogTextFieldViewController *dialogViewController = [[QMUIDialogTextFieldViewController alloc] init];
             dialogViewController.title = @"群昵称";
@@ -171,6 +210,10 @@
             self.currentTextFieldDialogViewController = dialogViewController;
         } else if (indexPath.row == 1) {
             //
+            if (!self.mIsAdmin) {
+                return;
+            }
+            //
             QMUIDialogTextFieldViewController *dialogViewController = [[QMUIDialogTextFieldViewController alloc] init];
             dialogViewController.title = @"群简介";
             [dialogViewController addTextFieldWithTitle:@"简介" configurationHandler:^(QMUILabel *titleLabel, QMUITextField *textField, CALayer *separatorLayer) {
@@ -186,6 +229,10 @@
             [dialogViewController show];
             self.currentTextFieldDialogViewController = dialogViewController;
         } else if (indexPath.row == 2) {
+            //
+            if (!self.mIsAdmin) {
+                return;
+            }
             //
             QMUIDialogTextFieldViewController *dialogViewController = [[QMUIDialogTextFieldViewController alloc] init];
             dialogViewController.title = @"群公告";
@@ -203,16 +250,50 @@
             self.currentTextFieldDialogViewController = dialogViewController;
         } else if (indexPath.row == 3) {
             // TODO: 生成群二维码
-            
+            DDLogInfo(@"生成群二维码");
+            BDQRCodeViewController *qrcodeViewController = [[BDQRCodeViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [qrcodeViewController initWithGid:self.mGid];
+            [self.navigationController pushViewController:qrcodeViewController animated:YES];
         } else {
-            // 群成员
-            [BDCoreApis getGroupMembers:self.mGid resultSuccess:^(NSDictionary *dict) {
+            // TODO: 邀请新成员
+            
+        }
+    } else if (indexPath.section == 2) {
+        
+        if (indexPath.row == 0) {
+            
+            DDLogInfo(@"消息免打扰");
+            
+            // FIXME: 点击tablecell显示两个滑动按钮？
+//            UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+//            UISwitch* switcher = (UISwitch*)[cell.contentView viewWithTag:100];
+//            [switcher setOn:!switcher.on animated:YES];
+//            [self switchNoDisturbChanged:switcher];
+        
+        }else if (indexPath.row == 1) {
+            
+            DDLogInfo(@"清空聊天记录");
+        
+            [BDCoreApis markClearGroupMessage:self.mGid resultSuccess:^(NSDictionary *dict) {
                 
             } resultFailed:^(NSError *error) {
                 
             }];
+            
+        } else if (indexPath.row == 2) {
+            
+            DDLogInfo(@"会话置顶");
+            
+            // FIXME: 点击tablecell显示两个滑动按钮？
+//            UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+//            UISwitch* switcher = (UISwitch*)[cell.contentView viewWithTag:101];
+//            [switcher setOn:!switcher.on animated:YES];
+//            [self switchTopThreadChanged:switcher];
+            
         }
+        
     } else {
+        //
         if (!self.mIsAdmin) {
             // 退出群
             QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
@@ -310,20 +391,25 @@
     [BDCoreApis getGroupDetail:self.mGid resultSuccess:^(NSDictionary *dict) {
         
         NSNumber *status_code = [dict objectForKey:@"status_code"];
-        DDLogWarn(@"dict:%@", dict);
+//        DDLogWarn(@"dict:%@", dict);
         if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            // 成功
-            self.mNickname = dict[@"data"][@"nickname"];
-            self.mDescription = dict[@"data"][@"description"];
-            self.mAnnouncement = dict[@"data"][@"announcement"];
             //
-            NSMutableArray *membersArray = dict[@"data"][@"members"];
+            self.mTid = dict[@"data"][@"threadTid"];
+            self.mIsTopThread = [dict[@"data"][@"isTopThread"] boolValue];
+            self.mIsNoDisturb = [dict[@"data"][@"isNoDisturb"] boolValue];
+            
+            // 成功
+            self.mNickname = dict[@"data"][@"group"][@"nickname"];
+            self.mDescription = dict[@"data"][@"group"][@"description"];
+            self.mAnnouncement = dict[@"data"][@"group"][@"announcement"];
+            //
+            NSMutableArray *membersArray = dict[@"data"][@"group"][@"members"];
             for (NSDictionary *memberDict in membersArray) {
                 BDContactModel *memberModel = [[BDContactModel alloc] initWithDictionary:memberDict];
                 [self.mMembersArray addObject:memberModel];
             }
             //
-            NSMutableArray *adminsArray = dict[@"data"][@"admins"];
+            NSMutableArray *adminsArray = dict[@"data"][@"group"][@"admins"];
             for (NSDictionary *adminDict in adminsArray) {
                 NSString *uid = adminDict[@"uid"];
                 if ([uid isEqualToString:[BDSettings getUid]]) {
@@ -344,6 +430,137 @@
     }];
 }
 
+#pragma mark - BDGroupMemberTableViewCellDelegate
+
+- (void)avatarClicked:(BDContactModel *)contactModel {
+    
+    DDLogInfo(@"%s nickname: %@", __PRETTY_FUNCTION__,  contactModel.nickname);
+    
+    // 非管理员 或者 点击自己群头像，直接返回
+    if (!self.mIsAdmin || [contactModel.uid isEqualToString:[BDSettings getUid]]) {
+        return;
+    }
+    
+    QMUIDialogSelectionViewController *dialogViewController = [[QMUIDialogSelectionViewController alloc] init];
+    dialogViewController.title = @"请选择操作";
+    dialogViewController.items = @[@"转交群", @"踢出群"];
+    [dialogViewController addCancelButtonWithText:@"取消" block:nil];
+    dialogViewController.cellForItemBlock = ^(QMUIDialogSelectionViewController *aDialogViewController, QMUITableViewCell *cell, NSUInteger itemIndex) {
+        cell.accessoryType = UITableViewCellAccessoryNone;// 移除点击时默认加上右边的checkbox
+    };
+    dialogViewController.heightForItemBlock = ^CGFloat (QMUIDialogSelectionViewController *aDialogViewController, NSUInteger itemIndex) {
+        return 54;
+    };
+    dialogViewController.didSelectItemBlock = ^(QMUIDialogSelectionViewController *aDialogViewController, NSUInteger itemIndex) {
+        DDLogInfo(@"%s %@ %lu", __PRETTY_FUNCTION__, contactModel.real_name, (unsigned long)itemIndex);
+        
+        if (itemIndex == 0) {
+            DDLogInfo(@"转交群");
+            
+            [BDCoreApis transferGroup:contactModel.uid withGroupGid:self.mGid resultSuccess:^(NSDictionary *dict) {
+                
+                NSNumber *status_code = [dict objectForKey:@"status_code"];
+                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    
+                    // TODO: UI提示
+                    
+                } else {
+                    
+                    NSString *message = dict[@"message"];
+                    DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
+                    [QMUITips showError:message inView:self.view hideAfterDelay:2];
+                }
+                
+            } resultFailed:^(NSError *error) {
+                DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+            }];
+            
+            
+        } else {
+            DDLogInfo(@"踢出群");
+            
+            [BDCoreApis kickGroupMember:contactModel.uid withGroupGid:self.mGid resultSuccess:^(NSDictionary *dict) {
+                
+                NSNumber *status_code = [dict objectForKey:@"status_code"];
+                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    
+                    // TODO: UI提示
+                    
+                } else {
+                    
+                    NSString *message = dict[@"message"];
+                    DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
+                    [QMUITips showError:message inView:self.view hideAfterDelay:2];
+                }
+                
+            } resultFailed:^(NSError *error) {
+                DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+            }];
+        }
+        
+        [aDialogViewController hide];
+    };
+    [dialogViewController show];
+}
+
+- (void)inviteClicked {
+    
+    DDLogInfo(@"inviteClicked");
+}
+
+
+
+-(void) switchNoDisturbChanged:(id)sender {
+    UISwitch* switcher = (UISwitch*)sender;
+    BOOL value = switcher.on;
+    // Store the value and/or respond appropriately
+    
+    if (value) {
+        
+        // 设置免打扰
+        [BDCoreApis markNoDisturbThread:self.mTid resultSuccess:^(NSDictionary *dict) {
+            
+        } resultFailed:^(NSError *error) {
+            
+        }];
+        
+    } else {
+        
+        // 取消免打扰
+        [BDCoreApis unmarkNoDisturbThread:self.mTid resultSuccess:^(NSDictionary *dict) {
+            
+        } resultFailed:^(NSError *error) {
+            
+        }];
+        
+    }
+}
+
+-(void) switchTopThreadChanged:(id)sender {
+    UISwitch* switcher = (UISwitch*)sender;
+    BOOL value = switcher.on;
+    // Store the value and/or respond appropriately
+    
+    if (value) {
+
+        // 设置会话置顶
+        [BDCoreApis markTopThread:self.mTid resultSuccess:^(NSDictionary *dict) {
+            
+        } resultFailed:^(NSError *error) {
+            
+        }];
+        
+    } else {
+        
+        // 取消会话置顶
+        [BDCoreApis unmarkTopThread:self.mTid resultSuccess:^(NSDictionary *dict) {
+            
+        } resultFailed:^(NSError *error) {
+            
+        }];
+    }
+    
+}
 
 
 @end

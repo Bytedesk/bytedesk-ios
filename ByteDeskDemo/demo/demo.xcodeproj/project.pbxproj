@@ -58,6 +58,7 @@
 		3DCA9C6D21F60FE800E63998 /* KFHelpCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6C21F60FE800E63998 /* KFHelpCenterViewController.m */; };
 		3DCA9C7021F6109600E63998 /* KFTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6F21F6109600E63998 /* KFTicketViewController.m */; };
 		3DE1AA7420039A7C00A32B20 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DE1AA7620039A7C00A32B20 /* Localizable.strings */; };
+		3DE6FD872235007B006F1329 /* KFQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6FD862235007B006F1329 /* KFQRCodeViewController.m */; };
 		AF07A2BB176935FE7FE9041E /* Pods_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA9625A7F4C1A519864722 /* Pods_demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -181,6 +182,8 @@
 		3DE1AA7C20039AB300A32B20 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		3DE1AA7D20039AB300A32B20 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		3DE1AA7E20039AB300A32B20 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		3DE6FD852235007B006F1329 /* KFQRCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFQRCodeViewController.h; sourceTree = "<group>"; };
+		3DE6FD862235007B006F1329 /* KFQRCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFQRCodeViewController.m; sourceTree = "<group>"; };
 		47B3ACE6A88CA6DE69A1D961 /* Pods-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-demo/Pods-demo.debug.xcconfig"; sourceTree = "<group>"; };
 		7B69D50047B7027F5F3109CB /* Pods-demo-demoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo-demoTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-demo-demoTests/Pods-demo-demoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A6F8D9C70681F31AC9D9456E /* Pods-demo-demoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo-demoTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-demo-demoTests/Pods-demo-demoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -440,6 +443,8 @@
 				3D9A14772081F629008C6DA2 /* KFNavigationController.m */,
 				3D548A491FC52374003117B4 /* KFIntroViewController.h */,
 				3D548A4A1FC52374003117B4 /* KFIntroViewController.m */,
+				3DE6FD852235007B006F1329 /* KFQRCodeViewController.h */,
+				3DE6FD862235007B006F1329 /* KFQRCodeViewController.m */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -625,8 +630,6 @@
 				"${BUILT_PRODUCTS_DIR}/MQTTClient/MQTTClient.framework",
 				"${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework",
-				"${PODS_ROOT}/bytedesk-core/frameworks/cocoapods/bytedesk-core.framework",
-				"${PODS_ROOT}/bytedesk-ui/frameworks/cocoapods/bytedesk-ui.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -639,8 +642,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MQTTClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QMUIKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TZImagePickerController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bytedesk-core.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bytedesk-ui.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -663,6 +664,7 @@
 				3D5E997621D908E7006D37CC /* KFFormPhoneViewCell.m in Sources */,
 				3D548A5D1FC5251B003117B4 /* KFVisitorThreadViewController.m in Sources */,
 				3D39291A21C28116001E1257 /* QDCommonViewController.m in Sources */,
+				3DE6FD872235007B006F1329 /* KFQRCodeViewController.m in Sources */,
 				3D39293521C28310001E1257 /* KFQueueTableViewCell.m in Sources */,
 				3D47629921D1CA190034BF83 /* KFNoticeViewController.m in Sources */,
 				3DCA9C5E21F605C300E63998 /* UIView+FeedBack.m in Sources */,
