@@ -42,7 +42,6 @@ static BDUIApis *sharedInstance = nil;
                        withTitle:(NSString *)title
                       withCustom:(NSDictionary *)custom {
     //
-    //
     BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
     chatViewController.navigationItem.backBarButtonItem.title = @"";
     //

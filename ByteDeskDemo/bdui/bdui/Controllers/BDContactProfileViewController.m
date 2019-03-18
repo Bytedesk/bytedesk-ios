@@ -12,7 +12,14 @@
 
 @interface BDContactProfileViewController ()
 
-@property(nonatomic, strong) BDThreadModel *mThreadModel;
+@property(nonatomic, strong) NSString *mUid;
+@property(nonatomic, strong) NSString *mTid;
+
+@property(nonatomic, strong) NSString *mNickname;
+
+@property(nonatomic, assign) BOOL mIsTopThread;
+@property(nonatomic, assign) BOOL mIsNoDisturb;
+@property(nonatomic, assign) BOOL mIsShield;
 
 @end
 
@@ -27,6 +34,8 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self fetchContactDetail];
 }
 
 #pragma mark -
@@ -37,7 +46,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 2;
+        return 3;
     } else {
         // 清空聊天记录
         return 1;
@@ -68,7 +77,7 @@
                 switcher = [[UISwitch alloc] init];
             }
             switcher.tag = 0;
-            switcher.on = [self.mThreadModel.is_mark_disturb boolValue];
+            switcher.on = self.mIsNoDisturb;
             [switcher removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
             [switcher addTarget:self action:@selector(handleSwitchCellEvent:) forControlEvents:UIControlEventValueChanged];
             cell.accessoryView = switcher;
@@ -83,7 +92,22 @@
                 switcher = [[UISwitch alloc] init];
             }
             switcher.tag = 1;
-            switcher.on = [self.mThreadModel.is_mark_top boolValue];
+            switcher.on = self.mIsTopThread;
+            [switcher removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+            [switcher addTarget:self action:@selector(handleSwitchCellEvent:) forControlEvents:UIControlEventValueChanged];
+            cell.accessoryView = switcher;
+        } else if (indexPath.row == 2) {
+            //
+            cell.textLabel.text = @"屏蔽";
+            
+            UISwitch *switcher;
+            if ([cell.accessoryView isKindOfClass:[UISwitch class]]) {
+                switcher = (UISwitch *)cell.accessoryView;
+            } else {
+                switcher = [[UISwitch alloc] init];
+            }
+            switcher.tag = 2;
+            switcher.on = self.mIsShield;
             [switcher removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
             [switcher addTarget:self action:@selector(handleSwitchCellEvent:) forControlEvents:UIControlEventValueChanged];
             cell.accessoryView = switcher;
@@ -103,7 +127,7 @@
     if (indexPath.section == 1) {
         DDLogInfo(@"清空聊天记录");
         //
-        [BDCoreApis markClearThreadMessage:self.mThreadModel.tid resultSuccess:^(NSDictionary *dict) {
+        [BDCoreApis markClearThreadMessage:self.mTid resultSuccess:^(NSDictionary *dict) {
             //
             NSNumber *status_code = [dict objectForKey:@"status_code"];
             if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
@@ -121,8 +145,8 @@
 }
 
 
-- (void)initWithThreadModel:(BDThreadModel *)threadModel {
-    self.mThreadModel = threadModel;
+- (void)initWithUid:(NSString *)uid {
+    self.mUid = uid;
 }
 
 - (void)handleSwitchCellEvent:(UISwitch *)switchControl {
@@ -131,84 +155,127 @@
     if (switchControl.tag == 0) {
         //
         if (switchControl.on) {
-            //
-            if (self.mThreadModel) {
-                // 设置免打扰
-                [BDCoreApis markNoDisturbThread:self.mThreadModel.tid resultSuccess:^(NSDictionary *dict) {
-                    //
-                    NSNumber *status_code = [dict objectForKey:@"status_code"];
-                    if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                        // 成功
-                        [QMUITips showSucceed:@"打开免打扰成功" inView:self.view hideAfterDelay:.8];
-                    } else {
-                        
-                    }
-                    //
-                } resultFailed:^(NSError *error) {
-                    //
-                    [QMUITips showError:@"打开免打扰失败" inView:self.view hideAfterDelay:.8];
-                }];
-            }
+            // 设置免打扰
+            [BDCoreApis markNoDisturbThread:self.mTid resultSuccess:^(NSDictionary *dict) {
+                //
+                NSNumber *status_code = [dict objectForKey:@"status_code"];
+                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    // 成功
+                    [QMUITips showSucceed:@"打开免打扰成功" inView:self.view hideAfterDelay:.8];
+                } else {
+                    
+                }
+                //
+            } resultFailed:^(NSError *error) {
+                //
+                [QMUITips showError:@"打开免打扰失败" inView:self.view hideAfterDelay:.8];
+            }];
         } else {
             //
-            if (self.mThreadModel) {
-                // 取消免打扰
-                [BDCoreApis unmarkNoDisturbThread:self.mThreadModel.tid resultSuccess:^(NSDictionary *dict) {
-                    //
-                    NSNumber *status_code = [dict objectForKey:@"status_code"];
-                    if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                        // 成功
-                        [QMUITips showSucceed:@"关闭免打扰成功" inView:self.view hideAfterDelay:.8];
-                    } else {
-                        
-                    }
-                    //
-                } resultFailed:^(NSError *error) {
-                    //
-                    [QMUITips showError:@"关闭免打扰失败" inView:self.view hideAfterDelay:.8];
-                }];
-            }
+            // 取消免打扰
+            [BDCoreApis unmarkNoDisturbThread:self.mTid resultSuccess:^(NSDictionary *dict) {
+                //
+                NSNumber *status_code = [dict objectForKey:@"status_code"];
+                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    // 成功
+                    [QMUITips showSucceed:@"关闭免打扰成功" inView:self.view hideAfterDelay:.8];
+                } else {
+                    
+                }
+                //
+            } resultFailed:^(NSError *error) {
+                //
+                [QMUITips showError:@"关闭免打扰失败" inView:self.view hideAfterDelay:.8];
+            }];
         }
     } else if (switchControl.tag == 1) {
         //
         if (switchControl.on) {
            
-            if (self.mThreadModel) {
-                // 置顶聊天
-                [BDCoreApis markTopThread:self.mThreadModel.tid resultSuccess:^(NSDictionary *dict) {
-                    //
-                    NSNumber *status_code = [dict objectForKey:@"status_code"];
-                    if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                        // 成功
-                        [QMUITips showSucceed:@"关闭指定聊天成功" inView:self.view hideAfterDelay:.8];
-                    } else {
-                        
-                    }
-                } resultFailed:^(NSError *error) {
-                    //
-                    [QMUITips showError:@"关闭置顶聊天" inView:self.view hideAfterDelay:.8];
-                }];
-            }
+            // 置顶聊天
+            [BDCoreApis markTopThread:self.mTid resultSuccess:^(NSDictionary *dict) {
+                //
+                NSNumber *status_code = [dict objectForKey:@"status_code"];
+                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    // 成功
+                    [QMUITips showSucceed:@"关闭指定聊天成功" inView:self.view hideAfterDelay:.8];
+                } else {
+                    
+                }
+            } resultFailed:^(NSError *error) {
+                //
+                [QMUITips showError:@"关闭置顶聊天" inView:self.view hideAfterDelay:.8];
+            }];
+            
         } else {
             //
-            if (self.mThreadModel) {
-                // 取消指定
-                [BDCoreApis unmarkTopThread:self.mThreadModel.tid resultSuccess:^(NSDictionary *dict) {
-                    //
-                    NSNumber *status_code = [dict objectForKey:@"status_code"];
-                    if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                        // 成功
-                        [QMUITips showSucceed:@"关闭指定聊天成功" inView:self.view hideAfterDelay:.8];
-                    } else {
-                        
-                    }
-                } resultFailed:^(NSError *error) {
-                    //
-                    [QMUITips showError:@"关闭置顶聊天" inView:self.view hideAfterDelay:.8];
-                }];
-            }
+            // 取消指定
+            [BDCoreApis unmarkTopThread:self.mTid resultSuccess:^(NSDictionary *dict) {
+                //
+                NSNumber *status_code = [dict objectForKey:@"status_code"];
+                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    // 成功
+                    [QMUITips showSucceed:@"关闭指定聊天成功" inView:self.view hideAfterDelay:.8];
+                } else {
+                    
+                }
+            } resultFailed:^(NSError *error) {
+                //
+                [QMUITips showError:@"关闭置顶聊天" inView:self.view hideAfterDelay:.8];
+            }];
+        }
+    } else if (switchControl.tag == 2) {
+        //
+        if (switchControl.on) {
+            // 屏蔽用户
+            [BDCoreApis shield:self.mUid resultSuccess:^(NSDictionary *dict) {
+                
+            } resultFailed:^(NSError *error) {
+                
+            }];
+            
+        } else {
+            // 取消屏蔽
+            [BDCoreApis unshield:self.mUid resultSuccess:^(NSDictionary *dict) {
+                
+            } resultFailed:^(NSError *error) {
+                
+            }];
         }
     }
+}
+
+
+#pragma mark - 加载联系人详情
+
+- (void)fetchContactDetail {
+    
+    [BDCoreApis userDetail:self.mUid resultSuccess:^(NSDictionary *dict) {
+        
+        NSNumber *status_code = [dict objectForKey:@"status_code"];
+        //        DDLogWarn(@"dict:%@", dict);
+        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            
+            //
+            self.mTid = dict[@"data"][@"threadTid"];
+            self.mIsTopThread = [dict[@"data"][@"isTopThread"] boolValue];
+            self.mIsNoDisturb = [dict[@"data"][@"isNoDisturb"] boolValue];
+            self.mIsShield = [dict[@"data"][@"isShield"] boolValue];
+            
+            // 成功
+            self.mNickname = dict[@"data"][@"user"][@"nickname"];
+            
+        } else {
+            //
+            NSString *message = dict[@"message"];
+            [QMUITips showError:message inView:self.view hideAfterDelay:2];
+        }
+        //
+        [self.tableView reloadData];
+    
+    } resultFailed:^(NSError *error) {
+        DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+    }];
 }
 
 @end

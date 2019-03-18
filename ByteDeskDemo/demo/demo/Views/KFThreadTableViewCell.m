@@ -11,7 +11,7 @@
 
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
-#define AVATAR_HEIGHT_WIDTH   40
+#define AVATAR_HEIGHT_WIDTH   55
 #define TIMESTAMP_LABEL_WIDTH 100
 #define MARGIN                8
 #define CONTENT_LABEL_HEIGHT  20

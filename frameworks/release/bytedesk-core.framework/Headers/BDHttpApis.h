@@ -159,6 +159,25 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                   resultFailed:(FailedCallbackBlock)failed;
 
 /**
+ 加载用户个人资料
+
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)userProfileResultSuccess:(SuccessCallbackBlock)success
+                 resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 他人加载用户详情
+
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)userDetail:(NSString *)uid
+     resultSuccess:(SuccessCallbackBlock)success
+      resultFailed:(FailedCallbackBlock)failed;
+
+/**
  <#Description#>
 
  @param success <#success description#>
@@ -437,6 +456,50 @@ typedef void (^FailedCallbackBlock)(NSError *error);
       resultSuccess:(SuccessCallbackBlock)success
        resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ 判断自己是否已经屏蔽对方
+
+ @param uid <#uid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)isShield:(NSString *)uid
+   resultSuccess:(SuccessCallbackBlock)success
+    resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 判断自己是否已经被对方屏蔽
+
+ @param uid <#uid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)isShielded:(NSString *)uid
+     resultSuccess:(SuccessCallbackBlock)success
+      resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 屏蔽对方，则对方无法给自己发送消息。但自己仍然可以给对方发送消息
+
+ @param uid <#uid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)shield:(NSString *)uid
+ resultSuccess:(SuccessCallbackBlock)success
+  resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 取消屏蔽
+
+ @param uid <#uid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)unshield:(NSString *)uid
+ resultSuccess:(SuccessCallbackBlock)success
+    resultFailed:(FailedCallbackBlock)failed;
+
 - (void)addBlock:(NSString *)uid
         withType:(NSString *)type
         withNote:(NSString *)note
@@ -703,6 +766,48 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (void)failError:(NSError *)error
     resultSuccess:(SuccessCallbackBlock)success
      resultFailed:(FailedCallbackBlock)failed;
+    
+    
+#pragma mark - 微信
+
+
+/**
+ 获取token
+ https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419317851&token=&lang=zh_CN
+
+ @param code <#code description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)getWXAccessToken:(NSString *)code
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+    
+
+/**
+ 刷新token
+ https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419317851&token=&lang=zh_CN
+
+ @param refreshToken <#refreshToken description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)refreshWXAccessToken:(NSString *)refreshToken
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+    
+
+- (void)isWxAccessTokenValid:(NSString *)accessToken
+                  withOpenId:(NSString *)openId
+               resultSuccess:(SuccessCallbackBlock)success
+                resultFailed:(FailedCallbackBlock)failed;
+    
+
+- (void)getWxUserinfo:(NSString *)accessToken
+           withOpenId:(NSString *)openId
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+    
 
 @end
 

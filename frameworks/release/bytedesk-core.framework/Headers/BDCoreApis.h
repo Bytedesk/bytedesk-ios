@@ -19,6 +19,22 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
 #pragma mark - 访客端接口
 
+/**
+ 普通用户注册
+
+ @param username 用户名
+ @param nickname 昵称
+ @param password 密码
+ @param success 成功回调
+ @param failed 失败回调
+ */
++ (void)registerUser:(NSString *)username
+        withNickname:(NSString *)nickname
+        withPassword:(NSString *)password
+       resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
+
+
 + (void)registerUser:(NSString *)username
            withNickname:(NSString *)nickname
            withPassword:(NSString *)password
@@ -26,6 +42,17 @@ typedef void (^FailedCallbackBlock)(NSError *error);
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ 自定义注册用户uid
+
+ @param username <#username description#>
+ @param nickname <#nickname description#>
+ @param uid <#uid description#>
+ @param password <#password description#>
+ @param subDomain <#subDomain description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)registerUser:(NSString *)username
         withNickname:(NSString *)nickname
              withUid:(NSString *)uid
@@ -230,6 +257,25 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  */
 + (void)initDataResultSuccess:(SuccessCallbackBlock)success
                   resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 加载用户个人资料
+ 
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)userProfileResultSuccess:(SuccessCallbackBlock)success
+                    resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 他人加载用户详情
+ 
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)userDetail:(NSString *)uid
+     resultSuccess:(SuccessCallbackBlock)success
+     resultFailed:(FailedCallbackBlock)failed;
 
 /**
  更新个人资料，目前仅开放nickname
@@ -736,6 +782,50 @@ typedef void (^FailedCallbackBlock)(NSError *error);
        resultFailed:(FailedCallbackBlock)failed;
 
 /**
+ 判断自己是否已经屏蔽对方
+ 
+ @param uid <#uid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)isShield:(NSString *)uid
+   resultSuccess:(SuccessCallbackBlock)success
+    resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 判断自己是否已经被对方屏蔽
+ 
+ @param uid <#uid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)isShielded:(NSString *)uid
+     resultSuccess:(SuccessCallbackBlock)success
+      resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 屏蔽对方，则对方无法给自己发送消息。但自己仍然可以给对方发送消息
+ 
+ @param uid <#uid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)shield:(NSString *)uid
+ resultSuccess:(SuccessCallbackBlock)success
+  resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 取消屏蔽
+ 
+ @param uid <#uid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)unshield:(NSString *)uid
+   resultSuccess:(SuccessCallbackBlock)success
+    resultFailed:(FailedCallbackBlock)failed;
+
+/**
  拉黑用户
 
  @param uid <#uid description#>
@@ -1047,7 +1137,6 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 + (void)logoutResultSuccess:(SuccessCallbackBlock)success
                resultFailed:(FailedCallbackBlock)failed;
 
-
 /**
  建立长连接
  */
@@ -1070,6 +1159,27 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 + (void)applicationDidBecomeActive;
 + (void)applicationWillTerminate;
 
+    
+#pragma mark - 微信
+    
++ (void)getWXAccessToken:(NSString *)code
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+    
++ (void)refreshWXAccessToken:(NSString *)refreshToken
+               resultSuccess:(SuccessCallbackBlock)success
+                resultFailed:(FailedCallbackBlock)failed;
+    
++ (void)isWxAccessTokenValid:(NSString *)accessToken
+                  withOpenId:(NSString *)openId
+               resultSuccess:(SuccessCallbackBlock)success
+                resultFailed:(FailedCallbackBlock)failed;
+    
+    
++ (void)getWxUserinfo:(NSString *)accessToken
+           withOpenId:(NSString *)openId
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
 
 @end
 

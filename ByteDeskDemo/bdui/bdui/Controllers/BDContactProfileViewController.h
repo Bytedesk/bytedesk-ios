@@ -11,11 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class BDThreadModel;
-
 @interface BDContactProfileViewController : QMUICommonTableViewController
 
-- (void) initWithThreadModel:(BDThreadModel *)threadModel;
+- (void) initWithUid:(NSString *)uid;
 
 @end
 

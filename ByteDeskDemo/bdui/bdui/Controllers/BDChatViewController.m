@@ -490,8 +490,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.mLastMessageId = INT_MAX;
  
     // FIXME: 因为点击右上角按钮初始化需要用到threadModel, 暂时隐藏不启用右上角按钮
-//    UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithImage:[UIImage imageNamed:@"icon_about" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] target:self action:@selector(handleRightBarButtonItemClicked:)];
-//    self.navigationItem.rightBarButtonItem = rightItem;
+    UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithImage:[UIImage imageNamed:@"icon_about" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] target:self action:@selector(handleRightBarButtonItemClicked:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 - (void) initWithContactModel:(BDContactModel *)contactModel withPush:(BOOL)isPush withCustom:(NSDictionary *)custom {
@@ -723,7 +723,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_CONTACT]) {
             // 联系人会话
             BDContactProfileViewController *contactViewController = [[BDContactProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
-            [contactViewController initWithThreadModel:self.mThreadModel];
+            [contactViewController initWithUid:self.mUid];
             [self.navigationController pushViewController:contactViewController animated:YES];
         } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_GROUP]) {
             // 群组会话
