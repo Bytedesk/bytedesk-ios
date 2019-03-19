@@ -25,20 +25,39 @@
                     withWorkGroupWid:(NSString *)wId
               withTitle:(NSString *)title;
 
++ (void)visitorPushWorkGroupChat:(UINavigationController *)navigationController
+                withWorkGroupWid:(NSString *)wId
+                       withTitle:(NSString *)title
+                      withCustom:(NSDictionary *)custom;
 
 + (void)visitorPresentWorkGroupChat:(UINavigationController *)navigationController
                        withWorkGroupWid:(NSString *)wId
               withTitle:(NSString *)title;
+
++ (void)visitorPresentWorkGroupChat:(UINavigationController *)navigationController
+                   withWorkGroupWid:(NSString *)wId
+                          withTitle:(NSString *)title
+                         withCustom:(NSDictionary *)custom;
 
 
 + (void)visitorPushAppointChat:(UINavigationController *)navigationController
                   withAgentUid:(NSString *)uId
                     withTitle:(NSString *)title;
 
++ (void)visitorPushAppointChat:(UINavigationController *)navigationController
+                  withAgentUid:(NSString *)uId
+                     withTitle:(NSString *)title
+                    withCustom:(NSDictionary *)custom;
+
 
 + (void)visitorPresentAppointChat:(UINavigationController *)navigationController
                      withAgentUid:(NSString *)uId
                         withTitle:(NSString *)title;
+
++ (void)visitorPresentAppointChat:(UINavigationController *)navigationController
+                     withAgentUid:(NSString *)uId
+                        withTitle:(NSString *)title
+                       withCustom:(NSDictionary *)custom;
 
 + (void)visitorPushFeedback:(UINavigationController *)navigationController;
 
@@ -48,20 +67,44 @@
 + (void)agentPushChat:(UINavigationController *)navigationController
        withThreadModel:(BDThreadModel *)threadModel;
 
++ (void)agentPushChat:(UINavigationController *)navigationController
+      withThreadModel:(BDThreadModel *)threadModel
+           withCustom:(NSDictionary *)custom;
+
 + (void)agentPresentChat:(UINavigationController *)navigationController
       withThreadModel:(BDThreadModel *)threadModel;
 
++ (void)agentPresentChat:(UINavigationController *)navigationController
+         withThreadModel:(BDThreadModel *)threadModel
+              withCustom:(NSDictionary *)custom;
+
 + (void)agentPushChat:(UINavigationController *)navigationController
       withContactModel:(BDContactModel *)contactModel;
+
++ (void)agentPushChat:(UINavigationController *)navigationController
+     withContactModel:(BDContactModel *)contactModel
+           withCustom:(NSDictionary *)custom;
 
 + (void)agentPresentChat:(UINavigationController *)navigationController
       withContactModel:(BDContactModel *)contactModel;
 
++ (void)agentPresentChat:(UINavigationController *)navigationController
+        withContactModel:(BDContactModel *)contactModel
+              withCustom:(NSDictionary *)custom;
+
 + (void)agentPushChat:(UINavigationController *)navigationController
       withGroupModel:(BDGroupModel *)groupModel;
 
++ (void)agentPushChat:(UINavigationController *)navigationController
+       withGroupModel:(BDGroupModel *)groupModel
+           withCustom:(NSDictionary *)custom;
+
 + (void)agentPresentChat:(UINavigationController *)navigationController
       withGroupModel:(BDGroupModel *)groupModel;
+
++ (void)agentPresentChat:(UINavigationController *)navigationController
+          withGroupModel:(BDGroupModel *)groupModel
+              withCustom:(NSDictionary *)custom;
 
 
 

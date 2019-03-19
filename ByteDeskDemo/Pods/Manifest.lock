@@ -14,12 +14,12 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - bytedesk-core (1.4.8):
+  - bytedesk-core (1.5.0):
     - AFNetworking
     - CocoaLumberjack
     - FMDB
     - MQTTClient
-  - bytedesk-ui (1.4.8):
+  - bytedesk-ui (1.5.0):
     - AFNetworking
     - bytedesk-core
     - CocoaLumberjack
@@ -28,14 +28,14 @@ PODS:
     - M80AttributedLabel
     - MQTTClient
     - QMUIKit
-  - CocoaLumberjack (3.5.1):
-    - CocoaLumberjack/Core (= 3.5.1)
-  - CocoaLumberjack/Core (3.5.1)
+  - CocoaLumberjack (3.5.2):
+    - CocoaLumberjack/Core (= 3.5.2)
+  - CocoaLumberjack/Core (3.5.2)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - HCSStarRatingView (1.5)
-  - M80AttributedLabel (1.9.1)
+  - M80AttributedLabel (1.9.3)
   - MGSwipeTableCell (1.6.8)
   - MQTTClient (0.15.2):
     - MQTTClient/Core (= 0.15.2)
@@ -311,7 +311,7 @@ PODS:
     - QMUIKit/QMUILog
   - QMUIKit/QMUIResources (3.1.2)
   - QMUIKit/QMUIWeakObjectContainer (3.1.2)
-  - TZImagePickerController (3.1.9)
+  - TZImagePickerController (3.2.0)
 
 DEPENDENCIES:
   - AFNetworking
@@ -342,16 +342,16 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  bytedesk-core: 8aec85ad9a6aabd1c97d0d766d06780163e0fc10
-  bytedesk-ui: 9b33d28b109ecc37a17a1e18f08debd475c31a99
-  CocoaLumberjack: 2101f8a5508197a305e737d16c5c2e9e2157628c
+  bytedesk-core: e176cc47ea31ac44484e42cf011b26251a4fa106
+  bytedesk-ui: 99f292f01a04380f6ce6e7502143905a19472eb4
+  CocoaLumberjack: 118bf4a820efc641f79fa487b75ed928dccfae23
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
-  M80AttributedLabel: d6079b23765837f583747c2b9949e3b7e0d4cb5d
+  M80AttributedLabel: 362643e3ed8d4c53d779eb8fe74f0ee70432c948
   MGSwipeTableCell: dc4eca3212ed38a563b27d6aa7b3c01ce656c1e2
   MQTTClient: 902c7bcac1501595f3d0b15178c7205b40331fb0
   QMUIKit: 765333b31bb25a973f2ea11e0a67fca727ef29a7
-  TZImagePickerController: c3f7c505d23281e21e98df6dbeae372946caa28f
+  TZImagePickerController: 7850b158d025065b162a1a963d445040b828abc9
 
 PODFILE CHECKSUM: 64e990d3a0d8552096d2c1a8a82bd5bfead9da6f
 

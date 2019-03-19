@@ -22,4 +22,10 @@
 
 + (NSString *)dictToJson:(NSDictionary *)dict;
 
++ (NSString *)getQRCodeLogin;
+
++ (NSString *)getQRCodeUser:(NSString *)uid;
+
++ (NSString *)getQRCodeGroup:(NSString *)gid;
+
 @end

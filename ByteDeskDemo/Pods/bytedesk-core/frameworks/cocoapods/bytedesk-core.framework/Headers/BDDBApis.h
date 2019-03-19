@@ -65,9 +65,23 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (BDMessageModel *) insertTextMessageLocal:(NSString *)tid withWorkGroupWid:(NSString *)wid
                 withContent:(NSString *)content withLocalId:(NSString *)localId
                 withSessionType:(NSString *)sessionType;
+
 - (BDMessageModel *) insertImageMessageLocal:(NSString *)tid withWorkGroupWid:(NSString *)wid
                     withContent:(NSString *)content withLocalId:(NSString *)localId
                 withSessionType:(NSString *)sessionType;
+
+- (BDMessageModel *) insertVoiceMessageLocal:(NSString *)tid withWorkGroupWid:(NSString *)wid
+                                withContent:(NSString *)content withLocalId:(NSString *)localId
+                            withSessionType:(NSString *)sessionType;
+
+- (BDMessageModel *) insertCommodityMessageLocal:(NSString *)tid withWorkGroupWid:(NSString *)wid
+                                withContent:(NSString *)content withLocalId:(NSString *)localId
+                            withSessionType:(NSString *)sessionType;
+
+- (BDMessageModel *) insertRedPacketMessageLocal:(NSString *)tid withWorkGroupWid:(NSString *)wid
+                                withContent:(NSString *)content withLocalId:(NSString *)localId
+                            withSessionType:(NSString *)sessionType;
+
 - (BDMessageModel *) insertMessageLocal:(NSString *)tid withWorkGroupWid:(NSString *)wid
                 withContent:(NSString *)content withLocalId:(NSString *)localId
                    withType:(NSString *)type withSessionType:(NSString *)sessionType;
