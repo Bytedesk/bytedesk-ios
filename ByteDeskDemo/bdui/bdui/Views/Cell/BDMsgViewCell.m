@@ -16,6 +16,7 @@
 #import "BDMsgVoiceContentView.h"
 #import "BDMsgQuestionnairViewCell.h"
 #import "BDRedPacketTableViewCell.h"
+#import "BDCommodityTableViewCell.h"
 
 
 @import AFNetworking;
@@ -154,7 +155,7 @@
         _bubbleView = [[BDMsgImageContentView alloc] initMessageContentView];
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_VOICE]) {
         //
-        _bubbleView = [[BDMsgVoiceContentView  alloc] initMessageContentView];
+        _bubbleView = [[BDMsgVoiceContentView alloc] initMessageContentView];
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_QUESTIONNAIRE]) {
         //
         _bubbleView = [[BDMsgQuestionnairViewCell alloc] initMessageContentView];

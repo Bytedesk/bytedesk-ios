@@ -22,6 +22,7 @@
 #define BD_AUTOREPLYCONTENT       @"bd_autoreplycontent"
 #define BD_STATUS                 @"bd_status"
 #define BD_CURRENT_TID            @"bd_current_tid"
+#define BD_DEVICE_TOKEN           @"bd_device_token"
 
 #define BD_IS_ALREADY_LOGIN       @"bd_is_already_login"
 
@@ -35,7 +36,13 @@
 
 + (BOOL)loginAsVisitor;
 
-+ (BOOL)getIsAlreadyLogin;
+/**
+ @deprecated 请使用 isAlreadyLogin
+ @return boolean
+ */
++ (BOOL)getIsAlreadyLogin DEPRECATED_ATTRIBUTE;
+
++ (BOOL)isAlreadyLogin;
 
 + (NSString *)getClient;
 
@@ -110,6 +117,10 @@
 + (NSString *)getPassportTokenType;
 
 + (void)setPassportTokenType:(NSString *)tokenType;
+
++ (NSString *)getDeviceToken;
+
++ (void)setDeviceToken:(NSString *)deviceToken;
 
 + (void)clear;
 

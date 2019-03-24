@@ -53,7 +53,8 @@
     //    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, self.model.pic_url);
     
     // TODO: 图片大小按照图片长宽比例显示
-    [_imageView setImageWithURL:[NSURL URLWithString:self.model.image_url] placeholderImage:[UIImage imageNamed:@"Fav_Cell_File_Img"]];
+//    [_imageView setImageWithURL:[NSURL URLWithString:self.model.image_url] placeholderImage:[UIImage imageNamed:@"Fav_Cell_File_Img"]];
+    [_imageView setBackgroundColor:[UIColor redColor]];
     
     [self setNeedsLayout];
 }
@@ -63,7 +64,7 @@
     
     UIEdgeInsets contentInsets = self.model.contentViewInsets;
     
-    CGSize size = CGSizeMake(200, 200);
+    CGSize size = CGSizeMake(150, 200);
     self.model.contentSize = size;
     
     CGRect imageFrame = CGRectZero;

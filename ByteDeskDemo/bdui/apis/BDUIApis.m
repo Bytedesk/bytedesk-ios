@@ -133,6 +133,134 @@ static BDUIApis *sharedInstance = nil;
     [navigationController pushViewController:categoryViewController animated:YES];
 }
 
+#pragma mark - IM接口
+
++ (void)pushChat:(UINavigationController *)navigationController
+      withThreadModel:(BDThreadModel *)threadModel {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithThreadModel:threadModel withPush:YES];
+    [navigationController pushViewController:chatViewController animated:YES];
+}
+
++ (void)pushChat:(UINavigationController *)navigationController
+      withThreadModel:(BDThreadModel *)threadModel
+           withCustom:(NSDictionary *)custom {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithThreadModel:threadModel withPush:YES withCustom:custom];
+    [navigationController pushViewController:chatViewController animated:YES];
+}
+
++ (void)presentChat:(UINavigationController *)navigationController
+         withThreadModel:(BDThreadModel *)threadModel {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithThreadModel:threadModel withPush:NO];
+    //
+    QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    [navigationController presentViewController:chatNavigationController animated:YES completion:^{
+        
+    }];
+}
+
++ (void)presentChat:(UINavigationController *)navigationController
+         withThreadModel:(BDThreadModel *)threadModel
+              withCustom:(NSDictionary *)custom {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithThreadModel:threadModel withPush:NO withCustom:custom];
+    //
+    QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    [navigationController presentViewController:chatNavigationController animated:YES completion:^{
+        
+    }];
+}
+
++ (void)pushChat:(UINavigationController *)navigationController
+     withContactModel:(BDContactModel *)contactModel {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithContactModel:contactModel withPush:YES];
+    [navigationController pushViewController:chatViewController animated:YES];
+}
+
++ (void)pushChat:(UINavigationController *)navigationController
+     withContactModel:(BDContactModel *)contactModel
+           withCustom:(NSDictionary *)custom {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithContactModel:contactModel withPush:YES withCustom:custom];
+    [navigationController pushViewController:chatViewController animated:YES];
+}
+
++ (void)presentChat:(UINavigationController *)navigationController
+        withContactModel:(BDContactModel *)contactModel {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithContactModel:contactModel withPush:NO];
+    //
+    QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    [navigationController presentViewController:chatNavigationController animated:YES completion:^{
+        
+    }];
+}
+
++ (void)presentChat:(UINavigationController *)navigationController
+        withContactModel:(BDContactModel *)contactModel
+              withCustom:(NSDictionary *)custom {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithContactModel:contactModel withPush:NO withCustom:custom];
+    //
+    QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    [navigationController presentViewController:chatNavigationController animated:YES completion:^{
+        
+    }];
+}
+
++ (void)pushChat:(UINavigationController *)navigationController
+       withGroupModel:(BDGroupModel *)groupModel {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithGroupModel:groupModel withPush:YES];
+    [navigationController pushViewController:chatViewController animated:YES];
+}
+
++ (void)pushChat:(UINavigationController *)navigationController
+       withGroupModel:(BDGroupModel *)groupModel
+           withCustom:(NSDictionary *)custom {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithGroupModel:groupModel withPush:YES withCustom:custom];
+    [navigationController pushViewController:chatViewController animated:YES];
+}
+
++ (void)presentChat:(UINavigationController *)navigationController
+          withGroupModel:(BDGroupModel *)groupModel {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithGroupModel:groupModel withPush:NO];
+    //
+    QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    [navigationController presentViewController:chatNavigationController animated:YES completion:^{
+        
+    }];
+}
+
++ (void)presentChat:(UINavigationController *)navigationController
+          withGroupModel:(BDGroupModel *)groupModel
+              withCustom:(NSDictionary *)custom {
+    //
+    BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
+    [chatViewController initWithGroupModel:groupModel withPush:NO withCustom:custom];
+    //
+    QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    [navigationController presentViewController:chatNavigationController animated:YES completion:^{
+        
+    }];
+}
+
 #pragma mark - 客服端接口
 
 + (void)agentPushChat:(UINavigationController *)navigationController

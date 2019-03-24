@@ -617,7 +617,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 - (void)viewDidLoad {
     [super viewDidLoad];
     //
-    if (![BDSettings getIsAlreadyLogin]) {
+    if (![BDSettings isAlreadyLogin]) {
         [QMUITips showError:@"请首先登录" inView:self.view hideAfterDelay:2];
         return;
     }
@@ -746,6 +746,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     //
     BDMessageModel *messageModel = [self.mMessageArray objectAtIndex:indexPath.row];
     if ([messageModel isNotification]) {
+        
+        DDLogInfo(@"通知 type: %@, content: %@", messageModel.type, messageModel.content);
+        
         //
         BDMsgNotificationViewCell *cell = [tableView dequeueReusableCellWithIdentifier:notifyIdentifier];
         if (!cell) {
@@ -762,6 +765,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         return cell;
         
     } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_COMMODITY]) {
+        
+        DDLogInfo(@"商品 type: %@, content: %@", messageModel.type, messageModel.content);
+
         //
         BDCommodityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:notifyIdentifier];
         if (!cell) {
@@ -1144,18 +1150,18 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 //    // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
     NSString *localId = [[NSUUID UUID] UUIDString];
 //
-//    // 插入本地消息, 可通过返回的messageModel首先更新本地UI，然后再发送消息
-//    BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertCommodityMessageLocal:self.mThreadTid withWorkGroupWid:self.mWorkGroupWid withContent:content withLocalId:localId withSessionType:self.mThreadType];
-////    DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.content);
-//
-//    // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
-//    NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
-//    [self.mMessageArray addObject:messageModel];
-//
-//    [self.tableView beginUpdates];
-//    [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
-//    [self.tableView endUpdates];
-//    [self tableViewScrollToBottom:YES];
+    // 插入本地消息, 可通过返回的messageModel首先更新本地UI，然后再发送消息
+    BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertCommodityMessageLocal:self.mThreadTid withWorkGroupWid:self.mWorkGroupWid withContent:content withLocalId:localId withSessionType:self.mThreadType];
+//    DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.content);
+
+    // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
+    NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
+    [self.mMessageArray addObject:messageModel];
+
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView endUpdates];
+    [self tableViewScrollToBottom:YES];
 
     // 同步发送消息
     [BDCoreApis sendCommodityMessage:content toTid:self.mThreadTid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {

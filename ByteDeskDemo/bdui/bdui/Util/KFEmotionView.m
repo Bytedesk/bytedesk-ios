@@ -64,7 +64,7 @@
                                               EMOTION_FACE_HEIGHT);
                     
                     UIButton *button = [[UIButton alloc] initWithFrame: frame];
-                    [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"AppKeFuResources.bundle/Expression_%d", 21*page + i*7 + (j+1)]] forState:UIControlStateNormal];
+                    [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"Expression_%d", 21*page + i*7 + (j+1)] inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
                     //
                     button.tag = 21*page + i*7 + (j + 1);
                     button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin;
@@ -73,8 +73,8 @@
                     //
                     if (i*7 + (j+1) == 21) {
                         
-                        [button setBackgroundImage:[UIImage imageNamed:@"AppKeFuResources.bundle/DeleteEmoticonBtn_ios7"] forState:UIControlStateNormal];
-                        [button setBackgroundImage:[UIImage imageNamed:@"AppKeFuResources.bundle/DeleteEmoticonBtnHL_ios7"] forState:UIControlStateHighlighted];
+                        [button setBackgroundImage:[UIImage imageNamed:@"DeleteEmoticonBtn_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+                        [button setBackgroundImage:[UIImage imageNamed:@"DeleteEmoticonBtnHL_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
                     }
                     
                     [button addTarget:self action:@selector(emotionFacePressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -243,12 +243,12 @@
         
         sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [sendButton setFrame:frame];
-        [sendButton setBackgroundImage:[UIImage imageNamed:@"AppKeFuResources.bundle/EmotionsSendBtnGrey_ios7"] forState:UIControlStateNormal];
-        [sendButton setBackgroundImage:[UIImage imageNamed:@"AppKeFuResources.bundle/EmotionsSendBtnBlue"] forState:UIControlStateHighlighted];
+        [sendButton setBackgroundImage:[UIImage imageNamed:@"EmotionsSendBtnGrey_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        [sendButton setBackgroundImage:[UIImage imageNamed:@"EmotionsSendBtnBlue" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
         
         [[sendButton titleLabel] setFont:[UIFont systemFontOfSize:15.0f]];
         [sendButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [sendButton setTitle:AppKeFuLocalizedString(@"Send", nil) forState:UIControlStateNormal];
+        [sendButton setTitle:@"发送" forState:UIControlStateNormal];
         
         sendButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin;
         

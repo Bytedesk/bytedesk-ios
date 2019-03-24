@@ -6,7 +6,9 @@
 //  Copyright (c) 2014年 appkefu.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
+#import <QMUIKit/QMUIKit.h>
+#import <bytedesk-core/bdcore.h>
 
 @interface KFRecordVoiceViewHUD : UIView
 
@@ -16,6 +18,7 @@
 @property (nonatomic, strong) UIImageView   *signalWaveImageView;
 @property (nonatomic, strong) UIImageView   *cancelArrowImageView;
 @property (nonatomic, strong) UILabel       *hintLabel;
+@property (nonatomic, assign) NSInteger     voiceRecordLength;
 
 //
 -(void) startVoiceRecordingToUsername:(NSString *)username;

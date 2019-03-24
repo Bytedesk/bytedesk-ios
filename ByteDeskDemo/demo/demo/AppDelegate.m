@@ -53,8 +53,18 @@
     self.window.rootViewController = aipNavigationController;
     [self.window makeKeyAndVisible];
     
-    // 建立长连接
-    [BDCoreApis connect];
+    if ([BDSettings isAlreadyLogin]) {
+        // 建立长连接
+        [BDCoreApis connect];
+        // 注册离线消息推送
+        if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+            // iOS 8 Notifications
+            [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+            
+            [application registerForRemoteNotifications];
+        }
+    } 
+    
     
     return YES;
 }
@@ -76,8 +86,13 @@
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     // TODO: 增加网络检测，如果无网络则提示
     
-    // 建立长连接
-    [BDCoreApis connect];
+    // TODO: 根据实际未读数目设置AppIcon数字
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    //
+    if ([BDSettings isAlreadyLogin]) {
+        // 建立长连接
+        [BDCoreApis connect];
+    }
 }
 
 
@@ -90,7 +105,48 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-// 初始化QMUI
+#pragma mark - 离线消息推送
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    //同步deviceToken便于离线消息推送, 同时必须在管理后台上传 .pem文件才能生效
+    NSString* newToken = [deviceToken description];
+    newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    // upload deviceToken: 4a89d8b0e971a3ff0ae6d1712ac62fa6bc1d6099756fa71b5d98d1708d12dfca
+    DDLogInfo(@"deviceToken:%@", newToken);
+    
+    // TODO: 判断是否已经上传，无需重复上传；如果没有上传，则引导提示用户开启推送
+    [BDCoreApis updateDeviceToken:newToken resultSuccess:^(NSDictionary *dict) {
+        
+    } resultFailed:^(NSError *error) {
+        
+    }];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    NSLog(@"收到推送消息。%@", userInfo);
+    /*
+     {
+     aps = {
+         alert = {
+             body = world;
+             title = Hello;
+         };
+         badge = 5;
+         "content-available" = 1;
+         sound = default;
+        };
+     }
+     */
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    //NSLog(@"注册推送失败，原因：%@",error);
+}
+
+#pragma mark - 初始化QMUI
+
 -(void) initQMUI {
     
     QMUICMI.navBarHighlightedAlpha = 0.2f;                                      // NavBarHighlightedAlpha : QMUINavigationButton 在 highlighted 时的 alpha

@@ -12,6 +12,7 @@
 //#import "KFProgressHUD.h"
 
 #import <AVFoundation/AVFoundation.h>
+#import "VoiceConverter.h"
 
 #define MICROPHONE_WIDTH        50.0f
 #define MICROPHONE_HEIGHT       100.0f
@@ -41,8 +42,6 @@
 
 @property (nonatomic, assign) double          voiceRecordStartTime;
 @property (nonatomic, assign) double          voiceRecordEndTime;
-
-@property (nonatomic, assign) NSInteger       voiceRecordLength;
 
 @end
 
@@ -127,7 +126,7 @@
                                   MICROPHONE_WIDTH,
                                   MICROPHONE_HEIGHT);
         microphoneImageView = [[UIImageView alloc] initWithFrame:frame];
-        [microphoneImageView setImage:[UIImage imageNamed:@"AppKeFuResources.bundle/RecordingBkg"]];
+        [microphoneImageView setImage:[UIImage imageNamed:@"RecordingBkg" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
         
         microphoneImageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         
@@ -147,7 +146,7 @@
                                   MICROWAVE_HEIGHT);
         
         signalWaveImageView = [[UIImageView alloc] initWithFrame:frame];
-        [signalWaveImageView setImage:[UIImage imageNamed:@"AppKeFuResources.bundle/RecordingSignal001"]];
+        [signalWaveImageView setImage:[UIImage imageNamed:@"RecordingSignal001" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
         
         signalWaveImageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     }
@@ -164,7 +163,7 @@
                                   CANCEL_WIDTH,
                                   CANCEL_HEIGHT);
         cancelArrowImageView = [[UIImageView alloc] initWithFrame:frame];
-        [cancelArrowImageView setImage:[UIImage imageNamed:@"AppKeFuResources.bundle/RecordCancel"]];
+        [cancelArrowImageView setImage:[UIImage imageNamed:@"RecordCancel" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
         
         cancelArrowImageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         
@@ -183,7 +182,7 @@
                                   HINTLABEL_HEIGHT);
         
         hintLabel = [[UILabel alloc] initWithFrame:frame];
-        [hintLabel setText:AppKeFuLocalizedString(@"Slide Up Cancel", nil)];
+        [hintLabel setText:@"上滑取消"];
         [hintLabel setTextColor:[UIColor whiteColor]];
         [hintLabel setFont:[UIFont systemFontOfSize:14.0f]];
         [hintLabel setTextAlignment:NSTextAlignmentCenter];
@@ -258,8 +257,6 @@
     return voiceRecorder;
 }
 
-
-
 -(NSTimer *)voiceRecorderTimer
 {
     if (!voiceRecorderTimer) {
@@ -274,8 +271,6 @@
     
     return voiceRecorderTimer;
 }
-
-
 
 -(NSURL *)voicePathURL
 {
@@ -309,45 +304,42 @@
     voiceRecordEndTime = [NSDate timeIntervalSinceReferenceDate];
     voiceRecordLength = voiceRecordEndTime - voiceRecordStartTime;
     
-//    if (voiceRecordLength < 1) {
-//
-//        [KFProgressHUD showErrorWithStatus:AppKeFuLocalizedString(@"RecordingTooShort", nil)];
-//
-//        return @"tooshort";
-//    }
-//    else if (voiceRecordLength > 60) {
-//
-//        [KFProgressHUD showErrorWithStatus:AppKeFuLocalizedString(@"RecordingTooLong", nil)];
-//
-//        return @"toolong";
-//    }
-//
-//    NSString *tempVoicePath = [NSString stringWithFormat:@"%@/Documents/tempVoice.wav", NSHomeDirectory()];
-//    NSString *wavVoiceFileName = [NSString stringWithFormat:@"%@_to_%@_%@_%ld.wav", [[AppKeFuLib sharedInstance] getUsername], workgroupName, [KFUtils getCurrentTimeString], (long)voiceRecordLength];
-//    NSString *amrVoiceFileName = [NSString stringWithFormat:@"%@_to_%@_%@_%ld.amr", [[AppKeFuLib sharedInstance] getUsername], workgroupName, [KFUtils getCurrentTimeString], (long)voiceRecordLength];
-//
-//    //NSLog(@"wavVoiveFileName:%@, amrfilename: %@", wavVoiceFileName, amrVoiceFileName);
-//
-//    NSString *wavVoicePath = [NSString stringWithFormat:@"%@/Documents/%@", NSHomeDirectory(), wavVoiceFileName];
-//    NSString *amrVoicePath = [NSString stringWithFormat:@"%@/Documents/%@", NSHomeDirectory(), amrVoiceFileName];
-//
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    NSError *error = nil;
-//    [fileManager moveItemAtPath:tempVoicePath toPath:wavVoicePath error:&error];
-//    if (error) {
-//        NSLog(@"rename file Error: %@ %ld %@", [error domain], (long)[error code], [[error userInfo] description]);
-//    }
-    
-    //转成amr格式
-//    [KFUtils wavToAmr:wavVoicePath amrSavePath:amrVoicePath];
-    
-    //发送语音文件
-    //[[KFUtils sharedInstance] uploadVoice:amrVoiceFileName workgroupName:workgroupName];
+    if (voiceRecordLength < 1) {
 
-//    return amrVoiceFileName;
+//        [KFProgressHUD showErrorWithStatus:AppKeFuLocalizedString(@"RecordingTooShort", nil)];
+        [QMUITips showError:@"录音时间太短" inView:self hideAfterDelay:2.0f];
+        return @"tooshort";
+    }
+    else if (voiceRecordLength > 60) {
+
+//        [KFProgressHUD showErrorWithStatus:AppKeFuLocalizedString(@"RecordingTooLong", nil)];
+        [QMUITips showError:@"录音时间太长" inView:self hideAfterDelay:2.0f];
+        return @"toolong";
+    }
+
+    NSString *tempVoicePath = [NSString stringWithFormat:@"%@/Documents/tempVoice.wav", NSHomeDirectory()];
+    NSString *wavVoiceFileName = [NSString stringWithFormat:@"%@_to_%@_%@_%ld.wav", [BDSettings getUsername], workgroupName, [BDUtils getCurrentTimeString], (long)voiceRecordLength];
+    NSString *amrVoiceFileName = [NSString stringWithFormat:@"%@_to_%@_%@_%ld.amr", [BDSettings getUsername], workgroupName, [BDUtils getCurrentTimeString], (long)voiceRecordLength];
+
+//    NSLog(@"wavVoiveFileName:%@, amrfilename: %@", wavVoiceFileName, amrVoiceFileName);
+    NSString *wavVoicePath = [NSString stringWithFormat:@"%@/Documents/%@", NSHomeDirectory(), wavVoiceFileName];
+    NSString *amrVoicePath = [NSString stringWithFormat:@"%@/Documents/%@", NSHomeDirectory(), amrVoiceFileName];
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error = nil;
+    [fileManager moveItemAtPath:tempVoicePath toPath:wavVoicePath error:&error];
+    if (error) {
+        NSLog(@"rename file Error: %@ %ld %@", [error domain], (long)[error code], [[error userInfo] description]);
+    }
     
-    return @"";
+//    转成amr格式
+//    [KFUtils wavToAmr:wavVoicePath amrSavePath:amrVoicePath];
+    [VoiceConverter wavToAmr:wavVoicePath amrSavePath:amrVoicePath];
     
+//    发送语音文件
+//    [[KFUtils sharedInstance] uploadVoice:amrVoiceFileName workgroupName:workgroupName];
+
+    return amrVoiceFileName;
 }
 
 -(void) cancelVoiceRecording
@@ -375,45 +367,44 @@
     
     if (-5.0f <= meter) {
         
-        [[self signalWaveImageView] setImage:[UIImage imageNamed:@"AppKeFuResources.bundle/RecordingSignal008"]];
+        [[self signalWaveImageView] setImage:[UIImage imageNamed:@"RecordingSignal008" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
         
     }
     else if (-10.0f <= meter && meter < -5.0f) {
         
-        [[self signalWaveImageView] setImage:[UIImage imageNamed:@"AppKeFuResources.bundle/RecordingSignal007"]];
+        [[self signalWaveImageView] setImage:[UIImage imageNamed:@"RecordingSignal007" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
         
     }
     else if (-20.0f <= meter && meter < -10.0f) {
         
-        [[self signalWaveImageView] setImage:[UIImage imageNamed:@"AppKeFuResources.bundle/RecordingSignal006"]];
+        [[self signalWaveImageView] setImage:[UIImage imageNamed:@"RecordingSignal006" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
         
     }
     else if (-30.0f <= meter && meter < -20.0f) {
         
-        [[self signalWaveImageView] setImage:[UIImage imageNamed:@"AppKeFuResources.bundle/RecordingSignal005"]];
+        [[self signalWaveImageView] setImage:[UIImage imageNamed:@"RecordingSignal005" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
         
     }
     else if (-40.0f <= meter && meter < -30.0f) {
         
-        [[self signalWaveImageView] setImage:[UIImage imageNamed:@"AppKeFuResources.bundle/RecordingSignal004"]];
+        [[self signalWaveImageView] setImage:[UIImage imageNamed:@"RecordingSignal004" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
         
     }
     else if (-50.0f <= meter && meter < -40.0f) {
         
-        [[self signalWaveImageView] setImage:[UIImage imageNamed:@"AppKeFuResources.bundle/RecordingSignal003"]];
+        [[self signalWaveImageView] setImage:[UIImage imageNamed:@"RecordingSignal003" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
         
     }
     else if (-55.0f <= meter && meter < -50.0f) {
         
-        [[self signalWaveImageView] setImage:[UIImage imageNamed:@"AppKeFuResources.bundle/RecordingSignal002"]];
+        [[self signalWaveImageView] setImage:[UIImage imageNamed:@"RecordingSignal002" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
         
     }
     else if (-60.0f <= meter && meter < -55.0f) {
         
-        [[self signalWaveImageView] setImage:[UIImage imageNamed:@"AppKeFuResources.bundle/RecordingSignal001"]];
+        [[self signalWaveImageView] setImage:[UIImage imageNamed:@"RecordingSignal001" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
         
     }
-    
     
 }
 

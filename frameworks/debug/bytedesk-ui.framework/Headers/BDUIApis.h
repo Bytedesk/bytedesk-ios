@@ -61,52 +61,94 @@
 
 + (void)visitorPushFeedback:(UINavigationController *)navigationController;
 
+#pragma mark - IM打开聊天界面接口
 
-#pragma mark - 客服端接口
++ (void)pushChat:(UINavigationController *)navigationController
+      withThreadModel:(BDThreadModel *)threadModel;
 
-+ (void)agentPushChat:(UINavigationController *)navigationController
-       withThreadModel:(BDThreadModel *)threadModel;
-
-+ (void)agentPushChat:(UINavigationController *)navigationController
++ (void)pushChat:(UINavigationController *)navigationController
       withThreadModel:(BDThreadModel *)threadModel
            withCustom:(NSDictionary *)custom;
 
-+ (void)agentPresentChat:(UINavigationController *)navigationController
-      withThreadModel:(BDThreadModel *)threadModel;
++ (void)presentChat:(UINavigationController *)navigationController
+         withThreadModel:(BDThreadModel *)threadModel;
 
-+ (void)agentPresentChat:(UINavigationController *)navigationController
++ (void)presentChat:(UINavigationController *)navigationController
          withThreadModel:(BDThreadModel *)threadModel
               withCustom:(NSDictionary *)custom;
 
-+ (void)agentPushChat:(UINavigationController *)navigationController
-      withContactModel:(BDContactModel *)contactModel;
++ (void)pushChat:(UINavigationController *)navigationController
+     withContactModel:(BDContactModel *)contactModel;
 
-+ (void)agentPushChat:(UINavigationController *)navigationController
++ (void)pushChat:(UINavigationController *)navigationController
      withContactModel:(BDContactModel *)contactModel
            withCustom:(NSDictionary *)custom;
 
-+ (void)agentPresentChat:(UINavigationController *)navigationController
-      withContactModel:(BDContactModel *)contactModel;
++ (void)presentChat:(UINavigationController *)navigationController
+        withContactModel:(BDContactModel *)contactModel;
 
-+ (void)agentPresentChat:(UINavigationController *)navigationController
++ (void)presentChat:(UINavigationController *)navigationController
         withContactModel:(BDContactModel *)contactModel
               withCustom:(NSDictionary *)custom;
 
-+ (void)agentPushChat:(UINavigationController *)navigationController
-      withGroupModel:(BDGroupModel *)groupModel;
++ (void)pushChat:(UINavigationController *)navigationController
+       withGroupModel:(BDGroupModel *)groupModel;
 
-+ (void)agentPushChat:(UINavigationController *)navigationController
++ (void)pushChat:(UINavigationController *)navigationController
        withGroupModel:(BDGroupModel *)groupModel
            withCustom:(NSDictionary *)custom;
 
-+ (void)agentPresentChat:(UINavigationController *)navigationController
-      withGroupModel:(BDGroupModel *)groupModel;
++ (void)presentChat:(UINavigationController *)navigationController
+          withGroupModel:(BDGroupModel *)groupModel;
 
-+ (void)agentPresentChat:(UINavigationController *)navigationController
++ (void)presentChat:(UINavigationController *)navigationController
           withGroupModel:(BDGroupModel *)groupModel
               withCustom:(NSDictionary *)custom;
 
 
+#pragma mark - 客服端接口
+
++ (void)agentPushChat:(UINavigationController *)navigationController
+       withThreadModel:(BDThreadModel *)threadModel DEPRECATED_ATTRIBUTE;
+
++ (void)agentPushChat:(UINavigationController *)navigationController
+      withThreadModel:(BDThreadModel *)threadModel
+           withCustom:(NSDictionary *)custom DEPRECATED_ATTRIBUTE;
+
++ (void)agentPresentChat:(UINavigationController *)navigationController
+      withThreadModel:(BDThreadModel *)threadModel DEPRECATED_ATTRIBUTE;
+
++ (void)agentPresentChat:(UINavigationController *)navigationController
+         withThreadModel:(BDThreadModel *)threadModel
+              withCustom:(NSDictionary *)custom DEPRECATED_ATTRIBUTE;
+
++ (void)agentPushChat:(UINavigationController *)navigationController
+      withContactModel:(BDContactModel *)contactModel DEPRECATED_ATTRIBUTE;
+
++ (void)agentPushChat:(UINavigationController *)navigationController
+     withContactModel:(BDContactModel *)contactModel
+           withCustom:(NSDictionary *)custom DEPRECATED_ATTRIBUTE;
+
++ (void)agentPresentChat:(UINavigationController *)navigationController
+      withContactModel:(BDContactModel *)contactModel DEPRECATED_ATTRIBUTE;
+
++ (void)agentPresentChat:(UINavigationController *)navigationController
+        withContactModel:(BDContactModel *)contactModel
+              withCustom:(NSDictionary *)custom DEPRECATED_ATTRIBUTE;
+
++ (void)agentPushChat:(UINavigationController *)navigationController
+      withGroupModel:(BDGroupModel *)groupModel DEPRECATED_ATTRIBUTE;
+
++ (void)agentPushChat:(UINavigationController *)navigationController
+       withGroupModel:(BDGroupModel *)groupModel
+           withCustom:(NSDictionary *)custom DEPRECATED_ATTRIBUTE;
+
++ (void)agentPresentChat:(UINavigationController *)navigationController
+      withGroupModel:(BDGroupModel *)groupModel DEPRECATED_ATTRIBUTE;
+
++ (void)agentPresentChat:(UINavigationController *)navigationController
+          withGroupModel:(BDGroupModel *)groupModel
+              withCustom:(NSDictionary *)custom DEPRECATED_ATTRIBUTE;
 
 
 #pragma mark - 公共接口

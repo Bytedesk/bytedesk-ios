@@ -1,4 +1,4 @@
-# 萝卜丝·云客服
+# 萝卜丝 · IM + 云客服
 
 - 致力于提供稳定、可扩展、定制化的客户服务一站式平台
 - [官方网站](https://www.bytedesk.com)
@@ -14,8 +14,8 @@
 
 萝卜丝·云客服在经典版[微客服](http://www.weikefu.net)基础上面做了重构，将原先一个SDK一分为二为两个sdk：
 
-- 核心库：[![bytedesk-core](https://img.shields.io/badge/bytedesk--core-1.5.0-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-core)
-- 界面库，完全开源(Demo中的bdui项目)，方便开发者自定义界面：[![bytedesk--ui](https://img.shields.io/badge/bytedesk--ui-1.5.0-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-ui#bytedesk-ui-pod)
+- 核心库：[![bytedesk-core](https://img.shields.io/badge/bytedesk--core-1.5.2-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-core)
+- 界面库，完全开源(Demo中的bdui项目)，方便开发者自定义界面：[![bytedesk--ui](https://img.shields.io/badge/bytedesk--ui-1.5.2-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-ui#bytedesk-ui-pod)
 
 ## 开发文档
 

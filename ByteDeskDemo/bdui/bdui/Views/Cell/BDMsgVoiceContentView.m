@@ -7,13 +7,17 @@
 //
 
 #import "BDMsgVoiceContentView.h"
+#import "KFDSLoadProgressView.h"
+//#import "KFDSMessageModel.h"
 #import "KFDSUConstants.h"
+
+@import AFNetworking;
 
 @interface BDMsgVoiceContentView ()
 
-@property (nonatomic,strong) UIImageView *voiceImageView;
+@property (nonatomic,strong) UIImageView * imageView;
 
-@property (nonatomic,strong) UILabel *durationLabel;
+@property (nonatomic,strong) KFDSLoadProgressView * progressView;
 
 @end
 
@@ -22,8 +26,20 @@
 - (instancetype)initMessageContentView
 {
     if (self = [super initMessageContentView]) {
-        
-        [self addVoiceView];
+        self.opaque = YES;
+        //
+        _imageView  = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _imageView.backgroundColor = [UIColor blackColor];
+        _imageView.userInteractionEnabled = YES;
+        [self addSubview:_imageView];
+        //
+        UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleImageClicked:)];
+        [singleTap setNumberOfTapsRequired:1];
+        [_imageView addGestureRecognizer:singleTap];
+        //
+        _progressView = [[KFDSLoadProgressView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+        _progressView.maxProgress = 1.0f;
+        [self addSubview:_progressView];
     }
     return self;
 }
@@ -32,120 +48,60 @@
 //    return YES;
 //}
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    [[NIMSDK sharedSDK].mediaManager removeDelegate:self];
+- (void)refresh:(BDMessageModel *)data{
+    [super refresh:data];
+    //    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, self.model.pic_url);
+    
+    // TODO: 图片大小按照图片长宽比例显示
+    [_imageView setImageWithURL:[NSURL URLWithString:self.model.image_url] placeholderImage:[UIImage imageNamed:@"Fav_Cell_File_Img"]];
+    
+    [self setNeedsLayout];
 }
-
-- (void)setPlaying:(BOOL)isPlaying
-{
-    if (isPlaying) {
-        [self.voiceImageView startAnimating];
-    }else{
-        [self.voiceImageView stopAnimating];
-    }
-}
-
-
-- (void)addVoiceView{
-//    UIImage * image = [UIImage nim_imageInKit:@"icon_receiver_voice_playing.png"];
-//    _voiceImageView = [[UIImageView alloc] initWithImage:image];
-//    NSArray * animateNames = @[@"icon_receiver_voice_playing_001.png",@"icon_receiver_voice_playing_002.png",@"icon_receiver_voice_playing_003.png"];
-//    NSMutableArray * animationImages = [[NSMutableArray alloc] initWithCapacity:animateNames.count];
-//    for (NSString * animateName in animateNames) {
-//        UIImage * animateImage = [UIImage nim_imageInKit:animateName];
-//        [animationImages addObject:animateImage];
-//    }
-//    _voiceImageView.animationImages = animationImages;
-//    _voiceImageView.animationDuration = 1.0;
-//    [self addSubview:_voiceImageView];
-//    
-//    _durationLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-//    _durationLabel.backgroundColor = [UIColor clearColor];
-//    [self addSubview:_durationLabel];
-//}
-//
-//- (void)refresh:(NIMMessageModel *)data{
-//    [super refresh:data];
-//    NIMAudioObject *object = self.model.message.messageObject;
-//    self.durationLabel.text = [NSString stringWithFormat:@"%zd\"",(object.duration+500)/1000];//四舍五入
-//    
-//    NIMKitBubbleConfig *config = [[NIMKitUIConfig sharedConfig] bubbleConfig:data.message];
-//    
-//    self.durationLabel.font = config.contentTextFont;
-//    self.durationLabel.textColor = config.contentTextColor;
-//    
-//    [self.durationLabel sizeToFit];
-}
-
 
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-//    UIEdgeInsets contentInsets = self.model.contentViewInsets;
-//    if (self.model.message.isOutgoingMsg) {
-//        self.voiceImageView.nim_right = self.nim_width - contentInsets.right;
-//        _durationLabel.nim_left = contentInsets.left;
-//    } else
-//    {
-//        self.voiceImageView.nim_left = contentInsets.left;
-//        _durationLabel.nim_right = self.nim_width - contentInsets.right;
-//    }
-//    _voiceImageView.nim_centerY = self.nim_height * .5f;
-//    _durationLabel.nim_centerY = _voiceImageView.nim_centerY;
+    UIEdgeInsets contentInsets = self.model.contentViewInsets;
     
+    CGSize size = CGSizeMake(150, 30);
+    self.model.contentSize = size;
+    
+    CGRect imageFrame = CGRectZero;
+    CGRect bubbleFrame = CGRectZero;
+    CGRect boundsFrame = CGRectZero;
+    
+    if ([self.model isSend]) {
+        imageFrame = CGRectMake(contentInsets.left+2, contentInsets.top, size.width, size.height);
+        bubbleFrame = CGRectMake(0, 0, contentInsets.left + size.width + contentInsets.right + 8, contentInsets.top + size.height + contentInsets.bottom + 5);
+        boundsFrame = CGRectMake(KFDSScreen.width - bubbleFrame.size.width - 55, 23, bubbleFrame.size.width,  bubbleFrame.size.height);
+    }
+    else {
+        imageFrame = CGRectMake(contentInsets.left+3, contentInsets.top, size.width, size.height);
+        bubbleFrame = CGRectMake(0, 0, contentInsets.left + size.width + contentInsets.right + 8, contentInsets.top + size.height + contentInsets.bottom + 5);
+        boundsFrame = CGRectMake(50, 40, bubbleFrame.size.width, bubbleFrame.size.height);
+    }
+    self.frame = boundsFrame;
+    
+    self.imageView.frame = imageFrame;
+    self.bubbleImageView.frame = bubbleFrame;
+    self.model.contentSize = boundsFrame.size;
 }
 
--(void)onTouchUpInside:(id)sender
-{
-//    if ([self.model.message attachmentDownloadState]== NIMMessageAttachmentDownloadStateFailed) {
-//        if (self.audioUIDelegate && [self.audioUIDelegate respondsToSelector:@selector(retryDownloadMsg)]) {
-//            [self.audioUIDelegate retryDownloadMsg];
-//        }
-//        return;
-//    }
-//    if ([self.model.message attachmentDownloadState] == NIMMessageAttachmentDownloadStateDownloaded) {
-//        if (![[NIMSDK sharedSDK].mediaManager isPlaying]) {
-//            [[NIMSDK sharedSDK].mediaManager switchAudioOutputDevice:NIMAudioOutputDeviceSpeaker];
-//            NIMAudioObject *audioObject = (NIMAudioObject*)self.model.message.messageObject;
-//            BOOL needProximityMonitor = YES;
-//            if ([self.model.sessionConfig respondsToSelector:@selector(disableProximityMonitor)]) {
-//                needProximityMonitor = !self.model.sessionConfig.disableProximityMonitor;
-//            }
-//            [[NIMSDK sharedSDK].mediaManager setNeedProximityMonitor:needProximityMonitor];
-//            [[NIMSDK sharedSDK].mediaManager addDelegate:self];
-//            [[NIMSDK sharedSDK].mediaManager play:audioObject.path];
-//        } else {
-//            [[NIMSDK sharedSDK].mediaManager stopPlay];
-//            [self stopPlayingUI];
-//        }
-//    }
-}
 
-#pragma mark - NIMMediaManagerDelgate
-
-- (void)playAudio:(NSString *)filePath didBeganWithError:(NSError *)error {
-    if(filePath && !error) {
-//        NIMAudioObject *audioObject = (NIMAudioObject*)self.model.message.messageObject;
-//        
-//        if ([audioObject.path isEqualToString:filePath] && [self.audioUIDelegate respondsToSelector:@selector(startPlayingAudioUI)]) {
-//            [self.audioUIDelegate startPlayingAudioUI];
-//            [self setPlaying:YES];
-//        }
+- (void)handleImageClicked:(UIGestureRecognizer *)recognizer {
+    //    DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, self.model.image_url);
+    
+    if ([self.delegate respondsToSelector:@selector(imageViewClicked:)]) {
+        [self.delegate imageViewClicked:_imageView];
     }
 }
 
-- (void)playAudio:(NSString *)filePath didCompletedWithError:(NSError *)error
-{
-    [self stopPlayingUI];
-}
-
-#pragma mark - private methods
-- (void)stopPlayingUI
-{
-    [self setPlaying:NO];
-}
+//- (void)updateProgress:(float)progress {
+//    if (progress > 1.0) {
+//        progress = 1.0;
+//    }
+//    self.progressView.progress = progress;
+//}
 
 
 @end

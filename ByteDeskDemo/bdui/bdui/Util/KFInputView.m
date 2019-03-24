@@ -8,7 +8,7 @@
 
 #import "KFInputView.h"
 
-#define INPUTBAR_HEIGHT 44.0f
+#define INPUTBAR_HEIGHT 60.0f
 #define INPUTBAR_MAX_HEIGHT 200.0f
 
 #define INPUTBAR_SHOWMENU_BUTTON_WIDTH 46.0f
@@ -68,7 +68,7 @@ CGFloat const kFontSize = 17.0f;
     if (self) {
         // Initialization code
 
-        //[self setUpViews];
+        [self setUpViews];
 //        self.backgroundColor = [UIColor yellowColor];
         
     }
@@ -109,7 +109,6 @@ CGFloat const kFontSize = 17.0f;
     shouldShowInputBarSwitchMenu = _shouldShowInputBarSwitchMenu;
     
     [self setUpViews];
-    
 }
 
 #pragma mark Widgets Initialization
@@ -161,12 +160,9 @@ CGFloat const kFontSize = 17.0f;
     
     //只有高级用户，才会显示自定义菜单
     if (shouldShowInputBarSwitchMenu) {
-        
         [self addSubview:[self showMenuButton]];
         [self addSubview:[self verticalLineView]];
-        
     }
-
 
     [self addSubview:[self switchVoiceButton]];
     [self addSubview:[self inputTextView]];
@@ -174,7 +170,6 @@ CGFloat const kFontSize = 17.0f;
     [self recordVoiceButton].hidden = TRUE;
     [self addSubview:[self switchEmotionButton]];
     [self addSubview:[self switchPlusButton]];
-    
 }
 
 
@@ -184,7 +179,9 @@ CGFloat const kFontSize = 17.0f;
         
         CGRect frame = [self bounds];
         frame.origin.y = 0.5f;
-        inputToolbar = [[UIToolbar alloc] initWithFrame:frame];
+        frame.size.height = INPUTBAR_HEIGHT;
+        inputToolbar = [[UIToolbar alloc] init];
+        inputToolbar.frame = frame;
         [inputToolbar setBarStyle:UIBarStyleDefault];
         [inputToolbar setTranslucent:YES];
         [inputToolbar setTintColor:[UIColor whiteColor]];
@@ -227,7 +224,7 @@ CGFloat const kFontSize = 17.0f;
 {
     if (!switchVoiceButton) {
         
-        switchVoiceButton = [[UIButton alloc] initWithFrame:CGRectMake(shouldShowInputBarSwitchMenu ? INPUTBAR_SHOWMENU_BUTTON_WIDTH + INPUTBAR_SWITCH_VOICE_LEFT_MARGIN : 0,
+        switchVoiceButton = [[UIButton alloc] initWithFrame:CGRectMake(shouldShowInputBarSwitchMenu ? INPUTBAR_SHOWMENU_BUTTON_WIDTH + INPUTBAR_SWITCH_VOICE_LEFT_MARGIN : INPUTBAR_SWITCH_VOICE_LEFT_MARGIN,
                                                                        INPUTBAR_SWITCH_VOICE_TOP_MARGIN,
                                                                        INPUTBAR_SWITCH_VOICE_BUTTON_WIDTH_HEIGHT,
                                                                        INPUTBAR_SWITCH_VOICE_BUTTON_WIDTH_HEIGHT)];
@@ -244,11 +241,10 @@ CGFloat const kFontSize = 17.0f;
 {
     if (!inputTextView) {
         
-        
-        CGRect frame = CGRectMake( (shouldShowInputBarSwitchMenu ? INPUTBAR_SHOWMENU_BUTTON_WIDTH + INPUTBAR_SWITCH_VOICE_LEFT_MARGIN : 0)
-                                  + INPUTBAR_SWITCH_VOICE_BUTTON_WIDTH_HEIGHT +INPUTBAR_INPUT_TEXTVIEW_LEFT_MARGIN,
+        CGRect frame = CGRectMake( (shouldShowInputBarSwitchMenu ? INPUTBAR_SHOWMENU_BUTTON_WIDTH + INPUTBAR_SWITCH_VOICE_LEFT_MARGIN : INPUTBAR_SWITCH_VOICE_LEFT_MARGIN)
+                                  + INPUTBAR_SWITCH_VOICE_BUTTON_WIDTH_HEIGHT + INPUTBAR_INPUT_TEXTVIEW_LEFT_MARGIN,
                                   INPUTBAR_INPUT_TEXTVIEW_TOP_MARGIN,
-                                  self.bounds.size.width - (shouldShowInputBarSwitchMenu ? INPUTBAR_SHOWMENU_BUTTON_WIDTH + INPUTBAR_SWITCH_VOICE_LEFT_MARGIN : 0) - INPUTBAR_SWITCH_VOICE_BUTTON_WIDTH_HEIGHT - INPUTBAR_INPUT_TEXTVIEW_LEFT_MARGIN - INPUTBAR_SWITCH_EMOTION_PLUS_BUTTON_WIDTH_HEIGHT*2 - INPUTBAR_SWITCH_EMOTION_LEFT_MARGIN - INPUTBAR_SWITCH_EMOTION_RIGHT_MARGIN - INPUTBAR_SWITCH_PLUS_RIGHT_MARGIN,
+                                  self.bounds.size.width - (shouldShowInputBarSwitchMenu ? INPUTBAR_SHOWMENU_BUTTON_WIDTH + INPUTBAR_SWITCH_VOICE_LEFT_MARGIN : 0) - INPUTBAR_SWITCH_VOICE_BUTTON_WIDTH_HEIGHT - INPUTBAR_INPUT_TEXTVIEW_LEFT_MARGIN - INPUTBAR_SWITCH_EMOTION_PLUS_BUTTON_WIDTH_HEIGHT*2 - INPUTBAR_SWITCH_EMOTION_LEFT_MARGIN - INPUTBAR_SWITCH_EMOTION_RIGHT_MARGIN - INPUTBAR_SWITCH_PLUS_RIGHT_MARGIN * 2,
                                   INPUTBAR_INPUT_TEXTVIEW_HEIGHT);
         
         inputTextView = [[UITextView alloc] initWithFrame:frame];
@@ -294,8 +290,8 @@ CGFloat const kFontSize = 17.0f;
         [recordVoiceButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [recordVoiceButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
         [[recordVoiceButton titleLabel] setFont:[UIFont systemFontOfSize:14.0f]];
-        [recordVoiceButton setTitle:AppKeFuLocalizedString(@"Press To Record", nil) forState:UIControlStateNormal];
-        [recordVoiceButton setTitle:AppKeFuLocalizedString(@"Lose To Cancel", nil) forState:UIControlStateHighlighted];
+        [recordVoiceButton setTitle:@"按住 说话" forState:UIControlStateNormal];
+        [recordVoiceButton setTitle:@"松开 取消" forState:UIControlStateHighlighted];
         
         UIImage *normalImage = [UIImage imageNamed:@"VoiceBtn_Black_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
         [recordVoiceButton setBackgroundImage:[normalImage stretchableImageWithLeftCapWidth:normalImage.size.width/2 topCapHeight:normalImage.size.height/2] forState:UIControlStateNormal];
@@ -308,7 +304,6 @@ CGFloat const kFontSize = 17.0f;
         [recordVoiceButton addTarget:self action:@selector(recordVoiceButtonTouchUpOutside:) forControlEvents:UIControlEventTouchUpOutside];
         [recordVoiceButton addTarget:self action:@selector(recordVoiceButtonTouchDragInside:) forControlEvents:UIControlEventTouchDragInside];
         [recordVoiceButton addTarget:self action:@selector(recordVoiceButtonTouchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
-        
     }
     
     return recordVoiceButton;
@@ -319,7 +314,7 @@ CGFloat const kFontSize = 17.0f;
     if (!switchEmotionButton) {
         
         switchEmotionButton = [[UIButton alloc] initWithFrame:
-                               CGRectMake(self.bounds.size.width - INPUTBAR_SWITCH_PLUS_RIGHT_MARGIN - INPUTBAR_SWITCH_EMOTION_PLUS_BUTTON_WIDTH_HEIGHT * 2 - INPUTBAR_SWITCH_EMOTION_RIGHT_MARGIN,
+                               CGRectMake(self.bounds.size.width - INPUTBAR_SWITCH_PLUS_RIGHT_MARGIN - INPUTBAR_SWITCH_EMOTION_PLUS_BUTTON_WIDTH_HEIGHT * 2 - INPUTBAR_SWITCH_EMOTION_RIGHT_MARGIN * 2,
                                           INPUTBAR_SWITCH_EMOTION_PLUS_TOP_MARGIN,
                                           INPUTBAR_SWITCH_EMOTION_PLUS_BUTTON_WIDTH_HEIGHT,
                                           INPUTBAR_SWITCH_EMOTION_PLUS_BUTTON_WIDTH_HEIGHT)];
@@ -340,7 +335,7 @@ CGFloat const kFontSize = 17.0f;
     if (!switchPlusButton) {
         
         switchPlusButton = [[UIButton alloc] initWithFrame:
-                            CGRectMake(self.bounds.size.width - INPUTBAR_SWITCH_EMOTION_PLUS_BUTTON_WIDTH_HEIGHT - INPUTBAR_SWITCH_PLUS_RIGHT_MARGIN,
+                            CGRectMake(self.bounds.size.width - INPUTBAR_SWITCH_EMOTION_PLUS_BUTTON_WIDTH_HEIGHT - INPUTBAR_SWITCH_PLUS_RIGHT_MARGIN * 2,
                                                                       INPUTBAR_SWITCH_EMOTION_PLUS_TOP_MARGIN,
                                                                       INPUTBAR_SWITCH_EMOTION_PLUS_BUTTON_WIDTH_HEIGHT,
                                                                       INPUTBAR_SWITCH_EMOTION_PLUS_BUTTON_WIDTH_HEIGHT)];

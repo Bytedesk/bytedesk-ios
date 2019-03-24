@@ -30,29 +30,32 @@
 #define MultipleImagePickingTag 1047
 #define SingleImagePickingTag 1048
 
-#define INPUTBAR_HEIGHT                    44.0f
+#define INPUTBAR_HEIGHT                    60
 #define EMOTION_PLUS_VIEW_HEIGHT           216.0f
 #define VIEW_ANIMATION_DURATION            0.25f
 #define TEXTBUBBLE_MAX_TEXT_WIDTH          180.0f
 
 #define RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT 150.0f
 
-static CGFloat const kToolbarHeight = 56;
+static CGFloat const kToolbarHeight = 60;
 static CGFloat const kEmotionViewHeight = 232;
 
 static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPhoto;
 
-@interface BDChatWxViewController ()<UINavigationControllerBackButtonHandlerProtocol, KFDSMsgViewCellDelegate, QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,BDSingleImagePickerPreviewViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, QMUITextFieldDelegate, QMUIImagePreviewViewDelegate>
+@interface BDChatWxViewController ()<UINavigationControllerBackButtonHandlerProtocol, KFDSMsgViewCellDelegate, QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,BDSingleImagePickerPreviewViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, QMUITextFieldDelegate, QMUIImagePreviewViewDelegate, KFEmotionViewDelegate, KFPlusViewDelegate, KFInputViewDelegate>
 {
 
 }
 
-@property(nonatomic, strong) UIView *toolbarView;
-@property(nonatomic, strong) QMUITextField *toolbarTextField;
-@property(nonatomic, strong) QMUIButton *faceButton;
-@property(nonatomic, strong) QMUIButton *sendButton;
-@property(nonatomic, strong) QMUIButton *plusButton;
-@property(nonatomic, strong) QMUIButton *recordButton;
+//@property(nonatomic, strong) UIView *toolbarView;
+//@property(nonatomic, strong) QMUITextField *toolbarTextField;
+//@property(nonatomic, strong) QMUIButton *switchVoiceButton;
+//@property(nonatomic, strong) QMUIButton *faceButton;
+//@property(nonatomic, strong) QMUIButton *sendButton;
+//@property(nonatomic, strong) QMUIButton *plusButton;
+//@property(nonatomic, strong) QMUIButton *recordButton;
+
+@property (nonatomic, strong) NSDictionary *emotionToTextDictionary;
 
 @property(nonatomic, strong) QMUIImagePreviewViewController *imagePreviewViewController;
 @property(nonatomic, strong) UIImageView *currentImageView;
@@ -104,12 +107,27 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 @property (nonatomic, strong) KFPlusView                *kfPlusView;
 @property (nonatomic, strong) KFRecordVoiceViewHUD      *kfRecordVoiceViewHUD;
 
+@property (nonatomic, assign) CGFloat                   inputViewY;
+@property (nonatomic, assign) CGFloat                   keyboardY;
+@property (nonatomic, assign) CGFloat                   keyboardHeight;
+
+@property (nonatomic, assign) BOOL                      isEmotionPlusPressedToHideKeyboard;
+
 
 @end
 
 @implementation BDChatWxViewController
 
-@synthesize mImagePickerController;
+@synthesize mImagePickerController,
+            kfInputView,
+            kfEmotionView,
+            kfPlusView,
+            kfRecordVoiceViewHUD,
+
+            inputViewY,
+            keyboardY,
+            keyboardHeight,
+            isEmotionPlusPressedToHideKeyboard;
 
 #pragma mark - 访客端接口
 
@@ -195,7 +213,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     //
     [self initWithAgentUid:uId withTitle:title withPush:isPush];
 }
-
 
 /**
  * 返回结果代码：
@@ -384,10 +401,10 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         };
         [dialogViewController show];
         
-        // 保存聊天记录
-        //        BDMessageModel *messageModel = [[BDMessageModel alloc] initWithDictionary:dict[@"data"]];
-        //        [[BDDBApis sharedInstance] insertMessage:messageModel];
-        //        [self reloadTableData];
+// 保存聊天记录
+//        BDMessageModel *messageModel = [[BDMessageModel alloc] initWithDictionary:dict[@"data"]];
+//        [[BDDBApis sharedInstance] insertMessage:messageModel];
+//        [self reloadTableData];
         
     } else {
         // 请求会话失败
@@ -513,8 +530,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.mLastMessageId = INT_MAX;
     
     // FIXME: 因为点击右上角按钮初始化需要用到threadModel, 暂时隐藏不启用右上角按钮
-        UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithImage:[UIImage imageNamed:@"icon_about" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] target:self action:@selector(handleRightBarButtonItemClicked:)];
-        self.navigationItem.rightBarButtonItem = rightItem;
+    UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithImage:[UIImage imageNamed:@"icon_about" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] target:self action:@selector(handleRightBarButtonItemClicked:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 - (void) initWithContactModel:(BDContactModel *)contactModel withPush:(BOOL)isPush withCustom:(NSDictionary *)custom {
@@ -561,49 +578,83 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [super initSubviews];
     //
     self.tableView.separatorColor = [UIColor clearColor];
+//    //
+//    self.toolbarView = [[UIView alloc] init];
+//    self.toolbarView.backgroundColor = UIColorWhite;
+//    self.toolbarView.qmui_borderColor = UIColorSeparator;
+//    self.toolbarView.qmui_borderPosition = QMUIViewBorderPositionTop;
+//    [self.view addSubview:self.toolbarView];
+//
+//    self.toolbarTextField = [[QMUITextField alloc] init];
+//    self.toolbarTextField.delegate = self;
+//    self.toolbarTextField.placeholder = @"请输入...";
+//    self.toolbarTextField.font = UIFontMake(15);
+//    self.toolbarTextField.backgroundColor = UIColorWhite;
+//    self.toolbarTextField.returnKeyType = UIReturnKeySend;
+//    [self.toolbarView addSubview:self.toolbarTextField];
+//
+//    __weak __typeof(self)weakSelf = self;
+//    self.toolbarTextField.qmui_keyboardWillChangeFrameNotificationBlock = ^(QMUIKeyboardUserInfo *keyboardUserInfo) {
+//        if (!weakSelf.plusButton.isSelected) {
+//            [QMUIKeyboardManager handleKeyboardNotificationWithUserInfo:keyboardUserInfo showBlock:^(QMUIKeyboardUserInfo *keyboardUserInfo) {
+//                [weakSelf showToolbarViewWithKeyboardUserInfo:keyboardUserInfo];
+//            } hideBlock:^(QMUIKeyboardUserInfo *keyboardUserInfo) {
+//                [weakSelf hideToolbarViewWithKeyboardUserInfo:keyboardUserInfo];
+//            }];
+//        } else {
+//            [weakSelf showToolbarViewWithKeyboardUserInfo:nil];
+//        }
+//    };
+//
+//    //
+//    self.switchVoiceButton = [[QMUIButton alloc] init];
+//    self.switchVoiceButton.titleLabel.font = UIFontMake(16);
+//    self.switchVoiceButton.qmui_outsideEdge = UIEdgeInsetsMake(-12, -12, -12, -12);
+//    [self.switchVoiceButton setImage:[UIImage imageNamed:@"ToolViewInputVoice_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+//    [self.switchVoiceButton setImage:[UIImage imageNamed:@"ToolViewInputVoiceHL_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
+//    [self.switchVoiceButton sizeToFit];
+//    [self.switchVoiceButton addTarget:self action:@selector(handleSwitchVoiceButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.toolbarView addSubview:self.switchVoiceButton];
+//
+//    //
+//    self.recordButton = [[QMUIButton alloc] init];
+//    self.recordButton.titleLabel.font = UIFontMake(16);
+//    self.recordButton.qmui_outsideEdge = UIEdgeInsetsMake(-12, -12, -12, -12);
+//    [self.recordButton setImage:[UIImage imageNamed:@"VoiceBtn_Black_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+//    [self.recordButton setImage:[UIImage imageNamed:@"VoiceBtn_BlackHL_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
+//    [self.recordButton sizeToFit];
+//    [self.recordButton addTarget:self action:@selector(recordVoiceButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+//    [self.recordButton addTarget:self action:@selector(recordVoiceButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.recordButton addTarget:self action:@selector(recordVoiceButtonTouchUpOutside:) forControlEvents:UIControlEventTouchUpOutside];
+//    [self.recordButton addTarget:self action:@selector(recordVoiceButtonTouchDragInside:) forControlEvents:UIControlEventTouchDragInside];
+//    [self.recordButton addTarget:self action:@selector(recordVoiceButtonTouchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
+//    [self.toolbarView addSubview:self.recordButton];
+//    //
+//    self.sendButton = [[QMUIButton alloc] init];
+//    self.sendButton.titleLabel.font = UIFontMake(16);
+//    [self.sendButton setTitle:@"发送" forState:UIControlStateNormal];
+//    [self.sendButton sizeToFit];
+//    [self.sendButton addTarget:self action:@selector(handleSendButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.toolbarView addSubview:self.sendButton];
+//    //
+//    self.faceButton = [[QMUIButton alloc] init];
+//    self.faceButton.titleLabel.font = UIFontMake(16);
+//    self.faceButton.qmui_outsideEdge = UIEdgeInsetsMake(-12, -12, -12, -12);
+//    [self.faceButton setImage:[UIImage imageNamed:@"ToolViewEmotion_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+//    [self.faceButton setImage:[UIImage imageNamed:@"ToolViewEmotionHL_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
+//    [self.faceButton sizeToFit];
+//    [self.faceButton addTarget:self action:@selector(handleFaceButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.toolbarView addSubview:self.faceButton];
+//    //
+//    self.plusButton = [[QMUIButton alloc] init];
+//    self.plusButton.titleLabel.font = UIFontMake(16);
+//    self.plusButton.qmui_outsideEdge = UIEdgeInsetsMake(-12, -12, -12, -12);
+//    [self.plusButton setImage:[UIImage imageNamed:@"TypeSelectorBtn_Black_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+//    [self.plusButton setImage:[UIImage imageNamed:@"TypeSelectorBtnHL_Black_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
+//    [self.plusButton sizeToFit];
+//    [self.plusButton addTarget:self action:@selector(handlePlusButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.toolbarView addSubview:self.plusButton];
     //
-    self.toolbarView = [[UIView alloc] init];
-    self.toolbarView.backgroundColor = UIColorWhite;
-    self.toolbarView.qmui_borderColor = UIColorSeparator;
-    self.toolbarView.qmui_borderPosition = QMUIViewBorderPositionTop;
-    [self.view addSubview:self.toolbarView];
-    
-    self.toolbarTextField = [[QMUITextField alloc] init];
-    self.toolbarTextField.delegate = self;
-    self.toolbarTextField.placeholder = @"请输入...";
-    self.toolbarTextField.font = UIFontMake(15);
-    self.toolbarTextField.backgroundColor = UIColorWhite;
-    self.toolbarTextField.returnKeyType = UIReturnKeySend;
-    [self.toolbarView addSubview:self.toolbarTextField];
-    
-    __weak __typeof(self)weakSelf = self;
-    self.toolbarTextField.qmui_keyboardWillChangeFrameNotificationBlock = ^(QMUIKeyboardUserInfo *keyboardUserInfo) {
-        if (!weakSelf.plusButton.isSelected) {
-            [QMUIKeyboardManager handleKeyboardNotificationWithUserInfo:keyboardUserInfo showBlock:^(QMUIKeyboardUserInfo *keyboardUserInfo) {
-                [weakSelf showToolbarViewWithKeyboardUserInfo:keyboardUserInfo];
-            } hideBlock:^(QMUIKeyboardUserInfo *keyboardUserInfo) {
-                [weakSelf hideToolbarViewWithKeyboardUserInfo:keyboardUserInfo];
-            }];
-        } else {
-            [weakSelf showToolbarViewWithKeyboardUserInfo:nil];
-        }
-    };
-    
-    self.sendButton = [[QMUIButton alloc] init];
-    self.sendButton.titleLabel.font = UIFontMake(16);
-    [self.sendButton setTitle:@"发送" forState:UIControlStateNormal];
-    [self.sendButton sizeToFit];
-    [self.sendButton addTarget:self action:@selector(handleSendButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
-    [self.toolbarView addSubview:self.sendButton];
-    ///
-    self.plusButton = [[QMUIButton alloc] init];
-    self.plusButton.titleLabel.font = UIFontMake(16);
-    self.plusButton.qmui_outsideEdge = UIEdgeInsetsMake(-12, -12, -12, -12);
-    [self.plusButton setImage:[UIImage imageNamed:@"TypeSelectorBtn_Black_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-    [self.plusButton setImage:[UIImage imageNamed:@"TypeSelectorBtnHL_Black_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
-    [self.plusButton sizeToFit];
-    [self.plusButton addTarget:self action:@selector(handlePlusButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
-    [self.toolbarView addSubview:self.plusButton];
     //
     self.mGetMessageFromChannelPage = 0;
     
@@ -613,33 +664,47 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
     //
     //输入框Toolbar
-//    self.kfInputView = [[KFInputView alloc] init];
-//    [self.kfInputView setBackgroundColor:[UIColor yellowColor]];
-    //    self.kfInputView.delegate = self;
-//    [self.view addSubview:self.kfInputView];
+    //    self.kfInputView = [[self.kfInputView alloc] init];
+    CGRect inputViewFrame = CGRectMake(0.0f, self.view.frame.size.height - INPUTBAR_HEIGHT, self.view.frame.size.width, INPUTBAR_HEIGHT);
+    self.kfInputView = [[KFInputView alloc] initWithFrame:inputViewFrame];
+    self.kfInputView.delegate = self;
+    [self.view addSubview:self.kfInputView];
+    //
+    self.emotionToTextDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:self.class] pathForResource:@"EmotionToText" ofType:@"plist"]];
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     //
     self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - kToolbarHeight);
-    
-    CGRect toolbarRect = CGRectFlatMake(0, CGRectGetHeight(self.view.bounds) - kToolbarHeight, CGRectGetWidth(self.view.bounds), kToolbarHeight);
-    self.toolbarView.frame = CGRectApplyAffineTransform(toolbarRect, self.toolbarView.transform);
+    //
+//    CGRect toolbarRect = CGRectFlatMake(0, CGRectGetHeight(self.view.bounds) - kToolbarHeight, CGRectGetWidth(self.view.bounds), kToolbarHeight);
+//    self.toolbarView.frame = CGRectApplyAffineTransform(toolbarRect, self.toolbarView.transform);
 //    self.kfInputView.frame = CGRectApplyAffineTransform(toolbarRect, self.kfInputView.transform);
     
-    CGFloat textFieldInset = 20;
-    CGFloat textFieldHeight = kToolbarHeight - textFieldInset * 2;
-    CGFloat emotionRight = 12;
+//    CGFloat textFieldInset = 20;
+//    CGFloat textFieldHeight = kToolbarHeight - textFieldInset * 2;
+//    CGFloat emotionRight = 12;
     
-    self.sendButton.frame = CGRectSetXY(self.sendButton.frame, CGRectGetWidth(self.toolbarView.bounds) - CGRectGetWidth(self.sendButton.bounds) - emotionRight, CGFloatGetCenter(CGRectGetHeight(self.toolbarView.bounds), CGRectGetHeight(self.sendButton.bounds)));
-    
-    self.plusButton.frame = CGRectSetXY(self.plusButton.frame, 12, CGFloatGetCenter(CGRectGetHeight(self.toolbarView.bounds), CGRectGetHeight(self.plusButton.bounds)));
-    
-    CGFloat textFieldWidth = CGRectGetMinX(self.sendButton.frame) - textFieldInset * 2;
-    self.toolbarTextField.frame = CGRectFlatMake(50, textFieldInset, textFieldWidth, textFieldHeight);
-    
-
+//    // 切换: 录音、输入框
+//    self.switchVoiceButton.frame = CGRectSetXY(self.switchVoiceButton.frame, 12, CGFloatGetCenter(CGRectGetHeight(self.toolbarView.bounds), CGRectGetHeight(self.switchVoiceButton.bounds)));
+//
+//    // 输入框
+//    CGFloat textFieldWidth = CGRectGetWidth(self.view.bounds) - self.switchVoiceButton.frame.size.width * 4;
+//    self.toolbarTextField.frame = CGRectFlatMake(50, textFieldInset, textFieldWidth, textFieldHeight);
+//
+//    // 按住录音
+//    self.recordButton.frame = self.toolbarTextField.frame;
+//    [self.recordButton setHidden:TRUE];
+//
+//    // 发送文本按钮
+//    self.sendButton.frame = CGRectSetXY(self.sendButton.frame, CGRectGetWidth(self.toolbarView.bounds) - CGRectGetWidth(self.sendButton.bounds) * 3 - emotionRight, CGFloatGetCenter(CGRectGetHeight(self.toolbarView.bounds), CGRectGetHeight(self.sendButton.bounds)));
+//
+//    // 隐藏显示表情
+//    self.faceButton.frame = CGRectSetXY(self.faceButton.frame, CGRectGetWidth(self.toolbarView.bounds) - CGRectGetWidth(self.sendButton.bounds) * 2 - emotionRight, CGFloatGetCenter(CGRectGetHeight(self.toolbarView.bounds), CGRectGetHeight(self.faceButton.bounds)));
+//
+//    // 扩展框
+//    self.plusButton.frame = CGRectSetXY(self.plusButton.frame, CGRectGetWidth(self.toolbarView.bounds) - CGRectGetWidth(self.sendButton.bounds) - emotionRight, CGFloatGetCenter(CGRectGetHeight(self.toolbarView.bounds), CGRectGetHeight(self.plusButton.bounds)));
     
 }
 
@@ -647,10 +712,33 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [super viewWillAppear:animated];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    CGRect recordVoiceViewFrame = CGRectMake((self.view.frame.size.width - RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT)/2,
+                                             (self.view.frame.size.height - RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT)/2,
+                                             RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT,
+                                             RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT);
+    self.kfRecordVoiceViewHUD = [[KFRecordVoiceViewHUD alloc] initWithFrame:recordVoiceViewFrame];
+    [self.view addSubview:self.kfRecordVoiceViewHUD];
+    self.kfRecordVoiceViewHUD.hidden = TRUE;
+    //
+    CGRect emotionViewFrame = CGRectMake(0.0f, self.view.frame.size.height, self.view.frame.size.width, EMOTION_PLUS_VIEW_HEIGHT);
+    self.kfEmotionView = [[KFEmotionView alloc] initWithFrame:emotionViewFrame];
+    self.kfEmotionView.delegate = self;
+    [self.view addSubview:self.kfEmotionView];
+    //
+    CGRect plusViewFrame = emotionViewFrame;
+    self.kfPlusView = [[KFPlusView alloc] initWithFrame:plusViewFrame];
+    self.kfPlusView.delegate = self;
+    [self.view addSubview:self.kfPlusView];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     //
-    if (![BDSettings getIsAlreadyLogin]) {
+    if (![BDSettings isAlreadyLogin]) {
         [QMUITips showError:@"请首先登录" inView:self.view hideAfterDelay:2];
         return;
     }
@@ -779,6 +867,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     //
     BDMessageModel *messageModel = [self.mMessageArray objectAtIndex:indexPath.row];
     if ([messageModel isNotification]) {
+        
+        DDLogInfo(@"通知 type: %@, content: %@", messageModel.type, messageModel.content);
+        
         //
         BDMsgNotificationViewCell *cell = [tableView dequeueReusableCellWithIdentifier:notifyIdentifier];
         if (!cell) {
@@ -794,6 +885,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         //
         return cell;
     } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_COMMODITY]) {
+        
+        DDLogInfo(@"商品 type: %@, content: %@", messageModel.type, messageModel.content);
         //
         BDCommodityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:notifyIdentifier];
         if (!cell) {
@@ -850,7 +943,11 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             if (height < 45) {
                 height = 45;
             }
-        } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_IMAGE]) {
+        } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_COMMODITY]) {
+            //
+            height = 100;
+        } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_IMAGE] ||
+                   [messageModel.type isEqualToString:BD_MESSAGE_TYPE_RED_PACKET]) {
             height = 280;
         }
         else {
@@ -978,10 +1075,41 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     //    [self.mInputView.emotionView setHidden:TRUE];
     //    [self.mInputView.plusView setHidden:TRUE];
     
-    UIEdgeInsets tableViewInsets = self.tableView.contentInset;
-    tableViewInsets.bottom = BD_INPUTBAR_HEIGHT;
-    self.tableView.contentInset = tableViewInsets;
-    self.tableView.scrollIndicatorInsets = tableViewInsets;
+    [UIView animateWithDuration:0.0f
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         
+                         CGSize Size = self.view.frame.size;
+                         
+                         UIEdgeInsets tableViewInsets = self.tableView.contentInset;
+                         tableViewInsets.bottom = BD_INPUTBAR_HEIGHT;
+                         self.tableView.contentInset = tableViewInsets;
+                         self.tableView.scrollIndicatorInsets = tableViewInsets;
+                         
+//                         UIEdgeInsets tableViewContentInsets = [self.tableView contentInset];
+//                         tableViewContentInsets.bottom = 0.0f;
+//                         [self.tableView setContentInset:tableViewContentInsets];
+                         
+                         //调整kfInputView
+                         self.kfInputView.frame = CGRectMake(0.0f,
+                                                        Size.height - INPUTBAR_HEIGHT,
+                                                        Size.width,
+                                                        INPUTBAR_HEIGHT);
+
+                         self.kfEmotionView.frame = CGRectMake(0.0f,
+                                                               Size.height,
+                                                               Size.width,
+                                                               EMOTION_PLUS_VIEW_HEIGHT);
+
+                         self.kfPlusView.frame = CGRectMake(0.0f,
+                                                            Size.height,
+                                                            Size.width,
+                                                            EMOTION_PLUS_VIEW_HEIGHT);
+                         
+                     } completion:^(BOOL finished) {
+                         
+                     }];
 }
 
 #pragma mark - Handle Keyboard Show/Hide
@@ -993,49 +1121,20 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
     CGRect keyboardFrame = [self.view convertRect:keyboardRect fromView:nil];
-    //    NSUInteger keyboardY = keyboardFrame.origin.y;
-    
-    NSUInteger keyboardHeight = keyboardFrame.size.height;
-    //    DDLogInfo(@"%s keyboard height:%lu", __PRETTY_FUNCTION__, keyboardHeight);
+    keyboardY = keyboardFrame.origin.y;
+    keyboardHeight = keyboardFrame.size.height;
     
     [UIView animateWithDuration:duration
                           delay:0.0f
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          
-                         //                         self.mInputView.frame = CGRectMake(0, keyboardY - BD_INPUTBAR_HEIGHT, KFDSScreen.width, BD_INPUTBAR_HEIGHT);
-                         //                         CGRect inputViewFrame = [weakSelf.mInputView frame];
-                         //                         inputViewFrame.origin.y = keyboardY - BD_INPUTBAR_HEIGHT;
-                         //                         [weakSelf.mInputView setFrame:inputViewFrame];
-                         
-                         //
-                         UIEdgeInsets tableViewInsets = self.tableView.contentInset;
-                         tableViewInsets.bottom = keyboardHeight + kToolbarHeight;
-                         self.tableView.contentInset = tableViewInsets;
-                         self.tableView.scrollIndicatorInsets = tableViewInsets;
-                         
-                     } completion:^(BOOL finished) {
-                         [self tableViewScrollToBottom:YES];
-                     }];
-    
-}
-
-- (void)handleWillHideKeyboard:(NSNotification *)notification {
-    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
-    
-    //    CGRect keyboardRect = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    //    NSUInteger keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;//键盘位置的y坐标
-    //    self.mInputView.frame = CGRectMake(0, keyboardY - BD_INPUTBAR_HEIGHT, KFDSScreen.width, BD_INPUTBAR_HEIGHT);
-    
-    [UIView animateWithDuration:duration
-                          delay:0.0f
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
+                         CGRect inputViewFrame = [self.kfInputView frame];
+                         inputViewFrame.origin.y = keyboardY - INPUTBAR_HEIGHT;
+                         [self.kfInputView setFrame:inputViewFrame];
                          
                          UIEdgeInsets tableViewInsets = self.tableView.contentInset;
-                         tableViewInsets.bottom = BD_INPUTBAR_HEIGHT;
+                         tableViewInsets.bottom = keyboardHeight;
                          self.tableView.contentInset = tableViewInsets;
                          self.tableView.scrollIndicatorInsets = tableViewInsets;
                          
@@ -1044,6 +1143,98 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                      }];
     
     [self tableViewScrollToBottom:YES];
+    
+//    CGRect keyboardRect = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+//    double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+//
+//    CGRect keyboardFrame = [self.view convertRect:keyboardRect fromView:nil];
+//    //    NSUInteger keyboardY = keyboardFrame.origin.y;
+//
+//    NSUInteger keyboardHeight = keyboardFrame.size.height;
+//    //    DDLogInfo(@"%s keyboard height:%lu", __PRETTY_FUNCTION__, keyboardHeight);
+//
+//    [UIView animateWithDuration:duration
+//                          delay:0.0f
+//                        options:UIViewAnimationOptionCurveEaseIn
+//                     animations:^{
+//
+//                         //                         self.mInputView.frame = CGRectMake(0, keyboardY - BD_INPUTBAR_HEIGHT, KFDSScreen.width, BD_INPUTBAR_HEIGHT);
+//                         //                         CGRect inputViewFrame = [weakSelf.mInputView frame];
+//                         //                         inputViewFrame.origin.y = keyboardY - BD_INPUTBAR_HEIGHT;
+//                         //                         [weakSelf.mInputView setFrame:inputViewFrame];
+//
+//                         //
+//                         UIEdgeInsets tableViewInsets = self.tableView.contentInset;
+//                         tableViewInsets.bottom = keyboardHeight + kToolbarHeight;
+//                         self.tableView.contentInset = tableViewInsets;
+//                         self.tableView.scrollIndicatorInsets = tableViewInsets;
+//
+//                     } completion:^(BOOL finished) {
+//                         [self tableViewScrollToBottom:YES];
+//                     }];
+    
+}
+
+- (void)handleWillHideKeyboard:(NSNotification *)notification {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+    CGRect keyboardRect = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;//键盘位置的y坐标
+    
+    
+    [UIView animateWithDuration:duration
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         
+                         CGRect inputViewFrame = [self.kfInputView frame];
+                         inputViewFrame.origin.y = keyboardY - INPUTBAR_HEIGHT;
+                         [self.kfInputView setFrame:inputViewFrame];
+                         
+                         //调整kfPlusView
+                         CGRect plusViewFrame = [self.kfPlusView frame];
+                         plusViewFrame.origin.y = inputViewFrame.origin.y + INPUTBAR_HEIGHT;
+                         [self.kfPlusView setFrame:plusViewFrame];
+                         
+                         //隐藏emotionView
+                         CGRect emotionViewFrame = [kfEmotionView frame];
+                         emotionViewFrame.origin.y = inputViewFrame.origin.y + INPUTBAR_HEIGHT;;
+                         [kfEmotionView setFrame:emotionViewFrame];
+                         
+                         UIEdgeInsets tableViewInsets = self.tableView.contentInset;
+                         tableViewInsets.bottom = 0.0f;
+                         self.tableView.contentInset = tableViewInsets;
+                         self.tableView.scrollIndicatorInsets = tableViewInsets;
+                         
+                     } completion:^(BOOL finished) {
+                         
+                     }];
+    
+    [self tableViewScrollToBottom:YES];
+    
+//    //    CGRect keyboardRect = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+//    double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+//
+//    //    NSUInteger keyboardY = [self.view convertRect:keyboardRect fromView:nil].origin.y;//键盘位置的y坐标
+//    //    self.mInputView.frame = CGRectMake(0, keyboardY - BD_INPUTBAR_HEIGHT, KFDSScreen.width, BD_INPUTBAR_HEIGHT);
+//
+//    [UIView animateWithDuration:duration
+//                          delay:0.0f
+//                        options:UIViewAnimationOptionCurveEaseOut
+//                     animations:^{
+//
+//                         UIEdgeInsets tableViewInsets = self.tableView.contentInset;
+//                         tableViewInsets.bottom = BD_INPUTBAR_HEIGHT;
+//                         self.tableView.contentInset = tableViewInsets;
+//                         self.tableView.scrollIndicatorInsets = tableViewInsets;
+//
+//                     } completion:^(BOOL finished) {
+//
+//                     }];
+//
+//    [self tableViewScrollToBottom:YES];
 }
 
 #pragma mark - KFDSInputViewDelegate
@@ -1087,7 +1278,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             
             // TODO：更新发送状态，隐藏activity indicator
             // reloadRowsAtIndexPaths
-            
             
         } else {
             // 修改本地消息发送状态为error
@@ -1168,6 +1358,74 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     }];
 }
 
+
+- (void)uploadAmrVoice:(NSString *)amrVoiceFileName voiceLength:(int)voiceLength {
+    
+    NSString *amrVoiceFilePath = [NSString stringWithFormat:@"%@/Documents/%@", NSHomeDirectory(), amrVoiceFileName];
+    NSData *voiceData = [NSData dataWithContentsOfFile:amrVoiceFilePath];
+//    DDLogInfo(@"amrVoiceFileName: %@", amrVoiceFilePath);
+
+    //
+    [BDCoreApis uploadVoiceData:voiceData withVoiceName:amrVoiceFileName resultSuccess:^(NSDictionary *dict) {
+        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+        
+        //
+        NSNumber *status_code = [dict objectForKey:@"status_code"];
+        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            
+            // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
+            NSString *localId = [[NSUUID UUID] UUIDString];
+            NSString *voiceUrl = dict[@"data"];
+            
+            // 插入本地消息
+            BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertVoiceMessageLocal:self.mThreadTid withWorkGroupWid:self.mWorkGroupWid withContent:voiceUrl withLocalId:localId withSessionType:self.mThreadType];
+            DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.voice_url);
+            
+            // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
+            NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
+            [self.mMessageArray addObject:messageModel];
+            
+            [self.tableView beginUpdates];
+            [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
+            [self.tableView endUpdates];
+            [self tableViewScrollToBottom:YES];
+            
+            // 同步发送录音消息
+            [BDCoreApis sendVoiceMessage:voiceUrl toTid:self.mThreadTid localId:localId sessionType:self.mThreadType voiceLength:voiceLength  resultSuccess:^(NSDictionary *dict) {
+                DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+                //
+                NSNumber *status_code = [dict objectForKey:@"status_code"];
+                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    // 发送成功
+                    
+                    // 服务器返回自定义消息本地id
+                    NSString *localId = dict[@"data"][@"localId"];
+                    DDLogInfo(@"callback localId: %@", localId);
+                    
+                    // TODO：更新发送状态，隐藏activity indicator
+                    
+                } else {
+                    // 修改本地消息发送状态为error
+                    [[BDDBApis sharedInstance] updateMessageError:localId];
+                    //
+                    NSString *message = dict[@"message"];
+                    DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
+                    [QMUITips showError:message inView:self.view hideAfterDelay:2];
+                }
+                
+            } resultFailed:^(NSError *error) {
+                DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+            }];
+            
+        } else {
+            [QMUITips showError:@"发送录音错误" inView:self.view hideAfterDelay:2];
+        }
+        
+    } resultFailed:^(NSError *error) {
+        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+    }];
+}
+
 // 发送商品消息
 -(void)sendCommodityMessage:(NSString *)content {
     DDLogInfo(@"%s, content:%@, tid:%@, sessionType:%@ ", __PRETTY_FUNCTION__, content, self.mThreadTid,  self.mThreadType);
@@ -1175,21 +1433,18 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
     NSString *localId = [[NSUUID UUID] UUIDString];
     
-//    // 插入本地消息, 可通过返回的messageModel首先更新本地UI，然后再发送消息
-//    BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertCommodityMessageLocal:self.mThreadTid withWorkGroupWid:self.mWorkGroupWid withContent:content withLocalId:localId withSessionType:self.mThreadType];
-//    DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.content);
-//
-//    // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
-//    NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
-//    [self.mMessageArray addObject:messageModel];
-//
-//    [self.tableView beginUpdates];
-//    [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
-//    [self.tableView endUpdates];
-//    [self tableViewScrollToBottom:YES];
-    
-    // 异步发送消息
-    //     [[BDMQTTApis sharedInstance] sendTextMessage:content toTid:self.mThreadTid localId:localId sessionType:self.mThreadType];
+    // 插入本地消息, 可通过返回的messageModel首先更新本地UI，然后再发送消息
+    BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertCommodityMessageLocal:self.mThreadTid withWorkGroupWid:self.mWorkGroupWid withContent:content withLocalId:localId withSessionType:self.mThreadType];
+    DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.content);
+
+    // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
+    NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
+    [self.mMessageArray addObject:messageModel];
+
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView endUpdates];
+    [self tableViewScrollToBottom:YES];
     
     // 同步发送消息
     [BDCoreApis sendCommodityMessage:content toTid:self.mThreadTid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {
@@ -1272,7 +1527,66 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     }];
 }
 
-#pragma mark - 录音
+#pragma mark - 表情
+
+-(void)emotionFaceButtonPressed:(id)sender
+{
+    UIButton *emotionButton = (UIButton *)sender;
+    NSString *emotionText = [[self emotionToTextDictionary] objectForKey:[NSString stringWithFormat:@"Expression_%ld", (long)emotionButton.tag]];
+//    DDLogError(@"emotion %@", emotionText);
+    
+    //取余为0，即整除
+    if (emotionButton.tag%21 == 0)
+    {
+        emotionText = @"删除";
+    }
+    
+    NSString *content = [self.kfInputView.inputTextView text];
+    NSInteger contentLength = [content length];
+    NSString *newContent;
+
+    if ([emotionText isEqualToString:@"删除"])
+    {
+        if (contentLength > 0)
+        {
+            if ([@"]" isEqualToString:[content substringFromIndex:contentLength - 1]])
+            {
+                if ([content rangeOfString:@"["].location == NSNotFound)
+                {
+                    newContent = [content substringToIndex:contentLength - 1];
+                }
+                else
+                {
+                    newContent = [content substringToIndex:[content rangeOfString:@"[" options:NSBackwardsSearch].location];
+                }
+            }
+            else
+            {
+                newContent = [content substringToIndex:contentLength-1];
+            }
+
+            self.kfInputView.inputTextView.text = newContent;
+        }
+    }
+    else
+    {
+        [self.kfInputView.inputTextView setText:[NSString stringWithFormat:@"%@%@", content, emotionText]];
+    }
+
+    [self.kfInputView textViewDidChange:kfInputView.inputTextView];
+}
+
+-(void)emotionViewSendButtonPressed:(id)sender
+{
+    NSString *content = [self.kfInputView.inputTextView text];
+
+    if ([content length] == 0) {
+        return;
+    }
+    
+    [self sendMessage:content];
+}
+
 
 #pragma mark - 拍照等Plus
 
@@ -1330,6 +1644,32 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         DDLogInfo(@"Unknown authorization status");
     }
 }
+
+
+-(void)shareRateButtonPressed:(id)sender {
+    DDLogInfo(@"发送商品消息 %s", __PRETTY_FUNCTION__);
+    
+    // TODO: 发送商品信息
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                          BD_MESSAGE_TYPE_COMMODITY, @"type",
+                          @"商品标题", @"title",
+                          @"商品详情", @"content",
+                          @"¥9.99", @"price",
+                          @"https://item.m.jd.com/product/12172344.html", @"url",
+                          @"https://m.360buyimg.com/mobilecms/s750x750_jfs/t4483/332/2284794111/122812/4bf353/58ed7f42Nf16d6b20.jpg!q80.dpg", @"imageUrl",
+                          nil];
+    NSString *customJson = [BDUtils dictToJson:dict];
+    [self sendCommodityMessage:customJson];
+}
+
+-(void)shareShowFAQButtonPressed:(id)sender {
+    DDLogInfo(@"发送红包消息 %s", __PRETTY_FUNCTION__);
+    
+    // TODO: 发送红包消息
+    [self sendRedPacketMessage:@"9.99"];
+    
+}
+
 
 #pragma mark - KFDSMsgViewCellDelegate
 
@@ -1662,8 +2002,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (void)handleSingleTap:(UIGestureRecognizer *)gestureRecognizer {
     //    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
-    [self.toolbarTextField resignFirstResponder];
+//    [self.toolbarTextField resignFirstResponder];
     [self hideToolbarViewWithKeyboardUserInfo:nil];
+    
 }
 
 #pragma mark - QMUITextFieldDelegate
@@ -1695,7 +2036,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         [QMUIKeyboardManager animateWithAnimated:YES keyboardUserInfo:keyboardUserInfo animations:^{
             CGFloat distanceFromBottom = [QMUIKeyboardManager distanceFromMinYToBottomInView:self.view keyboardRect:keyboardUserInfo.endFrame];
             
-            self.toolbarView.layer.transform = CATransform3DMakeTranslation(0, - distanceFromBottom, 0);
+//            self.toolbarView.layer.transform = CATransform3DMakeTranslation(0, - distanceFromBottom, 0);
             //            self.emotionInputManager.emotionView.layer.transform = CATransform3DMakeTranslation(0, - distanceFromBottom, 0);
             
         } completion:NULL];
@@ -1710,59 +2051,346 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 - (void)hideToolbarViewWithKeyboardUserInfo:(QMUIKeyboardUserInfo *)keyboardUserInfo {
     if (keyboardUserInfo) {
         [QMUIKeyboardManager animateWithAnimated:YES keyboardUserInfo:keyboardUserInfo animations:^{
-            self.toolbarView.layer.transform = CATransform3DIdentity;
+//            self.toolbarView.layer.transform = CATransform3DIdentity;
             //            self.emotionInputManager.emotionView.layer.transform = CATransform3DIdentity;
         } completion:NULL];
     } else {
         [UIView animateWithDuration:0.25 delay:0 options:QMUIViewAnimationOptionsCurveOut animations:^{
-            self.toolbarView.layer.transform = CATransform3DIdentity;
+//            self.toolbarView.layer.transform = CATransform3DIdentity;
             //            self.emotionInputManager.emotionView.layer.transform = CATransform3DIdentity;
         } completion:NULL];
     }
 }
 
-#pragma mark - Selectors
+#pragma mark - 录音
+
+- (void)handleSwitchVoiceButtonEvent:(id)sender {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+//    if ([self.toolbarTextField isHidden]) {
+//        [self.recordButton setHidden:TRUE];
+//        [self.toolbarTextField setHidden:FALSE];
+//    } else {
+//        [self.recordButton setHidden:FALSE];
+//        [self.toolbarTextField setHidden:TRUE];
+//    }
+}
+
+//
+-(void)recordVoiceButtonTouchDown:(id)sender {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+//#if TARGET_IPHONE_SIMULATOR
+//
+//#else
+    
+//    if ([BDUtils canRecordVoice]) {
+        //显示录音HUD
+        self.kfRecordVoiceViewHUD.hidden = FALSE;
+        //开始录音
+        [self.kfRecordVoiceViewHUD startVoiceRecordingToUsername:self.mThreadTid];
+    
+        //添加录音虚拟气泡
+//        KFMessageItem *inputtingVoiceMessage = [[KFMessageItem alloc] init];
+//        inputtingVoiceMessage.isSendFromMe = TRUE;
+//        inputtingVoiceMessage.username = workgroupname;
+//        inputtingVoiceMessage.messageType = KFMessageTypeRecordingVoice;
+//        inputtingVoiceMessage.voiceMessageLength = 0;
+//        inputtingVoiceMessage.messageContent = @"recording";
+//        inputtingVoiceMessage.timestamp = [NSDate date];
+//        [messagesMutableArray addObject:inputtingVoiceMessage];
+    
+        [self.tableView reloadData];
+        [self tableViewScrollToBottom:YES];
+        
+//    }
+    
+//#endif
+}
+
+
+-(void)recordVoiceButtonTouchUpInside:(id)sender {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+//#if TARGET_IPHONE_SIMULATOR
+//
+//#else
+//
+//#endif
+    
+//    if ([BDUtils canRecordVoice]) {
+    
+        self.kfRecordVoiceViewHUD.hidden = TRUE;
+        //
+        NSString *amrVoiceFileName = [kfRecordVoiceViewHUD stopVoiceRecording];
+        int voiceLength = (int)kfRecordVoiceViewHUD.voiceRecordLength;
+//        for (int i = 0; i < [messagesMutableArray count]; i++) {
+//            KFMessageItem *item = [messagesMutableArray objectAtIndex:i];
+//            if (item.isSendFromMe && item.messageType == KFMessageTypeRecordingVoice && item.voiceMessageLength == 0) {
+//                [messagesMutableArray removeObject:item];
+//                [kfTableView reloadData];
+//            }
+//        }
+        
+        if ([amrVoiceFileName isEqualToString:@"tooshort"]) {
+            DDLogInfo(@"tooshort");
+        }
+        else if ([amrVoiceFileName isEqualToString:@"toolong"]) {
+            DDLogInfo(@"toolong");
+        }
+        else
+        {
+            //
+//            KFMessageItem *sendingVoiceItem = [[KFMessageItem alloc] init];
+//            sendingVoiceItem.isSendFromMe = TRUE;
+//            sendingVoiceItem.username = workgroupname;
+//            sendingVoiceItem.messageType = KFMessageTypeSendingVoice;
+//            sendingVoiceItem.voiceFileName = voiceFilename;
+//            sendingVoiceItem.timestamp = [NSDate date];
+//            [messagesMutableArray addObject:sendingVoiceItem];
+//            //
+//            [kfTableView reloadData];
+//            [self tableViewScrollToBottom:YES];
+//            //上传、发送语音文件
+//            [[KFUtils sharedInstance] uploadVoice:voiceFilename workgroupName:workgroupname];
+            
+            [self uploadAmrVoice:amrVoiceFileName voiceLength:voiceLength];
+            
+        }
+//    }
+    
+}
+
+
+-(void)recordVoiceButtonTouchUpOutside:(id)sender {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+//#if TARGET_IPHONE_SIMULATOR
+//
+//#else
+//
+//#endif
+    
+    self.kfRecordVoiceViewHUD.hidden = TRUE;
+    [self.kfRecordVoiceViewHUD cancelVoiceRecording];
+
+    
+}
+
+
+-(void)recordVoiceButtonTouchDragInside:(id)sender {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+//#if TARGET_IPHONE_SIMULATOR
+//
+//#else
+//
+//#endif
+    
+    if ([BDUtils canRecordVoice]) {
+        
+        //
+        self.kfRecordVoiceViewHUD.microphoneImageView.hidden = FALSE;
+        self.kfRecordVoiceViewHUD.signalWaveImageView.hidden = FALSE;
+        self.kfRecordVoiceViewHUD.cancelArrowImageView.hidden = TRUE;
+        //
+        self.kfRecordVoiceViewHUD.hintLabel.text = @"上滑取消";
+        self.kfRecordVoiceViewHUD.hintLabel.backgroundColor = [UIColor clearColor];
+        
+    }
+
+}
+
+-(void)recordVoiceButtonTouchDragOutside:(id)sender {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+//#if TARGET_IPHONE_SIMULATOR
+//
+//#else
+//
+//#endif
+    
+    if ([BDUtils canRecordVoice]) {
+        //
+        self.kfRecordVoiceViewHUD.microphoneImageView.hidden = TRUE;
+        self.kfRecordVoiceViewHUD.signalWaveImageView.hidden = TRUE;
+        self.kfRecordVoiceViewHUD.cancelArrowImageView.hidden = FALSE;
+        //
+        self.kfRecordVoiceViewHUD.hintLabel.text = @"松手取消";
+        self.kfRecordVoiceViewHUD.hintLabel.backgroundColor = [UIColor redColor];
+    }
+
+}
 
 // TODO: bug显示表情面板的时候，会遮挡聊天记录
 - (void)handleFaceButtonEvent:(id)sender {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
-    //
+//
+//    CGFloat inputViewFrameY = [self.toolbarView frame].origin.y;
+//    if (inputViewFrameY == (CGRectGetHeight(self.view.bounds) - kToolbarHeight)) {
+//        //
+//        [UIView animateWithDuration:VIEW_ANIMATION_DURATION
+//                              delay:0.0f
+//                            options:UIViewAnimationOptionCurveEaseOut
+//                         animations:^{
+//
+//                             //调整kfTableView
+//                             UIEdgeInsets tableViewContentInsets = [self.tableView contentInset];
+//                             tableViewContentInsets.bottom += EMOTION_PLUS_VIEW_HEIGHT;
+//                             [self.tableView setContentInset:tableViewContentInsets];
+//
+//                             //调整kfInputView
+//                             CGRect inputViewFrame = [self.toolbarView frame];
+//                             inputViewFrame.origin.y -= EMOTION_PLUS_VIEW_HEIGHT;
+//                             [self.toolbarView setFrame:inputViewFrame];
+//
+//                             //调整kfEmotionView
+//                             CGRect emotionViewFrame = [self.kfEmotionView frame];
+//                             emotionViewFrame.origin.y -= EMOTION_PLUS_VIEW_HEIGHT;
+//                             [self.kfEmotionView setFrame:emotionViewFrame];
+//
+//
+//                         } completion:^(BOOL finished) {
+//
+//                         }];
+//    } else {
+//
+//        [UIView animateWithDuration:VIEW_ANIMATION_DURATION
+//                              delay:0.0f
+//                            options:UIViewAnimationOptionCurveEaseOut
+//                         animations:^{
+//
+//                             //输入框设置焦点，显示键盘
+////                             [self.kfInputView becomeFirstResponder];
+//
+//                             //调整kfTableView
+//                             UIEdgeInsets tableViewContentInsets = [self.tableView contentInset];
+//                             tableViewContentInsets.bottom -= EMOTION_PLUS_VIEW_HEIGHT;
+//                             [self.tableView setContentInset:tableViewContentInsets];
+//
+//                             //调整kfInputView
+//                             CGRect inputViewFrame = [self.toolbarView frame];
+//                             inputViewFrame.origin.y += EMOTION_PLUS_VIEW_HEIGHT;
+//                             [self.toolbarView setFrame:inputViewFrame];
+//
+//                             //隐藏emotionView
+//                             CGRect emotionViewFrame = [self.kfEmotionView frame];
+//                             emotionViewFrame.origin.y += EMOTION_PLUS_VIEW_HEIGHT;
+//                             [self.kfEmotionView setFrame:emotionViewFrame];
+//
+//                             //隐藏plusView
+////                             CGRect plusViewFrame = [self.kfPlusView frame];
+////                             plusViewFrame.origin.y += EMOTION_PLUS_VIEW_HEIGHT;
+////                             [self.kfPlusView setFrame:plusViewFrame];
+//
+//                             //
+//                         } completion:^(BOOL finished) {
+//
+//                         }];
+//
+//    }
+    
+    
 }
 
 - (void)handlePlusButtonEvent:(id)sender {
-    //    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
-    QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
-    }];
-    QMUIAlertAction *pickAction = [QMUIAlertAction actionWithTitle:@"照片" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
-        [self sharePickPhotoButtonPressed:nil];
-    }];
-    QMUIAlertAction *cameraAction = [QMUIAlertAction actionWithTitle:@"拍照" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
-        [self shareTakePhotoButtonPressed:nil];
-    }];
-    QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"工具栏" message:@"" preferredStyle:QMUIAlertControllerStyleActionSheet];
-    [alertController addAction:cancelAction];
-    [alertController addAction:pickAction];
-    [alertController addAction:cameraAction];
-    [alertController showWithAnimated:YES];
+//    CGFloat inputViewFrameY = [self.toolbarView frame].origin.y;
+//    if (inputViewFrameY == (CGRectGetHeight(self.view.bounds) - kToolbarHeight)) {
+//        //
+//        [UIView animateWithDuration:VIEW_ANIMATION_DURATION
+//                              delay:0.0f
+//                            options:UIViewAnimationOptionCurveEaseOut
+//                         animations:^{
+//
+//                             //调整kfTableView
+//                             UIEdgeInsets tableViewContentInsets = [self.tableView contentInset];
+//                             tableViewContentInsets.bottom += EMOTION_PLUS_VIEW_HEIGHT;
+//                             [self.tableView setContentInset:tableViewContentInsets];
+//
+//                             //调整kfInputView
+//                             CGRect inputViewFrame = [self.toolbarView frame];
+//                             inputViewFrame.origin.y -= EMOTION_PLUS_VIEW_HEIGHT;
+//                             [self.toolbarView setFrame:inputViewFrame];
+//
+//                             //调整kfPlusView
+//                             CGRect plusViewFrame = [self.kfPlusView frame];
+//                             plusViewFrame.origin.y -= EMOTION_PLUS_VIEW_HEIGHT;
+//                             [self.kfPlusView setFrame:plusViewFrame];
+//
+//                         } completion:^(BOOL finished) {
+//
+//                         }];
+//    } else {
+//
+//        [UIView animateWithDuration:VIEW_ANIMATION_DURATION
+//                              delay:0.0f
+//                            options:UIViewAnimationOptionCurveEaseOut
+//                         animations:^{
+//
+//                             //输入框设置焦点，显示键盘
+////                             [self.kfInputView becomeFirstResponder];
+//
+//                             //调整kfTableView
+//                             UIEdgeInsets tableViewContentInsets = [self.tableView contentInset];
+//                             tableViewContentInsets.bottom -= EMOTION_PLUS_VIEW_HEIGHT;
+//                             [self.tableView setContentInset:tableViewContentInsets];
+//
+//                             //调整kfInputView
+//                             CGRect inputViewFrame = [self.toolbarView frame];
+//                             inputViewFrame.origin.y += EMOTION_PLUS_VIEW_HEIGHT;
+//                             [self.toolbarView setFrame:inputViewFrame];
+//
+//                             //隐藏emotionView
+////                             CGRect emotionViewFrame = [self.kfEmotionView frame];
+////                             emotionViewFrame.origin.y += EMOTION_PLUS_VIEW_HEIGHT;
+////                             [self.kfEmotionView setFrame:emotionViewFrame];
+//
+//                             //隐藏plusView
+//                             CGRect plusViewFrame = [self.kfPlusView frame];
+//                             plusViewFrame.origin.y += EMOTION_PLUS_VIEW_HEIGHT;
+//                             [self.kfPlusView setFrame:plusViewFrame];
+//
+//                             //
+//                         } completion:^(BOOL finished) {
+//
+//                         }];
+//
+//    }
+    
+//    QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+//    }];
+//    QMUIAlertAction *pickAction = [QMUIAlertAction actionWithTitle:@"照片" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+//        [self sharePickPhotoButtonPressed:nil];
+//    }];
+//    QMUIAlertAction *cameraAction = [QMUIAlertAction actionWithTitle:@"拍照" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+//        [self shareTakePhotoButtonPressed:nil];
+//    }];
+//    QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"工具栏" message:@"" preferredStyle:QMUIAlertControllerStyleActionSheet];
+//    [alertController addAction:cancelAction];
+//    [alertController addAction:pickAction];
+//    [alertController addAction:cameraAction];
+//    [alertController showWithAnimated:YES];
 }
 
 - (void)handleSendButtonEvent:(id)sender {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
-    NSString *content = self.toolbarTextField.text;
-    if ([content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length > 0) {
-        [self sendTextMessage:content];
-        [self.toolbarTextField setText:@""];
-    }
+//    NSString *content = self.toolbarTextField.text;
+//    if ([content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length > 0) {
+//        [self sendTextMessage:content];
+//        [self.toolbarTextField setText:@""];
+//    }
+    
 }
 
 - (void)showEmotionView {
-    [UIView animateWithDuration:0.25 delay:0 options:QMUIViewAnimationOptionsCurveOut animations:^{
-        self.toolbarView.layer.transform = CATransform3DMakeTranslation(0, - kEmotionViewHeight, 0);
-        //        self.emotionInputManager.emotionView.layer.transform = CATransform3DMakeTranslation(0, - CGRectGetHeight(self.emotionInputManager.emotionView.bounds), 0);
-    } completion:NULL];
-    [self.toolbarTextField resignFirstResponder];
+//    [UIView animateWithDuration:0.25 delay:0 options:QMUIViewAnimationOptionsCurveOut animations:^{
+//        self.toolbarView.layer.transform = CATransform3DMakeTranslation(0, - kEmotionViewHeight, 0);
+//        //        self.emotionInputManager.emotionView.layer.transform = CATransform3DMakeTranslation(0, - CGRectGetHeight(self.emotionInputManager.emotionView.bounds), 0);
+//    } completion:NULL];
+//    [self.toolbarTextField resignFirstResponder];
 }
 
 #pragma mark - 下拉刷新
@@ -2045,11 +2673,376 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         
         // 开发者可以根据自己需要决定是否调用退出登录
         // 注意: 同一账号同时登录多个客户端不影响正常会话
-        
     }];
     QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"账号异地登录提示" message:content preferredStyle:QMUIAlertControllerStyleAlert];
     [alertController addAction:okAction];
     [alertController showWithAnimated:YES];
+}
+
+#pragma mark - KFInputViewDelegate
+
+-(void)showMenuButtonPressed:(id)sender
+{
+    [self.view endEditing:YES];
+
+}
+
+-(void)switchVoiceButtonPressed:(id)sender
+{
+    //NSLog(@"%s",__PRETTY_FUNCTION__);
+    
+    //如果当前按住说话按钮隐藏，则将其显示，并隐藏输入框
+    if ([self.kfInputView recordVoiceButton].hidden) {
+        
+        [self.kfInputView recordVoiceButton].hidden = FALSE;
+        
+        [[self.kfInputView inputTextView] resignFirstResponder];
+        
+        [self.kfInputView inputTextView].hidden = TRUE;
+    }
+    //如果当前按住说话按钮显示，则将其隐藏，并显示输入框，并将其获取焦点
+    else
+    {
+        [self.kfInputView recordVoiceButton].hidden = TRUE;
+        
+        [self.kfInputView inputTextView].hidden = FALSE;
+        
+        [[self.kfInputView inputTextView] becomeFirstResponder];
+    }
+    
+    //
+    CGFloat emotionViewFrameY = [kfEmotionView frame].origin.y;
+    CGFloat plusViewFrameY = [self.kfPlusView frame].origin.y;
+    CGFloat frameHeight = self.view.frame.size.height;
+    
+    //如果当前Emotion扩展处于显示状态, 则隐藏Emotion扩展，
+    if (emotionViewFrameY != frameHeight) {
+        
+        [UIView animateWithDuration:VIEW_ANIMATION_DURATION
+                              delay:0.0f
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             //
+                             //调整kfTableView
+                             UIEdgeInsets tableViewContentInsets = [self.tableView contentInset];
+                             tableViewContentInsets.bottom -= EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.tableView setContentInset:tableViewContentInsets];
+                             
+                             //调整kfInputView到页面底部
+                             CGRect inputViewFrame = [self.kfInputView frame];
+                             inputViewFrame.origin.y += EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.kfInputView setFrame:inputViewFrame];
+                             
+                             //隐藏emotionView
+                             CGRect emotionViewFrame = [kfEmotionView frame];
+                             emotionViewFrame.origin.y += EMOTION_PLUS_VIEW_HEIGHT;
+                             [kfEmotionView setFrame:emotionViewFrame];
+                             
+                         } completion:^(BOOL finished) {
+                             
+                         }];
+        
+    }
+    //如果当前Plus扩展处于显示状态，则隐藏Plus扩展
+    else if (plusViewFrameY != frameHeight) {
+        
+        [UIView animateWithDuration:VIEW_ANIMATION_DURATION
+                              delay:0.0f
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             
+                             //调整kfTableView
+                             UIEdgeInsets tableViewContentInsets = [self.tableView contentInset];
+                             tableViewContentInsets.bottom -= EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.tableView setContentInset:tableViewContentInsets];
+                             
+                             //调整kfInputView到页面底部
+                             CGRect inputViewFrame = [self.kfInputView frame];
+                             inputViewFrame.origin.y += EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.kfInputView setFrame:inputViewFrame];
+                             
+                             CGRect plusViewFrame = [self.kfPlusView frame];
+                             plusViewFrame.origin.y += EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.kfPlusView setFrame:plusViewFrame];
+                             
+                         } completion:^(BOOL finished) {
+                             
+                         }];
+    }
+    
+    
+}
+
+-(void)switchEmotionButtonPressed:(id)sender
+{
+    //NSLog(@"%s",__PRETTY_FUNCTION__);
+    
+    //如果输入框目前处于隐藏状态,即：显示录音button状态，则：1.隐藏录音button，2.显示输入框，3.更换switchViewButton image
+    if ([self.kfInputView inputTextView].hidden)
+    {
+        [self.kfInputView recordVoiceButton].hidden = TRUE;
+        
+        [self.kfInputView inputTextView].hidden = FALSE;
+        
+        [[self.kfInputView switchVoiceButton] setImage:[UIImage imageNamed:@"ToolViewInputVoice_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        [[self.kfInputView switchVoiceButton] setImage:[UIImage imageNamed:@"ToolViewInputVoiceHL_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
+    }
+    
+    
+    CGFloat inputViewFrameY = [self.kfInputView frame].origin.y;
+    CGFloat emotionViewFrameY = [kfEmotionView frame].origin.y;
+    CGFloat plusViewFrameY = [self.kfPlusView frame].origin.y;
+    CGFloat frameHeight = self.view.frame.size.height;
+    
+    //当前输入工具栏在会话页面最底部，显示表情
+    if (inputViewFrameY == frameHeight - INPUTBAR_HEIGHT) {
+        
+        [UIView animateWithDuration:VIEW_ANIMATION_DURATION
+                              delay:0.0f
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             
+                             //调整kfTableView
+                             UIEdgeInsets tableViewContentInsets = [self.tableView contentInset];
+                             tableViewContentInsets.bottom += EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.tableView setContentInset:tableViewContentInsets];
+                             
+                             //调整kfInputView
+                             CGRect inputViewFrame = [self.kfInputView frame];
+                             inputViewFrame.origin.y -= EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.kfInputView setFrame:inputViewFrame];
+                             
+                             //调整kfEmotionView
+                             CGRect emotionViewFrame = [self.kfEmotionView frame];
+                             emotionViewFrame.origin.y -= EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.kfEmotionView setFrame:emotionViewFrame];
+                             
+                         } completion:^(BOOL finished) {
+                             
+                         }];
+        
+    }
+    //当前显示表情扩展, 需要显示键盘
+    else if (emotionViewFrameY != frameHeight) {
+        
+        [UIView animateWithDuration:VIEW_ANIMATION_DURATION
+                              delay:0.0f
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             
+                             //输入框设置焦点，显示键盘
+                             [self.kfInputView becomeFirstResponder];
+                             
+                             //隐藏emotionView
+                             CGRect emotionViewFrame = [self.kfEmotionView frame];
+                             emotionViewFrame.origin.y += EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.kfEmotionView setFrame:emotionViewFrame];
+                             
+                             //
+                         } completion:^(BOOL finished) {
+                             
+                         }];
+    }
+    //当前显示plus扩展, 需要隐藏plus扩展，显示表情扩展
+    else if (plusViewFrameY != frameHeight) {
+        
+        [UIView animateWithDuration:VIEW_ANIMATION_DURATION
+                              delay:0.0f
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             
+                             //
+                             CGRect emotionViewFrame = [self.kfEmotionView frame];
+                             emotionViewFrame.origin.y -= EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.kfEmotionView setFrame:emotionViewFrame];
+                             
+                             //
+                             CGRect plusViewFrame = [self.kfPlusView frame];
+                             plusViewFrame.origin.y += EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.kfPlusView setFrame:plusViewFrame];
+                             
+                             //
+                             
+                         } completion:^(BOOL finished) {
+                             
+                         }];
+    }
+    //当前显示键盘, 需要隐藏键盘，显示kfEmotionView
+    else
+    {
+        
+        [UIView animateWithDuration:VIEW_ANIMATION_DURATION
+                              delay:0.0f
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             
+                             //隐藏键盘
+                             UIView *keyboard = self.kfInputView.inputTextView.inputAccessoryView.superview;
+                             CGRect keyboardFrame = keyboard.frame;
+                             keyboardFrame.origin.y = frameHeight;
+                             [keyboard setFrame:keyboardFrame];
+                             
+//                             isEmotionPlusPressedToHideKeyboard = TRUE;
+                             
+                             [self.kfInputView resignFirstResponder];
+                             
+                             //调整inputViewFrame
+                             CGRect inputViewFrame = [self.kfInputView frame];
+                             inputViewFrame.origin.y = frameHeight - EMOTION_PLUS_VIEW_HEIGHT - INPUTBAR_HEIGHT;
+                             [self.kfInputView setFrame:inputViewFrame];
+                             
+                             //显示kfEmotionView
+                             CGRect emotionViewFrame = [self.kfEmotionView frame];
+                             emotionViewFrame.origin.y -= EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.kfEmotionView setFrame:emotionViewFrame];
+                             
+                             
+                         } completion:^(BOOL finished) {
+                             
+                         }];
+        
+    }
+    
+    [self tableViewScrollToBottom:YES];
+}
+
+-(void)switchPlusButtonPressed:(id)sender
+{
+    //如果输入框目前处于隐藏状态,即：显示录音button状态，则：1.隐藏录音button，2.显示输入框，3.更换switchViewButton image
+    if ([self.kfInputView inputTextView].hidden)
+    {
+        [self.kfInputView recordVoiceButton].hidden = TRUE;
+        
+        [self.kfInputView inputTextView].hidden = FALSE;
+        
+        [[self.kfInputView switchVoiceButton] setImage:[UIImage imageNamed:@"ToolViewInputVoice_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        [[self.kfInputView switchVoiceButton] setImage:[UIImage imageNamed:@"ToolViewInputVoiceHL_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
+    }
+    
+    CGFloat inputViewFrameY = [self.kfInputView frame].origin.y;
+    CGFloat emotionViewFrameY = [kfEmotionView frame].origin.y;
+    CGFloat plusViewFrameY = [self.kfPlusView frame].origin.y;
+    CGFloat frameHeight = self.view.frame.size.height;
+    
+    
+    //当前输入工具栏在会话页面最底部，显示plus
+    if (inputViewFrameY == frameHeight - INPUTBAR_HEIGHT) {
+        
+        [UIView animateWithDuration:VIEW_ANIMATION_DURATION
+                              delay:0.0f
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             
+                             //调整kfTableView
+                             UIEdgeInsets tableViewContentInsets = [self.tableView contentInset];
+                             tableViewContentInsets.bottom += EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.tableView setContentInset:tableViewContentInsets];
+                             
+                             //调整kfInputView
+                             CGRect inputViewFrame = [self.kfInputView frame];
+                             inputViewFrame.origin.y -= EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.kfInputView setFrame:inputViewFrame];
+                             
+                             //调整kfPlusView
+                             CGRect plusViewFrame = [self.kfPlusView frame];
+                             plusViewFrame.origin.y -= EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.kfPlusView setFrame:plusViewFrame];
+                             
+                         } completion:^(BOOL finished) {
+                             
+                         }];
+        
+    }
+    //当前显示Plus扩展, 需要显示键盘
+    else if (plusViewFrameY != frameHeight) {
+        
+        [UIView animateWithDuration:VIEW_ANIMATION_DURATION
+                              delay:0.0f
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             
+                             //输入框设置焦点，显示键盘
+                             [self.kfInputView becomeFirstResponder];
+                             
+                             //隐藏plusView
+                             CGRect plusViewFrame = [self.kfPlusView frame];
+                             plusViewFrame.origin.y += EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.kfPlusView setFrame:plusViewFrame];
+                             
+                         } completion:^(BOOL finished) {
+                             
+                         }];
+    }
+    //当前显示表情扩展, 需要隐藏表情扩展，显示Plus扩展
+    else if (emotionViewFrameY != frameHeight) {
+        
+        [UIView animateWithDuration:VIEW_ANIMATION_DURATION
+                              delay:0.0f
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             
+                             //
+                             CGRect plusViewFrame = [self.kfPlusView frame];
+                             plusViewFrame.origin.y -= EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.kfPlusView setFrame:plusViewFrame];
+                             
+                             //
+                             CGRect emotionViewFrame = [self.kfEmotionView frame];
+                             emotionViewFrame.origin.y += EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.kfEmotionView setFrame:emotionViewFrame];
+                             
+                             //
+                             
+                         } completion:^(BOOL finished) {
+                             
+                         }];
+    }
+    //当前显示键盘, 需要隐藏键盘，显示kfPlusView
+    else
+    {
+        [UIView animateWithDuration:VIEW_ANIMATION_DURATION
+                              delay:0.0f
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             
+                             //隐藏键盘
+                             UIView *keyboard = self.kfInputView.inputTextView.inputAccessoryView.superview;
+                             CGRect keyboardFrame = keyboard.frame;
+                             keyboardFrame.origin.y = frameHeight;
+                             [keyboard setFrame:keyboardFrame];
+                             
+//                             isEmotionPlusPressedToHideKeyboard = TRUE;
+                             
+                             [self.kfInputView resignFirstResponder];
+                             
+                             //调整inputViewFrame
+                             CGRect inputViewFrame = [self.kfInputView frame];
+                             inputViewFrame.origin.y = frameHeight - EMOTION_PLUS_VIEW_HEIGHT - INPUTBAR_HEIGHT;
+                             [self.kfInputView setFrame:inputViewFrame];
+                             
+                             //显示kfPlusView
+                             CGRect plusViewFrame = [self.kfPlusView frame];
+                             plusViewFrame.origin.y -= EMOTION_PLUS_VIEW_HEIGHT;
+                             [self.kfPlusView setFrame:plusViewFrame];
+                             
+                         } completion:^(BOOL finished) {
+                             
+                         }];
+        
+    }
+    
+    [self tableViewScrollToBottom:YES];
+    
+}
+
+-(void)sendMessage:(NSString *)content {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+//    NSString *content = self.kfInputView.inputTextView.text;
+    if ([content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length > 0) {
+        [self sendTextMessage:content];
+        [self.kfInputView.inputTextView setText:@""];
+    }
 }
 
 @end

@@ -138,7 +138,7 @@
         
         sharePickPhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [sharePickPhotoButton setFrame:frame];
-        [sharePickPhotoButton setBackgroundImage:[UIImage imageNamed:@"AppKeFuResources.bundle/sharemore_pic_ios7"] forState:UIControlStateNormal];
+        [sharePickPhotoButton setBackgroundImage:[UIImage imageNamed:@"sharemore_pic_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         //
         sharePickPhotoButton.layer.cornerRadius = 5.0;
         sharePickPhotoButton.layer.masksToBounds = YES;
@@ -163,7 +163,7 @@
         sharePickPhotoLabel = [[UILabel alloc] initWithFrame:frame];
         [sharePickPhotoLabel setTextColor:[UIColor blackColor]];
         [sharePickPhotoLabel setFont:[UIFont systemFontOfSize:SHAREMORE_ITEM_LABEL_FONTSIZE]];
-        [sharePickPhotoLabel setText:AppKeFuLocalizedString(@"Photo", nil)];
+        [sharePickPhotoLabel setText:@"相册"];
         [sharePickPhotoLabel setBackgroundColor:[UIColor clearColor]];
     }
     
@@ -181,7 +181,7 @@
         
         shareTakePhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [shareTakePhotoButton setFrame:frame];
-        [shareTakePhotoButton setBackgroundImage:[UIImage imageNamed:@"AppKeFuResources.bundle/sharemore_video_ios7"] forState:UIControlStateNormal];
+        [shareTakePhotoButton setBackgroundImage:[UIImage imageNamed:@"sharemore_video_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         
         //
         shareTakePhotoButton.layer.cornerRadius = 5.0;
@@ -206,7 +206,7 @@
         shareTakePhotoLabel = [[UILabel alloc] initWithFrame:frame];
         [shareTakePhotoLabel setTextColor:[UIColor blackColor]];
         [shareTakePhotoLabel setFont:[UIFont systemFontOfSize:SHAREMORE_ITEM_LABEL_FONTSIZE]];
-        [shareTakePhotoLabel setText:AppKeFuLocalizedString(@"Camera", nil)];
+        [shareTakePhotoLabel setText:@"拍照"];
         [shareTakePhotoLabel setBackgroundColor:[UIColor clearColor]];
         
     }
@@ -225,7 +225,7 @@
         
         shareRateButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [shareRateButton setFrame:frame];
-        [shareRateButton setBackgroundImage:[UIImage imageNamed:@"AppKeFuResources.bundle/sharemore_friendcard_ios7"] forState:UIControlStateNormal];
+        [shareRateButton setBackgroundImage:[UIImage imageNamed:@"sharemore_friendcard_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         
         //
         shareRateButton.layer.cornerRadius = 5.0;
@@ -252,7 +252,7 @@
         shareRateLabel = [[UILabel alloc] initWithFrame:frame];
         [shareRateLabel setTextColor:[UIColor blackColor]];
         [shareRateLabel setFont:[UIFont systemFontOfSize:SHAREMORE_ITEM_LABEL_FONTSIZE]];
-        [shareRateLabel setText:AppKeFuLocalizedString(@"Rate", nil)];
+        [shareRateLabel setText:@"商品"];
         [shareRateLabel setBackgroundColor:[UIColor clearColor]];
     }
     
@@ -270,7 +270,7 @@
         
         shareShowFAQButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [shareShowFAQButton setFrame:frame];
-        [shareShowFAQButton setBackgroundImage:[UIImage imageNamed:@"AppKeFuResources.bundle/sharemore_wxtalk_ios7"] forState:UIControlStateNormal];
+        [shareShowFAQButton setBackgroundImage:[UIImage imageNamed:@"sharemore_wxtalk_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         
         //
         shareShowFAQButton.layer.cornerRadius = 5.0;
@@ -297,7 +297,7 @@
         shareShowFAQLabel = [[UILabel alloc] initWithFrame:frame];
         [shareShowFAQLabel setTextColor:[UIColor blackColor]];
         [shareShowFAQLabel setFont:[UIFont systemFontOfSize:SHAREMORE_ITEM_LABEL_FONTSIZE]];
-        [shareShowFAQLabel setText:AppKeFuLocalizedString(@"FAQ", nil)];
+        [shareShowFAQLabel setText:@"红包"];
         [shareShowFAQLabel setBackgroundColor:[UIColor clearColor]];
     }
     

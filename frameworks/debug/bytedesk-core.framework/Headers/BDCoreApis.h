@@ -1009,6 +1009,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                    toTid:(NSString *)tId
                  localId:(NSString *)localId
              sessionType:(NSString *)sessiontype
+             voiceLength:(int)voiceLength
            resultSuccess:(SuccessCallbackBlock)success
             resultFailed:(FailedCallbackBlock)failed;
 
@@ -1041,6 +1042,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
               toTid:(NSString *)tId
             localId:(NSString *)localId
         sessionType:(NSString *)sessiontype
+        voiceLength:(int)voiceLength
       resultSuccess:(SuccessCallbackBlock)success
        resultFailed:(FailedCallbackBlock)failed;
 
@@ -1128,6 +1130,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
++ (void)uploadVoiceData:(NSData *)voiceData
+          withVoiceName:(NSString *)voiceName
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
 /**
  <#Description#>
 
@@ -1180,6 +1187,20 @@ typedef void (^FailedCallbackBlock)(NSError *error);
            withOpenId:(NSString *)openId
         resultSuccess:(SuccessCallbackBlock)success
          resultFailed:(FailedCallbackBlock)failed;
+
+
+#pragma mark - device token
+
++ (void)isTokenUploadedResultSuccess:(SuccessCallbackBlock)success
+                        resultFailed:(FailedCallbackBlock)failed;
+
++ (void)updateDeviceToken:(NSString *)deviceToken
+            resultSuccess:(SuccessCallbackBlock)success
+             resultFailed:(FailedCallbackBlock)failed;
+
++ (void)deleteDeviceTokenResultSuccess:(SuccessCallbackBlock)success
+                          resultFailed:(FailedCallbackBlock)failed;
+
 
 @end
 

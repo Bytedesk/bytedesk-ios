@@ -296,5 +296,9 @@
 #define BD_GROUP_TYPE_GROUP @"group"
 #define BD_GROUP_TYPE_DISCUSS @"discuss"
 
+#define BD_IOS_BUILD_DEBUG @"debug"
+#define BD_IOS_BUILD_RELEASE @"release"
+
+
 #endif /* BDConstants_h */
 

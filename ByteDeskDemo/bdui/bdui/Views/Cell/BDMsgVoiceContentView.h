@@ -11,21 +11,9 @@
 
 @protocol KFDSPlayAudioUIDelegate <NSObject>
 
--(void)startPlayingAudioUI;  //点击一开始就要显示
-
-@optional
-
-- (void)retryDownloadMsg; //重收消息
-
 @end
 
 
-
-
 @interface BDMsgVoiceContentView : BDMsgBaseContentView
-
-@property (nonatomic, weak) id<KFDSPlayAudioUIDelegate> audioUIDelegate;
-
-- (void)setPlaying:(BOOL)isPlaying;
 
 @end
