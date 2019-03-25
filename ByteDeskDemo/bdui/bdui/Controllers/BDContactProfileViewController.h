@@ -11,7 +11,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol BDContactProfileViewControllerDelegate <NSObject>
+
+-(void)clearMessages;
+
+@end
+
 @interface BDContactProfileViewController : QMUICommonTableViewController
+
+@property (nonatomic, weak) id<BDContactProfileViewControllerDelegate> delegate;
 
 - (void) initWithUid:(NSString *)uid;
 

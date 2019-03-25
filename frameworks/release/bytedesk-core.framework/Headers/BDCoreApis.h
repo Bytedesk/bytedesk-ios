@@ -513,7 +513,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success <#success description#>
  @param failed <#failed description#>
  */
-- (void)unmuteGroupMember:(NSString *)uid
++ (void)unmuteGroupMember:(NSString *)uid
              withGroupGid:(NSString *)gid
             resultSuccess:(SuccessCallbackBlock)success
              resultFailed:(FailedCallbackBlock)failed;
@@ -527,7 +527,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success <#success description#>
  @param failed <#failed description#>
  */
-- (void)setGroupAdmin:(NSString *)uid
++ (void)setGroupAdmin:(NSString *)uid
          withGroupGid:(NSString *)gid
         resultSuccess:(SuccessCallbackBlock)success
          resultFailed:(FailedCallbackBlock)failed;
@@ -541,7 +541,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success <#success description#>
  @param failed <#failed description#>
  */
-- (void)unsetGroupAdmin:(NSString *)uid
++ (void)unsetGroupAdmin:(NSString *)uid
            withGroupGid:(NSString *)gid
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;

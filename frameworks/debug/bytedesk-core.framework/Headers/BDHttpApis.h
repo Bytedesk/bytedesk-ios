@@ -617,7 +617,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success <#success description#>
  @param failed <#failed description#>
  */
-- (void)sendReceiptMessage:(NSString *)content
+- (void)sendReceiptMessage:(NSString *)mid
                    toTid:(NSString *)tId
                  localId:(NSString *)localId
              sessionType:(NSString *)sessiontype

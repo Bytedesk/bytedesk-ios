@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) initWithThreadModel:(BDThreadModel *)threadModel withPush:(BOOL)isPush withCustom:(NSDictionary *)custom;
 
 /**
- 联系人会话
+ 联系人会话，一对一会话、单聊
  
  @param contactModel <#contactModel description#>
  @param isPush <#isPush description#>
@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) initWithContactModel:(BDContactModel *)contactModel withPush:(BOOL)isPush withCustom:(NSDictionary *)custom;
 
 /**
- 群组会话
+ 群组会话、群聊
  
  @param groupModel <#groupModel description#>
  @param isPush <#isPush description#>

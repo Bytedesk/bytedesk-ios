@@ -10,7 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol BDGroupProfileViewControllerDelegate <NSObject>
+
+-(void)clearMessages;
+
+@end
+
 @interface BDGroupProfileViewController : QMUICommonTableViewController
+
+@property (nonatomic, weak) id<BDGroupProfileViewControllerDelegate> delegate;
 
 - (void)initWithGroupGid:(NSString *)gid;
 

@@ -127,17 +127,24 @@
     if (indexPath.section == 1) {
         DDLogInfo(@"清空聊天记录");
         //
-        [BDCoreApis markClearThreadMessage:self.mTid resultSuccess:^(NSDictionary *dict) {
+        [BDCoreApis markClearContactMessage:self.mUid resultSuccess:^(NSDictionary *dict) {
             //
             NSNumber *status_code = [dict objectForKey:@"status_code"];
             if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
                 // 成功
                 
-            } else {
+                // delegate
+                if (self.delegate && [self.delegate respondsToSelector:@selector(clearMessages)]) {
+                    [self.delegate clearMessages];
+                }
                 
+                [QMUITips showSucceed:@"成功清空聊天记录" inView:self.view hideAfterDelay:.8];
+            } else {
+                //
+                NSString *message = dict[@"message"];
+                DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, message);
+                [QMUITips showError:message inView:self.view hideAfterDelay:2];
             }
-            // TODO: 清空本地相关聊天记录
-            [QMUITips showSucceed:@"成功清空聊天记录" inView:self.view hideAfterDelay:.8];
         } resultFailed:^(NSError *error) {
             [QMUITips showError:@"清空聊天记录失败" inView:self.view hideAfterDelay:.8];
         }];

@@ -275,9 +275,26 @@
             DDLogInfo(@"清空聊天记录");
         
             [BDCoreApis markClearGroupMessage:self.mGid resultSuccess:^(NSDictionary *dict) {
+                //
+                NSNumber *status_code = [dict objectForKey:@"status_code"];
+                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    // 成功
+                    
+                    // delegate
+                    if (self.delegate && [self.delegate respondsToSelector:@selector(clearMessages)]) {
+                        [self.delegate clearMessages];
+                    }
+                    
+                    [QMUITips showSucceed:@"成功清空聊天记录" inView:self.view hideAfterDelay:.8];
+                } else {
+                    //
+                    NSString *message = dict[@"message"];
+                    DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, message);
+                    [QMUITips showError:message inView:self.view hideAfterDelay:2];
+                }
                 
             } resultFailed:^(NSError *error) {
-                
+                [QMUITips showError:@"清空聊天记录失败" inView:self.view hideAfterDelay:.8];
             }];
             
         } else if (indexPath.row == 2) {

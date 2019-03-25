@@ -30,7 +30,7 @@ static CGFloat const kEmotionViewHeight = 232;
 
 static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPhoto;
 
-@interface BDChatViewController ()<UINavigationControllerBackButtonHandlerProtocol, KFDSMsgViewCellDelegate, QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,BDSingleImagePickerPreviewViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, QMUITextFieldDelegate, QMUIImagePreviewViewDelegate>
+@interface BDChatViewController ()<UINavigationControllerBackButtonHandlerProtocol, KFDSMsgViewCellDelegate, QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,BDSingleImagePickerPreviewViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, QMUITextFieldDelegate, QMUIImagePreviewViewDelegate, BDGroupProfileViewControllerDelegate, BDContactProfileViewControllerDelegate>
 {
 
 }
@@ -724,11 +724,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             // 联系人会话
             BDContactProfileViewController *contactViewController = [[BDContactProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [contactViewController initWithUid:self.mUid];
+            contactViewController.delegate = self;
             [self.navigationController pushViewController:contactViewController animated:YES];
         } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_GROUP]) {
             // 群组会话
             BDGroupProfileViewController *groupViewController = [[BDGroupProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [groupViewController initWithGroupGid:self.mUid];
+            groupViewController.delegate = self;
             [self.navigationController pushViewController:groupViewController animated:YES];
         }
     }
@@ -1945,6 +1947,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
  */
 - (void)notifyMessageAdd:(NSNotification *)notification {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    [self hideEmptyView];
     
     BDMessageModel *messageModel = [notification object];
     if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_NOTIFICATION_INVITE_RATE]) {
@@ -1961,6 +1964,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
         [self.tableView endUpdates];
         [self tableViewScrollToBottom:YES];
+        
+        // TODO: 发送消息已读回执
+        
     }
     
 }
@@ -2021,6 +2027,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [alertController showWithAnimated:YES];
 }
 
+#pragma mark - BDGroupProfileViewControllerDelegate, BDContactProfileViewControllerDelegate
+
+-(void)clearMessages {
+    DDLogInfo(@"清空内存聊天记录");
+    
+     [self reloadTableData];
+}
 
 @end
 

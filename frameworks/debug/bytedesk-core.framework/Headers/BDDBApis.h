@@ -98,6 +98,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (BOOL) updateMessage:(NSString *)localId withStatus:(NSString *)status;
 - (BOOL) deleteMessage:(NSString *)mid;
 
+- (BOOL) deleteThreadMessages:(NSString *)tid;
+- (BOOL) deleteContactMessages:(NSString *)uid;
+- (BOOL) deleteGroupMessages:(NSString *)gid;
+
+
 - (BOOL) insertContact:(BDContactModel *)contact;
 - (NSMutableArray *) getContacts;
 - (BOOL) clearContacts;

@@ -38,11 +38,11 @@
 #define RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT 150.0f
 
 static CGFloat const kToolbarHeight = 60;
-static CGFloat const kEmotionViewHeight = 232;
+//static CGFloat const kEmotionViewHeight = 232;
 
 static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPhoto;
 
-@interface BDChatWxViewController ()<UINavigationControllerBackButtonHandlerProtocol, KFDSMsgViewCellDelegate, QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,BDSingleImagePickerPreviewViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, QMUITextFieldDelegate, QMUIImagePreviewViewDelegate, KFEmotionViewDelegate, KFPlusViewDelegate, KFInputViewDelegate>
+@interface BDChatWxViewController ()<UINavigationControllerBackButtonHandlerProtocol, KFDSMsgViewCellDelegate, QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,BDSingleImagePickerPreviewViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, QMUITextFieldDelegate, QMUIImagePreviewViewDelegate, KFEmotionViewDelegate, KFPlusViewDelegate, KFInputViewDelegate, BDGroupProfileViewControllerDelegate, BDContactProfileViewControllerDelegate>
 {
 
 }
@@ -112,7 +112,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
 @property (nonatomic, assign) BOOL                      isEmotionPlusPressedToHideKeyboard;
-
+@property (nonatomic, assign) BOOL                      mIsViewControllerClosed;
 
 @end
 
@@ -227,6 +227,10 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
  * -2：请求会话失败-wId不存在
  */
 - (void)dealWithRequestThreadResult:(NSDictionary *)dict {
+    // 如果点击了左上角返回或关闭按钮之后，网络请求才返回m，则不需要继续处理此返回结果
+    if (self.mIsViewControllerClosed) {
+        return;
+    }
     //
     NSString *message = [dict objectForKey:@"message"];
     NSNumber *status_code = [dict objectForKey:@"status_code"];
@@ -785,14 +789,18 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 // 针对Present打开模式，左上角返回按钮处理action
 - (void)handleCloseButtonEvent:(id)sender {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    self.mIsViewControllerClosed = YES;
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
     }];
 }
 
 // 针对Push打开模式，左上角返回按钮处理action
 - (void)handleBackButtonEvent:(id)sender {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    self.mIsViewControllerClosed = YES;
     [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 - (BOOL)forceEnableInteractivePopGestureRecognizer {
@@ -845,11 +853,14 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             // 联系人会话
             BDContactProfileViewController *contactViewController = [[BDContactProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [contactViewController initWithUid:self.mUid];
+            contactViewController.delegate = self;
             [self.navigationController pushViewController:contactViewController animated:YES];
+            
         } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_GROUP]) {
             // 群组会话
             BDGroupProfileViewController *groupViewController = [[BDGroupProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [groupViewController initWithGroupGid:self.mUid];
+            groupViewController.delegate = self;
             [self.navigationController pushViewController:groupViewController animated:YES];
         }
     }
@@ -994,9 +1005,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     // 刷新tableView
     [self.tableView reloadData];
     [self tableViewScrollToBottom:NO];
-    
-    
-    
 }
 
 - (void)updateCurrentThread {
@@ -2602,6 +2610,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
  */
 - (void)notifyMessageAdd:(NSNotification *)notification {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    [self hideEmptyView];
     
     BDMessageModel *messageModel = [notification object];
     if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_NOTIFICATION_INVITE_RATE]) {
@@ -2618,10 +2627,12 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
         [self.tableView endUpdates];
         [self tableViewScrollToBottom:YES];
+        
+        // TODO: 发送消息已读回执
+        
+        
     }
     
-    // TODO: 优化处理
-    //    [self reloadTableData];
 }
 
 
@@ -3044,5 +3055,14 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         [self.kfInputView.inputTextView setText:@""];
     }
 }
+
+#pragma mark - BDGroupProfileViewControllerDelegate, BDContactProfileViewControllerDelegate
+
+-(void)clearMessages {
+    DDLogInfo(@"清空内存聊天记录");
+    
+    [self reloadTableData];
+}
+
 
 @end
