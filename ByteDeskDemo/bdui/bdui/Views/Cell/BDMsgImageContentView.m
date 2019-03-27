@@ -18,6 +18,9 @@
 @interface BDMsgImageContentView ()
 
 @property (nonatomic,strong) UIImageView * imageView;
+@property (nonatomic, strong) UIView                    *kfImageViewSendingPercentageMaskView;
+@property (nonatomic, strong) UIActivityIndicatorView   *kfImageSendPercentageIndicatorView;
+@property (nonatomic, strong) UILabel                   *kfImageSendPercentageLabel;
 
 @property (nonatomic,strong) KFDSLoadProgressView * progressView;
 

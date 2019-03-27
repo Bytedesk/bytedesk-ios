@@ -355,6 +355,7 @@
  显示登录自定义用户名弹框
  */
 - (void)showLoginDialogViewController {
+    //
     QMUIDialogTextFieldViewController *dialogViewController = [[QMUIDialogTextFieldViewController alloc] init];
     dialogViewController.title = @"自定义用户名登录";
     [dialogViewController addTextFieldWithTitle:@"用户名" configurationHandler:^(QMUILabel *titleLabel, QMUITextField *textField, CALayer *separatorLayer) {
@@ -389,25 +390,34 @@
 #pragma mark - 登录、退出登录
 
 - (void)login:(NSString *)username withPassword:(NSString *)password {
+    
+    [QMUITips showLoading:@"登录中..." inView:self.view];
     // 参考文档：https://github.com/pengjinning/bytedesk-ios
     // 获取subDomain，也即企业号：登录后台->所有设置->客服账号->企业号
     NSString *subDomain = @"vip";
     // 登录
     [BDCoreApis loginWithUsername:username withPassword:password withAppkey:DEFAULT_TEST_APPKEY withSubdomain:subDomain resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
+        [QMUITips hideAllToastInView:self.view animated:YES];
     } resultFailed:^(NSError *error) {
         DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+        [QMUITips hideAllToastInView:self.view animated:YES];
+        [QMUITips showError:@"登录失败" inView:self.view hideAfterDelay:2];
     }];
 }
 
 - (void)anonymouseLogin {
+    [QMUITips showLoading:@"登录中..." inView:self.view];
     // 访客登录
     [BDCoreApis visitorLoginWithAppkey:DEFAULT_TEST_APPKEY withSubdomain:DEFAULT_TEST_SUBDOMAIN resultSuccess:^(NSDictionary *dict) {
         // 登录成功
         DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
+        [QMUITips hideAllToastInView:self.view animated:YES];
     } resultFailed:^(NSError *error) {
         // 登录失败
         DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+        [QMUITips hideAllToastInView:self.view animated:YES];
+        [QMUITips showError:@"登录失败" inView:self.view hideAfterDelay:2];
     }];
 }
 

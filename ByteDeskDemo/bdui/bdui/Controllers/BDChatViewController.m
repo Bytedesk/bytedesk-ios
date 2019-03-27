@@ -830,6 +830,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             }
         } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_IMAGE]) {
             height = 280;
+        } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_VOICE]) {
+            height = 90;
         }
         else {
             height = 80;

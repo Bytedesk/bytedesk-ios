@@ -28,6 +28,7 @@
 
 // 测试域名
 // web后台此域名非统一的，而是每一家使用自己独特的二级域名
+//#define BD_WEBRTC_STUN_SERVER               @"stun:47.99.38.99:3478"
 //#define BD_IS_DEBUG                         true
 //#define BD_MQTT_HOST                        @"127.0.0.1"
 //#define BD_HTTP_HOST_ADDRESS                @"http://127.0.0.1:8000"
@@ -36,6 +37,7 @@
 //#define CLIENT_OAUTH_TOKEN                  @"http://127.0.0.1:8000/oauth/token"
 
 // 上线发布域名
+#define BD_WEBRTC_STUN_SERVER               @"stun:47.99.38.99:3478"
 #define BD_IS_DEBUG                         false
 #define BD_MQTT_HOST                        @"mq.bytedesk.com"
 #define BD_HTTP_HOST_ADDRESS                @"https://api.bytedesk.com"

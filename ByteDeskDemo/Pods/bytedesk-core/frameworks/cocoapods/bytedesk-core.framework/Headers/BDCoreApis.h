@@ -1135,6 +1135,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
++ (void)uploadFileData:(NSData *)fileData
+         withVoiceName:(NSString *)fileName
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
+
 /**
  <#Description#>
 

@@ -610,7 +610,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 /**
  同步发送消息回执
 
- @param content <#content description#>
+ @param mid mid
  @param tId <#tId description#>
  @param localId <#localId description#>
  @param sessiontype <#sessiontype description#>
@@ -694,6 +694,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
 - (void)uploadVoiceData:(NSData *)voiceData
           withVoiceName:(NSString *)voiceName
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
+- (void)uploadFileData:(NSData *)fileData
+          withVoiceName:(NSString *)fileName
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 

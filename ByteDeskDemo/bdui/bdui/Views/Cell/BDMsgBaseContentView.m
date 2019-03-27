@@ -9,6 +9,9 @@
 #import "BDMsgBaseContentView.h"
 
 @interface BDMsgBaseContentView ()
+//
+@property (nonatomic, strong) UIActivityIndicatorView   *kfSendingStatusIndicatorView;
+@property (nonatomic, strong) UIButton                  *kfSendErrorStatusButton;
 
 @end
 

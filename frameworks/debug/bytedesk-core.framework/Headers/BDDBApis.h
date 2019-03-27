@@ -62,29 +62,44 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (NSNumber *) getQueueCount;
 - (BOOL) clearQueues;
 
-- (BDMessageModel *) insertTextMessageLocal:(NSString *)tid withWorkGroupWid:(NSString *)wid
-                withContent:(NSString *)content withLocalId:(NSString *)localId
+- (BDMessageModel *) insertTextMessageLocal:(NSString *)tid
+                           withWorkGroupWid:(NSString *)wid
+                withContent:(NSString *)content
+                                withLocalId:(NSString *)localId
                 withSessionType:(NSString *)sessionType;
 
-- (BDMessageModel *) insertImageMessageLocal:(NSString *)tid withWorkGroupWid:(NSString *)wid
-                    withContent:(NSString *)content withLocalId:(NSString *)localId
+- (BDMessageModel *) insertImageMessageLocal:(NSString *)tid
+                            withWorkGroupWid:(NSString *)wid
+                    withContent:(NSString *)content
+                                 withLocalId:(NSString *)localId
                 withSessionType:(NSString *)sessionType;
 
-- (BDMessageModel *) insertVoiceMessageLocal:(NSString *)tid withWorkGroupWid:(NSString *)wid
-                                withContent:(NSString *)content withLocalId:(NSString *)localId
+- (BDMessageModel *) insertVoiceMessageLocal:(NSString *)tid
+                            withWorkGroupWid:(NSString *)wid
+                                withContent:(NSString *)content
+                                 withLocalId:(NSString *)localId
+                            withSessionType:(NSString *)sessionType
+                             withVoiceLength:(int)voiceLength;
+
+- (BDMessageModel *) insertCommodityMessageLocal:(NSString *)tid
+                                withWorkGroupWid:(NSString *)wid
+                                withContent:(NSString *)content
+                                     withLocalId:(NSString *)localId
                             withSessionType:(NSString *)sessionType;
 
-- (BDMessageModel *) insertCommodityMessageLocal:(NSString *)tid withWorkGroupWid:(NSString *)wid
-                                withContent:(NSString *)content withLocalId:(NSString *)localId
+- (BDMessageModel *) insertRedPacketMessageLocal:(NSString *)tid
+                                withWorkGroupWid:(NSString *)wid
+                                withContent:(NSString *)content
+                                     withLocalId:(NSString *)localId
                             withSessionType:(NSString *)sessionType;
 
-- (BDMessageModel *) insertRedPacketMessageLocal:(NSString *)tid withWorkGroupWid:(NSString *)wid
-                                withContent:(NSString *)content withLocalId:(NSString *)localId
-                            withSessionType:(NSString *)sessionType;
-
-- (BDMessageModel *) insertMessageLocal:(NSString *)tid withWorkGroupWid:(NSString *)wid
-                withContent:(NSString *)content withLocalId:(NSString *)localId
-                   withType:(NSString *)type withSessionType:(NSString *)sessionType;
+- (BDMessageModel *) insertMessageLocal:(NSString *)tid
+                       withWorkGroupWid:(NSString *)wid
+                            withContent:(NSString *)content
+                            withLocalId:(NSString *)localId
+                               withType:(NSString *)type
+                        withSessionType:(NSString *)sessionType
+                        withVoiceLength:(int)voiceLength;
 
 - (BOOL) insertMessage:(BDMessageModel *)message;
 - (BOOL) insertMessageLocal:(BDMessageModel *)message;
@@ -101,6 +116,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (BOOL) deleteThreadMessages:(NSString *)tid;
 - (BOOL) deleteContactMessages:(NSString *)uid;
 - (BOOL) deleteGroupMessages:(NSString *)gid;
+- (BOOL) clearMessages;
 
 
 - (BOOL) insertContact:(BDContactModel *)contact;
@@ -116,6 +132,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (BOOL) clearWorkGroups;
 
 #pragma mark - 公共接口
+
+- (void) clearAll;
 
 
 

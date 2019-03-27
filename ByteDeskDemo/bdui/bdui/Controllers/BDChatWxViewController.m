@@ -582,83 +582,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [super initSubviews];
     //
     self.tableView.separatorColor = [UIColor clearColor];
-//    //
-//    self.toolbarView = [[UIView alloc] init];
-//    self.toolbarView.backgroundColor = UIColorWhite;
-//    self.toolbarView.qmui_borderColor = UIColorSeparator;
-//    self.toolbarView.qmui_borderPosition = QMUIViewBorderPositionTop;
-//    [self.view addSubview:self.toolbarView];
-//
-//    self.toolbarTextField = [[QMUITextField alloc] init];
-//    self.toolbarTextField.delegate = self;
-//    self.toolbarTextField.placeholder = @"请输入...";
-//    self.toolbarTextField.font = UIFontMake(15);
-//    self.toolbarTextField.backgroundColor = UIColorWhite;
-//    self.toolbarTextField.returnKeyType = UIReturnKeySend;
-//    [self.toolbarView addSubview:self.toolbarTextField];
-//
-//    __weak __typeof(self)weakSelf = self;
-//    self.toolbarTextField.qmui_keyboardWillChangeFrameNotificationBlock = ^(QMUIKeyboardUserInfo *keyboardUserInfo) {
-//        if (!weakSelf.plusButton.isSelected) {
-//            [QMUIKeyboardManager handleKeyboardNotificationWithUserInfo:keyboardUserInfo showBlock:^(QMUIKeyboardUserInfo *keyboardUserInfo) {
-//                [weakSelf showToolbarViewWithKeyboardUserInfo:keyboardUserInfo];
-//            } hideBlock:^(QMUIKeyboardUserInfo *keyboardUserInfo) {
-//                [weakSelf hideToolbarViewWithKeyboardUserInfo:keyboardUserInfo];
-//            }];
-//        } else {
-//            [weakSelf showToolbarViewWithKeyboardUserInfo:nil];
-//        }
-//    };
-//
-//    //
-//    self.switchVoiceButton = [[QMUIButton alloc] init];
-//    self.switchVoiceButton.titleLabel.font = UIFontMake(16);
-//    self.switchVoiceButton.qmui_outsideEdge = UIEdgeInsetsMake(-12, -12, -12, -12);
-//    [self.switchVoiceButton setImage:[UIImage imageNamed:@"ToolViewInputVoice_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-//    [self.switchVoiceButton setImage:[UIImage imageNamed:@"ToolViewInputVoiceHL_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
-//    [self.switchVoiceButton sizeToFit];
-//    [self.switchVoiceButton addTarget:self action:@selector(handleSwitchVoiceButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.toolbarView addSubview:self.switchVoiceButton];
-//
-//    //
-//    self.recordButton = [[QMUIButton alloc] init];
-//    self.recordButton.titleLabel.font = UIFontMake(16);
-//    self.recordButton.qmui_outsideEdge = UIEdgeInsetsMake(-12, -12, -12, -12);
-//    [self.recordButton setImage:[UIImage imageNamed:@"VoiceBtn_Black_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-//    [self.recordButton setImage:[UIImage imageNamed:@"VoiceBtn_BlackHL_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
-//    [self.recordButton sizeToFit];
-//    [self.recordButton addTarget:self action:@selector(recordVoiceButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
-//    [self.recordButton addTarget:self action:@selector(recordVoiceButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.recordButton addTarget:self action:@selector(recordVoiceButtonTouchUpOutside:) forControlEvents:UIControlEventTouchUpOutside];
-//    [self.recordButton addTarget:self action:@selector(recordVoiceButtonTouchDragInside:) forControlEvents:UIControlEventTouchDragInside];
-//    [self.recordButton addTarget:self action:@selector(recordVoiceButtonTouchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
-//    [self.toolbarView addSubview:self.recordButton];
-//    //
-//    self.sendButton = [[QMUIButton alloc] init];
-//    self.sendButton.titleLabel.font = UIFontMake(16);
-//    [self.sendButton setTitle:@"发送" forState:UIControlStateNormal];
-//    [self.sendButton sizeToFit];
-//    [self.sendButton addTarget:self action:@selector(handleSendButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.toolbarView addSubview:self.sendButton];
-//    //
-//    self.faceButton = [[QMUIButton alloc] init];
-//    self.faceButton.titleLabel.font = UIFontMake(16);
-//    self.faceButton.qmui_outsideEdge = UIEdgeInsetsMake(-12, -12, -12, -12);
-//    [self.faceButton setImage:[UIImage imageNamed:@"ToolViewEmotion_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-//    [self.faceButton setImage:[UIImage imageNamed:@"ToolViewEmotionHL_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
-//    [self.faceButton sizeToFit];
-//    [self.faceButton addTarget:self action:@selector(handleFaceButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.toolbarView addSubview:self.faceButton];
-//    //
-//    self.plusButton = [[QMUIButton alloc] init];
-//    self.plusButton.titleLabel.font = UIFontMake(16);
-//    self.plusButton.qmui_outsideEdge = UIEdgeInsetsMake(-12, -12, -12, -12);
-//    [self.plusButton setImage:[UIImage imageNamed:@"TypeSelectorBtn_Black_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-//    [self.plusButton setImage:[UIImage imageNamed:@"TypeSelectorBtnHL_Black_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
-//    [self.plusButton sizeToFit];
-//    [self.plusButton addTarget:self action:@selector(handlePlusButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.toolbarView addSubview:self.plusButton];
-    //
     //
     self.mGetMessageFromChannelPage = 0;
     
@@ -681,35 +604,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [super viewDidLayoutSubviews];
     //
     self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - kToolbarHeight);
-    //
-//    CGRect toolbarRect = CGRectFlatMake(0, CGRectGetHeight(self.view.bounds) - kToolbarHeight, CGRectGetWidth(self.view.bounds), kToolbarHeight);
-//    self.toolbarView.frame = CGRectApplyAffineTransform(toolbarRect, self.toolbarView.transform);
-//    self.kfInputView.frame = CGRectApplyAffineTransform(toolbarRect, self.kfInputView.transform);
-    
-//    CGFloat textFieldInset = 20;
-//    CGFloat textFieldHeight = kToolbarHeight - textFieldInset * 2;
-//    CGFloat emotionRight = 12;
-    
-//    // 切换: 录音、输入框
-//    self.switchVoiceButton.frame = CGRectSetXY(self.switchVoiceButton.frame, 12, CGFloatGetCenter(CGRectGetHeight(self.toolbarView.bounds), CGRectGetHeight(self.switchVoiceButton.bounds)));
-//
-//    // 输入框
-//    CGFloat textFieldWidth = CGRectGetWidth(self.view.bounds) - self.switchVoiceButton.frame.size.width * 4;
-//    self.toolbarTextField.frame = CGRectFlatMake(50, textFieldInset, textFieldWidth, textFieldHeight);
-//
-//    // 按住录音
-//    self.recordButton.frame = self.toolbarTextField.frame;
-//    [self.recordButton setHidden:TRUE];
-//
-//    // 发送文本按钮
-//    self.sendButton.frame = CGRectSetXY(self.sendButton.frame, CGRectGetWidth(self.toolbarView.bounds) - CGRectGetWidth(self.sendButton.bounds) * 3 - emotionRight, CGFloatGetCenter(CGRectGetHeight(self.toolbarView.bounds), CGRectGetHeight(self.sendButton.bounds)));
-//
-//    // 隐藏显示表情
-//    self.faceButton.frame = CGRectSetXY(self.faceButton.frame, CGRectGetWidth(self.toolbarView.bounds) - CGRectGetWidth(self.sendButton.bounds) * 2 - emotionRight, CGFloatGetCenter(CGRectGetHeight(self.toolbarView.bounds), CGRectGetHeight(self.faceButton.bounds)));
-//
-//    // 扩展框
-//    self.plusButton.frame = CGRectSetXY(self.plusButton.frame, CGRectGetWidth(self.toolbarView.bounds) - CGRectGetWidth(self.sendButton.bounds) - emotionRight, CGFloatGetCenter(CGRectGetHeight(self.toolbarView.bounds), CGRectGetHeight(self.plusButton.bounds)));
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -946,8 +840,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_TEXT]) {
             if ([messageModel isSend]) {
                 height = messageModel.contentSize.height + messageModel.contentViewInsets.top + messageModel.contentViewInsets.bottom + 30;
-            }
-            else {
+            } else {
                 height = messageModel.contentSize.height + messageModel.contentViewInsets.top + messageModel.contentViewInsets.bottom + 40;
             }
             //
@@ -955,13 +848,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                 height = 45;
             }
         } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_COMMODITY]) {
-            //
             height = 100;
         } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_IMAGE] ||
                    [messageModel.type isEqualToString:BD_MESSAGE_TYPE_RED_PACKET]) {
             height = 280;
-        }
-        else {
+        } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_VOICE]) {
+            height = 90;
+        } else {
             height = 80;
         }
     }
@@ -1386,7 +1279,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             NSString *voiceUrl = dict[@"data"];
             
             // 插入本地消息
-            BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertVoiceMessageLocal:self.mThreadTid withWorkGroupWid:self.mWorkGroupWid withContent:voiceUrl withLocalId:localId withSessionType:self.mThreadType];
+            BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertVoiceMessageLocal:self.mThreadTid withWorkGroupWid:self.mWorkGroupWid withContent:voiceUrl withLocalId:localId withSessionType:self.mThreadType withVoiceLength:voiceLength];
             DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.voice_url);
             
             // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
@@ -2195,8 +2088,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 //
 //#endif
     
-    if ([BDUtils canRecordVoice]) {
-        
+//    if ([BDUtils canRecordVoice]) {
+    
         //
         self.kfRecordVoiceViewHUD.microphoneImageView.hidden = FALSE;
         self.kfRecordVoiceViewHUD.signalWaveImageView.hidden = FALSE;
@@ -2205,7 +2098,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         self.kfRecordVoiceViewHUD.hintLabel.text = @"上滑取消";
         self.kfRecordVoiceViewHUD.hintLabel.backgroundColor = [UIColor clearColor];
         
-    }
+//    }
 
 }
 
@@ -2218,7 +2111,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 //
 //#endif
     
-    if ([BDUtils canRecordVoice]) {
+//    if ([BDUtils canRecordVoice]) {
         //
         self.kfRecordVoiceViewHUD.microphoneImageView.hidden = TRUE;
         self.kfRecordVoiceViewHUD.signalWaveImageView.hidden = TRUE;
@@ -2226,7 +2119,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         //
         self.kfRecordVoiceViewHUD.hintLabel.text = @"松手取消";
         self.kfRecordVoiceViewHUD.hintLabel.backgroundColor = [UIColor redColor];
-    }
+//    }
 
 }
 
