@@ -16,9 +16,10 @@
 //typedef void (^SuccessCallbackBlock)(NSDictionary *dict)
 //typedef void (^FailedCallbackBlock)(NSError *error)
 
-#define BD_MQTT_PORT                        1883
-#define BD_MQTT_AUTH_USERNAME               @"mqtt_ios"
-#define BD_MQTT_AUTH_PASSWORD               @"mqtt_ios"
+//#define BD_MQTT_PORT                        1883
+//#define BD_MQTT_AUTH_USERNAME               @"mqtt_ios"
+//#define BD_MQTT_AUTH_PASSWORD               @"mqtt_ios"
+
 // 默认json格式
 #define BD_MQTT_TOPIC_MESSAGE               @"message/mqtt"
 // 发送protobuf格式: TODO
@@ -37,13 +38,13 @@
 //#define CLIENT_OAUTH_TOKEN                  @"http://127.0.0.1:8000/oauth/token"
 
 // 上线发布域名
-#define BD_WEBRTC_STUN_SERVER               @"stun:47.99.38.99:3478"
-#define BD_IS_DEBUG                         false
-#define BD_MQTT_HOST                        @"mq.bytedesk.com"
-#define BD_HTTP_HOST_ADDRESS                @"https://api.bytedesk.com"
-#define HTTP_VISITOR_API_BASE_URL           @"https://api.bytedesk.com/visitor/api"
-#define HTTP_API_BASE_URL                   @"https://api.bytedesk.com/api"
-#define CLIENT_OAUTH_TOKEN                  @"https://api.bytedesk.com/oauth/token"
+//#define BD_WEBRTC_STUN_SERVER               @"stun:47.99.38.99:3478"
+//#define BD_IS_DEBUG                         false
+//#define BD_MQTT_HOST                        @"mq.bytedesk.com"
+//#define BD_HTTP_HOST_ADDRESS                @"https://api.bytedesk.com"
+//#define HTTP_VISITOR_API_BASE_URL           @"https://api.bytedesk.com/visitor/api"
+//#define HTTP_API_BASE_URL                   @"https://api.bytedesk.com/api"
+//#define CLIENT_OAUTH_TOKEN                  @"https://api.bytedesk.com/oauth/token"
 
 // 加载聊天记录
 #define BD_GET_MESSAGE_TYPE_WORKGROUP            @"workGroup"  // 加载工作组会话

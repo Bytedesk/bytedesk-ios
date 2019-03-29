@@ -10,6 +10,7 @@
 #import <SafariServices/SafariServices.h>
 
 #import "KFQRCodeViewController.h"
+#import "KFServerViewController.h"
 
 // 客服接口演示
 #import "KFChatViewController.h"
@@ -64,6 +65,7 @@
     
     // 公共接口
     self.commonApisArray = @[
+                             @"自定义服务器",
                              @"注册接口",
                              @"登录接口",
                              @"退出登录接口",
@@ -146,7 +148,7 @@
         
         [cell.textLabel setText:[NSString stringWithFormat:@"%ld. %@", (long)(indexPath.row+1), [self.commonApisArray objectAtIndex:indexPath.row]]];
         
-        if (indexPath.row == 1) {
+        if (indexPath.row == 2) {
             [cell.detailTextLabel setText:self.mLoginItemDetailText];
         } else {
             cell.detailTextLabel.text = @"";
@@ -179,19 +181,23 @@
     if (indexPath.section == 0) {
         // 公共接口
         if (indexPath.row == 0) {
+            // 自定义服务器
+            KFServerViewController *serverViewController = [[KFServerViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [self.navigationController pushViewController:serverViewController animated:YES];
+        } else if (indexPath.row == 1) {
             // 注册：自定义用户名
             [self showRegisterSheet];
-        } else if (indexPath.row == 1) {
+        } else if (indexPath.row == 2) {
             // 登录
             [self showLoginSheet];
-        } else if (indexPath.row == 2) {
+        } else if (indexPath.row == 3) {
             // 退出登录
             [self logout];
-        } else if (indexPath.row == 3) {
+        } else if (indexPath.row == 4) {
             // TODO: 二维码、扫一扫
             KFQRCodeViewController *qrcodeViewController = [[KFQRCodeViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [self.navigationController pushViewController:qrcodeViewController animated:YES];
-        } else if (indexPath.row == 4) {
+        } else if (indexPath.row == 5) {
             // TODO: 多账号管理
             
         }

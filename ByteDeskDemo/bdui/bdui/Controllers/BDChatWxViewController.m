@@ -153,9 +153,11 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.rateNote = @"";
     self.rateInvite = false;
     self.mLastMessageId = INT_MAX;
-    //
-    UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithButton:[[QMUINavigationButton alloc] initWithType:QMUINavigationButtonTypeNormal title:@"评价"] target:self action:@selector(handleRightBarButtonItemClicked:)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+    
+    // TDOO: 暂时隐藏
+//    UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithButton:[[QMUINavigationButton alloc] initWithType:QMUINavigationButtonTypeNormal title:@"评价"] target:self action:@selector(handleRightBarButtonItemClicked:)];
+//    self.navigationItem.rightBarButtonItem = rightItem;
+    
     //
     [BDCoreApis requestThreadWithWorkGroupWid:wId resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
@@ -589,7 +591,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     [self.tableView addGestureRecognizer:singleFingerTap];
     
-    //
     //输入框Toolbar
     //    self.kfInputView = [[self.kfInputView alloc] init];
     CGRect inputViewFrame = CGRectMake(0.0f, self.view.frame.size.height - INPUTBAR_HEIGHT, self.view.frame.size.width, INPUTBAR_HEIGHT);
@@ -613,23 +614,26 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    CGRect recordVoiceViewFrame = CGRectMake((self.view.frame.size.width - RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT)/2,
-                                             (self.view.frame.size.height - RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT)/2,
-                                             RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT,
-                                             RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT);
-    self.kfRecordVoiceViewHUD = [[KFRecordVoiceViewHUD alloc] initWithFrame:recordVoiceViewFrame];
-    [self.view addSubview:self.kfRecordVoiceViewHUD];
-    self.kfRecordVoiceViewHUD.hidden = TRUE;
-    //
-    CGRect emotionViewFrame = CGRectMake(0.0f, self.view.frame.size.height, self.view.frame.size.width, EMOTION_PLUS_VIEW_HEIGHT);
-    self.kfEmotionView = [[KFEmotionView alloc] initWithFrame:emotionViewFrame];
-    self.kfEmotionView.delegate = self;
-    [self.view addSubview:self.kfEmotionView];
-    //
-    CGRect plusViewFrame = emotionViewFrame;
-    self.kfPlusView = [[KFPlusView alloc] initWithFrame:plusViewFrame];
-    self.kfPlusView.delegate = self;
-    [self.view addSubview:self.kfPlusView];
+    // FIXME: 加载大量图片容易引起界面卡顿，待优化
+//    dispatch_async(dispatch_get_main_queue(), ^{
+        CGRect recordVoiceViewFrame = CGRectMake((self.view.frame.size.width - RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT)/2,
+                                                 (self.view.frame.size.height - RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT)/2,
+                                                 RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT,
+                                                 RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT);
+        self.kfRecordVoiceViewHUD = [[KFRecordVoiceViewHUD alloc] initWithFrame:recordVoiceViewFrame];
+        [self.view addSubview:self.kfRecordVoiceViewHUD];
+        self.kfRecordVoiceViewHUD.hidden = TRUE;
+        //
+        CGRect emotionViewFrame = CGRectMake(0.0f, self.view.frame.size.height, self.view.frame.size.width, EMOTION_PLUS_VIEW_HEIGHT);
+        self.kfEmotionView = [[KFEmotionView alloc] initWithFrame:emotionViewFrame];
+        self.kfEmotionView.delegate = self;
+        [self.view addSubview:self.kfEmotionView];
+        //
+        CGRect plusViewFrame = emotionViewFrame;
+        self.kfPlusView = [[KFPlusView alloc] initWithFrame:plusViewFrame];
+        self.kfPlusView.delegate = self;
+        [self.view addSubview:self.kfPlusView];
+//    });
 }
 
 
@@ -773,8 +777,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     BDMessageModel *messageModel = [self.mMessageArray objectAtIndex:indexPath.row];
     if ([messageModel isNotification]) {
         
-        DDLogInfo(@"通知 type: %@, content: %@", messageModel.type, messageModel.content);
-        
+//        DDLogInfo(@"通知 type: %@, content: %@", messageModel.type, messageModel.content);
         //
         BDMsgNotificationViewCell *cell = [tableView dequeueReusableCellWithIdentifier:notifyIdentifier];
         if (!cell) {
@@ -791,7 +794,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         return cell;
     } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_COMMODITY]) {
         
-        DDLogInfo(@"商品 type: %@, content: %@", messageModel.type, messageModel.content);
+//        DDLogInfo(@"商品 type: %@, content: %@", messageModel.type, messageModel.content);
         //
         BDCommodityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:notifyIdentifier];
         if (!cell) {
@@ -2523,6 +2526,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         
         // TODO: 发送消息已读回执
         
+        // TODO: 判断是否阅后即焚消息，如果是，则倒计时销毁
         
     }
     

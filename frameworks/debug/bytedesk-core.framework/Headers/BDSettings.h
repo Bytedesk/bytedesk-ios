@@ -126,27 +126,27 @@
 
 
 
-#pragma mark - 服务器配置
-
-+ (NSString *) getOAuthHostAddress;
-
-+ (void) setOAuthHostAddress:(NSString *)address;
-
-+ (NSString *) getMessageHostAddress;
-
-+ (void) setMessageHostAddress:(NSString *)address;
-
-+ (NSUInteger) getMessageHostPort;
-
-+ (void) setMessageHostPort:(NSUInteger)port;
-
-+ (NSString *) getMessageHostUsername;
-
-+ (void) setMessageHostUsername:(NSString *)username;
-
-+ (NSString *) getMessageHostPassword;
-
-+ (void) setMessageHostPassword:(NSString *)password;
+//#pragma mark - 服务器配置
+//
+//+ (NSString *) getOAuthHostAddress;
+//
+//+ (void) setOAuthHostAddress:(NSString *)address;
+//
+//+ (NSString *) getMessageHostAddress;
+//
+//+ (void) setMessageHostAddress:(NSString *)address;
+//
+//+ (NSUInteger) getMessageHostPort;
+//
+//+ (void) setMessageHostPort:(NSUInteger)port;
+//
+//+ (NSString *) getMessageHostUsername;
+//
+//+ (void) setMessageHostUsername:(NSString *)username;
+//
+//+ (NSString *) getMessageHostPassword;
+//
+//+ (void) setMessageHostPassword:(NSString *)password;
 
 @end
 

@@ -16,6 +16,7 @@ FOUNDATION_EXPORT const unsigned char bdcoreVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <bdcore/PublicHeader.h>
 
+#import <bytedesk-core/BDConfig.h>
 #import <bytedesk-core/BDCoreApis.h>
 #import <bytedesk-core/BDMQTTApis.h>
 #import <bytedesk-core/BDDBApis.h>

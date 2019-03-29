@@ -749,8 +749,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     BDMessageModel *messageModel = [self.mMessageArray objectAtIndex:indexPath.row];
     if ([messageModel isNotification]) {
         
-        DDLogInfo(@"通知 type: %@, content: %@", messageModel.type, messageModel.content);
-        
+//        DDLogInfo(@"通知 type: %@, content: %@", messageModel.type, messageModel.content);
         //
         BDMsgNotificationViewCell *cell = [tableView dequeueReusableCellWithIdentifier:notifyIdentifier];
         if (!cell) {
@@ -768,8 +767,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         
     } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_COMMODITY]) {
         
-        DDLogInfo(@"商品 type: %@, content: %@", messageModel.type, messageModel.content);
-
+//        DDLogInfo(@"商品 type: %@, content: %@", messageModel.type, messageModel.content);
         //
         BDCommodityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:notifyIdentifier];
         if (!cell) {

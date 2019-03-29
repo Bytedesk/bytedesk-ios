@@ -14,12 +14,12 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - bytedesk-core (1.5.4):
+  - bytedesk-core (1.5.5):
     - AFNetworking
     - CocoaLumberjack
     - FMDB
     - MQTTClient
-  - bytedesk-ui (1.5.4):
+  - bytedesk-ui (1.5.5):
     - AFNetworking
     - bytedesk-core
     - CocoaLumberjack
@@ -342,8 +342,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  bytedesk-core: 1b59b4341497c9163209d39df57ae3e2dae05235
-  bytedesk-ui: 807b77f32b258066e5e740e90207ffd55a5ed86a
+  bytedesk-core: ea6f030ff9052de80cf85d30e6e02a47bb202f61
+  bytedesk-ui: 26655415e5106c6f87364ff51540e40e48f95161
   CocoaLumberjack: 118bf4a820efc641f79fa487b75ed928dccfae23
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
@@ -355,4 +355,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 64e990d3a0d8552096d2c1a8a82bd5bfead9da6f
 
-COCOAPODS: 1.5.4
+COCOAPODS: 1.5.3

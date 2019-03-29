@@ -50,6 +50,7 @@
         //self.backgroundColor = [UIColor redColor];
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
 
+        // FIXME: 加载大量图片容易引起界面卡顿，待优化
         //横向旋转之后，表情分布需重新调整
         for (int page = 0; page < 5; page++) {
             

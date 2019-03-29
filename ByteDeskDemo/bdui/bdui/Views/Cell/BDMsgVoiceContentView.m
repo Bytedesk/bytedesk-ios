@@ -260,16 +260,15 @@
     
 }
 
--(NSTimer *)voicePlayerTimer
-{
+-(NSTimer *)voicePlayerTimer {
+    
+    // FIXME: 关闭聊天页面的时候，停止播放语音
     if (!voicePlayerTimer) {
-        
         voicePlayerTimer = [NSTimer scheduledTimerWithTimeInterval:0.5f
                                                             target:self
                                                           selector:@selector(updateVoicePlayingWavIcon)
                                                           userInfo:nil
                                                            repeats:YES];
-        
     }
     
     return voicePlayerTimer;

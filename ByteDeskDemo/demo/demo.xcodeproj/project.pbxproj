@@ -30,6 +30,7 @@
 		3D39293621C28310001E1257 /* KFContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D39293421C28310001E1257 /* KFContactTableViewCell.m */; };
 		3D39293A21C2831A001E1257 /* KFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D39293821C2831A001E1257 /* KFUtils.m */; };
 		3D39294121C28595001E1257 /* KFProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D39294021C28595001E1257 /* KFProfileViewController.m */; };
+		3D3958A2224CC2E2000E88EE /* KFServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3958A1224CC2E2000E88EE /* KFServerViewController.m */; };
 		3D3B7C3021CA3613001FE199 /* BDApisTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3B7C2F21CA3613001FE199 /* BDApisTableViewController.m */; };
 		3D47629921D1CA190034BF83 /* KFNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D47629821D1CA190034BF83 /* KFNoticeViewController.m */; };
 		3D4C0B0E213131500083C8F9 /* KFIMApiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4C0B0C2131314F0083C8F9 /* KFIMApiViewController.m */; };
@@ -124,6 +125,8 @@
 		3D39293921C2831A001E1257 /* KFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFUtils.h; sourceTree = "<group>"; };
 		3D39293F21C28595001E1257 /* KFProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFProfileViewController.h; sourceTree = "<group>"; };
 		3D39294021C28595001E1257 /* KFProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFProfileViewController.m; sourceTree = "<group>"; };
+		3D3958A0224CC2E2000E88EE /* KFServerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFServerViewController.h; sourceTree = "<group>"; };
+		3D3958A1224CC2E2000E88EE /* KFServerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFServerViewController.m; sourceTree = "<group>"; };
 		3D3B7C2E21CA3613001FE199 /* BDApisTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDApisTableViewController.h; sourceTree = "<group>"; };
 		3D3B7C2F21CA3613001FE199 /* BDApisTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDApisTableViewController.m; sourceTree = "<group>"; };
 		3D47629721D1CA190034BF83 /* KFNoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFNoticeViewController.h; sourceTree = "<group>"; };
@@ -445,6 +448,8 @@
 				3D548A4A1FC52374003117B4 /* KFIntroViewController.m */,
 				3DE6FD852235007B006F1329 /* KFQRCodeViewController.h */,
 				3DE6FD862235007B006F1329 /* KFQRCodeViewController.m */,
+				3D3958A0224CC2E2000E88EE /* KFServerViewController.h */,
+				3D3958A1224CC2E2000E88EE /* KFServerViewController.m */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -701,6 +706,7 @@
 				3DCA9C6D21F60FE800E63998 /* KFHelpCenterViewController.m in Sources */,
 				3DCA9C7021F6109600E63998 /* KFTicketViewController.m in Sources */,
 				3D39294121C28595001E1257 /* KFProfileViewController.m in Sources */,
+				3D3958A2224CC2E2000E88EE /* KFServerViewController.m in Sources */,
 				3D5489D21FC515CF003117B4 /* AppDelegate.m in Sources */,
 				3D39291E21C28116001E1257 /* QDNavigationController.m in Sources */,
 				3D3928EB21C25E9E001E1257 /* KFQueueViewController.m in Sources */,

@@ -556,6 +556,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  */
 + (void)transferGroup:(NSString *)uid
          withGroupGid:(NSString *)gid
+      withNeedApprove:(BOOL)needApprove
         resultSuccess:(SuccessCallbackBlock)success
          resultFailed:(FailedCallbackBlock)failed;
 
@@ -984,6 +985,15 @@ typedef void (^FailedCallbackBlock)(NSError *error);
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
++ (void)sendTextMessage:(NSString *)content
+                  toTid:(NSString *)tId
+                localId:(NSString *)localId
+            sessionType:(NSString *)sessiontype
+    destroyAfterReading:(BOOL)destroyAfterReading
+     destroyAfterLength:(int)destroyAfterLength
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
 /**
  同步发送图片消息
  
@@ -997,6 +1007,41 @@ typedef void (^FailedCallbackBlock)(NSError *error);
              sessionType:(NSString *)sessiontype
            resultSuccess:(SuccessCallbackBlock)success
             resultFailed:(FailedCallbackBlock)failed;
+
++ (void)sendImageMessage:(NSString *)content
+                   toTid:(NSString *)tId
+                 localId:(NSString *)localId
+             sessionType:(NSString *)sessiontype
+     destroyAfterReading:(BOOL)destroyAfterReading
+      destroyAfterLength:(int)destroyAfterLength
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 发送文件消息
+
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param localId <#localId description#>
+ @param sessiontype <#sessiontype description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)sendFileMessage:(NSString *)content
+                  toTid:(NSString *)tId
+                localId:(NSString *)localId
+            sessionType:(NSString *)sessiontype
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
++ (void)sendFileMessage:(NSString *)content
+                  toTid:(NSString *)tId
+                localId:(NSString *)localId
+            sessionType:(NSString *)sessiontype
+    destroyAfterReading:(BOOL)destroyAfterReading
+     destroyAfterLength:(int)destroyAfterLength
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
 
 /**
  同步发送语音消息
@@ -1013,7 +1058,27 @@ typedef void (^FailedCallbackBlock)(NSError *error);
            resultSuccess:(SuccessCallbackBlock)success
             resultFailed:(FailedCallbackBlock)failed;
 
++ (void)sendVoiceMessage:(NSString *)content
+                   toTid:(NSString *)tId
+                 localId:(NSString *)localId
+             sessionType:(NSString *)sessiontype
+             voiceLength:(int)voiceLength
+     destroyAfterReading:(BOOL)destroyAfterReading
+      destroyAfterLength:(int)destroyAfterLength
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
 
+
+/**
+ 发送商品消息
+
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param localId <#localId description#>
+ @param sessiontype <#sessiontype description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)sendCommodityMessage:(NSString *)content
                        toTid:(NSString *)tId
                      localId:(NSString *)localId
@@ -1021,11 +1086,39 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                resultSuccess:(SuccessCallbackBlock)success
                 resultFailed:(FailedCallbackBlock)failed;
 
++ (void)sendCommodityMessage:(NSString *)content
+                       toTid:(NSString *)tId
+                     localId:(NSString *)localId
+                 sessionType:(NSString *)sessiontype
+         destroyAfterReading:(BOOL)destroyAfterReading
+          destroyAfterLength:(int)destroyAfterLength
+               resultSuccess:(SuccessCallbackBlock)success
+                resultFailed:(FailedCallbackBlock)failed;
+
+
+/**
+ 发送红包消息
+
+ @param content <#content description#>
+ @param tId <#tId description#>
+ @param localId <#localId description#>
+ @param sessiontype <#sessiontype description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)sendRedPacketMessage:(NSString *)content
+                       toTid:(NSString *)tId
+                     localId:(NSString *)localId
+                 sessionType:(NSString *)sessiontype
+               resultSuccess:(SuccessCallbackBlock)success
+                resultFailed:(FailedCallbackBlock)failed;
 
 + (void)sendRedPacketMessage:(NSString *)content
                        toTid:(NSString *)tId
                      localId:(NSString *)localId
                  sessionType:(NSString *)sessiontype
+         destroyAfterReading:(BOOL)destroyAfterReading
+          destroyAfterLength:(int)destroyAfterLength
                resultSuccess:(SuccessCallbackBlock)success
                 resultFailed:(FailedCallbackBlock)failed;
 
@@ -1043,6 +1136,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
             localId:(NSString *)localId
         sessionType:(NSString *)sessiontype
         voiceLength:(int)voiceLength
+destroyAfterReading:(BOOL)destroyAfterReading
+ destroyAfterLength:(int)destroyAfterLength
       resultSuccess:(SuccessCallbackBlock)success
        resultFailed:(FailedCallbackBlock)failed;
 

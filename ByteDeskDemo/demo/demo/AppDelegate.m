@@ -48,7 +48,7 @@
     // 界面
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     //
-    BDApisTableViewController *apisTableViewController = [[BDApisTableViewController alloc] init];
+    BDApisTableViewController *apisTableViewController = [[BDApisTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     KFNavigationController *aipNavigationController = [[KFNavigationController alloc] initWithRootViewController:apisTableViewController];
     self.window.rootViewController = aipNavigationController;
     [self.window makeKeyAndVisible];

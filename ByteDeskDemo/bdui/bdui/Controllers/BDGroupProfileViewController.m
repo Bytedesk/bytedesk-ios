@@ -474,7 +474,7 @@
         if (itemIndex == 0) {
             DDLogInfo(@"转交群");
             
-            [BDCoreApis transferGroup:contactModel.uid withGroupGid:self.mGid resultSuccess:^(NSDictionary *dict) {
+            [BDCoreApis transferGroup:contactModel.uid withGroupGid:self.mGid withNeedApprove:FALSE resultSuccess:^(NSDictionary *dict) {
                 
                 NSNumber *status_code = [dict objectForKey:@"status_code"];
                 if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
