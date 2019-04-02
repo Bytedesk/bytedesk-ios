@@ -298,6 +298,12 @@
 		3D31509A1F1A1D530005DB6C /* bdui.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D31508C1F1A1D530005DB6C /* bdui.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D3150F11F1A2A410005DB6C /* BDUIApis.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D3150EF1F1A2A410005DB6C /* BDUIApis.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D3150F21F1A2A410005DB6C /* BDUIApis.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3150F01F1A2A410005DB6C /* BDUIApis.m */; };
+		3D38CC3622517D9100BA2668 /* WBiCloudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D38CC3222517D9100BA2668 /* WBiCloudManager.m */; };
+		3D38CC3722517D9100BA2668 /* WBDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D38CC3322517D9100BA2668 /* WBDocument.m */; };
+		3D38CC3822517D9100BA2668 /* WBiCloudManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D38CC3422517D9100BA2668 /* WBiCloudManager.h */; };
+		3D38CC3922517D9100BA2668 /* WBDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D38CC3522517D9100BA2668 /* WBDocument.h */; };
+		3D38CC3C2251954D00BA2668 /* BDMsgFileContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D38CC3A2251954D00BA2668 /* BDMsgFileContentView.h */; };
+		3D38CC3D2251954D00BA2668 /* BDMsgFileContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D38CC3B2251954D00BA2668 /* BDMsgFileContentView.m */; };
 		3D3928D921BF9BEE001E1257 /* icon_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D3928D821BF9BEE001E1257 /* icon_about.png */; };
 		3D3928DB21BF9D9B001E1257 /* icon_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D3928DA21BF9D9B001E1257 /* icon_more.png */; };
 		3D3928DE21BF9ED7001E1257 /* BDGroupProfileViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D3928DC21BF9ED7001E1257 /* BDGroupProfileViewController.h */; };
@@ -669,6 +675,12 @@
 		3D3150991F1A1D530005DB6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D3150EF1F1A2A410005DB6C /* BDUIApis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BDUIApis.h; path = apis/BDUIApis.h; sourceTree = "<group>"; };
 		3D3150F01F1A2A410005DB6C /* BDUIApis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BDUIApis.m; path = apis/BDUIApis.m; sourceTree = "<group>"; };
+		3D38CC3222517D9100BA2668 /* WBiCloudManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBiCloudManager.m; sourceTree = "<group>"; };
+		3D38CC3322517D9100BA2668 /* WBDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBDocument.m; sourceTree = "<group>"; };
+		3D38CC3422517D9100BA2668 /* WBiCloudManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBiCloudManager.h; sourceTree = "<group>"; };
+		3D38CC3522517D9100BA2668 /* WBDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBDocument.h; sourceTree = "<group>"; };
+		3D38CC3A2251954D00BA2668 /* BDMsgFileContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMsgFileContentView.h; sourceTree = "<group>"; };
+		3D38CC3B2251954D00BA2668 /* BDMsgFileContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMsgFileContentView.m; sourceTree = "<group>"; };
 		3D3928D821BF9BEE001E1257 /* icon_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_about.png; sourceTree = "<group>"; };
 		3D3928DA21BF9D9B001E1257 /* icon_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_more.png; sourceTree = "<group>"; };
 		3D3928DC21BF9ED7001E1257 /* BDGroupProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDGroupProfileViewController.h; sourceTree = "<group>"; };
@@ -811,6 +823,8 @@
 				3D1996D01FCE638700219FEF /* BDMsgImageContentView.m */,
 				3D1996CC1FCE638700219FEF /* BDMsgVoiceContentView.h */,
 				3D1996C71FCE638700219FEF /* BDMsgVoiceContentView.m */,
+				3D38CC3A2251954D00BA2668 /* BDMsgFileContentView.h */,
+				3D38CC3B2251954D00BA2668 /* BDMsgFileContentView.m */,
 				3DC58F7221BE6B9D008BE85D /* BDMsgListContentView.h */,
 				3DC58F7321BE6B9D008BE85D /* BDMsgListContentView.m */,
 				3D1A9774221D3CD300DBEC28 /* BDMsgQuestionnairViewCell.h */,
@@ -1182,6 +1196,17 @@
 			name = apis;
 			sourceTree = "<group>";
 		};
+		3D38CC3122517D9100BA2668 /* document */ = {
+			isa = PBXGroup;
+			children = (
+				3D38CC3222517D9100BA2668 /* WBiCloudManager.m */,
+				3D38CC3322517D9100BA2668 /* WBDocument.m */,
+				3D38CC3422517D9100BA2668 /* WBiCloudManager.h */,
+				3D38CC3522517D9100BA2668 /* WBDocument.h */,
+			);
+			path = document;
+			sourceTree = "<group>";
+		};
 		3D3928D721BF9BEE001E1257 /* other */ = {
 			isa = PBXGroup;
 			children = (
@@ -1196,6 +1221,7 @@
 		3D3A7E3E22462152007EEC81 /* vendors */ = {
 			isa = PBXGroup;
 			children = (
+				3D38CC3122517D9100BA2668 /* document */,
 				3D3A7E4722462152007EEC81 /* BDNamespacedDependencies.h */,
 				3D3A7E3F22462152007EEC81 /* VoiceConvert */,
 				3D3A7E4822462152007EEC81 /* MLAudioRecorder */,
@@ -1392,6 +1418,7 @@
 				3D57D7111FD00E3F0072823F /* BDFeedbackViewController.h in Headers */,
 				3D3A7E6322462152007EEC81 /* wav.h in Headers */,
 				3DD5C6A82238F0B1002C4693 /* KFStarView.h in Headers */,
+				3D38CC3822517D9100BA2668 /* WBiCloudManager.h in Headers */,
 				3D3A7E6522462152007EEC81 /* BD_AmrRecordWriter.h in Headers */,
 				3D31509A1F1A1D530005DB6C /* bdui.h in Headers */,
 				3D3A7E6722462152007EEC81 /* BD_CafRecordWriter.h in Headers */,
@@ -1413,6 +1440,7 @@
 				3D1998FB1FCE833900219FEF /* KFDSBadgeView.h in Headers */,
 				3D3A7E6D22462152007EEC81 /* interf_dec.h in Headers */,
 				3D1996FE1FCE638800219FEF /* KFDSInputEmotionManager.h in Headers */,
+				3D38CC3C2251954D00BA2668 /* BDMsgFileContentView.h in Headers */,
 				3D1996E51FCE638800219FEF /* BDMsgNotificationViewCell.h in Headers */,
 				3D3928E521C07B81001E1257 /* BDContactSelectViewController.h in Headers */,
 				3D1998FA1FCE833900219FEF /* KFDSLoadProgressView.h in Headers */,
@@ -1431,6 +1459,7 @@
 				3DD5C6AD2238F0B1002C4693 /* KFRecordVoiceViewHUD.h in Headers */,
 				3D3928DE21BF9ED7001E1257 /* BDGroupProfileViewController.h in Headers */,
 				3D1996E71FCE638800219FEF /* BDMsgViewCell.h in Headers */,
+				3D38CC3922517D9100BA2668 /* WBDocument.h in Headers */,
 				3D1996E91FCE638800219FEF /* BDMsgImageContentView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1900,6 +1929,7 @@
 				3D1A9777221D3CD300DBEC28 /* BDMsgQuestionnairViewCell.m in Sources */,
 				3D1996EE1FCE638800219FEF /* BDMsgViewCell.m in Sources */,
 				3D1996EA1FCE638800219FEF /* BDMsgBaseContentView.m in Sources */,
+				3D38CC3D2251954D00BA2668 /* BDMsgFileContentView.m in Sources */,
 				3D1996EF1FCE638800219FEF /* BDMsgImageContentView.m in Sources */,
 				3DD5C6AA2238F0B1002C4693 /* KFInputView.m in Sources */,
 				3DD5C6AC2238F0B1002C4693 /* KFRateView.m in Sources */,
@@ -1916,6 +1946,7 @@
 				3D3928E621C07B81001E1257 /* BDContactSelectViewController.m in Sources */,
 				3DC58F7521BE6B9D008BE85D /* BDMsgListContentView.m in Sources */,
 				3DD5C6B72238FBA9002C4693 /* BDChatWxViewController.m in Sources */,
+				3D38CC3722517D9100BA2668 /* WBDocument.m in Sources */,
 				3DD5C6AE2238F0B1002C4693 /* KFRecordVoiceViewHUD.m in Sources */,
 				3D3A7E6122462152007EEC81 /* amrFileCodec.mm in Sources */,
 				3D8A626121DE598600935617 /* BDGroupMemberTableViewCell.m in Sources */,
@@ -1928,6 +1959,7 @@
 				3D1996C01FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.m in Sources */,
 				3D1998F81FCE833900219FEF /* KFDSLoadProgressView.m in Sources */,
 				3D1996EC1FCE638800219FEF /* BDMsgNotificationViewCell.m in Sources */,
+				3D38CC3622517D9100BA2668 /* WBiCloudManager.m in Sources */,
 				3DD5C6A62238F0B1002C4693 /* KFPlusView.m in Sources */,
 				3D1996F71FCE638800219FEF /* KFDSInputEmotionManager.m in Sources */,
 				3D4C5C9B2201E8510056BC63 /* BDFeedbackCategoryViewController.m in Sources */,

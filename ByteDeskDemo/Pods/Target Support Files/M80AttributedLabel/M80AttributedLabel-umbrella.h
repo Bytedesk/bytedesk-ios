@@ -12,9 +12,9 @@
 
 #import "M80AttributedLabel.h"
 #import "M80AttributedLabelAttachment.h"
-#import "M80AttributedLabelConfig.h"
 #import "M80AttributedLabelDefines.h"
 #import "M80AttributedLabelURL.h"
+#import "M80AttributedLabelURLDetector.h"
 #import "NSMutableAttributedString+M80.h"
 
 FOUNDATION_EXPORT double M80AttributedLabelVersionNumber;

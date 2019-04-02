@@ -68,7 +68,7 @@
     
     UIEdgeInsets contentInsets = self.model.contentViewInsets;
     
-    CGSize size = CGSizeMake(200, 200);
+    CGSize size = CGSizeMake(150, 200);
     self.model.contentSize = size;
     
     CGRect imageFrame = CGRectZero;

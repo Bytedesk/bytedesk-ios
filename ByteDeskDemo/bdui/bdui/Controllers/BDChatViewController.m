@@ -85,6 +85,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 @property (nonatomic, strong) UIImagePickerController *mImagePickerController;
 @property(nonatomic, assign) BOOL forceEnableBackGesture;
 
+@property (nonatomic, assign) BOOL mIsViewControllerClosed;
+
 @end
 
 @implementation BDChatViewController
@@ -115,8 +117,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.rateInvite = false;
     self.mLastMessageId = INT_MAX;
     //
-    UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithButton:[[QMUINavigationButton alloc] initWithType:QMUINavigationButtonTypeNormal title:@"评价"] target:self action:@selector(handleRightBarButtonItemClicked:)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+//    UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithButton:[[QMUINavigationButton alloc] initWithType:QMUINavigationButtonTypeNormal title:@"评价"] target:self action:@selector(handleRightBarButtonItemClicked:)];
+//    self.navigationItem.rightBarButtonItem = rightItem;
     //
     [BDCoreApis requestThreadWithWorkGroupWid:wId resultSuccess:^(NSDictionary *dict) {
 //        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
@@ -190,6 +192,10 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
  * -2：请求会话失败-wId不存在
  */
 - (void)dealWithRequestThreadResult:(NSDictionary *)dict {
+    // 如果点击了左上角返回或关闭按钮之后，网络请求才返回m，则不需要继续处理此返回结果
+    if (self.mIsViewControllerClosed) {
+        return;
+    }
     //
     NSString *message = [dict objectForKey:@"message"];
     NSNumber *status_code = [dict objectForKey:@"status_code"];
@@ -379,6 +385,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
     [BDCoreApis requestQuestionnairWithTid:self.mThreadTid itemQid:itemQid resultSuccess:^(NSDictionary *dict) {
 //        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
+        if (self.mIsViewControllerClosed) {
+            return;
+        }
         
         NSNumber *status_code = [dict objectForKey:@"status_code"];
         if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
@@ -421,7 +430,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         }
         
     } resultFailed:^(NSError *error) {
-        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, error);
+        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
     }];
 }
 
@@ -435,7 +444,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         [self dealWithRequestThreadResult:dict];
         
     } resultFailed:^(NSError *error) {
-        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, error);
+        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
     }];
 }
 
@@ -464,8 +473,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         self.mUid = self.mThreadModel.group_gid;
     }
     // 右上角按钮
-    UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithImage:[UIImage imageNamed:@"icon_more" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] target:self action:@selector(handleRightBarButtonItemClicked:)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+//    UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithImage:[UIImage imageNamed:@"icon_more" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] target:self action:@selector(handleRightBarButtonItemClicked:)];
+//    self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 - (void) initWithThreadModel:(BDThreadModel *)threadModel withPush:(BOOL)isPush withCustom:(NSDictionary *)custom {
@@ -664,6 +673,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 // 针对Present打开模式，左上角返回按钮处理action
 - (void)handleCloseButtonEvent:(id)sender {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    self.mIsViewControllerClosed = YES;
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
     }];
 }
@@ -671,8 +681,25 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 // 针对Push打开模式，左上角返回按钮处理action
 - (void)handleBackButtonEvent:(id)sender {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    self.mIsViewControllerClosed = YES;
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+//#pragma mark - <QMUINavigationControllerDelegate>
+//
+//- (void)navigationController:(QMUINavigationController *)navigationController poppingByInteractiveGestureRecognizer:(UIScreenEdgePanGestureRecognizer *)gestureRecognizer viewControllerWillDisappear:(UIViewController *)viewControllerWillDisappear viewControllerWillAppear:(UIViewController *)viewControllerWillAppear {
+//    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+//
+//    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+//        if (viewControllerWillDisappear == self) {
+//            self.mIsViewControllerClosed = YES;
+//            [QMUITips showSucceed:@"松手了，界面发生切换"];
+//        } else if (viewControllerWillAppear == self) {
+//            [QMUITips showInfo:@"松手了，没有触发界面切换"];
+//        }
+//        return;
+//    }
+//}
 
 - (BOOL)forceEnableInteractivePopGestureRecognizer {
     return self.forceEnableBackGesture;
@@ -875,9 +902,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     // 刷新tableView
     [self.tableView reloadData];
     [self tableViewScrollToBottom:NO];
-    
-    
-    
 }
 
 - (void)updateCurrentThread {
@@ -897,6 +921,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (BOOL)canPopViewController {
     // 这里不要做一些费时的操作，否则可能会卡顿。
+    self.mIsViewControllerClosed = YES;
+    [BDCoreApis cancelAllHttpRequest];
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
 //    [self unregisterNotifications];
     // 保存草稿
@@ -1325,7 +1351,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                                         //
                                         [BDCoreApis markDeletedMessage:itemToDelete.mid resultSuccess:^(NSDictionary *dict) {
                                             //
-                                            [[BDDBApis sharedInstance] deleteMessage:itemToDelete.mid];
                                             [self.mMessageArray removeObjectAtIndex:indexPath.row];
                                             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
                                             

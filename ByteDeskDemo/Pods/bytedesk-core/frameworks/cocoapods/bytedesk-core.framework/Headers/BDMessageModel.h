@@ -43,6 +43,10 @@
 @property(nonatomic, strong) NSString *local_image_path;
 // 文件消息类型：文件url, 文件类型通过format标示
 @property(nonatomic, strong) NSString *file_url;
+// 文件名
+@property(nonatomic, strong) NSString *file_name;
+// 文件大小
+@property(nonatomic, strong) NSString *file_size;
 // 发送文件本地路径，仅用于本地存储，首先判断是否为空，非空则可使用
 @property(nonatomic, strong) NSString *local_file_path;
 // 语音消息

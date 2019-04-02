@@ -10,6 +10,7 @@
 		000E9CD8D2D1CC3F83C25FA079A8E2DA /* QMUITableViewProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = FB415A2C4BEA3279BFCA404C59979FC4 /* QMUITableViewProtocols.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		003EAA3A44095B8B86FC129B8A9356E5 /* UICollectionView+QMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = A3B21F447C250E3356D094624DB2F12C /* UICollectionView+QMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		008B7662E26E8F880BBF09C75C80E5BF /* UIFont+QMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6094B3230B420845DBDCD0B08843BBF1 /* UIFont+QMUI.m */; };
+		00D93110FAE47C2DF36B59502D043587 /* M80AttributedLabelAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E9B7BC2225B68E4D35C8130C6FB75D1 /* M80AttributedLabelAttachment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		00E2C1092D2255BB25E45DF004D3E7E5 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EE519D61BA835AAD4A0A050F99FB1 /* UIWebView+AFNetworking.m */; };
 		00ED59EE2784CE922358E57E241A6C75 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 5067D5B4B82459D7224E6F2A159771A7 /* UIRefreshControl+AFNetworking.m */; };
 		011CA653504AFCEC41D84821C852DD89 /* MQTTLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 623C72FB0EBF694B10E1BA90656FAC68 /* MQTTLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -59,11 +60,14 @@
 		17E44377C2FA90BA646C6801246E7C77 /* QMUICellHeightCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 85DA28148CB003E852812A28FAE25C5D /* QMUICellHeightCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1938325AE96DBF09422A7EFB86823FC9 /* QMUITextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 57541F6172C6AF31ADD08F54F27D4103 /* QMUITextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		19448545ECDCED4A1476E02654BDF728 /* MQTTCFSocketTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A01FED5F68FF1A779D754EB9382D9D /* MQTTCFSocketTransport.m */; };
+		1B17DBD76D2D91F964F16E47B2E9B7D5 /* M80AttributedLabel-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 122FF22CCD13921DE5C636FC8C07E7D5 /* M80AttributedLabel-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E29E018DF37FD76D28FA9F95B0823F9 /* QMUITabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7950D7691ECBB38E938FCFEA4F2843 /* QMUITabBarViewController.m */; };
 		1E60D827627DB26AEC087782C91C9346 /* QMUIGhostButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F27F255C158B98FFA9B259607F53139 /* QMUIGhostButton.m */; };
 		1E9A40FFA36BF79868C6DF13FC6098E0 /* QMUILinkButton.h in Headers */ = {isa = PBXBuildFile; fileRef = EFE8F0EEAF1EC28EEF15947D2E9EF214 /* QMUILinkButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FE5DE4B5C965D35C2EB33F300194BA2 /* M80AttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AF80A5B8D601037AA02B689B7674D93F /* M80AttributedLabel.m */; };
 		215B5D3243D9F304754A742CF72E9F0E /* TZImageCropManager.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2474E1CD34D195321CAA8F2AE23C06 /* TZImageCropManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22F3E5E2651533FF39CAB695F471EA8B /* DDFileLogger+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 71522EE0378CF7CE9DF0903062602171 /* DDFileLogger+Internal.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		232E25420E137B292744B6976053C17D /* M80AttributedLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8250BFD1469FCB9CB2273AF026C5503F /* M80AttributedLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		233EAE1CF6BFB689E2BBF53C89CAF114 /* TZImagePickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6296832565EAE60D310D5709028DDF29 /* TZImagePickerController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		239D8DAF4A0F5E826A1E222C7B6DC66B /* MQTTSessionLegacy.m in Sources */ = {isa = PBXBuildFile; fileRef = E977020EA96FFEF5970044BA1199ADC5 /* MQTTSessionLegacy.m */; };
 		23A15EB59FBC43C34D07DAAC13D4B07D /* QMUIAlertController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E928C139DD1448EC8F7243D14BAE147 /* QMUIAlertController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -78,13 +82,13 @@
 		26299AA9D214CE7CF7AA3A183D79A452 /* QMUIFloatLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FF1C69A58F38BEBA91D6671E1E9B4D /* QMUIFloatLayoutView.m */; };
 		26462AF45D8B16DEA810AC2D8C7F3189 /* CALayer+QMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF745A85FCFB9253D6DCF33F00623C8 /* CALayer+QMUI.m */; };
 		2698E26F72DA381A958FAC0FE1F3874C /* QMUINavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C262564B066E082091E1AA7C54AC8894 /* QMUINavigationController.m */; };
-		2707065C9703AD7DE4295DBB2BC6D700 /* M80AttributedLabel-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E8871FF0CAADA6E6E305A941ABA22850 /* M80AttributedLabel-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		272E61FD184EA4884C7374906C1F06EF /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD737567568AFD3F0FCC880AE96B86 /* DDFileLogger.m */; };
 		2739D047063F11339441FEE67C2E6907 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF92E7B6F5CE669EB3A80DFC1E3303D /* Photos.framework */; };
 		27A1D5D60AC3A049C76BC814EDAAB66E /* MQTTCFSocketEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 65A63689CAF786D95E8E14C0FD61F8FD /* MQTTCFSocketEncoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		280E6F2691E7BEC77A215A1169CA649A /* DDLoggerNames.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C60E80DF82A0B2092DEA237D5CE5308 /* DDLoggerNames.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2887702192EDC95A94D41F15B439F49E /* QMUIImagePreviewViewTransitionAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BF3CD769B02A5DEDCF9BE7D6EE8F207 /* QMUIImagePreviewViewTransitionAnimator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		28DCAD17C956E286D427645668E467BF /* UIActivityIndicatorView+QMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 019A0CD51F9A2DB21C1F070A31B3DEE3 /* UIActivityIndicatorView+QMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		28F577098E55DDB7634E07D526DDF814 /* M80AttributedLabelURLDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 748C33CC2357431005A2771B3841DEA8 /* M80AttributedLabelURLDetector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		29C53F296819F3B4542A57B2FB4CBD61 /* QMUIButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BD2215DC6B99444DDDC2E8FAFCE337C /* QMUIButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		29EE408834042D65212A99133AC0539E /* QMUIModalPresentationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 099D0A52F5B71EE43570168A21982023 /* QMUIModalPresentationViewController.m */; };
 		29EE44F2A71F734BE31A56377D95DD50 /* UIView+QMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC36D3113C1CB9969B5797B07FB68FB /* UIView+QMUI.m */; };
@@ -117,13 +121,14 @@
 		36ED7D4587373A2223B739BA8BE3DCBD /* QMUIEmotionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CF2084571E1662C2795606751005596 /* QMUIEmotionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3754E123D814D59F49B13F25C1C2CE99 /* QMUIImagePickerCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 77E1399671D2E21960890B4E89FF4DA5 /* QMUIImagePickerCollectionViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37E8D5E0DBE1B4CD86A35579CAB67793 /* TZAssetCell.h in Headers */ = {isa = PBXBuildFile; fileRef = B199DEDF68350717CB8B599CA6431B44 /* TZAssetCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		382A4CB069147B91AA14176E896DCCCD /* NSMutableAttributedString+M80.h in Headers */ = {isa = PBXBuildFile; fileRef = CE4DB5A6F3FF8355BB474B55985F84D5 /* NSMutableAttributedString+M80.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38CD966A9415FE213214D113B815CEEB /* QMUIToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 72C7BF4BAF840AFDD33A5435545D772D /* QMUIToolbarButton.m */; };
 		3913DD601D6A7E7E65B5A095A8F772B5 /* QMUILogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEA4328FB6B598737084F360B64DC60 /* QMUILogger.m */; };
+		393F323118DE5EB384143180E02DB2BC /* M80AttributedLabelURLDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A9875B54F52AB792198F5F3CA2545 /* M80AttributedLabelURLDetector.m */; };
 		3979B0EEACBB50881FCC315387DACC21 /* MQTTMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0F432CAD45418873B49044F95FA253 /* MQTTMessage.m */; };
 		3A196366393D6EE12C3F6EC5F05247F5 /* NSString+QMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDC907AEF0392418690343EA6A62819 /* NSString+QMUI.m */; };
 		3AAB31F9B10D7AE23483FA61F935E080 /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4DE63C691938FA13E582ACF869DF41 /* UIView+Layout.m */; };
 		3ADEA46FCE14F5B0F287DB345F93B913 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93741E7A67EFDC946851137107AAED8D /* QuartzCore.framework */; };
-		3C2A1EDDCBEF510A224408DAEA6F2D93 /* M80AttributedLabel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 34055B94A68E69DB3CB6FD1343474BE1 /* M80AttributedLabel-dummy.m */; };
 		3C8724935DF22317F691F1FB7C39ABF7 /* QMUIImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 854B0C8C7E53B9C1BA5EDA42E3137429 /* QMUIImagePickerViewController.m */; };
 		3CC1558D8899A2E13A968D4C403CD793 /* AFCompatibilityMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B630F9D1034A5C7181724654B10F3CD /* AFCompatibilityMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D35B25C72D414DC54ECE2B88C898A1B /* HCSStarRatingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3139A013D39325BFB6B88FD650393809 /* HCSStarRatingView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -152,7 +157,6 @@
 		43F9281D38E7FC0945E4143A0087206E /* MQTTStrict.m in Sources */ = {isa = PBXBuildFile; fileRef = C97423CA66AF1C9B931A7882456FF46B /* MQTTStrict.m */; };
 		4498E0DF896CDFFCED3CC659E0C27769 /* QMUITips.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFA5EE6417FE2B6C7873BD80C42E522 /* QMUITips.m */; };
 		44F4D2D143DEC2001EB17B1E897663F1 /* QMUIToastContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6052D7F6A8399DF75A39965A4BA2173 /* QMUIToastContentView.m */; };
-		45DC991E8F86F6ABDA905F41EC6F5612 /* M80AttributedLabelAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D9ED65DA26D80D5217CDD0CCE2B1A1A /* M80AttributedLabelAttachment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4631F3F24EBE51A8791C0DAF9F1724D9 /* QMUIKeyboardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D66ABE7238E1E3C241F4CC3050AAD1EF /* QMUIKeyboardManager.m */; };
 		46EF5987B14487ADB7463E13A1AD7388 /* UIImage+QMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F4A579674783398CFDBA33E308DC17 /* UIImage+QMUI.m */; };
 		471DC50966F3EBC9552B5813FD677A3A /* QMUIFillButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3221B99D548CA7D1F46EC75501F6FA04 /* QMUIFillButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -184,7 +188,6 @@
 		54B0306EF6FFD76F417614B61540A9C9 /* NSCharacterSet+QMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 688B9B282A734556B5677F58E2AF0AFC /* NSCharacterSet+QMUI.m */; };
 		5578BB357C9D74ED9F51D5C13258BD13 /* QMUIStaticTableViewCellData.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F55DDAA1E0555C3A30397D8F21927A /* QMUIStaticTableViewCellData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		56BA12FF3A5E85B46E04F36AB36B6293 /* QMUIEmotionInputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DD721E707E0A0E9C9BD762D62147477C /* QMUIEmotionInputManager.m */; };
-		5781B2BAC3840B9E2A4C7AFA6E6E218C /* M80AttributedLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = EC24D909F7B400245E60BFBF807F5444 /* M80AttributedLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		582B7844B5D69066F9A1ADC53C04155C /* MQTTCFSocketDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8857E82E0ABFC4318A939E1F2ADFCC32 /* MQTTCFSocketDecoder.m */; };
 		59DA7A09405A797C89E6BE9F68B4DDA6 /* QMUILog.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EEA91D7AE560082CB849F9EA29A9D9D /* QMUILog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5A35E0CCFB8399821B72D605373EEDC5 /* NSBundle+TZImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 844F841819DB011D636CAC257B059C81 /* NSBundle+TZImagePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -198,7 +201,6 @@
 		5EC4C327FFB1BC0BD6A1EEC319E4FCA6 /* QMUIConfigurationMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = C4195919758866685C28560730229FC7 /* QMUIConfigurationMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5FEF38D5FE163999904FAC55622E8947 /* QMUILab.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F43C47C5BAF80A887FE5D9F17F9497A /* QMUILab.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		603D8D15416C6AD050341B2072B980CF /* NSURL+QMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FD83AF6AF588AD4ECF0130F9EC317A04 /* NSURL+QMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		613238625F259412261D8197A85D8793 /* NSMutableAttributedString+M80.m in Sources */ = {isa = PBXBuildFile; fileRef = AB92082B19F276E5E57E3CEC0FD8BEAF /* NSMutableAttributedString+M80.m */; };
 		613314D4A0AFEBFEF0409AAEEF238127 /* QMUISearchController.h in Headers */ = {isa = PBXBuildFile; fileRef = 894CC1C89A8A16691D322CCD5AC38783 /* QMUISearchController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		616166BD57B8707EC940068BF5E1AA0A /* AFImageDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B8531D2BF1D36060D8A3755C130C8E2 /* AFImageDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		61A8D4DB2F74089CE42D77598EF1DE96 /* TZPhotoPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182C60A9371C4FE6CBB69500ED400CF2 /* TZPhotoPreviewCell.m */; };
@@ -220,6 +222,7 @@
 		6A5E05D187005E863177B45D58905C71 /* AFImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = AF75A3F8698C5F987B2A39D87A30842C /* AFImageDownloader.m */; };
 		6A844E8EC198397D9E3F99AFEF784CBF /* TZPhotoPreviewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 329C86261557D67FF9DE86A6AA418094 /* TZPhotoPreviewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6AED0A65768EC50AB5FC76D38DEED3CF /* QMUILogManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D7D3292131285FCD05EC2FAF999050 /* QMUILogManagerViewController.m */; };
+		6B29336A31FEF80FDB44F4F8E73FD7C0 /* M80AttributedLabelURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 7094FAD4A24490A35FF6FED3A2787E5B /* M80AttributedLabelURL.m */; };
 		6B3DEA4FAF659B5F314554B40FD0D15E /* QMUILogItem.h in Headers */ = {isa = PBXBuildFile; fileRef = F4DB0636E109F5DE918E75AACB82BD45 /* QMUILogItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6B44E3421F9197364A60D706AC5A1334 /* UITabBar+QMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EFF39D1069B0230985DC19406CC11D /* UITabBar+QMUI.m */; };
 		6C50EA6AAC971485807F31178ACF063F /* UIImageView+QMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 62275B4485F07292CD8F597E67F1CEE5 /* UIImageView+QMUI.m */; };
@@ -230,10 +233,10 @@
 		6EB32BA700C8C43A8E0A7A19C50DA8B8 /* QMUIPopupMenuBaseItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 049D14B3D921BA78B9446F619B4EED34 /* QMUIPopupMenuBaseItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EFCB8DDA9FCBDE9899CBAF882AE00E6 /* QMUIImagePickerHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7103AD3E801EF6206D37943B36C71BF1 /* QMUIImagePickerHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F5C424795706255A9DF1AC94629152D /* QMUICellHeightKeyCache.h in Headers */ = {isa = PBXBuildFile; fileRef = DD706481B4A50D20DEA35B1DAC4B7355 /* QMUICellHeightKeyCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7087D9A5540ADD6B980094FCCB89CD6C /* M80AttributedLabelDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = CE8E0BCE7F2BCE07FE10E45C7CF88B5C /* M80AttributedLabelDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		73B665883AE826A092DF540A4BAF29CF /* QMUIEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B490B00471804A667ED02C264AC6B938 /* QMUIEmptyView.m */; };
 		749F35C8C4F4AB39E7F3896FCC1DF131 /* UITableView+QMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 0121BA1232AEB5A86179B24DDA44C132 /* UITableView+QMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		74C3C3EA6B9F86EC2D7B87D1718F812E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA042C01F0CF0FAC702B314F874AA0A1 /* CoreText.framework */; };
-		74D3E548CC00885044267845D247A565 /* M80AttributedLabelURL.h in Headers */ = {isa = PBXBuildFile; fileRef = CEFFB4CB040F21D9D0CE82822064ED9B /* M80AttributedLabelURL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		753BFAE283742CEBCAD4F0DB32B1CFD1 /* ReconnectTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 049E2F9E90FF3DFF62A9955536B70C1A /* ReconnectTimer.m */; };
 		75755D05668D32920C19E8C897378FC5 /* QMUINavigationTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCAE52C83286F6A64528E47A8988A65 /* QMUINavigationTitleView.m */; };
 		75BA435E673CD9E4B6597F89DAF26EB7 /* NSString+QMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E020D8849C693B66D77495977C83F59 /* NSString+QMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -247,7 +250,6 @@
 		7B01FC81BCCFA4E4F40297FF3BD51315 /* QMUIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C1EC4E9A7B824D9C791AE66753486F8F /* QMUIHelper.m */; };
 		7C604B1C8E8DB1E96864F36555EBCD02 /* MQTTClient-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB8CC9FFB28259E8843A20E5673EC49 /* MQTTClient-dummy.m */; };
 		7DDB8195E4505C5612CED51CFCFE0CA8 /* QMUIPieProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CFBF87B5EC253B626497EA391832CED /* QMUIPieProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E3D0AC9EAC48E7D166207B280E4AEAF /* M80AttributedLabelDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 98A020742A911CC3A35E28C670BDEE38 /* M80AttributedLabelDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F3CD4E774C9016C56C66E655D745C7D /* GCDTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7F29F0F30FA038716F8FE489815433 /* GCDTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		80439206C3AA4E821F2D3A8C58E7240B /* UIView+QMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = F7EEF658749F48452F299BFEAE7AFBE0 /* UIView+QMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		80F12955662D57B04244D3416802DAED /* QMUICellHeightKeyCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A449DE3005AE20CC5D2D4B731027E54F /* QMUICellHeightKeyCache.m */; };
@@ -269,6 +271,7 @@
 		89C4396A232D46513CAFDA590C7D85E6 /* Pods-bytedesk-ui-bduiTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D2278ACFE9012DB7F00E5EFF2F4DBDBC /* Pods-bytedesk-ui-bduiTests-dummy.m */; };
 		8AD9F8FE36978CB4348E402207950883 /* AFAutoPurgingImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = C356C5E321289916E26D139130589E19 /* AFAutoPurgingImageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B04C6F9ED7015FCB2FC978BA080278C /* QMUIPopupMenuItemProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EBA4E0041FFF170F03CAEC025F0DA61 /* QMUIPopupMenuItemProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B5674CDB0C2677794A140457FC1EC35 /* M80AttributedLabelAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB5412B5D5A9A65955E9D3D93781FE8 /* M80AttributedLabelAttachment.m */; };
 		8D0393AC3584ACCB8A7A87DCD15B86E8 /* UITableViewCell+QMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C2E386D99FF3C25DD565EA714BF082 /* UITableViewCell+QMUI.m */; };
 		8D437FBE9C43605694E7F25909B569DE /* UIBarItem+QMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EB69740F69720E5A79647B3B83AA8138 /* UIBarItem+QMUI.m */; };
 		8DBD7178BD0ADCF67944181B88A71E8D /* QMUILog+QMUIConsole.h in Headers */ = {isa = PBXBuildFile; fileRef = C1CDFC915F6642EC3EB02110CCEF3B10 /* QMUILog+QMUIConsole.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -283,8 +286,6 @@
 		91356CE977BA230150092C1576F68F27 /* QMUIScrollAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CEFECF9B5092AB74A325BEAF19DEA38 /* QMUIScrollAnimator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		913C359106A15AC0829FD7C85F263D92 /* MQTTClient-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F591C1939B0FA41B0C2E2BD202EFC04 /* MQTTClient-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91889117123BED5A885084610EA5DA78 /* QMUIImagePreviewViewTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E600F8F5066A2A602EAAF9F4D8453EB /* QMUIImagePreviewViewTransitionAnimator.m */; };
-		9343BF600F5DE708516E59C5640870AE /* NSMutableAttributedString+M80.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB315DC4F413D8FEFFEEE15190704F5 /* NSMutableAttributedString+M80.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		93A23C42DC60A36088CBD71FB329E2C6 /* M80AttributedLabelConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AF5039CF4154FE12DABCE4DC814C635 /* M80AttributedLabelConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93D0273D05E58C041A5088D87B8EF47B /* Pods-bytedesk-ui-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 50679ECD1B9AFDA5BB275BE0C26A629C /* Pods-bytedesk-ui-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		946A83F9D55E7732CC74EB6C00DF6223 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E168B8BA5E56E44AA7C6B990BDF8CA /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		9486D80CC092F8ACB2355D5C94A155E3 /* AFAutoPurgingImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AC979D978817C37EA13044271800E3 /* AFAutoPurgingImageCache.m */; };
@@ -313,7 +314,6 @@
 		A0CB444161AA06CEA6B69D8E7A9832DB /* HCSStarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C982C30BF14115FB6510F3783673E3DE /* HCSStarRatingView.m */; };
 		A0E791E0229E91C551B846731F9B18F4 /* QMUIImagePickerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC641AF976DE8A6D2BDC6C52B073DBB /* QMUIImagePickerHelper.m */; };
 		A151265C487261EDE25257CC61BD64B7 /* QMUIPopupMenuButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C1202D8F3BD8AABE4C82F4B43427A6 /* QMUIPopupMenuButtonItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A1E81659B3D33ECD0861E8AB042E7B99 /* M80AttributedLabelConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 314B176B8DC4FB0D93831762626558F2 /* M80AttributedLabelConfig.m */; };
 		A236388067DA0CBB4757B14C0F1FA4CD /* QMUINavigationBarScrollingSnapAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FD5C149EB654E6901AA54A464FA1F2 /* QMUINavigationBarScrollingSnapAnimator.m */; };
 		A29E7575C22801F4CD0B4EEF4F1D235E /* MQTTCFSocketEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5644052A7B87B40069D2A6B9B15595B6 /* MQTTCFSocketEncoder.m */; };
 		A39E1924915C53C49E7220F72AD96BBB /* UIKit+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 7465F3B733D0D9157F1616AD58BB9ED7 /* UIKit+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -365,7 +365,6 @@
 		BEA6CEF98C5BD699471CD14997D04B70 /* QMUIImagePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF6841A50B9290A200D982BB0DE3D3C /* QMUIImagePreviewView.m */; };
 		BEE7FD5C1C06AF3670E0FB75F996DDF7 /* UIButton+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 18C5057CA1E4C2A87CDB0BF8B6E94B71 /* UIButton+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF3BE01EA64CE40E470AB4FD107F36FF /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 859EF22CA664B6B627163B7E2D48AF7A /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		BF51BE545AE9603938B5A9F6083BEF4F /* M80AttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A37C9DEB2516F8641BD969CBF57AB6BE /* M80AttributedLabel.m */; };
 		BF670D502024426575848ECD1D9A35A0 /* MQTTSSLSecurityPolicyEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = EB285C24BB06ED08810654BB64F48AD8 /* MQTTSSLSecurityPolicyEncoder.m */; };
 		C026D6E469C23ABD6374BEBE689D4BEE /* QMUIDialogViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B27A32E83D85BB44F16316BCCD7AFC1 /* QMUIDialogViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C0AA6B989C53A2D15F4BBA0FD2E43639 /* QMUISegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F1250F17E21BA31AFBC299DF75D0B0D /* QMUISegmentedControl.m */; };
@@ -374,6 +373,7 @@
 		C22E8B0C11B45E2780D19963A41FD312 /* QMUISearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DD530D4A29396A268CEE653AA5224C /* QMUISearchBar.m */; };
 		C41EA35F0B2A02CC0382F1C4CC08D684 /* TZAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4C50E0FBC9353E31979AEE4B261138 /* TZAssetModel.m */; };
 		C422E71E27ABBE6D606E062B525B982B /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C0EF4D1FD439699630A0D20B4D8BA3 /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		C42F264D1ED056589B50610393A4D0B6 /* M80AttributedLabelURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 699F95DFEDE2EF218C71CB341B9A5CCD /* M80AttributedLabelURL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C488023BC6B0ED479A2B58B09B1EA801 /* QMUICore.h in Headers */ = {isa = PBXBuildFile; fileRef = F12ED810085FE13FE858EF59AD55A014 /* QMUICore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C67BB20E91963EE3A0995EAE7A5F3369 /* QMUIMarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 787828AE9FC4671BEB1AB43E3602B374 /* QMUIMarqueeLabel.m */; };
 		C6A5F586666CF54653143F43C3586C95 /* UINavigationBar+QMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 4316231795DB5C0A69D76DA6297CDCDB /* UINavigationBar+QMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -387,6 +387,7 @@
 		CC8BA5CFE683B032DA594CD872934919 /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = A41C39FE5CDB934DCA3345AFCC18A6C7 /* DDLog+LOGV.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE20F67D61FF83FA868CDEA567FCEEA7 /* TZImagePickerController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E932237FD5D447732943A376CF7C361B /* TZImagePickerController-dummy.m */; };
 		CE603695CA9222C915F47DFE025D717B /* TZPhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C726D9655232FFB719D32DADA30DF /* TZPhotoPickerController.m */; };
+		CF28639B1C1BC04628B4B0410F107E3E /* NSMutableAttributedString+M80.m in Sources */ = {isa = PBXBuildFile; fileRef = FEDE7B459C4F76A4B7A2653A8447D004 /* NSMutableAttributedString+M80.m */; };
 		D014A5430789C5F0FFCF490D53B22897 /* UIActivityIndicatorView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 46F0E13B89F3A973F7A491CEF49428D5 /* UIActivityIndicatorView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2AC0DD535E049C6B0FC170114C38777 /* QMUIToastView.h in Headers */ = {isa = PBXBuildFile; fileRef = D4F0FF5DED307A6D98E4F118A7834128 /* QMUIToastView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2E066B22DCC56E8744EAF804C57C320 /* MQTTSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AF883D8D5470F0CB9CCF61705F08F8A /* MQTTSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -399,7 +400,6 @@
 		D755914909A03FCA3D36B96CDB5F1B6E /* QMUIConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D13786B188FDCE07AE7BC762D1883C8 /* QMUIConfiguration.m */; };
 		D7981193D33429E689F6CCBA0553D8EE /* DDOSLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = D26A653A8A0173FD4BD20C21F3E92221 /* DDOSLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7DC3DD16BF9264251AAA7ABC6A5A22D /* DDFileLogger+Buffering.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9AE2B45EDD0410D091EA4AE16CC98 /* DDFileLogger+Buffering.m */; };
-		D84A1A6F508345F956B9B00B8613EDD9 /* M80AttributedLabelAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF0A8D4C1FCDD36BFD46D17E6202EA7 /* M80AttributedLabelAttachment.m */; };
 		D8F7FD4C154DA3913CDE4253BDE2556E /* MGSwipeTableCell-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 261622FA7E3004F9EDDA42B7704AAE25 /* MGSwipeTableCell-dummy.m */; };
 		D9B70CA27A66A7842CF531150E3E7BBD /* QMUITestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40EFC189B26F064E2CB416ACB4376908 /* QMUITestView.m */; };
 		D9F8723BAB22F86C17EC5AF107746D0E /* QMUIVisualEffectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EE980207EF7500269B2A387216CF3E /* QMUIVisualEffectView.m */; };
@@ -439,6 +439,7 @@
 		E8687EE7A7E2B984A9084646672B2836 /* UITableViewCell+QMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 44A04A6EE77F55589030C166F5CB8045 /* UITableViewCell+QMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8F66D0D4BD736F436F0D60084029610 /* MQTTDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F49217FCDBB3349EEF90277CACAB3B /* MQTTDecoder.m */; };
 		E927AB728432CD08C149AAD702E1974F /* UIInterface+QMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 340CA313AA85A3D8C2DC38CBBA873A11 /* UIInterface+QMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E93D42A95C8C72D574125B6B40114E75 /* M80AttributedLabel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E6F63DD329CBD5C0EAA3DA2C0C7A46D7 /* M80AttributedLabel-dummy.m */; };
 		E9A7045D16330FB58E25063853F9DDCB /* QMUITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6050F76721E043A91CA48584E5C99B1 /* QMUITableView.m */; };
 		EA34F9A85C83B4F7F6B762CC90F17542 /* QMUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 333361F10467845455C4CC94278CF2E1 /* QMUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA4177653AD5FE6DB2FE2DDCF0DAB2E5 /* UITextField+QMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2983A8B7C20589FA9C4212861E9EA28B /* UITextField+QMUI.m */; };
@@ -458,7 +459,6 @@
 		F30BE0AFAFDD73D62BE98960BFE941DD /* QMUIKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D915B47EE21A8C8657818E6E3259B5F4 /* QMUIKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F37B67DCD7DD9347382A200995F6561E /* TZImageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = CF38CC9BAA46FB8031D73B9613C41156 /* TZImageManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F3999E25BE9860F7A3FCBA14E5B0DE0D /* QMUISearchBar.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A4B248DD906AAD45B842F1B8430DD3 /* QMUISearchBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F64B493E0FF3F261F533B38CE96F92D5 /* M80AttributedLabelURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 495BC5D6AB014568C8C45AD511415664 /* M80AttributedLabelURL.m */; };
 		F6CB2DE341354FCFA6A55CFEF7B05547 /* QMUIAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B96A90C1B9C468DA14D7CA8F4116E /* QMUIAsset.m */; };
 		F6D7E57F3DA6DF2923293032AA39D4EF /* TZLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E22087240A6310053485C8C193764AE0 /* TZLocationManager.m */; };
 		F89C328A3E92AF0AEA83B26BCDB7CD16 /* QMUIFillButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 290D49C688772FA67ABED5F8D63EE21E /* QMUIFillButton.m */; };
@@ -675,6 +675,7 @@
 		0F0F432CAD45418873B49044F95FA253 /* MQTTMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MQTTMessage.m; path = MQTTClient/MQTTClient/MQTTMessage.m; sourceTree = "<group>"; };
 		0F591C1939B0FA41B0C2E2BD202EFC04 /* MQTTClient-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MQTTClient-umbrella.h"; sourceTree = "<group>"; };
 		10C31FE0A8892FD9D4C808BBC97D112A /* NSURL+QMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSURL+QMUI.m"; path = "QMUIKit/UIKitExtensions/NSURL+QMUI.m"; sourceTree = "<group>"; };
+		122FF22CCD13921DE5C636FC8C07E7D5 /* M80AttributedLabel-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "M80AttributedLabel-umbrella.h"; sourceTree = "<group>"; };
 		1374F6F92CCAB2201C793654987F8770 /* UITabBar+QMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITabBar+QMUI.h"; path = "QMUIKit/UIKitExtensions/UITabBar+QMUI.h"; sourceTree = "<group>"; };
 		13E8BB6C4C44715C27671FAB77B3594D /* MQTTCFSocketDecoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MQTTCFSocketDecoder.h; path = MQTTClient/MQTTClient/MQTTCFSocketDecoder.h; sourceTree = "<group>"; };
 		13F4A579674783398CFDBA33E308DC17 /* UIImage+QMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+QMUI.m"; path = "QMUIKit/UIKitExtensions/UIImage+QMUI.m"; sourceTree = "<group>"; };
@@ -682,12 +683,12 @@
 		14621B5A8C119C139D8827B3178667F9 /* UIView+Layout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+Layout.h"; path = "TZImagePickerController/TZImagePickerController/UIView+Layout.h"; sourceTree = "<group>"; };
 		1495E68D0838A89FD0B3292008E18001 /* MQTTCFSocketTransport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MQTTCFSocketTransport.h; path = MQTTClient/MQTTClient/MQTTCFSocketTransport.h; sourceTree = "<group>"; };
 		1511067812ED2577B780CDFA5F9032EA /* QMUIConsoleViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIConsoleViewController.h; path = QMUIKit/QMUIComponents/QMUIConsole/QMUIConsoleViewController.h; sourceTree = "<group>"; };
-		15120B45B58C1711E3C90CBBE59E9941 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16D5313904469AD2052726D462A6F711 /* UIButton+QMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIButton+QMUI.m"; path = "QMUIKit/UIKitExtensions/UIButton+QMUI.m"; sourceTree = "<group>"; };
 		17C4791DF541F737E08FC2542CF81927 /* QMUIConsoleToolbar.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUIConsoleToolbar.m; path = QMUIKit/QMUIComponents/QMUIConsole/QMUIConsoleToolbar.m; sourceTree = "<group>"; };
 		182C60A9371C4FE6CBB69500ED400CF2 /* TZPhotoPreviewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZPhotoPreviewCell.m; path = TZImagePickerController/TZImagePickerController/TZPhotoPreviewCell.m; sourceTree = "<group>"; };
 		18C5057CA1E4C2A87CDB0BF8B6E94B71 /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+AFNetworking.h"; path = "UIKit+AFNetworking/UIButton+AFNetworking.h"; sourceTree = "<group>"; };
 		1913C191A73338852987877952A6ABB0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A6810781DFD0015790D56A3EBA328F1 /* M80AttributedLabel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = M80AttributedLabel.xcconfig; sourceTree = "<group>"; };
 		1AEA4328FB6B598737084F360B64DC60 /* QMUILogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUILogger.m; path = QMUIKit/QMUIComponents/QMUILog/QMUILogger.m; sourceTree = "<group>"; };
 		1AF4EE7766457424C708C1CF4FF73E4C /* CocoaLumberjack.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = CocoaLumberjack.modulemap; sourceTree = "<group>"; };
 		1AF883D8D5470F0CB9CCF61705F08F8A /* MQTTSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MQTTSession.h; path = MQTTClient/MQTTClient/MQTTSession.h; sourceTree = "<group>"; };
@@ -726,7 +727,6 @@
 		2983A8B7C20589FA9C4212861E9EA28B /* UITextField+QMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITextField+QMUI.m"; path = "QMUIKit/UIKitExtensions/UITextField+QMUI.m"; sourceTree = "<group>"; };
 		29BE3F3B09832AB3BC35DF836062F2DB /* CAAnimation+QMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "CAAnimation+QMUI.m"; path = "QMUIKit/QMUIComponents/CAAnimation+QMUI.m"; sourceTree = "<group>"; };
 		2A4D6D53383F4095BACF6966CE8BA584 /* AFNetworking-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AFNetworking-dummy.m"; sourceTree = "<group>"; };
-		2AF5039CF4154FE12DABCE4DC814C635 /* M80AttributedLabelConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = M80AttributedLabelConfig.h; path = M80AttributedLabel/M80AttributedLabelConfig.h; sourceTree = "<group>"; };
 		2BA96FFD843D880EDCA3BBA66CF3E7DC /* ForegroundReconnection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ForegroundReconnection.m; path = MQTTClient/MQTTClient/ForegroundReconnection.m; sourceTree = "<group>"; };
 		2BB56C281AEFCC1A3DBD0E0413DAFBCD /* QMUITips.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUITips.h; path = QMUIKit/QMUIComponents/QMUITips.h; sourceTree = "<group>"; };
 		2C6494C9F9FC9952418DFAF364D0C263 /* Pods-bytedesk-ui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-bytedesk-ui.debug.xcconfig"; sourceTree = "<group>"; };
@@ -741,15 +741,12 @@
 		30D81BE36F9AC095518A90B0D63DB646 /* UIBarItem+QMUIBadge.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIBarItem+QMUIBadge.m"; path = "QMUIKit/QMUIComponents/QMUIBadge/UIBarItem+QMUIBadge.m"; sourceTree = "<group>"; };
 		312F91B06C88167E33234E0187DF1195 /* MQTTCoreDataPersistence.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MQTTCoreDataPersistence.h; path = MQTTClient/MQTTClient/MQTTCoreDataPersistence.h; sourceTree = "<group>"; };
 		3139A013D39325BFB6B88FD650393809 /* HCSStarRatingView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HCSStarRatingView.h; path = HCSStarRatingView/HCSStarRatingView.h; sourceTree = "<group>"; };
-		314B176B8DC4FB0D93831762626558F2 /* M80AttributedLabelConfig.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = M80AttributedLabelConfig.m; path = M80AttributedLabel/M80AttributedLabelConfig.m; sourceTree = "<group>"; };
 		3221B99D548CA7D1F46EC75501F6FA04 /* QMUIFillButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIFillButton.h; path = QMUIKit/QMUIComponents/QMUIButton/QMUIFillButton.h; sourceTree = "<group>"; };
 		328E1028DA0C66F29C4D605647B8F833 /* QMUIImagePickerPreviewViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUIImagePickerPreviewViewController.m; path = QMUIKit/QMUIComponents/ImagePickerLibrary/QMUIImagePickerPreviewViewController.m; sourceTree = "<group>"; };
 		329C86261557D67FF9DE86A6AA418094 /* TZPhotoPreviewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZPhotoPreviewController.h; path = TZImagePickerController/TZImagePickerController/TZPhotoPreviewController.h; sourceTree = "<group>"; };
-		32BB99F6DB2B222AD91A1FF080A3BACF /* M80AttributedLabel.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = M80AttributedLabel.modulemap; sourceTree = "<group>"; };
 		333361F10467845455C4CC94278CF2E1 /* QMUIKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIKit.h; path = QMUIKit/QMUIKit.h; sourceTree = "<group>"; };
 		33DB8415BE27B15E1E7C4266D8AB02CE /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = AFNetworking/AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		33F246A7589C98E98E890559FF20E9EA /* QMUITableViewHeaderFooterView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUITableViewHeaderFooterView.m; path = QMUIKit/QMUIComponents/QMUITableViewHeaderFooterView.m; sourceTree = "<group>"; };
-		34055B94A68E69DB3CB6FD1343474BE1 /* M80AttributedLabel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "M80AttributedLabel-dummy.m"; sourceTree = "<group>"; };
 		340CA313AA85A3D8C2DC38CBBA873A11 /* UIInterface+QMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIInterface+QMUI.h"; path = "QMUIKit/UIKitExtensions/UIInterface+QMUI.h"; sourceTree = "<group>"; };
 		351F76C15A5AB9C699A2927574B348FD /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFHTTPSessionManager.m; path = AFNetworking/AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		358BC7ADDC79B2C60A7269293E1CFC69 /* QMUIKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = QMUIKit.modulemap; sourceTree = "<group>"; };
@@ -764,6 +761,7 @@
 		3C84C5E22C820AE78BEB76593E920AEB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CBBE40BD74D0D19C97912676250E439 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkActivityIndicatorManager.h; path = "UIKit+AFNetworking/AFNetworkActivityIndicatorManager.h"; sourceTree = "<group>"; };
 		3CE69987E0DD7035798CA642484A9851 /* DDLoggerNames.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLoggerNames.m; path = Classes/DDLoggerNames.m; sourceTree = "<group>"; };
+		3DB5C583515759EE59C0873E9C109DC1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DB8CC9FFB28259E8843A20E5673EC49 /* MQTTClient-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MQTTClient-dummy.m"; sourceTree = "<group>"; };
 		3E020D8849C693B66D77495977C83F59 /* NSString+QMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+QMUI.h"; path = "QMUIKit/UIKitExtensions/NSString+QMUI.h"; sourceTree = "<group>"; };
 		3E600F8F5066A2A602EAAF9F4D8453EB /* QMUIImagePreviewViewTransitionAnimator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUIImagePreviewViewTransitionAnimator.m; path = QMUIKit/QMUIComponents/QMUIImagePreviewView/QMUIImagePreviewViewTransitionAnimator.m; sourceTree = "<group>"; };
@@ -790,7 +788,6 @@
 		47901A0F56BCBFF3DEC7EBF0DA5B5E23 /* TZVideoPlayerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZVideoPlayerController.h; path = TZImagePickerController/TZImagePickerController/TZVideoPlayerController.h; sourceTree = "<group>"; };
 		47BEB433B7F320A6954D04FC1367530C /* QMUIStaticTableViewCellData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUIStaticTableViewCellData.m; path = QMUIKit/QMUIComponents/StaticTableView/QMUIStaticTableViewCellData.m; sourceTree = "<group>"; };
 		4862E641FB4913A93DBCAEA117F409C5 /* UITabBarItem+QMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITabBarItem+QMUI.m"; path = "QMUIKit/UIKitExtensions/UITabBarItem+QMUI.m"; sourceTree = "<group>"; };
-		495BC5D6AB014568C8C45AD511415664 /* M80AttributedLabelURL.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = M80AttributedLabelURL.m; path = M80AttributedLabel/M80AttributedLabelURL.m; sourceTree = "<group>"; };
 		495C7E13FA2D6350CEDDD8E38C80FBB7 /* AFNetworking-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-prefix.pch"; sourceTree = "<group>"; };
 		4A58238FCAB295CDB30ABFB0C2F287A4 /* MGSwipeTableCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MGSwipeTableCell.h; path = MGSwipeTableCell/MGSwipeTableCell.h; sourceTree = "<group>"; };
 		4A97CB93D065A7807E2243DD18116A6B /* UIImageView+QMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+QMUI.h"; path = "QMUIKit/UIKitExtensions/UIImageView+QMUI.h"; sourceTree = "<group>"; };
@@ -798,10 +795,10 @@
 		4B16186AB76211116D76905D4889852E /* QMUIToastContentView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIToastContentView.h; path = QMUIKit/QMUIComponents/ToastView/QMUIToastContentView.h; sourceTree = "<group>"; };
 		4C5C1DDF3F3FC7346568D72C9FAEC316 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = AFNetworking/AFURLResponseSerialization.h; sourceTree = "<group>"; };
 		4C9E90E88186FBAEF8E94DB57EF72127 /* QMUIStaticTableViewCellDataSource.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUIStaticTableViewCellDataSource.m; path = QMUIKit/QMUIComponents/StaticTableView/QMUIStaticTableViewCellDataSource.m; sourceTree = "<group>"; };
+		4E3A9875B54F52AB792198F5F3CA2545 /* M80AttributedLabelURLDetector.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = M80AttributedLabelURLDetector.m; path = M80AttributedLabel/M80AttributedLabelURLDetector.m; sourceTree = "<group>"; };
 		4E8B1FB38A94F3070DDB4F4D7262851E /* MQTTPersistence.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MQTTPersistence.h; path = MQTTClient/MQTTClient/MQTTPersistence.h; sourceTree = "<group>"; };
 		50679ECD1B9AFDA5BB275BE0C26A629C /* Pods-bytedesk-ui-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-bytedesk-ui-umbrella.h"; sourceTree = "<group>"; };
 		5067D5B4B82459D7224E6F2A159771A7 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIRefreshControl+AFNetworking.m"; path = "UIKit+AFNetworking/UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
-		51267FC1CD4BD83A2048E31F61FBBE21 /* M80AttributedLabel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = M80AttributedLabel.xcconfig; sourceTree = "<group>"; };
 		51E9445A14431991F0B78C6180D68800 /* DDMultiFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDMultiFormatter.m; path = Classes/Extensions/DDMultiFormatter.m; sourceTree = "<group>"; };
 		52BDF5A8711923513B0B29B6F6033518 /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDContextFilterLogFormatter.m; path = Classes/Extensions/DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
 		55003E3907227B2EF90E3F40C7C388A3 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AFNetworking.h"; path = "UIKit+AFNetworking/UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
@@ -823,6 +820,7 @@
 		5CF2084571E1662C2795606751005596 /* QMUIEmotionView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIEmotionView.h; path = QMUIKit/QMUIComponents/QMUIEmotionView.h; sourceTree = "<group>"; };
 		5D3947E1C014E892974105FB5CCA2558 /* NSParagraphStyle+QMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSParagraphStyle+QMUI.h"; path = "QMUIKit/UIKitExtensions/NSParagraphStyle+QMUI.h"; sourceTree = "<group>"; };
 		5E6A6DD05260DEA61F354CE13C64156F /* QMUIResources.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = QMUIResources.bundle; path = QMUIKit/QMUIResources/QMUIResources.bundle; sourceTree = "<group>"; };
+		5E9B7BC2225B68E4D35C8130C6FB75D1 /* M80AttributedLabelAttachment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = M80AttributedLabelAttachment.h; path = M80AttributedLabel/M80AttributedLabelAttachment.h; sourceTree = "<group>"; };
 		6094B3230B420845DBDCD0B08843BBF1 /* UIFont+QMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIFont+QMUI.m"; path = "QMUIKit/UIKitExtensions/UIFont+QMUI.m"; sourceTree = "<group>"; };
 		611CE144501149724503D920F53A33C1 /* QMUIVisualEffectView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIVisualEffectView.h; path = QMUIKit/QMUIComponents/QMUIVisualEffectView.h; sourceTree = "<group>"; };
 		62275B4485F07292CD8F597E67F1CEE5 /* UIImageView+QMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+QMUI.m"; path = "QMUIKit/UIKitExtensions/UIImageView+QMUI.m"; sourceTree = "<group>"; };
@@ -839,6 +837,7 @@
 		688B9B282A734556B5677F58E2AF0AFC /* NSCharacterSet+QMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSCharacterSet+QMUI.m"; path = "QMUIKit/UIKitExtensions/NSCharacterSet+QMUI.m"; sourceTree = "<group>"; };
 		6901A998F144D6593C4AB02C937FE136 /* Pods-demo-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-demo-acknowledgements.plist"; sourceTree = "<group>"; };
 		6961811E2A6D16CC6E858074441599AC /* QMUINavigationBarScrollingAnimator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUINavigationBarScrollingAnimator.m; path = QMUIKit/QMUIComponents/QMUIScrollAnimator/QMUINavigationBarScrollingAnimator.m; sourceTree = "<group>"; };
+		699F95DFEDE2EF218C71CB341B9A5CCD /* M80AttributedLabelURL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = M80AttributedLabelURL.h; path = M80AttributedLabel/M80AttributedLabelURL.h; sourceTree = "<group>"; };
 		69F8A413AA50069F1D9DE76F1CC1D06F /* CALayer+QMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CALayer+QMUI.h"; path = "QMUIKit/UIKitExtensions/CALayer+QMUI.h"; sourceTree = "<group>"; };
 		6A82C2FDB0B1C43BFA6AA6BA2095DEE9 /* UITabBarItem+QMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITabBarItem+QMUI.h"; path = "QMUIKit/UIKitExtensions/UITabBarItem+QMUI.h"; sourceTree = "<group>"; };
 		6CF6841A50B9290A200D982BB0DE3D3C /* QMUIImagePreviewView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUIImagePreviewView.m; path = QMUIKit/QMUIComponents/QMUIImagePreviewView/QMUIImagePreviewView.m; sourceTree = "<group>"; };
@@ -848,8 +847,8 @@
 		6EFD75409020E0C1B863E2B48A2D3A10 /* FMDB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = src/fmdb/FMDB.h; sourceTree = "<group>"; };
 		6F27F255C158B98FFA9B259607F53139 /* QMUIGhostButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUIGhostButton.m; path = QMUIKit/QMUIComponents/QMUIButton/QMUIGhostButton.m; sourceTree = "<group>"; };
 		6F8E0F4BF335653B030592883FD7166B /* QMUILogNameManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUILogNameManager.h; path = QMUIKit/QMUIComponents/QMUILog/QMUILogNameManager.h; sourceTree = "<group>"; };
-		6FB315DC4F413D8FEFFEEE15190704F5 /* NSMutableAttributedString+M80.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSMutableAttributedString+M80.h"; path = "M80AttributedLabel/NSMutableAttributedString+M80.h"; sourceTree = "<group>"; };
 		6FF745A85FCFB9253D6DCF33F00623C8 /* CALayer+QMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "CALayer+QMUI.m"; path = "QMUIKit/UIKitExtensions/CALayer+QMUI.m"; sourceTree = "<group>"; };
+		7094FAD4A24490A35FF6FED3A2787E5B /* M80AttributedLabelURL.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = M80AttributedLabelURL.m; path = M80AttributedLabel/M80AttributedLabelURL.m; sourceTree = "<group>"; };
 		70DD6B07865F3154CA00A583B4D4F214 /* Pods-bytedesk-ui-bduiTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-bytedesk-ui-bduiTests-umbrella.h"; sourceTree = "<group>"; };
 		7103AD3E801EF6206D37943B36C71BF1 /* QMUIImagePickerHelper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIImagePickerHelper.h; path = QMUIKit/QMUIComponents/ImagePickerLibrary/QMUIImagePickerHelper.h; sourceTree = "<group>"; };
 		71522EE0378CF7CE9DF0903062602171 /* DDFileLogger+Internal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDFileLogger+Internal.h"; path = "Classes/DDFileLogger+Internal.h"; sourceTree = "<group>"; };
@@ -864,6 +863,7 @@
 		7465F3B733D0D9157F1616AD58BB9ED7 /* UIKit+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIKit+AFNetworking.h"; path = "UIKit+AFNetworking/UIKit+AFNetworking.h"; sourceTree = "<group>"; };
 		747A1112BA681EA2953393F48F6331CA /* DDOSLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDOSLogger.m; path = Classes/DDOSLogger.m; sourceTree = "<group>"; };
 		747BC3EAB567B315B65A20B778EBE3B6 /* TZPhotoPreviewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZPhotoPreviewController.m; path = TZImagePickerController/TZImagePickerController/TZPhotoPreviewController.m; sourceTree = "<group>"; };
+		748C33CC2357431005A2771B3841DEA8 /* M80AttributedLabelURLDetector.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = M80AttributedLabelURLDetector.h; path = M80AttributedLabel/M80AttributedLabelURLDetector.h; sourceTree = "<group>"; };
 		7525ABC5EFD990D36A9B05C7D20D63AA /* FMDB-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-prefix.pch"; sourceTree = "<group>"; };
 		76BA2E3A7A09EC454F0A0A96AC031804 /* UITextField+QMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITextField+QMUI.h"; path = "QMUIKit/UIKitExtensions/UITextField+QMUI.h"; sourceTree = "<group>"; };
 		774DD7BAF3F6013BC017B2D29699CE22 /* TZImageCropManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZImageCropManager.m; path = TZImagePickerController/TZImagePickerController/TZImageCropManager.m; sourceTree = "<group>"; };
@@ -883,6 +883,8 @@
 		7EBA4E0041FFF170F03CAEC025F0DA61 /* QMUIPopupMenuItemProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIPopupMenuItemProtocol.h; path = QMUIKit/QMUIComponents/QMUIPopupMenuView/QMUIPopupMenuItemProtocol.h; sourceTree = "<group>"; };
 		7F9B6D43CE5B06DD3B29F45696C944D3 /* NSNumber+QMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+QMUI.m"; path = "QMUIKit/UIKitExtensions/NSNumber+QMUI.m"; sourceTree = "<group>"; };
 		8208FDE044CA0AAF955051EA0CF150C6 /* Pods-bytedesk-ui-bduiTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-bytedesk-ui-bduiTests-frameworks.sh"; sourceTree = "<group>"; };
+		8250BFD1469FCB9CB2273AF026C5503F /* M80AttributedLabel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = M80AttributedLabel.h; path = M80AttributedLabel/M80AttributedLabel.h; sourceTree = "<group>"; };
+		82F54590EA768C3B56F969B217832F70 /* M80AttributedLabel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "M80AttributedLabel-prefix.pch"; sourceTree = "<group>"; };
 		83346146E3714101E62500C1F8B30763 /* AFNetworking.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AFNetworking.xcconfig; sourceTree = "<group>"; };
 		83412E05CF39CE625E376615EC66863B /* QMUITableViewHeaderFooterView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUITableViewHeaderFooterView.h; path = QMUIKit/QMUIComponents/QMUITableViewHeaderFooterView.h; sourceTree = "<group>"; };
 		834F44916EFFA0DA8C3C4A5DAB785D3E /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Classes/DDTTYLogger.h; sourceTree = "<group>"; };
@@ -915,9 +917,9 @@
 		8CAFBE40F6C01439013CA1861FEF2161 /* QMUIFloatLayoutView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIFloatLayoutView.h; path = QMUIKit/QMUIComponents/QMUIFloatLayoutView.h; sourceTree = "<group>"; };
 		8CE2BCB40EC207AA04F26852906C5A8A /* UIInterface+QMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIInterface+QMUI.m"; path = "QMUIKit/UIKitExtensions/UIInterface+QMUI.m"; sourceTree = "<group>"; };
 		8D77BAD0D5C991AEBB97660A0F4F83D6 /* Pods-bytedesk-ui-bduiTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-bytedesk-ui-bduiTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		8E3432912566F07FD48E8AEE0F87DAB9 /* M80AttributedLabel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "M80AttributedLabel-prefix.pch"; sourceTree = "<group>"; };
 		8E88350DA53D03DCB247BD87A3B34A9D /* TZPhotoPreviewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZPhotoPreviewCell.h; path = TZImagePickerController/TZImagePickerController/TZPhotoPreviewCell.h; sourceTree = "<group>"; };
 		8EB1AF2263776AE9BAF4DB4DFA100700 /* QMUIAlbumViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUIAlbumViewController.m; path = QMUIKit/QMUIComponents/ImagePickerLibrary/QMUIAlbumViewController.m; sourceTree = "<group>"; };
+		8EB5412B5D5A9A65955E9D3D93781FE8 /* M80AttributedLabelAttachment.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = M80AttributedLabelAttachment.m; path = M80AttributedLabel/M80AttributedLabelAttachment.m; sourceTree = "<group>"; };
 		8EB72381D5390CA9E6629080270C493D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		908A3722227E09E06E7B42B2C0D94533 /* QMUISlider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUISlider.m; path = QMUIKit/QMUIComponents/QMUISlider.m; sourceTree = "<group>"; };
 		91C2E386D99FF3C25DD565EA714BF082 /* UITableViewCell+QMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITableViewCell+QMUI.m"; path = "QMUIKit/UIKitExtensions/UITableViewCell+QMUI.m"; sourceTree = "<group>"; };
@@ -937,7 +939,6 @@
 		9771EEDB08094A6565BFC001048F35E1 /* QMUIEmotionInputManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIEmotionInputManager.h; path = QMUIKit/QMUIComponents/QMUIEmotionInputManager.h; sourceTree = "<group>"; };
 		986D8C00A99BE66369DCA181759ACF64 /* UITextView+QMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITextView+QMUI.h"; path = "QMUIKit/UIKitExtensions/UITextView+QMUI.h"; sourceTree = "<group>"; };
 		986FC2ADCDA4B3EA65D04D0B6AE5964B /* QMUISearchController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUISearchController.m; path = QMUIKit/QMUIComponents/QMUISearchController.m; sourceTree = "<group>"; };
-		98A020742A911CC3A35E28C670BDEE38 /* M80AttributedLabelDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = M80AttributedLabelDefines.h; path = M80AttributedLabel/M80AttributedLabelDefines.h; sourceTree = "<group>"; };
 		98FC569540F0703516415C0A5B322949 /* NSObject+QMUIMultipleDelegates.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+QMUIMultipleDelegates.m"; path = "QMUIKit/QMUIComponents/QMUIMultipleDelegates/NSObject+QMUIMultipleDelegates.m"; sourceTree = "<group>"; };
 		9942823F0895446EFC02A193CD8DDB67 /* QMUIConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIConfiguration.h; path = QMUIKit/QMUICore/QMUIConfiguration.h; sourceTree = "<group>"; };
 		9A0503E2F795B373E064353F1DBA3DEE /* Pods_bytedesk_ui_bduiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_bytedesk_ui_bduiTests.framework; path = "Pods-bytedesk-ui-bduiTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -952,7 +953,6 @@
 		9C80D470A1B215871F707CAAADEC1FA9 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIProgressView+AFNetworking.m"; path = "UIKit+AFNetworking/UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
 		9CC3214FDEF2B92A5ADF0AABF923158E /* MQTTSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MQTTSessionManager.m; path = MQTTClient/MQTTClient/MQTTSessionManager.m; sourceTree = "<group>"; };
 		9D1C335F4E3539D73FC2F5A4C1CB9716 /* QMUIPopupContainerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIPopupContainerView.h; path = QMUIKit/QMUIComponents/QMUIPopupContainerView.h; sourceTree = "<group>"; };
-		9D9ED65DA26D80D5217CDD0CCE2B1A1A /* M80AttributedLabelAttachment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = M80AttributedLabelAttachment.h; path = M80AttributedLabel/M80AttributedLabelAttachment.h; sourceTree = "<group>"; };
 		9E3037DA97918FB77438F571AF7BB21C /* bytedesk-core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "bytedesk-core.framework"; path = "frameworks/cocoapods/bytedesk-core.framework"; sourceTree = "<group>"; };
 		9EB073CA99BFAA58C3175327E4A29A2C /* MQTTClient-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MQTTClient-prefix.pch"; sourceTree = "<group>"; };
 		9F0530F17867F29EC3F41A3A81E42D32 /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Classes/Extensions/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
@@ -963,7 +963,6 @@
 		A1C6D6CEBD7671DF6EED5ACE2D047BEA /* QMUIConsole.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIConsole.h; path = QMUIKit/QMUIComponents/QMUIConsole/QMUIConsole.h; sourceTree = "<group>"; };
 		A26277A9F1C6578F3DBAE7A4D1196258 /* UIBezierPath+QMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIBezierPath+QMUI.m"; path = "QMUIKit/UIKitExtensions/UIBezierPath+QMUI.m"; sourceTree = "<group>"; };
 		A2BC775A93FD67B962323F70086A2B38 /* QMUIRuntime.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUIRuntime.m; path = QMUIKit/QMUICore/QMUIRuntime.m; sourceTree = "<group>"; };
-		A37C9DEB2516F8641BD969CBF57AB6BE /* M80AttributedLabel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = M80AttributedLabel.m; path = M80AttributedLabel/M80AttributedLabel.m; sourceTree = "<group>"; };
 		A3B21F447C250E3356D094624DB2F12C /* UICollectionView+QMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UICollectionView+QMUI.h"; path = "QMUIKit/UIKitExtensions/UICollectionView+QMUI.h"; sourceTree = "<group>"; };
 		A3CAC94EEE6E2C5BCEB3F5DD36901E27 /* NSNumber+QMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSNumber+QMUI.h"; path = "QMUIKit/UIKitExtensions/NSNumber+QMUI.h"; sourceTree = "<group>"; };
 		A41C39FE5CDB934DCA3345AFCC18A6C7 /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Classes/DDLog+LOGV.h"; sourceTree = "<group>"; };
@@ -988,7 +987,6 @@
 		AAD65FD544ED6AA11C54EBA4A15265EF /* NSObject+QMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+QMUI.m"; path = "QMUIKit/UIKitExtensions/NSObject+QMUI.m"; sourceTree = "<group>"; };
 		AAF23A55EF046A062BD33FC6D7C2DDB7 /* HCSStarRatingView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = HCSStarRatingView.modulemap; sourceTree = "<group>"; };
 		AB73F26F1AA649875155EC9FED9746A0 /* Pods-demo-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-demo-acknowledgements.markdown"; sourceTree = "<group>"; };
-		AB92082B19F276E5E57E3CEC0FD8BEAF /* NSMutableAttributedString+M80.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSMutableAttributedString+M80.m"; path = "M80AttributedLabel/NSMutableAttributedString+M80.m"; sourceTree = "<group>"; };
 		AB9402256CD91D8816D41AE016A0BB19 /* QMUIAssetsManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUIAssetsManager.m; path = QMUIKit/QMUIComponents/AssetLibrary/QMUIAssetsManager.m; sourceTree = "<group>"; };
 		ACDC907AEF0392418690343EA6A62819 /* NSString+QMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+QMUI.m"; path = "QMUIKit/UIKitExtensions/NSString+QMUI.m"; sourceTree = "<group>"; };
 		AD267CC7E702B927034D982C64F7FA62 /* QMUINavigationBarScrollingAnimator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUINavigationBarScrollingAnimator.h; path = QMUIKit/QMUIComponents/QMUIScrollAnimator/QMUINavigationBarScrollingAnimator.h; sourceTree = "<group>"; };
@@ -999,6 +997,7 @@
 		AE4146C3BE0E85E21B3E50FCA5F18700 /* QMUIToolbarButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIToolbarButton.h; path = QMUIKit/QMUIComponents/QMUIButton/QMUIToolbarButton.h; sourceTree = "<group>"; };
 		AE5AD9422E62B17BBC6CDFE39B034B81 /* TZPhotoPickerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZPhotoPickerController.h; path = TZImagePickerController/TZImagePickerController/TZPhotoPickerController.h; sourceTree = "<group>"; };
 		AF75A3F8698C5F987B2A39D87A30842C /* AFImageDownloader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFImageDownloader.m; path = "UIKit+AFNetworking/AFImageDownloader.m"; sourceTree = "<group>"; };
+		AF80A5B8D601037AA02B689B7674D93F /* M80AttributedLabel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = M80AttributedLabel.m; path = M80AttributedLabel/M80AttributedLabel.m; sourceTree = "<group>"; };
 		AF8EDAD5F36E61CEF92545F81FA20400 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkActivityIndicatorManager.m; path = "UIKit+AFNetworking/AFNetworkActivityIndicatorManager.m"; sourceTree = "<group>"; };
 		B07FAD462DDB74260C4DC079C1169BA1 /* MQTTSSLSecurityPolicy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MQTTSSLSecurityPolicy.h; path = MQTTClient/MQTTClient/MQTTSSLSecurityPolicy.h; sourceTree = "<group>"; };
 		B0C63072D8B87264E9112E0E352AFE55 /* HCSStarRatingView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HCSStarRatingView-dummy.m"; sourceTree = "<group>"; };
@@ -1029,7 +1028,6 @@
 		BAE2729A5B728BB153B1C759966DF31A /* QMUIImagePreviewViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIImagePreviewViewController.h; path = QMUIKit/QMUIComponents/QMUIImagePreviewView/QMUIImagePreviewViewController.h; sourceTree = "<group>"; };
 		BB299A677E1615847B890E486D55AF1A /* QMUITestView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUITestView.h; path = QMUIKit/QMUIComponents/QMUITestView.h; sourceTree = "<group>"; };
 		BBED15C5122C8FBF83638D79FD4D607F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BBF0A8D4C1FCDD36BFD46D17E6202EA7 /* M80AttributedLabelAttachment.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = M80AttributedLabelAttachment.m; path = M80AttributedLabel/M80AttributedLabelAttachment.m; sourceTree = "<group>"; };
 		BC549070D9DDB337888F0424AA5F15C6 /* UIBarItem+QMUIBadge.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIBarItem+QMUIBadge.h"; path = "QMUIKit/QMUIComponents/QMUIBadge/UIBarItem+QMUIBadge.h"; sourceTree = "<group>"; };
 		BD653362001EC84735E328346AA1B8CB /* QMUIOrderedDictionary.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUIOrderedDictionary.m; path = QMUIKit/QMUIComponents/QMUIOrderedDictionary.m; sourceTree = "<group>"; };
 		BE47D457224EECC185B368D530C4CB7D /* AFSecurityPolicy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFSecurityPolicy.m; path = AFNetworking/AFSecurityPolicy.m; sourceTree = "<group>"; };
@@ -1065,8 +1063,9 @@
 		CBF903549BD618A3D8ABB1501A47FADC /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = AFNetworking/AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		CC176DB69BE6E8E8FAA54CB4EDEFB860 /* UIActivityIndicatorView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIActivityIndicatorView+AFNetworking.m"; path = "UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.m"; sourceTree = "<group>"; };
 		CCC641AF976DE8A6D2BDC6C52B073DBB /* QMUIImagePickerHelper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUIImagePickerHelper.m; path = QMUIKit/QMUIComponents/ImagePickerLibrary/QMUIImagePickerHelper.m; sourceTree = "<group>"; };
+		CE4DB5A6F3FF8355BB474B55985F84D5 /* NSMutableAttributedString+M80.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSMutableAttributedString+M80.h"; path = "M80AttributedLabel/NSMutableAttributedString+M80.h"; sourceTree = "<group>"; };
+		CE8E0BCE7F2BCE07FE10E45C7CF88B5C /* M80AttributedLabelDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = M80AttributedLabelDefines.h; path = M80AttributedLabel/M80AttributedLabelDefines.h; sourceTree = "<group>"; };
 		CEB40D7B8909E68A50C9131663D0FB87 /* QMUIAlertController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUIAlertController.m; path = QMUIKit/QMUIComponents/QMUIAlertController.m; sourceTree = "<group>"; };
-		CEFFB4CB040F21D9D0CE82822064ED9B /* M80AttributedLabelURL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = M80AttributedLabelURL.h; path = M80AttributedLabel/M80AttributedLabelURL.h; sourceTree = "<group>"; };
 		CF0C0CEDD99CAC89FDD9AC2B1EDFD3C5 /* QMUITableView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUITableView.h; path = QMUIKit/QMUIComponents/QMUITableView.h; sourceTree = "<group>"; };
 		CF38CC9BAA46FB8031D73B9613C41156 /* TZImageManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZImageManager.h; path = TZImagePickerController/TZImagePickerController/TZImageManager.h; sourceTree = "<group>"; };
 		CFA47603F6C390E2FC4779A32EE2AC25 /* QMUICommonViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUICommonViewController.h; path = QMUIKit/QMUIMainFrame/QMUICommonViewController.h; sourceTree = "<group>"; };
@@ -1124,8 +1123,8 @@
 		E687D37C4FE8C6FD3CC610321EDB80A2 /* MQTTProperties.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MQTTProperties.h; path = MQTTClient/MQTTClient/MQTTProperties.h; sourceTree = "<group>"; };
 		E6A01FED5F68FF1A779D754EB9382D9D /* MQTTCFSocketTransport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MQTTCFSocketTransport.m; path = MQTTClient/MQTTClient/MQTTCFSocketTransport.m; sourceTree = "<group>"; };
 		E6C06872EFCC20994220C6945EF89703 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = src/fmdb/FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		E6F63DD329CBD5C0EAA3DA2C0C7A46D7 /* M80AttributedLabel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "M80AttributedLabel-dummy.m"; sourceTree = "<group>"; };
 		E7FF1C69A58F38BEBA91D6671E1E9B4D /* QMUIFloatLayoutView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUIFloatLayoutView.m; path = QMUIKit/QMUIComponents/QMUIFloatLayoutView.m; sourceTree = "<group>"; };
-		E8871FF0CAADA6E6E305A941ABA22850 /* M80AttributedLabel-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "M80AttributedLabel-umbrella.h"; sourceTree = "<group>"; };
 		E8E958C7BF24A9F4862D108589D86B6B /* MQTTSessionLegacy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MQTTSessionLegacy.h; path = MQTTClient/MQTTClient/MQTTSessionLegacy.h; sourceTree = "<group>"; };
 		E932237FD5D447732943A376CF7C361B /* TZImagePickerController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TZImagePickerController-dummy.m"; sourceTree = "<group>"; };
 		E977020EA96FFEF5970044BA1199ADC5 /* MQTTSessionLegacy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MQTTSessionLegacy.m; path = MQTTClient/MQTTClient/MQTTSessionLegacy.m; sourceTree = "<group>"; };
@@ -1136,7 +1135,6 @@
 		EB77B05CFF52123B692B5FA73AD12E43 /* QMUIMarqueeLabel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIMarqueeLabel.h; path = QMUIKit/QMUIComponents/QMUIMarqueeLabel.h; sourceTree = "<group>"; };
 		EBA0ED94AB12DF7021BC1630A99811F8 /* Pods-bytedesk-ui-bduiTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-bytedesk-ui-bduiTests-resources.sh"; sourceTree = "<group>"; };
 		EC21C2670560FCFAD0732B152A104BFB /* QMUIAssetsGroup.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUIAssetsGroup.m; path = QMUIKit/QMUIComponents/AssetLibrary/QMUIAssetsGroup.m; sourceTree = "<group>"; };
-		EC24D909F7B400245E60BFBF807F5444 /* M80AttributedLabel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = M80AttributedLabel.h; path = M80AttributedLabel/M80AttributedLabel.h; sourceTree = "<group>"; };
 		EC605E3EC4816438DB00AADF88B6B9C7 /* QMUIWeakObjectContainer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QMUIWeakObjectContainer.h; path = QMUIKit/QMUIComponents/QMUIWeakObjectContainer.h; sourceTree = "<group>"; };
 		EC9E61ED1FA1FFF0C37C6A161E17CAA8 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "UIKit+AFNetworking/UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		EDCAE52C83286F6A64528E47A8988A65 /* QMUINavigationTitleView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUINavigationTitleView.m; path = QMUIKit/QMUIComponents/QMUINavigationTitleView.m; sourceTree = "<group>"; };
@@ -1166,6 +1164,7 @@
 		F60BAD29A0189ECB2C0313D64C4BC363 /* QMUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = QMUIKit.framework; path = QMUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6650B086790A93CB82D186051375A06 /* UILabel+QMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UILabel+QMUI.h"; path = "QMUIKit/UIKitExtensions/UILabel+QMUI.h"; sourceTree = "<group>"; };
 		F6B8AA4E0F58512EE58EC44D17991C5B /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
+		F6C1C28B6316F766A90339E81F2EA255 /* M80AttributedLabel.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = M80AttributedLabel.modulemap; sourceTree = "<group>"; };
 		F721791E5FFDDB33933F6D4825DB7AC8 /* CAAnimation+QMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CAAnimation+QMUI.h"; path = "QMUIKit/QMUIComponents/CAAnimation+QMUI.h"; sourceTree = "<group>"; };
 		F723E6B770ED9599B1E6A541DD9D9A6A /* NSObject+QMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+QMUI.h"; path = "QMUIKit/UIKitExtensions/NSObject+QMUI.h"; sourceTree = "<group>"; };
 		F7580AB27EACD827BDE79E7FA6AACDE4 /* QMUILog+QMUIConsole.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "QMUILog+QMUIConsole.m"; path = "QMUIKit/QMUIComponents/QMUIConsole/QMUILog+QMUIConsole.m"; sourceTree = "<group>"; };
@@ -1182,6 +1181,7 @@
 		FD83AF6AF588AD4ECF0130F9EC317A04 /* NSURL+QMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSURL+QMUI.h"; path = "QMUIKit/UIKitExtensions/NSURL+QMUI.h"; sourceTree = "<group>"; };
 		FD97FDADD18EC305A7CA347F38226AD8 /* QMUIMultipleDelegates.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QMUIMultipleDelegates.m; path = QMUIKit/QMUIComponents/QMUIMultipleDelegates/QMUIMultipleDelegates.m; sourceTree = "<group>"; };
 		FD9EF370A69ADD44A81A905383B6C205 /* MQTTInMemoryPersistence.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MQTTInMemoryPersistence.m; path = MQTTClient/MQTTClient/MQTTInMemoryPersistence.m; sourceTree = "<group>"; };
+		FEDE7B459C4F76A4B7A2653A8447D004 /* NSMutableAttributedString+M80.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSMutableAttributedString+M80.m"; path = "M80AttributedLabel/NSMutableAttributedString+M80.m"; sourceTree = "<group>"; };
 		FF0D838851A587F9C71B7F4C4D3BC652 /* NSObject+QMUIMultipleDelegates.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+QMUIMultipleDelegates.h"; path = "QMUIKit/QMUIComponents/QMUIMultipleDelegates/NSObject+QMUIMultipleDelegates.h"; sourceTree = "<group>"; };
 		FF8266ED1675B2939864CED69E3A63FA /* CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1578,13 +1578,33 @@
 				9BB3EC959CEE7CF55A6A130F6FFCCCE5 /* CocoaLumberjack */,
 				2A55475FA9C0D63346578D08E08E7DAC /* FMDB */,
 				A15003474394C44DAFA527AA2B6E8BBD /* HCSStarRatingView */,
-				EFF883C932E499EBF5C7C9E638429B44 /* M80AttributedLabel */,
+				22ABA139198A8C8159ABCD5F2ACA1425 /* M80AttributedLabel */,
 				858077266F3FBD710ACEC560451B2B8E /* MGSwipeTableCell */,
 				5F77F71CFE7F05D70875C8AD0B554DD7 /* MQTTClient */,
 				7B009FD72639F6BCC4A31DAE5E4B13EA /* QMUIKit */,
 				4FF85B39694168BFDA10B49DB5CB20FC /* TZImagePickerController */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		22ABA139198A8C8159ABCD5F2ACA1425 /* M80AttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				8250BFD1469FCB9CB2273AF026C5503F /* M80AttributedLabel.h */,
+				AF80A5B8D601037AA02B689B7674D93F /* M80AttributedLabel.m */,
+				5E9B7BC2225B68E4D35C8130C6FB75D1 /* M80AttributedLabelAttachment.h */,
+				8EB5412B5D5A9A65955E9D3D93781FE8 /* M80AttributedLabelAttachment.m */,
+				CE8E0BCE7F2BCE07FE10E45C7CF88B5C /* M80AttributedLabelDefines.h */,
+				699F95DFEDE2EF218C71CB341B9A5CCD /* M80AttributedLabelURL.h */,
+				7094FAD4A24490A35FF6FED3A2787E5B /* M80AttributedLabelURL.m */,
+				748C33CC2357431005A2771B3841DEA8 /* M80AttributedLabelURLDetector.h */,
+				4E3A9875B54F52AB792198F5F3CA2545 /* M80AttributedLabelURLDetector.m */,
+				CE4DB5A6F3FF8355BB474B55985F84D5 /* NSMutableAttributedString+M80.h */,
+				FEDE7B459C4F76A4B7A2653A8447D004 /* NSMutableAttributedString+M80.m */,
+				418530DCD8877CEC6C1B151747DA245B /* Support Files */,
+			);
+			name = M80AttributedLabel;
+			path = M80AttributedLabel;
 			sourceTree = "<group>";
 		};
 		22F6BDE785BD1C14C76931A26FE7BEE3 /* Reachability */ = {
@@ -1802,6 +1822,20 @@
 				A05095174B63A405FF0C986040B83E9A /* QMUITableViewCell.m */,
 			);
 			name = QMUITableViewCell;
+			sourceTree = "<group>";
+		};
+		418530DCD8877CEC6C1B151747DA245B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				3DB5C583515759EE59C0873E9C109DC1 /* Info.plist */,
+				F6C1C28B6316F766A90339E81F2EA255 /* M80AttributedLabel.modulemap */,
+				1A6810781DFD0015790D56A3EBA328F1 /* M80AttributedLabel.xcconfig */,
+				E6F63DD329CBD5C0EAA3DA2C0C7A46D7 /* M80AttributedLabel-dummy.m */,
+				82F54590EA768C3B56F969B217832F70 /* M80AttributedLabel-prefix.pch */,
+				122FF22CCD13921DE5C636FC8C07E7D5 /* M80AttributedLabel-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/M80AttributedLabel";
 			sourceTree = "<group>";
 		};
 		4D19F1FEB0B1E8B2D040170071FA7E6C /* QMUILinkButton */ = {
@@ -2368,20 +2402,6 @@
 			name = QMUIConsole;
 			sourceTree = "<group>";
 		};
-		B63A799C92DF09847CC96DA363ECA411 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				15120B45B58C1711E3C90CBBE59E9941 /* Info.plist */,
-				32BB99F6DB2B222AD91A1FF080A3BACF /* M80AttributedLabel.modulemap */,
-				51267FC1CD4BD83A2048E31F61FBBE21 /* M80AttributedLabel.xcconfig */,
-				34055B94A68E69DB3CB6FD1343474BE1 /* M80AttributedLabel-dummy.m */,
-				8E3432912566F07FD48E8AEE0F87DAB9 /* M80AttributedLabel-prefix.pch */,
-				E8871FF0CAADA6E6E305A941ABA22850 /* M80AttributedLabel-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/M80AttributedLabel";
-			sourceTree = "<group>";
-		};
 		B9B9BBC202E477B5C0F275E0881732B6 /* Security */ = {
 			isa = PBXGroup;
 			children = (
@@ -2617,26 +2637,6 @@
 			name = QMUITableViewHeaderFooterView;
 			sourceTree = "<group>";
 		};
-		EFF883C932E499EBF5C7C9E638429B44 /* M80AttributedLabel */ = {
-			isa = PBXGroup;
-			children = (
-				EC24D909F7B400245E60BFBF807F5444 /* M80AttributedLabel.h */,
-				A37C9DEB2516F8641BD969CBF57AB6BE /* M80AttributedLabel.m */,
-				9D9ED65DA26D80D5217CDD0CCE2B1A1A /* M80AttributedLabelAttachment.h */,
-				BBF0A8D4C1FCDD36BFD46D17E6202EA7 /* M80AttributedLabelAttachment.m */,
-				2AF5039CF4154FE12DABCE4DC814C635 /* M80AttributedLabelConfig.h */,
-				314B176B8DC4FB0D93831762626558F2 /* M80AttributedLabelConfig.m */,
-				98A020742A911CC3A35E28C670BDEE38 /* M80AttributedLabelDefines.h */,
-				CEFFB4CB040F21D9D0CE82822064ED9B /* M80AttributedLabelURL.h */,
-				495BC5D6AB014568C8C45AD511415664 /* M80AttributedLabelURL.m */,
-				6FB315DC4F413D8FEFFEEE15190704F5 /* NSMutableAttributedString+M80.h */,
-				AB92082B19F276E5E57E3CEC0FD8BEAF /* NSMutableAttributedString+M80.m */,
-				B63A799C92DF09847CC96DA363ECA411 /* Support Files */,
-			);
-			name = M80AttributedLabel;
-			path = M80AttributedLabel;
-			sourceTree = "<group>";
-		};
 		F34282868D7159D3362817A6DA5A1D9A /* QMUIGridView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2839,20 +2839,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3E6496080BB22D78808D9BB9096E8CE3 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2707065C9703AD7DE4295DBB2BC6D700 /* M80AttributedLabel-umbrella.h in Headers */,
-				5781B2BAC3840B9E2A4C7AFA6E6E218C /* M80AttributedLabel.h in Headers */,
-				45DC991E8F86F6ABDA905F41EC6F5612 /* M80AttributedLabelAttachment.h in Headers */,
-				93A23C42DC60A36088CBD71FB329E2C6 /* M80AttributedLabelConfig.h in Headers */,
-				7E3D0AC9EAC48E7D166207B280E4AEAF /* M80AttributedLabelDefines.h in Headers */,
-				74D3E548CC00885044267845D247A565 /* M80AttributedLabelURL.h in Headers */,
-				9343BF600F5DE708516E59C5640870AE /* NSMutableAttributedString+M80.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		418AEC710D2AB87942812B322C81570D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -2860,6 +2846,20 @@
 				E1657BA54D04062D396D2D2D2C6D9AE3 /* MGSwipeButton.h in Headers */,
 				479BD8FBCE73A8B76B2FB51551BB8F42 /* MGSwipeTableCell-umbrella.h in Headers */,
 				E001A02F1889304FA8A1DEEDF92B6475 /* MGSwipeTableCell.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BE21A3DF285EF11418C5C509629266E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B17DBD76D2D91F964F16E47B2E9B7D5 /* M80AttributedLabel-umbrella.h in Headers */,
+				232E25420E137B292744B6976053C17D /* M80AttributedLabel.h in Headers */,
+				00D93110FAE47C2DF36B59502D043587 /* M80AttributedLabelAttachment.h in Headers */,
+				7087D9A5540ADD6B980094FCCB89CD6C /* M80AttributedLabelDefines.h in Headers */,
+				C42F264D1ED056589B50610393A4D0B6 /* M80AttributedLabelURL.h in Headers */,
+				28F577098E55DDB7634E07D526DDF814 /* M80AttributedLabelURLDetector.h in Headers */,
+				382A4CB069147B91AA14176E896DCCCD /* NSMutableAttributedString+M80.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3035,8 +3035,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 868F1C9A3A5515665A0B4CB5F6C7D1B1 /* Build configuration list for PBXNativeTarget "M80AttributedLabel" */;
 			buildPhases = (
-				3E6496080BB22D78808D9BB9096E8CE3 /* Headers */,
-				AF57B66852C42D873C3505387CDEFD7D /* Sources */,
+				7BE21A3DF285EF11418C5C509629266E /* Headers */,
+				8572EB205C53C1259B718591A7219ED3 /* Sources */,
 				E3D593FBE1830FEE109EEE3F658700BF /* Frameworks */,
 				E898997365F075B51A8394E4FB4A8828 /* Resources */,
 			);
@@ -3476,24 +3476,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8572EB205C53C1259B718591A7219ED3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E93D42A95C8C72D574125B6B40114E75 /* M80AttributedLabel-dummy.m in Sources */,
+				1FE5DE4B5C965D35C2EB33F300194BA2 /* M80AttributedLabel.m in Sources */,
+				8B5674CDB0C2677794A140457FC1EC35 /* M80AttributedLabelAttachment.m in Sources */,
+				6B29336A31FEF80FDB44F4F8E73FD7C0 /* M80AttributedLabelURL.m in Sources */,
+				393F323118DE5EB384143180E02DB2BC /* M80AttributedLabelURLDetector.m in Sources */,
+				CF28639B1C1BC04628B4B0410F107E3E /* NSMutableAttributedString+M80.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BAF6A014F1B1CF46B4739ED2270624A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				89C4396A232D46513CAFDA590C7D85E6 /* Pods-bytedesk-ui-bduiTests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AF57B66852C42D873C3505387CDEFD7D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C2A1EDDCBEF510A224408DAEA6F2D93 /* M80AttributedLabel-dummy.m in Sources */,
-				BF51BE545AE9603938B5A9F6083BEF4F /* M80AttributedLabel.m in Sources */,
-				D84A1A6F508345F956B9B00B8613EDD9 /* M80AttributedLabelAttachment.m in Sources */,
-				A1E81659B3D33ECD0861E8AB042E7B99 /* M80AttributedLabelConfig.m in Sources */,
-				F64B493E0FF3F261F533B38CE96F92D5 /* M80AttributedLabelURL.m in Sources */,
-				613238625F259412261D8197A85D8793 /* NSMutableAttributedString+M80.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4204,7 +4204,7 @@
 		};
 		619BD1A8DC5AB55D79C6433B4B7C5E0C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 51267FC1CD4BD83A2048E31F61FBBE21 /* M80AttributedLabel.xcconfig */;
+			baseConfigurationReference = 1A6810781DFD0015790D56A3EBA328F1 /* M80AttributedLabel.xcconfig */;
 			buildSettings = {
 				BITCODE_GENERATION_MODE = marker;
 				CODE_SIGN_IDENTITY = "";
@@ -4535,7 +4535,7 @@
 		};
 		C6DF24FB74666BD21E7A3486ED1648B9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 51267FC1CD4BD83A2048E31F61FBBE21 /* M80AttributedLabel.xcconfig */;
+			baseConfigurationReference = 1A6810781DFD0015790D56A3EBA328F1 /* M80AttributedLabel.xcconfig */;
 			buildSettings = {
 				BITCODE_GENERATION_MODE = bitcode;
 				CODE_SIGN_IDENTITY = "";

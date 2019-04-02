@@ -74,8 +74,12 @@
         [self addSubview:voiceUnreadImageView];
         //
         voiceUploadOrDownloadIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        [voiceUploadOrDownloadIndicatorView startAnimating];
+        // TODO: 状态暂时不显示
+//        [voiceUploadOrDownloadIndicatorView startAnimating];
         [self addSubview:voiceUploadOrDownloadIndicatorView];
+        // TODO: 状态暂时隐藏
+        [voiceUploadOrDownloadIndicatorView setHidden:TRUE];
+        
         //
 //        _progressView = [[KFDSLoadProgressView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
 //        _progressView.maxProgress = 1.0f;
@@ -91,7 +95,7 @@
 
 - (void)refresh:(BDMessageModel *)data{
     [super refresh:data];
-    DDLogInfo(@"%s voice_url:%@ length:%@", __PRETTY_FUNCTION__, self.model.voice_url, self.model.length);
+//    DDLogInfo(@"%s voice_url:%@ length:%@", __PRETTY_FUNCTION__, self.model.voice_url, self.model.length);
     
     // TODO: 图片大小按照图片长宽比例显示
 //    [_imageView setImageWithURL:[NSURL URLWithString:self.model.image_url] placeholderImage:[UIImage imageNamed:@"Fav_Cell_File_Img"]];
@@ -104,8 +108,6 @@
 //    [voiceUnreadImageView setHidden:[self.model.played boolValue]];
     // TODO: 未读状态暂时隐藏
     [voiceUnreadImageView setHidden:TRUE];
-    // TODO: 状态暂时隐藏
-    [voiceUploadOrDownloadIndicatorView setHidden:TRUE];
     //
     [self setNeedsLayout];
 }
@@ -207,7 +209,7 @@
             NSFileManager *fileManager = [NSFileManager defaultManager];
             if (![fileManager fileExistsAtPath:voicePath])
             {
-                NSLog(@"文件不存在，需下载");
+                DDLogInfo(@"文件不存在，需下载");
                 NSString *amrSavePath = [NSString stringWithFormat:@"%@/Documents/%@", NSHomeDirectory(), voiceName];
                 //需要替换下载
                 NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];

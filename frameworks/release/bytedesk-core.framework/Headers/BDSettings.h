@@ -124,29 +124,18 @@
 
 + (void)clear;
 
+//////////////////////////////////////
+
++ (BOOL)getDestroyAfterReading:(NSString *)tidOrUidOrGid sessionType:(NSString *)sessionType;
+
++ (void)setDestroyAfterReading:(NSString *)tidOrUidOrGid sessionType:(NSString *)sessionType flag:(BOOL)flag;
+
++ (NSInteger)getDestroyAfterLength:(NSString *)tidOrUidOrGid sessionType:(NSString *)sessionType;
+
++ (void)setDestroyAfterLength:(NSString *)tidOrUidOrGid sessionType:(NSString *)sessionType length:(NSInteger)length;
 
 
-//#pragma mark - 服务器配置
-//
-//+ (NSString *) getOAuthHostAddress;
-//
-//+ (void) setOAuthHostAddress:(NSString *)address;
-//
-//+ (NSString *) getMessageHostAddress;
-//
-//+ (void) setMessageHostAddress:(NSString *)address;
-//
-//+ (NSUInteger) getMessageHostPort;
-//
-//+ (void) setMessageHostPort:(NSUInteger)port;
-//
-//+ (NSString *) getMessageHostUsername;
-//
-//+ (void) setMessageHostUsername:(NSString *)username;
-//
-//+ (NSString *) getMessageHostPassword;
-//
-//+ (void) setMessageHostPassword:(NSString *)password;
+
 
 @end
 

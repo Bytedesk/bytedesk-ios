@@ -985,15 +985,6 @@ typedef void (^FailedCallbackBlock)(NSError *error);
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
-+ (void)sendTextMessage:(NSString *)content
-                  toTid:(NSString *)tId
-                localId:(NSString *)localId
-            sessionType:(NSString *)sessiontype
-    destroyAfterReading:(BOOL)destroyAfterReading
-     destroyAfterLength:(int)destroyAfterLength
-          resultSuccess:(SuccessCallbackBlock)success
-           resultFailed:(FailedCallbackBlock)failed;
-
 /**
  同步发送图片消息
  
@@ -1005,15 +996,6 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                    toTid:(NSString *)tId
                  localId:(NSString *)localId
              sessionType:(NSString *)sessiontype
-           resultSuccess:(SuccessCallbackBlock)success
-            resultFailed:(FailedCallbackBlock)failed;
-
-+ (void)sendImageMessage:(NSString *)content
-                   toTid:(NSString *)tId
-                 localId:(NSString *)localId
-             sessionType:(NSString *)sessiontype
-     destroyAfterReading:(BOOL)destroyAfterReading
-      destroyAfterLength:(int)destroyAfterLength
            resultSuccess:(SuccessCallbackBlock)success
             resultFailed:(FailedCallbackBlock)failed;
 
@@ -1031,15 +1013,9 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                   toTid:(NSString *)tId
                 localId:(NSString *)localId
             sessionType:(NSString *)sessiontype
-          resultSuccess:(SuccessCallbackBlock)success
-           resultFailed:(FailedCallbackBlock)failed;
-
-+ (void)sendFileMessage:(NSString *)content
-                  toTid:(NSString *)tId
-                localId:(NSString *)localId
-            sessionType:(NSString *)sessiontype
-    destroyAfterReading:(BOOL)destroyAfterReading
-     destroyAfterLength:(int)destroyAfterLength
+                 format:(NSString *)format
+               fileName:(NSString *)fileName
+               fileSize:(NSString *)fileSize
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
@@ -1055,19 +1031,9 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                  localId:(NSString *)localId
              sessionType:(NSString *)sessiontype
              voiceLength:(int)voiceLength
+                  format:(NSString *)format
            resultSuccess:(SuccessCallbackBlock)success
             resultFailed:(FailedCallbackBlock)failed;
-
-+ (void)sendVoiceMessage:(NSString *)content
-                   toTid:(NSString *)tId
-                 localId:(NSString *)localId
-             sessionType:(NSString *)sessiontype
-             voiceLength:(int)voiceLength
-     destroyAfterReading:(BOOL)destroyAfterReading
-      destroyAfterLength:(int)destroyAfterLength
-           resultSuccess:(SuccessCallbackBlock)success
-            resultFailed:(FailedCallbackBlock)failed;
-
 
 /**
  发送商品消息
@@ -1086,15 +1052,6 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                resultSuccess:(SuccessCallbackBlock)success
                 resultFailed:(FailedCallbackBlock)failed;
 
-+ (void)sendCommodityMessage:(NSString *)content
-                       toTid:(NSString *)tId
-                     localId:(NSString *)localId
-                 sessionType:(NSString *)sessiontype
-         destroyAfterReading:(BOOL)destroyAfterReading
-          destroyAfterLength:(int)destroyAfterLength
-               resultSuccess:(SuccessCallbackBlock)success
-                resultFailed:(FailedCallbackBlock)failed;
-
 
 /**
  发送红包消息
@@ -1110,15 +1067,6 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                        toTid:(NSString *)tId
                      localId:(NSString *)localId
                  sessionType:(NSString *)sessiontype
-               resultSuccess:(SuccessCallbackBlock)success
-                resultFailed:(FailedCallbackBlock)failed;
-
-+ (void)sendRedPacketMessage:(NSString *)content
-                       toTid:(NSString *)tId
-                     localId:(NSString *)localId
-                 sessionType:(NSString *)sessiontype
-         destroyAfterReading:(BOOL)destroyAfterReading
-          destroyAfterLength:(int)destroyAfterLength
                resultSuccess:(SuccessCallbackBlock)success
                 resultFailed:(FailedCallbackBlock)failed;
 
@@ -1231,7 +1179,7 @@ destroyAfterReading:(BOOL)destroyAfterReading
            resultFailed:(FailedCallbackBlock)failed;
 
 + (void)uploadFileData:(NSData *)fileData
-         withVoiceName:(NSString *)fileName
+         withFileName:(NSString *)fileName
          resultSuccess:(SuccessCallbackBlock)success
           resultFailed:(FailedCallbackBlock)failed;
 
@@ -1301,6 +1249,9 @@ destroyAfterReading:(BOOL)destroyAfterReading
 + (void)deleteDeviceTokenResultSuccess:(SuccessCallbackBlock)success
                           resultFailed:(FailedCallbackBlock)failed;
 
+#pragma mark - 取消网络请求
+
++ (void)cancelAllHttpRequest;
 
 @end
 

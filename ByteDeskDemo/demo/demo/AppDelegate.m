@@ -21,7 +21,7 @@
 //获取appkey：登录后台->所有设置->应用管理->APP->appkey列
 //获取subDomain，也即企业号：登录后台->所有设置->客服账号->企业号
 // 需要替换为真实的
-#define DEFAULT_TEST_APPKEY @"201809171553111"
+#define DEFAULT_TEST_APPKEY @"a3f79509-5cb6-4185-8df9-b1ce13d3c655"
 #define DEFAULT_TEST_SUBDOMAIN @"vip"
 
 @interface AppDelegate ()

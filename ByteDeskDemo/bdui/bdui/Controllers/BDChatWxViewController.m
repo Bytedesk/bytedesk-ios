@@ -20,6 +20,7 @@
 #import "KFEmotionView.h"
 #import "KFPlusView.h"
 #import "KFRecordVoiceViewHUD.h"
+#import "WBiCloudManager.h"
 
 #import <HCSStarRatingView/HCSStarRatingView.h>
 #import <bytedesk-core/bdcore.h>
@@ -42,7 +43,7 @@ static CGFloat const kToolbarHeight = 60;
 
 static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPhoto;
 
-@interface BDChatWxViewController ()<UINavigationControllerBackButtonHandlerProtocol, KFDSMsgViewCellDelegate, QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,BDSingleImagePickerPreviewViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, QMUITextFieldDelegate, QMUIImagePreviewViewDelegate, KFEmotionViewDelegate, KFPlusViewDelegate, KFInputViewDelegate, BDGroupProfileViewControllerDelegate, BDContactProfileViewControllerDelegate>
+@interface BDChatWxViewController ()<UINavigationControllerBackButtonHandlerProtocol, KFDSMsgViewCellDelegate, QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,BDSingleImagePickerPreviewViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, QMUITextFieldDelegate, QMUIImagePreviewViewDelegate, KFEmotionViewDelegate, KFPlusViewDelegate, KFInputViewDelegate, BDGroupProfileViewControllerDelegate, BDContactProfileViewControllerDelegate, UIDocumentPickerDelegate, UIDocumentInteractionControllerDelegate>
 {
 
 }
@@ -113,6 +114,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 @property (nonatomic, assign) BOOL                      isEmotionPlusPressedToHideKeyboard;
 @property (nonatomic, assign) BOOL                      mIsViewControllerClosed;
+
+@property (nonatomic, strong) NSArray *documentTypes;
+@property(nonatomic, assign) BOOL mViewDidAppeared;
 
 @end
 
@@ -422,6 +426,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
     [BDCoreApis requestQuestionnairWithTid:self.mThreadTid itemQid:itemQid resultSuccess:^(NSDictionary *dict) {
         //        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
+        if (self.mIsViewControllerClosed) {
+            return;
+        }
         
         NSNumber *status_code = [dict objectForKey:@"status_code"];
         if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
@@ -613,7 +620,16 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if (self.mViewDidAppeared) {
+        return;
+    }
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
+    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//
+//    });
+
     // FIXME: 加载大量图片容易引起界面卡顿，待优化
 //    dispatch_async(dispatch_get_main_queue(), ^{
         CGRect recordVoiceViewFrame = CGRectMake((self.view.frame.size.width - RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT)/2,
@@ -634,11 +650,16 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         self.kfPlusView.delegate = self;
         [self.view addSubview:self.kfPlusView];
 //    });
+    
+    self.mViewDidAppeared = TRUE;
+
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
     //
     if (![BDSettings isAlreadyLogin]) {
         [QMUITips showError:@"请首先登录" inView:self.view hideAfterDelay:2];
@@ -700,6 +721,22 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self.navigationController popViewControllerAnimated:YES];
     
 }
+
+//#pragma mark - <QMUINavigationControllerDelegate>
+//
+//- (void)navigationController:(QMUINavigationController *)navigationController poppingByInteractiveGestureRecognizer:(UIScreenEdgePanGestureRecognizer *)gestureRecognizer viewControllerWillDisappear:(UIViewController *)viewControllerWillDisappear viewControllerWillAppear:(UIViewController *)viewControllerWillAppear {
+//    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+//
+//    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+//        if (viewControllerWillDisappear == self) {
+//            self.mIsViewControllerClosed = YES;
+//            [QMUITips showSucceed:@"松手了，界面发生切换"];
+//        } else if (viewControllerWillAppear == self) {
+//            [QMUITips showInfo:@"松手了，没有触发界面切换"];
+//        }
+//        return;
+//    }
+//}
 
 - (BOOL)forceEnableInteractivePopGestureRecognizer {
     return self.forceEnableBackGesture;
@@ -857,6 +894,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             height = 280;
         } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_VOICE]) {
             height = 90;
+        } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_FILE]) {
+            height = 100;
         } else {
             height = 80;
         }
@@ -920,6 +959,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (BOOL)canPopViewController {
     // 这里不要做一些费时的操作，否则可能会卡顿。
+    self.mIsViewControllerClosed = YES;
+    [BDCoreApis cancelAllHttpRequest];
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     //    [self unregisterNotifications];
     // 保存草稿
@@ -1034,11 +1075,11 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                      animations:^{
                          
                          CGRect inputViewFrame = [self.kfInputView frame];
-                         inputViewFrame.origin.y = keyboardY - INPUTBAR_HEIGHT;
+                         inputViewFrame.origin.y = self.keyboardY - INPUTBAR_HEIGHT;
                          [self.kfInputView setFrame:inputViewFrame];
                          
                          UIEdgeInsets tableViewInsets = self.tableView.contentInset;
-                         tableViewInsets.bottom = keyboardHeight;
+                         tableViewInsets.bottom = self.keyboardHeight;
                          self.tableView.contentInset = tableViewInsets;
                          self.tableView.scrollIndicatorInsets = tableViewInsets;
                          
@@ -1094,7 +1135,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                      animations:^{
                          
                          CGRect inputViewFrame = [self.kfInputView frame];
-                         inputViewFrame.origin.y = keyboardY - INPUTBAR_HEIGHT;
+                         inputViewFrame.origin.y = self.keyboardY - INPUTBAR_HEIGHT;
                          [self.kfInputView setFrame:inputViewFrame];
                          
                          //调整kfPlusView
@@ -1103,9 +1144,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                          [self.kfPlusView setFrame:plusViewFrame];
                          
                          //隐藏emotionView
-                         CGRect emotionViewFrame = [kfEmotionView frame];
+                         CGRect emotionViewFrame = [self.kfEmotionView frame];
                          emotionViewFrame.origin.y = inputViewFrame.origin.y + INPUTBAR_HEIGHT;;
-                         [kfEmotionView setFrame:emotionViewFrame];
+                         [self.kfEmotionView setFrame:emotionViewFrame];
                          
                          UIEdgeInsets tableViewInsets = self.tableView.contentInset;
                          tableViewInsets.bottom = 0.0f;
@@ -1282,20 +1323,20 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             NSString *voiceUrl = dict[@"data"];
             
             // 插入本地消息
-            BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertVoiceMessageLocal:self.mThreadTid withWorkGroupWid:self.mWorkGroupWid withContent:voiceUrl withLocalId:localId withSessionType:self.mThreadType withVoiceLength:voiceLength];
+            BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertVoiceMessageLocal:self.mThreadTid withWorkGroupWid:self.mWorkGroupWid withContent:voiceUrl withLocalId:localId withSessionType:self.mThreadType withVoiceLength:voiceLength  withFormat:@"amr"];
             DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.voice_url);
             
             // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
             NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
             [self.mMessageArray addObject:messageModel];
-            
+            //
             [self.tableView beginUpdates];
             [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
             [self.tableView endUpdates];
             [self tableViewScrollToBottom:YES];
             
             // 同步发送录音消息
-            [BDCoreApis sendVoiceMessage:voiceUrl toTid:self.mThreadTid localId:localId sessionType:self.mThreadType voiceLength:voiceLength  resultSuccess:^(NSDictionary *dict) {
+            [BDCoreApis sendVoiceMessage:voiceUrl toTid:self.mThreadTid localId:localId sessionType:self.mThreadType voiceLength:voiceLength format:@"amr" resultSuccess:^(NSDictionary *dict) {
                 DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
                 //
                 NSNumber *status_code = [dict objectForKey:@"status_code"];
@@ -1574,6 +1615,166 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
 }
 
+// https://github.com/wenmobo/WBDocumentBrowserDemo
+// https://github.com/Unlimitzzh/FileAccess_iCloud_QQ_Wechat
+-(void)shareFileButtonPressed:(id)sender {
+    DDLogInfo(@"发送文件消息 %s", __PRETTY_FUNCTION__);
+    UIDocumentPickerViewController *documentPickerViewController = [[UIDocumentPickerViewController alloc]initWithDocumentTypes:self.documentTypes
+                                                                                                                         inMode:UIDocumentPickerModeOpen];
+    documentPickerViewController.delegate = self;
+    [self presentViewController:documentPickerViewController
+                       animated:YES
+                     completion:nil];
+}
+
+-(void)shareDestroyAfterReadingButtonPressed:(id)sender {
+    DDLogInfo(@"设置阅后即焚 %s", __PRETTY_FUNCTION__);
+    
+}
+
+#pragma mark - UIDocumentPickerDelegate
+
+/*  < iOS 11 API > */
+- (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentsAtURLs:(NSArray<NSURL *> *)urls {
+    DDLogInfo(@"%s",__func__);
+    
+    for (NSURL *url in urls) {
+        NSArray *array = [[url absoluteString] componentsSeparatedByString:@"/"];
+        NSString *fileName = [array lastObject];
+        fileName = [fileName stringByRemovingPercentEncoding];
+        
+        if ([WBiCloudManager iCloudEnable]) {
+            [WBiCloudManager wb_downloadWithDocumentURL:url
+                                         completedBlock:^(id obj) {
+                                             NSData *data = obj;
+                                             NSString *path = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@",fileName]];
+                                             /*  < 写入沙盒 > */
+                                             [data writeToFile:path atomically:YES];
+                                             
+//                                           file path: /var/mobile/Containers/Data/Application/910CED69-727D-4F4D-A19D-CDA6D3719466/Documents/架构图.key
+                                             DDLogInfo(@"file path: %@", path);
+                                             
+                                             // TODO: 上传文件 并发送
+                                              [self uploadFileData:data fileName:fileName];
+                                             
+                                         }];
+        } else {
+            DDLogWarn(@"iCloud not enabled");
+        }
+    }
+}
+
+/*  < iOS 8 API > */
+- (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentAtURL:(NSURL *)url {
+    DDLogInfo(@"%s",__func__);
+    
+    NSArray *array = [[url absoluteString] componentsSeparatedByString:@"/"];
+    NSString *fileName = [array lastObject];
+    fileName = [fileName stringByRemovingPercentEncoding];
+    
+    if ([WBiCloudManager iCloudEnable]) {
+        [WBiCloudManager wb_downloadWithDocumentURL:url
+                                     completedBlock:^(id obj) {
+                                         NSData *data = obj;
+                                         NSString *path = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@",fileName]];
+                                         /*  < 写入沙盒 > */
+                                         [data writeToFile:path atomically:YES];
+                                         
+                                         DDLogInfo(@"file path: %@", path);
+                                         [self uploadFileData:data fileName:fileName];
+                                         
+                                     }];
+    } else {
+        DDLogWarn(@"iCloud not enabled");
+    }
+}
+
+- (void)documentPickerWasCancelled:(UIDocumentPickerViewController *)controller {
+    DDLogInfo(@"%s",__func__);
+}
+
+// MARK:getter
+/*  < reference：https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html#//apple_ref/doc/uid/TP40009259-SW1 > */
+- (NSArray *)documentTypes {
+    if (!_documentTypes) {
+        _documentTypes = @[@"public.content",
+                           @"public.text",
+                           @"public.source-code",
+                           @"public.image",
+                           @"public.audiovisual-content",
+                           @"com.adobe.pdf",
+                           @"com.apple.keynote.key",
+                           @"com.microsoft.word.doc",
+                           @"com.microsoft.excel.xls",
+                           @"com.microsoft.powerpoint.ppt",
+                           @"public.rtf",
+                           @"public.html",
+                           @""];
+    }
+    return _documentTypes;
+}
+
+- (void)uploadFileData:(NSData *)fileData fileName:(NSString *)fileName {
+    
+    [BDCoreApis uploadFileData:fileData withFileName:fileName resultSuccess:^(NSDictionary *dict) {
+        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+        
+        //
+        NSNumber *status_code = [dict objectForKey:@"status_code"];
+        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            
+            // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
+            NSString *localId = [[NSUUID UUID] UUIDString];
+            NSString *fileUrl = dict[@"data"];
+            
+            // 插入本地消息
+            BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertFileMessageLocal:self.mThreadTid withWorkGroupWid:self.mWorkGroupWid withContent:fileUrl withLocalId:localId withSessionType:self.mThreadType withFormat:@"doc" withFileName:@"fileName" withFileSize:@"fileSize"];
+            DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.file_url);
+            
+            // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
+            NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
+            [self.mMessageArray addObject:messageModel];
+            
+            [self.tableView beginUpdates];
+            [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
+            [self.tableView endUpdates];
+            [self tableViewScrollToBottom:YES];
+            
+            // 同步发送文件消息
+            [BDCoreApis sendFileMessage:fileUrl toTid:self.mThreadTid localId:localId sessionType:self.mThreadType format:@"doc" fileName:@"fileName" fileSize:@"fileSize" resultSuccess:^(NSDictionary *dict) {
+                DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+                //
+                NSNumber *status_code = [dict objectForKey:@"status_code"];
+                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    // 发送成功
+
+                    // 服务器返回自定义消息本地id
+                    NSString *localId = dict[@"data"][@"localId"];
+                    DDLogInfo(@"callback localId: %@", localId);
+
+                    // TODO：更新发送状态，隐藏activity indicator
+
+                } else {
+                    // 修改本地消息发送状态为error
+                    [[BDDBApis sharedInstance] updateMessageError:localId];
+                    //
+                    NSString *message = dict[@"message"];
+                    DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
+                    [QMUITips showError:message inView:self.view hideAfterDelay:2];
+                }
+
+            } resultFailed:^(NSError *error) {
+                DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+            }];
+            
+        } else {
+            [QMUITips showError:@"发送文件错误" inView:self.view hideAfterDelay:2];
+        }
+        
+    } resultFailed:^(NSError *error) {
+        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+    }];
+}
 
 #pragma mark - KFDSMsgViewCellDelegate
 
@@ -1596,7 +1797,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                                         //
                                         [BDCoreApis markDeletedMessage:itemToDelete.mid resultSuccess:^(NSDictionary *dict) {
                                             //
-                                            [[BDDBApis sharedInstance] deleteMessage:itemToDelete.mid];
                                             [self.mMessageArray removeObjectAtIndex:indexPath.row];
                                             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
                                             
@@ -1668,6 +1868,11 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
     //    [self.imagePreviewViewController startPreviewFromRectInScreenCoordinate:[imageView convertRect:imageView.frame toView:nil] cornerRadius:imageView.layer.cornerRadius];
     [self presentViewController:self.imagePreviewViewController animated:YES completion:nil];
+    
+}
+
+- (void) fileViewClicked:(id)sender {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
 }
 
@@ -1938,7 +2143,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     if (keyboardUserInfo) {
         // 相对于键盘
         [QMUIKeyboardManager animateWithAnimated:YES keyboardUserInfo:keyboardUserInfo animations:^{
-            CGFloat distanceFromBottom = [QMUIKeyboardManager distanceFromMinYToBottomInView:self.view keyboardRect:keyboardUserInfo.endFrame];
+//            CGFloat distanceFromBottom = [QMUIKeyboardManager distanceFromMinYToBottomInView:self.view keyboardRect:keyboardUserInfo.endFrame];
             
 //            self.toolbarView.layer.transform = CATransform3DMakeTranslation(0, - distanceFromBottom, 0);
             //            self.emotionInputManager.emotionView.layer.transform = CATransform3DMakeTranslation(0, - distanceFromBottom, 0);
@@ -2524,7 +2729,19 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         [self.tableView endUpdates];
         [self tableViewScrollToBottom:YES];
         
+        // FIXME: 仅针对单聊和客服会话有效，群聊暂不发送已读状态
         // TODO: 发送消息已读回执
+        // 非系统消息
+        if (![messageModel.type hasPrefix:BD_MESSAGE_TYPE_NOTIFICATION]) {
+            // 消息状态
+            if (messageModel.status != NULL ||
+                [messageModel.status isEqualToString:BD_MESSAGE_STATUS_STORED]) {
+                // TODO: 更新本地消息为已读
+                
+                // 发送已读回执，通知服务器更新状态
+                
+            }
+        }
         
         // TODO: 判断是否阅后即焚消息，如果是，则倒计时销毁
         
@@ -2642,9 +2859,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                              [self.kfInputView setFrame:inputViewFrame];
                              
                              //隐藏emotionView
-                             CGRect emotionViewFrame = [kfEmotionView frame];
+                             CGRect emotionViewFrame = [self.kfEmotionView frame];
                              emotionViewFrame.origin.y += EMOTION_PLUS_VIEW_HEIGHT;
-                             [kfEmotionView setFrame:emotionViewFrame];
+                             [self.kfEmotionView setFrame:emotionViewFrame];
                              
                          } completion:^(BOOL finished) {
                              

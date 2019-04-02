@@ -76,14 +76,43 @@
 - (void)sendPreviewMessage:(NSString *)content toTid:(NSString *)tId localId:(NSString *)localId sessionType:(NSString *)sessiontype;
 
 /**
+  发送消息送达通知
+
+ @param mId 消息唯一mid
+ */
+- (void)sendReceiptReceivedMessage:(NSString *)mId;
+
+/**
+  发送消息已读通知
+
+ @param mId 消息唯一mid
+ */
+- (void)sendReceiptReadMessage:(NSString *)mId;
+
+/**
+ 发送消息销毁通知
+
+ @param mId 消息唯一mid
+ */
+- (void)sendReceiptDestroyedMessage:(NSString *)mId;
+
+/**
  发送消息回执通知
 
- @param content <#content description#>
- @param tId <#tId description#>
- @param localId <#localId description#>
- @param sessiontype <#sessiontype description#>
+ @param mId mid
+ @param status status
  */
-- (void)sendReceiptMessage:(NSString *)content toTid:(NSString *)tId localId:(NSString *)localId sessionType:(NSString *)sessiontype;
+- (void)sendReceiptMessage:(NSString *)mId status:(NSString *)status;
+
+
+/**
+ 发送webrtc消息
+
+ @param uuid 会话tid、用户uid 或者 群组gid
+ @param type 消息类型：invite、sdp、ice等
+ @param sessionType 会话类型：客服会话、单聊、群组
+ */
+- (void)sendWebRTCMessage:(NSString *)uuid type:(NSString *)type sessionType:(NSString *)sessionType;
 
 /**
  发送消息

@@ -194,7 +194,7 @@
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     // TODO: 打开聊天页面之后，根据thread类型区分会话类型：一对一、群组、工作组
     BDThreadModel *threadModel = [self.mThreadArray objectAtIndex:indexPath.row];
-    [BDUIApis agentPushChat:self.navigationController withThreadModel:threadModel];
+    [BDUIApis pushChat:self.navigationController withThreadModel:threadModel];
     
 //    if ([threadModel.type isEqualToString:BD_THREAD_TYPE_THREAD]) {
 //        [BDUIApis agentPushChat:self.navigationController withThreadModel:threadModel];

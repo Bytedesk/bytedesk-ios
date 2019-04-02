@@ -14,6 +14,8 @@
 #import "BDMsgTextContentView.h"
 #import "BDMsgImageContentView.h"
 #import "BDMsgVoiceContentView.h"
+#import "BDMsgFileContentView.h"
+
 #import "BDMsgQuestionnairViewCell.h"
 #import "BDRedPacketTableViewCell.h"
 #import "BDCommodityTableViewCell.h"
@@ -93,9 +95,11 @@
             [[UIPasteboard generalPasteboard] setString:_messageModel.pic_url];
         }
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_VOICE]) {
-        
+        [[UIPasteboard generalPasteboard] setString:_messageModel.voice_url];
+    } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_FILE]) {
+        [[UIPasteboard generalPasteboard] setString:_messageModel.file_url];
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_QUESTIONNAIRE]) {
-        
+        //
     }
     // TODO：其他类型消息记录
     //
@@ -156,6 +160,9 @@
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_VOICE]) {
         //
         _bubbleView = [[BDMsgVoiceContentView alloc] initMessageContentView];
+    } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_FILE]) {
+        //
+        _bubbleView = [[BDMsgFileContentView alloc] initMessageContentView];
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_QUESTIONNAIRE]) {
         //
         _bubbleView = [[BDMsgQuestionnairViewCell alloc] initMessageContentView];

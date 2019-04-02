@@ -14,12 +14,12 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - bytedesk-core (1.5.5):
+  - bytedesk-core (1.5.6):
     - AFNetworking
     - CocoaLumberjack
     - FMDB
     - MQTTClient
-  - bytedesk-ui (1.5.5):
+  - bytedesk-ui (1.5.6):
     - AFNetworking
     - bytedesk-core
     - CocoaLumberjack
@@ -35,7 +35,7 @@ PODS:
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - HCSStarRatingView (1.5)
-  - M80AttributedLabel (1.9.3)
+  - M80AttributedLabel (1.9.5)
   - MGSwipeTableCell (1.6.8)
   - MQTTClient (0.15.2):
     - MQTTClient/Core (= 0.15.2)
@@ -342,12 +342,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  bytedesk-core: ea6f030ff9052de80cf85d30e6e02a47bb202f61
-  bytedesk-ui: 26655415e5106c6f87364ff51540e40e48f95161
+  bytedesk-core: f79e5226dd4c0611201de7923c3a3ffc10966df9
+  bytedesk-ui: 63797c7420e00dbf1d46eba5b7d750240132383b
   CocoaLumberjack: 118bf4a820efc641f79fa487b75ed928dccfae23
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
-  M80AttributedLabel: 362643e3ed8d4c53d779eb8fe74f0ee70432c948
+  M80AttributedLabel: d1177fbd7451d134794b50e91ca8b0cb167ef530
   MGSwipeTableCell: dc4eca3212ed38a563b27d6aa7b3c01ce656c1e2
   MQTTClient: 902c7bcac1501595f3d0b15178c7205b40331fb0
   QMUIKit: 765333b31bb25a973f2ea11e0a67fca727ef29a7

@@ -22,6 +22,9 @@
 
 // 默认json格式
 #define BD_MQTT_TOPIC_MESSAGE               @"message/mqtt"
+#define BD_MQTT_TOPIC_RECEIPT               @"receipt/mqtt"
+#define BD_MQTT_TOPIC_WEBRTC                @"webrtc/mqtt"
+
 // 发送protobuf格式: TODO
 #define BD_MQTT_TOPIC_MESSAGE_PROTOBUF      @"message/mqtt/protobuf"
 #define BD_MQTT_TOPIC_STATUS                @"status/mqtt"
@@ -146,6 +149,30 @@
 #define BD_NOTIFICATION_MESSAGE_STATUS      @"bd_notification_message_status"
 #define BD_NOTIFICATION_MESSAGE_PREVIEW     @"bd_notification_message_preview"
 
+// 通知webrtc
+// 接受webrtc邀请
+#define BD_NOTIFICATION_WEBRTC_INVITE       @"bd_notification_webrtc_invite"
+// webrtc取消邀请
+#define BD_NOTIFICATION_WEBRTC_CANCEL       @"bd_notification_webrtc_cancel"
+// webrtc邀请视频会话
+#define BD_NOTIFICATION_WEBRTC_OFFER_VIDEO  @"bd_notification_webrtc_offer_video"
+// webrtc邀请音频会话
+#define BD_NOTIFICATION_WEBRTC_OFFER_AUDIO  @"bd_notification_webrtc_offer_audio"
+// 接受webrtc邀请
+#define BD_NOTIFICATION_WEBRTC_ANSWER       @"bd_notification_webrtc_answer"
+// webrtc candidate信息
+#define BD_NOTIFICATION_WEBRTC_CANDIDATE    @"bd_notification_webrtc_candidate"
+// 接受webrtc邀请
+#define BD_NOTIFICATION_WEBRTC_ACCEPT       @"bd_notification_webrtc_accept"
+// 拒绝webrtc邀请
+#define BD_NOTIFICATION_WEBRTC_REJECT       @"bd_notification_webrtc_reject"
+// 被邀请方视频设备 + peeConnection已经就绪
+#define BD_NOTIFICATION_WEBRTC_READY        @"bd_notification_webrtc_ready"
+// webrtc忙线
+#define BD_NOTIFICATION_WEBRTC_BUSY         @"bd_notification_webrtc_busy"
+// 结束webrtc会话
+#define BD_NOTIFICATION_WEBRTC_CLOSE        @"bd_notification_webrtc_close"
+
 /**
  * 用户在线状态：
  */
@@ -171,6 +198,7 @@
 #define BD_MESSAGE_STATUS_READ              @"read" // 已读
 #define BD_MESSAGE_STATUS_STORED            @"stored" // 发送到服务器，成功存储数据库中
 #define BD_MESSAGE_STATUS_ERROR             @"error" // 发送错误
+#define BD_MESSAGE_STATUS_DESTROYED         @"destroyed" // 阅后即焚已销毁
 
 // 消息类型
 #define BD_MESSAGE_TYPE_TEXT                @"text"  // 文本消息类型

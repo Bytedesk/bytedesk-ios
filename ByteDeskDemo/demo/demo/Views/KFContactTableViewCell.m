@@ -60,7 +60,7 @@
 
 - (void)initWithContactModel:(BDContactModel *)contactModel {
     //
-    mTitleLabel.text = contactModel.real_name;
+    mTitleLabel.text = contactModel.nickname;
     mDescriptionLabel.text = contactModel.mdescription;
     mType = @"contact";
     // TODO: 根据来源不同显示不同的placeholder image
@@ -69,7 +69,7 @@
 
 - (void)initWithRelationModel:(BDContactModel *)contactModel {
     //
-    mTitleLabel.text = contactModel.real_name;
+    mTitleLabel.text = contactModel.nickname;
     mDescriptionLabel.text = contactModel.mdescription;
     // TODO: 根据来源不同显示不同的placeholder image
     [mAvatarImageView setImageWithURL:[NSURL URLWithString:contactModel.avatar] placeholderImage:[UIImage imageNamed:@"android_default_avatar"]];

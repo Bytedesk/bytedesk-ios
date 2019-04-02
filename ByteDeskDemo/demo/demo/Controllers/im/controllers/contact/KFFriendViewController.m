@@ -233,12 +233,12 @@
             [BDCoreApis unBlock:contactModel.uid resultSuccess:^(NSDictionary *dict) {
                 DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
                 //
-                [self.mContactArray removeObject:contactModel];
-                [self reloadTable];
-                //
                 NSString *message = [dict objectForKey:@"message"];
                 NSNumber *status_code = [dict objectForKey:@"status_code"];
                 if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    //
+                    [self.mContactArray removeObject:contactModel];
+                    [self reloadTable];
                     //
                     [QMUITips showInfo:message inView:weakSelf.view hideAfterDelay:1.2];
                 } else {

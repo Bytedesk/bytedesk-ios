@@ -70,6 +70,8 @@
 @property(nonatomic, strong) NSNumber *is_mark_unread;
 // 是否标记删除
 @property(nonatomic, strong) NSNumber *is_mark_deleted;
+// 是否临时会话
+@property(nonatomic, strong) NSNumber *is_temp;
 
 
 @end

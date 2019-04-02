@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3D0DB22B21CC607C002ACB3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D0DB22D21CC607C002ACB3E /* InfoPlist.strings */; };
 		3D3823D921CF5BE800AB12AD /* KFFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3823D821CF5BE800AB12AD /* KFFriendViewController.m */; };
+		3D38CC30225179A100BA2668 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D38CC2F225179A100BA2668 /* CloudKit.framework */; };
 		3D3928CD21BF8F20001E1257 /* KFContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928CC21BF8F20001E1257 /* KFContactViewController.m */; };
 		3D3928D021BF8F31001E1257 /* KFGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928CF21BF8F31001E1257 /* KFGroupViewController.m */; };
 		3D3928EB21C25E9E001E1257 /* KFQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928EA21C25E9E001E1257 /* KFQueueViewController.m */; };
@@ -82,6 +83,7 @@
 		3D0DB22E21CC607E002ACB3E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3D3823D721CF5BE800AB12AD /* KFFriendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFFriendViewController.h; sourceTree = "<group>"; };
 		3D3823D821CF5BE800AB12AD /* KFFriendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFFriendViewController.m; sourceTree = "<group>"; };
+		3D38CC2F225179A100BA2668 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		3D3928CB21BF8F20001E1257 /* KFContactViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFContactViewController.h; sourceTree = "<group>"; };
 		3D3928CC21BF8F20001E1257 /* KFContactViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFContactViewController.m; sourceTree = "<group>"; };
 		3D3928CE21BF8F31001E1257 /* KFGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFGroupViewController.h; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF07A2BB176935FE7FE9041E /* Pods_demo.framework in Frameworks */,
+				3D38CC30225179A100BA2668 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +520,7 @@
 		D8CDB6BFD239E4E478079F2C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3D38CC2F225179A100BA2668 /* CloudKit.framework */,
 				3ABA9625A7F4C1A519864722 /* Pods_demo.framework */,
 				C34B8CBDF97B51FE7E0BD1C3 /* Pods_demo_demoTests.framework */,
 			);
@@ -560,6 +564,9 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};

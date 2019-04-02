@@ -71,6 +71,28 @@
 + (void)notifyKickoff:(NSString *)content;
 
 
+// webrtc
++ (void)notifyWebRTCInvite:(BDMessageModel *)messageModel;
+
++ (void)notifyWebRTCCancel:(BDMessageModel *)messageModel;
+
++ (void)notifyWebRTCOfferVideo:(BDMessageModel *)messageModel;
+
++ (void)notifyWebRTCOfferAudio:(BDMessageModel *)messageModel;
+
++ (void)notifyWebRTCAnswer:(BDMessageModel *)messageModel;
+
++ (void)notifyWebRTCCandidate:(BDMessageModel *)messageModel;
+
++ (void)notifyWebRTCAccept:(BDMessageModel *)messageModel;
+
++ (void)notifyWebRTCReject:(BDMessageModel *)messageModel;
+
++ (void)notifyWebRTCReady:(BDMessageModel *)messageModel;
+
++ (void)notifyWebRTCBusy:(BDMessageModel *)messageModel;
+
++ (void)notifyWebRTCClose:(BDMessageModel *)messageModel;
 
 @end
 

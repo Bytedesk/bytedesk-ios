@@ -64,28 +64,38 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
 - (BDMessageModel *) insertTextMessageLocal:(NSString *)tid
                            withWorkGroupWid:(NSString *)wid
-                withContent:(NSString *)content
+                                withContent:(NSString *)content
                                 withLocalId:(NSString *)localId
-                withSessionType:(NSString *)sessionType;
+                            withSessionType:(NSString *)sessionType;
 
 - (BDMessageModel *) insertImageMessageLocal:(NSString *)tid
                             withWorkGroupWid:(NSString *)wid
-                    withContent:(NSString *)content
+                                 withContent:(NSString *)content
                                  withLocalId:(NSString *)localId
-                withSessionType:(NSString *)sessionType;
+                             withSessionType:(NSString *)sessionType;
 
 - (BDMessageModel *) insertVoiceMessageLocal:(NSString *)tid
                             withWorkGroupWid:(NSString *)wid
                                 withContent:(NSString *)content
                                  withLocalId:(NSString *)localId
                             withSessionType:(NSString *)sessionType
-                             withVoiceLength:(int)voiceLength;
+                             withVoiceLength:(int)voiceLength
+                                  withFormat:format;
+
+- (BDMessageModel *) insertFileMessageLocal:(NSString *)tid
+                           withWorkGroupWid:(NSString *)wid
+                                withContent:(NSString *)content
+                                withLocalId:(NSString *)localId
+                            withSessionType:(NSString *)sessionType
+                                 withFormat:format
+                               withFileName:(NSString *)fileName
+                               withFileSize:(NSString *)fileSize;
 
 - (BDMessageModel *) insertCommodityMessageLocal:(NSString *)tid
                                 withWorkGroupWid:(NSString *)wid
-                                withContent:(NSString *)content
+                                     withContent:(NSString *)content
                                      withLocalId:(NSString *)localId
-                            withSessionType:(NSString *)sessionType;
+                                 withSessionType:(NSString *)sessionType;
 
 - (BDMessageModel *) insertRedPacketMessageLocal:(NSString *)tid
                                 withWorkGroupWid:(NSString *)wid
@@ -99,7 +109,10 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                             withLocalId:(NSString *)localId
                                withType:(NSString *)type
                         withSessionType:(NSString *)sessionType
-                        withVoiceLength:(int)voiceLength;
+                        withVoiceLength:(int)voiceLength
+                             withFormat:(NSString *)format
+                           withFileName:(NSString *)fileName
+                           withFileSize:(NSString *)fileSize;
 
 - (BOOL) insertMessage:(BDMessageModel *)message;
 - (BOOL) insertMessageLocal:(BDMessageModel *)message;

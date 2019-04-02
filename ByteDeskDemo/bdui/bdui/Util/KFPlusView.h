@@ -15,6 +15,9 @@
 -(void)shareShowFAQButtonPressed:(id)sender;
 -(void)shareRateButtonPressed:(id)sender;
 
+-(void)shareFileButtonPressed:(id)sender;
+-(void)shareDestroyAfterReadingButtonPressed:(id)sender;
+
 @end
 
 @interface KFPlusView : UIView

@@ -66,6 +66,12 @@ mTitleLabel;
     //
     mTitleLabel.text = threadModel.nickname;
     mContentLabel.text = threadModel.content;
+    //
+    if ([threadModel.is_temp boolValue]) {
+        mContentLabel.text = [NSString stringWithFormat:@"%@[临时会话]", threadModel.content];
+    } else {
+        mContentLabel.text = threadModel.content;
+    }
     // TODO: 根据来源不同显示不同的placeholder image
     [mAvatarImageView setImageWithURL:[NSURL URLWithString:threadModel.avatar] placeholderImage:[UIImage imageNamed:@"android_default_avatar"]];
     //

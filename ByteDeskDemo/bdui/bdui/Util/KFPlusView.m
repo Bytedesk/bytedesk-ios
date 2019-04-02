@@ -37,6 +37,12 @@
 @property (nonatomic, strong) UIButton  *shareRateButton;
 @property (nonatomic, strong) UILabel   *shareRateLabel;
 
+@property(nonatomic, strong) UIButton *shareFilebButton;
+@property(nonatomic, strong) UILabel *shareFileLabel;
+
+@property(nonatomic, strong) UIButton *shareDestroyAfterReadingButton;
+@property(nonatomic, strong) UILabel *shareDestroyAfterReadingLabel;
+
 @property (nonatomic, assign) NSInteger m_buttonMargin;
 
 @end
@@ -56,6 +62,12 @@
 
             shareRateButton,
             shareRateLabel,
+
+            shareFilebButton,
+            shareFileLabel,
+
+            shareDestroyAfterReadingButton,
+            shareDestroyAfterReadingLabel,
 
             m_buttonMargin;
 
@@ -87,6 +99,11 @@
     shareShowFAQLabel = nil;
     shareRateButton = nil;
     shareRateLabel = nil;
+    shareFilebButton = nil;
+    shareFileLabel = nil;
+    shareDestroyAfterReadingButton = nil;
+    shareDestroyAfterReadingLabel = nil;
+
 }
 
 /*
@@ -110,6 +127,10 @@
     [self addSubview:[self shareShowFAQButton]];
     [self addSubview:[self shareShowFAQLabel]];
     
+    [self addSubview:[self shareFilebButton]];
+    [self addSubview:[self shareFileLabel]];
+    [self addSubview:[self shareDestroyAfterReadingButton]];
+    [self addSubview:[self shareDestroyAfterReadingLabel]];
     
 }
 
@@ -289,9 +310,9 @@
 {
     if (!shareShowFAQLabel) {
         
-        CGRect frame = CGRectMake(m_buttonMargin*4 + SHAREMORE_ITEMS_WIDTH*3 + 0.0f,
+        CGRect frame = CGRectMake(m_buttonMargin*4 + SHAREMORE_ITEMS_WIDTH*3 + 13.0f,
                                   SHAREMORE_ITEMS_TOP_MARGIN + SHAREMORE_ITEMS_HEIGHT + SHAREMORE_ITEM_LABEL_TOP_MARGIN,
-                                  SHAREMORE_ITEM_LABEL_WIDTH + 5.0f,
+                                  SHAREMORE_ITEM_LABEL_WIDTH,
                                   SHAREMORE_ITEM_LABEL_HEIGHT);
         
         shareShowFAQLabel = [[UILabel alloc] initWithFrame:frame];
@@ -304,8 +325,91 @@
     return shareShowFAQLabel;
 }
 
+-(UIButton *)shareFilebButton
+{
+    if (!shareFilebButton) {
+        
+        CGRect frame = CGRectMake(m_buttonMargin,
+                                  SHAREMORE_ITEMS_TOP_MARGIN*3 + SHAREMORE_ITEMS_WIDTH + SHAREMORE_ITEM_LABEL_TOP_MARGIN*2,
+                                  SHAREMORE_ITEMS_WIDTH,
+                                  SHAREMORE_ITEMS_HEIGHT);
+        
+        shareFilebButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [shareFilebButton setFrame:frame];
+        [shareFilebButton setBackgroundImage:[UIImage imageNamed:@"sharemore_pic_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        //
+        shareFilebButton.layer.cornerRadius = 5.0;
+        shareFilebButton.layer.masksToBounds = YES;
+        shareFilebButton.layer.borderColor = [UIColor colorWithWhite:0.0 alpha:0.2].CGColor;
+        shareFilebButton.layer.borderWidth = 0.5;
+        
+        [shareFilebButton addTarget:self action:@selector(shareFileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return shareFilebButton;
+}
 
+-(UILabel *)shareFileLabel
+{
+    if (!shareFileLabel) {
+        
+        CGRect frame = CGRectMake(m_buttonMargin + 12.0f,
+                                  SHAREMORE_ITEMS_TOP_MARGIN*3 + SHAREMORE_ITEMS_HEIGHT*2 + SHAREMORE_ITEM_LABEL_TOP_MARGIN*2,
+                                  SHAREMORE_ITEM_LABEL_WIDTH,
+                                  SHAREMORE_ITEM_LABEL_HEIGHT);
+        
+        shareFileLabel = [[UILabel alloc] initWithFrame:frame];
+        [shareFileLabel setTextColor:[UIColor blackColor]];
+        [shareFileLabel setFont:[UIFont systemFontOfSize:SHAREMORE_ITEM_LABEL_FONTSIZE]];
+        [shareFileLabel setText:@"文件"];
+        [shareFileLabel setBackgroundColor:[UIColor clearColor]];
+    }
+    
+    return shareFileLabel;
+}
 
+-(UIButton *)shareDestroyAfterReadingButton
+{
+    if (!shareDestroyAfterReadingButton) {
+        
+        CGRect frame = CGRectMake(m_buttonMargin*2 + SHAREMORE_ITEMS_WIDTH,
+                                  SHAREMORE_ITEMS_TOP_MARGIN*3 + SHAREMORE_ITEMS_WIDTH + SHAREMORE_ITEM_LABEL_TOP_MARGIN*2,
+                                  SHAREMORE_ITEMS_WIDTH,
+                                  SHAREMORE_ITEMS_HEIGHT);
+        
+        shareDestroyAfterReadingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [shareDestroyAfterReadingButton setFrame:frame];
+        [shareDestroyAfterReadingButton setBackgroundImage:[UIImage imageNamed:@"sharemore_pic_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        //
+        shareDestroyAfterReadingButton.layer.cornerRadius = 5.0;
+        shareDestroyAfterReadingButton.layer.masksToBounds = YES;
+        shareDestroyAfterReadingButton.layer.borderColor = [UIColor colorWithWhite:0.0 alpha:0.2].CGColor;
+        shareDestroyAfterReadingButton.layer.borderWidth = 0.5;
+        
+        [shareDestroyAfterReadingButton addTarget:self action:@selector(shareDestroyAfterReadingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return shareDestroyAfterReadingButton;
+}
+
+-(UILabel *)shareDestroyAfterReadingLabel
+{
+    if (!shareDestroyAfterReadingLabel) {
+        
+        CGRect frame = CGRectMake(m_buttonMargin*2 + SHAREMORE_ITEMS_WIDTH,
+                                  SHAREMORE_ITEMS_TOP_MARGIN*3 + SHAREMORE_ITEMS_HEIGHT*2 + SHAREMORE_ITEM_LABEL_TOP_MARGIN*2,
+                                  SHAREMORE_ITEM_LABEL_WIDTH*1.5,
+                                  SHAREMORE_ITEM_LABEL_HEIGHT);
+        
+        shareDestroyAfterReadingLabel = [[UILabel alloc] initWithFrame:frame];
+        [shareDestroyAfterReadingLabel setTextColor:[UIColor blackColor]];
+        [shareDestroyAfterReadingLabel setFont:[UIFont systemFontOfSize:SHAREMORE_ITEM_LABEL_FONTSIZE]];
+        [shareDestroyAfterReadingLabel setText:@"阅后即焚"];
+        [shareDestroyAfterReadingLabel setBackgroundColor:[UIColor clearColor]];
+    }
+    
+    return shareDestroyAfterReadingLabel;
+}
 
 #pragma mark - Delegate
 
@@ -314,7 +418,6 @@
     if (delegate && [delegate respondsToSelector:@selector(sharePickPhotoButtonPressed:)]) {
         [delegate performSelector:@selector(sharePickPhotoButtonPressed:) withObject:nil];
     }
-    
 }
 
 -(void)shareTakePhotoButtonPressed:(id)sender
@@ -322,7 +425,6 @@
     if (delegate && [delegate respondsToSelector:@selector(shareTakePhotoButtonPressed:)]) {
         [delegate performSelector:@selector(shareTakePhotoButtonPressed:) withObject:nil];
     }
-
 }
 
 -(void)shareShowFAQButtonPressed:(id)sender
@@ -336,6 +438,18 @@
 {
     if (delegate && [delegate respondsToSelector:@selector(shareRateButtonPressed:)]) {
         [delegate performSelector:@selector(shareRateButtonPressed:) withObject:nil];
+    }
+}
+
+-(void)shareFileButtonPressed:(id)sender {
+    if (delegate && [delegate respondsToSelector:@selector(shareFileButtonPressed:)]) {
+        [delegate performSelector:@selector(shareFileButtonPressed:) withObject:nil];
+    }
+}
+
+-(void)shareDestroyAfterReadingButtonPressed:(id)sender {
+    if (delegate && [delegate respondsToSelector:@selector(shareDestroyAfterReadingButtonPressed:)]) {
+        [delegate performSelector:@selector(shareDestroyAfterReadingButtonPressed:) withObject:nil];
     }
 }
 

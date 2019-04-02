@@ -19,6 +19,8 @@
 // TODO: 打开放大图片
 - (void) imageViewClicked:(UIImageView *)imageView;
 
+- (void) fileViewClicked:(id)sender;
+
 @end
 
 
