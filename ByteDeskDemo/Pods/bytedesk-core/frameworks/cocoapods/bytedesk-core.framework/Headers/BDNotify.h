@@ -72,27 +72,27 @@
 
 
 // webrtc
-+ (void)notifyWebRTCInvite:(BDMessageModel *)messageModel;
++ (void)notifyWebRTCInvite:(NSDictionary *)dict;
 
-+ (void)notifyWebRTCCancel:(BDMessageModel *)messageModel;
++ (void)notifyWebRTCCancel:(NSDictionary *)dict;
 
-+ (void)notifyWebRTCOfferVideo:(BDMessageModel *)messageModel;
++ (void)notifyWebRTCOfferVideo:(NSDictionary *)dict;
 
-+ (void)notifyWebRTCOfferAudio:(BDMessageModel *)messageModel;
++ (void)notifyWebRTCOfferAudio:(NSDictionary *)dict;
 
-+ (void)notifyWebRTCAnswer:(BDMessageModel *)messageModel;
++ (void)notifyWebRTCAnswer:(NSDictionary *)dict;
 
-+ (void)notifyWebRTCCandidate:(BDMessageModel *)messageModel;
++ (void)notifyWebRTCCandidate:(NSDictionary *)dict;
 
-+ (void)notifyWebRTCAccept:(BDMessageModel *)messageModel;
++ (void)notifyWebRTCAccept:(NSDictionary *)dict;
 
-+ (void)notifyWebRTCReject:(BDMessageModel *)messageModel;
++ (void)notifyWebRTCReject:(NSDictionary *)dict;
 
-+ (void)notifyWebRTCReady:(BDMessageModel *)messageModel;
++ (void)notifyWebRTCReady:(NSDictionary *)dict;
 
-+ (void)notifyWebRTCBusy:(BDMessageModel *)messageModel;
++ (void)notifyWebRTCBusy:(NSDictionary *)dict;
 
-+ (void)notifyWebRTCClose:(BDMessageModel *)messageModel;
++ (void)notifyWebRTCClose:(NSDictionary *)dict;
 
 @end
 

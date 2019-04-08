@@ -96,6 +96,7 @@
  */
 - (void)sendReceiptDestroyedMessage:(NSString *)mId;
 
+
 /**
  发送消息回执通知
 
@@ -105,6 +106,33 @@
 - (void)sendReceiptMessage:(NSString *)mId status:(NSString *)status;
 
 
+- (void)sendWebRTCKeFuInviteMessage:(NSString *)uuid;
+
+- (void)sendWebRTCKeFuMessage:(NSString *)uuid type:(NSString *)type;
+
+- (void)sendWebRTCContactInviteMessage:(NSString *)uuid;
+
+- (void)sendWebRTCContactOfferMessage:(NSString *)uuid sdp:(NSString *)sdp;
+
+- (void)sendWebRTCContactAnswerMessage:(NSString *)uuid sdp:(NSString *)sdp;
+
+- (void)sendWebRTCContactCandidateMessage:(NSString *)uuid candidate:(NSString *)candidate;
+
+- (void)sendWebRTCContactCancelMessage:(NSString *)uuid;
+
+- (void)sendWebRTCContactAcceptMessage:(NSString *)uuid;
+
+- (void)sendWebRTCContactRejectMessage:(NSString *)uuid;
+
+- (void)sendWebRTCContactCloseMessage:(NSString *)uuid;
+
+- (void)sendWebRTCContactMessage:(NSString *)uuid type:(NSString *)type;
+
+- (void)sendWebRTCGroupInviteMessage:(NSString *)uuid;
+
+- (void)sendWebRTCGroupMessage:(NSString *)uuid type:(NSString *)type;
+
+
 /**
  发送webrtc消息
 
@@ -112,7 +140,7 @@
  @param type 消息类型：invite、sdp、ice等
  @param sessionType 会话类型：客服会话、单聊、群组
  */
-- (void)sendWebRTCMessage:(NSString *)uuid type:(NSString *)type sessionType:(NSString *)sessionType;
+- (void)sendWebRTCMessage:(NSString *)uuid type:(NSString *)type sessionType:(NSString *)sessionType content:(NSString *)content;
 
 /**
  发送消息

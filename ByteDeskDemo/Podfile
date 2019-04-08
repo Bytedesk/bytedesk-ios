@@ -4,7 +4,7 @@
 # 如果项目中需要用到一个workspace含多个project 公用一个podfile, 直接拷贝此文件放在跟workspace文件同目录 然后修改即可
 # 最后执行 pod update
 
-platform :ios, '9.0'
+platform :ios, '9.1'
 workspace 'bytedesk'
 
 

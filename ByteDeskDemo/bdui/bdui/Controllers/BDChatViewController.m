@@ -15,6 +15,7 @@
 #import "BDSingleImagePickerPreviewViewController.h"
 #import "KFDSUConstants.h"
 #import "BDGroupProfileViewController.h"
+#import "BDLeaveMessageViewController.h"
 
 #import <HCSStarRatingView/HCSStarRatingView.h>
 #import <bytedesk-core/bdcore.h>
@@ -86,6 +87,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 @property(nonatomic, assign) BOOL forceEnableBackGesture;
 
 @property (nonatomic, assign) BOOL mIsViewControllerClosed;
+@property(nonatomic, assign) BOOL mIsRobot;
 
 @end
 
@@ -98,6 +100,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 - (void)initWithWorkGroupWid:(NSString *)wId withTitle:(NSString *)title withPush:(BOOL)isPush {
     // titleView状态：1. 连接中...(发送请求到服务器，进入队列)，2. 排队中...(队列中等待客服接入会话), 3. 接入会话（一闪而过）
     self.mIsVisitor = YES;
+    self.mIsRobot = NO;
     self.mIsPush = isPush;
     self.mIsThreadClosed = NO;
     self.titleView.needsLoadingView = YES;
@@ -118,7 +121,10 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.mLastMessageId = INT_MAX;
     //
 //    UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithButton:[[QMUINavigationButton alloc] initWithType:QMUINavigationButtonTypeNormal title:@"评价"] target:self action:@selector(handleRightBarButtonItemClicked:)];
-//    self.navigationItem.rightBarButtonItem = rightItem;
+    
+    UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithImage:[UIImage imageNamed:@"icon_more" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] target:self action:@selector(handleRightBarButtonItemClicked:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    
     //
     [BDCoreApis requestThreadWithWorkGroupWid:wId resultSuccess:^(NSDictionary *dict) {
 //        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
@@ -141,6 +147,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 - (void)initWithAgentUid:(NSString *)uId withTitle:(NSString *)title withPush:(BOOL)isPush {
     //
     self.mIsVisitor = YES;
+    self.mIsRobot = NO;
     self.mIsPush = isPush;
     self.mIsThreadClosed = NO;
     self.titleView.needsLoadingView = YES;
@@ -159,6 +166,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.rateNote = @"";
     self.rateInvite = false;
     self.mLastMessageId = INT_MAX;
+    //
+    UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithImage:[UIImage imageNamed:@"icon_more" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] target:self action:@selector(handleRightBarButtonItemClicked:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
     //
     [BDCoreApis requestThreadWithAgentUid:uId resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
@@ -710,8 +720,73 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
     // 访客端
     if (self.mIsVisitor) {
-        //
-        [self showRateView];
+        
+//        [self showRateView];
+        
+        QMUIAlertAction *leaveMessageAction = [QMUIAlertAction actionWithTitle:@"留言" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+            
+            //
+            BDLeaveMessageViewController *leaveMessageVC = [[BDLeaveMessageViewController alloc] init];
+            [leaveMessageVC initWithType:self.mRequestType workGroupWid:self.mWorkGroupWid agentUid:self.mAgentUid];
+            [self.navigationController pushViewController:leaveMessageVC animated:YES];
+            
+        }];
+        
+        NSString *title = self.mIsRobot ? @"人工客服" : @"机器人";
+        QMUIAlertAction *robotAction = [QMUIAlertAction actionWithTitle:title style:QMUIAlertActionStyleDestructive handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+            
+            if (self.mIsRobot) {
+                
+                // TODO: 切换人工客服
+                if ([self.mRequestType isEqualToString:BD_THREAD_REQUEST_TYPE_WORK_GROUP]) {
+                    
+                    //
+                    [BDCoreApis requestThreadWithWorkGroupWid:self.mWorkGroupWid resultSuccess:^(NSDictionary *dict) {
+                        //        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
+                        //
+                        [self dealWithRequestThreadResult:dict];
+                    } resultFailed:^(NSError *error) {
+                        DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+                    }];
+                    
+                } else {
+                    
+                    //
+                    [BDCoreApis requestThreadWithAgentUid:self.mAgentUid resultSuccess:^(NSDictionary *dict) {
+                        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
+                        //
+                        [self dealWithRequestThreadResult:dict];
+                        
+                    } resultFailed:^(NSError *error) {
+                        DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+                    }];
+                }
+                
+            } else {
+                
+                // 切换机器人
+                [BDCoreApis initAnswer:self.mRequestType withWorkGroupWid:self.mWorkGroupWid withAgentUid:self.mAgentUid resultSuccess:^(NSDictionary *dict) {
+                    DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
+                    
+                    // TODO: 待优化
+                    NSDictionary *messageDict = dict[@"data"];
+                    BDMessageModel *messageModel = [[BDMessageModel alloc] initWithDictionary:messageDict];
+                    [[BDDBApis sharedInstance] insertMessage:messageModel];
+                    
+                    [self reloadTableData];
+                    
+                } resultFailed:^(NSError *error) {
+                    DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+                }];
+                
+            }
+            // 置反
+            self.mIsRobot = !self.mIsRobot;
+        }];
+        QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"提示" message:@"" preferredStyle:QMUIAlertControllerStyleActionSheet];
+        [alertController addAction:leaveMessageAction];
+        [alertController addAction:robotAction];
+        [alertController showWithAnimated:YES];
         
     } else {
         //
@@ -1057,6 +1132,33 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 // TODO: 区分发送消息
 -(void)sendTextMessage:(NSString *)content {
     DDLogInfo(@"%s, content:%@, tid:%@, sessionType:%@ ", __PRETTY_FUNCTION__, content, self.mThreadTid,  self.mThreadType);
+    
+    if (self.mIsRobot) {
+    
+        // 请求机器人问答
+        [BDCoreApis messageAnswer:self.mRequestType withWorkGroupWid:self.mWorkGroupWid withAgentUid:self.mAgentUid withMessage:content resultSuccess:^(NSDictionary *dict) {
+            DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
+            
+            NSDictionary *queryMessageDict = dict[@"data"][@"query"];
+            NSDictionary *replyMessageDict = dict[@"data"][@"reply"];
+
+            //
+            BDMessageModel *queryMessageModel = [[BDMessageModel alloc] initWithDictionary:queryMessageDict];
+            [[BDDBApis sharedInstance] insertMessage:queryMessageModel];
+
+            //
+            BDMessageModel *replyMessageModel = [[BDMessageModel alloc] initWithDictionary:replyMessageDict];
+            [[BDDBApis sharedInstance] insertMessage:replyMessageModel];
+            
+            //
+            [self reloadTableData];
+            
+        } resultFailed:^(NSError *error) {
+            DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+        }];
+        
+        return;
+    }
     
     // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
     NSString *localId = [[NSUUID UUID] UUIDString];

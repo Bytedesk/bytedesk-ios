@@ -468,7 +468,6 @@
         
         if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
             [QMUITips showSucceed:@"注册成功" inView:self.navigationController.view hideAfterDelay:4];
-        } else {
             [QMUITips showError:message inView:self.navigationController.view hideAfterDelay:4];
         }
         

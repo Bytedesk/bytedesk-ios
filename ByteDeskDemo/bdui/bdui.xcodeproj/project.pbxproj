@@ -333,6 +333,8 @@
 		3D3A7E7222462152007EEC81 /* BD_CafRecordWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A7E5B22462152007EEC81 /* BD_CafRecordWriter.m */; };
 		3D3A7E7322462152007EEC81 /* BD_MLAudioMeterObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A7E5C22462152007EEC81 /* BD_MLAudioMeterObserver.m */; };
 		3D3A7E7422462152007EEC81 /* BD_MLAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A7E5D22462152007EEC81 /* BD_MLAudioRecorder.m */; };
+		3D3B30F3225AB282000FC60F /* BDLeaveMessageViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D3B30F1225AB282000FC60F /* BDLeaveMessageViewController.h */; };
+		3D3B30F4225AB282000FC60F /* BDLeaveMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3B30F2225AB282000FC60F /* BDLeaveMessageViewController.m */; };
 		3D3C28DE2236804700E288AF /* BDChatBaseViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D3C28DC2236804700E288AF /* BDChatBaseViewController.h */; };
 		3D3C28DF2236804700E288AF /* BDChatBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C28DD2236804700E288AF /* BDChatBaseViewController.m */; };
 		3D46C221223B895F00BA41C4 /* BDCommodityTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D46C21F223B895F00BA41C4 /* BDCommodityTableViewCell.h */; };
@@ -710,6 +712,8 @@
 		3D3A7E5B22462152007EEC81 /* BD_CafRecordWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BD_CafRecordWriter.m; sourceTree = "<group>"; };
 		3D3A7E5C22462152007EEC81 /* BD_MLAudioMeterObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BD_MLAudioMeterObserver.m; sourceTree = "<group>"; };
 		3D3A7E5D22462152007EEC81 /* BD_MLAudioRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BD_MLAudioRecorder.m; sourceTree = "<group>"; };
+		3D3B30F1225AB282000FC60F /* BDLeaveMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDLeaveMessageViewController.h; sourceTree = "<group>"; };
+		3D3B30F2225AB282000FC60F /* BDLeaveMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDLeaveMessageViewController.m; sourceTree = "<group>"; };
 		3D3C28DC2236804700E288AF /* BDChatBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDChatBaseViewController.h; sourceTree = "<group>"; };
 		3D3C28DD2236804700E288AF /* BDChatBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDChatBaseViewController.m; sourceTree = "<group>"; };
 		3D46C21F223B895F00BA41C4 /* BDCommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDCommodityTableViewCell.h; sourceTree = "<group>"; };
@@ -1340,6 +1344,8 @@
 				3D4C5C9D2201E8680056BC63 /* BDFeedbackHistoryViewController.m */,
 				3DE6FD812234F3C2006F1329 /* BDQRCodeViewController.h */,
 				3DE6FD822234F3C2006F1329 /* BDQRCodeViewController.m */,
+				3D3B30F1225AB282000FC60F /* BDLeaveMessageViewController.h */,
+				3D3B30F2225AB282000FC60F /* BDLeaveMessageViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -1412,6 +1418,7 @@
 				3DAF8CB021EC1B4E0000E73D /* BDContactProfileViewController.h in Headers */,
 				3D86FF5A22295F8A00477E76 /* BDGroupInviteTableViewController.h in Headers */,
 				3D4C5C9E2201E8680056BC63 /* BDFeedbackHistoryViewController.h in Headers */,
+				3D3B30F3225AB282000FC60F /* BDLeaveMessageViewController.h in Headers */,
 				3D3150F11F1A2A410005DB6C /* BDUIApis.h in Headers */,
 				3D4C5C9A2201E8510056BC63 /* BDFeedbackCategoryViewController.h in Headers */,
 				3D1996C31FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.h in Headers */,
@@ -1866,7 +1873,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "# 编译的时候\n\nif [ \"${ACTION}\" = \"build\" ]\n\nthen\n\n# 生成通用framework的目录\n\nINSTALL_DIR=${SRCROOT}/products/${PRODUCT_NAME}.framework\n\n# 需要合并的framework\n\nDEVICE_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphoneos/${PRODUCT_NAME}.framework\n\nSIMULATOR_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphonesimulator/${PRODUCT_NAME}.framework\n\n# 如果已经存在，则删除\n\nif [ -d \"${INSTALL_DIR}\"]\n\nthen\n\nrm -rf \"${INSTALL_DIR}\"\n\nfi\n\n# 创建目录\n\nmkdir -p \"${INSTALL_DIR}\"\n\n# 拷贝Header到目标目录\n\ncp -R \"${DEVICE_DIR}/\" \"${INSTALL_DIR}/\"\n\n# 合并framework\n\nlipo -create \"${DEVICE_DIR}/${PRODUCT_NAME}\" \"${SIMULATOR_DIR}/${PRODUCT_NAME}\" -output \"${INSTALL_DIR}/${PRODUCT_NAME}\"\n\n# 编译完成后打开文件夹\n\n#open \"${DEVICE_DIR}\"\n\nopen \"${SRCROOT}/products/${PRODUCT_NAME}.framework\"\n\nfi\n\n";
 		};
 		40E4D3F06829C4C7A96FAE25 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1965,6 +1972,7 @@
 				3D4C5C9B2201E8510056BC63 /* BDFeedbackCategoryViewController.m in Sources */,
 				3D3C28DF2236804700E288AF /* BDChatBaseViewController.m in Sources */,
 				3D5606CB2057C875000E770C /* BDSingleImagePickerPreviewViewController.m in Sources */,
+				3D3B30F4225AB282000FC60F /* BDLeaveMessageViewController.m in Sources */,
 				3DD5C6A42238F0B1002C4693 /* KFEmotionView.m in Sources */,
 				3D1996F31FCE638800219FEF /* KFDSInputEmotionParser.m in Sources */,
 				3D3A7E7222462152007EEC81 /* BD_CafRecordWriter.m in Sources */,
@@ -2142,7 +2150,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/bdui/PrefixHeader.pch";
 				INFOPLIST_FILE = bdui/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2200,7 +2208,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/bdui/PrefixHeader.pch";
 				INFOPLIST_FILE = bdui/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

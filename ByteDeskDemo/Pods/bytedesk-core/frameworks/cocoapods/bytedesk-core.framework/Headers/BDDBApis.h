@@ -103,6 +103,23 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                                      withLocalId:(NSString *)localId
                             withSessionType:(NSString *)sessionType;
 
+
+/**
+ 插入消息到本地
+  TODO: 加频率限制，每秒1条
+
+ @param tid <#tid description#>
+ @param wid <#wid description#>
+ @param content <#content description#>
+ @param localId <#localId description#>
+ @param type <#type description#>
+ @param sessionType <#sessionType description#>
+ @param voiceLength <#voiceLength description#>
+ @param format <#format description#>
+ @param fileName <#fileName description#>
+ @param fileSize <#fileSize description#>
+ @return <#return value description#>
+ */
 - (BDMessageModel *) insertMessageLocal:(NSString *)tid
                        withWorkGroupWid:(NSString *)wid
                             withContent:(NSString *)content
@@ -114,16 +131,30 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                            withFileName:(NSString *)fileName
                            withFileSize:(NSString *)fileSize;
 
+/**
+  TODO: 加频率限制，每秒1条
+
+ @param message <#message description#>
+ @return <#return value description#>
+ */
 - (BOOL) insertMessage:(BDMessageModel *)message;
+
+/**
+  TODO: 加频率限制，每秒1条
+
+ @param message <#message description#>
+ @return <#return value description#>
+ */
 - (BOOL) insertMessageLocal:(BDMessageModel *)message;
 
 - (NSMutableArray *)getMessagesWithType:(NSString *)type withUid:(NSString *)uid;
 - (NSMutableArray *)getMessagesPage:(NSUInteger)page withSize:(NSUInteger)size withType:(NSString *)type withUid:(NSString *)uid;
 
-
 - (BOOL) updateMessage:(NSString *)localId withServerId:(NSNumber *)serverId withMid:(NSString *)mid withStatus:(NSString *)status;
 - (BOOL) updateMessageError:(NSString *)localId;
 - (BOOL) updateMessage:(NSString *)localId withStatus:(NSString *)status;
+- (BOOL) updateMessage:(NSString *)mId withLocalFilePath:(NSString *)localFilePath;
+
 - (BOOL) deleteMessage:(NSString *)mid;
 
 - (BOOL) deleteThreadMessages:(NSString *)tid;

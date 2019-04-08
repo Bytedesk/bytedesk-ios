@@ -1084,6 +1084,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
             localId:(NSString *)localId
         sessionType:(NSString *)sessiontype
         voiceLength:(int)voiceLength
+             format:(NSString *)format
 destroyAfterReading:(BOOL)destroyAfterReading
  destroyAfterLength:(int)destroyAfterLength
       resultSuccess:(SuccessCallbackBlock)success
@@ -1182,6 +1183,54 @@ destroyAfterReading:(BOOL)destroyAfterReading
          withFileName:(NSString *)fileName
          resultSuccess:(SuccessCallbackBlock)success
           resultFailed:(FailedCallbackBlock)failed;
+
+
+#pragma mark - 机器人
+
++ (void)initAnswer:(NSString *)type
+  withWorkGroupWid:(NSString *)wid
+      withAgentUid:(NSString *)aid
+     resultSuccess:(SuccessCallbackBlock)success
+      resultFailed:(FailedCallbackBlock)failed;
+
++ (void)topAnswer:(NSString *)uid
+    withThreadTid:(NSString *)tid
+    resultSuccess:(SuccessCallbackBlock)success
+     resultFailed:(FailedCallbackBlock)failed;
+
++ (void)queryAnswer:(NSString *)uid
+      withThreadTid:(NSString *)tid
+     withQuestinQid:(NSString *)aid
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
++ (void)messageAnswer:(NSString *)type
+     withWorkGroupWid:(NSString *)wid
+         withAgentUid:(NSString *)aid
+          withMessage:(NSString *)content
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 留言
+
+ @param type <#type description#>
+ @param wid <#wid description#>
+ @param aid <#aid description#>
+ @param mobile <#mobile description#>
+ @param email <#email description#>
+ @param content <#content description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)leaveMessage:(NSString *)type
+    withWorkGroupWid:(NSString *)wid
+        withAgentUid:(NSString *)aid
+          withMobile:(NSString *)mobile
+           withEmail:(NSString *)email
+         withContent:(NSString *)content
+       resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
 
 /**
  <#Description#>

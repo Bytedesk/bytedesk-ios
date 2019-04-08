@@ -645,6 +645,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
 /**
  同步发送消息
+ TODO: 加频率限制，每秒1条
  
  @param content <#content description#>
  @param type <#type description#>
@@ -657,7 +658,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
             localId:(NSString *)localId
         sessionType:(NSString *)sessiontype
         voiceLength:(int)voiceLength
-             format:format
+             format:(NSString *)format
 destroyAfterReading:(BOOL)destroyAfterReading
  destroyAfterLength:(int)destroyAfterLength
       resultSuccess:(SuccessCallbackBlock)success
@@ -727,12 +728,13 @@ destroyAfterReading:(BOOL)destroyAfterReading
 
 #pragma mark - 机器人
 
-- (void)getInitAnswer:(NSString *)uid
-        withThreadTid:(NSString *)tid
+- (void)initAnswer:(NSString *)type
+  withWorkGroupWid:(NSString *)wid
+      withAgentUid:(NSString *)aid
         resultSuccess:(SuccessCallbackBlock)success
          resultFailed:(FailedCallbackBlock)failed;
 
-- (void)getTopAnswer:(NSString *)uid
+- (void)topAnswer:(NSString *)uid
        withThreadTid:(NSString *)tid
        resultSuccess:(SuccessCallbackBlock)success
         resultFailed:(FailedCallbackBlock)failed;
@@ -743,12 +745,22 @@ destroyAfterReading:(BOOL)destroyAfterReading
       resultSuccess:(SuccessCallbackBlock)success
        resultFailed:(FailedCallbackBlock)failed;
 
-- (void)messageAnswer:(NSString *)uid
-        withThreadTid:(NSString *)tid
+- (void)messageAnswer:(NSString *)type
+     withWorkGroupWid:(NSString *)wid
+         withAgentUid:(NSString *)aid
           withMessage:(NSString *)content
         resultSuccess:(SuccessCallbackBlock)success
          resultFailed:(FailedCallbackBlock)failed;
 
+
+- (void)leaveMessage:(NSString *)type
+    withWorkGroupWid:(NSString *)wid
+        withAgentUid:(NSString *)aid
+          withMobile:(NSString *)mobile
+           withEmail:(NSString *)email
+         withContent:(NSString *)content
+       resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
 
 #pragma mark - 意见反馈
 
