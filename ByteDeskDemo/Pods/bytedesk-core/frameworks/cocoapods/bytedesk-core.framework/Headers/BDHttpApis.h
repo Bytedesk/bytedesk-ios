@@ -659,6 +659,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
         sessionType:(NSString *)sessiontype
         voiceLength:(int)voiceLength
              format:(NSString *)format
+           fileName:(NSString *)fileName
+           fileSize:(NSString *)fileSize
 destroyAfterReading:(BOOL)destroyAfterReading
  destroyAfterLength:(int)destroyAfterLength
       resultSuccess:(SuccessCallbackBlock)success
@@ -758,6 +760,9 @@ destroyAfterReading:(BOOL)destroyAfterReading
         withAgentUid:(NSString *)aid
           withMobile:(NSString *)mobile
            withEmail:(NSString *)email
+        withNickname:(NSString *)nickname
+        withLocation:(NSString *)location
+         withCountry:(NSString *)country
          withContent:(NSString *)content
        resultSuccess:(SuccessCallbackBlock)success
         resultFailed:(FailedCallbackBlock)failed;

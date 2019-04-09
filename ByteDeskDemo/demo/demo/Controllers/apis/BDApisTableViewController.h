@@ -6,11 +6,12 @@
 //  Copyright © 2018 KeFuDaShi. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
+#import <QMUIKit/QMUIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BDApisTableViewController : UITableViewController
+@interface BDApisTableViewController : QMUICommonTableViewController
 
 @end
 

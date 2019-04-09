@@ -59,7 +59,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = @"萝卜丝(未连接)";
+//    self.navigationItem.title = @"萝卜丝(未连接)";
+    self.title = @"萝卜丝(未连接)";
     self.mLoginItemDetailText = @"当前未连接，点我建立连接";
     
     // 公共接口
@@ -495,12 +496,12 @@
     NSString *status = [notification object];
     //
     if ([status isEqualToString:BD_USER_STATUS_CONNECTING]) {
-        self.navigationItem.title = @"萝卜丝(连接中...)";
+        self.title = @"萝卜丝(连接中...)";
     } else if ([status isEqualToString:BD_USER_STATUS_CONNECTED]){
-        self.navigationItem.title = @"萝卜丝(已连接)";
+        self.title = @"萝卜丝(已连接)";
         self.mLoginItemDetailText = [NSString stringWithFormat:@"当前已连接: %@", [BDSettings getUsername]];
     } else {
-        self.navigationItem.title = @"萝卜丝(连接断开)";
+        self.title = @"萝卜丝(连接断开)";
         self.mLoginItemDetailText = @"当前未连接";
     }
     [self.tableView reloadData];

@@ -154,6 +154,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (BOOL) updateMessageError:(NSString *)localId;
 - (BOOL) updateMessage:(NSString *)localId withStatus:(NSString *)status;
 - (BOOL) updateMessage:(NSString *)mId withLocalFilePath:(NSString *)localFilePath;
+- (BOOL) updateMessageLocal:(NSString *)localId withLocalFilePath:(NSString *)localFilePath;
 
 - (BOOL) deleteMessage:(NSString *)mid;
 

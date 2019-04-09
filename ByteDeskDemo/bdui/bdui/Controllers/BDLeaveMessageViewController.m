@@ -2,7 +2,7 @@
 //  BDLeaveMessageViewController.m
 //  bytedesk-ui
 //
-//  Created by 宁金鹏 on 2019/4/8.
+//  Created by 萝卜丝 on 2019/4/8.
 //  Copyright © 2019 KeFuDaShi. All rights reserved.
 //
 
@@ -41,7 +41,14 @@
 
 - (void)save {
     
-    [BDCoreApis leaveMessage:self.type withWorkGroupWid:self.wid withAgentUid:self.uid withMobile:@"手机号" withEmail:@"邮箱" withContent:@"留言内容" resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis leaveMessage:self.type withWorkGroupWid:self.wid withAgentUid:self.uid
+                  withMobile:@"手机号"
+                   withEmail:@"邮箱"
+                withNickname:@"昵称"
+                withLocation:@"所属区域"
+                 withCountry:@"意向国家"
+                 withContent:@"留言内容"
+               resultSuccess:^(NSDictionary *dict) {
         
     } resultFailed:^(NSError *error) {
         

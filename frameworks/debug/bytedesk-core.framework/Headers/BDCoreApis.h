@@ -1085,6 +1085,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
         sessionType:(NSString *)sessiontype
         voiceLength:(int)voiceLength
              format:(NSString *)format
+           fileName:(NSString *)fileName
+           fileSize:(NSString *)fileSize
 destroyAfterReading:(BOOL)destroyAfterReading
  destroyAfterLength:(int)destroyAfterLength
       resultSuccess:(SuccessCallbackBlock)success
@@ -1211,23 +1213,30 @@ destroyAfterReading:(BOOL)destroyAfterReading
         resultSuccess:(SuccessCallbackBlock)success
          resultFailed:(FailedCallbackBlock)failed;
 
+
 /**
  留言
 
- @param type <#type description#>
- @param wid <#wid description#>
- @param aid <#aid description#>
- @param mobile <#mobile description#>
- @param email <#email description#>
- @param content <#content description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param type 区分工作组会话 'workGroup'、指定坐席会话 'appointed'
+ @param wid 工作组 wid
+ @param aid 指定坐席 客服uid
+ @param mobile 手机
+ @param email 邮箱
+ @param nickname 昵称
+ @param location 所属区域
+ @param country 意向国家
+ @param content 留言内容
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)leaveMessage:(NSString *)type
     withWorkGroupWid:(NSString *)wid
         withAgentUid:(NSString *)aid
           withMobile:(NSString *)mobile
            withEmail:(NSString *)email
+        withNickname:(NSString *)nickname
+        withLocation:(NSString *)location
+         withCountry:(NSString *)country
          withContent:(NSString *)content
        resultSuccess:(SuccessCallbackBlock)success
         resultFailed:(FailedCallbackBlock)failed;

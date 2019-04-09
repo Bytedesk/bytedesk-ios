@@ -2,7 +2,7 @@
 //  KFFriendViewController.m
 //  demo
 //
-//  Created by 宁金鹏 on 2018/12/23.
+//  Created by 萝卜丝 on 2018/12/23.
 //  Copyright © 2018 KeFuDaShi. All rights reserved.
 //
 

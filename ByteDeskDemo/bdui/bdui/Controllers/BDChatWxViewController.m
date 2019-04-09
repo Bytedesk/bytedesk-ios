@@ -2,7 +2,7 @@
 //  BDChatWxViewController.m
 //  bytedesk-ui
 //
-//  Created by 宁金鹏 on 2019/3/11.
+//  Created by 萝卜丝 on 2019/3/11.
 //  Copyright © 2019 KeFuDaShi. All rights reserved.
 //
 
@@ -207,6 +207,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
         //
         [self dealWithRequestThreadResult:dict];
+        
     } resultFailed:^(NSError *error) {
         DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
     }];
