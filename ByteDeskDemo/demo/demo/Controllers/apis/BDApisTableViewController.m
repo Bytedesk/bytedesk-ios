@@ -2,7 +2,7 @@
 //  KFSocialApiViewController.m
 //  demo
 //
-//  Created by 萝卜丝 on 2018/4/12.
+//  Created by 萝卜丝1.5.8 on 2018/4/12.
 //  Copyright © 2018年 KeFuDaShi. All rights reserved.
 //
 
@@ -59,8 +59,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    self.navigationItem.title = @"萝卜丝(未连接)";
-    self.title = @"萝卜丝(未连接)";
+//    self.navigationItem.title = @"萝卜丝1.5.8(未连接)";
+    self.title = @"萝卜丝1.5.8(未连接)";
     self.mLoginItemDetailText = @"当前未连接，点我建立连接";
     
     // 公共接口
@@ -402,7 +402,7 @@
     // 获取subDomain，也即企业号：登录后台->所有设置->客服账号->企业号
     NSString *subDomain = @"vip";
     // 登录
-    [BDCoreApis loginWithUsername:username withPassword:password withAppkey:DEFAULT_TEST_APPKEY withSubdomain:subDomain resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis loginWithUsername:[username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] withPassword:password withAppkey:DEFAULT_TEST_APPKEY withSubdomain:subDomain resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
         [QMUITips hideAllToastInView:self.view animated:YES];
     } resultFailed:^(NSError *error) {
@@ -429,27 +429,43 @@
 
 
 - (void)logout {
+    
     // 退出登录
-    [BDCoreApis logoutResultSuccess:^(NSDictionary *dict) {
-        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
-        
-        NSNumber *status_code = [dict objectForKey:@"status_code"];
-        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            
-        } else {
-            
-            if ([status_code isEqualToNumber:[NSNumber numberWithInt:401]]) {
-                // TOKEN过期
-            }
-            
-            NSString *message = dict[@"message"];
-            DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
-            [QMUITips showError:message inView:self.view hideAfterDelay:2];
-        }
-        
-    } resultFailed:^(NSError *error) {
-        DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+    QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+        //
     }];
+    QMUIAlertAction *closeAction = [QMUIAlertAction actionWithTitle:@"退出" style:QMUIAlertActionStyleDestructive handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+        //
+        [QMUITips showLoading:@"退出中..." inView:self.view];
+        // 退出登录
+        [BDCoreApis logoutResultSuccess:^(NSDictionary *dict) {
+            DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
+            
+            NSNumber *status_code = [dict objectForKey:@"status_code"];
+            if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                
+            } else {
+                
+                if ([status_code isEqualToNumber:[NSNumber numberWithInt:401]]) {
+                    // TOKEN过期
+                } else if ([status_code isEqualToNumber:[NSNumber numberWithInt:-1001]]) {
+                    // 超时
+                }
+                
+                NSString *message = dict[@"message"];
+                DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
+                [QMUITips showError:message inView:self.view hideAfterDelay:2];
+            }
+            [QMUITips hideAllToastInView:self.view animated:YES];
+        } resultFailed:^(NSError *error) {
+            DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+            [QMUITips hideAllToastInView:self.view animated:YES];
+        }];
+    }];
+    QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"确定要退出登录？" message:@"" preferredStyle:QMUIAlertControllerStyleAlert];
+    [alertController addAction:cancelAction];
+    [alertController addAction:closeAction];
+    [alertController showWithAnimated:YES];
 }
 
 
@@ -461,7 +477,7 @@
     // 获取subDomain，也即企业号：登录后台->所有设置->客服账号->企业号
     NSString *subDomain = @"vip";
     //
-    [BDCoreApis registerUser:username withNickname:nickname withPassword:password withSubDomain:subDomain resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis registerUser:[username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] withNickname:nickname withPassword:[password stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] withSubDomain:subDomain resultSuccess:^(NSDictionary *dict) {
         
         NSString *message = dict[@"message"];
         NSNumber *status_code = dict[@"status_code"];
@@ -496,12 +512,12 @@
     NSString *status = [notification object];
     //
     if ([status isEqualToString:BD_USER_STATUS_CONNECTING]) {
-        self.title = @"萝卜丝(连接中...)";
+        self.title = @"萝卜丝1.5.8(连接中...)";
     } else if ([status isEqualToString:BD_USER_STATUS_CONNECTED]){
-        self.title = @"萝卜丝(已连接)";
+        self.title = @"萝卜丝1.5.8(已连接)";
         self.mLoginItemDetailText = [NSString stringWithFormat:@"当前已连接: %@", [BDSettings getUsername]];
     } else {
-        self.title = @"萝卜丝(连接断开)";
+        self.title = @"萝卜丝1.5.8(连接断开)";
         self.mLoginItemDetailText = @"当前未连接";
     }
     [self.tableView reloadData];

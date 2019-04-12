@@ -80,7 +80,7 @@
         } else {
             // 联系人
             [cell.imageView setImageWithURL:[NSURL URLWithString:self.mContactModel.avatar] placeholderImage:[UIImage imageNamed:@"admin_default_avatar"]];
-            cell.textLabel.text = self.mContactModel.real_name;
+            cell.textLabel.text = self.mContactModel.nickname;
             cell.detailTextLabel.text = self.mContactModel.mdescription;
         }
         // cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
