@@ -28,7 +28,9 @@
 // 打开放大图片
 - (void) imageViewClicked:(UIImageView *)imageView;
 
-// 
+- (void) fileViewClicked:(id)sender;
+
+- (void) sendErrorStatusButtonClicked:(BDMessageModel *)model;
 
 @end
 
@@ -41,12 +43,12 @@
 @property (nonatomic, strong) QMUILabel                   *timestampLabel;
 @property (nonatomic, strong) QMUILabel                   *nicknameLabel;          //姓名（群显示 个人不显示）
 @property (nonatomic, strong) UIImageView                 *avatarImageView;
-@property (nonatomic, strong) BDMsgBaseContentView      *bubbleView;             //内容区域
+@property (nonatomic, strong) BDMsgBaseContentView        *bubbleView;             //内容区域
 @property (nonatomic, strong) UIActivityIndicatorView     *sendingStatusActivityIndicator;  //发送loading
 @property (nonatomic, strong) QMUIButton                  *resendButton;             //重试
 @property (nonatomic, strong) KFDSBadgeView               *audioUnplayedIcon;         //语音未读红点
 @property (nonatomic, strong) QMUILabel                   *readLabel;               //已读
-@property (nonatomic, strong) BDMessageModel            *messageModel;
+@property (nonatomic, strong) BDMessageModel              *messageModel;
 
 @property(nonatomic, assign) id<KFDSMsgViewCellDelegate>  delegate;
 

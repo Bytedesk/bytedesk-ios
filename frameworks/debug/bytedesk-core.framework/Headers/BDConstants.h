@@ -60,7 +60,7 @@
 #define BD_THREAD_REQUEST_TYPE_APPOINTED    @"appointed"
 
 // 会话类型
-#define BD_THREAD_TYPE_THREAD               @"thread"  // 访客会话
+#define BD_THREAD_TYPE_THREAD               @"thread"  // 客服会话
 #define BD_THREAD_TYPE_CONTACT              @"contact" // 一对一
 #define BD_THREAD_TYPE_GROUP                @"group"   // 群组
 
@@ -76,7 +76,7 @@
 #define CLIENT_ID_ADMIN                     @"ios"
 #define CLIENT_SECRET_ADMIN                 @"XSf9jKCAPpeMwDZakt8AkvKppHEmXAb5sX0FtXwn"
 //
-#define kTimeOutInterval                    30
+#define kTimeOutInterval                    60
 
 // 角色类型
 #define BD_ROLE_VISITOR                     @"visitor" // 访客

@@ -40,6 +40,7 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 //        [self setQmui_shouldShowDebugColor:YES];
+        
         [self addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGesturePress:)]];
     }
     return self;
@@ -181,8 +182,10 @@
     [self.contentView addSubview:self.avatarImageView];
     [self.contentView addSubview:self.nicknameLabel];
     [self.contentView addSubview:self.bubbleView];
+    
     [self.contentView addSubview:self.sendingStatusActivityIndicator];
     [self.contentView addSubview:self.resendButton];
+    
     [self.contentView addSubview:self.audioUnplayedIcon];
     [self.contentView addSubview:self.readLabel];
 }
@@ -231,13 +234,17 @@
 - (UIActivityIndicatorView *)sendingStatusActivityIndicator {
     if (!_sendingStatusActivityIndicator) {
         _sendingStatusActivityIndicator = [UIActivityIndicatorView new];
+        _sendingStatusActivityIndicator.color = [UIColor grayColor];
     }
+    [_sendingStatusActivityIndicator startAnimating];
     return _sendingStatusActivityIndicator;
 }
 
 - (QMUIButton *)resendButton {
     if (!_resendButton) {
-        _resendButton = [QMUIButton new];
+        _resendButton = [[QMUIButton alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
+        [_resendButton setImage:[UIImage imageNamed:@"appkefu_error.png" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        [_resendButton addTarget:self action:@selector(sendErrorStatusButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _resendButton;
 }
@@ -258,7 +265,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-//    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
     [self layoutTimestampLabel];
     [self layoutAvatarImageView];
@@ -303,7 +310,6 @@
     }
 }
 
-
 - (void)layoutContentView {
     //
     [_bubbleView refresh:_messageModel];
@@ -312,10 +318,43 @@
 
 - (void)layoutSendingStatusActivityIndicator {
     
+    DDLogInfo(@"%s, status: %@, content: %@", __PRETTY_FUNCTION__, self.messageModel.status, self.messageModel.content);
+    
+//    if ([self.messageModel isSend]) {
+        if ([self.messageModel.status isKindOfClass:[NSString class]] &&
+            [self.messageModel.status isEqualToString:BD_MESSAGE_STATUS_SENDING]) {
+            
+            _sendingStatusActivityIndicator.frame = CGRectMake(_avatarImageView.frame.origin.x - self.messageModel.contentSize.width - self.messageModel.contentViewInsets.left - self.messageModel.contentViewInsets.right - 30,
+                                                               _avatarImageView.frame.origin.y,
+                                                               15, 15);
+            
+        } else {
+            _sendingStatusActivityIndicator.frame = CGRectMake(-50, -50, 0, 0);
+        }
+        [_sendingStatusActivityIndicator setNeedsLayout];
+//    }
 }
 
 - (void)layoutResendButton {
     
+    DDLogInfo(@"%s, status: %@, content: %@", __PRETTY_FUNCTION__, self.messageModel.status, self.messageModel.content);
+    
+//    if ([self.messageModel isSend]) {
+        if ([self.messageModel.status isKindOfClass:[NSString class]] &&
+            [self.messageModel.status isEqualToString:BD_MESSAGE_STATUS_ERROR]) {
+            
+            _resendButton.frame = CGRectMake(_avatarImageView.frame.origin.x - self.messageModel.contentSize.width - self.messageModel.contentViewInsets.left - self.messageModel.contentViewInsets.right - 30,
+                                             _avatarImageView.frame.origin.y,
+                                             15, 15);
+            
+//            DDLogInfo(@"x: %f, y:%f, w: %f, h: %f",
+//                      _resendButton.frame.origin.x, _resendButton.frame.origin.y,
+//                      _resendButton.frame.size.width, _resendButton.frame.size.height);
+        } else {
+            _resendButton.frame = CGRectZero;
+        }
+        [_resendButton setNeedsLayout];
+//    }
 }
 
 - (void)layoutAudioUnplayedIcon {
@@ -359,7 +398,6 @@
         else {
             DDLogInfo(@"menu invisible");
         }
-        
     }
 }
 
@@ -402,6 +440,12 @@
     
     if ([_delegate respondsToSelector:@selector(imageViewClicked:)]) {
         [_delegate imageViewClicked:imageView];
+    }
+}
+
+- (void)sendErrorStatusButtonClicked:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(sendErrorStatusButtonClicked:)]) {
+        [self.delegate sendErrorStatusButtonClicked:_messageModel];
     }
 }
 

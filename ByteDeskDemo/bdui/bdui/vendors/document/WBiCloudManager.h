@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^downloadCallBack)(id obj);
+typedef void(^downloadCallBack)(id contents, NSString *type);
 
 NS_ASSUME_NONNULL_BEGIN
 

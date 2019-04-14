@@ -135,6 +135,9 @@
                     [BDSettings setAutoReplyContent:@"接听电话中"];
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                    if (error) {
+                        [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                    }
                 }];
                 [self.tableView reloadData];
             }];
@@ -145,6 +148,9 @@
                     [BDSettings setAutoReplyContent:@"马上回来"];
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                    if (error) {
+                        [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                    }
                 }];
                 [self.tableView reloadData];
             }];
@@ -155,6 +161,9 @@
                     [BDSettings setAutoReplyContent:@"不在电脑旁，请稍后"];
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                    if (error) {
+                        [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                    }
                 }];
                 [self.tableView reloadData];
             }];
@@ -165,6 +174,9 @@
                     [BDSettings setAutoReplyContent:@"外出就餐，请稍后"];
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                    if (error) {
+                        [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                    }
                 }];
                 [self.tableView reloadData];
             }];
@@ -175,6 +187,9 @@
                     [BDSettings setAutoReplyContent:@"无自动回复"];
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                    if (error) {
+                        [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                    }
                 }];
                 [self.tableView reloadData];
             }];
@@ -200,6 +215,9 @@
                     [BDSettings setAcceptStatus:@"小休"];
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                    if (error) {
+                        [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                    }
                 }];
                 [self.tableView reloadData];
             }];
@@ -210,6 +228,9 @@
                     [BDSettings setAcceptStatus:@"忙线"];
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                    if (error) {
+                        [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                    }
                 }];
                 [self.tableView reloadData];
             }];
@@ -220,6 +241,9 @@
                     [BDSettings setAcceptStatus:@"在线"];
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                    if (error) {
+                        [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                    }
                 }];
                 [self.tableView reloadData];
             }];

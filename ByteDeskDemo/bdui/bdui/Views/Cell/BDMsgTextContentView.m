@@ -96,6 +96,12 @@
         labelFrame = CGRectMake(contentInsets.left+2, contentInsets.top, size.width, size.height);
         bubbleFrame = CGRectMake(0, 0, contentInsets.left + size.width + contentInsets.right + 5, contentInsets.top + size.height + contentInsets.bottom );
         boundsFrame = CGRectMake(KFDSScreen.width - bubbleFrame.size.width - 55, 23, bubbleFrame.size.width,  bubbleFrame.size.height);
+        //
+//        if ([self.model.status isEqualToString:BD_MESSAGE_STATUS_SENDING]) {
+//            self.sendingStatusIndicatorView.frame = CGRectMake(bubbleFrame.origin.x - 25, 23, 30, 30);
+//        } else if ([self.model.status isEqualToString:BD_MESSAGE_STATUS_ERROR]) {
+//            self.sendErrorStatusButton.frame = CGRectMake(bubbleFrame.origin.x - 25, 23, 30, 30);
+//        }
     }
     else {
         labelFrame = CGRectMake(contentInsets.left+3, contentInsets.top, size.width, size.height);

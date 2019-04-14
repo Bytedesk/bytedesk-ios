@@ -108,6 +108,9 @@
     } resultFailed:^(NSError *error) {
         DDLogInfo(@"%@", error);
         [self.mRefreshControl endRefreshing];
+        if (error) {
+            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+        }
     }];
     
     // 查询客服账号在线状态
@@ -123,6 +126,9 @@
     } resultFailed:^(NSError *error) {
         DDLogInfo(@"%@", error);
         [self.mRefreshControl endRefreshing];
+        if (error) {
+            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+        }
     }];
 }
 

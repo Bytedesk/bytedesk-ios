@@ -137,6 +137,9 @@
             [self.tableView reloadData];
         } resultFailed:^(NSError *error) {
             DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, error);
+            if (error) {
+                [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+            }
         }];
     } else {
         // 设置自定义标签
@@ -146,6 +149,9 @@
             [self.tableView reloadData];
         } resultFailed:^(NSError *error) {
             DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, error);
+            if (error) {
+                [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+            }
         }];
     }
 }
@@ -183,6 +189,9 @@
     } resultFailed:^(NSError *error) {
         DDLogInfo(@"%@", error);
         [self.mRefreshControl endRefreshing];
+        if (error) {
+            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+        }
     }];
 }
 

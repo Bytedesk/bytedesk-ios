@@ -2,13 +2,14 @@
 //  KFSocialApiViewController.m
 //  demo
 //
-//  Created by 萝卜丝1.5.8 on 2018/4/12.
+//  Created by 萝卜丝1.5.9 on 2018/4/12.
 //  Copyright © 2018年 KeFuDaShi. All rights reserved.
 //
 
 #import "BDApisTableViewController.h"
 #import <SafariServices/SafariServices.h>
 
+#import "KFScanViewController.h"
 #import "KFQRCodeViewController.h"
 #import "KFServerViewController.h"
 
@@ -59,8 +60,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    self.navigationItem.title = @"萝卜丝1.5.8(未连接)";
-    self.title = @"萝卜丝1.5.8(未连接)";
+//    self.navigationItem.title = @"萝卜丝1.5.9(未连接)";
+    self.title = @"萝卜丝1.5.9(未连接)";
     self.mLoginItemDetailText = @"当前未连接，点我建立连接";
     
     // 公共接口
@@ -69,7 +70,7 @@
                              @"注册接口",
                              @"登录接口",
                              @"退出登录接口",
-                             @"扫一扫",
+                             @"二维码",
                              @"多账号管理(TODO)"
                              ];
     // 客服接口
@@ -195,8 +196,11 @@
             [self logout];
         } else if (indexPath.row == 4) {
             // TODO: 二维码、扫一扫
-            KFQRCodeViewController *qrcodeViewController = [[KFQRCodeViewController alloc] initWithStyle:UITableViewStyleGrouped];
-            [self.navigationController pushViewController:qrcodeViewController animated:YES];
+            KFScanViewController *scanViewController = [[KFScanViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [self.navigationController pushViewController:scanViewController animated:YES];
+            //
+//            KFQRCodeViewController *qrcodeViewController = [[KFQRCodeViewController alloc] initWithStyle:UITableViewStyleGrouped];
+//            [self.navigationController pushViewController:qrcodeViewController animated:YES];
         } else if (indexPath.row == 5) {
             // TODO: 多账号管理
             
@@ -446,12 +450,6 @@
                 
             } else {
                 
-                if ([status_code isEqualToNumber:[NSNumber numberWithInt:401]]) {
-                    // TOKEN过期
-                } else if ([status_code isEqualToNumber:[NSNumber numberWithInt:-1001]]) {
-                    // 超时
-                }
-                
                 NSString *message = dict[@"message"];
                 DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
                 [QMUITips showError:message inView:self.view hideAfterDelay:2];
@@ -512,12 +510,12 @@
     NSString *status = [notification object];
     //
     if ([status isEqualToString:BD_USER_STATUS_CONNECTING]) {
-        self.title = @"萝卜丝1.5.8(连接中...)";
+        self.title = @"萝卜丝1.5.9(连接中...)";
     } else if ([status isEqualToString:BD_USER_STATUS_CONNECTED]){
-        self.title = @"萝卜丝1.5.8(已连接)";
+        self.title = @"萝卜丝1.5.9(已连接)";
         self.mLoginItemDetailText = [NSString stringWithFormat:@"当前已连接: %@", [BDSettings getUsername]];
     } else {
-        self.title = @"萝卜丝1.5.8(连接断开)";
+        self.title = @"萝卜丝1.5.9(连接断开)";
         self.mLoginItemDetailText = @"当前未连接";
     }
     [self.tableView reloadData];

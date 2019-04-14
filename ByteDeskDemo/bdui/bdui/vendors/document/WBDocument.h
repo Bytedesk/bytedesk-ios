@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WBDocument : UIDocument
 
-@property (nonatomic, strong) NSData *data;
+@property (nonatomic, strong) id data;
+@property(nonatomic, strong) NSString *type;
 
 @end
 

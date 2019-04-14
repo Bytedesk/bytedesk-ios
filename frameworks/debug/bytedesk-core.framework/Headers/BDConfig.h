@@ -76,6 +76,31 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)setRestApiHost:(NSString *)host;
 
+
++ (NSString *)getRestApiHostIM;
+
++ (void)setRestApiHostIM:(NSString *)host;
+
+
++ (NSString *)getRestApiHostKF;
+
++ (void)setRestApiHostKF:(NSString *)host;
+
+/**
+ 切换到IM+KF服务器
+ */
++ (void)switchToONE;
+
+/**
+ 分离服务器的情况下，切换到IM服务器
+ */
++ (void)switchToIM;
+
+/**
+ 分离服务器的情况下，切换到KF服务器
+ */
++ (void)switchToKF;
+
 ///////////////////////////////////////
 
 + (NSString *)getQRCodeBaseUrl;

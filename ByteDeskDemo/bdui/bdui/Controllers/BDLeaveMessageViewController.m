@@ -51,7 +51,9 @@
                resultSuccess:^(NSDictionary *dict) {
         
     } resultFailed:^(NSError *error) {
-        
+        if (error) {
+            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+        }
     }];
 }
 

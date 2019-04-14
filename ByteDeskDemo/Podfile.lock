@@ -14,12 +14,12 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - bytedesk-core (1.5.8):
+  - bytedesk-core (1.5.9):
     - AFNetworking
     - CocoaLumberjack
     - FMDB
     - MQTTClient
-  - bytedesk-ui (1.5.8):
+  - bytedesk-ui (1.5.9):
     - AFNetworking
     - bytedesk-core
     - CocoaLumberjack
@@ -316,7 +316,8 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - bytedesk-core
-  - bytedesk-ui
+  - bytedesk-core (= 1.5.9)
+  - bytedesk-ui (= 1.5.9)
   - CocoaLumberjack
   - FMDB
   - HCSStarRatingView
@@ -342,8 +343,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  bytedesk-core: 7d2ffabb7b118dba793e91ff66b0aa0591a759c4
-  bytedesk-ui: 3e4f6e7dece0be577194e0d199de3d4dd22b699d
+  bytedesk-core: d295b877b6c16cc05684d944a8c9d4c7332ed56d
+  bytedesk-ui: 0f1345914911e313e48cfd1b01feea19ced7f478
   CocoaLumberjack: 118bf4a820efc641f79fa487b75ed928dccfae23
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
@@ -353,6 +354,6 @@ SPEC CHECKSUMS:
   QMUIKit: 1bc386f20c68cf285484c933cf3ef3fea2a052f4
   TZImagePickerController: 7850b158d025065b162a1a963d445040b828abc9
 
-PODFILE CHECKSUM: 87a1bac0128b7795ad0c36626f59c93c90fe2c89
+PODFILE CHECKSUM: ed6640cd70c4431d61f4e3740ec9f430f2b1664e
 
 COCOAPODS: 1.5.3

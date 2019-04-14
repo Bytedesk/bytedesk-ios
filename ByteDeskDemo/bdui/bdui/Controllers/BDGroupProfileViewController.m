@@ -280,11 +280,7 @@
                 if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
                     // 成功
                     
-                    // delegate
-                    if (self.delegate && [self.delegate respondsToSelector:@selector(clearMessages)]) {
-                        [self.delegate clearMessages];
-                    }
-                    
+                  
                     [QMUITips showSucceed:@"成功清空聊天记录" inView:self.view hideAfterDelay:.8];
                 } else {
                     //
@@ -293,9 +289,20 @@
                     [QMUITips showError:message inView:self.view hideAfterDelay:2];
                 }
                 
+                // delegate
+                if (self.delegate && [self.delegate respondsToSelector:@selector(clearMessages)]) {
+                    [self.delegate clearMessages];
+                }
+                
             } resultFailed:^(NSError *error) {
+                // delegate
+                if (self.delegate && [self.delegate respondsToSelector:@selector(clearMessages)]) {
+                    [self.delegate clearMessages];
+                }
+                //
                 [QMUITips showError:@"清空聊天记录失败" inView:self.view hideAfterDelay:.8];
             }];
+            
             
         } else if (indexPath.row == 2) {
             
@@ -323,6 +330,9 @@
                     
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+                    if (error) {
+                        [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                    }
                 }];
                 
             }];
@@ -342,6 +352,9 @@
                     
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+                    if (error) {
+                        [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                    }
                 }];
             }];
             QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"确定要解散群？" message:@"" preferredStyle:QMUIAlertControllerStyleAlert];
@@ -381,6 +394,9 @@
             [self.tableView reloadData];
         } resultFailed:^(NSError *error) {
             DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+            if (error) {
+                [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+            }
         }];
     } else if ([self.currentTextFieldDialogViewController.title isEqualToString:@"群简介"]) {
         // 设置群简介
@@ -390,6 +406,9 @@
             [self.tableView reloadData];
         } resultFailed:^(NSError *error) {
             DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+            if (error) {
+                [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+            }
         }];
     } else {
         // 设置群公告
@@ -399,6 +418,9 @@
             [self.tableView reloadData];
         } resultFailed:^(NSError *error) {
             DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+            if (error) {
+                [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+            }
         }];
     }
 }
@@ -444,6 +466,9 @@
         [self.tableView reloadData];
     } resultFailed:^(NSError *error) {
         DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+        if (error) {
+            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+        }
     }];
 }
 
@@ -490,6 +515,9 @@
                 
             } resultFailed:^(NSError *error) {
                 DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                if (error) {
+                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                }
             }];
             
             
@@ -512,6 +540,9 @@
                 
             } resultFailed:^(NSError *error) {
                 DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                if (error) {
+                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                }
             }];
         }
         
@@ -538,7 +569,9 @@
         [BDCoreApis markNoDisturbThread:self.mTid resultSuccess:^(NSDictionary *dict) {
             
         } resultFailed:^(NSError *error) {
-            
+            if (error) {
+                [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+            }
         }];
         
     } else {
@@ -547,7 +580,9 @@
         [BDCoreApis unmarkNoDisturbThread:self.mTid resultSuccess:^(NSDictionary *dict) {
             
         } resultFailed:^(NSError *error) {
-            
+            if (error) {
+                [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+            }
         }];
         
     }
@@ -564,7 +599,9 @@
         [BDCoreApis markTopThread:self.mTid resultSuccess:^(NSDictionary *dict) {
             
         } resultFailed:^(NSError *error) {
-            
+            if (error) {
+                [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+            }
         }];
         
     } else {
@@ -573,7 +610,9 @@
         [BDCoreApis unmarkTopThread:self.mTid resultSuccess:^(NSDictionary *dict) {
             
         } resultFailed:^(NSError *error) {
-            
+            if (error) {
+                [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+            }
         }];
     }
     

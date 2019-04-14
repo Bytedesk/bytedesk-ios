@@ -9,14 +9,12 @@
 #import "BDMsgBaseContentView.h"
 
 @interface BDMsgBaseContentView ()
-//
-@property (nonatomic, strong) UIActivityIndicatorView   *kfSendingStatusIndicatorView;
-@property (nonatomic, strong) UIButton                  *kfSendErrorStatusButton;
 
 @end
 
 @implementation BDMsgBaseContentView
 
+//@synthesize sendingStatusIndicatorView, sendErrorStatusButton;
 
 - (instancetype) initMessageContentView {
     //
@@ -32,6 +30,7 @@
         _bubbleImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 //        _bubbleImageView.backgroundColor = [UIColor blueColor];
         [self addSubview:_bubbleImageView];
+        
     }
     return self;
 }
@@ -43,8 +42,45 @@
     [_bubbleImageView setHighlightedImage:[self chatBubbleImageForState:UIControlStateHighlighted outgoing:[_model isSend]]];
     _bubbleImageView.frame = self.bounds;
     
+//    if ([_model.status isEqualToString:BD_MESSAGE_STATUS_SENDING]) {
+//
+//        [self addSubview:[self sendingStatusIndicatorView]];
+//    } else if ([_model.status isEqualToString:BD_MESSAGE_STATUS_ERROR]){
+//
+//        [self addSubview:[self sendErrorStatusButton]];
+//    }
+//
     [self setNeedsLayout];
 }
+//
+//-(UIActivityIndicatorView *)kfSendingStatusIndicatorView
+//{
+//    if (!sendingStatusIndicatorView) {
+//        sendingStatusIndicatorView = [[UIActivityIndicatorView alloc] init];
+//        [sendingStatusIndicatorView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+//    }
+//    [sendingStatusIndicatorView startAnimating];
+//
+//    return sendingStatusIndicatorView;
+//}
+//
+//-(UIButton *)kfSendErrorStatusButton
+//{
+//    if (!sendErrorStatusButton) {
+//        sendErrorStatusButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+//        [sendErrorStatusButton setImage:[UIImage imageNamed:@"appkefu_error.png" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+//        [sendErrorStatusButton addTarget:self action:@selector(sendErrorStatusButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//
+//    return sendErrorStatusButton;
+//}
+
+//
+//- (void)sendErrorStatusButtonClicked:(id)sender {
+//    if ([self.delegate respondsToSelector:@selector(sendErrorStatusButtonClicked:)]) {
+//        [self.delegate sendErrorStatusButtonClicked:_model];
+//    }
+//}
 
 //- (BOOL)canBecomeFirstResponder {
 //    return YES;
@@ -112,14 +148,14 @@
 }
 
 
-- (CGSize)bubbleViewSize:(BDMessageModel *)model {
-    CGSize bubbleSize;
-    CGSize contentSize  = model.contentSize;
-    UIEdgeInsets insets = model.contentViewInsets;
-    bubbleSize.width  = contentSize.width + insets.left + insets.right;
-    bubbleSize.height = contentSize.height + insets.top + insets.bottom;
-    return bubbleSize;
-}
+//- (CGSize)bubbleViewSize {
+//    CGSize bubbleSize;
+//    CGSize contentSize  = _model.contentSize;
+//    UIEdgeInsets insets = _model.contentViewInsets;
+//    bubbleSize.width  = contentSize.width + insets.left + insets.right;
+//    bubbleSize.height = contentSize.height + insets.top + insets.bottom;
+//    return bubbleSize;
+//}
 
 
 - (void)setHighlighted:(BOOL)highlighted{

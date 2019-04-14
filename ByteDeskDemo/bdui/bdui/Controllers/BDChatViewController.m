@@ -132,6 +132,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         [self dealWithRequestThreadResult:dict];
     } resultFailed:^(NSError *error) {
         DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+        if (error) {
+            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+        }
     }];
 }
 
@@ -177,6 +180,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         
     } resultFailed:^(NSError *error) {
         DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+        if (error) {
+            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+        }
     }];
 }
 
@@ -441,6 +447,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         
     } resultFailed:^(NSError *error) {
         DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+        if (error) {
+            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+        }
     }];
 }
 
@@ -455,6 +464,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         
     } resultFailed:^(NSError *error) {
         DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+        if (error) {
+            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+        }
     }];
 }
 
@@ -635,11 +647,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //
-    if (![BDSettings isAlreadyLogin]) {
-        [QMUITips showError:@"请首先登录" inView:self.view hideAfterDelay:2];
-        return;
-    }
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     //
     self.title = self.mThreadModel ? self.mThreadModel.nickname : self.mTitle;
     if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_GROUP]) {
@@ -664,6 +672,11 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     //
     self.mImagePickerController = [[UIImagePickerController alloc] init];
     self.mImagePickerController.delegate = self;
+    //
+    if (![BDSettings isAlreadyLogin]) {
+        [QMUITips showError:@"请首先登录" inView:self.view hideAfterDelay:2];
+        return;
+    }
     //
     [self registerNotifications];
     [self reloadTableData];
@@ -747,6 +760,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                         [self dealWithRequestThreadResult:dict];
                     } resultFailed:^(NSError *error) {
                         DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+                        if (error) {
+                            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                        }
                     }];
                     
                 } else {
@@ -759,6 +775,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                         
                     } resultFailed:^(NSError *error) {
                         DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+                        if (error) {
+                            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                        }
                     }];
                 }
                 
@@ -777,6 +796,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                     
                 } resultFailed:^(NSError *error) {
                     DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+                    if (error) {
+                        [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                    }
                 }];
                 
             }
@@ -816,6 +838,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                     
                 } resultFailed:^(NSError *error) {
                      DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                    if (error) {
+                        [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                    }
                 }];
             }];
             QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"确定关闭会话？" message:@"" preferredStyle:QMUIAlertControllerStyleAlert];
@@ -979,12 +1004,47 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self tableViewScrollToBottom:NO];
 }
 
+- (void)reloadCellDataSuccess:(NSString *)localId {
+    for (int i = 0; i < [self.mMessageArray count]; i++) {
+        BDMessageModel *message = [self.mMessageArray objectAtIndex:i];
+        if (![message.local_id isKindOfClass:[NSNull class]] &&
+            [message.local_id isEqualToString:localId]) {
+            // 更新内存数据
+            message.status = BD_MESSAGE_STATUS_STORED;
+            // 更新UI
+            NSIndexPath *reloadIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            [self.tableView beginUpdates];
+            [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView endUpdates];
+        }
+    }
+}
+
+- (void)reloadCellDataError:(NSString *)localId {
+    for (int i = 0; i < [self.mMessageArray count]; i++) {
+        BDMessageModel *message = [self.mMessageArray objectAtIndex:i];
+        if (![message.local_id isKindOfClass:[NSNull class]] &&
+            [message.local_id isEqualToString:localId]) {
+            // 更新内存数据
+            message.status = BD_MESSAGE_STATUS_ERROR;
+            // 更新UI
+            NSIndexPath *reloadIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            [self.tableView beginUpdates];
+            [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView endUpdates];
+        }
+    }
+}
+
 - (void)updateCurrentThread {
     NSString *preTid = [BDSettings getCurrentTid];
     [BDCoreApis updateCurrentThread:preTid currentTid:self.mThreadTid resultSuccess:^(NSDictionary *dict) {
         [BDSettings setCurrentTid:self.mThreadTid];
     } resultFailed:^(NSError *error) {
         DDLogError(@"updateCurrentThread %@", error);
+        if (error) {
+            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+        }
     }];
 }
 
@@ -1155,6 +1215,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             
         } resultFailed:^(NSError *error) {
             DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+            if (error) {
+                [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:2];
+            }
         }];
         
         return;
@@ -1174,10 +1237,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
     [self.tableView endUpdates];
-    [self tableViewScrollToBottom:YES];
-    
-    // 异步发送消息
-//     [[BDMQTTApis sharedInstance] sendTextMessage:content toTid:self.mThreadTid localId:localId sessionType:self.mThreadType];
+    [self tableViewScrollToBottom:NO];
     
     // 同步发送消息
     [BDCoreApis sendTextMessage:content toTid:self.mThreadTid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {
@@ -1191,12 +1251,14 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             NSString *localId = dict[@"data"][@"localId"];
             DDLogInfo(@"callback localId: %@", localId);
             
-            // TODO：更新发送状态，隐藏activity indicator
-            // reloadRowsAtIndexPaths
+            // 修改本地消息发送状态为成功
+            [[BDDBApis sharedInstance] updateMessageSuccess:localId];
+            [self reloadCellDataSuccess:localId];
             
         } else {
             // 修改本地消息发送状态为error
             [[BDDBApis sharedInstance] updateMessageError:localId];
+            [self reloadCellDataError:localId];
             //
             NSString *message = dict[@"message"];
             DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
@@ -1204,6 +1266,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         }
     } resultFailed:^(NSError *error) {
         DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+        // 修改本地消息发送状态为error
+        [[BDDBApis sharedInstance] updateMessageError:localId];
+        [self reloadCellDataError:localId];
+        //
+        if (error) {
+            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:2];
+        }
     }];
 }
 
@@ -1250,11 +1319,14 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                     NSString *localId = dict[@"data"][@"localId"];
                     DDLogInfo(@"callback localId: %@", localId);
                     
-                    // TODO：更新发送状态，隐藏activity indicator
+                    // 修改本地消息发送状态为成功
+                    [[BDDBApis sharedInstance] updateMessageSuccess:localId];
+                    [self reloadCellDataSuccess:localId];
                     
                 } else {
                     // 修改本地消息发送状态为error
                     [[BDDBApis sharedInstance] updateMessageError:localId];
+                    [self reloadCellDataError:localId];
                     //
                     NSString *message = dict[@"message"];
                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
@@ -1262,6 +1334,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                 }
             } resultFailed:^(NSError *error) {
                 DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                // 修改本地消息发送状态为error
+                [[BDDBApis sharedInstance] updateMessageError:localId];
+                [self reloadCellDataError:localId];
+                //
+                if (error) {
+                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:2];
+                }
             }];
             
         } else {
@@ -1305,12 +1384,14 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             NSString *localId = dict[@"data"][@"localId"];
             DDLogInfo(@"callback localId: %@", localId);
             
-            // TODO：更新发送状态，隐藏activity indicator
-            // reloadRowsAtIndexPaths
+            // 修改本地消息发送状态为成功
+            [[BDDBApis sharedInstance] updateMessageSuccess:localId];
+            [self reloadCellDataSuccess:localId];
             
         } else {
             // 修改本地消息发送状态为error
             [[BDDBApis sharedInstance] updateMessageError:localId];
+            [self reloadCellDataError:localId];
             //
             NSString *message = dict[@"message"];
             DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
@@ -1318,6 +1399,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         }
     } resultFailed:^(NSError *error) {
         DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+        // 修改本地消息发送状态为error
+        [[BDDBApis sharedInstance] updateMessageError:localId];
+        [self reloadCellDataError:localId];
+        //
+        if (error) {
+            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:2];
+        }
     }];
 }
 
@@ -1355,14 +1443,16 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             // 服务器返回自定义消息本地id
             NSString *localId = dict[@"data"][@"localId"];
             DDLogInfo(@"callback localId: %@", localId);
-            
-            // TODO：更新发送状态，隐藏activity indicator
-            // reloadRowsAtIndexPaths
+
+            // 修改本地消息发送状态为成功
+            [[BDDBApis sharedInstance] updateMessageSuccess:localId];
+            [self reloadCellDataSuccess:localId];
             
             
         } else {
             // 修改本地消息发送状态为error
             [[BDDBApis sharedInstance] updateMessageError:localId];
+            [self reloadCellDataError:localId];
             //
             NSString *message = dict[@"message"];
             DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
@@ -1370,6 +1460,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         }
     } resultFailed:^(NSError *error) {
         DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+        // 修改本地消息发送状态为error
+        [[BDDBApis sharedInstance] updateMessageError:localId];
+        [self reloadCellDataError:localId];
+        //
+        if (error) {
+            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:2];
+        }
     }];
 }
 
@@ -1525,6 +1622,14 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 //    [self.imagePreviewViewController startPreviewFromRectInScreenCoordinate:[imageView convertRect:imageView.frame toView:nil] cornerRadius:imageView.layer.cornerRadius];
     [self presentViewController:self.imagePreviewViewController animated:YES completion:nil];
     
+}
+
+- (void) fileViewClicked:(id)sender {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void) sendErrorStatusButtonClicked:(BDMessageModel *)model {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
 }
 
 #pragma mark - <QMUIImagePreviewViewDelegate>

@@ -89,6 +89,9 @@
             [self dealWithDict:dict];
         } resultFailed:^(NSError *error) {
             DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+            if (error) {
+                [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+            }
         }];
     } else if (item.tag == 2) {
         // 从服务器加载我的粉丝
@@ -97,6 +100,9 @@
             [self dealWithDict:dict];
         } resultFailed:^(NSError *error) {
             DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+            if (error) {
+                [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+            }
         }];
     } else if (item.tag == 3) {
         // 从服务器加载我的好友：互相关注
@@ -105,6 +111,9 @@
             [self dealWithDict:dict];
         } resultFailed:^(NSError *error) {
             DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+            if (error) {
+                [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+            }
         }];
     } else if (item.tag == 4) {
         // 从服务器加载我的黑名单
@@ -124,6 +133,9 @@
             [self reloadTable];
         } resultFailed:^(NSError *error) {
             DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+            if (error) {
+                [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+            }
         }];
     }
 }
@@ -188,6 +200,9 @@
                 }
             } resultFailed:^(NSError *error) {
                 DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                if (error) {
+                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                }
             }];
             
         } else if (itemIndex == 1) {
@@ -209,6 +224,9 @@
                 }
             } resultFailed:^(NSError *error) {
                 DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                if (error) {
+                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                }
             }];
             
         } else if (itemIndex == 2) {
@@ -227,6 +245,9 @@
                 }
             } resultFailed:^(NSError *error) {
                 DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                if (error) {
+                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                }
             }];
         } else if (itemIndex == 3) {
             // 取消拉黑
@@ -247,6 +268,9 @@
                 }
             } resultFailed:^(NSError *error) {
                 DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                if (error) {
+                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                }
             }];
         } else if (itemIndex == 4) {
             // 添加好友
@@ -264,6 +288,9 @@
                 }
             } resultFailed:^(NSError *error) {
                 DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                if (error) {
+                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                }
             }];
             
         } else if (itemIndex == 5) {
@@ -285,13 +312,15 @@
                 }
             } resultFailed:^(NSError *error) {
                 DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+                if (error) {
+                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                }
             }];
         }
         
         [aDialogViewController hide];
     };
     [dialogViewController show];
-    
 }
 
 
@@ -316,6 +345,9 @@
         [self reloadTable];
     } resultFailed:^(NSError *error) {
         DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+        if (error) {
+            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+        }
     }];
 }
 

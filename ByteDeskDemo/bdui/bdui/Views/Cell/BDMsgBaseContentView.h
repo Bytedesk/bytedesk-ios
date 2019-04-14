@@ -21,6 +21,7 @@
 
 - (void) fileViewClicked:(id)sender;
 
+
 @end
 
 
@@ -30,6 +31,9 @@
 @property (nonatomic, strong, readonly)  BDMessageModel   *model;
 
 @property (nonatomic, strong) UIImageView * bubbleImageView;
+
+//@property (nonatomic, strong) UIActivityIndicatorView   *sendingStatusIndicatorView;
+//@property (nonatomic, strong) UIButton                  *sendErrorStatusButton;
 
 @property (nonatomic, weak) id<KFDSMsgBaseContentViewDelegate> delegate;
 
@@ -63,7 +67,6 @@
 // *  手指按下contentView
 // */
 //- (void)onTouchDown:(id)sender;
-
 
 /**
  *  聊天气泡图

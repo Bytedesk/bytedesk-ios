@@ -151,6 +151,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (NSMutableArray *)getMessagesPage:(NSUInteger)page withSize:(NSUInteger)size withType:(NSString *)type withUid:(NSString *)uid;
 
 - (BOOL) updateMessage:(NSString *)localId withServerId:(NSNumber *)serverId withMid:(NSString *)mid withStatus:(NSString *)status;
+
+- (BOOL) updateMessageSuccess:(NSString *)localId;
 - (BOOL) updateMessageError:(NSString *)localId;
 - (BOOL) updateMessage:(NSString *)localId withStatus:(NSString *)status;
 - (BOOL) updateMessage:(NSString *)mId withLocalFilePath:(NSString *)localFilePath;

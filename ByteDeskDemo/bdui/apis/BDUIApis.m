@@ -11,6 +11,8 @@
 #import "BDChatWxViewController.h"
 #import "BDFeedbackCategoryViewController.h"
 
+#import <bytedesk-core/BDConfig.h>
+
 static BDUIApis *sharedInstance = nil;
 
 @implementation BDUIApis
@@ -30,6 +32,8 @@ static BDUIApis *sharedInstance = nil;
                 withWorkGroupWid:(NSString *)wId
                        withTitle:(NSString *)title {
     //
+    [BDConfig switchToKF];
+    //
     BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
     chatViewController.navigationItem.backBarButtonItem.title = @"";
     //
@@ -42,6 +46,8 @@ static BDUIApis *sharedInstance = nil;
                        withTitle:(NSString *)title
                       withCustom:(NSDictionary *)custom {
     //
+    [BDConfig switchToKF];
+    //
     BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
     chatViewController.navigationItem.backBarButtonItem.title = @"";
     //
@@ -52,7 +58,9 @@ static BDUIApis *sharedInstance = nil;
 + (void)visitorPresentWorkGroupChat:(UINavigationController *)navigationController
                    withWorkGroupWid:(NSString *)wId
                           withTitle:(NSString *)title{
-    
+    //
+    [BDConfig switchToKF];
+    //
     BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
     [chatViewController initWithWorkGroupWid:wId withTitle:title withPush:NO];
     //
@@ -67,6 +75,9 @@ static BDUIApis *sharedInstance = nil;
                    withWorkGroupWid:(NSString *)wId
                           withTitle:(NSString *)title
                          withCustom:(NSDictionary *)custom {
+    //
+    [BDConfig switchToKF];
+    //
     BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
     [chatViewController initWithWorkGroupWid:wId withTitle:title withPush:NO withCustom:custom];
     //
@@ -81,6 +92,8 @@ static BDUIApis *sharedInstance = nil;
                   withAgentUid:(NSString *)uId
                      withTitle:(NSString *)title {
     //
+    [BDConfig switchToKF];
+    //
     BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
     chatViewController.navigationItem.backBarButtonItem.title = @"";
     //
@@ -93,6 +106,8 @@ static BDUIApis *sharedInstance = nil;
                      withTitle:(NSString *)title
                     withCustom:(NSDictionary *)custom {
     //
+    [BDConfig switchToKF];
+    //
     BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
     chatViewController.navigationItem.backBarButtonItem.title = @"";
     //
@@ -103,6 +118,8 @@ static BDUIApis *sharedInstance = nil;
 + (void)visitorPresentAppointChat:(UINavigationController *)navigationController
                      withAgentUid:(NSString *)uId
                         withTitle:(NSString *)title {
+    //
+    [BDConfig switchToKF];
     //
     BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
     [chatViewController initWithAgentUid:uId withTitle:title withPush:NO];
@@ -118,6 +135,8 @@ static BDUIApis *sharedInstance = nil;
                         withTitle:(NSString *)title
                        withCustom:(NSDictionary *)custom {
     //
+    [BDConfig switchToKF];
+    //
     BDChatViewController *chatViewController = [[BDChatViewController alloc] init];
     [chatViewController initWithAgentUid:uId withTitle:title withPush:NO withCustom:custom];
     //
@@ -129,6 +148,8 @@ static BDUIApis *sharedInstance = nil;
 
 + (void)visitorPushFeedback:(UINavigationController *)navigationController {
     //
+    [BDConfig switchToKF];
+    //
     BDFeedbackCategoryViewController *categoryViewController = [[BDFeedbackCategoryViewController alloc] init];
     [navigationController pushViewController:categoryViewController animated:YES];
 }
@@ -137,6 +158,8 @@ static BDUIApis *sharedInstance = nil;
 
 + (void)pushChat:(UINavigationController *)navigationController
       withThreadModel:(BDThreadModel *)threadModel {
+    //
+    [BDConfig switchToIM];
     //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithThreadModel:threadModel withPush:YES];
@@ -147,6 +170,8 @@ static BDUIApis *sharedInstance = nil;
       withThreadModel:(BDThreadModel *)threadModel
            withCustom:(NSDictionary *)custom {
     //
+    [BDConfig switchToIM];
+    //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithThreadModel:threadModel withPush:YES withCustom:custom];
     [navigationController pushViewController:chatViewController animated:YES];
@@ -154,6 +179,8 @@ static BDUIApis *sharedInstance = nil;
 
 + (void)presentChat:(UINavigationController *)navigationController
          withThreadModel:(BDThreadModel *)threadModel {
+    //
+    [BDConfig switchToIM];
     //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithThreadModel:threadModel withPush:NO];
@@ -168,6 +195,8 @@ static BDUIApis *sharedInstance = nil;
          withThreadModel:(BDThreadModel *)threadModel
               withCustom:(NSDictionary *)custom {
     //
+    [BDConfig switchToIM];
+    //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithThreadModel:threadModel withPush:NO withCustom:custom];
     //
@@ -180,6 +209,8 @@ static BDUIApis *sharedInstance = nil;
 + (void)pushChat:(UINavigationController *)navigationController
      withContactModel:(BDContactModel *)contactModel {
     //
+    [BDConfig switchToIM];
+    //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithContactModel:contactModel withPush:YES];
     [navigationController pushViewController:chatViewController animated:YES];
@@ -189,6 +220,8 @@ static BDUIApis *sharedInstance = nil;
      withContactModel:(BDContactModel *)contactModel
            withCustom:(NSDictionary *)custom {
     //
+    [BDConfig switchToIM];
+    //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithContactModel:contactModel withPush:YES withCustom:custom];
     [navigationController pushViewController:chatViewController animated:YES];
@@ -196,6 +229,8 @@ static BDUIApis *sharedInstance = nil;
 
 + (void)presentChat:(UINavigationController *)navigationController
         withContactModel:(BDContactModel *)contactModel {
+    //
+    [BDConfig switchToIM];
     //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithContactModel:contactModel withPush:NO];
@@ -210,6 +245,8 @@ static BDUIApis *sharedInstance = nil;
         withContactModel:(BDContactModel *)contactModel
               withCustom:(NSDictionary *)custom {
     //
+    [BDConfig switchToIM];
+    //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithContactModel:contactModel withPush:NO withCustom:custom];
     //
@@ -222,6 +259,8 @@ static BDUIApis *sharedInstance = nil;
 + (void)pushChat:(UINavigationController *)navigationController
        withGroupModel:(BDGroupModel *)groupModel {
     //
+    [BDConfig switchToIM];
+    //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithGroupModel:groupModel withPush:YES];
     [navigationController pushViewController:chatViewController animated:YES];
@@ -231,6 +270,8 @@ static BDUIApis *sharedInstance = nil;
        withGroupModel:(BDGroupModel *)groupModel
            withCustom:(NSDictionary *)custom {
     //
+    [BDConfig switchToIM];
+    //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithGroupModel:groupModel withPush:YES withCustom:custom];
     [navigationController pushViewController:chatViewController animated:YES];
@@ -238,6 +279,8 @@ static BDUIApis *sharedInstance = nil;
 
 + (void)presentChat:(UINavigationController *)navigationController
           withGroupModel:(BDGroupModel *)groupModel {
+    //
+    [BDConfig switchToIM];
     //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithGroupModel:groupModel withPush:NO];
@@ -251,6 +294,8 @@ static BDUIApis *sharedInstance = nil;
 + (void)presentChat:(UINavigationController *)navigationController
           withGroupModel:(BDGroupModel *)groupModel
               withCustom:(NSDictionary *)custom {
+    //
+    [BDConfig switchToIM];
     //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithGroupModel:groupModel withPush:NO withCustom:custom];
@@ -266,6 +311,8 @@ static BDUIApis *sharedInstance = nil;
 + (void)agentPushChat:(UINavigationController *)navigationController
       withThreadModel:(BDThreadModel *)threadModel {
     //
+    [BDConfig switchToIM];
+    //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithThreadModel:threadModel withPush:YES];
     [navigationController pushViewController:chatViewController animated:YES];
@@ -275,6 +322,8 @@ static BDUIApis *sharedInstance = nil;
       withThreadModel:(BDThreadModel *)threadModel
            withCustom:(NSDictionary *)custom {
     //
+    [BDConfig switchToIM];
+    //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithThreadModel:threadModel withPush:YES withCustom:custom];
     [navigationController pushViewController:chatViewController animated:YES];
@@ -282,6 +331,8 @@ static BDUIApis *sharedInstance = nil;
 
 + (void)agentPresentChat:(UINavigationController *)navigationController
          withThreadModel:(BDThreadModel *)threadModel {
+    //
+    [BDConfig switchToIM];
     //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithThreadModel:threadModel withPush:NO];
@@ -296,6 +347,8 @@ static BDUIApis *sharedInstance = nil;
          withThreadModel:(BDThreadModel *)threadModel
               withCustom:(NSDictionary *)custom {
     //
+    [BDConfig switchToIM];
+    //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithThreadModel:threadModel withPush:NO withCustom:custom];
     //
@@ -308,6 +361,8 @@ static BDUIApis *sharedInstance = nil;
 + (void)agentPushChat:(UINavigationController *)navigationController
      withContactModel:(BDContactModel *)contactModel {
     //
+    [BDConfig switchToIM];
+    //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithContactModel:contactModel withPush:YES];
     [navigationController pushViewController:chatViewController animated:YES];
@@ -317,6 +372,8 @@ static BDUIApis *sharedInstance = nil;
      withContactModel:(BDContactModel *)contactModel
            withCustom:(NSDictionary *)custom {
     //
+    [BDConfig switchToIM];
+    //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithContactModel:contactModel withPush:YES withCustom:custom];
     [navigationController pushViewController:chatViewController animated:YES];
@@ -324,6 +381,8 @@ static BDUIApis *sharedInstance = nil;
 
 + (void)agentPresentChat:(UINavigationController *)navigationController
         withContactModel:(BDContactModel *)contactModel {
+    //
+    [BDConfig switchToIM];
     //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithContactModel:contactModel withPush:NO];
@@ -338,6 +397,8 @@ static BDUIApis *sharedInstance = nil;
         withContactModel:(BDContactModel *)contactModel
               withCustom:(NSDictionary *)custom {
     //
+    [BDConfig switchToIM];
+    //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithContactModel:contactModel withPush:NO withCustom:custom];
     //
@@ -350,6 +411,8 @@ static BDUIApis *sharedInstance = nil;
 + (void)agentPushChat:(UINavigationController *)navigationController
        withGroupModel:(BDGroupModel *)groupModel {
     //
+    [BDConfig switchToIM];
+    //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithGroupModel:groupModel withPush:YES];
     [navigationController pushViewController:chatViewController animated:YES];
@@ -359,6 +422,8 @@ static BDUIApis *sharedInstance = nil;
        withGroupModel:(BDGroupModel *)groupModel
            withCustom:(NSDictionary *)custom {
     //
+    [BDConfig switchToIM];
+    //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithGroupModel:groupModel withPush:YES withCustom:custom];
     [navigationController pushViewController:chatViewController animated:YES];
@@ -366,6 +431,8 @@ static BDUIApis *sharedInstance = nil;
 
 + (void)agentPresentChat:(UINavigationController *)navigationController
           withGroupModel:(BDGroupModel *)groupModel {
+    //
+    [BDConfig switchToIM];
     //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithGroupModel:groupModel withPush:NO];
@@ -379,6 +446,8 @@ static BDUIApis *sharedInstance = nil;
 + (void)agentPresentChat:(UINavigationController *)navigationController
           withGroupModel:(BDGroupModel *)groupModel
               withCustom:(NSDictionary *)custom {
+    //
+    [BDConfig switchToIM];
     //
     BDChatWxViewController *chatViewController = [[BDChatWxViewController alloc] init];
     [chatViewController initWithGroupModel:groupModel withPush:NO withCustom:custom];

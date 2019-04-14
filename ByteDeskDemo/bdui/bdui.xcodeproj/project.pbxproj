@@ -337,6 +337,8 @@
 		3D3B30F4225AB282000FC60F /* BDLeaveMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3B30F2225AB282000FC60F /* BDLeaveMessageViewController.m */; };
 		3D3C28DE2236804700E288AF /* BDChatBaseViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D3C28DC2236804700E288AF /* BDChatBaseViewController.h */; };
 		3D3C28DF2236804700E288AF /* BDChatBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C28DD2236804700E288AF /* BDChatBaseViewController.m */; };
+		3D3E2271225F2026008038F5 /* KFUIUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D3E226F225F2026008038F5 /* KFUIUtils.h */; };
+		3D3E2272225F2026008038F5 /* KFUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3E2270225F2026008038F5 /* KFUIUtils.m */; };
 		3D46C221223B895F00BA41C4 /* BDCommodityTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D46C21F223B895F00BA41C4 /* BDCommodityTableViewCell.h */; };
 		3D46C222223B895F00BA41C4 /* BDCommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D46C220223B895F00BA41C4 /* BDCommodityTableViewCell.m */; };
 		3D46C225223B897200BA41C4 /* BDRedPacketTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D46C223223B897200BA41C4 /* BDRedPacketTableViewCell.h */; };
@@ -350,6 +352,9 @@
 		3D5606CC2057C875000E770C /* BDSingleImagePickerPreviewViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D5606CA2057C874000E770C /* BDSingleImagePickerPreviewViewController.h */; };
 		3D57D7111FD00E3F0072823F /* BDFeedbackViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D57D70F1FD00E3F0072823F /* BDFeedbackViewController.h */; };
 		3D57D7121FD00E3F0072823F /* BDFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D57D7101FD00E3F0072823F /* BDFeedbackViewController.m */; };
+		3D667E78225EAA1D003E39F9 /* in.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3D667E75225EAA1D003E39F9 /* in.caf */; };
+		3D667E79225EAA1D003E39F9 /* messageReceived.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 3D667E76225EAA1D003E39F9 /* messageReceived.aiff */; };
+		3D667E7A225EAA1D003E39F9 /* messageSent.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 3D667E77225EAA1D003E39F9 /* messageSent.aiff */; };
 		3D86FF5A22295F8A00477E76 /* BDGroupInviteTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D86FF5822295F8A00477E76 /* BDGroupInviteTableViewController.h */; };
 		3D86FF5B22295F8A00477E76 /* BDGroupInviteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D86FF5922295F8A00477E76 /* BDGroupInviteTableViewController.m */; };
 		3D8A626021DE598600935617 /* BDGroupMemberTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D8A625E21DE598600935617 /* BDGroupMemberTableViewCell.h */; };
@@ -716,6 +721,8 @@
 		3D3B30F2225AB282000FC60F /* BDLeaveMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDLeaveMessageViewController.m; sourceTree = "<group>"; };
 		3D3C28DC2236804700E288AF /* BDChatBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDChatBaseViewController.h; sourceTree = "<group>"; };
 		3D3C28DD2236804700E288AF /* BDChatBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDChatBaseViewController.m; sourceTree = "<group>"; };
+		3D3E226F225F2026008038F5 /* KFUIUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFUIUtils.h; sourceTree = "<group>"; };
+		3D3E2270225F2026008038F5 /* KFUIUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFUIUtils.m; sourceTree = "<group>"; };
 		3D46C21F223B895F00BA41C4 /* BDCommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDCommodityTableViewCell.h; sourceTree = "<group>"; };
 		3D46C220223B895F00BA41C4 /* BDCommodityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDCommodityTableViewCell.m; sourceTree = "<group>"; };
 		3D46C223223B897200BA41C4 /* BDRedPacketTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDRedPacketTableViewCell.h; sourceTree = "<group>"; };
@@ -732,6 +739,9 @@
 		3D57D70F1FD00E3F0072823F /* BDFeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDFeedbackViewController.h; sourceTree = "<group>"; };
 		3D57D7101FD00E3F0072823F /* BDFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDFeedbackViewController.m; sourceTree = "<group>"; };
 		3D62021320FC844F00A94F15 /* bdcore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = bdcore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D667E75225EAA1D003E39F9 /* in.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = in.caf; sourceTree = "<group>"; };
+		3D667E76225EAA1D003E39F9 /* messageReceived.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = messageReceived.aiff; sourceTree = "<group>"; };
+		3D667E77225EAA1D003E39F9 /* messageSent.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = messageSent.aiff; sourceTree = "<group>"; };
 		3D86FF5822295F8A00477E76 /* BDGroupInviteTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDGroupInviteTableViewController.h; sourceTree = "<group>"; };
 		3D86FF5922295F8A00477E76 /* BDGroupInviteTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDGroupInviteTableViewController.m; sourceTree = "<group>"; };
 		3D8A625E21DE598600935617 /* BDGroupMemberTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDGroupMemberTableViewCell.h; sourceTree = "<group>"; };
@@ -800,6 +810,7 @@
 		3D1996B71FCE2BA700219FEF /* views */ = {
 			isa = PBXGroup;
 			children = (
+				3D218645225F26AB00C09777 /* input */,
 				3D1996C51FCE638700219FEF /* cell */,
 			);
 			path = views;
@@ -848,16 +859,17 @@
 		3D1997041FCE817E00219FEF /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				3D1997051FCE817E00219FEF /* Weixin2 */,
-				3D1997241FCE817E00219FEF /* FromWeixin */,
-				3D19976C1FCE817E00219FEF /* CellImage */,
-				3D1997921FCE817E00219FEF /* Emotions */,
+				3D667E74225EAA1D003E39F9 /* voices */,
+				3D1997051FCE817E00219FEF /* weixin2 */,
+				3D1997241FCE817E00219FEF /* weixin */,
+				3D19976C1FCE817E00219FEF /* cellImage */,
+				3D1997921FCE817E00219FEF /* emotions */,
 				3D3928D721BF9BEE001E1257 /* other */,
 			);
 			path = resources;
 			sourceTree = "<group>";
 		};
-		3D1997051FCE817E00219FEF /* Weixin2 */ = {
+		3D1997051FCE817E00219FEF /* weixin2 */ = {
 			isa = PBXGroup;
 			children = (
 				3D1997061FCE817E00219FEF /* ReceiverTextNodeBkgHL@2x.png */,
@@ -891,10 +903,10 @@
 				3D1997221FCE817E00219FEF /* SenderVoiceNodePlaying003@2x.png */,
 				3D1997231FCE817E00219FEF /* SenderVoiceNodePlaying001@3x.png */,
 			);
-			path = Weixin2;
+			path = weixin2;
 			sourceTree = "<group>";
 		};
-		3D1997241FCE817E00219FEF /* FromWeixin */ = {
+		3D1997241FCE817E00219FEF /* weixin */ = {
 			isa = PBXGroup;
 			children = (
 				3D1997251FCE817E00219FEF /* Mode_listtextbuttonHL_ios7@2x.png */,
@@ -969,10 +981,10 @@
 				3D19976A1FCE817E00219FEF /* Clear_Enter_HL@2x.png */,
 				3D19976B1FCE817E00219FEF /* appkefu_vip64.png */,
 			);
-			path = FromWeixin;
+			path = weixin;
 			sourceTree = "<group>";
 		};
-		3D19976C1FCE817E00219FEF /* CellImage */ = {
+		3D19976C1FCE817E00219FEF /* cellImage */ = {
 			isa = PBXGroup;
 			children = (
 				3D19976D1FCE817E00219FEF /* pause@2x.png */,
@@ -1013,10 +1025,10 @@
 				3D1997901FCE817E00219FEF /* play.png */,
 				3D1997911FCE817E00219FEF /* welcome.png */,
 			);
-			path = CellImage;
+			path = cellImage;
 			sourceTree = "<group>";
 		};
-		3D1997921FCE817E00219FEF /* Emotions */ = {
+		3D1997921FCE817E00219FEF /* emotions */ = {
 			isa = PBXGroup;
 			children = (
 				3D1997931FCE817E00219FEF /* Expression_95@2x.png */,
@@ -1127,7 +1139,7 @@
 				3D1997FC1FCE817E00219FEF /* Expression_101@2x.png */,
 				3D1997FD1FCE817E00219FEF /* Expression_90@2x.png */,
 			);
-			path = Emotions;
+			path = emotions;
 			sourceTree = "<group>";
 		};
 		3D1998F31FCE833900219FEF /* common */ = {
@@ -1141,6 +1153,30 @@
 				3D5606C92057C874000E770C /* BDSingleImagePickerPreviewViewController.m */,
 			);
 			path = common;
+			sourceTree = "<group>";
+		};
+		3D218645225F26AB00C09777 /* input */ = {
+			isa = PBXGroup;
+			children = (
+				3D1996E01FCE638700219FEF /* KFDSInputEmotionManager.h */,
+				3D1996D91FCE638700219FEF /* KFDSInputEmotionManager.m */,
+				3D1996D51FCE638700219FEF /* KFDSInputEmotionParser.m */,
+				3D1996DD1FCE638700219FEF /* KFDSInputEmotionParser.h */,
+				3DD5C69F2238F0B1002C4693 /* KFEmotionView.h */,
+				3DD5C6982238F0AF002C4693 /* KFEmotionView.m */,
+				3DD5C69B2238F0AF002C4693 /* KFInputView.h */,
+				3DD5C69E2238F0B0002C4693 /* KFInputView.m */,
+				3DD5C6992238F0AF002C4693 /* KFPlusView.h */,
+				3DD5C69A2238F0AF002C4693 /* KFPlusView.m */,
+				3DD5C6A32238F0B1002C4693 /* KFRateView.h */,
+				3DD5C6A02238F0B1002C4693 /* KFRateView.m */,
+				3DD5C6A12238F0B1002C4693 /* KFRecordVoiceViewHUD.h */,
+				3DD5C6A22238F0B1002C4693 /* KFRecordVoiceViewHUD.m */,
+				3DD5C69C2238F0AF002C4693 /* KFStarView.h */,
+				3DD5C69D2238F0AF002C4693 /* KFStarView.m */,
+			);
+			name = input;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		3D31507F1F1A1D530005DB6C = {
@@ -1203,10 +1239,10 @@
 		3D38CC3122517D9100BA2668 /* document */ = {
 			isa = PBXGroup;
 			children = (
-				3D38CC3222517D9100BA2668 /* WBiCloudManager.m */,
-				3D38CC3322517D9100BA2668 /* WBDocument.m */,
 				3D38CC3422517D9100BA2668 /* WBiCloudManager.h */,
+				3D38CC3222517D9100BA2668 /* WBiCloudManager.m */,
 				3D38CC3522517D9100BA2668 /* WBDocument.h */,
+				3D38CC3322517D9100BA2668 /* WBDocument.m */,
 			);
 			path = document;
 			sourceTree = "<group>";
@@ -1225,8 +1261,8 @@
 		3D3A7E3E22462152007EEC81 /* vendors */ = {
 			isa = PBXGroup;
 			children = (
-				3D38CC3122517D9100BA2668 /* document */,
 				3D3A7E4722462152007EEC81 /* BDNamespacedDependencies.h */,
+				3D38CC3122517D9100BA2668 /* document */,
 				3D3A7E3F22462152007EEC81 /* VoiceConvert */,
 				3D3A7E4822462152007EEC81 /* MLAudioRecorder */,
 			);
@@ -1350,26 +1386,22 @@
 			path = controllers;
 			sourceTree = "<group>";
 		};
+		3D667E74225EAA1D003E39F9 /* voices */ = {
+			isa = PBXGroup;
+			children = (
+				3D667E75225EAA1D003E39F9 /* in.caf */,
+				3D667E76225EAA1D003E39F9 /* messageReceived.aiff */,
+				3D667E77225EAA1D003E39F9 /* messageSent.aiff */,
+			);
+			path = voices;
+			sourceTree = "<group>";
+		};
 		3DBAC5E01FBDE2500042215B /* util */ = {
 			isa = PBXGroup;
 			children = (
-				3D1996E01FCE638700219FEF /* KFDSInputEmotionManager.h */,
-				3D1996D91FCE638700219FEF /* KFDSInputEmotionManager.m */,
-				3D1996D51FCE638700219FEF /* KFDSInputEmotionParser.m */,
-				3D1996DD1FCE638700219FEF /* KFDSInputEmotionParser.h */,
-				3DD5C69F2238F0B1002C4693 /* KFEmotionView.h */,
-				3DD5C6982238F0AF002C4693 /* KFEmotionView.m */,
-				3DD5C69B2238F0AF002C4693 /* KFInputView.h */,
-				3DD5C69E2238F0B0002C4693 /* KFInputView.m */,
-				3DD5C6992238F0AF002C4693 /* KFPlusView.h */,
-				3DD5C69A2238F0AF002C4693 /* KFPlusView.m */,
-				3DD5C6A32238F0B1002C4693 /* KFRateView.h */,
-				3DD5C6A02238F0B1002C4693 /* KFRateView.m */,
-				3DD5C6A12238F0B1002C4693 /* KFRecordVoiceViewHUD.h */,
-				3DD5C6A22238F0B1002C4693 /* KFRecordVoiceViewHUD.m */,
-				3DD5C69C2238F0AF002C4693 /* KFStarView.h */,
-				3DD5C69D2238F0AF002C4693 /* KFStarView.m */,
 				3D548A751FC5514B003117B4 /* KFDSUConstants.h */,
+				3D3E226F225F2026008038F5 /* KFUIUtils.h */,
+				3D3E2270225F2026008038F5 /* KFUIUtils.m */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -1446,6 +1478,7 @@
 				3D8A626021DE598600935617 /* BDGroupMemberTableViewCell.h in Headers */,
 				3D1998FB1FCE833900219FEF /* KFDSBadgeView.h in Headers */,
 				3D3A7E6D22462152007EEC81 /* interf_dec.h in Headers */,
+				3D3E2271225F2026008038F5 /* KFUIUtils.h in Headers */,
 				3D1996FE1FCE638800219FEF /* KFDSInputEmotionManager.h in Headers */,
 				3D38CC3C2251954D00BA2668 /* BDMsgFileContentView.h in Headers */,
 				3D1996E51FCE638800219FEF /* BDMsgNotificationViewCell.h in Headers */,
@@ -1588,6 +1621,7 @@
 				3D19982F1FCE817E00219FEF /* SenderVoiceNodePlaying001_ios7@2x.png in Resources */,
 				3D1998871FCE817E00219FEF /* welcome.png in Resources */,
 				3D1998121FCE817E00219FEF /* SenderVoiceNodeBack@2x.png in Resources */,
+				3D667E7A225EAA1D003E39F9 /* messageSent.aiff in Resources */,
 				3D1998DA1FCE817E00219FEF /* Expression_103@2x.png in Resources */,
 				3D1998241FCE817E00219FEF /* RecordingSignal003@2x.png in Resources */,
 				3D1998621FCE817E00219FEF /* appkefu_vip64.png in Resources */,
@@ -1681,6 +1715,7 @@
 				3D1998A91FCE817E00219FEF /* Expression_48@2x.png in Resources */,
 				3D1998E21FCE817E00219FEF /* Expression_73@2x.png in Resources */,
 				3D19988C1FCE817E00219FEF /* Expression_87@2x.png in Resources */,
+				3D667E79225EAA1D003E39F9 /* messageReceived.aiff in Resources */,
 				3D1998A31FCE817E00219FEF /* Expression_89@2x.png in Resources */,
 				3D1998831FCE817E00219FEF /* user@2x.png in Resources */,
 				3D1998081FCE817E00219FEF /* ReceiverTextNodeBkgHL@3x.png in Resources */,
@@ -1769,6 +1804,7 @@
 				3D1998A71FCE817E00219FEF /* Expression_2@2x.png in Resources */,
 				3D1998A41FCE817E00219FEF /* Expression_11@2x.png in Resources */,
 				3D1998EE1FCE817E00219FEF /* Expression_12@2x.png in Resources */,
+				3D667E78225EAA1D003E39F9 /* in.caf in Resources */,
 				3D1998351FCE817E00219FEF /* Mode_listtextbutton_ios7@2x.png in Resources */,
 				3D1998E61FCE817E00219FEF /* Expression_59@2x.png in Resources */,
 				3D1998CC1FCE817E00219FEF /* Expression_84@2x.png in Resources */,
@@ -1970,6 +2006,7 @@
 				3DD5C6A62238F0B1002C4693 /* KFPlusView.m in Sources */,
 				3D1996F71FCE638800219FEF /* KFDSInputEmotionManager.m in Sources */,
 				3D4C5C9B2201E8510056BC63 /* BDFeedbackCategoryViewController.m in Sources */,
+				3D3E2272225F2026008038F5 /* KFUIUtils.m in Sources */,
 				3D3C28DF2236804700E288AF /* BDChatBaseViewController.m in Sources */,
 				3D5606CB2057C875000E770C /* BDSingleImagePickerPreviewViewController.m in Sources */,
 				3D3B30F4225AB282000FC60F /* BDLeaveMessageViewController.m in Sources */,

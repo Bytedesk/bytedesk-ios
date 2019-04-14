@@ -93,7 +93,9 @@
             [BDCoreApis acceptGroupTransfer:noticeModel.nid resultSuccess:^(NSDictionary *dict) {
                 
             } resultFailed:^(NSError *error) {
-                
+                if (error) {
+                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                }
             }];
             
         } else {
@@ -102,7 +104,9 @@
             [BDCoreApis rejectGroupTransfer:noticeModel.nid resultSuccess:^(NSDictionary *dict) {
                 
             } resultFailed:^(NSError *error) {
-                
+                if (error) {
+                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                }
             }];
         }
         [aDialogViewController hide];

@@ -11,15 +11,16 @@
 
 @implementation WBiCloudManager
 
-
-
-
 /*  < 判断是否有iCloud权限 > */
 + (BOOL)iCloudEnable {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
     return [self defaultiCloudURL] ? YES : NO;
 }
 
 + (NSURL *)defaultiCloudURL {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
     NSURL *url = nil;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     url = [fileManager URLForUbiquityContainerIdentifier:nil];
@@ -27,6 +28,8 @@
 }
 
 + (NSURL *)iCloudURLForIdentifier:(NSString *)identifier {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
     NSURL *url = nil;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     url = [fileManager URLForUbiquityContainerIdentifier:identifier];
@@ -34,25 +37,31 @@
 }
 
 /*  < 从iCloud下载文件 > */
-+ (void)wb_downloadWithDocumentURL:(NSURL *)url
-                    completedBlock:(downloadCallBack)completedBlock {
-    WBDocument *document = [[WBDocument alloc]initWithFileURL:url];
++ (void)wb_downloadWithDocumentURL:(NSURL *)url completedBlock:(downloadCallBack)completedBlock {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+    WBDocument *document = [[WBDocument alloc] initWithFileURL:url];
     [document openWithCompletionHandler:^(BOOL success) {
         if (success) {
+            //
             if (completedBlock) {
-                completedBlock(document.data);
+                completedBlock(document.data, document.type);
             }
-            
+            //
             [document closeWithCompletionHandler:^(BOOL success) {
                 if (success) {
-                    NSLog(@"关闭成功");
+                    DDLogInfo(@"关闭成功");
                 }
             }];
+        } else {
+            DDLogError(@"打开iCloud文件失败");
         }
     }];
 }
 
 + (NSURL *)wb_createUbiquityContainerURLWithFileName:(NSString *)fileName {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    //
     NSURL *url = [self defaultiCloudURL];
     if (url) {
         NSURL *documentURL = [url URLByAppendingPathComponent:@"Documents"];

@@ -61,4 +61,9 @@
 //
 + (BOOL)isSimulator;
 
+/**
+ 断开连接，清空缓存
+ */
++ (void)clearOut;
+
 @end

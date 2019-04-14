@@ -126,28 +126,45 @@
     
     if (indexPath.section == 1) {
         DDLogInfo(@"清空聊天记录");
-        //
-        [BDCoreApis markClearContactMessage:self.mUid resultSuccess:^(NSDictionary *dict) {
+        QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
             //
-            NSNumber *status_code = [dict objectForKey:@"status_code"];
-            if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                // 成功
-                
+        }];
+        QMUIAlertAction *closeAction = [QMUIAlertAction actionWithTitle:@"清空" style:QMUIAlertActionStyleDestructive handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+            //
+            [QMUITips showLoading:@"清空聊天记录中..." inView:self.view];
+            //
+            [BDCoreApis markClearContactMessage:self.mUid resultSuccess:^(NSDictionary *dict) {
+                //
+                NSNumber *status_code = [dict objectForKey:@"status_code"];
+                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+                    // 成功
+                    
+                    [QMUITips showSucceed:@"成功清空聊天记录" inView:self.view hideAfterDelay:.8];
+                } else {
+                    //
+                    NSString *message = dict[@"message"];
+                    DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, message);
+                    [QMUITips showError:message inView:self.view hideAfterDelay:2];
+                }
+                [QMUITips hideAllToastInView:self.view animated:YES];
                 // delegate
                 if (self.delegate && [self.delegate respondsToSelector:@selector(clearMessages)]) {
                     [self.delegate clearMessages];
                 }
-                
-                [QMUITips showSucceed:@"成功清空聊天记录" inView:self.view hideAfterDelay:.8];
-            } else {
-                //
-                NSString *message = dict[@"message"];
-                DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, message);
-                [QMUITips showError:message inView:self.view hideAfterDelay:2];
-            }
-        } resultFailed:^(NSError *error) {
-            [QMUITips showError:@"清空聊天记录失败" inView:self.view hideAfterDelay:.8];
+            } resultFailed:^(NSError *error) {
+                // delegate
+                if (self.delegate && [self.delegate respondsToSelector:@selector(clearMessages)]) {
+                    [self.delegate clearMessages];
+                }
+                [QMUITips showError:@"清空聊天记录失败" inView:self.view hideAfterDelay:.8];
+                [QMUITips hideAllToastInView:self.view animated:YES];
+            }];
+            
         }];
+        QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"确定要清空聊天记录？" message:@"" preferredStyle:QMUIAlertControllerStyleAlert];
+        [alertController addAction:cancelAction];
+        [alertController addAction:closeAction];
+        [alertController showWithAnimated:YES];
     }
 }
 
@@ -238,7 +255,9 @@
             [BDCoreApis shield:self.mUid resultSuccess:^(NSDictionary *dict) {
                 
             } resultFailed:^(NSError *error) {
-                
+                if (error) {
+                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                }
             }];
             
         } else {
@@ -246,7 +265,9 @@
             [BDCoreApis unshield:self.mUid resultSuccess:^(NSDictionary *dict) {
                 
             } resultFailed:^(NSError *error) {
-                
+                if (error) {
+                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+                }
             }];
         }
     }
@@ -282,6 +303,9 @@
     
     } resultFailed:^(NSError *error) {
         DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+        if (error) {
+            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+        }
     }];
 }
 

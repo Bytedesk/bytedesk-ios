@@ -14,7 +14,10 @@
 - (BOOL)loadFromContents:(id)contents
                   ofType:(NSString *)typeName
                    error:(NSError * _Nullable __autoreleasing *)outError {
+    //
     self.data = contents;
+    self.type = typeName;
+    
     return YES;
 }
 
