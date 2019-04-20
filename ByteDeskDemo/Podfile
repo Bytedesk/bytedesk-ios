@@ -26,13 +26,13 @@ target 'demo' do
     
     # 集成核心协议库core
 #    pod 'bytedesk-core', '1.5.9'
-    pod 'bytedesk-core'
+    pod 'bytedesk-core', '1.5.9.jjldxz.com'
 
     # 集成UI界面库
 #   第一种集成方式：直接使用pod
 #    pod 'bytedesk-ui', '1.5.9'
-    pod 'bytedesk-ui'
-    
+#    pod 'bytedesk-ui'
+
 #   第二种集成方式：将bdui项目集成到自己项目中，并添加依赖，可自定义界面
 
 
@@ -56,7 +56,8 @@ target 'bytedesk-ui' do
     pod 'CocoaLumberjack'
     
     # 集成核心协议库core
-    pod 'bytedesk-core'
+    pod 'bytedesk-core', '1.5.9.jjldxz.com'
+#    pod 'bytedesk-core'
 
     target 'bduiTests' do
     end
