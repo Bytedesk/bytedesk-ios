@@ -6,20 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		3D0DB23121CD531D002ACB3E /* Document */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 3D0DB23221CD531E002ACB3E /* Build configuration list for PBXAggregateTarget "Document" */;
-			buildPhases = (
-				3D0DB23521CD532D002ACB3E /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = Document;
-			productName = Document;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		3D1996B51FCE2B9600219FEF /* BDChatViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996B31FCE2B9600219FEF /* BDChatViewController.h */; };
 		3D1996B61FCE2B9600219FEF /* BDChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996B41FCE2B9600219FEF /* BDChatViewController.m */; };
@@ -1555,11 +1541,6 @@
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = KeFuDaShi;
 				TargetAttributes = {
-					3D0DB23121CD531D002ACB3E = {
-						CreatedOnToolsVersion = 10.1;
-						DevelopmentTeam = L5F47963M2;
-						ProvisioningStyle = Automatic;
-					};
 					3D3150881F1A1D530005DB6C = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = L5F47963M2;
@@ -1577,6 +1558,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 3D31507F1F1A1D530005DB6C;
@@ -1586,7 +1568,6 @@
 			targets = (
 				3D3150881F1A1D530005DB6C /* bytedesk-ui */,
 				3D3150911F1A1D530005DB6C /* bduiTests */,
-				3D0DB23121CD531D002ACB3E /* Document */,
 			);
 		};
 /* End PBXProject section */
@@ -1878,23 +1859,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3D0DB23521CD532D002ACB3E /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nappledoc --no-create-docset --output ./docs --project-name bytedesk-ui --project-company bytedesk.com --company-id bytedesk .\n";
-		};
 		3D60DF4D2084C22300B5BE5B /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2037,24 +2001,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		3D0DB23321CD531E002ACB3E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L5F47963M2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		3D0DB23421CD531E002ACB3E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L5F47963M2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		3D31509B1F1A1D530005DB6C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2318,15 +2264,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3D0DB23221CD531E002ACB3E /* Build configuration list for PBXAggregateTarget "Document" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3D0DB23321CD531E002ACB3E /* Debug */,
-				3D0DB23421CD531E002ACB3E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		3D3150831F1A1D530005DB6C /* Build configuration list for PBXProject "bdui" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
