@@ -42,98 +42,356 @@
  */
 + (BOOL)getIsAlreadyLogin DEPRECATED_ATTRIBUTE;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (BOOL)isAlreadyLogin;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getClient;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getSubdomain;
 
+/**
+ <#Description#>
+
+ @param subdomain <#subdomain description#>
+ */
 + (void)setSubdomain:(NSString *)subdomain;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getUsername;
 
+/**
+ <#Description#>
+
+ @param username <#username description#>
+ */
 + (void)setUsername:(NSString *)username;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getUid;
 
+/**
+ <#Description#>
+
+ @param uid <#uid description#>
+ */
 + (void)setUid:(NSString *)uid;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getNickname;
 
+/**
+ <#Description#>
+
+ @param nickname <#nickname description#>
+ */
 + (void)setNickname:(NSString *)nickname;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getRealname;
 
+/**
+ <#Description#>
+
+ @param realname <#realname description#>
+ */
 + (void)setRealname:(NSString *)realname;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getPassword;
 
+/**
+ <#Description#>
+
+ @param password <#password description#>
+ */
 + (void)setPassword:(NSString *)password;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getAvatar;
 
+/**
+ <#Description#>
+
+ @param avatar <#avatar description#>
+ */
 + (void)setAvatar:(NSString *)avatar;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getRole;
 
+/**
+ <#Description#>
+
+ @param role <#role description#>
+ */
 + (void)setRole:(NSString *)role;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getAppkey;
 
+/**
+ <#Description#>
+
+ @param appkey <#appkey description#>
+ */
 + (void)setAppkey:(NSString *)appkey;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getDescription;
 
+/**
+ <#Description#>
+
+ @param description <#description description#>
+ */
 + (void)setDescription:(NSString *)description;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getAcceptStatus;
 
+/**
+ <#Description#>
+
+ @param acceptStatus <#acceptStatus description#>
+ */
 + (void)setAcceptStatus:(NSString *)acceptStatus;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getAutoReplyContent;
 
+/**
+ <#Description#>
+
+ @param autoreply <#autoreply description#>
+ */
 + (void)setAutoReplyContent:(NSString *)autoreply;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getStatus;
 
+/**
+ <#Description#>
+
+ @param status <#status description#>
+ */
 + (void)setStatus:(NSString *)status;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getCurrentTid;
 
+/**
+ <#Description#>
+
+ @param tid <#tid description#>
+ */
 + (void)setCurrentTid:(NSString *)tid;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getPassportAccessToken;
 
+/**
+ <#Description#>
+
+ @param accessToken <#accessToken description#>
+ */
 + (void)setPassportAccessToken:(NSString *)accessToken;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getPassportExpiresIn;
 
+/**
+ <#Description#>
+
+ @param expiresIn <#expiresIn description#>
+ */
 + (void)setPassportExpiresIn:(NSString *)expiresIn;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getPassportRefreshToken;
 
+/**
+ <#Description#>
+
+ @param refreshToken <#refreshToken description#>
+ */
 + (void)setPassportRefreshToken:(NSString *)refreshToken;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getPassportTokenType;
 
+/**
+ <#Description#>
+
+ @param tokenType <#tokenType description#>
+ */
 + (void)setPassportTokenType:(NSString *)tokenType;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getDeviceToken;
 
+/**
+ <#Description#>
+
+ @param deviceToken <#deviceToken description#>
+ */
 + (void)setDeviceToken:(NSString *)deviceToken;
 
+/**
+ <#Description#>
+ */
 + (void)clear;
 
-//////////////////////////////////////
+#pragma mark - 阅后即焚
 
+/**
+ <#Description#>
+
+ @param tidOrUidOrGid <#tidOrUidOrGid description#>
+ @param sessionType <#sessionType description#>
+ @return <#return value description#>
+ */
 + (BOOL)getDestroyAfterReading:(NSString *)tidOrUidOrGid sessionType:(NSString *)sessionType;
 
+/**
+ <#Description#>
+
+ @param tidOrUidOrGid <#tidOrUidOrGid description#>
+ @param sessionType <#sessionType description#>
+ @param flag <#flag description#>
+ */
 + (void)setDestroyAfterReading:(NSString *)tidOrUidOrGid sessionType:(NSString *)sessionType flag:(BOOL)flag;
 
+/**
+ <#Description#>
+
+ @param tidOrUidOrGid <#tidOrUidOrGid description#>
+ @param sessionType <#sessionType description#>
+ @return <#return value description#>
+ */
 + (NSInteger)getDestroyAfterLength:(NSString *)tidOrUidOrGid sessionType:(NSString *)sessionType;
 
+/**
+ <#Description#>
+
+ @param tidOrUidOrGid <#tidOrUidOrGid description#>
+ @param sessionType <#sessionType description#>
+ @param length <#length description#>
+ */
 + (void)setDestroyAfterLength:(NSString *)tidOrUidOrGid sessionType:(NSString *)sessionType length:(NSInteger)length;
 
+
+#pragma mark - 新消息提示
+
+
+/**
+ 设置发送消息时是否播放提示音
+
+ @return <#return value description#>
+ */
++(BOOL) shouldRingWhenSendMessage;
++(void) setRingWhenSendMessage:(BOOL)flag;
+
+/**
+ 设置接收到消息时是否播放提示音
+
+ @return <#return value description#>
+ */
++(BOOL) shouldRingWhenReceiveMessage;
++(void) setRingWhenReceiveMessage:(BOOL)flag;
+
+/**
+ 设置接收到消息时是否震动
+
+ @return <#return value description#>
+ */
++(BOOL) shouldVibrateWhenReceiveMessage;
++(void) setVibrateWhenReceiveMessage:(BOOL)flag;
 
 
 

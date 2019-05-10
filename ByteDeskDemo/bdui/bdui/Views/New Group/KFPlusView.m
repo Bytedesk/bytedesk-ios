@@ -126,7 +126,7 @@
     [self addSubview:[self shareRateLabel]];
     [self addSubview:[self shareShowFAQButton]];
     [self addSubview:[self shareShowFAQLabel]];
-    
+
     [self addSubview:[self shareFilebButton]];
     [self addSubview:[self shareFileLabel]];
     
@@ -256,7 +256,6 @@
         shareRateButton.layer.borderWidth = 0.5;
         
         [shareRateButton addTarget:self action:@selector(shareRateButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        
     }
     
     return shareRateButton;

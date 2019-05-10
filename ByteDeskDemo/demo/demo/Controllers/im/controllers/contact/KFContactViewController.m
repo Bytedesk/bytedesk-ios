@@ -142,7 +142,6 @@
     else {
         [self hideEmptyView];
     }
-    //
     [self.tableView reloadData];
 }
 

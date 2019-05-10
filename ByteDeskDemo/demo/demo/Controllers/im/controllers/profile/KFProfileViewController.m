@@ -8,12 +8,15 @@
 #import "KFProfileViewController.h"
 #import "QDNavigationController.h"
 #import "KFQRCodeViewController.h"
+#import "QDSingleImagePickerPreviewViewController.h"
 
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 #import <bytedesk-core/bdcore.h>
 
-@interface KFProfileViewController ()
+static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPhoto;
+
+@interface KFProfileViewController ()<QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,QDSingleImagePickerPreviewViewControllerDelegate>
 
 @property(nonatomic, strong) UIRefreshControl *mRefreshControl;
 
@@ -102,23 +105,7 @@
     //        viewController = [[KFProfileViewController alloc] init];
     //        [self.navigationController pushViewController:viewController animated:YES];
         
-        QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
-        }];
-        QMUIAlertAction *avatarAction = [QMUIAlertAction actionWithTitle:@"修改头像TODO" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
-            
-        }];
-        QMUIAlertAction *nicknameAction = [QMUIAlertAction actionWithTitle:@"修改昵称TODO" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
-            
-        }];
-        QMUIAlertAction *descriptionAction = [QMUIAlertAction actionWithTitle:@"修改签名TODO" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
-            
-        }];
-        QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"设置在线状态" message:@"" preferredStyle:QMUIAlertControllerStyleActionSheet];
-        [alertController addAction:cancelAction];
-        [alertController addAction:avatarAction];
-        [alertController addAction:nicknameAction];
-        [alertController addAction:descriptionAction];
-        [alertController showWithAnimated:YES];
+        [self authorizationPresentAlbumViewController];
         
     } else if (indexPath.section == 1) {
         //
@@ -285,6 +272,117 @@
 //        [[NSUserDefaults standardUserDefaults] setObject:newTitle forKey:specifier.key];
 //    }
 //}
+
+- (void)authorizationPresentAlbumViewController {
+    if ([QMUIAssetsManager authorizationStatus] == QMUIAssetAuthorizationStatusNotDetermined) {
+        [QMUIAssetsManager requestAuthorization:^(QMUIAssetAuthorizationStatus status) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self presentAlbumViewController];
+            });
+        }];
+    } else {
+        [self presentAlbumViewController];
+    }
+}
+
+- (void)presentAlbumViewController {
+    
+    // 创建一个 QMUIAlbumViewController 实例用于呈现相簿列表
+    QMUIAlbumViewController *albumViewController = [[QMUIAlbumViewController alloc] init];
+    albumViewController.albumViewControllerDelegate = self;
+    albumViewController.contentType = kAlbumContentType;
+    albumViewController.title = @"选择头像";
+    QDNavigationController *navigationController = [[QDNavigationController alloc] initWithRootViewController:albumViewController];
+    
+    // 获取最近发送图片时使用过的相簿，如果有则直接进入该相簿
+    [albumViewController pickLastAlbumGroupDirectlyIfCan];
+    
+    [self presentViewController:navigationController animated:YES completion:NULL];
+}
+
+#pragma mark - <QMUIAlbumViewControllerDelegate>
+
+- (QMUIImagePickerViewController *)imagePickerViewControllerForAlbumViewController:(QMUIAlbumViewController *)albumViewController {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+    QMUIImagePickerViewController *imagePickerViewController = [[QMUIImagePickerViewController alloc] init];
+    imagePickerViewController.imagePickerViewControllerDelegate = self;
+    imagePickerViewController.maximumSelectImageCount = 1;
+    imagePickerViewController.view.tag = albumViewController.view.tag;
+    imagePickerViewController.allowsMultipleSelection = NO;
+    
+    return imagePickerViewController;
+}
+
+#pragma mark - <QMUIImagePickerViewControllerDelegate>
+
+- (QMUIImagePickerPreviewViewController *)imagePickerPreviewViewControllerForImagePickerViewController:(QMUIImagePickerViewController *)imagePickerViewController {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    //
+    QDSingleImagePickerPreviewViewController *imagePickerPreviewViewController = [[QDSingleImagePickerPreviewViewController alloc] init];
+    imagePickerPreviewViewController.delegate = self;
+    imagePickerPreviewViewController.assetsGroup = imagePickerViewController.assetsGroup;
+    imagePickerPreviewViewController.view.tag = imagePickerViewController.view.tag;
+    
+    return imagePickerPreviewViewController;
+}
+
+
+#pragma mark - <QDSingleImagePickerPreviewViewControllerDelegate>
+
+- (void)imagePickerPreviewViewController:(QDSingleImagePickerPreviewViewController *)imagePickerPreviewViewController didSelectImageWithImagesAsset:(QMUIAsset *)imageAsset {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+    // 储存最近选择了图片的相册，方便下次直接进入该相册
+    [QMUIImagePickerHelper updateLastestAlbumWithAssetsGroup:imagePickerPreviewViewController.assetsGroup ablumContentType:kAlbumContentType userIdentify:nil];
+    
+    // 显示 loading
+    //    [self startLoading];
+    
+    [imageAsset requestImageData:^(NSData *imageData, NSDictionary<NSString *,id> *info, BOOL isGIF, BOOL isHEIC) {
+        UIImage *targetImage = [UIImage imageWithData:imageData];
+        if (isHEIC) {
+            // iOS 11 中新增 HEIF/HEVC 格式的资源，直接发送新格式的照片到不支持新格式的设备，照片可能会无法识别，可以先转换为通用的 JPEG 格式再进行使用。
+            // 详细请浏览：https://github.com/QMUI/QMUI_iOS/issues/224
+            targetImage = [UIImage imageWithData:UIImageJPEGRepresentation(targetImage, 1)];
+        }
+        NSData *imageData2 = UIImageJPEGRepresentation(targetImage, 0);
+        [self uploadImageData:imageData2];
+    }];
+}
+
+- (void)uploadImageData:(NSData *)imageData {
+    //
+    //    NSString *imageName = [NSString stringWithFormat:@"%@_%@.png", [BDSettings getUsername], [BDUtils getCurrentTimeString]];
+    //
+    [BDCoreApis uploadAvatarData:imageData resultSuccess:^(NSDictionary *dict) {
+        //
+        NSNumber *status_code = [dict objectForKey:@"status_code"];
+        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            
+            NSString *avatarUrl = dict[@"data"];
+            [BDSettings setAvatar:avatarUrl];
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
+            // 注意：新头像需要与旧头像url保持一致，如此可以保证用户更新头像之后，其所有好友实时更新头像
+            // 调用更新个人资料接口
+            [BDCoreApis setAvatar:avatarUrl resultSuccess:^(NSDictionary *dict) {
+                // 设置成功
+                
+            } resultFailed:^(NSError *error) {
+                [QMUITips showError:@"设置头像错误" inView:self.view hideAfterDelay:2];
+            }];
+            
+        } else {
+            [QMUITips showError:@"上传头像错误" inView:self.view hideAfterDelay:2];
+        }
+        
+    } resultFailed:^(NSError *error) {
+        
+    }];
+}
 
 #pragma mark - Selectors
 

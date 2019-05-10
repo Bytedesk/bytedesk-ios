@@ -389,7 +389,9 @@
         self.mNickname = self.currentTextFieldDialogViewController.textFields[0].text;
         //
         [BDCoreApis updateGroupNickname:self.mNickname withGroupGid:self.mGid resultSuccess:^(NSDictionary *dict) {
+            
             // TODO: 更新本地群组信息、更新本地会话信息
+            
             
             [self.tableView reloadData];
         } resultFailed:^(NSError *error) {

@@ -7,6 +7,9 @@
 //
 
 #import "KFScanViewController.h"
+#import "KFQRCodeViewController.h"
+
+#import "SWQRCode.h"
 
 @interface KFScanViewController ()
 
@@ -21,14 +24,81 @@
     
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - Table view data source
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
 }
-*/
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 4;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    // Configure the cell...
+    if (!cell){
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
+    if (indexPath.row == 0) {
+        
+        cell.textLabel.text = @"登录二维码生成";
+        cell.detailTextLabel.text = @"";
+        
+    } else if (indexPath.row == 1) {
+        
+        cell.textLabel.text = @"个人二维码生成";
+        cell.detailTextLabel.text = @"";
+        
+    } else if (indexPath.row == 2) {
+        
+        cell.textLabel.text = @"群二维码生成";
+        cell.detailTextLabel.text = @"";
+        
+    } else if (indexPath.row == 3) {
+        
+        cell.textLabel.text = @"扫一扫";
+    }
+    
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 0) {
+        //
+        
+    } else if (indexPath.row == 1) {
+        //
+        KFQRCodeViewController *qrcodeViewController = [[KFQRCodeViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        [self.navigationController pushViewController:qrcodeViewController animated:YES];
+    } else if (indexPath.row == 2) {
+        //
+        KFQRCodeViewController *qrcodeViewController = [[KFQRCodeViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        [self.navigationController pushViewController:qrcodeViewController animated:YES];
+    } else if (indexPath.row == 3) {
+ 
+        [self showScanController];
+    }
+}
+
+
+/**
+ 扫描
+ */
+- (void)showScanController {
+    SWQRCodeConfig *config = [[SWQRCodeConfig alloc]init];
+    config.scannerType = SWScannerTypeBoth;
+    
+    SWQRCodeViewController *qrcodeVC = [[SWQRCodeViewController alloc]init];
+    qrcodeVC.codeConfig = config;
+    qrcodeVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:qrcodeVC animated:YES];
+}
 
 @end

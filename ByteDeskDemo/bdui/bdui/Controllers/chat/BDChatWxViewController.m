@@ -386,6 +386,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         NSString *title = @"";
         // 存储key/value: content/qid
         NSMutableDictionary *questionDict = [[NSMutableDictionary alloc] init];
+        // 存储key/value: content/workGroups
+        NSMutableDictionary *workGroupDict = [[NSMutableDictionary alloc] init];
         // content数组
         NSMutableArray *questionArray = [[NSMutableArray alloc] init];
         //
@@ -399,6 +401,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                 //
                 NSLog(@"content %@", questionnaireItemItemsDict[@"content"]);
                 questionDict[questionnaireItemItemsDict[@"content"]] = questionnaireItemItemsDict[@"qid"];
+                workGroupDict[questionnaireItemItemsDict[@"content"]] = questionnaireItemItemsDict[@"workGroups"];
                 [questionArray addObject:questionnaireItemItemsDict[@"content"]];
             }
         }
@@ -417,8 +420,20 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             NSString *content = questionArray[itemIndex];
             NSString *qid = questionDict[content];
             DDLogInfo(@"content: %@, qid: %@", content, qid);
-            //
-            [self requestQuestionnaire:qid];
+            // 留学: 意向国家 qid = '201810061551181'
+            // 移民：意向国家 qid = '201810061551183'
+            // 语培：意向类别 qid = '201810061551182'
+            // 其他：意向类别 qid = '201810061551184'
+            // 院校：意向院校 qid = '201810061551185'
+            
+            NSMutableArray *workGroupsArray = workGroupDict[content];
+            if ([qid isEqualToString:@"201810061551181"]) {
+                // 单独处理 留学: 意向国家 qid = '201810061551181'
+                //                [self requestQuestionnaire:qid];
+                [self showWorkGroupDialog:workGroupsArray isLiuXue:YES];
+            } else {
+                [self showWorkGroupDialog:workGroupsArray isLiuXue:NO];
+            }
             
             [aDialogViewController hide];
         };
@@ -435,60 +450,69 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     }
 }
 
-- (void)requestQuestionnaire:(NSString *)itemQid {
+//- (void)requestQuestionnaire:(NSString *)itemQid {
+//
+//    [BDCoreApis requestQuestionnairWithTid:self.mThreadTid itemQid:itemQid resultSuccess:^(NSDictionary *dict) {
+//        //        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
+//        if (self.mIsViewControllerClosed) {
+//            return;
+//        }
+//
+//        NSNumber *status_code = [dict objectForKey:@"status_code"];
+//        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+//            //
+//            // NSString *title = dict[@"data"][@"content"];
+//            NSMutableArray *workGroupsArray = dict[@"data"][@"workGroups"];
+//            [self showWorkGroupDialog:workGroupsArray];
+//
+//        } else {
+//            NSString *message = [dict objectForKey:@"message"];
+//            [QMUITips showError:message inView:self.view hideAfterDelay:2.0];
+//        }
+//
+//    } resultFailed:^(NSError *error) {
+//        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+//        if (error) {
+//            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+//        }
+//    }];
+//}
+
+- (void)showWorkGroupDialog:(NSMutableArray *)workGroupsArray isLiuXue:(BOOL)isLiuXue {
     
-    [BDCoreApis requestQuestionnairWithTid:self.mThreadTid itemQid:itemQid resultSuccess:^(NSDictionary *dict) {
-        //        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
-        if (self.mIsViewControllerClosed) {
-            return;
-        }
-        
-        NSNumber *status_code = [dict objectForKey:@"status_code"];
-        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            //
-            NSString *title = dict[@"data"][@"content"];
-            NSMutableDictionary *workGroupDict = [[NSMutableDictionary alloc] init];
-            NSMutableArray *workGroupNamesArray = [[NSMutableArray alloc] init];
-            //
-            NSMutableArray *workGroupsArray = dict[@"data"][@"workGroups"];
-            for (NSDictionary *workGroupObjectDict in workGroupsArray) {
-                //
-                workGroupDict[workGroupObjectDict[@"nickname"]] = workGroupObjectDict[@"wid"];
-                [workGroupNamesArray addObject:workGroupObjectDict[@"nickname"]];
-            }
-            //
-            QMUIDialogSelectionViewController *dialogViewController = [[QMUIDialogSelectionViewController alloc] init];
-            dialogViewController.title = title;
-            dialogViewController.items = workGroupNamesArray;
-            dialogViewController.cellForItemBlock = ^(QMUIDialogSelectionViewController *aDialogViewController, QMUITableViewCell *cell, NSUInteger itemIndex) {
-                cell.accessoryType = UITableViewCellAccessoryNone;// 移除点击时默认加上右边的checkbox
-            };
-            dialogViewController.heightForItemBlock = ^CGFloat (QMUIDialogSelectionViewController *aDialogViewController, NSUInteger itemIndex) {
-                return 54;// 修改默认的行高，默认为 TableViewCellNormalHeight
-            };
-            dialogViewController.didSelectItemBlock = ^(QMUIDialogSelectionViewController *aDialogViewController, NSUInteger itemIndex) {
-                //
-                NSString *nickname = workGroupNamesArray[itemIndex];
-                NSString *wid = workGroupDict[nickname];
-                DDLogInfo(@"nickname: %@, wid: %@", nickname, wid);
-                //
-                [self chooseWorkGroup:wid];
-                
-                [aDialogViewController hide];
-            };
-            [dialogViewController show];
-            
+    NSMutableDictionary *workGroupDict = [[NSMutableDictionary alloc] init];
+    NSMutableArray *workGroupNamesArray = [[NSMutableArray alloc] init];
+    //
+    for (NSDictionary *workGroupObjectDict in workGroupsArray) {
+        //
+        workGroupDict[workGroupObjectDict[@"nickname"]] = workGroupObjectDict[@"wid"];
+        [workGroupNamesArray addObject:workGroupObjectDict[@"nickname"]];
+    }
+    //
+    QMUIDialogSelectionViewController *dialogViewController = [[QMUIDialogSelectionViewController alloc] init];
+    dialogViewController.title = @"请选择";
+    dialogViewController.items = workGroupNamesArray;
+    dialogViewController.cellForItemBlock = ^(QMUIDialogSelectionViewController *aDialogViewController, QMUITableViewCell *cell, NSUInteger itemIndex) {
+        cell.accessoryType = UITableViewCellAccessoryNone;// 移除点击时默认加上右边的checkbox
+    };
+    dialogViewController.heightForItemBlock = ^CGFloat (QMUIDialogSelectionViewController *aDialogViewController, NSUInteger itemIndex) {
+        return 54;// 修改默认的行高，默认为 TableViewCellNormalHeight
+    };
+    dialogViewController.didSelectItemBlock = ^(QMUIDialogSelectionViewController *aDialogViewController, NSUInteger itemIndex) {
+        //
+        NSString *nickname = workGroupNamesArray[itemIndex];
+        NSString *wid = workGroupDict[nickname];
+        DDLogInfo(@"nickname: %@, wid: %@", nickname, wid);
+        //
+        if (isLiuXue) {
+            [self chooseWorkGroupLiuXue:wid withWorkGroupNickname:nickname];
         } else {
-            NSString *message = [dict objectForKey:@"message"];
-            [QMUITips showError:message inView:self.view hideAfterDelay:2.0];
+            [self chooseWorkGroup:wid];
         }
         
-    } resultFailed:^(NSError *error) {
-        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, error);
-        if (error) {
-            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
-        }
-    }];
+        [aDialogViewController hide];
+    };
+    [dialogViewController show];
 }
 
 - (void)chooseWorkGroup:(NSString *)workGroupWid {
@@ -501,7 +525,24 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         [self dealWithRequestThreadResult:dict];
         
     } resultFailed:^(NSError *error) {
-        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, error);
+        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+        if (error) {
+            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+        }
+    }];
+}
+
+- (void)chooseWorkGroupLiuXue:(NSString *)workGroupWid withWorkGroupNickname:(NSString *)nickname {
+    
+    [BDCoreApis requestChooseWorkGroupLiuXue:workGroupWid withWorkGroupNickname:nickname resultSuccess:^(NSDictionary *dict) {
+        //        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
+        
+        self.mWorkGroupWid = workGroupWid;
+        
+        [self dealWithRequestThreadResult:dict];
+        
+    } resultFailed:^(NSError *error) {
+        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
         if (error) {
             [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
         }
@@ -898,7 +939,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         height = 55;
     } else {
         //
-        if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_TEXT]) {
+        if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_TEXT] ||
+            [messageModel.type isEqualToString:BD_MESSAGE_TYPE_ROBOT]) {
+            //
             if ([messageModel isSend]) {
                 height = messageModel.contentSize.height + messageModel.contentViewInsets.top + messageModel.contentViewInsets.bottom + 30;
             } else {
@@ -2477,7 +2520,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             [self.mRefreshControl endRefreshing];
         } resultFailed:^(NSError *error) {
             
-            [QMUITips showError:@"加载失败" inView:self.view hideAfterDelay:2.0f];
+//            [QMUITips showError:@"加载失败" inView:self.view hideAfterDelay:2.0f];
             [self.mRefreshControl endRefreshing];
         }];
         
@@ -2508,7 +2551,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             [self.mRefreshControl endRefreshing];
         } resultFailed:^(NSError *error) {
             
-            [QMUITips showError:@"加载失败" inView:self.view hideAfterDelay:2.0f];
+//            [QMUITips showError:@"加载失败" inView:self.view hideAfterDelay:2.0f];
             [self.mRefreshControl endRefreshing];
         }];
         
@@ -2539,7 +2582,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             [self.mRefreshControl endRefreshing];
         } resultFailed:^(NSError *error) {
             
-            [QMUITips showError:@"加载失败" inView:self.view hideAfterDelay:2.0f];
+//            [QMUITips showError:@"加载失败" inView:self.view hideAfterDelay:2.0f];
             [self.mRefreshControl endRefreshing];
         }];
         
@@ -2569,7 +2612,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             [self.mRefreshControl endRefreshing];
         } resultFailed:^(NSError *error) {
             
-            [QMUITips showError:@"加载失败" inView:self.view hideAfterDelay:2.0f];
+//            [QMUITips showError:@"加载失败" inView:self.view hideAfterDelay:2.0f];
             [self.mRefreshControl endRefreshing];
         }];
         

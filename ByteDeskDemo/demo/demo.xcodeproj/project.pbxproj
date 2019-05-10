@@ -33,7 +33,10 @@
 		3D39294121C28595001E1257 /* KFProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D39294021C28595001E1257 /* KFProfileViewController.m */; };
 		3D3958A2224CC2E2000E88EE /* KFServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3958A1224CC2E2000E88EE /* KFServerViewController.m */; };
 		3D3B7C3021CA3613001FE199 /* BDApisTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3B7C2F21CA3613001FE199 /* BDApisTableViewController.m */; };
+		3D3EC9EA2285CFC70067888F /* bytedesk-ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3EC9E92285CFC70067888F /* bytedesk-ui.framework */; };
+		3D3EC9EB2285CFC70067888F /* bytedesk-ui.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3EC9E92285CFC70067888F /* bytedesk-ui.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3D47629921D1CA190034BF83 /* KFNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D47629821D1CA190034BF83 /* KFNoticeViewController.m */; };
+		3D4A3C8E22802388005F2F0F /* QDSingleImagePickerPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4A3C8C22802387005F2F0F /* QDSingleImagePickerPreviewViewController.m */; };
 		3D4C0B0E213131500083C8F9 /* KFIMApiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4C0B0C2131314F0083C8F9 /* KFIMApiViewController.m */; };
 		3D5489D21FC515CF003117B4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5489D11FC515CF003117B4 /* AppDelegate.m */; };
 		3D5489D81FC515CF003117B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D5489D61FC515CF003117B4 /* Main.storyboard */; };
@@ -47,8 +50,6 @@
 		3D548A5A1FC524EC003117B4 /* KFStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A591FC524EC003117B4 /* KFStatusViewController.m */; };
 		3D548A5D1FC5251B003117B4 /* KFVisitorThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A5C1FC5251B003117B4 /* KFVisitorThreadViewController.m */; };
 		3D5606EC205FB699000E770C /* KFThreadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5606EB205FB699000E770C /* KFThreadTableViewCell.m */; };
-		3D5CA98F226B275F008419F7 /* bytedesk-ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5CA98E226B275F008419F7 /* bytedesk-ui.framework */; };
-		3D5CA990226B275F008419F7 /* bytedesk-ui.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5CA98E226B275F008419F7 /* bytedesk-ui.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3D5E996F21D904AC006D37CC /* KFFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E996E21D904AC006D37CC /* KFFeedbackViewController.m */; };
 		3D5E997621D908E7006D37CC /* KFFormPhoneViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E997121D908E7006D37CC /* KFFormPhoneViewCell.m */; };
 		3D5E997721D908E7006D37CC /* KFFormSubmitViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E997321D908E7006D37CC /* KFFormSubmitViewCell.m */; };
@@ -61,6 +62,14 @@
 		3DCA9C6A21F60F7C00E63998 /* KFFAQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6921F60F7C00E63998 /* KFFAQViewController.m */; };
 		3DCA9C6D21F60FE800E63998 /* KFHelpCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6C21F60FE800E63998 /* KFHelpCenterViewController.m */; };
 		3DCA9C7021F6109600E63998 /* KFTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6F21F6109600E63998 /* KFTicketViewController.m */; };
+		3DCB17672267813C00E8FB16 /* SWQRCodeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB175C2267813C00E8FB16 /* SWQRCodeConfig.m */; };
+		3DCB17682267813C00E8FB16 /* SWQRCodeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB175D2267813C00E8FB16 /* SWQRCodeManager.m */; };
+		3DCB17692267813C00E8FB16 /* SWQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB17612267813C00E8FB16 /* SWQRCodeViewController.m */; };
+		3DCB176A2267813C00E8FB16 /* SWQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3DCB17622267813C00E8FB16 /* SWQRCode.bundle */; };
+		3DCB176B2267813C00E8FB16 /* SWScannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB17642267813C00E8FB16 /* SWScannerView.m */; };
+		3DCB176E2267F20900E8FB16 /* KFAppRateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB176D2267F20900E8FB16 /* KFAppRateViewController.m */; };
+		3DCB17712267F21D00E8FB16 /* KFAppUpgrateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB17702267F21D00E8FB16 /* KFAppUpgrateViewController.m */; };
+		3DCB17752267FC7300E8FB16 /* KFSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB17742267FC7300E8FB16 /* KFSettingViewController.m */; };
 		3DD32EFA2262B24C0049FB24 /* KFScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD32EF92262B24C0049FB24 /* KFScanViewController.m */; };
 		3DE1AA7420039A7C00A32B20 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DE1AA7620039A7C00A32B20 /* Localizable.strings */; };
 		3DE6FD872235007B006F1329 /* KFQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6FD862235007B006F1329 /* KFQRCodeViewController.m */; };
@@ -74,7 +83,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3D5CA990226B275F008419F7 /* bytedesk-ui.framework in Embed Frameworks */,
+				3D3EC9EB2285CFC70067888F /* bytedesk-ui.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,8 +144,11 @@
 		3D3958A1224CC2E2000E88EE /* KFServerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFServerViewController.m; sourceTree = "<group>"; };
 		3D3B7C2E21CA3613001FE199 /* BDApisTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDApisTableViewController.h; sourceTree = "<group>"; };
 		3D3B7C2F21CA3613001FE199 /* BDApisTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDApisTableViewController.m; sourceTree = "<group>"; };
+		3D3EC9E92285CFC70067888F /* bytedesk-ui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "bytedesk-ui.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D47629721D1CA190034BF83 /* KFNoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFNoticeViewController.h; sourceTree = "<group>"; };
 		3D47629821D1CA190034BF83 /* KFNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFNoticeViewController.m; sourceTree = "<group>"; };
+		3D4A3C8C22802387005F2F0F /* QDSingleImagePickerPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDSingleImagePickerPreviewViewController.m; sourceTree = "<group>"; };
+		3D4A3C8D22802388005F2F0F /* QDSingleImagePickerPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDSingleImagePickerPreviewViewController.h; sourceTree = "<group>"; };
 		3D4C0B0C2131314F0083C8F9 /* KFIMApiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFIMApiViewController.m; sourceTree = "<group>"; };
 		3D4C0B0D2131314F0083C8F9 /* KFIMApiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFIMApiViewController.h; sourceTree = "<group>"; };
 		3D5489CD1FC515CF003117B4 /* demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,7 +175,6 @@
 		3D548A5C1FC5251B003117B4 /* KFVisitorThreadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFVisitorThreadViewController.m; sourceTree = "<group>"; };
 		3D5606EA205FB699000E770C /* KFThreadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFThreadTableViewCell.h; sourceTree = "<group>"; };
 		3D5606EB205FB699000E770C /* KFThreadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFThreadTableViewCell.m; sourceTree = "<group>"; };
-		3D5CA98E226B275F008419F7 /* bytedesk-ui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "bytedesk-ui.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D5E996D21D904AC006D37CC /* KFFeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFFeedbackViewController.h; sourceTree = "<group>"; };
 		3D5E996E21D904AC006D37CC /* KFFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFFeedbackViewController.m; sourceTree = "<group>"; };
 		3D5E997021D908E7006D37CC /* KFFormPhoneViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFFormPhoneViewCell.h; sourceTree = "<group>"; };
@@ -188,6 +199,22 @@
 		3DCA9C6C21F60FE800E63998 /* KFHelpCenterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFHelpCenterViewController.m; sourceTree = "<group>"; };
 		3DCA9C6E21F6109600E63998 /* KFTicketViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFTicketViewController.h; sourceTree = "<group>"; };
 		3DCA9C6F21F6109600E63998 /* KFTicketViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFTicketViewController.m; sourceTree = "<group>"; };
+		3DCB175C2267813C00E8FB16 /* SWQRCodeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWQRCodeConfig.m; sourceTree = "<group>"; };
+		3DCB175D2267813C00E8FB16 /* SWQRCodeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWQRCodeManager.m; sourceTree = "<group>"; };
+		3DCB175E2267813C00E8FB16 /* SWQRCodeConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWQRCodeConfig.h; sourceTree = "<group>"; };
+		3DCB175F2267813C00E8FB16 /* SWQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWQRCode.h; sourceTree = "<group>"; };
+		3DCB17602267813C00E8FB16 /* SWQRCodeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWQRCodeManager.h; sourceTree = "<group>"; };
+		3DCB17612267813C00E8FB16 /* SWQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWQRCodeViewController.m; sourceTree = "<group>"; };
+		3DCB17622267813C00E8FB16 /* SWQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SWQRCode.bundle; sourceTree = "<group>"; };
+		3DCB17642267813C00E8FB16 /* SWScannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWScannerView.m; sourceTree = "<group>"; };
+		3DCB17652267813C00E8FB16 /* SWScannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWScannerView.h; sourceTree = "<group>"; };
+		3DCB17662267813C00E8FB16 /* SWQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWQRCodeViewController.h; sourceTree = "<group>"; };
+		3DCB176C2267F20900E8FB16 /* KFAppRateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFAppRateViewController.h; sourceTree = "<group>"; };
+		3DCB176D2267F20900E8FB16 /* KFAppRateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFAppRateViewController.m; sourceTree = "<group>"; };
+		3DCB176F2267F21D00E8FB16 /* KFAppUpgrateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFAppUpgrateViewController.h; sourceTree = "<group>"; };
+		3DCB17702267F21D00E8FB16 /* KFAppUpgrateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFAppUpgrateViewController.m; sourceTree = "<group>"; };
+		3DCB17732267FC7300E8FB16 /* KFSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFSettingViewController.h; sourceTree = "<group>"; };
+		3DCB17742267FC7300E8FB16 /* KFSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFSettingViewController.m; sourceTree = "<group>"; };
 		3DD32EF82262B24C0049FB24 /* KFScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFScanViewController.h; sourceTree = "<group>"; };
 		3DD32EF92262B24C0049FB24 /* KFScanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFScanViewController.m; sourceTree = "<group>"; };
 		3DE1AA7520039A7C00A32B20 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -210,7 +237,7 @@
 			files = (
 				AF07A2BB176935FE7FE9041E /* Pods_demo.framework in Frameworks */,
 				3D38CC30225179A100BA2668 /* CloudKit.framework in Frameworks */,
-				3D5CA98F226B275F008419F7 /* bytedesk-ui.framework in Frameworks */,
+				3D3EC9EA2285CFC70067888F /* bytedesk-ui.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +247,7 @@
 		3D3928E721C25E50001E1257 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3DCB17722267FC3200E8FB16 /* profile */,
 				3D47629621D1CA020034BF83 /* notice */,
 				3D39293E21C2846A001E1257 /* setting */,
 				3D39293D21C28464001E1257 /* thread */,
@@ -285,6 +313,8 @@
 				3D39290521C28116001E1257 /* QDCommonViewController.h */,
 				3D39290621C28116001E1257 /* QDNavigationController.m */,
 				3D39290721C28116001E1257 /* QDCommonTableViewController.m */,
+				3D4A3C8D22802388005F2F0F /* QDSingleImagePickerPreviewViewController.h */,
+				3D4A3C8C22802387005F2F0F /* QDSingleImagePickerPreviewViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -351,8 +381,8 @@
 		3D39293E21C2846A001E1257 /* setting */ = {
 			isa = PBXGroup;
 			children = (
-				3D39293F21C28595001E1257 /* KFProfileViewController.h */,
-				3D39294021C28595001E1257 /* KFProfileViewController.m */,
+				3DCB17732267FC7300E8FB16 /* KFSettingViewController.h */,
+				3DCB17742267FC7300E8FB16 /* KFSettingViewController.m */,
 			);
 			path = setting;
 			sourceTree = "<group>";
@@ -388,7 +418,7 @@
 		3D5489C41FC515CF003117B4 = {
 			isa = PBXGroup;
 			children = (
-				3D5CA98E226B275F008419F7 /* bytedesk-ui.framework */,
+				3D3EC9E92285CFC70067888F /* bytedesk-ui.framework */,
 				3D5489CF1FC515CF003117B4 /* demo */,
 				3D5489CE1FC515CF003117B4 /* Products */,
 				9C7149EBC449A684C32A715E /* Pods */,
@@ -464,6 +494,10 @@
 				3DE6FD862235007B006F1329 /* KFQRCodeViewController.m */,
 				3D3958A0224CC2E2000E88EE /* KFServerViewController.h */,
 				3D3958A1224CC2E2000E88EE /* KFServerViewController.m */,
+				3DCB176C2267F20900E8FB16 /* KFAppRateViewController.h */,
+				3DCB176D2267F20900E8FB16 /* KFAppRateViewController.m */,
+				3DCB176F2267F21D00E8FB16 /* KFAppUpgrateViewController.h */,
+				3DCB17702267F21D00E8FB16 /* KFAppUpgrateViewController.m */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -501,6 +535,7 @@
 		3DCA9C5F21F6094700E63998 /* vendors */ = {
 			isa = PBXGroup;
 			children = (
+				3DCB175A2267813C00E8FB16 /* SWQRCode */,
 				3DCA9C6021F6097E00E63998 /* pickImage */,
 			);
 			path = vendors;
@@ -515,6 +550,48 @@
 				3DCA9C6421F6097E00E63998 /* LxGridViewFlowLayout.m */,
 			);
 			path = pickImage;
+			sourceTree = "<group>";
+		};
+		3DCB175A2267813C00E8FB16 /* SWQRCode */ = {
+			isa = PBXGroup;
+			children = (
+				3DCB175B2267813C00E8FB16 /* Config */,
+				3DCB17632267813C00E8FB16 /* View */,
+				3DCB17662267813C00E8FB16 /* SWQRCodeViewController.h */,
+				3DCB17612267813C00E8FB16 /* SWQRCodeViewController.m */,
+				3DCB17622267813C00E8FB16 /* SWQRCode.bundle */,
+			);
+			path = SWQRCode;
+			sourceTree = "<group>";
+		};
+		3DCB175B2267813C00E8FB16 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				3DCB175C2267813C00E8FB16 /* SWQRCodeConfig.m */,
+				3DCB175D2267813C00E8FB16 /* SWQRCodeManager.m */,
+				3DCB175E2267813C00E8FB16 /* SWQRCodeConfig.h */,
+				3DCB175F2267813C00E8FB16 /* SWQRCode.h */,
+				3DCB17602267813C00E8FB16 /* SWQRCodeManager.h */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		3DCB17632267813C00E8FB16 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3DCB17642267813C00E8FB16 /* SWScannerView.m */,
+				3DCB17652267813C00E8FB16 /* SWScannerView.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3DCB17722267FC3200E8FB16 /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				3D39293F21C28595001E1257 /* KFProfileViewController.h */,
+				3D39294021C28595001E1257 /* KFProfileViewController.m */,
+			);
+			path = profile;
 			sourceTree = "<group>";
 		};
 		9C7149EBC449A684C32A715E /* Pods */ = {
@@ -609,6 +686,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D5489DD1FC515CF003117B4 /* LaunchScreen.storyboard in Resources */,
+				3DCB176A2267813C00E8FB16 /* SWQRCode.bundle in Resources */,
 				3DE1AA7420039A7C00A32B20 /* Localizable.strings in Resources */,
 				3D5489DA1FC515CF003117B4 /* Assets.xcassets in Resources */,
 				3D5489D81FC515CF003117B4 /* Main.storyboard in Resources */,
@@ -643,7 +721,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/../Pods/Target Support Files/Pods-demo/Pods-demo-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-demo/Pods-demo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
@@ -670,7 +748,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-demo/Pods-demo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-demo/Pods-demo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -699,17 +777,22 @@
 				3D39291B21C28116001E1257 /* QDCommonGridViewController.m in Sources */,
 				3D39291C21C28116001E1257 /* QDTabBarViewController.m in Sources */,
 				3D39292421C28116001E1257 /* QMUIConfigurationTemplate.m in Sources */,
+				3DCB176B2267813C00E8FB16 /* SWScannerView.m in Sources */,
 				3D3928F721C280C8001E1257 /* KFDetailViewController.m in Sources */,
+				3DCB176E2267F20900E8FB16 /* KFAppRateViewController.m in Sources */,
 				3D548A5A1FC524EC003117B4 /* KFStatusViewController.m in Sources */,
 				3D5E997721D908E7006D37CC /* KFFormSubmitViewCell.m in Sources */,
 				3D3928D021BF8F31001E1257 /* KFGroupViewController.m in Sources */,
+				3DCB17672267813C00E8FB16 /* SWQRCodeConfig.m in Sources */,
 				3D39293A21C2831A001E1257 /* KFUtils.m in Sources */,
 				3D5606EC205FB699000E770C /* KFThreadTableViewCell.m in Sources */,
 				3D3823D921CF5BE800AB12AD /* KFFriendViewController.m in Sources */,
 				3D5E996F21D904AC006D37CC /* KFFeedbackViewController.m in Sources */,
+				3DCB17712267F21D00E8FB16 /* KFAppUpgrateViewController.m in Sources */,
 				3D548A431FC51906003117B4 /* KFKeFuApiViewController.m in Sources */,
 				3D39292021C28116001E1257 /* QDThemeManager.m in Sources */,
 				3D39291921C28116001E1257 /* QDCommonGroupListViewController.m in Sources */,
+				3D4A3C8E22802388005F2F0F /* QDSingleImagePickerPreviewViewController.m in Sources */,
 				3D548A4B1FC52374003117B4 /* KFIntroViewController.m in Sources */,
 				3D5E997821D908E7006D37CC /* KFFormContentViewCell.m in Sources */,
 				3DCA9C6521F6097E00E63998 /* TZTestCell.m in Sources */,
@@ -718,6 +801,7 @@
 				3D9A14782081F629008C6DA2 /* KFNavigationController.m in Sources */,
 				3D548A541FC524B1003117B4 /* KFChatViewController.m in Sources */,
 				3D3928EE21C25EAB001E1257 /* KFThreadViewController.m in Sources */,
+				3DCB17752267FC7300E8FB16 /* KFSettingViewController.m in Sources */,
 				3D3B7C3021CA3613001FE199 /* BDApisTableViewController.m in Sources */,
 				3D39292521C28116001E1257 /* QDUIHelper.m in Sources */,
 				3DCA9C6D21F60FE800E63998 /* KFHelpCenterViewController.m in Sources */,
@@ -725,7 +809,9 @@
 				3D39294121C28595001E1257 /* KFProfileViewController.m in Sources */,
 				3D3958A2224CC2E2000E88EE /* KFServerViewController.m in Sources */,
 				3D5489D21FC515CF003117B4 /* AppDelegate.m in Sources */,
+				3DCB17692267813C00E8FB16 /* SWQRCodeViewController.m in Sources */,
 				3D39291E21C28116001E1257 /* QDNavigationController.m in Sources */,
+				3DCB17682267813C00E8FB16 /* SWQRCodeManager.m in Sources */,
 				3D3928EB21C25E9E001E1257 /* KFQueueViewController.m in Sources */,
 				3D3928CD21BF8F20001E1257 /* KFContactViewController.m in Sources */,
 				3D4C0B0E213131500083C8F9 /* KFIMApiViewController.m in Sources */,

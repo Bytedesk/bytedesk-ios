@@ -69,7 +69,9 @@ mTitleLabel;
     //
     if ([threadModel.is_temp boolValue]) {
         mContentLabel.text = [NSString stringWithFormat:@"%@[临时会话]", threadModel.content];
-    } else {
+    } else if ([threadModel.type isEqualToString:BD_MESSAGE_SESSION_TYPE_THREAD]) {
+        mContentLabel.text = [NSString stringWithFormat:@"%@[客服会话]", threadModel.content];
+    }  else {
         mContentLabel.text = threadModel.content;
     }
     // TODO: 根据来源不同显示不同的placeholder image

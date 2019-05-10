@@ -96,7 +96,6 @@
  */
 - (void)sendReceiptDestroyedMessage:(NSString *)mId;
 
-
 /**
  发送消息回执通知
 
@@ -105,33 +104,95 @@
  */
 - (void)sendReceiptMessage:(NSString *)mId status:(NSString *)status;
 
+//- (void)sendWebRTCKeFuInviteMessage:(NSString *)uuid;
 
-- (void)sendWebRTCKeFuInviteMessage:(NSString *)uuid;
+/**
+ <#Description#>
 
+ @param uuid <#uuid description#>
+ @param type <#type description#>
+ */
 - (void)sendWebRTCKeFuMessage:(NSString *)uuid type:(NSString *)type;
 
-- (void)sendWebRTCContactInviteMessage:(NSString *)uuid;
+//- (void)sendWebRTCContactInviteMessage:(NSString *)uuid;
 
-- (void)sendWebRTCContactOfferMessage:(NSString *)uuid sdp:(NSString *)sdp;
+/**
+ <#Description#>
 
+ @param uuid <#uuid description#>
+ @param sdp <#sdp description#>
+ */
+- (void)sendWebRTCContactOfferVideoMessage:(NSString *)uuid sdp:(NSString *)sdp;
+
+/**
+ <#Description#>
+
+ @param uuid <#uuid description#>
+ @param sdp <#sdp description#>
+ */
+- (void)sendWebRTCContactOfferAudioMessage:(NSString *)uuid sdp:(NSString *)sdp;
+
+/**
+ <#Description#>
+
+ @param uuid <#uuid description#>
+ @param sdp <#sdp description#>
+ */
 - (void)sendWebRTCContactAnswerMessage:(NSString *)uuid sdp:(NSString *)sdp;
 
+/**
+ <#Description#>
+
+ @param uuid <#uuid description#>
+ @param candidate <#candidate description#>
+ */
 - (void)sendWebRTCContactCandidateMessage:(NSString *)uuid candidate:(NSString *)candidate;
 
+/**
+ <#Description#>
+
+ @param uuid <#uuid description#>
+ */
 - (void)sendWebRTCContactCancelMessage:(NSString *)uuid;
 
+/**
+ <#Description#>
+
+ @param uuid <#uuid description#>
+ */
 - (void)sendWebRTCContactAcceptMessage:(NSString *)uuid;
 
+/**
+ <#Description#>
+
+ @param uuid <#uuid description#>
+ */
 - (void)sendWebRTCContactRejectMessage:(NSString *)uuid;
 
+/**
+ <#Description#>
+
+ @param uuid <#uuid description#>
+ */
 - (void)sendWebRTCContactCloseMessage:(NSString *)uuid;
 
+/**
+ <#Description#>
+
+ @param uuid <#uuid description#>
+ @param type <#type description#>
+ */
 - (void)sendWebRTCContactMessage:(NSString *)uuid type:(NSString *)type;
 
-- (void)sendWebRTCGroupInviteMessage:(NSString *)uuid;
+//- (void)sendWebRTCGroupInviteMessage:(NSString *)uuid;
 
+/**
+ <#Description#>
+
+ @param uuid <#uuid description#>
+ @param type <#type description#>
+ */
 - (void)sendWebRTCGroupMessage:(NSString *)uuid type:(NSString *)type;
-
 
 /**
  发送webrtc消息
@@ -164,7 +225,11 @@
  */
 - (void)disconnect;
 
+/**
+ <#Description#>
 
+ @return <#return value description#>
+ */
 - (BOOL)isConnected;
 
 

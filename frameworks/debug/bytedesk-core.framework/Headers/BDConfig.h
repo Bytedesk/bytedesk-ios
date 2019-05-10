@@ -68,6 +68,33 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)setWebRTCStunServer:(NSString *)stunServer;
 
 /**
+WebRTC TURN server
+
+ @return string
+ */
++ (NSString *)getWebRTCTurnServer;
+
++ (void)setWebRTCTurnServer:(NSString *)turnServer;
+
+/**
+ WebRTC TURN 用户名
+
+ @return 用户名
+ */
++ (NSString *)getWebRTCTurnUsername;
+
++ (void)setWebRTCTurnUsername:(NSString *)username;
+
+/**
+ WebRTC TURN 密码
+
+ @return 密码
+ */
++ (NSString *)getWebRTCTurnPassword;
+
++ (void)setWebRTCTurnPassword:(NSString *)password;
+
+/**
  rest api接口host
 
  @return nsstring 注意：地址以 http或https开头, '/'结尾
@@ -77,11 +104,21 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)setRestApiHost:(NSString *)host;
 
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getRestApiHostIM;
 
 + (void)setRestApiHostIM:(NSString *)host;
 
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getRestApiHostKF;
 
 + (void)setRestApiHostKF:(NSString *)host;
@@ -97,32 +134,87 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)switchToIM;
 
 /**
- 分离服务器的情况下，切换到KF服务器
+  分离服务器的情况下，切换到KF服务器
  */
 + (void)switchToKF;
 
 ///////////////////////////////////////
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getQRCodeBaseUrl;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getApiBaseUrl;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getPasswordOAuthTokenUrl;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getApiVisitorBaseUrl;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getVisitorGenerateUsernameUrl;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getVisitorRegisterUserUrl;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getVisitorRegisterUserUidUrl;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getVisitorRegisterAdminUrl;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getUploadImageUrl;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getUploadVoiceUrl;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getUploadFileUrl;
 
 

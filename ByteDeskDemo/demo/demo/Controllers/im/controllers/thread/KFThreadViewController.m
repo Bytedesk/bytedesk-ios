@@ -140,7 +140,7 @@
 
 - (void)reloadTableData {
     // 读取本地数据
-    self.mThreadArray = [BDCoreApis getThreads];
+    self.mThreadArray = [BDCoreApis getIMThreads];
     if ([self.mThreadArray count] == 0) {
         //TODO: bug 当对话记录内容为空的时候，无法点击进入排队页面
         [self showEmptyViewWithText:@"对话记录为空" detailText:@"暂无对话记录" buttonTitle:nil buttonAction:NULL];

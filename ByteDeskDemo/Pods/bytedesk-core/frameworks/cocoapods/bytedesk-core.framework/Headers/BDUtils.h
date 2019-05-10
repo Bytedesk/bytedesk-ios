@@ -21,44 +21,127 @@
 
 @interface BDUtils : NSObject
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 +(NSString *)getCurrentDate;
 
+/**
+ <#Description#>
+
+ @param string <#string description#>
+ @return <#return value description#>
+ */
 + (NSDate *)stringToDate:(NSString *)string;
 
+/**
+ <#Description#>
+
+ @param date <#date description#>
+ @return <#return value description#>
+ */
 + (NSString *) getOptimizedTimestamp:(NSString *)date;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getCurrentTimeString;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)deviceVersion;
 
+/**
+ <#Description#>
+
+ @param dict <#dict description#>
+ @return <#return value description#>
+ */
 + (NSString *)dictToJson:(NSDictionary *)dict;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getQRCodeLogin;
 
+/**
+ <#Description#>
+
+ @param uid <#uid description#>
+ @return <#return value description#>
+ */
 + (NSString *)getQRCodeUser:(NSString *)uid;
 
+/**
+ <#Description#>
+
+ @param gid <#gid description#>
+ @return <#return value description#>
+ */
 + (NSString *)getQRCodeGroup:(NSString *)gid;
 
-//函数35: 设置发送消息时是否播放提示音
+/**
+ 设置发送消息时是否播放提示音
+
+ @return <#return value description#>
+ */
 +(BOOL) shouldRingWhenSendMessage;
 +(void) setRingWhenSendMessage:(BOOL)flag;
 
-//函数36: 设置接收到消息时是否播放提示音
+/**
+ 设置接收到消息时是否播放提示音
+
+ @return <#return value description#>
+ */
 +(BOOL) shouldRingWhenReceiveMessage;
 +(void) setRingWhenReceiveMessage:(BOOL)flag;
 
-//函数37: 设置接收到消息时是否震动
+/**
+ 设置接收到消息时是否震动
+
+ @return <#return value description#>
+ */
 +(BOOL) shouldVibrateWhenReceiveMessage;
 +(void) setVibrateWhenReceiveMessage:(BOOL)flag;
 
 #pragma 正则匹配手机号
+
+/**
+ <#Description#>
+
+ @param telNumber <#telNumber description#>
+ @return <#return value description#>
+ */
 + (BOOL)checkTelNumber:(NSString *) telNumber;
 
-//
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (BOOL)canRecordVoice;
-//
+
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (BOOL)checkMicrophonePermission;
-//
+
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (BOOL)isSimulator;
 
 /**

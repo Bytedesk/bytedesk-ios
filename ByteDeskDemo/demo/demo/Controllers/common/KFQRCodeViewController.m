@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleView.title = @"二维码";
+    self.titleView.title = @"生成二维码";
     //
     self.mScreenWidth = [UIScreen mainScreen].bounds.size.width;
     //

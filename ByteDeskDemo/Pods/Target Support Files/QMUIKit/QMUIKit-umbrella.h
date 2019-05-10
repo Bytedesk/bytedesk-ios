@@ -102,6 +102,7 @@
 #import "NSArray+QMUI.h"
 #import "NSAttributedString+QMUI.h"
 #import "NSCharacterSet+QMUI.h"
+#import "NSMethodSignature+QMUI.h"
 #import "NSNumber+QMUI.h"
 #import "NSObject+QMUI.h"
 #import "NSParagraphStyle+QMUI.h"

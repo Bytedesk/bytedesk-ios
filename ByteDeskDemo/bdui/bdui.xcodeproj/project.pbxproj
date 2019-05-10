@@ -329,6 +329,7 @@
 		3D46C222223B895F00BA41C4 /* BDCommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D46C220223B895F00BA41C4 /* BDCommodityTableViewCell.m */; };
 		3D46C225223B897200BA41C4 /* BDRedPacketTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D46C223223B897200BA41C4 /* BDRedPacketTableViewCell.h */; };
 		3D46C226223B897200BA41C4 /* BDRedPacketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D46C224223B897200BA41C4 /* BDRedPacketTableViewCell.m */; };
+		3D4824F5215792FA00B50593 /* bytedesk-core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4824F4215792FA00B50593 /* bytedesk-core.framework */; };
 		3D4C5C9A2201E8510056BC63 /* BDFeedbackCategoryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D4C5C982201E8510056BC63 /* BDFeedbackCategoryViewController.h */; };
 		3D4C5C9B2201E8510056BC63 /* BDFeedbackCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4C5C992201E8510056BC63 /* BDFeedbackCategoryViewController.m */; };
 		3D4C5C9E2201E8680056BC63 /* BDFeedbackHistoryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D4C5C9C2201E8680056BC63 /* BDFeedbackHistoryViewController.h */; };
@@ -337,9 +338,6 @@
 		3D5606CC2057C875000E770C /* BDSingleImagePickerPreviewViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D5606CA2057C874000E770C /* BDSingleImagePickerPreviewViewController.h */; };
 		3D57D7111FD00E3F0072823F /* BDFeedbackViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D57D70F1FD00E3F0072823F /* BDFeedbackViewController.h */; };
 		3D57D7121FD00E3F0072823F /* BDFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D57D7101FD00E3F0072823F /* BDFeedbackViewController.m */; };
-		3D667E78225EAA1D003E39F9 /* in.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3D667E75225EAA1D003E39F9 /* in.caf */; };
-		3D667E79225EAA1D003E39F9 /* messageReceived.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 3D667E76225EAA1D003E39F9 /* messageReceived.aiff */; };
-		3D667E7A225EAA1D003E39F9 /* messageSent.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 3D667E77225EAA1D003E39F9 /* messageSent.aiff */; };
 		3D86FF5A22295F8A00477E76 /* BDGroupInviteTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D86FF5822295F8A00477E76 /* BDGroupInviteTableViewController.h */; };
 		3D86FF5B22295F8A00477E76 /* BDGroupInviteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D86FF5922295F8A00477E76 /* BDGroupInviteTableViewController.m */; };
 		3D8A626021DE598600935617 /* BDGroupMemberTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D8A625E21DE598600935617 /* BDGroupMemberTableViewCell.h */; };
@@ -724,9 +722,6 @@
 		3D57D70F1FD00E3F0072823F /* BDFeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDFeedbackViewController.h; sourceTree = "<group>"; };
 		3D57D7101FD00E3F0072823F /* BDFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDFeedbackViewController.m; sourceTree = "<group>"; };
 		3D62021320FC844F00A94F15 /* bdcore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = bdcore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3D667E75225EAA1D003E39F9 /* in.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = in.caf; sourceTree = "<group>"; };
-		3D667E76225EAA1D003E39F9 /* messageReceived.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = messageReceived.aiff; sourceTree = "<group>"; };
-		3D667E77225EAA1D003E39F9 /* messageSent.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = messageSent.aiff; sourceTree = "<group>"; };
 		3D86FF5822295F8A00477E76 /* BDGroupInviteTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDGroupInviteTableViewController.h; sourceTree = "<group>"; };
 		3D86FF5922295F8A00477E76 /* BDGroupInviteTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDGroupInviteTableViewController.m; sourceTree = "<group>"; };
 		3D8A625E21DE598600935617 /* BDGroupMemberTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDGroupMemberTableViewCell.h; sourceTree = "<group>"; };
@@ -772,6 +767,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D4824F5215792FA00B50593 /* bytedesk-core.framework in Frameworks */,
 				3D3A7E7022462152007EEC81 /* libopencore-amrnb.a in Frameworks */,
 				3D3A7E6F22462152007EEC81 /* libopencore-amrwb.a in Frameworks */,
 				81DCA33DE54CCB81B8CA020A /* Pods_bytedesk_ui.framework in Frameworks */,
@@ -791,6 +787,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D0345A6226E8A3D00F1BB44 /* thread */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = thread;
+			sourceTree = "<group>";
+		};
+		3D0345A7226E8A4800F1BB44 /* contact */ = {
+			isa = PBXGroup;
+			children = (
+				3D3928E321C07B81001E1257 /* BDContactSelectViewController.h */,
+				3D3928E421C07B81001E1257 /* BDContactSelectViewController.m */,
+			);
+			path = contact;
+			sourceTree = "<group>";
+		};
+		3D0345A8226E8A4E00F1BB44 /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				3D3928DC21BF9ED7001E1257 /* BDGroupProfileViewController.h */,
+				3D3928DD21BF9ED7001E1257 /* BDGroupProfileViewController.m */,
+				3DAF8CAE21EC1B4E0000E73D /* BDContactProfileViewController.h */,
+				3DAF8CAF21EC1B4E0000E73D /* BDContactProfileViewController.m */,
+				3DABD1B41FE790F600DE473B /* BDUserinfoViewController.h */,
+				3DABD1B51FE790F600DE473B /* BDUserinfoViewController.m */,
+			);
+			path = profile;
+			sourceTree = "<group>";
+		};
+		3D0345A9226E8A5D00F1BB44 /* chat */ = {
+			isa = PBXGroup;
+			children = (
+				3D1996B31FCE2B9600219FEF /* BDChatViewController.h */,
+				3D1996B41FCE2B9600219FEF /* BDChatViewController.m */,
+				3DD5C6B62238FBA8002C4693 /* BDChatWxViewController.h */,
+				3DD5C6B52238FBA7002C4693 /* BDChatWxViewController.m */,
+				3D3C28DC2236804700E288AF /* BDChatBaseViewController.h */,
+				3D3C28DD2236804700E288AF /* BDChatBaseViewController.m */,
+			);
+			path = chat;
+			sourceTree = "<group>";
+		};
+		3D0345AA226E8A7600F1BB44 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				3D86FF5822295F8A00477E76 /* BDGroupInviteTableViewController.h */,
+				3D86FF5922295F8A00477E76 /* BDGroupInviteTableViewController.m */,
+				3D57D70F1FD00E3F0072823F /* BDFeedbackViewController.h */,
+				3D57D7101FD00E3F0072823F /* BDFeedbackViewController.m */,
+				3D4C5C982201E8510056BC63 /* BDFeedbackCategoryViewController.h */,
+				3D4C5C992201E8510056BC63 /* BDFeedbackCategoryViewController.m */,
+				3D4C5C9C2201E8680056BC63 /* BDFeedbackHistoryViewController.h */,
+				3D4C5C9D2201E8680056BC63 /* BDFeedbackHistoryViewController.m */,
+				3DE6FD812234F3C2006F1329 /* BDQRCodeViewController.h */,
+				3DE6FD822234F3C2006F1329 /* BDQRCodeViewController.m */,
+				3D3B30F1225AB282000FC60F /* BDLeaveMessageViewController.h */,
+				3D3B30F2225AB282000FC60F /* BDLeaveMessageViewController.m */,
+			);
+			path = other;
+			sourceTree = "<group>";
+		};
 		3D1996B71FCE2BA700219FEF /* views */ = {
 			isa = PBXGroup;
 			children = (
@@ -843,7 +900,6 @@
 		3D1997041FCE817E00219FEF /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				3D667E74225EAA1D003E39F9 /* voices */,
 				3D1997051FCE817E00219FEF /* weixin2 */,
 				3D1997241FCE817E00219FEF /* weixin */,
 				3D19976C1FCE817E00219FEF /* cellImage */,
@@ -1340,44 +1396,13 @@
 		3D548A671FC52DAE003117B4 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3D1996B31FCE2B9600219FEF /* BDChatViewController.h */,
-				3D1996B41FCE2B9600219FEF /* BDChatViewController.m */,
-				3DD5C6B62238FBA8002C4693 /* BDChatWxViewController.h */,
-				3DD5C6B52238FBA7002C4693 /* BDChatWxViewController.m */,
-				3D3C28DC2236804700E288AF /* BDChatBaseViewController.h */,
-				3D3C28DD2236804700E288AF /* BDChatBaseViewController.m */,
-				3D3928DC21BF9ED7001E1257 /* BDGroupProfileViewController.h */,
-				3D3928DD21BF9ED7001E1257 /* BDGroupProfileViewController.m */,
-				3D86FF5822295F8A00477E76 /* BDGroupInviteTableViewController.h */,
-				3D86FF5922295F8A00477E76 /* BDGroupInviteTableViewController.m */,
-				3DAF8CAE21EC1B4E0000E73D /* BDContactProfileViewController.h */,
-				3DAF8CAF21EC1B4E0000E73D /* BDContactProfileViewController.m */,
-				3D3928E321C07B81001E1257 /* BDContactSelectViewController.h */,
-				3D3928E421C07B81001E1257 /* BDContactSelectViewController.m */,
-				3DABD1B41FE790F600DE473B /* BDUserinfoViewController.h */,
-				3DABD1B51FE790F600DE473B /* BDUserinfoViewController.m */,
-				3D57D70F1FD00E3F0072823F /* BDFeedbackViewController.h */,
-				3D57D7101FD00E3F0072823F /* BDFeedbackViewController.m */,
-				3D4C5C982201E8510056BC63 /* BDFeedbackCategoryViewController.h */,
-				3D4C5C992201E8510056BC63 /* BDFeedbackCategoryViewController.m */,
-				3D4C5C9C2201E8680056BC63 /* BDFeedbackHistoryViewController.h */,
-				3D4C5C9D2201E8680056BC63 /* BDFeedbackHistoryViewController.m */,
-				3DE6FD812234F3C2006F1329 /* BDQRCodeViewController.h */,
-				3DE6FD822234F3C2006F1329 /* BDQRCodeViewController.m */,
-				3D3B30F1225AB282000FC60F /* BDLeaveMessageViewController.h */,
-				3D3B30F2225AB282000FC60F /* BDLeaveMessageViewController.m */,
+				3D0345A9226E8A5D00F1BB44 /* chat */,
+				3D0345A6226E8A3D00F1BB44 /* thread */,
+				3D0345A7226E8A4800F1BB44 /* contact */,
+				3D0345A8226E8A4E00F1BB44 /* profile */,
+				3D0345AA226E8A7600F1BB44 /* other */,
 			);
 			path = controllers;
-			sourceTree = "<group>";
-		};
-		3D667E74225EAA1D003E39F9 /* voices */ = {
-			isa = PBXGroup;
-			children = (
-				3D667E75225EAA1D003E39F9 /* in.caf */,
-				3D667E76225EAA1D003E39F9 /* messageReceived.aiff */,
-				3D667E77225EAA1D003E39F9 /* messageSent.aiff */,
-			);
-			path = voices;
 			sourceTree = "<group>";
 		};
 		3DBAC5E01FBDE2500042215B /* util */ = {
@@ -1600,7 +1625,6 @@
 				3D19982F1FCE817E00219FEF /* SenderVoiceNodePlaying001_ios7@2x.png in Resources */,
 				3D1998871FCE817E00219FEF /* welcome.png in Resources */,
 				3D1998121FCE817E00219FEF /* SenderVoiceNodeBack@2x.png in Resources */,
-				3D667E7A225EAA1D003E39F9 /* messageSent.aiff in Resources */,
 				3D1998DA1FCE817E00219FEF /* Expression_103@2x.png in Resources */,
 				3D1998241FCE817E00219FEF /* RecordingSignal003@2x.png in Resources */,
 				3D1998621FCE817E00219FEF /* appkefu_vip64.png in Resources */,
@@ -1694,7 +1718,6 @@
 				3D1998A91FCE817E00219FEF /* Expression_48@2x.png in Resources */,
 				3D1998E21FCE817E00219FEF /* Expression_73@2x.png in Resources */,
 				3D19988C1FCE817E00219FEF /* Expression_87@2x.png in Resources */,
-				3D667E79225EAA1D003E39F9 /* messageReceived.aiff in Resources */,
 				3D1998A31FCE817E00219FEF /* Expression_89@2x.png in Resources */,
 				3D1998831FCE817E00219FEF /* user@2x.png in Resources */,
 				3D1998081FCE817E00219FEF /* ReceiverTextNodeBkgHL@3x.png in Resources */,
@@ -1783,7 +1806,6 @@
 				3D1998A71FCE817E00219FEF /* Expression_2@2x.png in Resources */,
 				3D1998A41FCE817E00219FEF /* Expression_11@2x.png in Resources */,
 				3D1998EE1FCE817E00219FEF /* Expression_12@2x.png in Resources */,
-				3D667E78225EAA1D003E39F9 /* in.caf in Resources */,
 				3D1998351FCE817E00219FEF /* Mode_listtextbutton_ios7@2x.png in Resources */,
 				3D1998E61FCE817E00219FEF /* Expression_59@2x.png in Resources */,
 				3D1998CC1FCE817E00219FEF /* Expression_84@2x.png in Resources */,
@@ -1871,8 +1893,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
+			shellScript = "\n";
 		};
 		40E4D3F06829C4C7A96FAE25 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1898,7 +1919,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/../Pods/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
@@ -1921,7 +1942,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

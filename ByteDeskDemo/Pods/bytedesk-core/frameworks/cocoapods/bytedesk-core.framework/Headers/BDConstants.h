@@ -12,13 +12,6 @@
 
 #ifndef BDConstants_h
 #define BDConstants_h
-//
-//typedef void (^SuccessCallbackBlock)(NSDictionary *dict)
-//typedef void (^FailedCallbackBlock)(NSError *error)
-
-//#define BD_MQTT_PORT                        1883
-//#define BD_MQTT_AUTH_USERNAME               @"mqtt_ios"
-//#define BD_MQTT_AUTH_PASSWORD               @"mqtt_ios"
 
 // 默认json格式
 #define BD_MQTT_TOPIC_MESSAGE               @"message/mqtt"
@@ -172,6 +165,12 @@
 #define BD_NOTIFICATION_WEBRTC_BUSY         @"bd_notification_webrtc_busy"
 // 结束webrtc会话
 #define BD_NOTIFICATION_WEBRTC_CLOSE        @"bd_notification_webrtc_close"
+// 微信操作开始
+#define BD_NOTIFICATION_WECHAT_START        @"bd_notification_wechat_start"
+// 微信操作成功
+#define BD_NOTIFICATION_WECHAT_SUCCESS      @"bd_notification_wechat_success"
+// 微信操作失败
+#define BD_NOTIFICATION_WECHAT_ERROR        @"bd_notification_wechat_error"
 
 /**
  * 用户在线状态：
@@ -330,6 +329,12 @@
 #define BD_IOS_BUILD_DEBUG @"debug"
 #define BD_IOS_BUILD_RELEASE @"release"
 
+#define BD_SHOULD_PLAY_SEND_MESSAGE_SOUND           @"bd_should_play_send_message_sound"
+#define BD_SHOULD_PLAY_RECEIVE_MESSAGE_SOUND        @"bd_should_play_receive_message_sound"
+#define BD_SHOULD_VIBRATE_ON_RECEIVE_MESSAGE        @"bd_should_vibrate_on_receiving_message"
+
+#define BD_UPLOAD_NOTIFICATION_PERCENTAGE           @"bd_upload_notification_percentage"
+#define BD_UPLOAD_NOTIFICATION_ERROR                @"bd_upload_notification_error"
 
 #endif /* BDConstants_h */
 

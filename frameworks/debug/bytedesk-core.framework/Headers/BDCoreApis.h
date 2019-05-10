@@ -34,24 +34,51 @@ typedef void (^FailedCallbackBlock)(NSError *error);
        resultSuccess:(SuccessCallbackBlock)success
         resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ 普通用户注册接口，自定义subDomain
 
+ @param username 用户名
+ @param nickname 昵称
+ @param password 密码
+ @param subDomain 企业号，主要用于多租户平台，如SaaS；其他情况可写死为 ‘vip’
+ @param success 成功回调
+ @param failed 失败回调
+ */
 + (void)registerUser:(NSString *)username
-           withNickname:(NSString *)nickname
-           withPassword:(NSString *)password
-          withSubDomain:(NSString *)subDomain
-          resultSuccess:(SuccessCallbackBlock)success
-           resultFailed:(FailedCallbackBlock)failed;
+        withNickname:(NSString *)nickname
+        withPassword:(NSString *)password
+       withSubDomain:(NSString *)subDomain
+       resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 普通用户注册接口，自定义subDomain
+ 
+ @param email 邮箱
+ @param nickname 昵称
+ @param password 密码
+ @param subDomain 企业号，主要用于多租户平台，如SaaS；其他情况可写死为 ‘vip’
+ @param success 成功回调
+ @param failed 失败回调
+ */
++ (void)registerEmail:(NSString *)email
+         withNickname:(NSString *)nickname
+         withPassword:(NSString *)password
+        withSubDomain:(NSString *)subDomain
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
 
 /**
  自定义注册用户uid
+ 可用于跟业务用户系统对接
 
- @param username <#username description#>
- @param nickname <#nickname description#>
- @param uid <#uid description#>
- @param password <#password description#>
- @param subDomain <#subDomain description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param username 用户名
+ @param nickname 昵称
+ @param uid 自定义uid
+ @param password 密码
+ @param subDomain 企业号，主要用于多租户平台，如SaaS；其他情况可写死为 ‘vip’
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)registerUser:(NSString *)username
         withNickname:(NSString *)nickname
@@ -74,7 +101,6 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                   resultSuccess:(SuccessCallbackBlock)success
                    resultFailed:(FailedCallbackBlock)failed;
 
-
 /**
  利用本地缓存信息登录
 
@@ -96,46 +122,48 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param failed 失败回调
  */
 + (void)requestThreadWithWorkGroupWid:(NSString *)wId
-                      resultSuccess:(SuccessCallbackBlock)success
-                       resultFailed:(FailedCallbackBlock)failed;
-
+                        resultSuccess:(SuccessCallbackBlock)success
+                         resultFailed:(FailedCallbackBlock)failed;
 
 /**
  指定坐席会话
 
- @param uid <#uid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param uid 指定坐席uid
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)requestThreadWithAgentUid:(NSString *)uid
-                        resultSuccess:(SuccessCallbackBlock)success
-                         resultFailed:(FailedCallbackBlock)failed;
-
+                    resultSuccess:(SuccessCallbackBlock)success
+                     resultFailed:(FailedCallbackBlock)failed;
 
 /**
  选择问卷答案
 
- @param tid <#tid description#>
+ @param tid 会话tid
  @param qid <#qid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)requestQuestionnairWithTid:(NSString *)tid
                            itemQid:(NSString *)qid
                      resultSuccess:(SuccessCallbackBlock)success
                       resultFailed:(FailedCallbackBlock)failed;
 
-
 /**
  选择工作组
 
- @param wid <#wid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param wid 工作组wid
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)requestChooseWorkGroup:(NSString *)wid
                  resultSuccess:(SuccessCallbackBlock)success
                   resultFailed:(FailedCallbackBlock)failed;
+
++ (void)requestChooseWorkGroupLiuXue:(NSString *)wid
+               withWorkGroupNickname:(NSString *)workGroupNickname
+                       resultSuccess:(SuccessCallbackBlock)success
+                        resultFailed:(FailedCallbackBlock)failed;
 
 /**
  设置昵称
@@ -145,8 +173,20 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param failed 失败回调
  */
 + (void)setNickname:(NSString *)nickname
-             resultSuccess:(SuccessCallbackBlock)success
-              resultFailed:(FailedCallbackBlock)failed;
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 设置头像
+ 注意：新头像需要与旧头像url保持一致，如此可以保证用户更新头像之后，其所有好友实时更新头像
+
+ @param avatar <#avatar description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)setAvatar:(NSString *)avatar
+    resultSuccess:(SuccessCallbackBlock)success
+     resultFailed:(FailedCallbackBlock)failed;
 
 /**
  获取用户信息
@@ -155,24 +195,24 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param failed 失败回调
  */
 + (void)getFingerPrintWithUid:(NSString *)uid
-                    resultSuccess:(SuccessCallbackBlock)success
-                     resultFailed:(FailedCallbackBlock)failed;
+                resultSuccess:(SuccessCallbackBlock)success
+                 resultFailed:(FailedCallbackBlock)failed;
 
 /**
  自定义设置用户属性
  */
 + (void)setFingerPrint:(NSString *)name
-                   withKey:(NSString *)key
-                 withValue:(NSString *)value
-             resultSuccess:(SuccessCallbackBlock)success
-              resultFailed:(FailedCallbackBlock)failed;
+               withKey:(NSString *)key
+             withValue:(NSString *)value
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
 
 /**
  获取工作组在线状态
  */
 + (void)getWorkGroupStatus:(NSString *)wId
-                    resultSuccess:(SuccessCallbackBlock)success
-                     resultFailed:(FailedCallbackBlock)failed;
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
 
 /**
  获取某个客服账号的在线状态
@@ -181,8 +221,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param failed 失败回调
  */
 + (void)getAgentStatus:(NSString *)agentUid
-                resultSuccess:(SuccessCallbackBlock)success
-                 resultFailed:(FailedCallbackBlock)failed;
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
 
 /**
  获取用户的所有会话历史
@@ -198,12 +238,12 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 /**
  满意度评价
 
- @param tId <#tId description#>
+ @param tId 会话tid
  @param score <#score description#>
  @param note <#note description#>
  @param invite <#invite description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)visitorRate:(NSString *)tId
           withScore:(NSInteger)score
@@ -225,20 +265,20 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param failed 失败回调
  */
 + (void) loginWithUsername:(NSString *)username
-                   withPassword:(NSString *)password
-                     withAppkey:(NSString *)appkey
-                  withSubdomain:(NSString *)subDomain
-                  resultSuccess:(SuccessCallbackBlock)success
-                   resultFailed:(FailedCallbackBlock)failed;
+              withPassword:(NSString *)password
+                withAppkey:(NSString *)appkey
+             withSubdomain:(NSString *)subDomain
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
 
 /**
  非首次客服登录，利用首次登录保存在本地的token请求数据
 
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void) loginResultSuccess:(SuccessCallbackBlock)success
-                    resultFailed:(FailedCallbackBlock)failed;
+               resultFailed:(FailedCallbackBlock)failed;
 
 /**
  数据初始化：
@@ -261,8 +301,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 /**
  加载用户个人资料
  
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)userProfileResultSuccess:(SuccessCallbackBlock)success
                     resultFailed:(FailedCallbackBlock)failed;
@@ -270,8 +310,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 /**
  他人加载用户详情
  
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)userDetail:(NSString *)uid
      resultSuccess:(SuccessCallbackBlock)success
@@ -281,8 +321,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  更新个人资料，目前仅开放nickname
 
  @param nickname <#nickname description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)updateProfile:(NSString *)nickname
         resultSuccess:(SuccessCallbackBlock)success
@@ -294,8 +334,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param isAutoReply <#isAutoReply description#>
  @param content <#content description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)updateAutoReply:(BOOL)isAutoReply
             withContent:(NSString *)content
@@ -306,8 +346,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  设置接待状态
 
  @param acceptStatus <#acceptStatus description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)setAcceptStatus:(NSString *)acceptStatus
           resultSuccess:(SuccessCallbackBlock)success
@@ -329,8 +369,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 /**
  获取群组
  
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)getGroupsResultSuccess:(SuccessCallbackBlock)success
                   resultFailed:(FailedCallbackBlock)failed;
@@ -340,8 +380,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  查询群组详情
 
  @param gid <#gid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)getGroupDetail:(NSString *)gid
          resultSuccess:(SuccessCallbackBlock)success
@@ -351,8 +391,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  获取群组成员
 
  @param gid <#gid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)getGroupMembers:(NSString *)gid
           resultSuccess:(SuccessCallbackBlock)success
@@ -363,8 +403,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param nickname <#nickname description#>
  @param selectedContacts <#selectedContacts description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)createGroup:(NSString *)nickname
    selectedContacts:(NSArray *)selectedContacts
@@ -382,8 +422,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param nickname <#nickname description#>
  @param gid <#gid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)updateGroupNickname:(NSString *)nickname
                withGroupGid:(NSString *)gid
@@ -395,8 +435,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param announcement <#announcement description#>
  @param gid <#gid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)updateGroupAnnouncement:(NSString *)announcement
                    withGroupGid:(NSString *)gid
@@ -408,8 +448,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param description <#description description#>
  @param gid <#gid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)updateGroupDescription:(NSString *)description
                   withGroupGid:(NSString *)gid
@@ -421,8 +461,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param uid <#uid description#>
  @param gid <#gid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)inviteToGroup:(NSString *)uid
          withGroupGid:(NSString *)gid
@@ -438,8 +478,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  主动申请加群，无需要群主审核
 
  @param gid <#gid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)joinGroup:(NSString *)gid
     resultSuccess:(SuccessCallbackBlock)success
@@ -449,8 +489,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  主动申请加群，需要群主审核
 
  @param gid <#gid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)applyGroup:(NSString *)gid
      resultSuccess:(SuccessCallbackBlock)success
@@ -460,8 +500,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  同意加群请求
 
  @param nid <#nid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)approveGroupApply:(NSString *)nid
             resultSuccess:(SuccessCallbackBlock)success
@@ -471,8 +511,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  拒绝加群请求
 
  @param nid <#nid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)denyGroupApply:(NSString *)nid
          resultSuccess:(SuccessCallbackBlock)success
@@ -483,8 +523,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param uid <#uid description#>
  @param gid <#gid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)kickGroupMember:(NSString *)uid
           withGroupGid:(NSString *)gid
@@ -496,8 +536,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param uid <#uid description#>
  @param gid <#gid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)muteGroupMember:(NSString *)uid
           withGroupGid:(NSString *)gid
@@ -510,8 +550,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param uid <#uid description#>
  @param gid <#gid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)unmuteGroupMember:(NSString *)uid
              withGroupGid:(NSString *)gid
@@ -524,8 +564,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param uid <#uid description#>
  @param gid <#gid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)setGroupAdmin:(NSString *)uid
          withGroupGid:(NSString *)gid
@@ -538,8 +578,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param uid <#uid description#>
  @param gid <#gid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)unsetGroupAdmin:(NSString *)uid
            withGroupGid:(NSString *)gid
@@ -551,8 +591,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param uid <#uid description#>
  @param gid <#gid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)transferGroup:(NSString *)uid
          withGroupGid:(NSString *)gid
@@ -564,8 +604,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  同意移交群组
 
  @param nid <#nid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)acceptGroupTransfer:(NSString *)nid
               resultSuccess:(SuccessCallbackBlock)success
@@ -575,8 +615,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  拒绝移交群组
 
  @param nid <#nid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)rejectGroupTransfer:(NSString *)nid
               resultSuccess:(SuccessCallbackBlock)success
@@ -586,8 +626,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  退出群组
 
  @param gid <#gid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)withdrawGroup:(NSString *)gid
         resultSuccess:(SuccessCallbackBlock)success
@@ -597,8 +637,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  解散群组
 
  @param gid <#gid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)dismissGroup:(NSString *)gid
        resultSuccess:(SuccessCallbackBlock)success
@@ -608,8 +648,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  搜索群组
 
  @param keyword <#keyword description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)filterGroup:(NSString *)keyword
       resultSuccess:(SuccessCallbackBlock)success
@@ -620,8 +660,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param gid <#gid description#>
  @param keyword <#keyword description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)filterGroupMembers:(NSString *)gid
                withKeyword:(NSString *)keyword
@@ -634,8 +674,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param page <#page description#>
  @param size <#size description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)getNoticesPage:(NSUInteger)page
               withSize:(NSUInteger)size
@@ -650,8 +690,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param page <#page description#>
  @param size <#size description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)getStrangersPage:(NSUInteger)page
                 withSize:(NSUInteger)size
@@ -664,8 +704,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param page <#page description#>
  @param size <#size description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)getFollowsPage:(NSUInteger)page
               withSize:(NSUInteger)size
@@ -678,8 +718,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param page <#page description#>
  @param size <#size description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)getFansPage:(NSUInteger)page
            withSize:(NSUInteger)size
@@ -692,8 +732,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param page <#page description#>
  @param size <#size description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)getFriendsPage:(NSUInteger)page
               withSize:(NSUInteger)size
@@ -706,8 +746,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param page <#page description#>
  @param size <#size description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)getBlocksPage:(NSUInteger)page
              withSize:(NSUInteger)size
@@ -718,8 +758,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  添加关注
 
  @param uid <#uid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)addFollow:(NSString *)uid
     resultSuccess:(SuccessCallbackBlock)success
@@ -729,8 +769,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  取消关注
 
  @param uid <#uid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)unFollow:(NSString *)uid
    resultSuccess:(SuccessCallbackBlock)success
@@ -741,8 +781,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  添加好友
 
  @param uid <#uid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)addFriend:(NSString *)uid
     resultSuccess:(SuccessCallbackBlock)success
@@ -753,8 +793,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  删除好友
 
  @param uid <#uid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)removeFriend:(NSString *)uid
        resultSuccess:(SuccessCallbackBlock)success
@@ -764,8 +804,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  判断是否已经关注
 
  @param uid <#uid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)isFollowed:(NSString *)uid
      resultSuccess:(SuccessCallbackBlock)success
@@ -775,8 +815,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  获取关系（暂未上线）
 
  @param uid <#uid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)getRelation:(NSString *)uid
       resultSuccess:(SuccessCallbackBlock)success
@@ -786,8 +826,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  判断自己是否已经屏蔽对方
  
  @param uid <#uid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)isShield:(NSString *)uid
    resultSuccess:(SuccessCallbackBlock)success
@@ -797,8 +837,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  判断自己是否已经被对方屏蔽
  
  @param uid <#uid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)isShielded:(NSString *)uid
      resultSuccess:(SuccessCallbackBlock)success
@@ -808,8 +848,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  屏蔽对方，则对方无法给自己发送消息。但自己仍然可以给对方发送消息
  
  @param uid <#uid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)shield:(NSString *)uid
  resultSuccess:(SuccessCallbackBlock)success
@@ -819,8 +859,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  取消屏蔽
  
  @param uid <#uid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)unshield:(NSString *)uid
    resultSuccess:(SuccessCallbackBlock)success
@@ -831,8 +871,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
  @param uid <#uid description#>
  @param note <#note description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)addBlock:(NSString *)uid
         withNote:(NSString *)note
@@ -843,8 +883,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  取消拉黑
 
  @param uid <#uid description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)unBlock:(NSString *)uid
   resultSuccess:(SuccessCallbackBlock)success
@@ -853,6 +893,14 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
 #pragma mark - 公共接口
 
+/**
+ <#Description#>
+
+ @param email <#email description#>
+ @param password <#password description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)registerAdmin:(NSString *)email
          withPassword:(NSString *)password
         resultSuccess:(SuccessCallbackBlock)success
@@ -872,11 +920,13 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  */
 + (NSMutableArray *)getThreads;
 
++ (NSMutableArray *)getIMThreads;
+
 /**
  <#Description#>
 
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)getThreadResultSuccess:(SuccessCallbackBlock)success
                   resultFailed:(FailedCallbackBlock)failed;
@@ -898,8 +948,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 /**
  <#Description#>
 
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)getQueueResultSuccess:(SuccessCallbackBlock)success
                  resultFailed:(FailedCallbackBlock)failed;
@@ -911,62 +961,152 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  */
 + (NSMutableArray *)getContacts;
 
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSMutableArray *)getGroups;
 
 /**
  <#Description#>
 
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)getContactsResultSuccess:(SuccessCallbackBlock)success
                   resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param preTid <#preTid description#>
+ @param tid <#tid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)updateCurrentThread:(NSString *)preTid
                   currentTid:(NSString *)tid
                resultSuccess:(SuccessCallbackBlock)success
                 resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param tid <#tid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)markTopThread:(NSString *)tid
         resultSuccess:(SuccessCallbackBlock)success
          resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param tid <#tid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)unmarkTopThread:(NSString *)tid
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param tid <#tid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)markNoDisturbThread:(NSString *)tid
             resultSuccess:(SuccessCallbackBlock)success
              resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param tid <#tid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)unmarkNoDisturbThread:(NSString *)tid
               resultSuccess:(SuccessCallbackBlock)success
                resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param tid <#tid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)markUnreadThread:(NSString *)tid
            resultSuccess:(SuccessCallbackBlock)success
             resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param tid <#tid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)unmarkUnreadThread:(NSString *)tid
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param tid <#tid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)markDeletedThread:(NSString *)tid
             resultSuccess:(SuccessCallbackBlock)success
              resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param mid <#mid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)markDeletedMessage:(NSString *)mid
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param tid <#tid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)markClearThreadMessage:(NSString *)tid
                  resultSuccess:(SuccessCallbackBlock)success
                   resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param uid <#uid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)markClearContactMessage:(NSString *)uid
                   resultSuccess:(SuccessCallbackBlock)success
                    resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param gid <#gid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)markClearGroupMessage:(NSString *)gid
                 resultSuccess:(SuccessCallbackBlock)success
                  resultFailed:(FailedCallbackBlock)failed;
@@ -975,7 +1115,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  同步发送文本消息
  
  @param content content description
- @param tId <#tId description#>
+ @param tId 会话tid
  @param sessiontype <#stype description#>
  */
 + (void)sendTextMessage:(NSString *)content
@@ -989,7 +1129,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  同步发送图片消息
  
  @param content <#content description#>
- @param tId <#tId description#>
+ @param tId 会话tid
  @param sessiontype <#stype description#>
  */
 + (void)sendImageMessage:(NSString *)content
@@ -1003,11 +1143,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  发送文件消息
 
  @param content <#content description#>
- @param tId <#tId description#>
+ @param tId 会话tid
  @param localId <#localId description#>
  @param sessiontype <#sessiontype description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)sendFileMessage:(NSString *)content
                   toTid:(NSString *)tId
@@ -1023,7 +1163,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  同步发送语音消息
  
  @param content <#content description#>
- @param tId <#tId description#>
+ @param tId 会话tid
  @param sessiontype <#stype description#>
  */
 + (void)sendVoiceMessage:(NSString *)content
@@ -1039,11 +1179,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  发送商品消息
 
  @param content <#content description#>
- @param tId <#tId description#>
+ @param tId 会话tid
  @param localId <#localId description#>
  @param sessiontype <#sessiontype description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)sendCommodityMessage:(NSString *)content
                        toTid:(NSString *)tId
@@ -1057,11 +1197,11 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  发送红包消息
 
  @param content <#content description#>
- @param tId <#tId description#>
+ @param tId 会话tid
  @param localId <#localId description#>
  @param sessiontype <#sessiontype description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)sendRedPacketMessage:(NSString *)content
                        toTid:(NSString *)tId
@@ -1075,7 +1215,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  
  @param content <#content description#>
  @param type <#type description#>
- @param tId <#tId description#>
+ @param tId 会话tid
  @param sessiontype <#stype description#>
  */
 + (void)sendMessage:(NSString *)content
@@ -1100,14 +1240,46 @@ destroyAfterReading:(BOOL)destroyAfterReading
  */
 + (NSMutableArray *)getMessagesWithUser;
 
+/**
+ <#Description#>
+
+ @param page <#page description#>
+ @return <#return value description#>
+ */
 + (NSMutableArray *)getMessagesWithUserPage:(NSUInteger)page;
 
+/**
+ <#Description#>
+
+ @param tid <#tid description#>
+ @return <#return value description#>
+ */
 + (NSMutableArray *)getMessagesWithThread:(NSString *)tid;
 
+/**
+ <#Description#>
+
+ @param tid <#tid description#>
+ @param page <#page description#>
+ @return <#return value description#>
+ */
 + (NSMutableArray *)getMessagesWithThread:(NSString *)tid withPage:(NSUInteger)page;
 
+/**
+ <#Description#>
+
+ @param wid <#wid description#>
+ @return <#return value description#>
+ */
 + (NSMutableArray *)getMessagesWithWorkGroup:(NSString *)wid;
 
+/**
+ <#Description#>
+
+ @param wid <#wid description#>
+ @param page <#page description#>
+ @return <#return value description#>
+ */
 + (NSMutableArray *)getMessagesWithWorkGroup:(NSString *)wid withPage:(NSUInteger)page;
 
 /**
@@ -1118,41 +1290,122 @@ destroyAfterReading:(BOOL)destroyAfterReading
  */
 + (NSMutableArray *)getMessagesWithUser:(NSString *)uid;
 
+/**
+ <#Description#>
+
+ @param uid <#uid description#>
+ @param page <#page description#>
+ @return <#return value description#>
+ */
 + (NSMutableArray *)getMessagesWithUser:(NSString *)uid withPage:(NSUInteger)page;
 
+/**
+ <#Description#>
+
+ @param cid <#cid description#>
+ @return <#return value description#>
+ */
 + (NSMutableArray *)getMessagesWithContact:(NSString *)cid;
 
+/**
+ <#Description#>
+
+ @param cid <#cid description#>
+ @param page <#page description#>
+ @return <#return value description#>
+ */
 + (NSMutableArray *)getMessagesWithContact:(NSString *)cid withPage:(NSUInteger)page;
 
+/**
+ <#Description#>
+
+ @param gid <#gid description#>
+ @return <#return value description#>
+ */
 + (NSMutableArray *)getMessagesWithGroup:(NSString *)gid;
 
+/**
+ <#Description#>
+
+ @param gid <#gid description#>
+ @param page <#page description#>
+ @return <#return value description#>
+ */
 + (NSMutableArray *)getMessagesWithGroup:(NSString *)gid withPage:(NSUInteger)page;
 
+/**
+ <#Description#>
+
+ @param uid <#uid description#>
+ @param page <#page description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)getMessageWithUser:(NSString *)uid
                   withPage:(NSInteger)page
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param uid <#uid description#>
+ @param messageid <#messageid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)getMessageWithUser:(NSString *)uid
                     withId:(NSInteger)messageid
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param cid <#cid description#>
+ @param page <#page description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)getMessageWithContact:(NSString *)cid
                   withPage:(NSInteger)page
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param cid <#cid description#>
+ @param messageid <#messageid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)getMessageWithContact:(NSString *)cid
                        withId:(NSInteger)messageid
                 resultSuccess:(SuccessCallbackBlock)success
                  resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param gid <#gid description#>
+ @param page <#page description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)getMessageWithGroup:(NSString *)gid
                   withPage:(NSInteger)page
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param gid <#gid description#>
+ @param messageid <#messageid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)getMessageWithGroup:(NSString *)gid
                      withId:(NSInteger)messageid
               resultSuccess:(SuccessCallbackBlock)success
@@ -1163,24 +1416,46 @@ destroyAfterReading:(BOOL)destroyAfterReading
 
  @param imageData <#imageData description#>
  @param imageName <#imageName description#>
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)uploadImageData:(NSData *)imageData
           withImageName:(NSString *)imageName
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param imageData <#imageData description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)uploadAvatarData:(NSData *)imageData
-          withImageName:(NSString *)imageName
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param voiceData <#voiceData description#>
+ @param voiceName <#voiceName description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)uploadVoiceData:(NSData *)voiceData
           withVoiceName:(NSString *)voiceName
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param fileData <#fileData description#>
+ @param fileName <#fileName description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)uploadFileData:(NSData *)fileData
          withFileName:(NSString *)fileName
          resultSuccess:(SuccessCallbackBlock)success
@@ -1189,23 +1464,59 @@ destroyAfterReading:(BOOL)destroyAfterReading
 
 #pragma mark - 机器人
 
+/**
+ <#Description#>
+
+ @param type <#type description#>
+ @param wid <#wid description#>
+ @param aid <#aid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)initAnswer:(NSString *)type
   withWorkGroupWid:(NSString *)wid
       withAgentUid:(NSString *)aid
      resultSuccess:(SuccessCallbackBlock)success
       resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param uid <#uid description#>
+ @param tid <#tid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)topAnswer:(NSString *)uid
     withThreadTid:(NSString *)tid
     resultSuccess:(SuccessCallbackBlock)success
      resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param uid <#uid description#>
+ @param tid <#tid description#>
+ @param aid <#aid description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)queryAnswer:(NSString *)uid
       withThreadTid:(NSString *)tid
      withQuestinQid:(NSString *)aid
       resultSuccess:(SuccessCallbackBlock)success
        resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param type <#type description#>
+ @param wid <#wid description#>
+ @param aid <#aid description#>
+ @param content <#content description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)messageAnswer:(NSString *)type
      withWorkGroupWid:(NSString *)wid
          withAgentUid:(NSString *)aid
@@ -1244,8 +1555,8 @@ destroyAfterReading:(BOOL)destroyAfterReading
 /**
  <#Description#>
 
- @param success <#success description#>
- @param failed <#failed description#>
+ @param success 成功回调
+ @param failed 失败回调
  */
 + (void)logoutResultSuccess:(SuccessCallbackBlock)success
                resultFailed:(FailedCallbackBlock)failed;
@@ -1260,55 +1571,143 @@ destroyAfterReading:(BOOL)destroyAfterReading
  */
 + (void)disconnect;
 
+/**
+ <#Description#>
 
+ @return <#return value description#>
+ */
 + (BOOL)isConnected;
-
 
 #pragma mark - Application
 
+/**
+ <#Description#>
+ */
 + (void)applicationWillResignActive;
+
+/**
+ <#Description#>
+ */
 + (void)applicationDidEnterBackground;
+
+/**
+ <#Description#>
+ */
 + (void)applicationWillEnterForeground;
+
+/**
+ <#Description#>
+ */
 + (void)applicationDidBecomeActive;
+
+/**
+ <#Description#>
+ */
 + (void)applicationWillTerminate;
 
-    
 #pragma mark - 微信
-    
+
+/**
+ <#Description#>
+
+ @param code <#code description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)getWXAccessToken:(NSString *)code
            resultSuccess:(SuccessCallbackBlock)success
             resultFailed:(FailedCallbackBlock)failed;
-    
+
+/**
+ <#Description#>
+
+ @param refreshToken <#refreshToken description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)refreshWXAccessToken:(NSString *)refreshToken
                resultSuccess:(SuccessCallbackBlock)success
                 resultFailed:(FailedCallbackBlock)failed;
-    
+
+/**
+ <#Description#>
+
+ @param accessToken <#accessToken description#>
+ @param openId <#openId description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)isWxAccessTokenValid:(NSString *)accessToken
                   withOpenId:(NSString *)openId
                resultSuccess:(SuccessCallbackBlock)success
                 resultFailed:(FailedCallbackBlock)failed;
-    
-    
+
+/**
+ <#Description#>
+
+ @param accessToken <#accessToken description#>
+ @param openId <#openId description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)getWxUserinfo:(NSString *)accessToken
            withOpenId:(NSString *)openId
         resultSuccess:(SuccessCallbackBlock)success
          resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param unionid <#unionid description#>
+ @param openid <#openid description#>
+ @param nickname <#nickname description#>
+ @param avatar <#avatar description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)registerWeChat:(NSString *)unionid
+            withOpenId:(NSString *)openid
+          withNickname:(NSString *)nickname
+            withAvatar:(NSString *)avatar
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
 
 #pragma mark - device token
 
+/**
+ <#Description#>
+
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)isTokenUploadedResultSuccess:(SuccessCallbackBlock)success
                         resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param deviceToken <#deviceToken description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)updateDeviceToken:(NSString *)deviceToken
             resultSuccess:(SuccessCallbackBlock)success
              resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ <#Description#>
+
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
 + (void)deleteDeviceTokenResultSuccess:(SuccessCallbackBlock)success
                           resultFailed:(FailedCallbackBlock)failed;
 
 #pragma mark - 取消网络请求
 
+/**
+ <#Description#>
+ */
 + (void)cancelAllHttpRequest;
 
 @end

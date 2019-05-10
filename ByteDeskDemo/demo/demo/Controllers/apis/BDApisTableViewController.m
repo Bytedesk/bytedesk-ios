@@ -22,6 +22,8 @@
 #import "KFHelpCenterViewController.h"
 #import "KFFAQViewController.h"
 #import "KFTicketViewController.h"
+#import "KFAppRateViewController.h"
+#import "KFAppUpgrateViewController.h"
 
 // IM接口演示
 #import "KFContactViewController.h"
@@ -31,6 +33,7 @@
 #import "KFThreadViewController.h"
 #import "KFProfileViewController.h"
 #import "KFNoticeViewController.h"
+#import "KFSettingViewController.h"
 
 #import <bytedesk-core/bdcore.h>
 #import <bytedesk-ui/bdui.h>
@@ -52,6 +55,8 @@
 @property(nonatomic, strong) NSString *mLoginItemDetailText;
 @property(nonatomic, weak) QMUIDialogTextFieldViewController *currentTextFieldDialogViewController;
 
+@property(nonatomic, strong) NSString *demoVersion;
+
 @end
 
 @implementation BDApisTableViewController
@@ -61,7 +66,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 //    self.navigationItem.title = @"萝卜丝1.5.9(未连接)";
-    self.title = @"萝卜丝1.5.9(未连接)";
+    self.demoVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    self.title = [NSString stringWithFormat:@"萝卜丝%@(未连接)", self.demoVersion];
+    //
     self.mLoginItemDetailText = @"当前未连接，点我建立连接";
     
     // 公共接口
@@ -83,7 +90,9 @@
                            @"帮助中心(TODO)",
                            @"常见问题(TODO)",
                            @"网页形式接入",
-                           @"提交工单(TODO)"
+                           @"提交工单(TODO)",
+                           @"引导应用商店好评(TODO)",
+                           @"引导新版本升级(TODO)"
                            ];
     // IM接口
     self.imApisArray = @[
@@ -93,6 +102,7 @@
                        @"会话接口",
                        @"排队接口",
                        @"通知接口",
+                       @"个人资料接口",
                        @"设置接口",
                        ];
     //
@@ -198,9 +208,6 @@
             // TODO: 二维码、扫一扫
             KFScanViewController *scanViewController = [[KFScanViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [self.navigationController pushViewController:scanViewController animated:YES];
-            //
-//            KFQRCodeViewController *qrcodeViewController = [[KFQRCodeViewController alloc] initWithStyle:UITableViewStyleGrouped];
-//            [self.navigationController pushViewController:qrcodeViewController animated:YES];
         } else if (indexPath.row == 5) {
             // TODO: 多账号管理
             
@@ -241,9 +248,15 @@
             // 建议
             [self presentViewController:safariVC animated:YES completion:nil];
             return;
-        } else {
+        } else if (indexPath.row == 8) {
             // TODO: 提交工单
             viewController = [[KFTicketViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        } else if (indexPath.row == 9) {
+            // TODO: 应用商店评价
+            viewController = [[KFAppRateViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        } else {
+            // TODO: 引导升级
+            viewController = [[KFAppUpgrateViewController alloc] initWithStyle:UITableViewStyleGrouped];
         }
         viewController.title = [self.kefuApisArray objectAtIndex:indexPath.row];
         viewController.hidesBottomBarWhenPushed = YES;
@@ -272,8 +285,11 @@
             // TODO: 通知接口
             viewController = [[KFNoticeViewController alloc] init];
         } else if (indexPath.row == 6) {
-            // 设置接口
+            // 个人资料接口
             viewController = [[KFProfileViewController alloc] init];
+        } else if (indexPath.row == 6) {
+            // 设置接口
+            viewController = [[KFSettingViewController alloc] init];
         }
         viewController.title = [self.imApisArray objectAtIndex:indexPath.row];
         viewController.hidesBottomBarWhenPushed = YES;
@@ -506,16 +522,16 @@
  @param notification <#notification description#>
  */
 - (void)notifyConnectionStatus:(NSNotification *)notification {
-    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     NSString *status = [notification object];
+    DDLogInfo(@"%s status:%@", __PRETTY_FUNCTION__, status);
     //
     if ([status isEqualToString:BD_USER_STATUS_CONNECTING]) {
-        self.title = @"萝卜丝1.5.9(连接中...)";
+        self.title = [NSString stringWithFormat:@"萝卜丝%@(连接中...)", self.demoVersion];
     } else if ([status isEqualToString:BD_USER_STATUS_CONNECTED]){
-        self.title = @"萝卜丝1.5.9(已连接)";
+        self.title = [NSString stringWithFormat:@"萝卜丝%@(已连接)", self.demoVersion];
         self.mLoginItemDetailText = [NSString stringWithFormat:@"当前已连接: %@", [BDSettings getUsername]];
     } else {
-        self.title = @"萝卜丝1.5.9(连接断开)";
+        self.title = [NSString stringWithFormat:@"萝卜丝%@(连接断开)", self.demoVersion];
         self.mLoginItemDetailText = @"当前未连接";
     }
     [self.tableView reloadData];
