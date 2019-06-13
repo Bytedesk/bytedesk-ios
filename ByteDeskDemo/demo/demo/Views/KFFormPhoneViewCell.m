@@ -40,24 +40,25 @@
 - (void)setupSubviews {
     
     QMUITextField *phoneTextField = [[QMUITextField alloc] initWithFrame:CGRectMake(5, 0, LBScreen.width-10, 44)];
-    phoneTextField.placeholder = @"选填，便于我们与你联系";
+    phoneTextField.placeholder = @"手机号";
     phoneTextField.font = [UIFont systemFontOfSize:13.0f];
     phoneTextField.keyboardType = UIKeyboardTypePhonePad;
     phoneTextField.clearButtonMode = UITextFieldViewModeAlways;
+//    phoneTextField.layer.cornerRadius = 2;
+//    phoneTextField.layer.borderColor = UIColorSeparator.CGColor;
+//    phoneTextField.layer.borderWidth = PixelOne;
+//    phoneTextField.textInsets = UIEdgeInsetsMake(0, 10, 0, 10);
     [self.contentView addSubview:phoneTextField];
     
     // Add a "textFieldDidChange" notification method to the text field control.
     [phoneTextField addTarget:self action:@selector(textFieldDidChange:)
              forControlEvents:UIControlEventEditingChanged];
-    
 }
-
-
 
 #pragma mark - UITextFieldDelegate
 
 -(void)textFieldDidChange:(UITextField *)textField {
-    //    NSLog(@"%s", __PRETTY_FUNCTION__);
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
     if (_delegate && [_delegate respondsToSelector:@selector(phoneTextField:)]) {
         [_delegate phoneTextField:textField.text];

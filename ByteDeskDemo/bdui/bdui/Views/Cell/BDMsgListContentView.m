@@ -34,7 +34,7 @@
         _textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _textLabel.backgroundColor = [UIColor clearColor];
         _textLabel.font = [UIFont systemFontOfSize:12.0f];
-        [self.bubbleImageView addSubview:_textLabel];
+        [self addSubview:_textLabel];
     }
     return self;
 }

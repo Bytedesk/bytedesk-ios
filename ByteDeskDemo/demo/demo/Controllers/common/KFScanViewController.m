@@ -11,6 +11,8 @@
 
 #import "SWQRCode.h"
 
+#import <bytedesk-core/bdcore.h>
+
 @interface KFScanViewController ()
 
 @end
@@ -31,7 +33,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -46,20 +48,15 @@
     
     if (indexPath.row == 0) {
         
-        cell.textLabel.text = @"登录二维码生成";
+        cell.textLabel.text = @"个人二维码生成";
         cell.detailTextLabel.text = @"";
         
     } else if (indexPath.row == 1) {
         
-        cell.textLabel.text = @"个人二维码生成";
-        cell.detailTextLabel.text = @"";
-        
-    } else if (indexPath.row == 2) {
-        
         cell.textLabel.text = @"群二维码生成";
         cell.detailTextLabel.text = @"";
         
-    } else if (indexPath.row == 3) {
+    } else if (indexPath.row == 2) {
         
         cell.textLabel.text = @"扫一扫";
     }
@@ -72,16 +69,15 @@
     
     if (indexPath.row == 0) {
         //
-        
+        KFQRCodeViewController *qrcodeViewController = [[KFQRCodeViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        [qrcodeViewController initWithUid:[BDSettings getUid]];
+        [self.navigationController pushViewController:qrcodeViewController animated:YES];
     } else if (indexPath.row == 1) {
         //
         KFQRCodeViewController *qrcodeViewController = [[KFQRCodeViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        [qrcodeViewController initWithGid:@""];
         [self.navigationController pushViewController:qrcodeViewController animated:YES];
     } else if (indexPath.row == 2) {
-        //
-        KFQRCodeViewController *qrcodeViewController = [[KFQRCodeViewController alloc] initWithStyle:UITableViewStyleGrouped];
-        [self.navigationController pushViewController:qrcodeViewController animated:YES];
-    } else if (indexPath.row == 3) {
  
         [self showScanController];
     }

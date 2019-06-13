@@ -247,7 +247,6 @@
         else {
             NSLog(@"%@ file not exist", voicePath);
         }
-        
         voicePlayer.meteringEnabled = YES;
         voicePlayer.delegate = self;
     }

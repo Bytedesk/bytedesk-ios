@@ -13,17 +13,18 @@
 @protocol KFDSMsgBaseContentViewDelegate <NSObject>
 
 // TODO: 点击客服/访客头像，显示其相关信息
+//- (void)avatarClicked:(BDMessageModel *)messageModel;
 
 // TODO: text点击超链接
+- (void) linkUrlClicked:(NSString *)url;
 
 // TODO: 打开放大图片
 - (void) imageViewClicked:(UIImageView *)imageView;
 
-- (void) fileViewClicked:(id)sender;
-
+// TODO: 点击文件消息
+- (void) fileViewClicked:(NSString *)fileUrl;
 
 @end
-
 
 
 @interface BDMsgBaseContentView : UIControl

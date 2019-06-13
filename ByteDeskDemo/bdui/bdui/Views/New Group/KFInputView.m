@@ -362,35 +362,36 @@ CGFloat const kFontSize = 17.0f;
 
 #pragma mark UITextViewDelegate
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-	if(![textView hasText] && [text isEqualToString:@""])
-    {
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+//    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    //
+    if(![textView hasText] && [text isEqualToString:@""]) {
         return NO;
-	}
+    }
     
-	if ([text isEqualToString:@"\n"])
-    {
+	if ([text isEqualToString:@"\n"]) {
+        
         NSString *content = [textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
         if ([content length] == 0) {
             return NO;
         }
         
-        
         if ([delegate respondsToSelector:@selector(sendMessage:)]) {
-            
             [delegate performSelector:@selector(sendMessage:) withObject:content];
-            
         }
+        
+        //
+        [self textViewDidChange:textView];
 
         return NO;
 	}
+    
 	return YES;
 }
 
--(void)textViewDidChange:(UITextView *)textView
-{
+-(void)textViewDidChange:(UITextView *)textView {
+//    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
     CGFloat previewHeight = [self inputTextViewPreviousTextHeight];
     
@@ -469,10 +470,7 @@ CGFloat const kFontSize = 17.0f;
                              textViewFrame.origin.y -= deltaHeight;
                          }
                          [[self inputTextView] setFrame:textViewFrame];
-                         
-                         
-                         
-                         
+
                          ///////////////////////////////////////////////////////////////////////
                          
                          CGRect verticalLineFrame = [[self verticalLineView] frame];
@@ -496,10 +494,9 @@ CGFloat const kFontSize = 17.0f;
 }
 
 
--(CGFloat)inputTextViewPreviousTextHeight
-{
+-(CGFloat)inputTextViewPreviousTextHeight {
+    
     if (!inputTextViewPreviousTextHeight) {
-        
         inputTextViewPreviousTextHeight = [self inputTextViewHeight];
     }
     
@@ -515,16 +512,14 @@ CGFloat const kFontSize = 17.0f;
 
 #pragma mark UIButton Selectors
 
--(void)showMenuButtonPressed:(id)sender
-{
+-(void)showMenuButtonPressed:(id)sender {
+    //
     if ([delegate respondsToSelector:@selector(showMenuButtonPressed:)]) {
-        
         [delegate performSelector:@selector(showMenuButtonPressed:) withObject:nil];
     }
 }
 
--(void)switchVoiceButtonPressed:(id)sender
-{
+-(void)switchVoiceButtonPressed:(id)sender {
 
     if ([delegate respondsToSelector:@selector(switchVoiceButtonPressed:)]) {
         [delegate performSelector:@selector(switchVoiceButtonPressed:) withObject:nil];
@@ -535,8 +530,8 @@ CGFloat const kFontSize = 17.0f;
         [[self switchVoiceButton] setImage:[UIImage imageNamed:@"ToolViewInputVoice_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         [[self switchVoiceButton] setImage:[UIImage imageNamed:@"ToolViewInputVoiceHL_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
     }
-    else
-    {
+    else {
+        
         [[self switchVoiceButton] setImage:[UIImage imageNamed:@"ToolViewInputText_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         [[self switchVoiceButton] setImage:[UIImage imageNamed:@"ToolViewInputTextHL_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
         
@@ -547,13 +542,11 @@ CGFloat const kFontSize = 17.0f;
     
 }
 
--(void)switchEmotionButtonPressed:(id)sender
-{
+-(void)switchEmotionButtonPressed:(id)sender {
+    
     //执行Delegate
     if ([delegate respondsToSelector:@selector(switchEmotionButtonPressed:)]) {
-        
         [delegate performSelector:@selector(switchEmotionButtonPressed:) withObject:nil];
-        
     }
     
     if ([[self inputTextView] isFirstResponder]) {
@@ -561,9 +554,7 @@ CGFloat const kFontSize = 17.0f;
         [[self switchEmotionButton] setImage:[UIImage imageNamed:@"ToolViewEmotion_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         [[self switchEmotionButton] setImage:[UIImage imageNamed:@"ToolViewEmotionHL_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
         
-    }
-    else
-    {
+    } else {
         [[self switchEmotionButton] setImage:[UIImage imageNamed:@"ToolViewInputText_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         [[self switchEmotionButton] setImage:[UIImage imageNamed:@"ToolViewInputTextHL_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
         
@@ -571,23 +562,19 @@ CGFloat const kFontSize = 17.0f;
     
 }
 
--(void)switchPlusButtonPressed:(id)sender
-{
+-(void)switchPlusButtonPressed:(id)sender {
+    
     if ([delegate respondsToSelector:@selector(switchPlusButtonPressed:)]) {
-        
         [delegate performSelector:@selector(switchPlusButtonPressed:) withObject:nil];
-        
     }
 }
 
 
 //
--(void)recordVoiceButtonTouchDown:(id)sender
-{
+-(void)recordVoiceButtonTouchDown:(id)sender {
+    
     if ([delegate respondsToSelector:@selector(recordVoiceButtonTouchDown:)]) {
-        
         [delegate performSelector:@selector(recordVoiceButtonTouchDown:) withObject:nil];
-        
     }
 }
 

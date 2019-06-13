@@ -19,8 +19,7 @@
 #import "KFStatusViewController.h"
 #import "KFVisitorThreadViewController.h"
 #import "KFFeedbackViewController.h"
-#import "KFHelpCenterViewController.h"
-#import "KFFAQViewController.h"
+#import "KFSupportViewController.h"
 #import "KFTicketViewController.h"
 #import "KFAppRateViewController.h"
 #import "KFAppUpgrateViewController.h"
@@ -31,6 +30,7 @@
 #import "KFGroupViewController.h"
 #import "KFQueueViewController.h"
 #import "KFThreadViewController.h"
+#import "KFMomentViewController.h"
 #import "KFProfileViewController.h"
 #import "KFNoticeViewController.h"
 #import "KFSettingViewController.h"
@@ -61,7 +61,6 @@
 
 @implementation BDApisTableViewController
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -82,33 +81,42 @@
                              ];
     // 客服接口
     self.kefuApisArray = @[
-                           @"联系客服接口",
-                           @"自定义用户信息接口",
-                           @"在线状态接口",
-                           @"历史会话接口",
-                           @"意见反馈(TODO)",
-                           @"帮助中心(TODO)",
-                           @"常见问题(TODO)",
-                           @"网页形式接入",
-                           @"提交工单(TODO)",
+                           @"联系客服",
+                           @"自定义用户信息",
+                           @"在线状态",
+                           @"历史会话",
+                           @"提交工单",
+                           @"意见反馈",
+                           @"帮助中心",
+                           @"网页会话",
                            @"引导应用商店好评(TODO)",
                            @"引导新版本升级(TODO)"
                            ];
     // IM接口
     self.imApisArray = @[
-                       @"好友接口",
-                       @"联系人接口",
-                       @"群组接口",
-                       @"会话接口",
-                       @"排队接口",
-                       @"通知接口",
-                       @"个人资料接口",
+                       @"好友关系",
+                       @"联系人",
+                       @"群组",
+                       @"会话",
+                       @"朋友圈(TODO)",
+                       @"排队",
+                       @"系统消息",
+                       @"个人资料",
                        @"设置接口",
                        ];
-    //
+    // 监听消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOAuthResult:) name:BD_NOTIFICATION_OAUTH_RESULT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyConnectionStatus:) name:BD_NOTIFICATION_CONNECTION_STATUS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyKickoff:) name:BD_NOTIFICATION_KICKOFF object:nil];
+    
+    // 摇一摇：意见反馈
+    [[UIApplication sharedApplication] setApplicationSupportsShakeToEdit:YES];
+    [self becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -210,7 +218,6 @@
             [self.navigationController pushViewController:scanViewController animated:YES];
         } else if (indexPath.row == 5) {
             // TODO: 多账号管理
-            
         }
         
     } else if (indexPath.section == 1) {
@@ -229,16 +236,16 @@
             // 历史会话接口
             viewController = [[KFVisitorThreadViewController alloc] init];
         } else if (indexPath.row == 4) {
-            // 意见反馈
-//            viewController = [[KFFeedbackViewController alloc] initWithStyle:UITableViewStyleGrouped];
-            [BDUIApis visitorPushFeedback:self.navigationController];
-            return;
+            // 提交工单
+            viewController = [[KFTicketViewController alloc] initWithStyle:UITableViewStyleGrouped];
         } else if (indexPath.row == 5) {
-            // TODO: 帮助中心
-             viewController = [[KFHelpCenterViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            // 意见反馈
+            viewController = [[KFFeedbackViewController alloc] initWithStyle:UITableViewStyleGrouped];
+//            [BDUIApis visitorPushFeedback:self.navigationController];
+//            return;
         } else if (indexPath.row == 6) {
-            // 常见问题
-             viewController = [[KFFAQViewController alloc] init];
+            // TODO: 帮助中心
+             viewController = [[KFSupportViewController alloc] initWithStyle:UITableViewStyleGrouped];
         } else if (indexPath.row == 7) {
             // 网页形式接入
             // 注意: 登录后台->所有设置->所有客服->工作组->获取代码 获取相应URL
@@ -249,9 +256,6 @@
             [self presentViewController:safariVC animated:YES completion:nil];
             return;
         } else if (indexPath.row == 8) {
-            // TODO: 提交工单
-            viewController = [[KFTicketViewController alloc] initWithStyle:UITableViewStyleGrouped];
-        } else if (indexPath.row == 9) {
             // TODO: 应用商店评价
             viewController = [[KFAppRateViewController alloc] initWithStyle:UITableViewStyleGrouped];
         } else {
@@ -279,15 +283,18 @@
             // 会话接口
             viewController = [[KFThreadViewController alloc] init];
         } else if (indexPath.row == 4) {
+            // 朋友圈接口
+            viewController = [[KFMomentViewController alloc] init];
+        } else if (indexPath.row == 5) {
             // 排队接口
             viewController = [[KFQueueViewController alloc] init];
-        } else if (indexPath.row == 5) {
-            // TODO: 通知接口
-            viewController = [[KFNoticeViewController alloc] init];
         } else if (indexPath.row == 6) {
+            // TODO: 系统消息接口
+            viewController = [[KFNoticeViewController alloc] init];
+        } else if (indexPath.row == 7) {
             // 个人资料接口
             viewController = [[KFProfileViewController alloc] init];
-        } else if (indexPath.row == 6) {
+        } else if (indexPath.row == 8) {
             // 设置接口
             viewController = [[KFSettingViewController alloc] init];
         }
@@ -559,6 +566,26 @@
     [alertController showWithAnimated:YES];
 }
 
+
+#pragma mark - ShakeToEdit 摇动手机之后的回调方法, 摇一摇意见反馈(类似知乎)
+
+- (void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (motion == UIEventSubtypeMotionShake) {
+        DDLogInfo(@"检测到摇动开始");
+    }
+}
+
+- (void) motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    DDLogInfo(@"摇动取消");
+}
+
+- (void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (event.subtype == UIEventSubtypeMotionShake) {
+        DDLogInfo(@"摇动结束");
+        //振动效果 需要#import <AudioToolbox/AudioToolbox.h>
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    }
+}
 
 @end
 

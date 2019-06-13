@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3D0DB22B21CC607C002ACB3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D0DB22D21CC607C002ACB3E /* InfoPlist.strings */; };
+		3D177E00229EA76C00B5409A /* KFSupportApiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D177DFF229EA76C00B5409A /* KFSupportApiViewController.m */; };
 		3D3823D921CF5BE800AB12AD /* KFFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3823D821CF5BE800AB12AD /* KFFriendViewController.m */; };
 		3D38CC30225179A100BA2668 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D38CC2F225179A100BA2668 /* CloudKit.framework */; };
+		3D391BEA22869B5000D03C04 /* KFMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D391BE922869B5000D03C04 /* KFMomentViewController.m */; };
 		3D3928CD21BF8F20001E1257 /* KFContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928CC21BF8F20001E1257 /* KFContactViewController.m */; };
 		3D3928D021BF8F31001E1257 /* KFGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928CF21BF8F31001E1257 /* KFGroupViewController.m */; };
 		3D3928EB21C25E9E001E1257 /* KFQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928EA21C25E9E001E1257 /* KFQueueViewController.m */; };
@@ -33,8 +35,7 @@
 		3D39294121C28595001E1257 /* KFProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D39294021C28595001E1257 /* KFProfileViewController.m */; };
 		3D3958A2224CC2E2000E88EE /* KFServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3958A1224CC2E2000E88EE /* KFServerViewController.m */; };
 		3D3B7C3021CA3613001FE199 /* BDApisTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3B7C2F21CA3613001FE199 /* BDApisTableViewController.m */; };
-		3D3EC9EA2285CFC70067888F /* bytedesk-ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3EC9E92285CFC70067888F /* bytedesk-ui.framework */; };
-		3D3EC9EB2285CFC70067888F /* bytedesk-ui.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3EC9E92285CFC70067888F /* bytedesk-ui.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3D44B27B229395B700588402 /* KFFormEmailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44B27A229395B700588402 /* KFFormEmailViewCell.m */; };
 		3D47629921D1CA190034BF83 /* KFNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D47629821D1CA190034BF83 /* KFNoticeViewController.m */; };
 		3D4A3C8E22802388005F2F0F /* QDSingleImagePickerPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4A3C8C22802387005F2F0F /* QDSingleImagePickerPreviewViewController.m */; };
 		3D4C0B0E213131500083C8F9 /* KFIMApiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4C0B0C2131314F0083C8F9 /* KFIMApiViewController.m */; };
@@ -54,13 +55,13 @@
 		3D5E997621D908E7006D37CC /* KFFormPhoneViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E997121D908E7006D37CC /* KFFormPhoneViewCell.m */; };
 		3D5E997721D908E7006D37CC /* KFFormSubmitViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E997321D908E7006D37CC /* KFFormSubmitViewCell.m */; };
 		3D5E997821D908E7006D37CC /* KFFormContentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E997421D908E7006D37CC /* KFFormContentViewCell.m */; };
-		3D5E997B21D90B33006D37CC /* KFFormImageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E997921D90B33006D37CC /* KFFormImageViewCell.m */; };
+		3D6A562522B29CF200A81DC1 /* bytedesk-ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6A562422B29CF200A81DC1 /* bytedesk-ui.framework */; };
+		3D6A562622B29CF200A81DC1 /* bytedesk-ui.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6A562422B29CF200A81DC1 /* bytedesk-ui.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3D9A14782081F629008C6DA2 /* KFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9A14772081F629008C6DA2 /* KFNavigationController.m */; };
+		3DC136B6229F8DB200D4C61A /* KFSupportCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC136B5229F8DB200D4C61A /* KFSupportCategoryViewController.m */; };
+		3DC136B9229F8DC600D4C61A /* KFSupportArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC136B8229F8DC600D4C61A /* KFSupportArticleViewController.m */; };
 		3DCA9C5E21F605C300E63998 /* UIView+FeedBack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C5D21F605C300E63998 /* UIView+FeedBack.m */; };
-		3DCA9C6521F6097E00E63998 /* TZTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6121F6097E00E63998 /* TZTestCell.m */; };
-		3DCA9C6621F6097E00E63998 /* LxGridViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6421F6097E00E63998 /* LxGridViewFlowLayout.m */; };
-		3DCA9C6A21F60F7C00E63998 /* KFFAQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6921F60F7C00E63998 /* KFFAQViewController.m */; };
-		3DCA9C6D21F60FE800E63998 /* KFHelpCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6C21F60FE800E63998 /* KFHelpCenterViewController.m */; };
+		3DCA9C6D21F60FE800E63998 /* KFSupportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6C21F60FE800E63998 /* KFSupportViewController.m */; };
 		3DCA9C7021F6109600E63998 /* KFTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6F21F6109600E63998 /* KFTicketViewController.m */; };
 		3DCB17672267813C00E8FB16 /* SWQRCodeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB175C2267813C00E8FB16 /* SWQRCodeConfig.m */; };
 		3DCB17682267813C00E8FB16 /* SWQRCodeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB175D2267813C00E8FB16 /* SWQRCodeManager.m */; };
@@ -83,7 +84,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3D3EC9EB2285CFC70067888F /* bytedesk-ui.framework in Embed Frameworks */,
+				3D6A562622B29CF200A81DC1 /* bytedesk-ui.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,9 +95,13 @@
 		3ABA9625A7F4C1A519864722 /* Pods_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D0DB22C21CC607C002ACB3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3D0DB22E21CC607E002ACB3E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		3D177DFE229EA76C00B5409A /* KFSupportApiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFSupportApiViewController.h; sourceTree = "<group>"; };
+		3D177DFF229EA76C00B5409A /* KFSupportApiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFSupportApiViewController.m; sourceTree = "<group>"; };
 		3D3823D721CF5BE800AB12AD /* KFFriendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFFriendViewController.h; sourceTree = "<group>"; };
 		3D3823D821CF5BE800AB12AD /* KFFriendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFFriendViewController.m; sourceTree = "<group>"; };
 		3D38CC2F225179A100BA2668 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		3D391BE822869B5000D03C04 /* KFMomentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFMomentViewController.h; sourceTree = "<group>"; };
+		3D391BE922869B5000D03C04 /* KFMomentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFMomentViewController.m; sourceTree = "<group>"; };
 		3D3928CB21BF8F20001E1257 /* KFContactViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFContactViewController.h; sourceTree = "<group>"; };
 		3D3928CC21BF8F20001E1257 /* KFContactViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFContactViewController.m; sourceTree = "<group>"; };
 		3D3928CE21BF8F31001E1257 /* KFGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFGroupViewController.h; sourceTree = "<group>"; };
@@ -144,7 +149,8 @@
 		3D3958A1224CC2E2000E88EE /* KFServerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFServerViewController.m; sourceTree = "<group>"; };
 		3D3B7C2E21CA3613001FE199 /* BDApisTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDApisTableViewController.h; sourceTree = "<group>"; };
 		3D3B7C2F21CA3613001FE199 /* BDApisTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDApisTableViewController.m; sourceTree = "<group>"; };
-		3D3EC9E92285CFC70067888F /* bytedesk-ui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "bytedesk-ui.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D44B279229395B600588402 /* KFFormEmailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFFormEmailViewCell.h; sourceTree = "<group>"; };
+		3D44B27A229395B700588402 /* KFFormEmailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFFormEmailViewCell.m; sourceTree = "<group>"; };
 		3D47629721D1CA190034BF83 /* KFNoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFNoticeViewController.h; sourceTree = "<group>"; };
 		3D47629821D1CA190034BF83 /* KFNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFNoticeViewController.m; sourceTree = "<group>"; };
 		3D4A3C8C22802387005F2F0F /* QDSingleImagePickerPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDSingleImagePickerPreviewViewController.m; sourceTree = "<group>"; };
@@ -183,20 +189,17 @@
 		3D5E997321D908E7006D37CC /* KFFormSubmitViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFFormSubmitViewCell.m; sourceTree = "<group>"; };
 		3D5E997421D908E7006D37CC /* KFFormContentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFFormContentViewCell.m; sourceTree = "<group>"; };
 		3D5E997521D908E7006D37CC /* KFFormContentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFFormContentViewCell.h; sourceTree = "<group>"; };
-		3D5E997921D90B33006D37CC /* KFFormImageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFFormImageViewCell.m; sourceTree = "<group>"; };
-		3D5E997A21D90B33006D37CC /* KFFormImageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFFormImageViewCell.h; sourceTree = "<group>"; };
+		3D6A562422B29CF200A81DC1 /* bytedesk-ui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "bytedesk-ui.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9A14762081F629008C6DA2 /* KFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFNavigationController.h; sourceTree = "<group>"; };
 		3D9A14772081F629008C6DA2 /* KFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFNavigationController.m; sourceTree = "<group>"; };
+		3DC136B4229F8DB200D4C61A /* KFSupportCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFSupportCategoryViewController.h; sourceTree = "<group>"; };
+		3DC136B5229F8DB200D4C61A /* KFSupportCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFSupportCategoryViewController.m; sourceTree = "<group>"; };
+		3DC136B7229F8DC600D4C61A /* KFSupportArticleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFSupportArticleViewController.h; sourceTree = "<group>"; };
+		3DC136B8229F8DC600D4C61A /* KFSupportArticleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFSupportArticleViewController.m; sourceTree = "<group>"; };
 		3DCA9C5C21F605C300E63998 /* UIView+FeedBack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FeedBack.h"; sourceTree = "<group>"; };
 		3DCA9C5D21F605C300E63998 /* UIView+FeedBack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FeedBack.m"; sourceTree = "<group>"; };
-		3DCA9C6121F6097E00E63998 /* TZTestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZTestCell.m; sourceTree = "<group>"; };
-		3DCA9C6221F6097E00E63998 /* LxGridViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridViewFlowLayout.h; sourceTree = "<group>"; };
-		3DCA9C6321F6097E00E63998 /* TZTestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZTestCell.h; sourceTree = "<group>"; };
-		3DCA9C6421F6097E00E63998 /* LxGridViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridViewFlowLayout.m; sourceTree = "<group>"; };
-		3DCA9C6821F60F7C00E63998 /* KFFAQViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFFAQViewController.h; sourceTree = "<group>"; };
-		3DCA9C6921F60F7C00E63998 /* KFFAQViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFFAQViewController.m; sourceTree = "<group>"; };
-		3DCA9C6B21F60FE800E63998 /* KFHelpCenterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFHelpCenterViewController.h; sourceTree = "<group>"; };
-		3DCA9C6C21F60FE800E63998 /* KFHelpCenterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFHelpCenterViewController.m; sourceTree = "<group>"; };
+		3DCA9C6B21F60FE800E63998 /* KFSupportViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFSupportViewController.h; sourceTree = "<group>"; };
+		3DCA9C6C21F60FE800E63998 /* KFSupportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFSupportViewController.m; sourceTree = "<group>"; };
 		3DCA9C6E21F6109600E63998 /* KFTicketViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFTicketViewController.h; sourceTree = "<group>"; };
 		3DCA9C6F21F6109600E63998 /* KFTicketViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFTicketViewController.m; sourceTree = "<group>"; };
 		3DCB175C2267813C00E8FB16 /* SWQRCodeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWQRCodeConfig.m; sourceTree = "<group>"; };
@@ -237,16 +240,26 @@
 			files = (
 				AF07A2BB176935FE7FE9041E /* Pods_demo.framework in Frameworks */,
 				3D38CC30225179A100BA2668 /* CloudKit.framework in Frameworks */,
-				3D3EC9EA2285CFC70067888F /* bytedesk-ui.framework in Frameworks */,
+				3D6A562522B29CF200A81DC1 /* bytedesk-ui.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D391BE422869A9C00D03C04 /* moment */ = {
+			isa = PBXGroup;
+			children = (
+				3D391BE822869B5000D03C04 /* KFMomentViewController.h */,
+				3D391BE922869B5000D03C04 /* KFMomentViewController.m */,
+			);
+			path = moment;
+			sourceTree = "<group>";
+		};
 		3D3928E721C25E50001E1257 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3D391BE422869A9C00D03C04 /* moment */,
 				3DCB17722267FC3200E8FB16 /* profile */,
 				3D47629621D1CA020034BF83 /* notice */,
 				3D39293E21C2846A001E1257 /* setting */,
@@ -269,14 +282,18 @@
 				3D548A591FC524EC003117B4 /* KFStatusViewController.m */,
 				3D548A5B1FC5251B003117B4 /* KFVisitorThreadViewController.h */,
 				3D548A5C1FC5251B003117B4 /* KFVisitorThreadViewController.m */,
-				3D5E996D21D904AC006D37CC /* KFFeedbackViewController.h */,
-				3D5E996E21D904AC006D37CC /* KFFeedbackViewController.m */,
-				3DCA9C6821F60F7C00E63998 /* KFFAQViewController.h */,
-				3DCA9C6921F60F7C00E63998 /* KFFAQViewController.m */,
-				3DCA9C6B21F60FE800E63998 /* KFHelpCenterViewController.h */,
-				3DCA9C6C21F60FE800E63998 /* KFHelpCenterViewController.m */,
 				3DCA9C6E21F6109600E63998 /* KFTicketViewController.h */,
 				3DCA9C6F21F6109600E63998 /* KFTicketViewController.m */,
+				3D5E996D21D904AC006D37CC /* KFFeedbackViewController.h */,
+				3D5E996E21D904AC006D37CC /* KFFeedbackViewController.m */,
+				3DCA9C6B21F60FE800E63998 /* KFSupportViewController.h */,
+				3DCA9C6C21F60FE800E63998 /* KFSupportViewController.m */,
+				3D177DFE229EA76C00B5409A /* KFSupportApiViewController.h */,
+				3D177DFF229EA76C00B5409A /* KFSupportApiViewController.m */,
+				3DC136B4229F8DB200D4C61A /* KFSupportCategoryViewController.h */,
+				3DC136B5229F8DB200D4C61A /* KFSupportCategoryViewController.m */,
+				3DC136B7229F8DC600D4C61A /* KFSupportArticleViewController.h */,
+				3DC136B8229F8DC600D4C61A /* KFSupportArticleViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -418,7 +435,7 @@
 		3D5489C41FC515CF003117B4 = {
 			isa = PBXGroup;
 			children = (
-				3D3EC9E92285CFC70067888F /* bytedesk-ui.framework */,
+				3D6A562422B29CF200A81DC1 /* bytedesk-ui.framework */,
 				3D5489CF1FC515CF003117B4 /* demo */,
 				3D5489CE1FC515CF003117B4 /* Products */,
 				9C7149EBC449A684C32A715E /* Pods */,
@@ -513,8 +530,8 @@
 				3D39293321C28310001E1257 /* KFQueueTableViewCell.m */,
 				3D5E997521D908E7006D37CC /* KFFormContentViewCell.h */,
 				3D5E997421D908E7006D37CC /* KFFormContentViewCell.m */,
-				3D5E997A21D90B33006D37CC /* KFFormImageViewCell.h */,
-				3D5E997921D90B33006D37CC /* KFFormImageViewCell.m */,
+				3D44B279229395B600588402 /* KFFormEmailViewCell.h */,
+				3D44B27A229395B700588402 /* KFFormEmailViewCell.m */,
 				3D5E997021D908E7006D37CC /* KFFormPhoneViewCell.h */,
 				3D5E997121D908E7006D37CC /* KFFormPhoneViewCell.m */,
 				3D5E997221D908E7006D37CC /* KFFormSubmitViewCell.h */,
@@ -536,20 +553,8 @@
 			isa = PBXGroup;
 			children = (
 				3DCB175A2267813C00E8FB16 /* SWQRCode */,
-				3DCA9C6021F6097E00E63998 /* pickImage */,
 			);
 			path = vendors;
-			sourceTree = "<group>";
-		};
-		3DCA9C6021F6097E00E63998 /* pickImage */ = {
-			isa = PBXGroup;
-			children = (
-				3DCA9C6321F6097E00E63998 /* TZTestCell.h */,
-				3DCA9C6121F6097E00E63998 /* TZTestCell.m */,
-				3DCA9C6221F6097E00E63998 /* LxGridViewFlowLayout.h */,
-				3DCA9C6421F6097E00E63998 /* LxGridViewFlowLayout.m */,
-			);
-			path = pickImage;
 			sourceTree = "<group>";
 		};
 		3DCB175A2267813C00E8FB16 /* SWQRCode */ = {
@@ -730,7 +735,6 @@
 				"${BUILT_PRODUCTS_DIR}/MGSwipeTableCell/MGSwipeTableCell.framework",
 				"${BUILT_PRODUCTS_DIR}/MQTTClient/MQTTClient.framework",
 				"${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework",
-				"${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework",
 				"${PODS_ROOT}/bytedesk-core/frameworks/cocoapods/bytedesk-core.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -743,7 +747,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGSwipeTableCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MQTTClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QMUIKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TZImagePickerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bytedesk-core.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -760,11 +763,11 @@
 			files = (
 				3D39291D21C28116001E1257 /* QDCommonListViewController.m in Sources */,
 				3D39292621C28116001E1257 /* QDCommonUI.m in Sources */,
-				3DCA9C6621F6097E00E63998 /* LxGridViewFlowLayout.m in Sources */,
 				3D548A571FC524D6003117B4 /* KFUserinfoViewController.m in Sources */,
 				3D3928F821C280C8001E1257 /* KFContactSelectViewController.m in Sources */,
 				3D39291F21C28116001E1257 /* QDCommonTableViewController.m in Sources */,
 				3D5E997621D908E7006D37CC /* KFFormPhoneViewCell.m in Sources */,
+				3D177E00229EA76C00B5409A /* KFSupportApiViewController.m in Sources */,
 				3D548A5D1FC5251B003117B4 /* KFVisitorThreadViewController.m in Sources */,
 				3D39291A21C28116001E1257 /* QDCommonViewController.m in Sources */,
 				3DE6FD872235007B006F1329 /* KFQRCodeViewController.m in Sources */,
@@ -772,10 +775,10 @@
 				3D39293521C28310001E1257 /* KFQueueTableViewCell.m in Sources */,
 				3D47629921D1CA190034BF83 /* KFNoticeViewController.m in Sources */,
 				3DCA9C5E21F605C300E63998 /* UIView+FeedBack.m in Sources */,
-				3D5E997B21D90B33006D37CC /* KFFormImageViewCell.m in Sources */,
 				3D39293621C28310001E1257 /* KFContactTableViewCell.m in Sources */,
 				3D39291B21C28116001E1257 /* QDCommonGridViewController.m in Sources */,
 				3D39291C21C28116001E1257 /* QDTabBarViewController.m in Sources */,
+				3D44B27B229395B700588402 /* KFFormEmailViewCell.m in Sources */,
 				3D39292421C28116001E1257 /* QMUIConfigurationTemplate.m in Sources */,
 				3DCB176B2267813C00E8FB16 /* SWScannerView.m in Sources */,
 				3D3928F721C280C8001E1257 /* KFDetailViewController.m in Sources */,
@@ -786,7 +789,9 @@
 				3DCB17672267813C00E8FB16 /* SWQRCodeConfig.m in Sources */,
 				3D39293A21C2831A001E1257 /* KFUtils.m in Sources */,
 				3D5606EC205FB699000E770C /* KFThreadTableViewCell.m in Sources */,
+				3DC136B9229F8DC600D4C61A /* KFSupportArticleViewController.m in Sources */,
 				3D3823D921CF5BE800AB12AD /* KFFriendViewController.m in Sources */,
+				3D391BEA22869B5000D03C04 /* KFMomentViewController.m in Sources */,
 				3D5E996F21D904AC006D37CC /* KFFeedbackViewController.m in Sources */,
 				3DCB17712267F21D00E8FB16 /* KFAppUpgrateViewController.m in Sources */,
 				3D548A431FC51906003117B4 /* KFKeFuApiViewController.m in Sources */,
@@ -795,16 +800,15 @@
 				3D4A3C8E22802388005F2F0F /* QDSingleImagePickerPreviewViewController.m in Sources */,
 				3D548A4B1FC52374003117B4 /* KFIntroViewController.m in Sources */,
 				3D5E997821D908E7006D37CC /* KFFormContentViewCell.m in Sources */,
-				3DCA9C6521F6097E00E63998 /* TZTestCell.m in Sources */,
 				3D5489E01FC515CF003117B4 /* main.m in Sources */,
-				3DCA9C6A21F60F7C00E63998 /* KFFAQViewController.m in Sources */,
 				3D9A14782081F629008C6DA2 /* KFNavigationController.m in Sources */,
+				3DC136B6229F8DB200D4C61A /* KFSupportCategoryViewController.m in Sources */,
 				3D548A541FC524B1003117B4 /* KFChatViewController.m in Sources */,
 				3D3928EE21C25EAB001E1257 /* KFThreadViewController.m in Sources */,
 				3DCB17752267FC7300E8FB16 /* KFSettingViewController.m in Sources */,
 				3D3B7C3021CA3613001FE199 /* BDApisTableViewController.m in Sources */,
 				3D39292521C28116001E1257 /* QDUIHelper.m in Sources */,
-				3DCA9C6D21F60FE800E63998 /* KFHelpCenterViewController.m in Sources */,
+				3DCA9C6D21F60FE800E63998 /* KFSupportViewController.m in Sources */,
 				3DCA9C7021F6109600E63998 /* KFTicketViewController.m in Sources */,
 				3D39294121C28595001E1257 /* KFProfileViewController.m in Sources */,
 				3D3958A2224CC2E2000E88EE /* KFServerViewController.m in Sources */,

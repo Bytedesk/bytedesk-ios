@@ -8,13 +8,12 @@
 
 //#import <UIKit/UIKit.h>
 #import "BDMsgBaseContentView.h"
-@class M80AttributedLabel;
 
+@class M80AttributedLabel;
 
 //@protocol KFDSMsgTextContentViewDelegate <NSObject>
 //
 //@end
-
 
 @interface BDMsgTextContentView : BDMsgBaseContentView
 

@@ -11,6 +11,8 @@
 
 @protocol KFFormSubmitViewCellDelegate <NSObject>
 
+- (void)submitButtonClicked:(id)sender;
+
 @end
 
 

@@ -1,16 +1,16 @@
 //
-//  KFSettingViewController.h
-//  demo
+//  KFSettingsViewController.h
+//  demoWebRTC
 //
-//  Created by 宁金鹏 on 2019/4/18.
-//  Copyright © 2019 KeFuDaShi. All rights reserved.
+//  Created by 宁金鹏 on 2019/4/8.
+//  Copyright © 2019 xiaper.io. All rights reserved.
 //
 
-#import "QDCommonGroupListViewController.h"
+#import <QMUIKit/QMUIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface KFSettingViewController : QDCommonGroupListViewController
+@interface KFSettingViewController : QMUICommonTableViewController
 
 @end
 

@@ -68,7 +68,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         cell = [[QMUITableViewCell alloc] initForTableView:self.tableView withStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
     }
     if (indexPath.section == 0) {
-        [cell.imageView setImageWithURL:[NSURL URLWithString:[BDSettings getAvatar]] placeholderImage:[UIImage imageNamed:@"admin_default_avatar"]];
+        [cell.imageView setImageWithURL:[NSURL URLWithString:[BDSettings getAvatar]] placeholderImage:[UIImage imageNamed:@"admin_default_avatar" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
         cell.textLabel.text = [BDSettings getNickname];
         cell.detailTextLabel.text = [BDSettings getDescription];
 //        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -86,6 +86,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     [cell updateCellAppearanceWithIndexPath:indexPath];
+    
     return cell;
 }
 
@@ -98,7 +99,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.tableView qmui_clearsSelection];
+//    [self.tableView qmui_clearsSelection];
     //    UIViewController *viewController = nil;
     if (indexPath.section == 0) {
         //
@@ -274,6 +275,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 //}
 
 - (void)authorizationPresentAlbumViewController {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
     if ([QMUIAssetsManager authorizationStatus] == QMUIAssetAuthorizationStatusNotDetermined) {
         [QMUIAssetsManager requestAuthorization:^(QMUIAssetAuthorizationStatus status) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -286,6 +289,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 }
 
 - (void)presentAlbumViewController {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
     // 创建一个 QMUIAlbumViewController 实例用于呈现相簿列表
     QMUIAlbumViewController *albumViewController = [[QMUIAlbumViewController alloc] init];
@@ -304,13 +308,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (QMUIImagePickerViewController *)imagePickerViewControllerForAlbumViewController:(QMUIAlbumViewController *)albumViewController {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
-    
+
     QMUIImagePickerViewController *imagePickerViewController = [[QMUIImagePickerViewController alloc] init];
     imagePickerViewController.imagePickerViewControllerDelegate = self;
     imagePickerViewController.maximumSelectImageCount = 1;
     imagePickerViewController.view.tag = albumViewController.view.tag;
     imagePickerViewController.allowsMultipleSelection = NO;
-    
+
     return imagePickerViewController;
 }
 
@@ -323,10 +327,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     imagePickerPreviewViewController.delegate = self;
     imagePickerPreviewViewController.assetsGroup = imagePickerViewController.assetsGroup;
     imagePickerPreviewViewController.view.tag = imagePickerViewController.view.tag;
-    
+
     return imagePickerPreviewViewController;
 }
-
 
 #pragma mark - <QDSingleImagePickerPreviewViewControllerDelegate>
 

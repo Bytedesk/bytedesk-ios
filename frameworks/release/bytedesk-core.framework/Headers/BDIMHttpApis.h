@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BDIMHttpApis : NSObject
 
+// TODO: 分拆IM相关接口到此文件
+
 @end
 
 NS_ASSUME_NONNULL_END

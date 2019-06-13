@@ -265,7 +265,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+//    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
     [self layoutTimestampLabel];
     [self layoutAvatarImageView];
@@ -318,7 +318,7 @@
 
 - (void)layoutSendingStatusActivityIndicator {
     
-    DDLogInfo(@"%s, status: %@, content: %@", __PRETTY_FUNCTION__, self.messageModel.status, self.messageModel.content);
+//    DDLogInfo(@"%s, status: %@, content: %@", __PRETTY_FUNCTION__, self.messageModel.status, self.messageModel.content);
     
 //    if ([self.messageModel isSend]) {
         if ([self.messageModel.status isKindOfClass:[NSString class]] &&
@@ -337,7 +337,7 @@
 
 - (void)layoutResendButton {
     
-    DDLogInfo(@"%s, status: %@, content: %@", __PRETTY_FUNCTION__, self.messageModel.status, self.messageModel.content);
+//    DDLogInfo(@"%s, status: %@, content: %@", __PRETTY_FUNCTION__, self.messageModel.status, self.messageModel.content);
     
 //    if ([self.messageModel isSend]) {
         if ([self.messageModel.status isKindOfClass:[NSString class]] &&
@@ -367,8 +367,7 @@
 
 #pragma mark - UILongPressGestureRecognizer
 
-- (void)longGesturePress:(UIGestureRecognizer*)gestureRecognizer
-{
+- (void)longGesturePress:(UIGestureRecognizer*)gestureRecognizer {
 //    if (gestureRecognizer.state != UIGestureRecognizerStateBegan || ![self becomeFirstResponder]) {
 //        return;
 //    }
@@ -417,7 +416,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMenuWillHideNotification:) name:UIMenuControllerWillHideMenuNotification object:nil];
 }
 
-
 - (void)handleAvatarClicked:(UIGestureRecognizer *)recognizer {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
@@ -431,19 +429,34 @@
 // TODO: 点击客服/访客头像，显示其相关信息
 
 // TODO: text点击超链接
-
-// TODO: 长按复制、删除消息
+- (void) linkUrlClicked:(NSString *)url {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+    if ([_delegate respondsToSelector:@selector(linkUrlClicked:)]) {
+        [_delegate linkUrlClicked:url];
+    }
+}
 
 // TODO: 打开放大图片
 - (void) imageViewClicked:(UIImageView *)imageView {
-//    DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, imageUrl);
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
     if ([_delegate respondsToSelector:@selector(imageViewClicked:)]) {
         [_delegate imageViewClicked:imageView];
     }
 }
 
+//
+- (void) fileViewClicked:(NSString *)fileUrl {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+    if ([_delegate respondsToSelector:@selector(fileViewClicked:)]) {
+        [_delegate fileViewClicked:fileUrl];
+    }
+}
+
 - (void)sendErrorStatusButtonClicked:(id)sender {
+    
     if ([self.delegate respondsToSelector:@selector(sendErrorStatusButtonClicked:)]) {
         [self.delegate sendErrorStatusButtonClicked:_messageModel];
     }

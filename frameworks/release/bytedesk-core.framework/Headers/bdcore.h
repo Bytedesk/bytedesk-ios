@@ -35,3 +35,5 @@ FOUNDATION_EXPORT const unsigned char bdcoreVersionString[];
 #import <bytedesk-core/BDGroupModel.h>
 #import <bytedesk-core/BDWorkGroupModel.h>
 #import <bytedesk-core/BDNoticeModel.h>
+#import <bytedesk-core/BDCategoryModel.h>
+#import <bytedesk-core/BDArticleModel.h>

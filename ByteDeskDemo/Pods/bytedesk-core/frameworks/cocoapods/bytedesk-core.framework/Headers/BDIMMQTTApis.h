@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BDIMMQTTApis *)sharedInstance;
 
+// TODO: 分拆IM相关接口到此文件
+
 @end
 
 NS_ASSUME_NONNULL_END

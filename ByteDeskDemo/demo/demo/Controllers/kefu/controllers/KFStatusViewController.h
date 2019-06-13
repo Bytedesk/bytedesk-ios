@@ -6,8 +6,9 @@
 //  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
+#import "QDCommonTableViewController.h"
 
-@interface KFStatusViewController : UITableViewController
+@interface KFStatusViewController : QDCommonTableViewController
 
 @end

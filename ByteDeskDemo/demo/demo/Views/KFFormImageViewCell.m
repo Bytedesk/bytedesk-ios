@@ -54,7 +54,8 @@
 }
 
 - (void)reloadCollectionData {
-    [_countTipLabel setText:[NSString stringWithFormat:@"%lu/4", (unsigned long)[_selectedPhotos count]]];
+//    [_countTipLabel setText:[NSString stringWithFormat:@"%lu/4", (unsigned long)[_selectedPhotos count]]];
+    [_countTipLabel setText:[NSString stringWithFormat:@"%lu/1", (unsigned long)[_selectedPhotos count]]];
     [_collectionView reloadData];
 }
 
@@ -69,7 +70,8 @@
     [tipLabel sizeToFit];
     
     _countTipLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    _countTipLabel.text = @"0/4";
+//    _countTipLabel.text = @"0/4";
+    _countTipLabel.text = @"0/1";
     _countTipLabel.font = [UIFont systemFontOfSize:13.0f];
     _countTipLabel.textColor = [UIColor grayColor];
     _countTipLabel.fb_top = 10;
@@ -224,7 +226,8 @@
     [_selectedAssets removeObjectAtIndex:sourceIndexPath.item];
     [_selectedAssets insertObject:asset atIndex:destinationIndexPath.item];
     
-    [_countTipLabel setText:[NSString stringWithFormat:@"%lu/4", (unsigned long)[_selectedPhotos count]]];
+//    [_countTipLabel setText:[NSString stringWithFormat:@"%lu/4", (unsigned long)[_selectedPhotos count]]];
+    [_countTipLabel setText:[NSString stringWithFormat:@"%lu/1", (unsigned long)[_selectedPhotos count]]];
     [_collectionView reloadData];
 }
 

@@ -91,7 +91,7 @@
     DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, self.model.file_url);
     
     if ([self.delegate respondsToSelector:@selector(fileViewClicked:)]) {
-        [self.delegate fileViewClicked:sender];
+        [self.delegate fileViewClicked:self.model.file_url];
     }
 }
 

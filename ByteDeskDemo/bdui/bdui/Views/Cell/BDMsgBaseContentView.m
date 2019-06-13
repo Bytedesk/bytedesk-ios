@@ -18,7 +18,7 @@
 
 - (instancetype) initMessageContentView {
     //
-    self.backgroundColor = [UIColor darkGrayColor];
+//    self.backgroundColor = [UIColor darkGrayColor];
     
     if (self = [self initWithFrame:CGRectZero]) {
 //        self.backgroundColor = [UIColor redColor];
@@ -28,6 +28,7 @@
         
         _bubbleImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _bubbleImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+//        _bubbleImageView.userInteractionEnabled = YES;
 //        _bubbleImageView.backgroundColor = [UIColor blueColor];
         [self addSubview:_bubbleImageView];
         

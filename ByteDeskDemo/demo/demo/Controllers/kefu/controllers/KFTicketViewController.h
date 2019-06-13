@@ -6,11 +6,12 @@
 //  Copyright © 2019 KeFuDaShi. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
+#import "QDCommonTableViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface KFTicketViewController : UITableViewController
+@interface KFTicketViewController : QDCommonTableViewController
 
 @end
 

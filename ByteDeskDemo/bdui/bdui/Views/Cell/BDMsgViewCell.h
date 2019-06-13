@@ -25,6 +25,8 @@
 //- (void)onTapAvatar:(NSString *)userId;
 //- (void)onTapLinkData:(id)linkData;
 
+- (void) linkUrlClicked:(NSString *)url;
+
 // 打开放大图片
 - (void) imageViewClicked:(UIImageView *)imageView;
 

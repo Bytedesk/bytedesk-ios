@@ -444,39 +444,16 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 //        [[BDDBApis sharedInstance] insertMessage:messageModel];
 //        [self reloadTableData];
         
+    } else if ([status_code isEqualToNumber:[NSNumber numberWithInt:206]]) {
+        
+        //
+        
+        
     } else {
         // 请求会话失败
         [QMUITips showError:dict[@"message"] inView:self.view hideAfterDelay:2.0f];
     }
 }
-
-//- (void)requestQuestionnaire:(NSString *)itemQid {
-//
-//    [BDCoreApis requestQuestionnairWithTid:self.mThreadTid itemQid:itemQid resultSuccess:^(NSDictionary *dict) {
-//        //        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
-//        if (self.mIsViewControllerClosed) {
-//            return;
-//        }
-//
-//        NSNumber *status_code = [dict objectForKey:@"status_code"];
-//        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-//            //
-//            // NSString *title = dict[@"data"][@"content"];
-//            NSMutableArray *workGroupsArray = dict[@"data"][@"workGroups"];
-//            [self showWorkGroupDialog:workGroupsArray];
-//
-//        } else {
-//            NSString *message = [dict objectForKey:@"message"];
-//            [QMUITips showError:message inView:self.view hideAfterDelay:2.0];
-//        }
-//
-//    } resultFailed:^(NSError *error) {
-//        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-//        if (error) {
-//            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
-//        }
-//    }];
-//}
 
 - (void)showWorkGroupDialog:(NSMutableArray *)workGroupsArray isLiuXue:(BOOL)isLiuXue {
     
@@ -588,7 +565,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self sendCommodityMessage:customJson];
 }
 
-
 // 从联系人model进入
 - (void)initWithContactModel:(BDContactModel *)contactModel withPush:(BOOL)isPush {
     
@@ -615,7 +591,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     NSString *customJson = [BDUtils dictToJson:custom];
     [self sendCommodityMessage:customJson];
 }
-
 
 // 从群组model进入
 - (void)initWithGroupModel:(BDGroupModel *)groupModel withPush:(BOOL)isPush {
@@ -684,11 +659,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         return;
     }
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
-    
-    
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//
-//    });
 
     // FIXME: 加载大量图片容易引起界面卡顿，待优化
 //    dispatch_async(dispatch_get_main_queue(), ^{
@@ -712,14 +682,12 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 //    });
     
     self.mViewDidAppeared = TRUE;
-
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
-    
     //
     self.title = self.mThreadModel ? self.mThreadModel.nickname : self.mTitle;
     if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_GROUP]) {
@@ -871,6 +839,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *notifyIdentifier = @"notifyCell";
+    static NSString *commodityIdentifier = @"commodityCell";
     static NSString *msgIdentifier = @"msgCell";
     //
     BDMessageModel *messageModel = [self.mMessageArray objectAtIndex:indexPath.row];
@@ -895,9 +864,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         
 //        DDLogInfo(@"商品 type: %@, content: %@", messageModel.type, messageModel.content);
         //
-        BDCommodityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:notifyIdentifier];
+        BDCommodityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:commodityIdentifier];
         if (!cell) {
-            cell = [[BDCommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:notifyIdentifier];
+            cell = [[BDCommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:commodityIdentifier];
         }
         [cell initWithMessageModel:messageModel];
         cell.tag = indexPath.row;
@@ -1098,7 +1067,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 #pragma mark - TableViewRelated
 
 -(void)tableViewScrollToBottom:(BOOL)animated {
-    DDLogInfo(@"tableViewScrollToBottom");
+//    DDLogInfo(@"tableViewScrollToBottom");
     
     NSInteger rows = [self.tableView numberOfRowsInSection:0];
     
@@ -1970,7 +1939,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (void)avatarClicked:(BDMessageModel *)messageModel {
     DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, messageModel.avatar);
+}
+
+- (void) linkUrlClicked:(NSString *)url {
+    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, url);
     
+    NSURL *urlToOpen = [[NSURL alloc] initWithString:url];
+    [[UIApplication sharedApplication] openURL:urlToOpen];
 }
 
 //TODO: 增加上拉、下拉关闭图片
@@ -3178,6 +3153,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
     [self reloadTableData];
 }
+
 
 
 @end

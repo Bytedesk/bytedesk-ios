@@ -16,33 +16,24 @@
     
     [self setText:@""];
     NSArray *tokens = [[KFDSInputEmotionParser currentParser] tokens:text];
-    for (KFDSInputTextToken *token in tokens)
-    {
-        if (token.type == KFDSInputTokenTypeEmoticon)
-        {
+    for (KFDSInputTextToken *token in tokens) {
+        if (token.type == KFDSInputTokenTypeEmoticon) {
             KFDSInputEmotion *emoticon = [[KFDSInputEmotionManager sharedManager] emotionByText:token.text];
-            DDLogInfo(@"emotion text:%@  image:%@", token.text, emoticon.filename);
-            
             if (emoticon) {
                 UIImage *image = [UIImage imageNamed:emoticon.filename inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
-//                UIImage *image = [UIImage imageNamed:emoticon.filename];
-                if (image)
-                {
-                    DDLogInfo(@"%s append image", __PRETTY_FUNCTION__);
+                if (image) {
                     [self appendImage:image
-                              maxSize:CGSizeMake(18, 18)
-                               margin:UIEdgeInsetsZero
-                            alignment:M80ImageAlignmentCenter];
+                                    maxSize:CGSizeMake(18, 18)
+                                     margin:UIEdgeInsetsZero
+                                  alignment:M80ImageAlignmentCenter];
                 }
                 else {
-                    DDLogInfo(@"%s, image null", __PRETTY_FUNCTION__);
                     NSString *text = token.text;
                     [self appendText:text];
                 }
             }
         }
-        else
-        {
+        else {
             NSString *text = token.text;
             [self appendText:text];
         }

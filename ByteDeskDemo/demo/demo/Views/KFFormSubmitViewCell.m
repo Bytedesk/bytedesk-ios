@@ -49,8 +49,11 @@
 }
 
 - (void)submitButtonClicked:(UIButton *)btn {
-    NSLog(@"submit");
+    DDLogInfo(@"submit %s", __PRETTY_FUNCTION__);
     
+    if (_delegate && [_delegate respondsToSelector:@selector(submitButtonClicked:)]) {
+        [_delegate submitButtonClicked:btn];
+    }
 }
 
 @end

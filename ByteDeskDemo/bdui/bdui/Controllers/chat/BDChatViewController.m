@@ -408,6 +408,11 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 //        [[BDDBApis sharedInstance] insertMessage:messageModel];
 //        [self reloadTableData];
         
+    } else if ([status_code isEqualToNumber:[NSNumber numberWithInt:206]]) {
+        
+        //
+        
+        
     } else {
         // 请求会话失败
         [QMUITips showError:dict[@"message"] inView:self.view hideAfterDelay:2.0f];
@@ -498,7 +503,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (void)chooseWorkGroupLiuXue:(NSString *)workGroupWid withWorkGroupNickname:(NSString *)nickname {
     
-    [BDCoreApis requestChooseWorkGroupLiuXue:workGroupWid withWorkGroupNickname:nickname resultSuccess:^(NSDictionary *dict) {
+    // LBS版本，传入当前用户所在 省份 和 城市名
+    [BDCoreApis requestChooseWorkGroupLiuXueLBS:workGroupWid withWorkGroupNickname:nickname withProvince:@"辽宁" withCity:@"大连" resultSuccess:^(NSDictionary *dict) {
         //        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
         
         self.mWorkGroupWid = workGroupWid;
@@ -777,7 +783,11 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     // 访客端
     if (self.mIsVisitor) {
         
-//        [self showRateView];
+        QMUIAlertAction *rateAction = [QMUIAlertAction actionWithTitle:@"评价" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+            
+            [self showRateView];
+            
+        }];
         
         QMUIAlertAction *leaveMessageAction = [QMUIAlertAction actionWithTitle:@"留言" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
             
@@ -789,7 +799,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         }];
         
         NSString *title = self.mIsRobot ? @"人工客服" : @"机器人";
-        QMUIAlertAction *robotAction = [QMUIAlertAction actionWithTitle:title style:QMUIAlertActionStyleDestructive handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+        QMUIAlertAction *robotAction = [QMUIAlertAction actionWithTitle:title style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
             
             if (self.mIsRobot) {
                 
@@ -850,6 +860,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         }];
         QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"提示" message:@"" preferredStyle:QMUIAlertControllerStyleActionSheet];
         [alertController addAction:leaveMessageAction];
+        [alertController addAction:rateAction];
         [alertController addAction:robotAction];
         [alertController showWithAnimated:YES];
         
@@ -914,6 +925,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *notifyIdentifier = @"notifyCell";
+    static NSString *commodityIdentifier = @"commodityCell";
     static NSString *msgIdentifier = @"msgCell";
     //
     BDMessageModel *messageModel = [self.mMessageArray objectAtIndex:indexPath.row];
@@ -937,9 +949,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         
         //        DDLogInfo(@"商品 type: %@, content: %@", messageModel.type, messageModel.content);
         //
-        BDCommodityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:notifyIdentifier];
+        BDCommodityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:commodityIdentifier];
         if (!cell) {
-            cell = [[BDCommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:notifyIdentifier];
+            cell = [[BDCommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:commodityIdentifier];
         }
         [cell initWithMessageModel:messageModel];
         cell.tag = indexPath.row;
@@ -1238,6 +1250,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     DDLogInfo(@"%s, content:%@, tid:%@, sessionType:%@ ", __PRETTY_FUNCTION__, content, self.mThreadTid,  self.mThreadType);
     
     if (self.mIsRobot) {
+        
+        // TODO: 插入本地消息，显示发送状态
     
         // 请求机器人问答
         [BDCoreApis messageAnswer:self.mRequestType withWorkGroupWid:self.mWorkGroupWid withAgentUid:self.mAgentUid withMessage:content resultSuccess:^(NSDictionary *dict) {
@@ -1274,7 +1288,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertTextMessageLocal:self.mThreadTid withWorkGroupWid:self.mWorkGroupWid withContent:content withLocalId:localId withSessionType:self.mThreadType];
     DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.content);
     
-    // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
+    // 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
     NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
     [self.mMessageArray addObject:messageModel];
     
@@ -1622,6 +1636,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
 }
 
+- (void)linkUrlClicked:(NSString *)url {
+    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, url);
+    
+    NSURL *urlToOpen = [[NSURL alloc] initWithString:url];
+    [[UIApplication sharedApplication] openURL:urlToOpen];
+}
+
 //TODO: 增加上拉、下拉关闭图片
 #pragma mark 打开放大图片
 
@@ -1665,7 +1686,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
 //    [self.imagePreviewViewController startPreviewFromRectInScreenCoordinate:[imageView convertRect:imageView.frame toView:nil] cornerRadius:imageView.layer.cornerRadius];
     [self presentViewController:self.imagePreviewViewController animated:YES completion:nil];
-    
 }
 
 - (void) fileViewClicked:(id)sender {
@@ -1879,7 +1899,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [dialogViewController addSubmitButtonWithText:@"确定" block:^(QMUIDialogViewController *aDialogViewController) {
         [aDialogViewController hide];
         
-        // TODO: 发送满意度评价
+        // 发送满意度评价: rateScore 评分，1~5分，rateNote 附言
         [BDCoreApis visitorRate:self.mThreadModel.tid
                       withScore:self.rateScore
                        withNote:self.rateNote

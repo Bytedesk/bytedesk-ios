@@ -11,7 +11,10 @@
 
 #define LBScreen [UIScreen mainScreen].bounds.size
 
-@interface KFFormContentViewCell ()<UITextViewDelegate>
+@interface KFFormContentViewCell ()<QMUITextViewDelegate>
+
+@property(nonatomic, strong) QMUITextView *contentTextView;
+@property(nonatomic, strong) UILabel *countTipLabel;
 
 @end
 
@@ -41,29 +44,32 @@
 
 - (void)setupSubviews {
     
-    QMUITextView *contentTextView = [[QMUITextView alloc] initWithFrame:CGRectMake(0, 0, LBScreen.width, 100)];
-//    contentTextView.delegate = self;
-    contentTextView.font = [UIFont systemFontOfSize:13.0f];
-    contentTextView.placeholder = @"请简要描述你的问题和意见";
+    self.contentTextView = [[QMUITextView alloc] initWithFrame:CGRectMake(0, 0, LBScreen.width, 100)];
+    self.contentTextView.delegate = self;
+    self.contentTextView.font = [UIFont systemFontOfSize:13.0f];
+    self.contentTextView.placeholder = @"请简要描述你的问题和意见";
 //    contentTextView.placeholderLabel.font = [UIFont systemFontOfSize:13.0f];
-    [self.contentView addSubview:contentTextView];
+    [self.contentView addSubview:self.contentTextView];
     
+    //
+    self.countTipLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.countTipLabel.text = @"0/200";
+    self.countTipLabel.font = [UIFont systemFontOfSize:13.0f];
+    self.countTipLabel.textColor = [UIColor grayColor];
+    self.countTipLabel.fb_bottom = 70;
+    self.countTipLabel.fb_right = LBScreen.width - 60;
+    [self.contentView addSubview:self.countTipLabel];
+    [self.countTipLabel sizeToFit];
     
-    UILabel *countTipLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    countTipLabel.text = @"0/200";
-    countTipLabel.font = [UIFont systemFontOfSize:13.0f];
-    countTipLabel.textColor = [UIColor grayColor];
-    countTipLabel.fb_bottom = 70;
-    countTipLabel.fb_right = LBScreen.width - 45;
-    [self.contentView addSubview:countTipLabel];
-    [countTipLabel sizeToFit];
-    
+    //
 }
 
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView {
-    //    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    NSUInteger length = [textView.text length];
+    self.countTipLabel.text = [NSString stringWithFormat:@"%lu/200", (unsigned long)length];
     
     if (_delegate && [_delegate respondsToSelector:@selector(contentTextView:)]) {
         [_delegate contentTextView:textView.text];

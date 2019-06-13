@@ -23,8 +23,8 @@
 
 @implementation BDRedPacketTableViewCell
 
-- (instancetype)initMessageContentView
-{
+- (instancetype)initMessageContentView {
+    //
     if (self = [super initMessageContentView]) {
         self.opaque = YES;
         //
@@ -50,7 +50,7 @@
 
 - (void)refresh:(BDMessageModel *)data{
     [super refresh:data];
-    //    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, self.model.pic_url);
+//    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, self.model.pic_url);
     
     // TODO: 图片大小按照图片长宽比例显示
 //    [_imageView setImageWithURL:[NSURL URLWithString:self.model.image_url] placeholderImage:[UIImage imageNamed:@"Fav_Cell_File_Img"]];

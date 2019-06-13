@@ -94,7 +94,7 @@
 
 
 - (void)handleImageClicked:(UIGestureRecognizer *)recognizer {
-//    DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, self.model.image_url);
+    DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, self.model.image_url);
     
     if ([self.delegate respondsToSelector:@selector(imageViewClicked:)]) {
         [self.delegate imageViewClicked:_imageView];

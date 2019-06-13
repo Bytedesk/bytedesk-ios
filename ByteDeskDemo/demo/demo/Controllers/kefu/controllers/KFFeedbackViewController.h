@@ -6,11 +6,12 @@
 //  Copyright © 2018 KeFuDaShi. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
+#import "QDCommonTableViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface KFFeedbackViewController : UITableViewController
+@interface KFFeedbackViewController : QDCommonTableViewController
 
 @end
 
