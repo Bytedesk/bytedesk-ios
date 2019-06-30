@@ -13,6 +13,12 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
+- (instancetype)initWithRobotDictionary:(NSDictionary *)dictionary;
+
+- (instancetype)initWithRobotRightAnswerDictionary:(NSDictionary *)dictionary;
+
+- (instancetype)initWithRobotNoAnswerDictionary:(NSDictionary *)dictionary;
+
 // 本地表主键id
 @property(nonatomic, strong) NSNumber *uu_id;
 // 客户端本地id

@@ -102,7 +102,7 @@
                        @"排队",
                        @"系统消息",
                        @"个人资料",
-                       @"设置接口",
+                       @"设置",
                        ];
     // 监听消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOAuthResult:) name:BD_NOTIFICATION_OAUTH_RESULT object:nil];

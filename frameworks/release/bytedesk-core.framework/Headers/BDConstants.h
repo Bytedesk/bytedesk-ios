@@ -49,18 +49,24 @@
 #define BD_GET_MESSAGE_TYPE_CONTACT              @"contact" // 一对一
 #define BD_GET_MESSAGE_TYPE_GROUP                @"group"   // 群组
 
-#define BD_THREAD_REQUEST_TYPE_WORK_GROUP   @"workGroup"
-#define BD_THREAD_REQUEST_TYPE_APPOINTED    @"appointed"
+#define BD_THREAD_REQUEST_TYPE_WORK_GROUP       @"workGroup"
+#define BD_THREAD_REQUEST_TYPE_APPOINTED        @"appointed"
 
 // 会话类型
 #define BD_THREAD_TYPE_THREAD               @"thread"  // 客服会话
+#define BD_THREAD_TYPE_WORKGROUP            @"workgroup" // 工作组会话
+#define BD_THREAD_TYPE_APPOINTED            @"appointed" // 指定坐席
 #define BD_THREAD_TYPE_CONTACT              @"contact" // 一对一
 #define BD_THREAD_TYPE_GROUP                @"group"   // 群组
+#define BD_THREAD_TYPE_ROBOT                @"robot" // 机器人会话
 
 // 消息会话类型
 #define BD_MESSAGE_SESSION_TYPE_THREAD      @"thread"  // 访客会话
+#define BD_MESSAGE_SESSION_TYPE_WORKGROUP   @"workgroup" // 工作组会话
+#define BD_MESSAGE_SESSION_TYPE_APPOINTED   @"appointed" // 指定坐席
 #define BD_MESSAGE_SESSION_TYPE_CONTACT     @"contact" // 一对一
 #define BD_MESSAGE_SESSION_TYPE_GROUP       @"group"   // 群组
+#define BD_MESSAGE_SESSION_TYPE_ROBOT       @"robot" // 机器人会话
 
 // passport 授权访客端参数
 #define CLIENT_ID_VISITOR                   @"ios"
@@ -209,7 +215,7 @@
 #define BD_MESSAGE_TYPE_LOCATION            @"location"    // 位置消息类型
 #define BD_MESSAGE_TYPE_LINK                @"link"    // 链接消息类型
 #define BD_MESSAGE_TYPE_EVENT               @"event"  // 事件消息类型
-#define BD_MESSAGE_TYPE_ROBOT               @"robot"
+#define BD_MESSAGE_TYPE_ROBOT               @"robot"  // 智能问答
 #define BD_MESSAGE_TYPE_QUESTIONNAIRE       @"questionnaire"   // 调查问卷
 #define BD_MESSAGE_TYPE_WORKGROUP           @"workGroup"   // 选择工作组
 #define BD_MESSAGE_TYPE_NOTIFICATION        @"notification"    // 通知消息类型

@@ -33,7 +33,7 @@
         _textLabel.underLineForLink = YES;
 //        _textLabel.numberOfLines = 0;
 //        _textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-//        _textLabel.backgroundColor = [UIColor clearColor];
+        _textLabel.backgroundColor = [UIColor clearColor];
         _textLabel.font = [UIFont systemFontOfSize:12.0f];
         //
         [self addSubview:_textLabel];

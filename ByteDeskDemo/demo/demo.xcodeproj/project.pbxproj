@@ -37,6 +37,8 @@
 		3D3B7C3021CA3613001FE199 /* BDApisTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3B7C2F21CA3613001FE199 /* BDApisTableViewController.m */; };
 		3D44B27B229395B700588402 /* KFFormEmailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44B27A229395B700588402 /* KFFormEmailViewCell.m */; };
 		3D47629921D1CA190034BF83 /* KFNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D47629821D1CA190034BF83 /* KFNoticeViewController.m */; };
+		3D4824FE21579E3E00B50593 /* bytedesk-ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4824FD21579E3E00B50593 /* bytedesk-ui.framework */; };
+		3D4824FF21579E3E00B50593 /* bytedesk-ui.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4824FD21579E3E00B50593 /* bytedesk-ui.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3D4A3C8E22802388005F2F0F /* QDSingleImagePickerPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4A3C8C22802387005F2F0F /* QDSingleImagePickerPreviewViewController.m */; };
 		3D4C0B0E213131500083C8F9 /* KFIMApiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4C0B0C2131314F0083C8F9 /* KFIMApiViewController.m */; };
 		3D5489D21FC515CF003117B4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5489D11FC515CF003117B4 /* AppDelegate.m */; };
@@ -55,8 +57,6 @@
 		3D5E997621D908E7006D37CC /* KFFormPhoneViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E997121D908E7006D37CC /* KFFormPhoneViewCell.m */; };
 		3D5E997721D908E7006D37CC /* KFFormSubmitViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E997321D908E7006D37CC /* KFFormSubmitViewCell.m */; };
 		3D5E997821D908E7006D37CC /* KFFormContentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E997421D908E7006D37CC /* KFFormContentViewCell.m */; };
-		3D6A562522B29CF200A81DC1 /* bytedesk-ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6A562422B29CF200A81DC1 /* bytedesk-ui.framework */; };
-		3D6A562622B29CF200A81DC1 /* bytedesk-ui.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6A562422B29CF200A81DC1 /* bytedesk-ui.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3D9A14782081F629008C6DA2 /* KFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9A14772081F629008C6DA2 /* KFNavigationController.m */; };
 		3DC136B6229F8DB200D4C61A /* KFSupportCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC136B5229F8DB200D4C61A /* KFSupportCategoryViewController.m */; };
 		3DC136B9229F8DC600D4C61A /* KFSupportArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC136B8229F8DC600D4C61A /* KFSupportArticleViewController.m */; };
@@ -84,7 +84,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3D6A562622B29CF200A81DC1 /* bytedesk-ui.framework in Embed Frameworks */,
+				3D4824FF21579E3E00B50593 /* bytedesk-ui.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,6 +153,7 @@
 		3D44B27A229395B700588402 /* KFFormEmailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFFormEmailViewCell.m; sourceTree = "<group>"; };
 		3D47629721D1CA190034BF83 /* KFNoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFNoticeViewController.h; sourceTree = "<group>"; };
 		3D47629821D1CA190034BF83 /* KFNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFNoticeViewController.m; sourceTree = "<group>"; };
+		3D4824FD21579E3E00B50593 /* bytedesk-ui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "bytedesk-ui.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D4A3C8C22802387005F2F0F /* QDSingleImagePickerPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDSingleImagePickerPreviewViewController.m; sourceTree = "<group>"; };
 		3D4A3C8D22802388005F2F0F /* QDSingleImagePickerPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDSingleImagePickerPreviewViewController.h; sourceTree = "<group>"; };
 		3D4C0B0C2131314F0083C8F9 /* KFIMApiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFIMApiViewController.m; sourceTree = "<group>"; };
@@ -189,7 +190,6 @@
 		3D5E997321D908E7006D37CC /* KFFormSubmitViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFFormSubmitViewCell.m; sourceTree = "<group>"; };
 		3D5E997421D908E7006D37CC /* KFFormContentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFFormContentViewCell.m; sourceTree = "<group>"; };
 		3D5E997521D908E7006D37CC /* KFFormContentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFFormContentViewCell.h; sourceTree = "<group>"; };
-		3D6A562422B29CF200A81DC1 /* bytedesk-ui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "bytedesk-ui.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9A14762081F629008C6DA2 /* KFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFNavigationController.h; sourceTree = "<group>"; };
 		3D9A14772081F629008C6DA2 /* KFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFNavigationController.m; sourceTree = "<group>"; };
 		3DC136B4229F8DB200D4C61A /* KFSupportCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFSupportCategoryViewController.h; sourceTree = "<group>"; };
@@ -240,7 +240,7 @@
 			files = (
 				AF07A2BB176935FE7FE9041E /* Pods_demo.framework in Frameworks */,
 				3D38CC30225179A100BA2668 /* CloudKit.framework in Frameworks */,
-				3D6A562522B29CF200A81DC1 /* bytedesk-ui.framework in Frameworks */,
+				3D4824FE21579E3E00B50593 /* bytedesk-ui.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,7 +435,7 @@
 		3D5489C41FC515CF003117B4 = {
 			isa = PBXGroup;
 			children = (
-				3D6A562422B29CF200A81DC1 /* bytedesk-ui.framework */,
+				3D4824FD21579E3E00B50593 /* bytedesk-ui.framework */,
 				3D5489CF1FC515CF003117B4 /* demo */,
 				3D5489CE1FC515CF003117B4 /* Products */,
 				9C7149EBC449A684C32A715E /* Pods */,

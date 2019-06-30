@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D1996B51FCE2B9600219FEF /* BDChatViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996B31FCE2B9600219FEF /* BDChatViewController.h */; };
-		3D1996B61FCE2B9600219FEF /* BDChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996B41FCE2B9600219FEF /* BDChatViewController.m */; };
+		3D1996B51FCE2B9600219FEF /* BDChatKFViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996B31FCE2B9600219FEF /* BDChatKFViewController.h */; };
+		3D1996B61FCE2B9600219FEF /* BDChatKFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996B41FCE2B9600219FEF /* BDChatKFViewController.m */; };
 		3D1996C01FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996BA1FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.m */; };
 		3D1996C31FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996BD1FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.h */; };
 		3D1996E51FCE638800219FEF /* BDMsgNotificationViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996C61FCE638700219FEF /* BDMsgNotificationViewCell.h */; };
@@ -338,6 +338,12 @@
 		3D5606CC2057C875000E770C /* BDSingleImagePickerPreviewViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D5606CA2057C874000E770C /* BDSingleImagePickerPreviewViewController.h */; };
 		3D57D7111FD00E3F0072823F /* BDFeedbackViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D57D70F1FD00E3F0072823F /* BDFeedbackViewController.h */; };
 		3D57D7121FD00E3F0072823F /* BDFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D57D7101FD00E3F0072823F /* BDFeedbackViewController.m */; };
+		3D6D15D822B38638005BA341 /* KFCoreTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D6D15D422B38638005BA341 /* KFCoreTextView.h */; };
+		3D6D15D922B38638005BA341 /* KFCoreTextStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D6D15D522B38638005BA341 /* KFCoreTextStyle.h */; };
+		3D6D15DA22B38638005BA341 /* KFCoreTextStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D6D15D622B38638005BA341 /* KFCoreTextStyle.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3D6D15DB22B38638005BA341 /* KFCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D6D15D722B38638005BA341 /* KFCoreTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3D6D15DE22B389F7005BA341 /* BDMsgRobotContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D6D15DC22B389F7005BA341 /* BDMsgRobotContentView.h */; };
+		3D6D15DF22B389F7005BA341 /* BDMsgRobotContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D6D15DD22B389F7005BA341 /* BDMsgRobotContentView.m */; };
 		3D86FF5A22295F8A00477E76 /* BDGroupInviteTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D86FF5822295F8A00477E76 /* BDGroupInviteTableViewController.h */; };
 		3D86FF5B22295F8A00477E76 /* BDGroupInviteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D86FF5922295F8A00477E76 /* BDGroupInviteTableViewController.m */; };
 		3D8A626021DE598600935617 /* BDGroupMemberTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D8A625E21DE598600935617 /* BDGroupMemberTableViewCell.h */; };
@@ -360,8 +366,8 @@
 		3DD5C6AD2238F0B1002C4693 /* KFRecordVoiceViewHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD5C6A12238F0B1002C4693 /* KFRecordVoiceViewHUD.h */; };
 		3DD5C6AE2238F0B1002C4693 /* KFRecordVoiceViewHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5C6A22238F0B1002C4693 /* KFRecordVoiceViewHUD.m */; };
 		3DD5C6AF2238F0B1002C4693 /* KFRateView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD5C6A32238F0B1002C4693 /* KFRateView.h */; };
-		3DD5C6B72238FBA9002C4693 /* BDChatWxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5C6B52238FBA7002C4693 /* BDChatWxViewController.m */; };
-		3DD5C6B82238FBA9002C4693 /* BDChatWxViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD5C6B62238FBA8002C4693 /* BDChatWxViewController.h */; };
+		3DD5C6B72238FBA9002C4693 /* BDChatIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5C6B52238FBA7002C4693 /* BDChatIMViewController.m */; };
+		3DD5C6B82238FBA9002C4693 /* BDChatIMViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD5C6B62238FBA8002C4693 /* BDChatIMViewController.h */; };
 		3DE6FD832234F3C3006F1329 /* BDQRCodeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DE6FD812234F3C2006F1329 /* BDQRCodeViewController.h */; };
 		3DE6FD842234F3C3006F1329 /* BDQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6FD822234F3C2006F1329 /* BDQRCodeViewController.m */; };
 		81DCA33DE54CCB81B8CA020A /* Pods_bytedesk_ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953A297AD3F39573C972B590 /* Pods_bytedesk_ui.framework */; };
@@ -385,8 +391,8 @@
 		3A92AA90AD96DC8E86B4A69F /* Pods-bytedesk-ui-bduiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bytedesk-ui-bduiTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests.release.xcconfig"; sourceTree = "<group>"; };
 		3AF1CF3234A5985280A3DE30 /* Pods-bytedesk-ui-bduiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bytedesk-ui-bduiTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3D0DB22F21CD4F5C002ACB3E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		3D1996B31FCE2B9600219FEF /* BDChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDChatViewController.h; sourceTree = "<group>"; };
-		3D1996B41FCE2B9600219FEF /* BDChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDChatViewController.m; sourceTree = "<group>"; };
+		3D1996B31FCE2B9600219FEF /* BDChatKFViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDChatKFViewController.h; sourceTree = "<group>"; };
+		3D1996B41FCE2B9600219FEF /* BDChatKFViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDChatKFViewController.m; sourceTree = "<group>"; };
 		3D1996BA1FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "M80AttributedLabel+KFDSUI.m"; sourceTree = "<group>"; };
 		3D1996BD1FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "M80AttributedLabel+KFDSUI.h"; sourceTree = "<group>"; };
 		3D1996C61FCE638700219FEF /* BDMsgNotificationViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMsgNotificationViewCell.h; sourceTree = "<group>"; };
@@ -722,6 +728,12 @@
 		3D57D70F1FD00E3F0072823F /* BDFeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDFeedbackViewController.h; sourceTree = "<group>"; };
 		3D57D7101FD00E3F0072823F /* BDFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDFeedbackViewController.m; sourceTree = "<group>"; };
 		3D62021320FC844F00A94F15 /* bdcore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = bdcore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D6D15D422B38638005BA341 /* KFCoreTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFCoreTextView.h; sourceTree = "<group>"; };
+		3D6D15D522B38638005BA341 /* KFCoreTextStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFCoreTextStyle.h; sourceTree = "<group>"; };
+		3D6D15D622B38638005BA341 /* KFCoreTextStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFCoreTextStyle.m; sourceTree = "<group>"; };
+		3D6D15D722B38638005BA341 /* KFCoreTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFCoreTextView.m; sourceTree = "<group>"; };
+		3D6D15DC22B389F7005BA341 /* BDMsgRobotContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMsgRobotContentView.h; sourceTree = "<group>"; };
+		3D6D15DD22B389F7005BA341 /* BDMsgRobotContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMsgRobotContentView.m; sourceTree = "<group>"; };
 		3D86FF5822295F8A00477E76 /* BDGroupInviteTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDGroupInviteTableViewController.h; sourceTree = "<group>"; };
 		3D86FF5922295F8A00477E76 /* BDGroupInviteTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDGroupInviteTableViewController.m; sourceTree = "<group>"; };
 		3D8A625E21DE598600935617 /* BDGroupMemberTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDGroupMemberTableViewCell.h; sourceTree = "<group>"; };
@@ -744,8 +756,8 @@
 		3DD5C6A12238F0B1002C4693 /* KFRecordVoiceViewHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFRecordVoiceViewHUD.h; sourceTree = "<group>"; };
 		3DD5C6A22238F0B1002C4693 /* KFRecordVoiceViewHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFRecordVoiceViewHUD.m; sourceTree = "<group>"; };
 		3DD5C6A32238F0B1002C4693 /* KFRateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFRateView.h; sourceTree = "<group>"; };
-		3DD5C6B52238FBA7002C4693 /* BDChatWxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDChatWxViewController.m; sourceTree = "<group>"; };
-		3DD5C6B62238FBA8002C4693 /* BDChatWxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDChatWxViewController.h; sourceTree = "<group>"; };
+		3DD5C6B52238FBA7002C4693 /* BDChatIMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDChatIMViewController.m; sourceTree = "<group>"; };
+		3DD5C6B62238FBA8002C4693 /* BDChatIMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDChatIMViewController.h; sourceTree = "<group>"; };
 		3DE6FD812234F3C2006F1329 /* BDQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDQRCodeViewController.h; sourceTree = "<group>"; };
 		3DE6FD822234F3C2006F1329 /* BDQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDQRCodeViewController.m; sourceTree = "<group>"; };
 		4AFF2CBFAB7AE6AB4F360A63 /* Pods-wxui-wxuiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wxui-wxuiTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-wxui-wxuiTests/Pods-wxui-wxuiTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -819,10 +831,10 @@
 		3D0345A9226E8A5D00F1BB44 /* chat */ = {
 			isa = PBXGroup;
 			children = (
-				3D1996B31FCE2B9600219FEF /* BDChatViewController.h */,
-				3D1996B41FCE2B9600219FEF /* BDChatViewController.m */,
-				3DD5C6B62238FBA8002C4693 /* BDChatWxViewController.h */,
-				3DD5C6B52238FBA7002C4693 /* BDChatWxViewController.m */,
+				3D1996B31FCE2B9600219FEF /* BDChatKFViewController.h */,
+				3D1996B41FCE2B9600219FEF /* BDChatKFViewController.m */,
+				3DD5C6B62238FBA8002C4693 /* BDChatIMViewController.h */,
+				3DD5C6B52238FBA7002C4693 /* BDChatIMViewController.m */,
 				3D3C28DC2236804700E288AF /* BDChatBaseViewController.h */,
 				3D3C28DD2236804700E288AF /* BDChatBaseViewController.m */,
 			);
@@ -875,6 +887,8 @@
 				3D1996CB1FCE638700219FEF /* BDMsgBaseContentView.m */,
 				3D1996C91FCE638700219FEF /* BDMsgTextContentView.h */,
 				3D1996CE1FCE638700219FEF /* BDMsgTextContentView.m */,
+				3D6D15DC22B389F7005BA341 /* BDMsgRobotContentView.h */,
+				3D6D15DD22B389F7005BA341 /* BDMsgRobotContentView.m */,
 				3D1996CA1FCE638700219FEF /* BDMsgImageContentView.h */,
 				3D1996D01FCE638700219FEF /* BDMsgImageContentView.m */,
 				3D1996CC1FCE638700219FEF /* BDMsgVoiceContentView.h */,
@@ -1302,6 +1316,7 @@
 			isa = PBXGroup;
 			children = (
 				3D3A7E4722462152007EEC81 /* BDNamespacedDependencies.h */,
+				3D6D15D322B38638005BA341 /* FTCoreText */,
 				3D38CC3122517D9100BA2668 /* document */,
 				3D3A7E3F22462152007EEC81 /* VoiceConvert */,
 				3D3A7E4822462152007EEC81 /* MLAudioRecorder */,
@@ -1405,6 +1420,17 @@
 			path = controllers;
 			sourceTree = "<group>";
 		};
+		3D6D15D322B38638005BA341 /* FTCoreText */ = {
+			isa = PBXGroup;
+			children = (
+				3D6D15D422B38638005BA341 /* KFCoreTextView.h */,
+				3D6D15D722B38638005BA341 /* KFCoreTextView.m */,
+				3D6D15D522B38638005BA341 /* KFCoreTextStyle.h */,
+				3D6D15D622B38638005BA341 /* KFCoreTextStyle.m */,
+			);
+			path = FTCoreText;
+			sourceTree = "<group>";
+		};
 		3DBAC5E01FBDE2500042215B /* util */ = {
 			isa = PBXGroup;
 			children = (
@@ -1476,11 +1502,14 @@
 				3D3A7E6A22462152007EEC81 /* BD_AMR_Debug.h in Headers */,
 				3D1996E81FCE638800219FEF /* BDMsgTextContentView.h in Headers */,
 				3D1996EB1FCE638800219FEF /* BDMsgVoiceContentView.h in Headers */,
-				3DD5C6B82238FBA9002C4693 /* BDChatWxViewController.h in Headers */,
+				3DD5C6B82238FBA9002C4693 /* BDChatIMViewController.h in Headers */,
 				3D3A7E6E22462152007EEC81 /* interf_enc.h in Headers */,
 				3D3A7E6222462152007EEC81 /* amrFileCodec.h in Headers */,
+				3D6D15D922B38638005BA341 /* KFCoreTextStyle.h in Headers */,
+				3D6D15D822B38638005BA341 /* KFCoreTextView.h in Headers */,
 				3DD5C6A72238F0B1002C4693 /* KFInputView.h in Headers */,
 				3DD5C6AF2238F0B1002C4693 /* KFRateView.h in Headers */,
+				3D6D15DE22B389F7005BA341 /* BDMsgRobotContentView.h in Headers */,
 				3D3A7E6C22462152007EEC81 /* dec_if.h in Headers */,
 				3D1A9776221D3CD300DBEC28 /* BDMsgQuestionnairViewCell.h in Headers */,
 				3D3A7E7122462152007EEC81 /* BDChatAudioTypes.h in Headers */,
@@ -1496,7 +1525,7 @@
 				3D5606CC2057C875000E770C /* BDSingleImagePickerPreviewViewController.h in Headers */,
 				3D1996F01FCE638800219FEF /* BDMsgBaseContentView.h in Headers */,
 				3DC58F7421BE6B9D008BE85D /* BDMsgListContentView.h in Headers */,
-				3D1996B51FCE2B9600219FEF /* BDChatViewController.h in Headers */,
+				3D1996B51FCE2B9600219FEF /* BDChatKFViewController.h in Headers */,
 				3DD5C6A52238F0B1002C4693 /* KFPlusView.h in Headers */,
 				3D3C28DE2236804700E288AF /* BDChatBaseViewController.h in Headers */,
 				3D3A7E6422462152007EEC81 /* BDNamespacedDependencies.h in Headers */,
@@ -1959,6 +1988,7 @@
 				3D38CC3D2251954D00BA2668 /* BDMsgFileContentView.m in Sources */,
 				3D1996EF1FCE638800219FEF /* BDMsgImageContentView.m in Sources */,
 				3DD5C6AA2238F0B1002C4693 /* KFInputView.m in Sources */,
+				3D6D15DB22B38638005BA341 /* KFCoreTextView.m in Sources */,
 				3DD5C6AC2238F0B1002C4693 /* KFRateView.m in Sources */,
 				3D1996E61FCE638800219FEF /* BDMsgVoiceContentView.m in Sources */,
 				3DD5C6A92238F0B1002C4693 /* KFStarView.m in Sources */,
@@ -1972,16 +2002,18 @@
 				3D3928DF21BF9ED7001E1257 /* BDGroupProfileViewController.m in Sources */,
 				3D3928E621C07B81001E1257 /* BDContactSelectViewController.m in Sources */,
 				3DC58F7521BE6B9D008BE85D /* BDMsgListContentView.m in Sources */,
-				3DD5C6B72238FBA9002C4693 /* BDChatWxViewController.m in Sources */,
+				3DD5C6B72238FBA9002C4693 /* BDChatIMViewController.m in Sources */,
 				3D38CC3722517D9100BA2668 /* WBDocument.m in Sources */,
 				3DD5C6AE2238F0B1002C4693 /* KFRecordVoiceViewHUD.m in Sources */,
 				3D3A7E6122462152007EEC81 /* amrFileCodec.mm in Sources */,
 				3D8A626121DE598600935617 /* BDGroupMemberTableViewCell.m in Sources */,
 				3D46C222223B895F00BA41C4 /* BDCommodityTableViewCell.m in Sources */,
-				3D1996B61FCE2B9600219FEF /* BDChatViewController.m in Sources */,
+				3D1996B61FCE2B9600219FEF /* BDChatKFViewController.m in Sources */,
 				3D86FF5B22295F8A00477E76 /* BDGroupInviteTableViewController.m in Sources */,
+				3D6D15DF22B389F7005BA341 /* BDMsgRobotContentView.m in Sources */,
 				3D3A7E5E22462152007EEC81 /* VoiceConverter.mm in Sources */,
 				3DABD1B71FE790F600DE473B /* BDUserinfoViewController.m in Sources */,
+				3D6D15DA22B38638005BA341 /* KFCoreTextStyle.m in Sources */,
 				3D3A7E6022462152007EEC81 /* wav.mm in Sources */,
 				3D1996C01FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.m in Sources */,
 				3D1998F81FCE833900219FEF /* KFDSLoadProgressView.m in Sources */,

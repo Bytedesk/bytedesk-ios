@@ -15,6 +15,7 @@
 #import "BDMsgImageContentView.h"
 #import "BDMsgVoiceContentView.h"
 #import "BDMsgFileContentView.h"
+#import "BDMsgRobotContentView.h"
 
 #import "BDMsgQuestionnairViewCell.h"
 #import "BDRedPacketTableViewCell.h"
@@ -86,9 +87,12 @@
 - (void)mycopy:(id)sender {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
-    if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_TEXT]) {
+    if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_TEXT] ||
+        [_messageModel.type isEqualToString:BD_MESSAGE_TYPE_ROBOT]) {
+        //
         [[UIPasteboard generalPasteboard] setString:_messageModel.content];
-    } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_IMAGE]){
+    } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_IMAGE]) {
+        //
         if (_messageModel.image_url) {
             [[UIPasteboard generalPasteboard] setString:_messageModel.image_url];
         }
@@ -96,14 +100,15 @@
             [[UIPasteboard generalPasteboard] setString:_messageModel.pic_url];
         }
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_VOICE]) {
+        //
         [[UIPasteboard generalPasteboard] setString:_messageModel.voice_url];
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_FILE]) {
+        //
         [[UIPasteboard generalPasteboard] setString:_messageModel.file_url];
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_QUESTIONNAIRE]) {
         //
     }
     // TODO：其他类型消息记录
-    //
     [self resignFirstResponder];
     _bubbleView.highlighted = NO;
 }
@@ -170,6 +175,9 @@
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_RED_PACKET]) {
         //
         _bubbleView = [[BDRedPacketTableViewCell alloc] initMessageContentView];
+    } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_ROBOT]) {
+        //
+        _bubbleView = [[BDMsgRobotContentView alloc] initMessageContentView];
     } else {
         // TODO: 当前版本暂不支持查看此消息, 请升级
         // 暂未处理的类型，全部当做text类型处理
@@ -323,7 +331,7 @@
 //    if ([self.messageModel isSend]) {
         if ([self.messageModel.status isKindOfClass:[NSString class]] &&
             [self.messageModel.status isEqualToString:BD_MESSAGE_STATUS_SENDING]) {
-            
+            //
             _sendingStatusActivityIndicator.frame = CGRectMake(_avatarImageView.frame.origin.x - self.messageModel.contentSize.width - self.messageModel.contentViewInsets.left - self.messageModel.contentViewInsets.right - 30,
                                                                _avatarImageView.frame.origin.y,
                                                                15, 15);
@@ -462,6 +470,12 @@
     }
 }
 
+- (void) robotLinkClicked:(NSString *)label withKey:(NSString *)key; {
+    
+    if ([_delegate respondsToSelector:@selector(robotLinkClicked:withKey:)]) {
+        [self.delegate robotLinkClicked:label withKey:key];
+    }
+}
 
 @end
 

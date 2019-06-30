@@ -24,6 +24,9 @@
 // TODO: 点击文件消息
 - (void) fileViewClicked:(NSString *)fileUrl;
 
+// 机器人问答
+- (void) robotLinkClicked:(NSString *)label withKey:(NSString *)key;
+
 @end
 
 

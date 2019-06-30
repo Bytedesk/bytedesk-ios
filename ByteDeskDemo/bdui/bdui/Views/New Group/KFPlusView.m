@@ -122,10 +122,10 @@
     [self addSubview:[self sharePickPhotoLabel]];
     [self addSubview:[self shareTakePhotoButton]];
     [self addSubview:[self shareTakePhotoLabel]];
-    [self addSubview:[self shareRateButton]];
-    [self addSubview:[self shareRateLabel]];
-    [self addSubview:[self shareShowFAQButton]];
-    [self addSubview:[self shareShowFAQLabel]];
+//    [self addSubview:[self shareRateButton]];
+//    [self addSubview:[self shareRateLabel]];
+//    [self addSubview:[self shareShowFAQButton]];
+//    [self addSubview:[self shareShowFAQLabel]];
 
     [self addSubview:[self shareFilebButton]];
     [self addSubview:[self shareFileLabel]];
@@ -329,10 +329,15 @@
 {
     if (!shareFilebButton) {
         
-        CGRect frame = CGRectMake(m_buttonMargin,
-                                  SHAREMORE_ITEMS_TOP_MARGIN*3 + SHAREMORE_ITEMS_WIDTH + SHAREMORE_ITEM_LABEL_TOP_MARGIN*2,
+        CGRect frame = CGRectMake(m_buttonMargin*3 + SHAREMORE_ITEMS_WIDTH*2,
+                                  SHAREMORE_ITEMS_TOP_MARGIN,
                                   SHAREMORE_ITEMS_WIDTH,
                                   SHAREMORE_ITEMS_HEIGHT);
+        
+//        CGRect frame = CGRectMake(m_buttonMargin,
+//                                  SHAREMORE_ITEMS_TOP_MARGIN*3 + SHAREMORE_ITEMS_WIDTH + SHAREMORE_ITEM_LABEL_TOP_MARGIN*2,
+//                                  SHAREMORE_ITEMS_WIDTH,
+//                                  SHAREMORE_ITEMS_HEIGHT);
         
         shareFilebButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [shareFilebButton setFrame:frame];
@@ -353,10 +358,15 @@
 {
     if (!shareFileLabel) {
         
-        CGRect frame = CGRectMake(m_buttonMargin + 12.0f,
-                                  SHAREMORE_ITEMS_TOP_MARGIN*3 + SHAREMORE_ITEMS_HEIGHT*2 + SHAREMORE_ITEM_LABEL_TOP_MARGIN*2,
+        CGRect frame = CGRectMake(m_buttonMargin*3 + SHAREMORE_ITEMS_WIDTH*2 + 13.0f,
+                                  SHAREMORE_ITEMS_TOP_MARGIN + SHAREMORE_ITEMS_HEIGHT + SHAREMORE_ITEM_LABEL_TOP_MARGIN,
                                   SHAREMORE_ITEM_LABEL_WIDTH,
                                   SHAREMORE_ITEM_LABEL_HEIGHT);
+        
+//        CGRect frame = CGRectMake(m_buttonMargin + 12.0f,
+//                                  SHAREMORE_ITEMS_TOP_MARGIN*3 + SHAREMORE_ITEMS_HEIGHT*2 + SHAREMORE_ITEM_LABEL_TOP_MARGIN*2,
+//                                  SHAREMORE_ITEM_LABEL_WIDTH,
+//                                  SHAREMORE_ITEM_LABEL_HEIGHT);
         
         shareFileLabel = [[UILabel alloc] initWithFrame:frame];
         [shareFileLabel setTextColor:[UIColor blackColor]];

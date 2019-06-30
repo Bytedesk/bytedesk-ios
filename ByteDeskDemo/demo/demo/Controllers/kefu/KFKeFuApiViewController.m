@@ -20,13 +20,6 @@
 
 #import <bytedesk-core/bdcore.h>
 
-//开发文档：https://github.com/pengjinning/bytedesk-ios
-//获取appkey：登录后台->所有设置->应用管理->APP->appkey列
-//获取subDomain，也即企业号：登录后台->所有设置->客服账号->企业号
-// 需要替换为真实的
-#define DEFAULT_TEST_APPKEY @"201809171553111"
-#define DEFAULT_TEST_SUBDOMAIN @"vip"
-
 //"0. 萝卜丝简介",
 //"1. 初始化/登录接口",
 //"2. 开始对话接口",
@@ -132,7 +125,7 @@
         viewController = [[KFVisitorThreadViewController alloc] init];
     } else if (indexPath.row == 7) {
         // 注意: 登录后台->所有设置->所有客服->工作组->获取代码 获取相应URL
-        NSURL *url = [NSURL URLWithString:@"https://vip.bytedesk.com/chat?uid=201808221551193&wid=201807171659201&type=workGroup&aid=&ph=ph"];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://vip.bytedesk.com/chat?uid=%@&wid=201807171659201&type=workGroup&aid=&ph=ph", DEFAULT_TEST_ADMIN_UID]];
         SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:url];
         safariVC.delegate = self;
         

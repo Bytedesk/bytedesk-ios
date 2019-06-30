@@ -15,8 +15,6 @@
 
 #import <bytedesk-core/bdcore.h>
 
-#define DEFAULT_TEST_APPKEY @"201809171553111"
-
 @interface KFIMApiViewController ()
 
 @property(nonatomic, strong) NSArray *apisArray;

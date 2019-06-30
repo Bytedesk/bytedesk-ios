@@ -6,7 +6,7 @@
 //  Copyright © 2019 KeFuDaShi. All rights reserved.
 //
 
-#import "BDChatWxViewController.h"
+#import "BDChatIMViewController.h"
 #import "BDMsgViewCell.h"
 #import "BDMsgNotificationViewCell.h"
 #import "BDCommodityTableViewCell.h"
@@ -44,7 +44,7 @@ static CGFloat const kToolbarHeight = 60;
 
 static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPhoto;
 
-@interface BDChatWxViewController ()<UINavigationControllerBackButtonHandlerProtocol, KFDSMsgViewCellDelegate, QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,BDSingleImagePickerPreviewViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, QMUITextFieldDelegate, QMUIImagePreviewViewDelegate, KFEmotionViewDelegate, KFPlusViewDelegate, KFInputViewDelegate, BDGroupProfileViewControllerDelegate, BDContactProfileViewControllerDelegate,
+@interface BDChatIMViewController ()<UINavigationControllerBackButtonHandlerProtocol, KFDSMsgViewCellDelegate, QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,BDSingleImagePickerPreviewViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, QMUITextFieldDelegate, QMUIImagePreviewViewDelegate, KFEmotionViewDelegate, KFPlusViewDelegate, KFInputViewDelegate, BDGroupProfileViewControllerDelegate, BDContactProfileViewControllerDelegate,
     UIDocumentPickerDelegate,
     UIDocumentInteractionControllerDelegate,
     UIDocumentMenuDelegate,
@@ -125,7 +125,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 @end
 
-@implementation BDChatWxViewController
+@implementation BDChatIMViewController
 
 @synthesize mImagePickerController,
             kfInputView,

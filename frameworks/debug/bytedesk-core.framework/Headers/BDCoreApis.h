@@ -137,6 +137,37 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                      resultFailed:(FailedCallbackBlock)failed;
 
 /**
+ 请求会话
+ 
+ @param workGroupWid 工作组wid
+ @param type 类型：workGroup or appointed
+ @param agentUid 指定坐席uid
+ @param success 成功回调
+ @param failed 失败回调
+ */
++ (void)requestThread:(NSString *)workGroupWid
+             withType:(NSString *)type
+         withAgentUid:(NSString *)agentUid
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+
+/**
+ 请求人工客服，不管此工作组是否设置为默认机器人，只要有人工客服在线，则可以直接对接人工
+ 
+ @param workGroupWid 工作组wid
+ @param type 类型：workGroup or appointed
+ @param agentUid 指定坐席uid
+ @param success 成功回调
+ @param failed 失败回调
+ */
++ (void)requestAgent:(NSString *)workGroupWid
+            withType:(NSString *)type
+        withAgentUid:(NSString *)agentUid
+       resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
+
+/**
  选择问卷答案
 
  @param tid 会话tid
@@ -1502,14 +1533,12 @@ destroyAfterReading:(BOOL)destroyAfterReading
 /**
  <#Description#>
 
- @param uid <#uid description#>
  @param tid <#tid description#>
  @param aid <#aid description#>
  @param success 成功回调函数
  @param failed 失败回调函数
  */
-+ (void)queryAnswer:(NSString *)uid
-      withThreadTid:(NSString *)tid
++ (void)queryAnswer:(NSString *)tid
      withQuestinQid:(NSString *)aid
       resultSuccess:(SuccessCallbackBlock)success
        resultFailed:(FailedCallbackBlock)failed;
@@ -1531,6 +1560,20 @@ destroyAfterReading:(BOOL)destroyAfterReading
         resultSuccess:(SuccessCallbackBlock)success
          resultFailed:(FailedCallbackBlock)failed;
 
+/**
+ 对机器人返回答案进行评价反馈
+ 
+ @param aid <#aid description#>
+ @param mid <#mid description#>
+ @param rate <#rate description#>
+ @param success 成功回调函数
+ @param failed 失败回调函数
+ */
++ (void)rateAnswer:(NSString *)aid
+    withMessageMid:(NSString *)mid
+          withRate:(BOOL)rate
+     resultSuccess:(SuccessCallbackBlock)success
+      resultFailed:(FailedCallbackBlock)failed;
 
 /**
  留言

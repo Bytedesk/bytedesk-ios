@@ -34,6 +34,8 @@
 
 - (void) sendErrorStatusButtonClicked:(BDMessageModel *)model;
 
+- (void) robotLinkClicked:(NSString *)label withKey:(NSString *)key;
+
 @end
 
 

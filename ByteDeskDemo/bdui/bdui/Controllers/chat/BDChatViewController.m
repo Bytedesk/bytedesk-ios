@@ -6,7 +6,7 @@
 //  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
 
-#import "BDChatViewController.h"
+#import "BDChatKFViewController.h"
 #import "BDMsgViewCell.h"
 #import "BDMsgNotificationViewCell.h"
 #import "BDCommodityTableViewCell.h"
@@ -16,6 +16,7 @@
 #import "KFDSUConstants.h"
 #import "BDGroupProfileViewController.h"
 #import "BDLeaveMessageViewController.h"
+#import "KFUIUtils.h"
 
 #import <HCSStarRatingView/HCSStarRatingView.h>
 #import <bytedesk-core/bdcore.h>
@@ -31,7 +32,7 @@ static CGFloat const kEmotionViewHeight = 232;
 
 static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPhoto;
 
-@interface BDChatViewController ()<UINavigationControllerBackButtonHandlerProtocol, KFDSMsgViewCellDelegate, QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,BDSingleImagePickerPreviewViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, QMUITextFieldDelegate, QMUIImagePreviewViewDelegate, BDGroupProfileViewControllerDelegate, BDContactProfileViewControllerDelegate>
+@interface BDChatKFViewController ()<UINavigationControllerBackButtonHandlerProtocol, KFDSMsgViewCellDelegate, QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,BDSingleImagePickerPreviewViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, QMUITextFieldDelegate, QMUIImagePreviewViewDelegate, BDGroupProfileViewControllerDelegate, BDContactProfileViewControllerDelegate>
 {
 
 }
@@ -91,7 +92,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 @end
 
-@implementation BDChatViewController
+@implementation BDChatKFViewController
 
 @synthesize mImagePickerController;
 
@@ -336,9 +337,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         [self reloadTableData];
         
     } else if ([status_code isEqualToNumber:[NSNumber numberWithInt:205]]) {
-        // TODO: 咨询前问卷
-        DDLogInfo(@"dict %@", dict);
-        
+        // 咨询前问卷
         // 修改UI界面
         self.titleView.title = dict[@"data"][@"thread"][@"workGroup"][@"nickname"];
 //        self.titleView.subtitle = dict[@"message"];
@@ -409,43 +408,32 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 //        [self reloadTableData];
         
     } else if ([status_code isEqualToNumber:[NSNumber numberWithInt:206]]) {
+        // 返回机器人初始欢迎语 + 欢迎问题列表
+        DDLogInfo(@"dict %@", dict);
         
-        //
+        // 解析数据
+        self.mThreadModel = [[BDThreadModel alloc] initWithDictionary:dict[@"data"][@"thread"]];
+        self.mThreadTid = self.mThreadModel.tid;
+        self.threadTopic = [NSString stringWithFormat:@"thread/%@", self.mThreadTid];
         
+        // 订阅主题
+        [[BDMQTTApis sharedInstance] subscribeTopic:self.threadTopic];
+        
+        // 修改UI界面
+        self.titleView.title = dict[@"data"][@"thread"][@"workGroup"][@"nickname"];
+        self.titleView.subtitle = dict[@"message"];
+        self.titleView.needsLoadingView = NO;
+        
+        // 保存聊天记录
+        BDMessageModel *messageModel = [[BDMessageModel alloc] initWithDictionary:dict[@"data"]];
+        [[BDDBApis sharedInstance] insertMessage:messageModel];
+        [self reloadTableData];
         
     } else {
         // 请求会话失败
         [QMUITips showError:dict[@"message"] inView:self.view hideAfterDelay:2.0f];
     }
 }
-
-//- (void)requestQuestionnaire:(NSString *)itemQid {
-//
-//    [BDCoreApis requestQuestionnairWithTid:self.mThreadTid itemQid:itemQid resultSuccess:^(NSDictionary *dict) {
-////        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
-//        if (self.mIsViewControllerClosed) {
-//            return;
-//        }
-//        //
-//        NSNumber *status_code = [dict objectForKey:@"status_code"];
-//        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-//            //
-//            // NSString *title = dict[@"data"][@"content"];
-//            NSMutableArray *workGroupsArray = dict[@"data"][@"workGroups"];
-//            [self showWorkGroupDialog:workGroupsArray];
-//
-//        } else {
-//            NSString *message = [dict objectForKey:@"message"];
-//            [QMUITips showError:message inView:self.view hideAfterDelay:2.0];
-//        }
-//
-//    } resultFailed:^(NSError *error) {
-//        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-//        if (error) {
-//            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
-//        }
-//    }];
-//}
 
 - (void)showWorkGroupDialog:(NSMutableArray *)workGroupsArray isLiuXue:(BOOL)isLiuXue {
     
@@ -993,13 +981,25 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         height = 55;
     } else {
         //
-        if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_TEXT] ||
-            [messageModel.type isEqualToString:BD_MESSAGE_TYPE_ROBOT]) {
+        if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_TEXT]) {
             //
             if ([messageModel isSend]) {
                 height = messageModel.contentSize.height + messageModel.contentViewInsets.top + messageModel.contentViewInsets.bottom + 30;
             } else {
                 height = messageModel.contentSize.height + messageModel.contentViewInsets.top + messageModel.contentViewInsets.bottom + 40;
+            }
+            //
+            if (height < 45) {
+                height = 45;
+            }
+        } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_ROBOT]) {
+            //
+            CGSize size = [KFUIUtils sizeOfRobotContent:messageModel.content];
+            //
+            if ([messageModel isSend]) {
+                height = size.height + messageModel.contentViewInsets.top + messageModel.contentViewInsets.bottom + 30;
+            } else {
+                height = size.height + messageModel.contentViewInsets.top + messageModel.contentViewInsets.bottom + 40;
             }
             //
             if (height < 45) {
