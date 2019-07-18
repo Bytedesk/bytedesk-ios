@@ -1152,7 +1152,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 #pragma mark - TableViewRelated
 
 -(void)tableViewScrollToBottom:(BOOL)animated {
-    DDLogInfo(@"tableViewScrollToBottom");
+//    DDLogInfo(@"tableViewScrollToBottom");
     
     NSInteger rows = [self.tableView numberOfRowsInSection:0];
     
@@ -1248,14 +1248,14 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 // TODO: 区分发送消息
 -(void)sendTextMessage:(NSString *)content {
-    DDLogInfo(@"%s, content:%@, tid:%@, sessionType:%@ ", __PRETTY_FUNCTION__, content, self.mTidOrUidOrGid,  self.mThreadType);
     
     // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
     NSString *localId = [[NSUUID UUID] UUIDString];
     
+    DDLogInfo(@"%s, content:%@, tid:%@, sessionType:%@, localId:%@ ", __PRETTY_FUNCTION__, content, self.mTidOrUidOrGid,  self.mThreadType, localId);
+    
     // 插入本地消息, 可通过返回的messageModel首先更新本地UI，然后再发送消息
     BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertTextMessageLocal:self.mTidOrUidOrGid withWorkGroupWid:self.mWorkGroupWid withContent:content withLocalId:localId withSessionType:self.mThreadType];
-    DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.content);
     
     // 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
     NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
@@ -1276,7 +1276,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             
             // 服务器返回自定义消息本地id
             NSString *localId = dict[@"data"][@"localId"];
-            DDLogInfo(@"callback localId: %@", localId);
+//            DDLogInfo(@"callback localId: %@", localId);
             
             // 修改本地消息发送状态为成功
             [[BDDBApis sharedInstance] updateMessageSuccess:localId];
@@ -1601,9 +1601,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
     [self.tableView endUpdates];
     [self tableViewScrollToBottom:YES];
-    
-    // 异步发送消息
-    //     [[BDMQTTApis sharedInstance] sendTextMessage:content toTid:self.mTidOrUidOrGid localId:localId sessionType:self.mThreadType];
     
     // 同步发送消息
     [BDCoreApis sendRedPacketMessage:content toTid:self.mTidOrUidOrGid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {

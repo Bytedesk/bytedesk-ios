@@ -7,11 +7,12 @@
 //
 
 #import "KFSupportViewController.h"
-#import "KFSupportApiViewController.h"
+//#import "KFSupportApiViewController.h"
 
-#import <SafariServices/SafariServices.h>
+//#import <SafariServices/SafariServices.h>
+#import <bytedesk-ui/bdui.h>
 
-@interface KFSupportViewController ()<SFSafariViewControllerDelegate>
+@interface KFSupportViewController ()//<SFSafariViewControllerDelegate>
 
 @end
 
@@ -72,15 +73,14 @@
     if (indexPath.section == 0) {
         // 替换：URL参数uid
         // 注意: 登录后台->所有设置->所有客服->管理员唯一uid
-        NSURL *url = [NSURL URLWithString:@"https://www.bytedesk.com/support?uid=201808221551193&ph=ph"];
-        SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:url];
-        safariVC.delegate = self;
-        // 建议
-        [self presentViewController:safariVC animated:YES completion:nil];
+        [BDUIApis presentSupportURL:self.navigationController withAdminUid:DEFAULT_TEST_ADMIN_UID];
+        
     } else {
         
-        KFSupportApiViewController *apiVC = [[KFSupportApiViewController alloc] initWithStyle:UITableViewStyleGrouped];
-        [self.navigationController pushViewController:apiVC animated:YES];
+//        BDSupportApiViewController *apiVC = [[BDSupportApiViewController alloc] initWithStyle:UITableViewStyleGrouped];
+//        [self.navigationController pushViewController:apiVC animated:YES];
+        
+        [BDUIApis pushSupportApi:self.navigationController withAdminUid:DEFAULT_TEST_ADMIN_UID];
     }
 }
 

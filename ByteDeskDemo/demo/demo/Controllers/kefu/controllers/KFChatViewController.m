@@ -126,19 +126,19 @@
         //
         if (indexPath.row == 0) {
             // push工作组会话
-            [BDUIApis visitorPushWorkGroupChat:self.navigationController withWorkGroupWid:kDefaultWorkGroupWid withTitle:title];
+            [BDUIApis pushWorkGroupChat:self.navigationController withWorkGroupWid:kDefaultWorkGroupWid withTitle:title];
         } else {
             // present工作组会话
-            [BDUIApis visitorPresentWorkGroupChat:self.navigationController withWorkGroupWid:kDefaultWorkGroupWid withTitle:title];
+            [BDUIApis presentWorkGroupChat:self.navigationController withWorkGroupWid:kDefaultWorkGroupWid withTitle:title];
         }
     } else if (indexPath.section == 1){
         //
         if (indexPath.row == 0) {
             // push指定坐席会话
-            [BDUIApis visitorPushAppointChat:self.navigationController withAgentUid:kDefaultAgentUid withTitle:title];
+            [BDUIApis pushAppointChat:self.navigationController withAgentUid:kDefaultAgentUid withTitle:title];
         } else {
             // present指定坐席会话
-            [BDUIApis visitorPresentAppointChat:self.navigationController withAgentUid:kDefaultAgentUid withTitle:title];
+            [BDUIApis presentAppointChat:self.navigationController withAgentUid:kDefaultAgentUid withTitle:title];
         }
     } else if (indexPath.section == 2) {
         //
@@ -152,7 +152,7 @@
                                   @"https://item.m.jd.com/product/12172344.html", @"url",
                                   @"https://m.360buyimg.com/mobilecms/s750x750_jfs/t4483/332/2284794111/122812/4bf353/58ed7f42Nf16d6b20.jpg!q80.dpg", @"imageUrl",
                                   nil];
-            [BDUIApis visitorPushWorkGroupChat:self.navigationController withWorkGroupWid:kDefaultWorkGroupWid withTitle:title withCustom:dict];
+            [BDUIApis pushWorkGroupChat:self.navigationController withWorkGroupWid:kDefaultWorkGroupWid withTitle:title withCustom:dict];
         } else {
             // 携带商品信息指定坐席
             NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -164,25 +164,25 @@
                                   @"https://m.360buyimg.com/mobilecms/s750x750_jfs/t4483/332/2284794111/122812/4bf353/58ed7f42Nf16d6b20.jpg!q80.dpg",
                                   @"imageUrl",
                                   nil];
-            [BDUIApis visitorPushAppointChat:self.navigationController withAgentUid:kDefaultAgentUid withTitle:title withCustom:dict];
+            [BDUIApis pushAppointChat:self.navigationController withAgentUid:kDefaultAgentUid withTitle:title withCustom:dict];
         }
     } else if (indexPath.section == 3) {
         //
         if (indexPath.row == 0) {
             // push工作组会话
-            [BDUIApis visitorPushWorkGroupChat:self.navigationController withWorkGroupWid:kPreWorkGroupWid withTitle:title];
+            [BDUIApis pushWorkGroupChat:self.navigationController withWorkGroupWid:kPreWorkGroupWid withTitle:title];
         } else {
             // present工作组会话
-            [BDUIApis visitorPresentWorkGroupChat:self.navigationController withWorkGroupWid:kPreWorkGroupWid withTitle:title];
+            [BDUIApis presentWorkGroupChat:self.navigationController withWorkGroupWid:kPreWorkGroupWid withTitle:title];
         }
     } else {
         //
         if (indexPath.row == 0) {
             // push工作组会话
-            [BDUIApis visitorPushWorkGroupChat:self.navigationController withWorkGroupWid:kRobotWorkGroupWid withTitle:title];
+            [BDUIApis pushWorkGroupChat:self.navigationController withWorkGroupWid:kRobotWorkGroupWid withTitle:title];
         } else {
             // present工作组会话
-            [BDUIApis visitorPresentWorkGroupChat:self.navigationController withWorkGroupWid:kRobotWorkGroupWid withTitle:title];
+            [BDUIApis presentWorkGroupChat:self.navigationController withWorkGroupWid:kRobotWorkGroupWid withTitle:title];
         }
     }
     

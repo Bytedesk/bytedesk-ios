@@ -148,6 +148,9 @@
 #define BD_NOTIFICATION_MESSAGE_STATUS      @"bd_notification_message_status"
 #define BD_NOTIFICATION_MESSAGE_PREVIEW     @"bd_notification_message_preview"
 
+// 通知连接状态
+#define BD_NOTIFICATION_CONNECTION_STATUS               @"notification_connection_status"
+
 // 通知webrtc
 // 接受webrtc邀请
 #define BD_NOTIFICATION_WEBRTC_INVITE       @"bd_notification_webrtc_invite"
@@ -256,9 +259,11 @@
 #define BD_MESSAGE_TYPE_NOTIFICATION_RATE_REQUEST       @"notification_rate_request"  // 满意度请求
 #define BD_MESSAGE_TYPE_NOTIFICATION_RATE               @"notification_rate"  // 评价
 
-// 通知连接状态
-#define BD_NOTIFICATION_CONNECTION_STATUS               @"notification_connection_status"
-// 接待状态
+// 普通用户设置 在线状态消息
+#define BD_MESSAGE_TYPE_NOTIFICATION_ONLINE_STATUS      @"notification_online_status"
+// 长连接状态
+#define BD_MESSAGE_TYPE_NOTIFICATION_CONNECTION_STATUS  @"notification_connection_status"
+// 客服设置接待状态
 #define BD_MESSAGE_TYPE_NOTIFICATION_ACCEPT_STATUS      @"notification_accept_status"
 // 消息预知
 #define BD_MESSAGE_TYPE_NOTIFICATION_PREVIEW            @"notification_preview"

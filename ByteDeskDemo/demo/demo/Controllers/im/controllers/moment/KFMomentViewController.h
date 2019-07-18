@@ -6,11 +6,13 @@
 //  Copyright © 2019 KeFuDaShi. All rights reserved.
 //
 
-#import <QMUIKit/QMUIKit.h>
+//#import <QMUIKit/QMUIKit.h>
+#import "SDBaseTableViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface KFMomentViewController : QMUICommonTableViewController
+//@interface KFMomentViewController : QMUICommonTableViewController
+@interface KFMomentViewController : SDBaseTableViewController
 
 @end
 

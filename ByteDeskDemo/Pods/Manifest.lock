@@ -14,7 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - bytedesk-core (1.6.3):
+  - bytedesk-core (1.6.4):
     - AFNetworking
     - CocoaLumberjack
     - FMDB
@@ -302,10 +302,11 @@ PODS:
     - QMUIKit/QMUILog
   - QMUIKit/QMUIResources (3.2.1)
   - QMUIKit/QMUIWeakObjectContainer (3.2.1)
+  - SDAutoLayout (2.2.1)
 
 DEPENDENCIES:
   - AFNetworking
-  - bytedesk-core (= 1.6.3)
+  - bytedesk-core (= 1.6.4)
   - CocoaLumberjack
   - FMDB
   - HCSStarRatingView
@@ -313,6 +314,7 @@ DEPENDENCIES:
   - MGSwipeTableCell
   - MQTTClient
   - QMUIKit
+  - SDAutoLayout
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -325,10 +327,11 @@ SPEC REPOS:
     - MGSwipeTableCell
     - MQTTClient
     - QMUIKit
+    - SDAutoLayout
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  bytedesk-core: 3dce61b3b0725933b22aab3fee2f3fe9978a0758
+  bytedesk-core: cf1d1c882cc6b529824b59e663848f97b435b415
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
@@ -336,7 +339,8 @@ SPEC CHECKSUMS:
   MGSwipeTableCell: dc4eca3212ed38a563b27d6aa7b3c01ce656c1e2
   MQTTClient: 902c7bcac1501595f3d0b15178c7205b40331fb0
   QMUIKit: a3af645843b9558eb7aaf407b320eaeb45ab6144
+  SDAutoLayout: 8bf6b3bbc8b01f775d4defbb4fda2ace805461be
 
-PODFILE CHECKSUM: 172341b683baa708ef05f3d928ca86f7fb242073
+PODFILE CHECKSUM: 3b594d8b42fa70bc4e54fcb764cf717bd1981e59
 
 COCOAPODS: 1.6.1

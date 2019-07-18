@@ -18,9 +18,9 @@
 #import "KFUserinfoViewController.h"
 #import "KFStatusViewController.h"
 #import "KFVisitorThreadViewController.h"
-#import "KFFeedbackViewController.h"
+//#import "BDFeedbackViewController.h"
 #import "KFSupportViewController.h"
-#import "KFTicketViewController.h"
+//#import "KFTicketViewController.h"
 #import "KFAppRateViewController.h"
 #import "KFAppUpgrateViewController.h"
 
@@ -237,12 +237,14 @@
             viewController = [[KFVisitorThreadViewController alloc] init];
         } else if (indexPath.row == 4) {
             // 提交工单
-            viewController = [[KFTicketViewController alloc] initWithStyle:UITableViewStyleGrouped];
+//            viewController = [[KFTicketViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [BDUIApis pushTicket:self.navigationController withAdminUid:DEFAULT_TEST_ADMIN_UID];
+            return;
         } else if (indexPath.row == 5) {
             // 意见反馈
-            viewController = [[KFFeedbackViewController alloc] initWithStyle:UITableViewStyleGrouped];
-//            [BDUIApis visitorPushFeedback:self.navigationController];
-//            return;
+//            viewController = [[BDFeedbackViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [BDUIApis pushFeedback:self.navigationController withAdminUid:DEFAULT_TEST_ADMIN_UID];
+            return;
         } else if (indexPath.row == 6) {
             // TODO: 帮助中心
              viewController = [[KFSupportViewController alloc] initWithStyle:UITableViewStyleGrouped];

@@ -9,8 +9,11 @@
 #import "BDUIApis.h"
 #import "BDChatKFViewController.h"
 #import "BDChatIMViewController.h"
-#import "BDFeedbackCategoryViewController.h"
+#import "BDFeedbackViewController.h"
+#import "BDTicketViewController.h"
+#import "BDSupportApiViewController.h"
 
+#import <SafariServices/SafariServices.h>
 #import <bytedesk-core/BDConfig.h>
 
 static BDUIApis *sharedInstance = nil;
@@ -28,7 +31,7 @@ static BDUIApis *sharedInstance = nil;
 
 #pragma mark - 访客端接口
 
-+ (void)visitorPushWorkGroupChat:(UINavigationController *)navigationController
++ (void)pushWorkGroupChat:(UINavigationController *)navigationController
                 withWorkGroupWid:(NSString *)wId
                        withTitle:(NSString *)title {
     //
@@ -41,7 +44,7 @@ static BDUIApis *sharedInstance = nil;
     [navigationController pushViewController:chatViewController animated:YES];
 }
 
-+ (void)visitorPushWorkGroupChat:(UINavigationController *)navigationController
++ (void)pushWorkGroupChat:(UINavigationController *)navigationController
                 withWorkGroupWid:(NSString *)wId
                        withTitle:(NSString *)title
                       withCustom:(NSDictionary *)custom {
@@ -55,7 +58,7 @@ static BDUIApis *sharedInstance = nil;
     [navigationController pushViewController:chatViewController animated:YES];
 }
 
-+ (void)visitorPresentWorkGroupChat:(UINavigationController *)navigationController
++ (void)presentWorkGroupChat:(UINavigationController *)navigationController
                    withWorkGroupWid:(NSString *)wId
                           withTitle:(NSString *)title{
     //
@@ -71,7 +74,7 @@ static BDUIApis *sharedInstance = nil;
 }
 
 
-+ (void)visitorPresentWorkGroupChat:(UINavigationController *)navigationController
++ (void)presentWorkGroupChat:(UINavigationController *)navigationController
                    withWorkGroupWid:(NSString *)wId
                           withTitle:(NSString *)title
                          withCustom:(NSDictionary *)custom {
@@ -88,7 +91,7 @@ static BDUIApis *sharedInstance = nil;
 }
 
 
-+ (void)visitorPushAppointChat:(UINavigationController *)navigationController
++ (void)pushAppointChat:(UINavigationController *)navigationController
                   withAgentUid:(NSString *)uId
                      withTitle:(NSString *)title {
     //
@@ -101,7 +104,7 @@ static BDUIApis *sharedInstance = nil;
     [navigationController pushViewController:chatViewController animated:YES];
 }
 
-+ (void)visitorPushAppointChat:(UINavigationController *)navigationController
++ (void)pushAppointChat:(UINavigationController *)navigationController
                   withAgentUid:(NSString *)uId
                      withTitle:(NSString *)title
                     withCustom:(NSDictionary *)custom {
@@ -115,7 +118,7 @@ static BDUIApis *sharedInstance = nil;
     [navigationController pushViewController:chatViewController animated:YES];
 }
 
-+ (void)visitorPresentAppointChat:(UINavigationController *)navigationController
++ (void)presentAppointChat:(UINavigationController *)navigationController
                      withAgentUid:(NSString *)uId
                         withTitle:(NSString *)title {
     //
@@ -130,7 +133,7 @@ static BDUIApis *sharedInstance = nil;
     }];
 }
 
-+ (void)visitorPresentAppointChat:(UINavigationController *)navigationController
++ (void)presentAppointChat:(UINavigationController *)navigationController
                      withAgentUid:(NSString *)uId
                         withTitle:(NSString *)title
                        withCustom:(NSDictionary *)custom {
@@ -146,13 +149,49 @@ static BDUIApis *sharedInstance = nil;
     }];
 }
 
-+ (void)visitorPushFeedback:(UINavigationController *)navigationController {
++ (void)pushFeedback:(UINavigationController *)navigationController withAdminUid:(NSString *)uid {
     //
     [BDConfig switchToKF];
     //
-    BDFeedbackCategoryViewController *categoryViewController = [[BDFeedbackCategoryViewController alloc] init];
-    [navigationController pushViewController:categoryViewController animated:YES];
+    BDFeedbackViewController *feedbackViewController = [[BDFeedbackViewController alloc] init];
+    [feedbackViewController initWithUid:uid];
+    //
+    [navigationController pushViewController:feedbackViewController animated:YES];
 }
+
++ (void)pushTicket:(UINavigationController *)navigationController withAdminUid:(NSString *)uid {
+    //
+    [BDConfig switchToKF];
+    //
+    BDTicketViewController *ticketViewController = [[BDTicketViewController alloc] init];
+    [ticketViewController initWithUid:uid];
+    //
+    [navigationController pushViewController:ticketViewController animated:YES];
+}
+
++ (void)pushSupportApi:(UINavigationController *)navigationController withAdminUid:(NSString *)uid {
+    //
+    [BDConfig switchToKF];
+    //
+    BDSupportApiViewController *supportViewController = [[BDSupportApiViewController alloc] init];
+    [supportViewController initWithUid:uid];
+    //
+    [navigationController pushViewController:supportViewController animated:YES];
+}
+
++ (void)presentSupportURL:(UINavigationController *)navigationController withAdminUid:(NSString *)uid {
+    //
+    [BDConfig switchToKF];
+    //
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.bytedesk.com/support?uid=%@&ph=ph", uid]];
+    SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:url];
+//    safariVC.delegate = self;
+//    [navigationController pushViewController:safariVC animated:YES];
+    // 建议
+    [navigationController presentViewController:safariVC animated:YES completion:^{
+    }];
+}
+
 
 #pragma mark - IM接口
 
@@ -339,7 +378,7 @@ static BDUIApis *sharedInstance = nil;
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
-        
+
     }];
 }
 
@@ -354,7 +393,7 @@ static BDUIApis *sharedInstance = nil;
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
-        
+
     }];
 }
 
@@ -389,7 +428,7 @@ static BDUIApis *sharedInstance = nil;
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
-        
+
     }];
 }
 
@@ -404,7 +443,7 @@ static BDUIApis *sharedInstance = nil;
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
-        
+
     }];
 }
 
@@ -439,7 +478,7 @@ static BDUIApis *sharedInstance = nil;
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
-        
+
     }];
 }
 
@@ -454,7 +493,7 @@ static BDUIApis *sharedInstance = nil;
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
-        
+
     }];
 }
 

@@ -27,9 +27,9 @@
  @param wId <#wId description#>
  @param title <#title description#>
  */
-+ (void)visitorPushWorkGroupChat:(UINavigationController *)navigationController
++ (void)pushWorkGroupChat:(UINavigationController *)navigationController
                     withWorkGroupWid:(NSString *)wId
-              withTitle:(NSString *)title;
+                       withTitle:(NSString *)title;
 
 /**
  <#Description#>
@@ -39,7 +39,7 @@
  @param title <#title description#>
  @param custom <#custom description#>
  */
-+ (void)visitorPushWorkGroupChat:(UINavigationController *)navigationController
++ (void)pushWorkGroupChat:(UINavigationController *)navigationController
                 withWorkGroupWid:(NSString *)wId
                        withTitle:(NSString *)title
                       withCustom:(NSDictionary *)custom;
@@ -51,7 +51,7 @@
  @param wId <#wId description#>
  @param title <#title description#>
  */
-+ (void)visitorPresentWorkGroupChat:(UINavigationController *)navigationController
++ (void)presentWorkGroupChat:(UINavigationController *)navigationController
                        withWorkGroupWid:(NSString *)wId
               withTitle:(NSString *)title;
 
@@ -63,7 +63,7 @@
  @param title <#title description#>
  @param custom <#custom description#>
  */
-+ (void)visitorPresentWorkGroupChat:(UINavigationController *)navigationController
++ (void)presentWorkGroupChat:(UINavigationController *)navigationController
                    withWorkGroupWid:(NSString *)wId
                           withTitle:(NSString *)title
                          withCustom:(NSDictionary *)custom;
@@ -75,7 +75,7 @@
  @param uId <#uId description#>
  @param title <#title description#>
  */
-+ (void)visitorPushAppointChat:(UINavigationController *)navigationController
++ (void)pushAppointChat:(UINavigationController *)navigationController
                   withAgentUid:(NSString *)uId
                     withTitle:(NSString *)title;
 
@@ -87,7 +87,7 @@
  @param title <#title description#>
  @param custom <#custom description#>
  */
-+ (void)visitorPushAppointChat:(UINavigationController *)navigationController
++ (void)pushAppointChat:(UINavigationController *)navigationController
                   withAgentUid:(NSString *)uId
                      withTitle:(NSString *)title
                     withCustom:(NSDictionary *)custom;
@@ -99,7 +99,7 @@
  @param uId <#uId description#>
  @param title <#title description#>
  */
-+ (void)visitorPresentAppointChat:(UINavigationController *)navigationController
++ (void)presentAppointChat:(UINavigationController *)navigationController
                      withAgentUid:(NSString *)uId
                         withTitle:(NSString *)title;
 
@@ -111,7 +111,7 @@
  @param title <#title description#>
  @param custom <#custom description#>
  */
-+ (void)visitorPresentAppointChat:(UINavigationController *)navigationController
++ (void)presentAppointChat:(UINavigationController *)navigationController
                      withAgentUid:(NSString *)uId
                         withTitle:(NSString *)title
                        withCustom:(NSDictionary *)custom;
@@ -121,7 +121,32 @@
 
  @param navigationController <#navigationController description#>
  */
-+ (void)visitorPushFeedback:(UINavigationController *)navigationController;
++ (void)pushFeedback:(UINavigationController *)navigationController withAdminUid:(NSString *)uid;
+
+/**
+ <#Description#>
+
+ @param navigationController <#navigationController description#>
+ @param uid <#uid description#>
+ */
++ (void)pushTicket:(UINavigationController *)navigationController withAdminUid:(NSString *)uid;
+
+/**
+ <#Description#>
+
+ @param navigationController <#navigationController description#>
+ @param uid <#uid description#>
+ */
++ (void)pushSupportApi:(UINavigationController *)navigationController withAdminUid:(NSString *)uid;
+
+/**
+ <#Description#>
+
+ @param navigationController <#navigationController description#>
+ @param uid <#uid description#>
+ */
++ (void)presentSupportURL:(UINavigationController *)navigationController withAdminUid:(NSString *)uid;
+
 
 #pragma mark - IM打开聊天界面接口
 
@@ -246,6 +271,8 @@
               withCustom:(NSDictionary *)custom;
 
 
+
+
 #pragma mark - 客服端接口
 
 /**
@@ -367,6 +394,7 @@
 + (void)agentPresentChat:(UINavigationController *)navigationController
           withGroupModel:(BDGroupModel *)groupModel
               withCustom:(NSDictionary *)custom DEPRECATED_ATTRIBUTE;
+
 
 #pragma mark - 公共接口
 
