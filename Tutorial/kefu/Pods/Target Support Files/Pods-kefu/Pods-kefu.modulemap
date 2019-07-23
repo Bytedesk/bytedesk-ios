@@ -1,0 +1,6 @@
+framework module Pods_kefu {
+  umbrella header "Pods-kefu-umbrella.h"
+
+  export *
+  module * { export * }
+}
