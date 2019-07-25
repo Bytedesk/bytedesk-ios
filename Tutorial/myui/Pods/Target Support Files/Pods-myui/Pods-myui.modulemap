@@ -1,0 +1,6 @@
+framework module Pods_myui {
+  umbrella header "Pods-myui-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,77 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
+workspace 'myui'
+
+target 'myui' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for myui
+  
+  # Pods for bdui
+  pod 'FMDB'
+  pod 'MQTTClient'
+  pod 'AFNetworking'
+  pod 'QMUIKit'
+  pod 'M80AttributedLabel'
+  pod 'HCSStarRatingView'
+  pod 'CocoaLumberjack'
+
+  # 集成萝卜丝核心协议库core
+  pod 'bytedesk-core'
+
+  target 'myuiTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+target 'bytedesk-ui' do
+  # Comment this line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  project 'bdui/bdui.xcodeproj'
+
+  # Pods for bdui
+  pod 'FMDB'
+  pod 'MQTTClient'
+  pod 'AFNetworking'
+  pod 'QMUIKit'
+  pod 'M80AttributedLabel'
+  pod 'HCSStarRatingView'
+  pod 'CocoaLumberjack'
+
+  # 集成核心协议库core
+  pod 'bytedesk-core'
+
+  target 'bduiTests' do
+  end
+
+end
+
+# 支持bitcode
+#bitcode enable
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['ENABLE_BITCODE'] = 'YES'
+      
+      if config.name == 'Release'
+        config.build_settings['BITCODE_GENERATION_MODE'] = 'bitcode'
+        else
+        config.build_settings['BITCODE_GENERATION_MODE'] = 'marker'
+      end
+      
+      cflags = config.build_settings['OTHER_CFLAGS'] || ['$(inherited)']
+      
+      if config.name == 'Release'
+        cflags << '-fembed-bitcode'
+        else
+        cflags << '-fembed-bitcode-marker'
+      end
+      
+      config.build_settings['OTHER_CFLAGS'] = cflags
+    end
+  end
+end

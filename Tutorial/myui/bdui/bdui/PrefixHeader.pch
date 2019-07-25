@@ -1,0 +1,89 @@
+//
+//  PrefixHeader.pch
+//  bdui
+//
+//  Created by 萝卜丝 on 2018/11/22.
+//  Copyright © 2018年 Bytedesk.com. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <CocoaLumberjack/CocoaLumberjack.h>
+#ifdef DEBUG
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+#else
+//static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+static const DDLogLevel ddLogLevel = DDLogLevelWarning;
+#endif
+
+//http://dalezak.ca/2012/12/AppKeFuLocalizedString-framework.html
+//http://blog.xianqu.org/2015/08/pod-resources/
+#define AppKeFuLocalizedString(key, comment) \
+NSLocalizedStringFromTableInBundle((key), @"AppKeFu", [NSBundle bundleWithPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"AppKeFuResources.bundle"]], (comment))
+
+//开发文档：https://github.com/pengjinning/bytedesk-ios
+//获取appkey：登录后台->所有设置->应用管理->APP->appkey列
+//获取subDomain，也即企业号：登录后台->所有设置->客服账号->企业号列
+// 需要替换为真实的
+//#define DEFAULT_TEST_APPKEY @"a3f79509-5cb6-4185-8df9-b1ce13d3c655"
+//#define DEFAULT_TEST_SUBDOMAIN @"vip"
+
+// 获取adminUid, 登录后台->所有设置->客服账号->管理员uid列
+//#define DEFAULT_TEST_ADMIN_UID @"201808221551193"
+
+
+#endif /* PrefixHeader_pch */
+
+
+//# 编译的时候
+//
+//if [ "${ACTION}" = "build" ]
+//
+//then
+//
+//# 生成通用framework的目录
+//
+//INSTALL_DIR=${SRCROOT}/products/${PRODUCT_NAME}.framework
+//
+//# 需要合并的framework
+//
+//DEVICE_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphoneos/${PRODUCT_NAME}.framework
+//
+//SIMULATOR_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphonesimulator/${PRODUCT_NAME}.framework
+//
+//# 如果已经存在，则删除
+//
+//if [ -d "${INSTALL_DIR}"]
+//
+//then
+//
+//rm -rf "${INSTALL_DIR}"
+//
+//fi
+//
+//# 创建目录
+//
+//mkdir -p "${INSTALL_DIR}"
+//
+//# 拷贝Header到目标目录
+//
+//cp -R "${DEVICE_DIR}/" "${INSTALL_DIR}/"
+//
+//# 合并framework
+//
+//lipo -create "${DEVICE_DIR}/${PRODUCT_NAME}" "${SIMULATOR_DIR}/${PRODUCT_NAME}" -output "${INSTALL_DIR}/${PRODUCT_NAME}"
+//
+//# 编译完成后打开文件夹
+//
+//#open "${DEVICE_DIR}"
+//
+//open "${SRCROOT}/products/${PRODUCT_NAME}.framework"
+//
+//fi
+//
