@@ -26,7 +26,7 @@
     - [5分钟集成帮助中心](https://github.com/Bytedesk/bytedesk-ios/wiki/5%E5%88%86%E9%92%9F%E9%9B%86%E6%88%90%E5%B8%AE%E5%8A%A9%E4%B8%AD%E5%BF%83)
     - [5分钟集成意见反馈](https://github.com/Bytedesk/bytedesk-ios/wiki/5%E5%88%86%E9%92%9F%E9%9B%86%E6%88%90%E6%84%8F%E8%A7%81%E5%8F%8D%E9%A6%88)
     - [5分钟集成自定义UI](https://github.com/Bytedesk/bytedesk-ios/wiki/5%E5%88%86%E9%92%9F%E9%9B%86%E6%88%90%E8%87%AA%E5%AE%9A%E4%B9%89UI)
-- [IM开发文档](https://github.com/bytedesk/bytedesk-ios/wiki/IM%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3)
+- [5分钟集成IM](https://github.com/Bytedesk/bytedesk-ios/wiki/5%E5%88%86%E9%92%9F%E9%9B%86%E6%88%90IM)
 
 ## 其他
 
