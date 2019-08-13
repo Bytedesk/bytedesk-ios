@@ -41,6 +41,8 @@ workspace 'myui'
 
 # 第三方依赖
 pod 'FMDB'
+pod 'WCDB'
+pod 'MMKV'
 pod 'MQTTClient'
 pod 'AFNetworking'
 pod 'QMUIKit'
@@ -63,6 +65,8 @@ target 'bytedesk-ui' do
 
   # Pods for bdui
   pod 'FMDB'
+  pod 'WCDB'
+  pod 'MMKV'
   pod 'MQTTClient'
   pod 'AFNetworking'
   pod 'QMUIKit'
