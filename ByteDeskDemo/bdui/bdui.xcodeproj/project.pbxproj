@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D3950D15A754AD7B6D3D875 /* Pods_bytedesk_ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5D5B9D19C760007972848C /* Pods_bytedesk_ui.framework */; };
 		3D1996B51FCE2B9600219FEF /* BDChatKFViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996B31FCE2B9600219FEF /* BDChatKFViewController.h */; };
 		3D1996B61FCE2B9600219FEF /* BDChatKFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996B41FCE2B9600219FEF /* BDChatKFViewController.m */; };
 		3D1996C01FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996BA1FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.m */; };
@@ -331,10 +332,6 @@
 		3D46C225223B897200BA41C4 /* BDRedPacketTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D46C223223B897200BA41C4 /* BDRedPacketTableViewCell.h */; };
 		3D46C226223B897200BA41C4 /* BDRedPacketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D46C224223B897200BA41C4 /* BDRedPacketTableViewCell.m */; };
 		3D4824F5215792FA00B50593 /* bytedesk-core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4824F4215792FA00B50593 /* bytedesk-core.framework */; };
-		3D4C5C9A2201E8510056BC63 /* BDFeedbackCategoryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D4C5C982201E8510056BC63 /* BDFeedbackCategoryViewController.h */; };
-		3D4C5C9B2201E8510056BC63 /* BDFeedbackCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4C5C992201E8510056BC63 /* BDFeedbackCategoryViewController.m */; };
-		3D4C5C9E2201E8680056BC63 /* BDFeedbackHistoryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D4C5C9C2201E8680056BC63 /* BDFeedbackHistoryViewController.h */; };
-		3D4C5C9F2201E8680056BC63 /* BDFeedbackHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4C5C9D2201E8680056BC63 /* BDFeedbackHistoryViewController.m */; };
 		3D5606CB2057C875000E770C /* BDSingleImagePickerPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5606C92057C874000E770C /* BDSingleImagePickerPreviewViewController.m */; };
 		3D5606CC2057C875000E770C /* BDSingleImagePickerPreviewViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D5606CA2057C874000E770C /* BDSingleImagePickerPreviewViewController.h */; };
 		3D6D15D822B38638005BA341 /* KFCoreTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D6D15D422B38638005BA341 /* KFCoreTextView.h */; };
@@ -349,10 +346,16 @@
 		3D8A626121DE598600935617 /* BDGroupMemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8A625F21DE598600935617 /* BDGroupMemberTableViewCell.m */; };
 		3DABD1B61FE790F600DE473B /* BDUserinfoViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DABD1B41FE790F600DE473B /* BDUserinfoViewController.h */; };
 		3DABD1B71FE790F600DE473B /* BDUserinfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DABD1B51FE790F600DE473B /* BDUserinfoViewController.m */; };
+		3DAC0B602302B04A00B026C2 /* BDChatAtViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DAC0B5E2302B04A00B026C2 /* BDChatAtViewController.h */; };
+		3DAC0B612302B04A00B026C2 /* BDChatAtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC0B5F2302B04A00B026C2 /* BDChatAtViewController.m */; };
 		3DAF8CB021EC1B4E0000E73D /* BDContactProfileViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DAF8CAE21EC1B4E0000E73D /* BDContactProfileViewController.h */; };
 		3DAF8CB121EC1B4E0000E73D /* BDContactProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF8CAF21EC1B4E0000E73D /* BDContactProfileViewController.m */; };
 		3DC58F7421BE6B9D008BE85D /* BDMsgListContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DC58F7221BE6B9D008BE85D /* BDMsgListContentView.h */; };
 		3DC58F7521BE6B9D008BE85D /* BDMsgListContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC58F7321BE6B9D008BE85D /* BDMsgListContentView.m */; };
+		3DCDC52C22F1870D000438E6 /* BDFeedbackRecordViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DCDC52A22F1870D000438E6 /* BDFeedbackRecordViewController.h */; };
+		3DCDC52D22F1870D000438E6 /* BDFeedbackRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCDC52B22F1870D000438E6 /* BDFeedbackRecordViewController.m */; };
+		3DCDC53022F1872E000438E6 /* BDTicketRecordViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DCDC52E22F1872E000438E6 /* BDTicketRecordViewController.h */; };
+		3DCDC53122F1872E000438E6 /* BDTicketRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCDC52F22F1872E000438E6 /* BDTicketRecordViewController.m */; };
 		3DD5C6A42238F0B1002C4693 /* KFEmotionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5C6982238F0AF002C4693 /* KFEmotionView.m */; };
 		3DD5C6A52238F0B1002C4693 /* KFPlusView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD5C6992238F0AF002C4693 /* KFPlusView.h */; };
 		3DD5C6A62238F0B1002C4693 /* KFPlusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5C69A2238F0AF002C4693 /* KFPlusView.m */; };
@@ -389,10 +392,8 @@
 		3DF8230E22D02358003353D7 /* BDSupportCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8230422D02357003353D7 /* BDSupportCategoryViewController.m */; };
 		3DF8230F22D02358003353D7 /* BDTicketViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DF8230522D02357003353D7 /* BDTicketViewController.h */; };
 		3DF8231022D02358003353D7 /* BDTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8230622D02358003353D7 /* BDTicketViewController.m */; };
-		503EEA4A5155AFB3AAFD7A88 /* Pods_bytedesk_ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 617832211D3314A894EABD1B /* Pods_bytedesk_ui.framework */; };
+		5A59550DA217EEA9AAACFB2B /* Pods_bytedesk_ui_bduiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F09F1F4AE17C93E536D2B08 /* Pods_bytedesk_ui_bduiTests.framework */; };
 		81DCA33DE54CCB81B8CA020A /* Pods_bytedesk_ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953A297AD3F39573C972B590 /* Pods_bytedesk_ui.framework */; };
-		DE829B41D540F7AF1BDCAF7F /* Pods_bdui_bduiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE9D3198D64539B03C40CBAF /* Pods_bdui_bduiTests.framework */; };
-		F083B14690587054D498B015 /* Pods_bytedesk_ui_bduiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1669276FA4E577851C4B5B44 /* Pods_bytedesk_ui_bduiTests.framework */; };
 		F71E0A2E640D53D647C19446 /* Pods_bytedesk_ui_bduiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CEBFF73F8E899B293D07513 /* Pods_bytedesk_ui_bduiTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -407,7 +408,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1669276FA4E577851C4B5B44 /* Pods_bytedesk_ui_bduiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bytedesk_ui_bduiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C2BBF675DA2CAC005E0E271 /* Pods-wxui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wxui.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-wxui/Pods-wxui.debug.xcconfig"; sourceTree = "<group>"; };
 		32438A0703C43905086DFD58 /* Pods-wxui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wxui.release.xcconfig"; path = "../Pods/Target Support Files/Pods-wxui/Pods-wxui.release.xcconfig"; sourceTree = "<group>"; };
 		3A92AA90AD96DC8E86B4A69F /* Pods-bytedesk-ui-bduiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bytedesk-ui-bduiTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-bytedesk-ui-bduiTests/Pods-bytedesk-ui-bduiTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -740,10 +740,6 @@
 		3D46C223223B897200BA41C4 /* BDRedPacketTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDRedPacketTableViewCell.h; sourceTree = "<group>"; };
 		3D46C224223B897200BA41C4 /* BDRedPacketTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDRedPacketTableViewCell.m; sourceTree = "<group>"; };
 		3D4824F4215792FA00B50593 /* bytedesk-core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "bytedesk-core.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3D4C5C982201E8510056BC63 /* BDFeedbackCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDFeedbackCategoryViewController.h; sourceTree = "<group>"; };
-		3D4C5C992201E8510056BC63 /* BDFeedbackCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDFeedbackCategoryViewController.m; sourceTree = "<group>"; };
-		3D4C5C9C2201E8680056BC63 /* BDFeedbackHistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDFeedbackHistoryViewController.h; sourceTree = "<group>"; };
-		3D4C5C9D2201E8680056BC63 /* BDFeedbackHistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDFeedbackHistoryViewController.m; sourceTree = "<group>"; };
 		3D548A731FC55016003117B4 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		3D548A751FC5514B003117B4 /* KFDSUConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFDSUConstants.h; sourceTree = "<group>"; };
 		3D5606C92057C874000E770C /* BDSingleImagePickerPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDSingleImagePickerPreviewViewController.m; sourceTree = "<group>"; };
@@ -761,10 +757,16 @@
 		3D8A625F21DE598600935617 /* BDGroupMemberTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDGroupMemberTableViewCell.m; sourceTree = "<group>"; };
 		3DABD1B41FE790F600DE473B /* BDUserinfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDUserinfoViewController.h; sourceTree = "<group>"; };
 		3DABD1B51FE790F600DE473B /* BDUserinfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDUserinfoViewController.m; sourceTree = "<group>"; };
+		3DAC0B5E2302B04A00B026C2 /* BDChatAtViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDChatAtViewController.h; sourceTree = "<group>"; };
+		3DAC0B5F2302B04A00B026C2 /* BDChatAtViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDChatAtViewController.m; sourceTree = "<group>"; };
 		3DAF8CAE21EC1B4E0000E73D /* BDContactProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDContactProfileViewController.h; sourceTree = "<group>"; };
 		3DAF8CAF21EC1B4E0000E73D /* BDContactProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDContactProfileViewController.m; sourceTree = "<group>"; };
 		3DC58F7221BE6B9D008BE85D /* BDMsgListContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMsgListContentView.h; sourceTree = "<group>"; };
 		3DC58F7321BE6B9D008BE85D /* BDMsgListContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMsgListContentView.m; sourceTree = "<group>"; };
+		3DCDC52A22F1870D000438E6 /* BDFeedbackRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDFeedbackRecordViewController.h; sourceTree = "<group>"; };
+		3DCDC52B22F1870D000438E6 /* BDFeedbackRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDFeedbackRecordViewController.m; sourceTree = "<group>"; };
+		3DCDC52E22F1872E000438E6 /* BDTicketRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDTicketRecordViewController.h; sourceTree = "<group>"; };
+		3DCDC52F22F1872E000438E6 /* BDTicketRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDTicketRecordViewController.m; sourceTree = "<group>"; };
 		3DD5C6982238F0AF002C4693 /* KFEmotionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEmotionView.m; sourceTree = "<group>"; };
 		3DD5C6992238F0AF002C4693 /* KFPlusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFPlusView.h; sourceTree = "<group>"; };
 		3DD5C69A2238F0AF002C4693 /* KFPlusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFPlusView.m; sourceTree = "<group>"; };
@@ -803,15 +805,16 @@
 		3DF8230622D02358003353D7 /* BDTicketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDTicketViewController.m; sourceTree = "<group>"; };
 		4AFF2CBFAB7AE6AB4F360A63 /* Pods-wxui-wxuiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wxui-wxuiTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-wxui-wxuiTests/Pods-wxui-wxuiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4C57D21EFE3BF46E5EFEBC14 /* Pods-bdui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdui.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-bdui/Pods-bdui.debug.xcconfig"; sourceTree = "<group>"; };
-		617832211D3314A894EABD1B /* Pods_bytedesk_ui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bytedesk_ui.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		68E1819B62F043C68A26C8D7 /* Pods-bdui-bduiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdui-bduiTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-bdui-bduiTests/Pods-bdui-bduiTests.release.xcconfig"; sourceTree = "<group>"; };
 		771383C0F6BD1BAE336079CD /* Pods-bytedesk-ui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bytedesk-ui.release.xcconfig"; path = "../Pods/Target Support Files/Pods-bytedesk-ui/Pods-bytedesk-ui.release.xcconfig"; sourceTree = "<group>"; };
 		7CEBFF73F8E899B293D07513 /* Pods_bytedesk_ui_bduiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bytedesk_ui_bduiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F09F1F4AE17C93E536D2B08 /* Pods_bytedesk_ui_bduiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bytedesk_ui_bduiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90FA3AAA9DBC3195112D83B4 /* Pods-bdui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdui.release.xcconfig"; path = "../Pods/Target Support Files/Pods-bdui/Pods-bdui.release.xcconfig"; sourceTree = "<group>"; };
 		953A297AD3F39573C972B590 /* Pods_bytedesk_ui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bytedesk_ui.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9843616BE4D9F5EDACD39B8E /* Pods-bytedesk-ui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bytedesk-ui.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-bytedesk-ui/Pods-bytedesk-ui.debug.xcconfig"; sourceTree = "<group>"; };
 		B525D8377F0427CACFA20FCA /* Pods-bdui-bduiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bdui-bduiTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-bdui-bduiTests/Pods-bdui-bduiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BE9D3198D64539B03C40CBAF /* Pods_bdui_bduiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdui_bduiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA5D5B9D19C760007972848C /* Pods_bytedesk_ui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bytedesk_ui.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0DE01CE25A433F7C77A32FF /* Pods_bdui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bdui.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F40E95B52198654C85E659C0 /* Pods-wxui-wxuiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wxui-wxuiTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-wxui-wxuiTests/Pods-wxui-wxuiTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -825,7 +828,7 @@
 				3D3A7E7022462152007EEC81 /* libopencore-amrnb.a in Frameworks */,
 				3D3A7E6F22462152007EEC81 /* libopencore-amrwb.a in Frameworks */,
 				81DCA33DE54CCB81B8CA020A /* Pods_bytedesk_ui.framework in Frameworks */,
-				503EEA4A5155AFB3AAFD7A88 /* Pods_bytedesk_ui.framework in Frameworks */,
+				1D3950D15A754AD7B6D3D875 /* Pods_bytedesk_ui.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -834,24 +837,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D3150931F1A1D530005DB6C /* bytedesk-ui.framework in Frameworks */,
-				DE829B41D540F7AF1BDCAF7F /* Pods_bdui_bduiTests.framework in Frameworks */,
 				F71E0A2E640D53D647C19446 /* Pods_bytedesk_ui_bduiTests.framework in Frameworks */,
-				F083B14690587054D498B015 /* Pods_bytedesk_ui_bduiTests.framework in Frameworks */,
+				5A59550DA217EEA9AAACFB2B /* Pods_bytedesk_ui_bduiTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A7051FB78B6086D4C54B4AC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				617832211D3314A894EABD1B /* Pods_bytedesk_ui.framework */,
-				1669276FA4E577851C4B5B44 /* Pods_bytedesk_ui_bduiTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		3D0345A6226E8A3D00F1BB44 /* thread */ = {
 			isa = PBXGroup;
 			children = (
@@ -890,6 +883,8 @@
 				3DD5C6B52238FBA7002C4693 /* BDChatIMViewController.m */,
 				3D3C28DC2236804700E288AF /* BDChatBaseViewController.h */,
 				3D3C28DD2236804700E288AF /* BDChatBaseViewController.m */,
+				3DAC0B5E2302B04A00B026C2 /* BDChatAtViewController.h */,
+				3DAC0B5F2302B04A00B026C2 /* BDChatAtViewController.m */,
 			);
 			path = chat;
 			sourceTree = "<group>";
@@ -897,22 +892,8 @@
 		3D0345AA226E8A7600F1BB44 /* other */ = {
 			isa = PBXGroup;
 			children = (
-				3DF8230522D02357003353D7 /* BDTicketViewController.h */,
-				3DF8230622D02358003353D7 /* BDTicketViewController.m */,
-				3DF822FE22D02357003353D7 /* BDFeedbackViewController.h */,
-				3DF8230022D02357003353D7 /* BDFeedbackViewController.m */,
-				3DF822FD22D02356003353D7 /* BDSupportApiViewController.h */,
-				3DF8230122D02357003353D7 /* BDSupportApiViewController.m */,
-				3DF8230322D02357003353D7 /* BDSupportArticleViewController.h */,
-				3DF8230222D02357003353D7 /* BDSupportArticleViewController.m */,
-				3DF822FF22D02357003353D7 /* BDSupportCategoryViewController.h */,
-				3DF8230422D02357003353D7 /* BDSupportCategoryViewController.m */,
 				3D86FF5822295F8A00477E76 /* BDGroupInviteTableViewController.h */,
 				3D86FF5922295F8A00477E76 /* BDGroupInviteTableViewController.m */,
-				3D4C5C982201E8510056BC63 /* BDFeedbackCategoryViewController.h */,
-				3D4C5C992201E8510056BC63 /* BDFeedbackCategoryViewController.m */,
-				3D4C5C9C2201E8680056BC63 /* BDFeedbackHistoryViewController.h */,
-				3D4C5C9D2201E8680056BC63 /* BDFeedbackHistoryViewController.m */,
 				3DE6FD812234F3C2006F1329 /* BDQRCodeViewController.h */,
 				3DE6FD822234F3C2006F1329 /* BDQRCodeViewController.m */,
 				3D3B30F1225AB282000FC60F /* BDLeaveMessageViewController.h */,
@@ -1305,7 +1286,7 @@
 				3D3150961F1A1D530005DB6C /* bduiTests */,
 				3D31508A1F1A1D530005DB6C /* Products */,
 				CC94849B2A58252E6813E9F6 /* Pods */,
-				0A7051FB78B6086D4C54B4AC /* Frameworks */,
+				9B25B14F6667DB6DFB115DB7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1476,6 +1457,9 @@
 		3D548A671FC52DAE003117B4 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3DCDC53422F18749000438E6 /* support */,
+				3DCDC53322F18741000438E6 /* feedback */,
+				3DCDC53222F18739000438E6 /* ticket */,
 				3D0345A9226E8A5D00F1BB44 /* chat */,
 				3D0345A6226E8A3D00F1BB44 /* thread */,
 				3D0345A7226E8A4800F1BB44 /* contact */,
@@ -1506,6 +1490,41 @@
 			path = util;
 			sourceTree = "<group>";
 		};
+		3DCDC53222F18739000438E6 /* ticket */ = {
+			isa = PBXGroup;
+			children = (
+				3DF8230522D02357003353D7 /* BDTicketViewController.h */,
+				3DF8230622D02358003353D7 /* BDTicketViewController.m */,
+				3DCDC52E22F1872E000438E6 /* BDTicketRecordViewController.h */,
+				3DCDC52F22F1872E000438E6 /* BDTicketRecordViewController.m */,
+			);
+			path = ticket;
+			sourceTree = "<group>";
+		};
+		3DCDC53322F18741000438E6 /* feedback */ = {
+			isa = PBXGroup;
+			children = (
+				3DF822FE22D02357003353D7 /* BDFeedbackViewController.h */,
+				3DF8230022D02357003353D7 /* BDFeedbackViewController.m */,
+				3DCDC52A22F1870D000438E6 /* BDFeedbackRecordViewController.h */,
+				3DCDC52B22F1870D000438E6 /* BDFeedbackRecordViewController.m */,
+			);
+			path = feedback;
+			sourceTree = "<group>";
+		};
+		3DCDC53422F18749000438E6 /* support */ = {
+			isa = PBXGroup;
+			children = (
+				3DF822FD22D02356003353D7 /* BDSupportApiViewController.h */,
+				3DF8230122D02357003353D7 /* BDSupportApiViewController.m */,
+				3DF8230322D02357003353D7 /* BDSupportArticleViewController.h */,
+				3DF8230222D02357003353D7 /* BDSupportArticleViewController.m */,
+				3DF822FF22D02357003353D7 /* BDSupportCategoryViewController.h */,
+				3DF8230422D02357003353D7 /* BDSupportCategoryViewController.m */,
+			);
+			path = support;
+			sourceTree = "<group>";
+		};
 		3DF822E422D0224E003353D7 /* form */ = {
 			isa = PBXGroup;
 			children = (
@@ -1530,6 +1549,15 @@
 				BE9D3198D64539B03C40CBAF /* Pods_bdui_bduiTests.framework */,
 				953A297AD3F39573C972B590 /* Pods_bytedesk_ui.framework */,
 				7CEBFF73F8E899B293D07513 /* Pods_bytedesk_ui_bduiTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9B25B14F6667DB6DFB115DB7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EA5D5B9D19C760007972848C /* Pods_bytedesk_ui.framework */,
+				8F09F1F4AE17C93E536D2B08 /* Pods_bytedesk_ui_bduiTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1563,13 +1591,12 @@
 			files = (
 				3D46C225223B897200BA41C4 /* BDRedPacketTableViewCell.h in Headers */,
 				3DE6FD832234F3C3006F1329 /* BDQRCodeViewController.h in Headers */,
+				3DCDC52C22F1870D000438E6 /* BDFeedbackRecordViewController.h in Headers */,
 				3DF8230F22D02358003353D7 /* BDTicketViewController.h in Headers */,
 				3DAF8CB021EC1B4E0000E73D /* BDContactProfileViewController.h in Headers */,
 				3D86FF5A22295F8A00477E76 /* BDGroupInviteTableViewController.h in Headers */,
-				3D4C5C9E2201E8680056BC63 /* BDFeedbackHistoryViewController.h in Headers */,
 				3D3B30F3225AB282000FC60F /* BDLeaveMessageViewController.h in Headers */,
 				3D3150F11F1A2A410005DB6C /* BDUIApis.h in Headers */,
-				3D4C5C9A2201E8510056BC63 /* BDFeedbackCategoryViewController.h in Headers */,
 				3DF822F022D02306003353D7 /* BDFormSubmitViewCell.h in Headers */,
 				3D1996C31FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.h in Headers */,
 				3D3A7E6322462152007EEC81 /* wav.h in Headers */,
@@ -1592,6 +1619,7 @@
 				3DD5C6A72238F0B1002C4693 /* KFInputView.h in Headers */,
 				3DD5C6AF2238F0B1002C4693 /* KFRateView.h in Headers */,
 				3D6D15DE22B389F7005BA341 /* BDMsgRobotContentView.h in Headers */,
+				3DCDC53022F1872E000438E6 /* BDTicketRecordViewController.h in Headers */,
 				3DF822F222D02306003353D7 /* BDFormPhoneViewCell.h in Headers */,
 				3D3A7E6C22462152007EEC81 /* dec_if.h in Headers */,
 				3D1A9776221D3CD300DBEC28 /* BDMsgQuestionnairViewCell.h in Headers */,
@@ -1607,6 +1635,7 @@
 				3D1996E51FCE638800219FEF /* BDMsgNotificationViewCell.h in Headers */,
 				3DF8230722D02358003353D7 /* BDSupportApiViewController.h in Headers */,
 				3DF822FB22D02347003353D7 /* UIView+FeedBack.h in Headers */,
+				3DAC0B602302B04A00B026C2 /* BDChatAtViewController.h in Headers */,
 				3D3928E521C07B81001E1257 /* BDContactSelectViewController.h in Headers */,
 				3D1998FA1FCE833900219FEF /* KFDSLoadProgressView.h in Headers */,
 				3D5606CC2057C875000E770C /* BDSingleImagePickerPreviewViewController.h in Headers */,
@@ -2045,8 +2074,12 @@
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
 				"${BUILT_PRODUCTS_DIR}/M80AttributedLabel/M80AttributedLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/MMKV/MMKV.framework",
 				"${BUILT_PRODUCTS_DIR}/MQTTClient/MQTTClient.framework",
 				"${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SQLiteRepairKit/sqliterk.framework",
+				"${BUILT_PRODUCTS_DIR}/WCDB/WCDB.framework",
+				"${BUILT_PRODUCTS_DIR}/WCDBOptimizedSQLCipher/sqlcipher.framework",
 				"${PODS_ROOT}/bytedesk-core/frameworks/cocoapods/bytedesk-core.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -2056,8 +2089,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M80AttributedLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMKV.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MQTTClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QMUIKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sqliterk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WCDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sqlcipher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bytedesk-core.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2093,6 +2130,7 @@
 				3DAF8CB121EC1B4E0000E73D /* BDContactProfileViewController.m in Sources */,
 				3D3928DF21BF9ED7001E1257 /* BDGroupProfileViewController.m in Sources */,
 				3D3928E621C07B81001E1257 /* BDContactSelectViewController.m in Sources */,
+				3DAC0B612302B04A00B026C2 /* BDChatAtViewController.m in Sources */,
 				3DC58F7521BE6B9D008BE85D /* BDMsgListContentView.m in Sources */,
 				3DD5C6B72238FBA9002C4693 /* BDChatIMViewController.m in Sources */,
 				3D38CC3722517D9100BA2668 /* WBDocument.m in Sources */,
@@ -2113,10 +2151,11 @@
 				3D1998F81FCE833900219FEF /* KFDSLoadProgressView.m in Sources */,
 				3D1996EC1FCE638800219FEF /* BDMsgNotificationViewCell.m in Sources */,
 				3D38CC3622517D9100BA2668 /* WBiCloudManager.m in Sources */,
+				3DCDC53122F1872E000438E6 /* BDTicketRecordViewController.m in Sources */,
 				3DD5C6A62238F0B1002C4693 /* KFPlusView.m in Sources */,
 				3DF8231022D02358003353D7 /* BDTicketViewController.m in Sources */,
+				3DCDC52D22F1870D000438E6 /* BDFeedbackRecordViewController.m in Sources */,
 				3D1996F71FCE638800219FEF /* KFDSInputEmotionManager.m in Sources */,
-				3D4C5C9B2201E8510056BC63 /* BDFeedbackCategoryViewController.m in Sources */,
 				3D3E2272225F2026008038F5 /* KFUIUtils.m in Sources */,
 				3D3C28DF2236804700E288AF /* BDChatBaseViewController.m in Sources */,
 				3D5606CB2057C875000E770C /* BDSingleImagePickerPreviewViewController.m in Sources */,
@@ -2129,7 +2168,6 @@
 				3D3A7E7222462152007EEC81 /* BD_CafRecordWriter.m in Sources */,
 				3DF822FC22D02347003353D7 /* UIView+FeedBack.m in Sources */,
 				3DF822EF22D02306003353D7 /* BDFormEmailViewCell.m in Sources */,
-				3D4C5C9F2201E8680056BC63 /* BDFeedbackHistoryViewController.m in Sources */,
 				3D3150F21F1A2A410005DB6C /* BDUIApis.m in Sources */,
 				3D1996ED1FCE638800219FEF /* BDMsgTextContentView.m in Sources */,
 			);

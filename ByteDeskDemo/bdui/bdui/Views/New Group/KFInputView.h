@@ -15,6 +15,7 @@
 -(void)switchEmotionButtonPressed:(id)sender;       //
 -(void)switchPlusButtonPressed:(id)sender;          //
 -(void)sendMessage:(NSString *)content;             //
+//-(void)textDidChange:(NSString *)content;
 
 //
 -(void)recordVoiceButtonTouchDown:(id)sender;       //

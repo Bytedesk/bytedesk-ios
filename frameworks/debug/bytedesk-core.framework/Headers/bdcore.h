@@ -22,6 +22,7 @@ FOUNDATION_EXPORT const unsigned char bdcoreVersionString[];
 #import <bytedesk-core/BDKFMQTTApis.h>
 #import <bytedesk-core/BDIMMQTTApis.h>
 #import <bytedesk-core/BDDBApis.h>
+#import <bytedesk-core/BDWCDBApis.h>
 #import <bytedesk-core/BDHttpApis.h>
 #import <bytedesk-core/BDConstants.h>
 #import <bytedesk-core/BDUtils.h>
@@ -37,3 +38,5 @@ FOUNDATION_EXPORT const unsigned char bdcoreVersionString[];
 #import <bytedesk-core/BDNoticeModel.h>
 #import <bytedesk-core/BDCategoryModel.h>
 #import <bytedesk-core/BDArticleModel.h>
+#import <bytedesk-core/BDFeedbackModel.h>
+#import <bytedesk-core/BDTicketModel.h>

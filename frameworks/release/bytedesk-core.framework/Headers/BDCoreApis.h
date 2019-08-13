@@ -1615,6 +1615,12 @@ destroyAfterReading:(BOOL)destroyAfterReading
           resultSuccess:(SuccessCallbackBlock)success
                resultFailed:(FailedCallbackBlock)failed;
 
+
++ (void)getTickets:(NSUInteger)page
+          withSize:(NSUInteger)size
+     resultSuccess:(SuccessCallbackBlock)success
+      resultFailed:(FailedCallbackBlock)failed;
+
 /**
  <#Description#>
  
@@ -1646,6 +1652,12 @@ destroyAfterReading:(BOOL)destroyAfterReading
 + (void)getFeedbackCategories:(NSString *)uid
                 resultSuccess:(SuccessCallbackBlock)success
                  resultFailed:(FailedCallbackBlock)failed;
+
+
++ (void)getFeedbacks:(NSUInteger)page
+            withSize:(NSUInteger)size
+       resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
 
 /**
  <#Description#>

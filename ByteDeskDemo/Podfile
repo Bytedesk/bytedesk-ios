@@ -15,6 +15,8 @@ target 'demo' do
     project 'demo/demo.xcodeproj'
     
     pod 'FMDB'
+    pod 'WCDB'
+    pod 'MMKV'
     pod 'MQTTClient'
     pod 'AFNetworking'
     pod 'QMUIKit'
@@ -26,7 +28,7 @@ target 'demo' do
 #    pod 'TZImagePickerController'
 
     # 集成核心协议库core
-    pod 'bytedesk-core', '1.6.4'
+    pod 'bytedesk-core', '1.6.5.1'
 
     # 集成UI界面库
 #   第一种集成方式：将bdui项目集成到自己项目中，并添加依赖，可自定义界面
@@ -47,6 +49,8 @@ target 'bytedesk-ui' do
 
     # Pods for bdui
     pod 'FMDB'
+    pod 'WCDB'
+    pod 'MMKV'
     pod 'MQTTClient'
     pod 'AFNetworking'
     pod 'QMUIKit'
@@ -55,7 +59,7 @@ target 'bytedesk-ui' do
     pod 'CocoaLumberjack'
     
     # 集成核心协议库core
-    pod 'bytedesk-core', '1.6.4'
+    pod 'bytedesk-core', '1.6.5.1'
 
     target 'bduiTests' do
     end

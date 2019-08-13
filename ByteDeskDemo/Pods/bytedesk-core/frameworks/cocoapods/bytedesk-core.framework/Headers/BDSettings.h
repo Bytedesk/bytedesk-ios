@@ -354,7 +354,7 @@
  @param sessionType <#sessionType description#>
  @return <#return value description#>
  */
-+ (NSInteger)getDestroyAfterLength:(NSString *)tidOrUidOrGid sessionType:(NSString *)sessionType;
++ (uint32_t)getDestroyAfterLength:(NSString *)tidOrUidOrGid sessionType:(NSString *)sessionType;
 
 /**
  <#Description#>
@@ -363,7 +363,7 @@
  @param sessionType <#sessionType description#>
  @param length <#length description#>
  */
-+ (void)setDestroyAfterLength:(NSString *)tidOrUidOrGid sessionType:(NSString *)sessionType length:(NSInteger)length;
++ (void)setDestroyAfterLength:(NSString *)tidOrUidOrGid sessionType:(NSString *)sessionType length:(uint32_t)length;
 
 
 #pragma mark - 新消息提示

@@ -634,7 +634,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self.tableView addGestureRecognizer:singleFingerTap];
     
     //输入框Toolbar
-    //    self.kfInputView = [[self.kfInputView alloc] init];
     CGRect inputViewFrame = CGRectMake(0.0f, self.view.frame.size.height - INPUTBAR_HEIGHT, self.view.frame.size.width, INPUTBAR_HEIGHT);
     self.kfInputView = [[KFInputView alloc] initWithFrame:inputViewFrame];
     self.kfInputView.delegate = self;
@@ -720,8 +719,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     //
     [self registerNotifications];
     [self reloadTableData];
-    // 从服务器加载聊天记录
-    [self refreshMessages];
+    // 从服务器加载聊天记录, 暂时不从服务器加载
+    // [self refreshMessages];
 }
 
 - (void)didReceiveMemoryWarning {

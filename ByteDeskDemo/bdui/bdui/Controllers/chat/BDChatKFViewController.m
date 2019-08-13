@@ -621,6 +621,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.toolbarTextField.backgroundColor = UIColorWhite;
     self.toolbarTextField.returnKeyType = UIReturnKeySend;
     [self.toolbarView addSubview:self.toolbarTextField];
+    [self.toolbarTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+
     
     __weak __typeof(self)weakSelf = self;
     self.toolbarTextField.qmui_keyboardWillChangeFrameNotificationBlock = ^(QMUIKeyboardUserInfo *keyboardUserInfo) {
@@ -719,8 +721,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self registerNotifications];
     // 加载本地聊天记录
     [self reloadTableData];
-    // 从服务器加载聊天记录
-    [self refreshMessages];
+    // 从服务器加载聊天记录, 暂时不从服务器加载
+    // [self refreshMessages];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -1244,6 +1246,14 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 #pragma mark - KFDSInputViewDelegate
 
+-(void)textFieldDidChange :(UITextField *)textField{
+    NSString *content = textField.text;
+    NSLog( @"text changed: %@", content);
+    
+    // 发送消息预知
+//    [[BDMQTTApis sharedInstance] sendPreviewMessage:content toTid:self.mTidOrUidOrGid sessionType:self.mThreadType];
+}
+
 #pragma mark - 发送消息
 
 // TODO: 区分发送消息
@@ -1639,6 +1649,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         }
     }];
 }
+
 
 #pragma mark - 录音
 

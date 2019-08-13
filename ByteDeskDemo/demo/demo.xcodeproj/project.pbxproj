@@ -50,8 +50,8 @@
 		3D548A5D1FC5251B003117B4 /* KFVisitorThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A5C1FC5251B003117B4 /* KFVisitorThreadViewController.m */; };
 		3D5606EC205FB699000E770C /* KFThreadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5606EB205FB699000E770C /* KFThreadTableViewCell.m */; };
 		3D9A14782081F629008C6DA2 /* KFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9A14772081F629008C6DA2 /* KFNavigationController.m */; };
-		3DAC9D0022E0C42700A5C8D3 /* bytedesk-ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC9CFF22E0C42700A5C8D3 /* bytedesk-ui.framework */; };
-		3DAC9D0122E0C42700A5C8D3 /* bytedesk-ui.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC9CFF22E0C42700A5C8D3 /* bytedesk-ui.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3DAC0B632303749C00B026C2 /* bytedesk-ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC0B622303749C00B026C2 /* bytedesk-ui.framework */; };
+		3DAC0B642303749C00B026C2 /* bytedesk-ui.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAC0B622303749C00B026C2 /* bytedesk-ui.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3DCA9C6D21F60FE800E63998 /* KFSupportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6C21F60FE800E63998 /* KFSupportViewController.m */; };
 		3DCB17672267813C00E8FB16 /* SWQRCodeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB175C2267813C00E8FB16 /* SWQRCodeConfig.m */; };
 		3DCB17682267813C00E8FB16 /* SWQRCodeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB175D2267813C00E8FB16 /* SWQRCodeManager.m */; };
@@ -127,7 +127,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3DAC9D0122E0C42700A5C8D3 /* bytedesk-ui.framework in Embed Frameworks */,
+				3DAC0B642303749C00B026C2 /* bytedesk-ui.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,7 +222,7 @@
 		3D5606EB205FB699000E770C /* KFThreadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFThreadTableViewCell.m; sourceTree = "<group>"; };
 		3D9A14762081F629008C6DA2 /* KFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFNavigationController.h; sourceTree = "<group>"; };
 		3D9A14772081F629008C6DA2 /* KFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFNavigationController.m; sourceTree = "<group>"; };
-		3DAC9CFF22E0C42700A5C8D3 /* bytedesk-ui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "bytedesk-ui.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DAC0B622303749C00B026C2 /* bytedesk-ui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "bytedesk-ui.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DCA9C6B21F60FE800E63998 /* KFSupportViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFSupportViewController.h; sourceTree = "<group>"; };
 		3DCA9C6C21F60FE800E63998 /* KFSupportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFSupportViewController.m; sourceTree = "<group>"; };
 		3DCB175C2267813C00E8FB16 /* SWQRCodeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWQRCodeConfig.m; sourceTree = "<group>"; };
@@ -353,7 +353,7 @@
 			files = (
 				AF07A2BB176935FE7FE9041E /* Pods_demo.framework in Frameworks */,
 				3D38CC30225179A100BA2668 /* CloudKit.framework in Frameworks */,
-				3DAC9D0022E0C42700A5C8D3 /* bytedesk-ui.framework in Frameworks */,
+				3DAC0B632303749C00B026C2 /* bytedesk-ui.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,7 +538,7 @@
 		3D5489C41FC515CF003117B4 = {
 			isa = PBXGroup;
 			children = (
-				3DAC9CFF22E0C42700A5C8D3 /* bytedesk-ui.framework */,
+				3DAC0B622303749C00B026C2 /* bytedesk-ui.framework */,
 				3D5489CF1FC515CF003117B4 /* demo */,
 				3D5489CE1FC515CF003117B4 /* Products */,
 				9C7149EBC449A684C32A715E /* Pods */,
@@ -1137,9 +1137,13 @@
 				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
 				"${BUILT_PRODUCTS_DIR}/M80AttributedLabel/M80AttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/MGSwipeTableCell/MGSwipeTableCell.framework",
+				"${BUILT_PRODUCTS_DIR}/MMKV/MMKV.framework",
 				"${BUILT_PRODUCTS_DIR}/MQTTClient/MQTTClient.framework",
 				"${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SDAutoLayout/SDAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/SQLiteRepairKit/sqliterk.framework",
+				"${BUILT_PRODUCTS_DIR}/WCDB/WCDB.framework",
+				"${BUILT_PRODUCTS_DIR}/WCDBOptimizedSQLCipher/sqlcipher.framework",
 				"${PODS_ROOT}/bytedesk-core/frameworks/cocoapods/bytedesk-core.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1150,9 +1154,13 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M80AttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGSwipeTableCell.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMKV.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MQTTClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QMUIKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sqliterk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WCDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sqlcipher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bytedesk-core.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

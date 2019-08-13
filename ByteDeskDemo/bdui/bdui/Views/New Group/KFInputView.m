@@ -557,9 +557,7 @@ CGFloat const kFontSize = 17.0f;
     } else {
         [[self switchEmotionButton] setImage:[UIImage imageNamed:@"ToolViewInputText_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         [[self switchEmotionButton] setImage:[UIImage imageNamed:@"ToolViewInputTextHL_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
-        
     }
-    
 }
 
 -(void)switchPlusButtonPressed:(id)sender {

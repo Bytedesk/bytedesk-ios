@@ -14,11 +14,13 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - bytedesk-core (1.6.4):
+  - bytedesk-core (1.6.5.1):
     - AFNetworking
     - CocoaLumberjack
     - FMDB
+    - MMKV
     - MQTTClient
+    - WCDB
   - CocoaLumberjack (3.5.3):
     - CocoaLumberjack/Core (= 3.5.3)
   - CocoaLumberjack/Core (3.5.3)
@@ -28,6 +30,7 @@ PODS:
   - HCSStarRatingView (1.5)
   - M80AttributedLabel (1.9.5)
   - MGSwipeTableCell (1.6.8)
+  - MMKV (1.0.22)
   - MQTTClient (0.15.2):
     - MQTTClient/Core (= 0.15.2)
   - MQTTClient/Core (0.15.2):
@@ -303,18 +306,26 @@ PODS:
   - QMUIKit/QMUIResources (3.2.1)
   - QMUIKit/QMUIWeakObjectContainer (3.2.1)
   - SDAutoLayout (2.2.1)
+  - SQLiteRepairKit (1.2.2):
+    - WCDBOptimizedSQLCipher (~> 1.2.0)
+  - WCDB (1.0.7.5):
+    - SQLiteRepairKit (~> 1.2.0)
+    - WCDBOptimizedSQLCipher (~> 1.2.0)
+  - WCDBOptimizedSQLCipher (1.2.1)
 
 DEPENDENCIES:
   - AFNetworking
-  - bytedesk-core (= 1.6.4)
+  - bytedesk-core (= 1.6.5.1)
   - CocoaLumberjack
   - FMDB
   - HCSStarRatingView
   - M80AttributedLabel
   - MGSwipeTableCell
+  - MMKV
   - MQTTClient
   - QMUIKit
   - SDAutoLayout
+  - WCDB
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -325,22 +336,30 @@ SPEC REPOS:
     - HCSStarRatingView
     - M80AttributedLabel
     - MGSwipeTableCell
+    - MMKV
     - MQTTClient
     - QMUIKit
     - SDAutoLayout
+    - SQLiteRepairKit
+    - WCDB
+    - WCDBOptimizedSQLCipher
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  bytedesk-core: cf1d1c882cc6b529824b59e663848f97b435b415
+  bytedesk-core: 719d889ad009036f6ba6d71364397371978feb0c
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   M80AttributedLabel: d1177fbd7451d134794b50e91ca8b0cb167ef530
   MGSwipeTableCell: dc4eca3212ed38a563b27d6aa7b3c01ce656c1e2
+  MMKV: 99b05c376c0eb412b468ba1d3e6813502edeaa24
   MQTTClient: 902c7bcac1501595f3d0b15178c7205b40331fb0
   QMUIKit: a3af645843b9558eb7aaf407b320eaeb45ab6144
   SDAutoLayout: 8bf6b3bbc8b01f775d4defbb4fda2ace805461be
+  SQLiteRepairKit: 35aaae5a8838adb85f5b1eb4d796055be6060a4b
+  WCDB: 8e90babdeb7784c569353a4bd22a66c0a175a882
+  WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
 
-PODFILE CHECKSUM: 3b594d8b42fa70bc4e54fcb764cf717bd1981e59
+PODFILE CHECKSUM: b2a3c4778a1804d7515eab814ed97d8f58746c65
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.7.5

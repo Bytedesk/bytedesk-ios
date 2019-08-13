@@ -1470,6 +1470,19 @@ destroyAfterReading:(BOOL)destroyAfterReading
                resultFailed:(FailedCallbackBlock)failed;
 
 /**
+ 我的工单
+
+ @param page <#page description#>
+ @param size <#size description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)getTickets:(NSUInteger)page
+          withSize:(NSUInteger)size
+     resultSuccess:(SuccessCallbackBlock)success
+      resultFailed:(FailedCallbackBlock)failed;
+
+/**
  <#Description#>
  
  @param uid <#uid description#>
@@ -1498,6 +1511,19 @@ destroyAfterReading:(BOOL)destroyAfterReading
 - (void)getFeedbackCategories:(NSString *)uid
                 resultSuccess:(SuccessCallbackBlock)success
                  resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 我的反馈
+
+ @param page <#page description#>
+ @param size <#size description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
+- (void)getFeedbacks:(NSUInteger)page
+            withSize:(NSUInteger)size
+       resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
 
 /**
  <#Description#>

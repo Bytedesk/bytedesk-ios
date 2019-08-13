@@ -16,10 +16,12 @@
 // 默认json格式
 #define BD_MQTT_TOPIC_MESSAGE               @"message/mqtt"
 #define BD_MQTT_TOPIC_RECEIPT               @"receipt/mqtt"
+#define BD_MQTT_TOPIC_RECALL                @"recall/mqtt"
 #define BD_MQTT_TOPIC_WEBRTC                @"webrtc/mqtt"
 
 // 发送protobuf格式: TODO
 #define BD_MQTT_TOPIC_MESSAGE_PROTOBUF      @"message/mqtt/protobuf"
+
 #define BD_MQTT_TOPIC_STATUS                @"status/mqtt"
 #define BD_MQTT_TOPIC_LASTWILL              @"lastWill/mqtt"
 
@@ -207,6 +209,7 @@
 #define BD_MESSAGE_STATUS_STORED            @"stored" // 发送到服务器，成功存储数据库中
 #define BD_MESSAGE_STATUS_ERROR             @"error" // 发送错误
 #define BD_MESSAGE_STATUS_DESTROYED         @"destroyed" // 阅后即焚已销毁
+#define BD_MESSAGE_STATUS_RECALL            @"recall" // 消息撤回
 
 // 消息类型
 #define BD_MESSAGE_TYPE_TEXT                @"text"  // 文本消息类型
@@ -267,6 +270,8 @@
 #define BD_MESSAGE_TYPE_NOTIFICATION_ACCEPT_STATUS      @"notification_accept_status"
 // 消息预知
 #define BD_MESSAGE_TYPE_NOTIFICATION_PREVIEW            @"notification_preview"
+// 消息撤回
+#define BD_MESSAGE_TYPE_NOTIFICATION_RECALL             @"notification_recall"
 // 消息回执：收到消息之后回复给消息发送方
 #define BD_MESSAGE_TYPE_NOTIFICATION_RECEIPT            @"notification_receipt"
 // 踢掉其他客户端
