@@ -1042,6 +1042,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (void)addBlock:(NSString *)uid
         withType:(NSString *)type
         withNote:(NSString *)note
+         withWid:(NSString *)wid
    resultSuccess:(SuccessCallbackBlock)success
     resultFailed:(FailedCallbackBlock)failed;
 

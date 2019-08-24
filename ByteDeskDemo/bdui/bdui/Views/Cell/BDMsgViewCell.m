@@ -152,9 +152,9 @@
         [self.audioUnplayedIcon removeFromSuperview];
         self.audioUnplayedIcon = nil;
     }
-    if (self.readLabel) {
-        [self.readLabel removeFromSuperview];
-        self.readLabel = nil;
+    if (self.statusLabel) {
+        [self.statusLabel removeFromSuperview];
+        self.statusLabel = nil;
     }
     
     if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_TEXT]) {
@@ -195,7 +195,7 @@
     [self.contentView addSubview:self.resendButton];
     
     [self.contentView addSubview:self.audioUnplayedIcon];
-    [self.contentView addSubview:self.readLabel];
+    [self.contentView addSubview:self.statusLabel];
 }
 
 
@@ -264,11 +264,14 @@
     return _audioUnplayedIcon;
 }
 
-- (QMUILabel *)readLabel {
-    if (!_readLabel) {
-        _readLabel = [QMUILabel new];
+- (QMUILabel *)statusLabel {
+    if (!_statusLabel) {
+        _statusLabel = [QMUILabel new];
+        _statusLabel.textColor = [UIColor grayColor];
+        _statusLabel.font = [UIFont systemFontOfSize:11.0f];
+        _statusLabel.backgroundColor = [UIColor clearColor];
     }
-    return _readLabel;
+    return _statusLabel;
 }
 
 - (void)layoutSubviews {
@@ -282,7 +285,7 @@
     [self layoutSendingStatusActivityIndicator];
     [self layoutResendButton];
     [self layoutAudioUnplayedIcon];
-    [self layoutReadLabel];
+    [self layoutStatusLabel];
 }
 
 
@@ -325,7 +328,6 @@
 }
 
 - (void)layoutSendingStatusActivityIndicator {
-    
 //    DDLogInfo(@"%s, status: %@, content: %@", __PRETTY_FUNCTION__, self.messageModel.status, self.messageModel.content);
     
 //    if ([self.messageModel isSend]) {
@@ -344,7 +346,6 @@
 }
 
 - (void)layoutResendButton {
-    
 //    DDLogInfo(@"%s, status: %@, content: %@", __PRETTY_FUNCTION__, self.messageModel.status, self.messageModel.content);
     
 //    if ([self.messageModel isSend]) {
@@ -354,7 +355,6 @@
             _resendButton.frame = CGRectMake(_avatarImageView.frame.origin.x - self.messageModel.contentSize.width - self.messageModel.contentViewInsets.left - self.messageModel.contentViewInsets.right - 30,
                                              _avatarImageView.frame.origin.y,
                                              15, 15);
-            
 //            DDLogInfo(@"x: %f, y:%f, w: %f, h: %f",
 //                      _resendButton.frame.origin.x, _resendButton.frame.origin.y,
 //                      _resendButton.frame.size.width, _resendButton.frame.size.height);
@@ -369,8 +369,30 @@
     
 }
 
-- (void)layoutReadLabel {
-    
+- (void)layoutStatusLabel {
+//    DDLogInfo(@"%s, status: %@, content: %@", __PRETTY_FUNCTION__, self.messageModel.status, self.messageModel.content);
+    // 如果已经为read的，则直接返回
+    if ([_statusLabel.text isEqualToString:BD_MESSAGE_STATUS_READ]) {
+        return;
+    }
+    //
+    if ([self.messageModel.status isKindOfClass:[NSString class]] &&
+        ([self.messageModel.status isEqualToString:BD_MESSAGE_STATUS_RECEIVED] ||
+         [self.messageModel.status isEqualToString:BD_MESSAGE_STATUS_READ] )) {
+        //
+            _statusLabel.frame = CGRectMake(_avatarImageView.frame.origin.x - self.messageModel.contentSize.width - self.messageModel.contentViewInsets.left - self.messageModel.contentViewInsets.right - 35,
+                                            _avatarImageView.frame.origin.y,
+                                            25, 25);
+        // TODO: 不直接使用汉语，修改为国际化
+            _statusLabel.text = [self.messageModel.status isEqualToString:BD_MESSAGE_STATUS_READ] ?  @"已读" : @"送达";
+        //
+//        DDLogInfo(@"%s x: %f, y:%f, w: %f, h: %f", __PRETTY_FUNCTION__,
+//                  _statusLabel.frame.origin.x, _statusLabel.frame.origin.y,
+//                  _statusLabel.frame.size.width, _statusLabel.frame.size.height);
+    } else {
+        _statusLabel.frame = CGRectMake(-50, -50, 0, 0);
+    }
+    [_statusLabel setNeedsLayout];
 }
 
 #pragma mark - UILongPressGestureRecognizer

@@ -70,31 +70,30 @@
 
  @param content <#content description#>
  @param tId <#tId description#>
- @param localId <#localId description#>
  @param sessiontype <#sessiontype description#>
  */
-- (void)sendPreviewMessage:(NSString *)content toTid:(NSString *)tId localId:(NSString *)localId sessionType:(NSString *)sessiontype;
+- (void)sendPreviewMessage:(NSString *)content toTid:(NSString *)tId sessionType:(NSString *)sessiontype;
 
 /**
   发送消息送达通知
 
  @param mId 消息唯一mid
  */
-- (void)sendReceiptReceivedMessage:(NSString *)mId;
+- (void)sendReceiptReceivedMessage:(NSString *)mId threadTid:(NSString *)tId;
 
 /**
   发送消息已读通知
 
  @param mId 消息唯一mid
  */
-- (void)sendReceiptReadMessage:(NSString *)mId;
+- (void)sendReceiptReadMessage:(NSString *)mId threadTid:(NSString *)tId;
 
 /**
  发送消息销毁通知
 
  @param mId 消息唯一mid
  */
-- (void)sendReceiptDestroyedMessage:(NSString *)mId;
+- (void)sendReceiptDestroyedMessage:(NSString *)mId threadTid:(NSString *)tId;
 
 /**
  发送消息回执通知
@@ -102,7 +101,7 @@
  @param mId mid
  @param status status
  */
-- (void)sendReceiptMessage:(NSString *)mId status:(NSString *)status;
+- (void)sendReceiptMessage:(NSString *)mId threadTid:(NSString *)tId status:(NSString *)status;
 
 //- (void)sendWebRTCKeFuInviteMessage:(NSString *)uuid;
 
@@ -122,7 +121,7 @@
  @param uuid <#uuid description#>
  @param sdp <#sdp description#>
  */
-- (void)sendWebRTCContactOfferVideoMessage:(NSString *)uuid sdp:(NSString *)sdp;
+- (void)sendWebRTCContactOfferVideoSDP:(NSString *)uuid sdp:(NSString *)sdp;
 
 /**
  <#Description#>
@@ -130,7 +129,7 @@
  @param uuid <#uuid description#>
  @param sdp <#sdp description#>
  */
-- (void)sendWebRTCContactOfferAudioMessage:(NSString *)uuid sdp:(NSString *)sdp;
+- (void)sendWebRTCContactOfferAudioSDP:(NSString *)uuid sdp:(NSString *)sdp;
 
 /**
  <#Description#>
@@ -138,7 +137,7 @@
  @param uuid <#uuid description#>
  @param sdp <#sdp description#>
  */
-- (void)sendWebRTCContactAnswerMessage:(NSString *)uuid sdp:(NSString *)sdp;
+- (void)sendWebRTCContactAnswerSDP:(NSString *)uuid sdp:(NSString *)sdp;
 
 /**
  <#Description#>
@@ -146,7 +145,7 @@
  @param uuid <#uuid description#>
  @param candidate <#candidate description#>
  */
-- (void)sendWebRTCContactCandidateMessage:(NSString *)uuid candidate:(NSString *)candidate;
+- (void)sendWebRTCContactICECandidate:(NSString *)uuid candidate:(NSString *)candidate;
 
 /**
  <#Description#>

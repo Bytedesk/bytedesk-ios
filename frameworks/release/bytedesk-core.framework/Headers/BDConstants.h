@@ -144,9 +144,10 @@
 #define BD_NOTIFICATION_QUEUE_ACCEPT        @"bd_notification_queue_accept"
 
 // 通知UI message状态
+#define BD_NOTIFICATION_MESSAGE_LOCALID     @"bd_notification_message_localid"
 #define BD_NOTIFICATION_MESSAGE_ADD         @"bd_notification_message_add"
 #define BD_NOTIFICATION_MESSAGE_DELETE      @"bd_notification_message_delete"
-#define BD_NOTIFICATION_MESSAGE_RETRACT     @"bd_notification_message_retract"
+#define BD_NOTIFICATION_MESSAGE_RECALL     @"bd_notification_message_recall"
 #define BD_NOTIFICATION_MESSAGE_STATUS      @"bd_notification_message_status"
 #define BD_NOTIFICATION_MESSAGE_PREVIEW     @"bd_notification_message_preview"
 

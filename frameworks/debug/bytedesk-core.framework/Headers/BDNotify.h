@@ -108,6 +108,15 @@
 /**
  <#Description#>
 
+ @param localId <#localId description#>
+ */
++ (void)notifyReloadCellSuccess:(NSString *)localId;
+
++ (void)notifyReloadCell:(NSString *)localId status:(NSString *)status;
+
+/**
+ <#Description#>
+
  @param messageModel <#messageModel description#>
  */
 + (void)notifyMessageAdd:(BDMessageModel *)messageModel;
@@ -140,9 +149,16 @@
 /**
  <#Description#>
 
+ @param dict <#dict description#>
+ */
++ (void)notifyMessagePreview:(NSDictionary *)dict;
+
+/**
+ <#Description#>
+
  @param messageId <#messageId description#>
  */
-+ (void)notifyMessageRetract:(NSNumber *)messageId;
++ (void)notifyMessageRecall:(NSString *)mid;
 
 /**
  <#Description#>

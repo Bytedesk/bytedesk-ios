@@ -51,7 +51,7 @@
 @property (nonatomic, strong) UIActivityIndicatorView     *sendingStatusActivityIndicator;  //发送loading
 @property (nonatomic, strong) QMUIButton                  *resendButton;             //重试
 @property (nonatomic, strong) KFDSBadgeView               *audioUnplayedIcon;         //语音未读红点
-@property (nonatomic, strong) QMUILabel                   *readLabel;               //已读
+@property (nonatomic, strong) QMUILabel                   *statusLabel;               //已读状态
 @property (nonatomic, strong) BDMessageModel              *messageModel;
 
 @property(nonatomic, assign) id<KFDSMsgViewCellDelegate>  delegate;

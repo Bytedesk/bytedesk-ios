@@ -8,10 +8,11 @@
 
 #import <QMUIKit/QMUIKit.h>
 #import <bytedesk-core/bdcore.h>
+#import "BDChatBaseViewController.h"
 
 // 客服对话窗口
 
-@interface BDChatKFViewController : QMUICommonTableViewController
+@interface BDChatKFViewController : BDChatBaseViewController
 
 #pragma mark - 访客端接口
 

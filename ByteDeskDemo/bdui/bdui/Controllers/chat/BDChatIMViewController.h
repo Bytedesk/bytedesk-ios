@@ -8,12 +8,13 @@
 
 #import <QMUIKit/QMUIKit.h>
 #import <bytedesk-core/bdcore.h>
+#import "BDChatBaseViewController.h"
 
 // IM 对话窗口
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BDChatIMViewController : QMUICommonTableViewController
+@interface BDChatIMViewController : BDChatBaseViewController
 
 #pragma mark - 访客端接口
 

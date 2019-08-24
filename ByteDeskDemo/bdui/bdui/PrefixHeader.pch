@@ -18,8 +18,8 @@
 #ifdef DEBUG
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 #else
-//static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
-static const DDLogLevel ddLogLevel = DDLogLevelWarning;
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+//static const DDLogLevel ddLogLevel = DDLogLevelWarning;
 #endif
 
 //http://dalezak.ca/2012/12/AppKeFuLocalizedString-framework.html
