@@ -31,6 +31,26 @@
     doubleTap.numberOfTouchesRequired = 1;
     [self.view addGestureRecognizer:doubleTap];
     
+    // for testing get
+//    [[BDIMHttpApis sharedInstance] getProto:@"" resultSuccess:^(NSDictionary * _Nonnull dict) {
+//
+//    } resultFailed:^(NSError * _Nonnull error) {
+//
+//    }];
+    
+//    [[BDIMHttpApis sharedInstance] getProto2:@"" resultSuccess:^(NSDictionary * _Nonnull dict) {
+//
+//    } resultFailed:^(NSError * _Nonnull error) {
+//
+//    }];
+
+    // for testing post
+    [[BDIMHttpApis sharedInstance] postProto:@"" resultSuccess:^(NSDictionary * _Nonnull dict) {
+
+    } resultFailed:^(NSError * _Nonnull error) {
+
+    }];
+    
 }
 
 #pragma mark - Table view data source
@@ -164,6 +184,8 @@
         
     } else if (indexPath.section == 2) {
         
+    } else if (indexPath.section == 3) {
+        DDLogInfo(@"恢复默认值");
         //        恢复默认值
         [BDConfig restoreDefault];
         

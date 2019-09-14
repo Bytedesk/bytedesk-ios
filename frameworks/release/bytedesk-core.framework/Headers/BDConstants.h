@@ -278,7 +278,8 @@
 // 踢掉其他客户端
 #define BD_MESSAGE_TYPE_NOTIFICATION_KICKOFF            @"notification_kickoff"
 // webrtc通知初始化localStream
-#define BD_MESSAGE_TYPE_NOTIFICATION_WEBRTC_INVITE     @"notification_webrtc_invite"
+#define BD_MESSAGE_TYPE_NOTIFICATION_WEBRTC_INVITE_VIDEO     @"notification_webrtc_invite_video"
+#define BD_MESSAGE_TYPE_NOTIFICATION_WEBRTC_INVITE_AUDIO     @"notification_webrtc_invite_audio"
 // webrtc取消邀请
 #define BD_MESSAGE_TYPE_NOTIFICATION_WEBRTC_CANCEL     @"notification_webrtc_cancel"
 // webrtc邀请视频会话

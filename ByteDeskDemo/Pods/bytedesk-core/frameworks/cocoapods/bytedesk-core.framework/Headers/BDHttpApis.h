@@ -104,6 +104,12 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (void)requestThreadWithWorkGroupWid:(NSString *)wId
                         resultSuccess:(SuccessCallbackBlock)success
                          resultFailed:(FailedCallbackBlock)failed;
+
+- (void)requestThreadWebRTCWithWorkGroupWid:(NSString *)wId
+                                     webrtc:(int)webrtc
+                        resultSuccess:(SuccessCallbackBlock)success
+                         resultFailed:(FailedCallbackBlock)failed;
+
 /**
  指定坐席
 

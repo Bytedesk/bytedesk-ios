@@ -111,69 +111,38 @@
  @param uuid <#uuid description#>
  @param type <#type description#>
  */
-- (void)sendWebRTCKeFuMessage:(NSString *)uuid type:(NSString *)type;
+//- (void)sendWebRTCKeFuMessage:(NSString *)uuid type:(NSString *)type;
 
 //- (void)sendWebRTCContactInviteMessage:(NSString *)uuid;
 
-/**
- <#Description#>
+- (void)sendWebRTCInviteVideoMessage:(NSString *)uid sessionType:(NSString *)sessionType;
 
- @param uuid <#uuid description#>
- @param sdp <#sdp description#>
- */
-- (void)sendWebRTCContactOfferVideoSDP:(NSString *)uuid sdp:(NSString *)sdp;
 
-/**
- <#Description#>
+- (void)sendWebRTCInviteAudioMessage:(NSString *)uid sessionType:(NSString *)sessionType;
 
- @param uuid <#uuid description#>
- @param sdp <#sdp description#>
- */
-- (void)sendWebRTCContactOfferAudioSDP:(NSString *)uuid sdp:(NSString *)sdp;
 
-/**
- <#Description#>
+- (void)sendWebRTCOfferVideoSDP:(NSString *)uid sessionType:(NSString *)sessionType content:(NSString *)content;
 
- @param uuid <#uuid description#>
- @param sdp <#sdp description#>
- */
-- (void)sendWebRTCContactAnswerSDP:(NSString *)uuid sdp:(NSString *)sdp;
 
-/**
- <#Description#>
+- (void)sendWebRTCOfferAudioSDP:(NSString *)uid sessionType:(NSString *)sessionType content:(NSString *)content;
 
- @param uuid <#uuid description#>
- @param candidate <#candidate description#>
- */
-- (void)sendWebRTCContactICECandidate:(NSString *)uuid candidate:(NSString *)candidate;
 
-/**
- <#Description#>
+- (void)sendWebRTCAnswerSDP:(NSString *)uid sessionType:(NSString *)sessionType content:(NSString *)content;
 
- @param uuid <#uuid description#>
- */
-- (void)sendWebRTCContactCancelMessage:(NSString *)uuid;
 
-/**
- <#Description#>
+- (void)sendWebRTCICECandidate:(NSString *)uid sessionType:(NSString *)sessionType content:(NSString *)content;
 
- @param uuid <#uuid description#>
- */
-- (void)sendWebRTCContactAcceptMessage:(NSString *)uuid;
 
-/**
- <#Description#>
+- (void)sendWebRTCCancelMessage:(NSString *)uid sessionType:(NSString *)sessionType;
 
- @param uuid <#uuid description#>
- */
-- (void)sendWebRTCContactRejectMessage:(NSString *)uuid;
 
-/**
- <#Description#>
+- (void)sendWebRTCAcceptMessage:(NSString *)uid sessionType:(NSString *)sessionType;
 
- @param uuid <#uuid description#>
- */
-- (void)sendWebRTCContactCloseMessage:(NSString *)uuid;
+
+- (void)sendWebRTCRejectMessage:(NSString *)uid sessionType:(NSString *)sessionType;
+
+
+- (void)sendWebRTCCloseMessage:(NSString *)uid sessionType:(NSString *)sessionType;
 
 /**
  <#Description#>
@@ -181,7 +150,7 @@
  @param uuid <#uuid description#>
  @param type <#type description#>
  */
-- (void)sendWebRTCContactMessage:(NSString *)uuid type:(NSString *)type;
+//- (void)sendWebRTCContactMessage:(NSString *)uuid type:(NSString *)type;
 
 //- (void)sendWebRTCGroupInviteMessage:(NSString *)uuid;
 
@@ -191,7 +160,7 @@
  @param uuid <#uuid description#>
  @param type <#type description#>
  */
-- (void)sendWebRTCGroupMessage:(NSString *)uuid type:(NSString *)type;
+//- (void)sendWebRTCGroupMessage:(NSString *)uuid type:(NSString *)type;
 
 /**
  发送webrtc消息

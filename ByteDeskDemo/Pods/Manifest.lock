@@ -14,12 +14,13 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - bytedesk-core (1.7.0):
+  - bytedesk-core (1.7.1):
     - AFNetworking
     - CocoaLumberjack
     - FMDB
     - MMKV
     - MQTTClient
+    - Protobuf
     - WCDB
   - CocoaLumberjack (3.5.3):
     - CocoaLumberjack/Core (= 3.5.3)
@@ -29,8 +30,8 @@ PODS:
   - FMDB/standard (2.7.5)
   - HCSStarRatingView (1.5)
   - M80AttributedLabel (1.9.5)
-  - MGSwipeTableCell (1.6.8)
-  - MMKV (1.0.22)
+  - MGSwipeTableCell (1.6.9)
+  - MMKV (1.0.23)
   - MQTTClient (0.15.2):
     - MQTTClient/Core (= 0.15.2)
   - MQTTClient/Core (0.15.2):
@@ -39,6 +40,7 @@ PODS:
   - MQTTClient/Manager (0.15.2):
     - MQTTClient/Min
   - MQTTClient/Min (0.15.2)
+  - Protobuf (3.9.0)
   - QMUIKit (3.2.1):
     - QMUIKit/QMUIComponents (= 3.2.1)
     - QMUIKit/QMUICore (= 3.2.1)
@@ -315,7 +317,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
-  - bytedesk-core (= 1.7.0)
+  - bytedesk-core (= 1.7.1)
   - CocoaLumberjack
   - FMDB
   - HCSStarRatingView
@@ -338,6 +340,7 @@ SPEC REPOS:
     - MGSwipeTableCell
     - MMKV
     - MQTTClient
+    - Protobuf
     - QMUIKit
     - SDAutoLayout
     - SQLiteRepairKit
@@ -346,20 +349,21 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  bytedesk-core: c202cea2acd12329a29fba4629b6219c3c69b7b0
+  bytedesk-core: 9714c5bc2762ebacea5b2d6112bdf36624e9ff9c
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   M80AttributedLabel: d1177fbd7451d134794b50e91ca8b0cb167ef530
-  MGSwipeTableCell: dc4eca3212ed38a563b27d6aa7b3c01ce656c1e2
-  MMKV: 99b05c376c0eb412b468ba1d3e6813502edeaa24
+  MGSwipeTableCell: 17349a8b56c81245bd77671251eb8aa9d486d46b
+  MMKV: 031ae51aedc0af1b250922f7ed8a6b6ee2f94c4c
   MQTTClient: 902c7bcac1501595f3d0b15178c7205b40331fb0
+  Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
   QMUIKit: a3af645843b9558eb7aaf407b320eaeb45ab6144
   SDAutoLayout: 8bf6b3bbc8b01f775d4defbb4fda2ace805461be
   SQLiteRepairKit: 35aaae5a8838adb85f5b1eb4d796055be6060a4b
   WCDB: 8e90babdeb7784c569353a4bd22a66c0a175a882
   WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
 
-PODFILE CHECKSUM: 0d3609c0a550ec3af5165b3e664321645fa64924
+PODFILE CHECKSUM: 84b9ed12ba0bf1d2a46fef0a4ae5860d584bd252
 
 COCOAPODS: 1.7.5

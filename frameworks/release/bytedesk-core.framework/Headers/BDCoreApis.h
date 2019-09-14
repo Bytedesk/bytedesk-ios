@@ -126,6 +126,19 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                          resultFailed:(FailedCallbackBlock)failed;
 
 /**
+ 音视频工作组会话
+
+ @param wId <#wId description#>
+ @param webrtc <#webrtc description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)requestThreadWebRTCWithWorkGroupWid:(NSString *)wId
+                                     webrtc:(int)webrtc
+                              resultSuccess:(SuccessCallbackBlock)success
+                               resultFailed:(FailedCallbackBlock)failed;
+
+/**
  指定坐席会话
 
  @param uid 指定坐席uid

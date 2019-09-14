@@ -23,6 +23,7 @@
 #define BD_STATUS                 @"bd_status"
 #define BD_CURRENT_TID            @"bd_current_tid"
 #define BD_DEVICE_TOKEN           @"bd_device_token"
+#define BD_CLIENT_UUID            @"bd_client_uuid"
 
 #define BD_IS_ALREADY_LOGIN       @"bd_is_already_login"
 
@@ -321,6 +322,13 @@
  @param deviceToken <#deviceToken description#>
  */
 + (void)setDeviceToken:(NSString *)deviceToken;
+
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
++ (NSString *)getClientUUID;
 
 /**
  <#Description#>

@@ -24,6 +24,8 @@ FOUNDATION_EXPORT const unsigned char bdcoreVersionString[];
 #import <bytedesk-core/BDDBApis.h>
 #import <bytedesk-core/BDWCDBApis.h>
 #import <bytedesk-core/BDHttpApis.h>
+#import <bytedesk-core/BDKFHttpApis.h>
+#import <bytedesk-core/BDIMHttpApis.h>
 #import <bytedesk-core/BDConstants.h>
 #import <bytedesk-core/BDUtils.h>
 #import <bytedesk-core/BDSettings.h>

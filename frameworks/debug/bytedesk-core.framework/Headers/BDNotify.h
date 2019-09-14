@@ -156,7 +156,7 @@
 /**
  <#Description#>
 
- @param messageId <#messageId description#>
+ @param mid mid
  */
 + (void)notifyMessageRecall:(NSString *)mid;
 
