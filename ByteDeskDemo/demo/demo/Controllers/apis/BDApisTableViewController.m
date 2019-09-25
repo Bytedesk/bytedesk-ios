@@ -107,6 +107,7 @@
     // 监听消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOAuthResult:) name:BD_NOTIFICATION_OAUTH_RESULT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyConnectionStatus:) name:BD_NOTIFICATION_CONNECTION_STATUS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyMessageAdd:) name:BD_NOTIFICATION_MESSAGE_ADD object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyKickoff:) name:BD_NOTIFICATION_KICKOFF object:nil];
     
     // 摇一摇：意见反馈
@@ -546,7 +547,16 @@
     [self.tableView reloadData];
 }
 
+/**
+ 监听到新消息
 
+ @param notification <#notification description#>
+ */
+- (void)notifyMessageAdd:(NSNotification *)notification {
+    BDMessageModel *messageModel = [notification object];
+    DDLogInfo(@"%s type:%@, content:%@", __PRETTY_FUNCTION__, messageModel.type, messageModel.content);
+    // TODO: 监听到新消息之后，开发者可自行处理
+}
 /**
  监听账号异地登录通知
 
