@@ -101,9 +101,9 @@
     QMUICMI.tabBarBackgroundImage = [[UIImage qmui_imageWithColor:UIColorMake(249, 249, 249)] resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1)];   // TabBarBackgroundImage : UITabBar 的背景图，建议使用 resizableImage，否则在 UITabBar (NavigationController) 的 setBackgroundImage: 里会每次都视为 image 发生了变化（isEqual: 为 NO）
     QMUICMI.tabBarBarTintColor = nil;                                           // TabBarBarTintColor : UITabBar 的 barTintColor
     QMUICMI.tabBarShadowImageColor = UIColorSeparator;                          // TabBarShadowImageColor : UITabBar 的 shadowImage 的颜色，会自动创建一张 1px 高的图片
-    QMUICMI.tabBarTintColor = UIColorMake(4, 189, 231);                         // TabBarTintColor : UITabBar 的 tintColor
+//    QMUICMI.tabBarTintColor = UIColorMake(4, 189, 231);                         // TabBarTintColor : UITabBar 的 tintColor
     QMUICMI.tabBarItemTitleColor = UIColorGray6;                                // TabBarItemTitleColor : 未选中的 UITabBarItem 的标题颜色
-    QMUICMI.tabBarItemTitleColorSelected = TabBarTintColor;                     // TabBarItemTitleColorSelected : 选中的 UITabBarItem 的标题颜色
+//    QMUICMI.tabBarItemTitleColorSelected = TabBarTintColor;                     // TabBarItemTitleColorSelected : 选中的 UITabBarItem 的标题颜色
     QMUICMI.tabBarItemTitleFont = nil;                                          // TabBarItemTitleFont : UITabBarItem 的标题字体
     
 #pragma mark - Toolbar
@@ -120,10 +120,10 @@
     
 #pragma mark - SearchBar
     
-    QMUICMI.searchBarTextFieldBackground = UIColorMake(237, 238, 240);          // SearchBarTextFieldBackground : QMUISearchBar 里的文本框的背景颜色
+//    QMUICMI.searchBarTextFieldBackground = UIColorMake(237, 238, 240);          // SearchBarTextFieldBackground : QMUISearchBar 里的文本框的背景颜色
     QMUICMI.searchBarTextFieldBorderColor = nil;                                // SearchBarTextFieldBorderColor : QMUISearchBar 里的文本框的边框颜色
-    QMUICMI.searchBarBottomBorderColor = UIColorClear;                          // SearchBarBottomBorderColor : QMUISearchBar 底部分隔线颜色
-    QMUICMI.searchBarBarTintColor = UIColorWhite;                               // SearchBarBarTintColor : QMUISearchBar 的 barTintColor，也即背景色
+//    QMUICMI.searchBarBottomBorderColor = UIColorClear;                          // SearchBarBottomBorderColor : QMUISearchBar 底部分隔线颜色
+//    QMUICMI.searchBarBarTintColor = UIColorWhite;                               // SearchBarBarTintColor : QMUISearchBar 的 barTintColor，也即背景色
     QMUICMI.searchBarTintColor = self.themeTintColor;                           // SearchBarTintColor : QMUISearchBar 的 tintColor，也即上面的操作控件的主题色
     QMUICMI.searchBarTextColor = UIColorBlack;                                  // SearchBarTextColor : QMUISearchBar 里的文本框的文字颜色
     QMUICMI.searchBarPlaceholderColor = UIColorMake(136, 136, 143);             // SearchBarPlaceholderColor : QMUISearchBar 里的文本框的 placeholder 颜色

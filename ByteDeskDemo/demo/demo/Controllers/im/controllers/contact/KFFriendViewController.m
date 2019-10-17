@@ -38,7 +38,7 @@
     };
     
     self.tabBar = [[UITabBar alloc] init];
-    self.tabBar.tintColor = TabBarTintColor;
+//    self.tabBar.tintColor = TabBarTintColor;
     
     UITabBarItem *item0 = [QDUIHelper tabBarItemWithTitle:@"测试用户" image:[UIImageMake(@"icon_tabbar_contact") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:UIImageMake(@"icon_tabbar_contact_selected") tag:0];
     item0.qmui_doubleTapBlock = tabBarItemDoubleTapBlock;

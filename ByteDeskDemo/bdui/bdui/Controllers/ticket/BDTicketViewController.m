@@ -25,7 +25,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 @property(nonatomic, strong) NSMutableDictionary *mCategoryDict;
 
-// 注意：仅有两个值，NSString类型，紧急：“1”，一般：“0”
+// 注意：仅有两个值，NSString类型，紧急：“true”，一般：“false”
 @property(nonatomic, strong) NSString *mUrgent;
 @property(nonatomic, strong) NSString *mCategoryName;
 @property(nonatomic, strong) NSString *mCategoryCid;
@@ -47,7 +47,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.title = @"提交工单";
     
     //
-    self.mUrgent = @"0";
+    self.mUrgent = @"false";
     self.mCategoryName = @"";
     self.mCategoryCid = @"";
     //
@@ -136,7 +136,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                 urgentCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
             urgentCell.textLabel.text = @"优先级";
-            urgentCell.detailTextLabel.text = [self.mUrgent isEqualToString:@"0"] ? @"一般" : @"紧急";
+            urgentCell.detailTextLabel.text = [self.mUrgent isEqualToString:@"false"] ? @"一般" : @"紧急";
             return urgentCell;
         } else {
             NSString *identifier = @"identifierCategory";
@@ -428,12 +428,12 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     }];
     QMUIAlertAction *normalAction = [QMUIAlertAction actionWithTitle:@"一般" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
         //
-        self.mUrgent = @"0";
+        self.mUrgent = @"false";
         [self.tableView reloadData];
     }];
     QMUIAlertAction *urgentAction = [QMUIAlertAction actionWithTitle:@"紧急" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
         //
-        self.mUrgent = @"1";
+        self.mUrgent = @"true";
         [self.tableView reloadData];
     }];
     QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"选择优先级" message:@"" preferredStyle:QMUIAlertControllerStyleActionSheet];

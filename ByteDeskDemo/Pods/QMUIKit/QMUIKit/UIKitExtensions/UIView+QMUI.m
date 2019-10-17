@@ -38,15 +38,19 @@
 
 @implementation UIView (QMUI)
 
+QMUISynthesizeBOOLProperty(qmui_tintColorCustomized, setQmui_tintColorCustomized)
 QMUISynthesizeIdCopyProperty(qmui_frameWillChangeBlock, setQmui_frameWillChangeBlock)
 QMUISynthesizeIdCopyProperty(qmui_frameDidChangeBlock, setQmui_frameDidChangeBlock)
-QMUISynthesizeIdCopyProperty(qmui_layoutSubviewsBlock, setQmui_layoutSubviewsBlock)
 QMUISynthesizeIdCopyProperty(qmui_tintColorDidChangeBlock, setQmui_tintColorDidChangeBlock)
 QMUISynthesizeIdCopyProperty(qmui_hitTestBlock, setQmui_hitTestBlock)
 
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        
+        ExtendImplementationOfVoidMethodWithSingleArgument([UIView class], @selector(setTintColor:), UIColor *, ^(UIView *selfObject, UIColor *tintColor) {
+            selfObject.qmui_tintColorCustomized = !!tintColor;
+        });
         
         ExtendImplementationOfVoidMethodWithoutArguments([UIView class], @selector(tintColorDidChange), ^(UIView *selfObject) {
             if (selfObject.qmui_tintColorDidChangeBlock) {
@@ -62,33 +66,23 @@ QMUISynthesizeIdCopyProperty(qmui_hitTestBlock, setQmui_hitTestBlock)
             return originReturnValue;
         });
         
-        OverrideImplementation([UIView class], @selector(becomeFirstResponder), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-            return ^BOOL(UIView *selfObject) {
-                
-                // avoid superclass
-                if ([selfObject isKindOfClass:originClass]) {
-                    if (IS_SIMULATOR && ![selfObject isKindOfClass:[UIWindow class]] && (selfObject.window ? !selfObject.window.keyWindow : YES) && !selfObject.qmui_visible) {
+        // 这个私有方法在 view 被调用 becomeFirstResponder 并且处于 window 上时，才会被调用，所以比 becomeFirstResponder 更适合用来检测
+        ExtendImplementationOfVoidMethodWithSingleArgument([UIView class], NSSelectorFromString(@"_didChangeToFirstResponder:"), id, ^(UIView *selfObject, id firstArgv) {
+            if (selfObject == firstArgv && [selfObject conformsToProtocol:@protocol(UITextInput)]) {
+                // 像 QMUIModalPresentationViewController 那种以 window 的形式展示浮层，浮层里的输入框 becomeFirstResponder 的场景，[window makeKeyAndVisible] 被调用后，就会立即走到这里，但此时该 window 尚不是 keyWindow，所以这里延迟到下一个 runloop 里再去判断
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (IS_DEBUG && ![selfObject isKindOfClass:[UIWindow class]] && selfObject.window && !selfObject.window.keyWindow) {
                         [selfObject QMUISymbolicUIViewBecomeFirstResponderWithoutKeyWindow];
                     }
-                }
-                
-                // call super
-                BOOL (*originSelectorIMP)(id, SEL);
-                originSelectorIMP = (BOOL (*)(id, SEL))originalIMPProvider();
-                BOOL result = originSelectorIMP(selfObject, originCMD);
-                
-                return result;
-            };
+                });
+            }
         });
         
         OverrideImplementation([UIView class], @selector(addSubview:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, UIView *view) {
-                // avoid superclass
-                if ([selfObject isKindOfClass:originClass]) {
-                    if (view == selfObject) {
-                        [selfObject printLogForAddSubviewToSelf];
-                        return;
-                    }
+                if (view == selfObject) {
+                    [selfObject printLogForAddSubviewToSelf];
+                    return;
                 }
                 
                 // call super
@@ -100,12 +94,9 @@ QMUISynthesizeIdCopyProperty(qmui_hitTestBlock, setQmui_hitTestBlock)
         
         OverrideImplementation([UIView class], @selector(insertSubview:atIndex:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, UIView *view, NSInteger index) {
-                // avoid superclass
-                if ([selfObject isKindOfClass:originClass]) {
-                    if (view == selfObject) {
-                        [selfObject printLogForAddSubviewToSelf];
-                        return;
-                    }
+                if (view == selfObject) {
+                    [selfObject printLogForAddSubviewToSelf];
+                    return;
                 }
                 
                 // call super
@@ -117,12 +108,9 @@ QMUISynthesizeIdCopyProperty(qmui_hitTestBlock, setQmui_hitTestBlock)
         
         OverrideImplementation([UIView class], @selector(insertSubview:aboveSubview:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, UIView *view, UIView *siblingSubview) {
-                // avoid superclass
-                if ([selfObject isKindOfClass:originClass]) {
-                    if (view == self) {
-                        [selfObject printLogForAddSubviewToSelf];
-                        return;
-                    }
+                if (view == self) {
+                    [selfObject printLogForAddSubviewToSelf];
+                    return;
                 }
                 
                 // call super
@@ -134,12 +122,9 @@ QMUISynthesizeIdCopyProperty(qmui_hitTestBlock, setQmui_hitTestBlock)
         
         OverrideImplementation([UIView class], @selector(insertSubview:belowSubview:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, UIView *view, UIView *siblingSubview) {
-                // avoid superclass
-                if ([selfObject isKindOfClass:originClass]) {
-                    if (view == self) {
-                        [selfObject printLogForAddSubviewToSelf];
-                        return;
-                    }
+                if (view == self) {
+                    [selfObject printLogForAddSubviewToSelf];
+                    return;
                 }
                 
                 // call super
@@ -152,10 +137,7 @@ QMUISynthesizeIdCopyProperty(qmui_hitTestBlock, setQmui_hitTestBlock)
         OverrideImplementation([UIView class], @selector(convertPoint:toView:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^CGPoint(UIView *selfObject, CGPoint point, UIView *view) {
                 
-                // avoid superclass
-                if ([selfObject isKindOfClass:originClass]) {
-                    [selfObject alertConvertValueWithView:view];
-                }
+                [selfObject alertConvertValueWithView:view];
                 
                 // call super
                 CGPoint (*originSelectorIMP)(id, SEL, CGPoint, UIView *);
@@ -169,10 +151,7 @@ QMUISynthesizeIdCopyProperty(qmui_hitTestBlock, setQmui_hitTestBlock)
         OverrideImplementation([UIView class], @selector(convertPoint:fromView:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^CGPoint(UIView *selfObject, CGPoint point, UIView *view) {
                 
-                // avoid superclass
-                if ([selfObject isKindOfClass:originClass]) {
-                    [selfObject alertConvertValueWithView:view];
-                }
+                [selfObject alertConvertValueWithView:view];
                 
                 // call super
                 CGPoint (*originSelectorIMP)(id, SEL, CGPoint, UIView *);
@@ -186,10 +165,7 @@ QMUISynthesizeIdCopyProperty(qmui_hitTestBlock, setQmui_hitTestBlock)
         OverrideImplementation([UIView class], @selector(convertRect:toView:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^CGRect(UIView *selfObject, CGRect rect, UIView *view) {
                 
-                // avoid superclass
-                if ([selfObject isKindOfClass:originClass]) {
-                    [selfObject alertConvertValueWithView:view];
-                }
+                [selfObject alertConvertValueWithView:view];
                 
                 // call super
                 CGRect (*originSelectorIMP)(id, SEL, CGRect, UIView *);
@@ -203,10 +179,7 @@ QMUISynthesizeIdCopyProperty(qmui_hitTestBlock, setQmui_hitTestBlock)
         OverrideImplementation([UIView class], @selector(convertRect:fromView:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^CGRect(UIView *selfObject, CGRect rect, UIView *view) {
                 
-                // avoid superclass
-                if ([selfObject isKindOfClass:originClass]) {
-                    [selfObject alertConvertValueWithView:view];
-                }
+                [selfObject alertConvertValueWithView:view];
                 
                 // call super
                 CGRect (*originSelectorIMP)(id, SEL, CGRect, UIView *);
@@ -217,25 +190,6 @@ QMUISynthesizeIdCopyProperty(qmui_hitTestBlock, setQmui_hitTestBlock)
             };
         });
         
-        
-        
-        // 目前发现 UIButton、UITabBarButton 等系统的 class 的 layoutSubviews 内没有调用 super，导致 UIView (QMUI) 里的重写不生效，所以要专门为这些 class 每个都重写一次
-        NSMutableArray<Class> *classes = @[UIView.class, UIButton.class].mutableCopy;
-        if (IOS_VERSION_NUMBER < 93000) {
-            [classes addObject:NSClassFromString([NSString stringWithFormat:@"%@%@", @"UITab", @"BarButton"])];
-        }
-        [classes enumerateObjectsUsingBlock:^(Class obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            ExtendImplementationOfVoidMethodWithoutArguments(obj, @selector(layoutSubviews), ^(__kindof UIView *selfObject) {
-                // 放到下一个 runloop 是为了保证比子类的 layoutSubviews 逻辑要更晚调用
-                if (selfObject.qmui_layoutSubviewsBlock) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if (selfObject.qmui_layoutSubviewsBlock) {
-                            selfObject.qmui_layoutSubviewsBlock(selfObject);
-                        }
-                    });
-                }
-            });
-        }];
     });
 }
 
@@ -377,7 +331,7 @@ QMUISynthesizeIdCopyProperty(qmui_hitTestBlock, setQmui_hitTestBlock)
     
     __block BOOL isPrivate = NO;
     NSString *classString = NSStringFromClass(self.class);
-    [@[@"LayoutContainer", @"NavigationItemButton", @"NavigationItemView", @"SelectionGrabber", @"InputViewContent", @"InputSetContainer", @"TextFieldContentView"] enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [@[@"LayoutContainer", @"NavigationItemButton", @"NavigationItemView", @"SelectionGrabber", @"InputViewContent", @"InputSetContainer", @"TextFieldContentView", @"KeyboardImpl"] enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (([classString hasPrefix:@"UI"] || [classString hasPrefix:@"_UI"]) && [classString containsString:obj]) {
             isPrivate = YES;
             *stop = YES;
@@ -445,7 +399,7 @@ static char kAssociatedObjectKey_viewController;
             } else {
                 // 临时修复 iOS 10.0.2 上在输入框内切换输入法可能引发死循环的 bug，待查
                 // https://github.com/Tencent/QMUI_iOS/issues/471
-                ((UIView *)[selfObject valueForKey:@"_view"]).qmui_viewController = selfObject;
+                ((UIView *)[selfObject qmui_valueForKey:@"_view"]).qmui_viewController = selfObject;
             }
         });
     });
@@ -481,7 +435,9 @@ static char kAssociatedObjectKey_viewController;
                                                [UIDatePicker class],
                                                [UIPickerView class],
                                                [UIVisualEffectView class],
-                                               [UIWebView class],
+                                               // Apple 不再接受使用了 UIWebView 的 App 提交，所以这里去掉 UIWebView
+                                               // https://github.com/Tencent/QMUI_iOS/issues/741
+//                                               [UIWebView class],
                                                [UIWindow class],
                                                [UINavigationBar class],
                                                [UIToolbar class],
@@ -746,45 +702,37 @@ const CGFloat QMUIViewSelfSizingHeight = INFINITY;
         
         OverrideImplementation([UIView class], @selector(setFrame:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, CGRect frame) {
-                // call super
-                void (^callSuperBlock)(CGRect) = ^void(CGRect aFrame) {
-                    void (*originSelectorIMP)(id, SEL, CGRect);
-                    originSelectorIMP = (void (*)(id, SEL, CGRect))originalIMPProvider();
-                    originSelectorIMP(selfObject, originCMD, aFrame);
-                };
                 
-                // avoid superclass
-                if ([selfObject isKindOfClass:originClass]) {
-                    // QMUIViewSelfSizingHeight 的功能
-                    if (CGRectGetWidth(frame) > 0 && isinf(CGRectGetHeight(frame))) {
-                        CGFloat height = flat([selfObject sizeThatFits:CGSizeMake(CGRectGetWidth(frame), CGFLOAT_MAX)].height);
-                        frame = CGRectSetHeight(frame, height);
+                // QMUIViewSelfSizingHeight 的功能
+                if (CGRectGetWidth(frame) > 0 && isinf(CGRectGetHeight(frame))) {
+                    CGFloat height = flat([selfObject sizeThatFits:CGSizeMake(CGRectGetWidth(frame), CGFLOAT_MAX)].height);
+                    frame = CGRectSetHeight(frame, height);
+                }
+                
+                // 对非法的 frame，Debug 下中 assert，Release 下会将其中的 NaN 改为 0，避免 crash
+                if (CGRectIsNaN(frame)) {
+                    QMUILogWarn(@"UIView (QMUI)", @"%@ setFrame:%@，参数包含 NaN，已被拦截并处理为 0。%@", selfObject, NSStringFromCGRect(frame), [NSThread callStackSymbols]);
+                    if (QMUICMIActivated && !ShouldPrintQMUIWarnLogToConsole) {
+                        NSAssert(NO, @"UIView setFrame: 出现 NaN");
                     }
-                    
-                    // 对非法的 frame，Debug 下中 assert，Release 下会将其中的 NaN 改为 0，避免 crash
-                    if (CGRectIsNaN(frame)) {
-                        QMUILogWarn(@"UIView (QMUI)", @"%@ setFrame:%@，参数包含 NaN，已被拦截并处理为 0。%@", selfObject, NSStringFromCGRect(frame), [NSThread callStackSymbols]);
-                        if (QMUICMIActivated && !ShouldPrintQMUIWarnLogToConsole) {
-                            NSAssert(NO, @"UIView setFrame: 出现 NaN");
-                        }
-                        if (!IS_DEBUG) {
-                            frame = CGRectSafeValue(frame);
-                        }
+                    if (!IS_DEBUG) {
+                        frame = CGRectSafeValue(frame);
                     }
-                    
-                    CGRect precedingFrame = selfObject.frame;
-                    BOOL valueChange = !CGRectEqualToRect(frame, precedingFrame);
-                    if (selfObject.qmui_frameWillChangeBlock && valueChange) {
-                        frame = selfObject.qmui_frameWillChangeBlock(selfObject, frame);
-                    }
-                    
-                    callSuperBlock(frame);
-                    
-                    if (selfObject.qmui_frameDidChangeBlock && valueChange) {
-                        selfObject.qmui_frameDidChangeBlock(selfObject, precedingFrame);
-                    }
-                } else {
-                    callSuperBlock(frame);
+                }
+                
+                CGRect precedingFrame = selfObject.frame;
+                BOOL valueChange = !CGRectEqualToRect(frame, precedingFrame);
+                if (selfObject.qmui_frameWillChangeBlock && valueChange) {
+                    frame = selfObject.qmui_frameWillChangeBlock(selfObject, frame);
+                }
+                
+                // call super
+                void (*originSelectorIMP)(id, SEL, CGRect);
+                originSelectorIMP = (void (*)(id, SEL, CGRect))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, frame);
+                
+                if (selfObject.qmui_frameDidChangeBlock && valueChange) {
+                    selfObject.qmui_frameDidChangeBlock(selfObject, precedingFrame);
                 }
             };
         });
@@ -792,31 +740,22 @@ const CGFloat QMUIViewSelfSizingHeight = INFINITY;
         OverrideImplementation([UIView class], @selector(setBounds:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, CGRect bounds) {
                 
-                // call super
-                void (^callSuperBlock)(CGRect) = ^void(CGRect aBounds) {
-                    void (*originSelectorIMP)(id, SEL, CGRect);
-                    originSelectorIMP = (void (*)(id, SEL, CGRect))originalIMPProvider();
-                    originSelectorIMP(selfObject, originCMD, aBounds);
-                };
+                CGRect precedingFrame = selfObject.frame;
+                CGRect precedingBounds = selfObject.bounds;
+                BOOL valueChange = !CGSizeEqualToSize(bounds.size, precedingBounds.size);// bounds 只有 size 发生变化才会影响 frame
+                if (selfObject.qmui_frameWillChangeBlock && valueChange) {
+                    CGRect followingFrame = CGRectMake(CGRectGetMinX(precedingFrame) + CGFloatGetCenter(CGRectGetWidth(bounds), CGRectGetWidth(precedingFrame)), CGRectGetMinY(precedingFrame) + CGFloatGetCenter(CGRectGetHeight(bounds), CGRectGetHeight(precedingFrame)), bounds.size.width, bounds.size.height);
+                    followingFrame = selfObject.qmui_frameWillChangeBlock(selfObject, followingFrame);
+                    bounds = CGRectSetSize(bounds, followingFrame.size);
+                }
                 
-                // avoid superclass
-                if ([selfObject isKindOfClass:originClass]) {
-                    CGRect precedingFrame = selfObject.frame;
-                    CGRect precedingBounds = selfObject.bounds;
-                    BOOL valueChange = !CGSizeEqualToSize(bounds.size, precedingBounds.size);// bounds 只有 size 发生变化才会影响 frame
-                    if (selfObject.qmui_frameWillChangeBlock && valueChange) {
-                        CGRect followingFrame = CGRectMake(CGRectGetMinX(precedingFrame) + CGFloatGetCenter(CGRectGetWidth(bounds), CGRectGetWidth(precedingFrame)), CGRectGetMinY(precedingFrame) + CGFloatGetCenter(CGRectGetHeight(bounds), CGRectGetHeight(precedingFrame)), bounds.size.width, bounds.size.height);
-                        followingFrame = selfObject.qmui_frameWillChangeBlock(selfObject, followingFrame);
-                        bounds = CGRectSetSize(bounds, followingFrame.size);
-                    }
-                    
-                    callSuperBlock(bounds);
-                    
-                    if (selfObject.qmui_frameDidChangeBlock && valueChange) {
-                        selfObject.qmui_frameDidChangeBlock(selfObject, precedingFrame);
-                    }
-                } else {
-                    callSuperBlock(bounds);
+                // call super
+                void (*originSelectorIMP)(id, SEL, CGRect);
+                originSelectorIMP = (void (*)(id, SEL, CGRect))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, bounds);
+                
+                if (selfObject.qmui_frameDidChangeBlock && valueChange) {
+                    selfObject.qmui_frameDidChangeBlock(selfObject, precedingFrame);
                 }
             };
         });
@@ -824,31 +763,22 @@ const CGFloat QMUIViewSelfSizingHeight = INFINITY;
         OverrideImplementation([UIView class], @selector(setCenter:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, CGPoint center) {
                 
-                // call super
-                void (^callSuperBlock)(CGPoint) = ^void(CGPoint aCenter) {
-                    void (*originSelectorIMP)(id, SEL, CGPoint);
-                    originSelectorIMP = (void (*)(id, SEL, CGPoint))originalIMPProvider();
-                    originSelectorIMP(selfObject, originCMD, aCenter);
-                };
+                CGRect precedingFrame = selfObject.frame;
+                CGPoint precedingCenter = selfObject.center;
+                BOOL valueChange = !CGPointEqualToPoint(center, precedingCenter);
+                if (selfObject.qmui_frameWillChangeBlock && valueChange) {
+                    CGRect followingFrame = CGRectSetXY(precedingFrame, center.x - CGRectGetWidth(selfObject.frame) / 2, center.y - CGRectGetHeight(selfObject.frame) / 2);
+                    followingFrame = selfObject.qmui_frameWillChangeBlock(selfObject, followingFrame);
+                    center = CGPointMake(CGRectGetMidX(followingFrame), CGRectGetMidY(followingFrame));
+                }
                 
-                // avoid superclass
-                if ([selfObject isKindOfClass:originClass]) {
-                    CGRect precedingFrame = selfObject.frame;
-                    CGPoint precedingCenter = selfObject.center;
-                    BOOL valueChange = !CGPointEqualToPoint(center, precedingCenter);
-                    if (selfObject.qmui_frameWillChangeBlock && valueChange) {
-                        CGRect followingFrame = CGRectSetXY(precedingFrame, center.x - CGRectGetWidth(selfObject.frame) / 2, center.y - CGRectGetHeight(selfObject.frame) / 2);
-                        followingFrame = selfObject.qmui_frameWillChangeBlock(selfObject, followingFrame);
-                        center = CGPointMake(CGRectGetMidX(followingFrame), CGRectGetMidY(followingFrame));
-                    }
-                    
-                    callSuperBlock(center);
-                    
-                    if (selfObject.qmui_frameDidChangeBlock && valueChange) {
-                        selfObject.qmui_frameDidChangeBlock(selfObject, precedingFrame);
-                    }
-                } else {
-                    callSuperBlock(center);
+                // call super
+                void (*originSelectorIMP)(id, SEL, CGPoint);
+                originSelectorIMP = (void (*)(id, SEL, CGPoint))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, center);
+                
+                if (selfObject.qmui_frameDidChangeBlock && valueChange) {
+                    selfObject.qmui_frameDidChangeBlock(selfObject, precedingFrame);
                 }
             };
         });
@@ -856,30 +786,21 @@ const CGFloat QMUIViewSelfSizingHeight = INFINITY;
         OverrideImplementation([UIView class], @selector(setTransform:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, CGAffineTransform transform) {
                 
-                // call super
-                void (^callSuperBlock)(CGAffineTransform) = ^void(CGAffineTransform aTransform) {
-                    void (*originSelectorIMP)(id, SEL, CGAffineTransform);
-                    originSelectorIMP = (void (*)(id, SEL, CGAffineTransform))originalIMPProvider();
-                    originSelectorIMP(selfObject, originCMD, aTransform);
-                };
+                CGRect precedingFrame = selfObject.frame;
+                CGAffineTransform precedingTransform = selfObject.transform;
+                BOOL valueChange = !CGAffineTransformEqualToTransform(transform, precedingTransform);
+                if (selfObject.qmui_frameWillChangeBlock && valueChange) {
+                    CGRect followingFrame = CGRectApplyAffineTransformWithAnchorPoint(precedingFrame, transform, selfObject.layer.anchorPoint);
+                    selfObject.qmui_frameWillChangeBlock(selfObject, followingFrame);// 对于 CGAffineTransform，无法根据修改后的 rect 来算出新的 transform，所以就不修改 transform 的值了
+                }
                 
-                // avoid superclass
-                if ([selfObject isKindOfClass:originClass]) {
-                    CGRect precedingFrame = selfObject.frame;
-                    CGAffineTransform precedingTransform = selfObject.transform;
-                    BOOL valueChange = !CGAffineTransformEqualToTransform(transform, precedingTransform);
-                    if (selfObject.qmui_frameWillChangeBlock && valueChange) {
-                        CGRect followingFrame = CGRectApplyAffineTransformWithAnchorPoint(precedingFrame, transform, selfObject.layer.anchorPoint);
-                        selfObject.qmui_frameWillChangeBlock(selfObject, followingFrame);// 对于 CGAffineTransform，无法根据修改后的 rect 来算出新的 transform，所以就不修改 transform 的值了
-                    }
-                    
-                    callSuperBlock(transform);
-                    
-                    if (selfObject.qmui_frameDidChangeBlock && valueChange) {
-                        selfObject.qmui_frameDidChangeBlock(selfObject, precedingFrame);
-                    }
-                } else {
-                    callSuperBlock(transform);
+                // call super
+                void (*originSelectorIMP)(id, SEL, CGAffineTransform);
+                originSelectorIMP = (void (*)(id, SEL, CGAffineTransform))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, transform);
+                
+                if (selfObject.qmui_frameDidChangeBlock && valueChange) {
+                    selfObject.qmui_frameDidChangeBlock(selfObject, precedingFrame);
                 }
             };
         });
@@ -1043,6 +964,28 @@ static char kAssociatedObjectKey_shouldShowDebugColor;
 - (BOOL)qmui_shouldShowDebugColor {
     BOOL flag = [objc_getAssociatedObject(self, &kAssociatedObjectKey_shouldShowDebugColor) boolValue];
     return flag;
+}
+
+static char kAssociatedObjectKey_layoutSubviewsBlock;
+static NSMutableSet * qmui_registeredLayoutSubviewsBlockClasses;
+- (void)setQmui_layoutSubviewsBlock:(void (^)(__kindof UIView * _Nonnull))qmui_layoutSubviewsBlock {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_layoutSubviewsBlock, qmui_layoutSubviewsBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    if (!qmui_registeredLayoutSubviewsBlockClasses) qmui_registeredLayoutSubviewsBlockClasses = [NSMutableSet set];
+    if (qmui_layoutSubviewsBlock) {
+        Class viewClass = self.class;
+        if (![qmui_registeredLayoutSubviewsBlockClasses containsObject:viewClass]) {
+            // Extend 每个实例对象的类是为了保证比子类的 layoutSubviews 逻辑要更晚调用
+            ExtendImplementationOfVoidMethodWithoutArguments(viewClass, @selector(layoutSubviews), ^(__kindof UIView *selfObject) {
+                if (selfObject.qmui_layoutSubviewsBlock && [selfObject isMemberOfClass:viewClass]) {
+                    selfObject.qmui_layoutSubviewsBlock(selfObject);
+                }
+            });
+        }
+    }
+}
+
+- (void (^)(UIView * _Nonnull))qmui_layoutSubviewsBlock {
+    return objc_getAssociatedObject(self, &kAssociatedObjectKey_layoutSubviewsBlock);
 }
 
 - (void)renderColorWithSubviews:(NSArray *)subviews {

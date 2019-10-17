@@ -77,6 +77,12 @@
     #pragma mark - TextField & TextView
     QMUICMI.textFieldTintColor = nil;                                           // TextFieldTintColor : QMUITextField、QMUITextView 的 tintColor，不影响 UIKit 的输入框
     QMUICMI.textFieldTextInsets = UIEdgeInsetsMake(0, 7, 0, 7);                 // TextFieldTextInsets : QMUITextField 的内边距，不影响 UITextField
+    QMUICMI.keyboardAppearance = UIKeyboardAppearanceDefault;                   // KeyboardAppearance : UITextView、UITextField、UISearchBar 的 keyboardAppearance
+    
+    #pragma mark - UISwitch
+    QMUICMI.switchOnTintColor = nil;                                            // SwitchOnTintColor : UISwitch 打开时的背景色（除了圆点外的其他颜色）
+    QMUICMI.switchTintColor = nil;                                              // SwitchTintColor : UISwitch 关闭时的周围边框颜色
+    QMUICMI.switchThumbTintColor = nil;                                         // SwitchThumbTintColor : UISwitch 中间的操控圆点的颜色
     
     #pragma mark - NavigationBar
     
@@ -85,8 +91,10 @@
     QMUICMI.navBarButtonFont = nil;                                             // NavBarButtonFont : QMUINavigationButtonTypeNormal 和 UINavigationBar 上的 UIBarButtonItem 的字体
     QMUICMI.navBarButtonFontBold = nil;                                         // NavBarButtonFontBold : QMUINavigationButtonTypeBold 的字体
     QMUICMI.navBarBackgroundImage = nil;                                        // NavBarBackgroundImage : UINavigationBar 的背景图
-    QMUICMI.navBarShadowImage = nil;                                            // NavBarShadowImage : UINavigationBar.shadowImage，也即导航栏底部那条分隔线
+    QMUICMI.navBarShadowImage = nil;                                            // NavBarShadowImage : UINavigationBar.shadowImage，也即导航栏底部那条分隔线，配合 NavBarShadowImageColor 使用。
+    QMUICMI.navBarShadowImageColor = nil;                                       // NavBarShadowImageColor : UINavigationBar.shadowImage 的颜色，如果为 nil，则显示系统默认 shadowImage，如果为全透明，则不显示 shadowImage，如果为除了 nil 和全透明外的其他颜色，则会将这个颜色叠加到 NavBarShadowImage 上显示出来，如果不存在 NavBarShadowImage，则使用一张 1px 高的图片作为默认图。
     QMUICMI.navBarBarTintColor = nil;                                           // NavBarBarTintColor : UINavigationBar.barTintColor，也即背景色
+    QMUICMI.navBarStyle = UIBarStyleDefault;                                    // NavBarStyle : UINavigationBar 的 barStyle
     QMUICMI.navBarTintColor = nil;                                              // NavBarTintColor : QMUINavigationController.navigationBar 的 tintColor，也即导航栏上面的按钮颜色，由于 tintColor 不支持 appearance，所以这里只支持 QMUINavigationController
     QMUICMI.navBarTitleColor = nil;                                             // NavBarTitleColor : UINavigationBar 的标题颜色，以及 QMUINavigationTitleView 的默认文字颜色
     QMUICMI.navBarTitleFont = nil;                                              // NavBarTitleFont : UINavigationBar 的标题字体，以及 QMUINavigationTitleView 的默认字体
@@ -107,10 +115,12 @@
     QMUICMI.tabBarBackgroundImage = nil;                                        // TabBarBackgroundImage : UITabBar 的背景图
     QMUICMI.tabBarBarTintColor = nil;                                           // TabBarBarTintColor : UITabBar 的 barTintColor
     QMUICMI.tabBarShadowImageColor = nil;                                       // TabBarShadowImageColor : UITabBar 的 shadowImage 的颜色，会自动创建一张 1px 高的图片
-    QMUICMI.tabBarTintColor = nil;                                              // TabBarTintColor : UITabBar 的 tintColor
-    QMUICMI.tabBarItemTitleColor = nil;                                         // TabBarItemTitleColor : 未选中的 UITabBarItem 的标题颜色
-    QMUICMI.tabBarItemTitleColorSelected = TabBarTintColor;                     // TabBarItemTitleColorSelected : 选中的 UITabBarItem 的标题颜色
+    QMUICMI.tabBarStyle = UIBarStyleDefault;                                    // TabBarStyle : UITabBar 的 barStyle
     QMUICMI.tabBarItemTitleFont = nil;                                          // TabBarItemTitleFont : UITabBarItem 的标题字体
+    QMUICMI.tabBarItemTitleColor = nil;                                         // TabBarItemTitleColor : 未选中的 UITabBarItem 的标题颜色
+    QMUICMI.tabBarItemTitleColorSelected = nil;                                 // TabBarItemTitleColorSelected : 选中的 UITabBarItem 的标题颜色
+    QMUICMI.tabBarItemImageColor = nil;                                         // TabBarItemImageColor : UITabBarItem 未选中时的图片颜色
+    QMUICMI.tabBarItemImageColorSelected = nil;                                 // TabBarItemImageColorSelected : UITabBarItem 选中时的图片颜色
     
     #pragma mark - Toolbar
     
@@ -122,14 +132,14 @@
     QMUICMI.toolBarBackgroundImage = nil;                                       // ToolBarBackgroundImage : UIToolbar 的背景图
     QMUICMI.toolBarBarTintColor = nil;                                          // ToolBarBarTintColor : UIToolbar 的 tintColor
     QMUICMI.toolBarShadowImageColor = nil;                                      // ToolBarShadowImageColor : UIToolbar 的 shadowImage 的颜色，会自动创建一张 1px 高的图片
+    QMUICMI.toolBarStyle = UIBarStyleDefault;                                   // ToolBarStyle : UIToolbar 的 barStyle
     QMUICMI.toolBarButtonFont = nil;                                            // ToolBarButtonFont : QMUIToolbarButton 的字体
     
     #pragma mark - SearchBar
     
-    QMUICMI.searchBarTextFieldBackground = nil;                                 // SearchBarTextFieldBackground : QMUISearchBar 里的文本框的背景颜色
+    QMUICMI.searchBarTextFieldBackgroundImage = nil;                            // SearchBarTextFieldBackgroundImage : QMUISearchBar 里的文本框的背景图，图片高度会决定输入框的高度
     QMUICMI.searchBarTextFieldBorderColor = nil;                                // SearchBarTextFieldBorderColor : QMUISearchBar 里的文本框的边框颜色
-    QMUICMI.searchBarBottomBorderColor = nil;                                   // SearchBarBottomBorderColor : QMUISearchBar 底部分隔线颜色
-    QMUICMI.searchBarBarTintColor = nil;                                        // SearchBarBarTintColor : QMUISearchBar 的 barTintColor，也即背景色
+    QMUICMI.searchBarBackgroundImage = nil;                                     // SearchBarBackgroundImage : 搜索框的背景图，如果需要设置底部分隔线的颜色也请绘制到图片里
     QMUICMI.searchBarTintColor = nil;                                           // SearchBarTintColor : QMUISearchBar 的 tintColor，也即上面的操作控件的主题色
     QMUICMI.searchBarTextColor = nil;                                           // SearchBarTextColor : QMUISearchBar 里的文本框的文字颜色
     QMUICMI.searchBarPlaceholderColor = UIColorPlaceholder;                     // SearchBarPlaceholderColor : QMUISearchBar 里的文本框的 placeholder 颜色
@@ -143,7 +153,6 @@
     QMUICMI.tableViewEstimatedHeightEnabled = YES;                              // TableViewEstimatedHeightEnabled : 是否要开启全局 UITableView 的 estimatedRow(Section/Footer)Height
     
     QMUICMI.tableViewBackgroundColor = nil;                                     // TableViewBackgroundColor : Plain 类型的 QMUITableView 的背景色颜色
-    QMUICMI.tableViewGroupedBackgroundColor = nil;                              // TableViewGroupedBackgroundColor : Grouped 类型的 QMUITableView 的背景色
     QMUICMI.tableSectionIndexColor = nil;                                       // TableSectionIndexColor : 列表右边的字母索引条的文字颜色
     QMUICMI.tableSectionIndexBackgroundColor = nil;                             // TableSectionIndexBackgroundColor : 列表右边的字母索引条的背景色
     QMUICMI.tableSectionIndexTrackingBackgroundColor = nil;                     // TableSectionIndexTrackingBackgroundColor : 列表右边的字母索引条在选中时的背景色
@@ -152,7 +161,7 @@
     QMUICMI.tableViewCellNormalHeight = UITableViewAutomaticDimension;          // TableViewCellNormalHeight : QMUITableView 的默认 cell 高度
     QMUICMI.tableViewCellTitleLabelColor = nil;                                 // TableViewCellTitleLabelColor : QMUITableViewCell 的 textLabel 的文字颜色
     QMUICMI.tableViewCellDetailLabelColor = nil;                                // TableViewCellDetailLabelColor : QMUITableViewCell 的 detailTextLabel 的文字颜色
-    QMUICMI.tableViewCellBackgroundColor = UIColorWhite;                        // TableViewCellBackgroundColor : QMUITableViewCell 的背景色
+    QMUICMI.tableViewCellBackgroundColor = nil;                                 // TableViewCellBackgroundColor : QMUITableViewCell 的背景色
     QMUICMI.tableViewCellSelectedBackgroundColor = UIColorMake(238, 239, 241);  // TableViewCellSelectedBackgroundColor : QMUITableViewCell 点击时的背景色
     QMUICMI.tableViewCellWarningBackgroundColor = UIColorYellow;                // TableViewCellWarningBackgroundColor : QMUITableViewCell 用于表示警告时的背景色，备用
     QMUICMI.tableViewCellDisclosureIndicatorImage = nil;                        // TableViewCellDisclosureIndicatorImage : QMUITableViewCell 当 accessoryType 为 UITableViewCellAccessoryDisclosureIndicator 时的箭头的图片
@@ -171,6 +180,12 @@
     QMUICMI.tableViewSectionHeaderContentInset = UIEdgeInsetsMake(4, 15, 4, 15);                        // TableViewSectionHeaderContentInset : Plain 类型的 QMUITableView sectionHeader 里的内容的 padding
     QMUICMI.tableViewSectionFooterContentInset = UIEdgeInsetsMake(4, 15, 4, 15);                        // TableViewSectionFooterContentInset : Plain 类型的 QMUITableView sectionFooter 里的内容的 padding
     
+    QMUICMI.tableViewGroupedBackgroundColor = nil;                                                      // TableViewGroupedBackgroundColor : Grouped 类型的 QMUITableView 的背景色
+    QMUICMI.tableViewGroupedCellTitleLabelColor = TableViewCellTitleLabelColor;                         // TableViewGroupedCellTitleLabelColor : Grouped 类型的 QMUITableView cell 里的标题颜色
+    QMUICMI.tableViewGroupedCellDetailLabelColor = TableViewCellDetailLabelColor;                       // TableViewGroupedCellDetailLabelColor : Grouped 类型的 QMUITableView cell 里的副标题颜色
+    QMUICMI.tableViewGroupedCellBackgroundColor = TableViewCellBackgroundColor;                         // TableViewGroupedCellBackgroundColor : Grouped 类型的 QMUITableView cell 背景色
+    QMUICMI.tableViewGroupedCellSelectedBackgroundColor = TableViewCellSelectedBackgroundColor;         // TableViewGroupedCellSelectedBackgroundColor : Grouped 类型的 QMUITableView cell 点击时的背景色
+    QMUICMI.tableViewGroupedCellWarningBackgroundColor = TableViewCellWarningBackgroundColor;           // tableViewGroupedCellWarningBackgroundColor : Grouped 类型的 QMUITableView cell 在提醒状态下的背景色
     QMUICMI.tableViewGroupedSectionHeaderFont = UIFontMake(12);                                         // TableViewGroupedSectionHeaderFont : Grouped 类型的 QMUITableView sectionHeader 里的文字字体
     QMUICMI.tableViewGroupedSectionFooterFont = UIFontMake(12);                                         // TableViewGroupedSectionFooterFont : Grouped 类型的 QMUITableView sectionFooter 里的文字字体
     QMUICMI.tableViewGroupedSectionHeaderTextColor = UIColorGrayDarken;                                 // TableViewGroupedSectionHeaderTextColor : Grouped 类型的 QMUITableView sectionHeader 里的文字颜色
@@ -218,6 +233,11 @@
     QMUICMI.shouldFixTabBarButtonBugForAll = NO;                                // ShouldFixTabBarButtonBugForAll : 是否要对 iOS 12.1.1 及以后的版本也修复手势返回时 tabBarButton 布局错误的 bug(issue #410)，默认为 NO
     QMUICMI.shouldPrintQMUIWarnLogToConsole = IS_DEBUG;                         // ShouldPrintQMUIWarnLogToConsole : 是否在出现 QMUILogWarn 时自动把这些 log 以 QMUIConsole 的方式显示到设备屏幕上
     QMUICMI.sendAnalyticsToQMUITeam = YES;                                      // SendAnalyticsToQMUITeam : 是否允许在 DEBUG 模式下上报 Bundle Identifier 和 Display Name 给 QMUI 统计用
+    QMUICMI.dynamicPreferredValueForIPad = NO;                                  // DynamicPreferredValueForIPad : 当 iPad 处于 Slide Over 或 Split View 分屏模式下，宏 `PreferredValueForXXX` 是否把 iPad 视为某种屏幕宽度近似的 iPhone 来取值。
+    if (@available(iOS 13.0, *)) {
+        QMUICMI.ignoreKVCAccessProhibited = NO;                                     // IgnoreKVCAccessProhibited : 是否全局忽略 iOS 13 对 KVC 访问 UIKit 私有属性的限制
+        QMUICMI.adjustScrollIndicatorInsetsByContentInsetAdjustment = NO;           // AdjustScrollIndicatorInsetsByContentInsetAdjustment : 当将 UIScrollView.contentInsetAdjustmentBehavior 设为 UIScrollViewContentInsetAdjustmentNever 时，是否自动将 UIScrollView.automaticallyAdjustsScrollIndicatorInsets 设为 NO，以保证原本在 iOS 12 下的代码不用修改就能在 iOS 13 下正常控制滚动条的位置。
+    }
 }
 
 // QMUI 2.3.0 版本里，配置表新增这个方法，返回 YES 表示在 App 启动时要自动应用这份配置表。仅当你的 App 里存在多份配置表时，才需要把除默认配置表之外的其他配置表的返回值改为 NO。

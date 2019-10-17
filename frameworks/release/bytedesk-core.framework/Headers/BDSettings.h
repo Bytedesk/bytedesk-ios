@@ -38,12 +38,6 @@
 + (BOOL)loginAsVisitor;
 
 /**
- @deprecated 请使用 isAlreadyLogin
- @return boolean
- */
-+ (BOOL)getIsAlreadyLogin DEPRECATED_ATTRIBUTE;
-
-/**
  <#Description#>
 
  @return <#return value description#>

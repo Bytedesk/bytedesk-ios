@@ -16,22 +16,19 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface QMUIHelper : NSObject
 
-+ (instancetype _Nonnull)sharedInstance;
++ (instancetype)sharedInstance;
 @end
-
-
-extern NSString *const _Nonnull QMUIResourcesMainBundleName;
 
 @interface QMUIHelper (Bundle)
 
-// QMUI专属
-+ (nullable NSBundle *)resourcesBundle;
-+ (nullable UIImage *)imageWithName:(nullable NSString *)name;
+/// 获取 QMUIKit.framework Images.xcassets 内的图片资源
+/// @param name 图片名
++ (nullable UIImage *)imageWithName:(NSString *)name;
 
-+ (nullable NSBundle *)resourcesBundleWithName:(nullable NSString *)bundleName;
-+ (nullable UIImage *)imageInBundle:(nullable NSBundle *)bundle withName:(nullable NSString *)name;
 @end
 
 @interface QMUIHelper (SystemVersion)
@@ -124,14 +121,18 @@ extern NSString *const _Nonnull QMUIResourcesMainBundleName;
 + (void)inspectContextSize:(CGSize)size;
 
 /// context是否合法
-+ (void)inspectContextIfInvalidatedInDebugMode:(CGContextRef _Nonnull)context;
-+ (BOOL)inspectContextIfInvalidatedInReleaseMode:(CGContextRef _Nonnull)context;
++ (void)inspectContextIfInvalidatedInDebugMode:(CGContextRef)context;
++ (BOOL)inspectContextIfInvalidatedInReleaseMode:(CGContextRef)context;
 @end
 
 
 @interface QMUIHelper (Device)
 
+/// 如 iPhone12,5、iPad6,8
 + (nonnull NSString *)deviceModel;
+
+/// 如 iPhone 11 Pro Max、iPad Pro (12.9 inch)
++ (nonnull NSString *)deviceName;
 
 + (BOOL)isIPad;
 + (BOOL)isIPod;
@@ -144,13 +145,13 @@ extern NSString *const _Nonnull QMUIResourcesMainBundleName;
 /// 将屏幕分为普通和紧凑两种，这个方法用于判断普通屏幕
 + (BOOL)isRegularScreen;
 
-/// iPhone XS Max
+/// iPhone XS Max / 11 Pro Max
 + (BOOL)is65InchScreen;
 
-/// iPhone XR
+/// iPhone XR / 11
 + (BOOL)is61InchScreen;
 
-/// iPhone X/XS
+/// iPhone X / XS / 11Pro
 + (BOOL)is58InchScreen;
 
 /// iPhone 8 Plus
@@ -184,23 +185,15 @@ extern NSString *const _Nonnull QMUIResourcesMainBundleName;
 /// 系统设置里是否开启了“放大显示-试图-放大”，支持放大模式的 iPhone 设备可在官方文档中查询 https://support.apple.com/zh-cn/guide/iphone/iphd6804774e/ios
 + (BOOL)isZoomedMode;
 
+/**
+ 在 iPad 分屏模式下可获得实际运行区域的窗口大小，如需适配 iPad 分屏，建议用这个方法来代替 [UIScreen mainScreen].bounds.size
+ @return 应用运行的窗口大小
+ */
++ (CGSize)applicationSize;
+
 @end
 
 @interface QMUIHelper (UIApplication)
-
-/**
- *  更改状态栏内容颜色为深色
- *
- *  @warning 需在项目的 Info.plist 文件内设置字段 “View controller-based status bar appearance” 的值为 NO 才能生效，如果不设置，或者值为 YES，则请通过系统的 - UIViewController preferredStatusBarStyle 方法来修改
- */
-+ (void)renderStatusBarStyleDark DEPRECATED_ATTRIBUTE;
-
-/**
- *  更改状态栏内容颜色为浅色
- *
- *  @warning 需在项目的 Info.plist 文件内设置字段 “View controller-based status bar appearance” 的值为 NO 才能生效，如果不设置，或者值为 YES，则请通过系统的 - UIViewController preferredStatusBarStyle 方法来修改
- */
-+ (void)renderStatusBarStyleLight DEPRECATED_ATTRIBUTE;
 
 /**
  * 把App的主要window置灰，用于浮层弹出时，请注意要在适当时机调用`resetDimmedApplicationWindow`恢复到正常状态
@@ -211,6 +204,13 @@ extern NSString *const _Nonnull QMUIResourcesMainBundleName;
  * 恢复对App的主要window的置灰操作，与`dimmedApplicationWindow`成对调用
  */
 + (void)resetDimmedApplicationWindow;
+
+/**
+ * 黑色的 StatusBarStyle，用于亮色背景
+ * @note 在 iOS 13 以前  UIStatusBarStyleDefault 状态栏内容的颜色固定是黑色的，而在 iOS 13 UIStatusBarStyleDefault 会根据 user interface style 来决定状态栏的颜色，如果你需要一直黑色可以用 QMUIStatusBarStyleDarkContent 来代替以前 UIStatusBarStyleDefault 的写法
+ * @return 在 iOS 13 以上返回 UIStatusBarStyleDarkContent，在 iOS 12 及以下返回 UIStatusBarStyleDefault
+*/
++ (UIStatusBarStyle)statusBarStyleDarkContent;
 
 @end
 
@@ -225,3 +225,5 @@ extern NSString *const _Nonnull QMUIResourcesMainBundleName;
 + (void)executeAnimationBlock:(nonnull __attribute__((noescape)) void (^)(void))animationBlock completionBlock:(nullable __attribute__((noescape)) void (^)(void))completionBlock;
 
 @end
+
+NS_ASSUME_NONNULL_END

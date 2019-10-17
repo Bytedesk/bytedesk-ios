@@ -25,9 +25,10 @@ target 'demo' do
     pod 'HCSStarRatingView'
     pod 'CocoaLumberjack'
     pod 'SDAutoLayout'
+    pod 'Protobuf'
 
     # 集成核心协议库core
-    pod 'bytedesk-core', '1.7.1'
+    pod 'bytedesk-core', '1.7.2'
 
     # 集成UI界面库
 #   第一种集成方式：将bdui项目集成到自己项目中，并添加依赖，可自定义界面
@@ -57,9 +58,10 @@ target 'bytedesk-ui' do
     pod 'M80AttributedLabel'
     pod 'HCSStarRatingView'
     pod 'CocoaLumberjack'
+    pod 'Protobuf'
     
     # 集成核心协议库core
-    pod 'bytedesk-core', '1.7.1'
+    pod 'bytedesk-core', '1.7.2'
 
     target 'bduiTests' do
     end
