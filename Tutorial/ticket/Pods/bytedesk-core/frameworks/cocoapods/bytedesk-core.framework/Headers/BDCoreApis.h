@@ -89,6 +89,87 @@ typedef void (^FailedCallbackBlock)(NSError *error);
         resultFailed:(FailedCallbackBlock)failed;
 
 /**
+ <#Description#>
+
+ @param email <#email description#>
+ @param password <#password description#>
+ @param success 成功回调函数
+ @param failed 失败回调函数
+ */
++ (void)registerAdmin:(NSString *)email
+         withPassword:(NSString *)password
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+/// 手机号注册
+/// @param mobile <#mobile description#>
+/// @param email <#email description#>
+/// @param nickname <#nickname description#>
+/// @param success <#success description#>
+/// @param failed <#failed description#>
++ (void)registerMobile:(NSString *)mobile
+             withEmail:(NSString *)email
+          withNickname:(NSString *)nickname
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+/// 绑定手机号
+/// @param mobile <#mobile description#>
+/// @param email <#email description#>
+/// @param success <#success description#>
+/// @param failed <#failed description#>
++ (void)bindMobile:(NSString *)mobile
+         withEmail:(NSString *)email
+    resultSuccess:(SuccessCallbackBlock)success
+     resultFailed:(FailedCallbackBlock)failed;
+
+/// 判断微信号是否曾经登录 或者 被绑定过
+/// @param unionId <#unionId description#>
+/// @param success <#success description#>
+/// @param failed <#failed description#>
++ (void)isWeChatRegistered:(NSString *)unionId
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ <#Description#>
+
+ @param unionid <#unionid description#>
+ @param openid <#openid description#>
+ @param nickname <#nickname description#>
+ @param avatar <#avatar description#>
+ @param success 成功回调函数
+ @param failed 失败回调函数
+ */
++ (void)registerWeChat:(NSString *)unionid
+             withEmail:(NSString *)email
+            withOpenId:(NSString *)openid
+          withNickname:(NSString *)nickname
+            withAvatar:(NSString *)avatar
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
+
+/// 绑定微信
+/// @param unionid  <#mobile description#>
+/// @param email <#email description#>
+/// @param success <#success description#>
+/// @param failed <#failed description#>
++ (void)bindWeChat:(NSString *)unionid
+         withEmail:(NSString *)email
+    resultSuccess:(SuccessCallbackBlock)success
+     resultFailed:(FailedCallbackBlock)failed;
+
+/// 上传通讯录
+/// @param mobile <#mobile description#>
+/// @param nickname <#nickname description#>
+/// @param success <#success description#>
+/// @param failed <#failed description#>
++ (void)uploadMobile:(NSString *)mobile
+        withNickname:(NSString *)nickname
+       resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
+
+/**
  访客登录: 包含自动注册默认用户
 
  @param appkey appkey
@@ -96,10 +177,88 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success 成功回调
  @param failed 失败回调
  */
-+ (void) visitorLoginWithAppkey:(NSString *)appkey
-                  withSubdomain:(NSString *)subdomain
-                  resultSuccess:(SuccessCallbackBlock)success
-                   resultFailed:(FailedCallbackBlock)failed;
++ (void) loginWithAppkey:(NSString *)appkey
+           withSubdomain:(NSString *)subdomain
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 设置当前用户身份为访客
+
+ @return true/false
+ */
++ (BOOL)loginAsVisitor;
+
+/**
+ 客服首次登录，需要提供相关信息
+
+ @param username 用户名
+ @param password 密码
+ @param appkey appkey
+ @param subDomain 企业号
+ @param success 成功回调
+ @param failed 失败回调
+ */
++ (void) loginWithUsername:(NSString *)username
+              withPassword:(NSString *)password
+                withAppkey:(NSString *)appkey
+             withSubdomain:(NSString *)subDomain
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
+/// 手机号登录
+/// @param mobile <#mobile description#>
+/// @param code <#code description#>
+/// @param success <#success description#>
+/// @param failed <#failed description#>
++ (void) loginWithMobile:(NSString *)mobile
+                withCode:(NSString *)code
+            resultSuccess:(SuccessCallbackBlock)success
+             resultFailed:(FailedCallbackBlock)failed;
+
+/// 邮箱验证码登录
+/// @param email <#email description#>
+/// @param code <#code description#>
+/// @param success <#success description#>
+/// @param failed <#failed description#>
++ (void) loginWithEmail:(NSString *)email
+                withCode:(NSString *)code
+            resultSuccess:(SuccessCallbackBlock)success
+             resultFailed:(FailedCallbackBlock)failed;
+
+/// 微信登录
+/// @param unionId <#unionId description#>
+/// @param success <#success description#>
+/// @param failed <#failed description#>
++ (void) loginWithUnionId:(NSString *)unionId
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+/// 发送手机h验证码
+/// @param mobile <#mobile description#>
+/// @param success <#success description#>
+/// @param failed <#failed description#>
++ (void)requestMobileCode:(NSString *)mobile
+            resultSuccess:(SuccessCallbackBlock)success
+             resultFailed:(FailedCallbackBlock)failed;
+
+/// 发送邮件验证码
+/// @param email <#email description#>
+/// @param success <#success description#>
+/// @param failed <#failed description#>
++ (void)requestEmailCode:(NSString *)email
+            resultSuccess:(SuccessCallbackBlock)success
+             resultFailed:(FailedCallbackBlock)failed;
+
+
+/**
+ 非首次客服登录，利用首次登录保存在本地的token请求数据
+
+ @param success 成功回调
+ @param failed 失败回调
+ */
++ (void) loginResultSuccess:(SuccessCallbackBlock)success
+               resultFailed:(FailedCallbackBlock)failed;
 
 /**
  利用本地缓存信息登录
@@ -109,10 +268,10 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success 成功回调
  @param failed 失败回调
  */
-+ (void) visitorOAuthWithAppkey:(NSString *)appkey
-                  withSubdomain:(NSString *)subdomain
-                  resultSuccess:(SuccessCallbackBlock)success
-                   resultFailed:(FailedCallbackBlock)failed;
++ (void) oauthWithAppkey:(NSString *)appkey
+           withSubdomain:(NSString *)subdomain
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
 
 /**
  工作组会话
@@ -124,6 +283,19 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 + (void)requestThreadWithWorkGroupWid:(NSString *)wId
                         resultSuccess:(SuccessCallbackBlock)success
                          resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 音视频工作组会话
+
+ @param wId <#wId description#>
+ @param webrtc <#webrtc description#>
+ @param success <#success description#>
+ @param failed <#failed description#>
+ */
++ (void)requestThreadWebRTCWithWorkGroupWid:(NSString *)wId
+                                     webrtc:(int)webrtc
+                              resultSuccess:(SuccessCallbackBlock)success
+                               resultFailed:(FailedCallbackBlock)failed;
 
 /**
  指定坐席会话
@@ -151,6 +323,21 @@ typedef void (^FailedCallbackBlock)(NSError *error);
         resultSuccess:(SuccessCallbackBlock)success
          resultFailed:(FailedCallbackBlock)failed;
 
+/// 请求联系人会话
+/// @param cid <#cid description#>
+/// @param success <#success description#>
+/// @param failed <#failed description#>
++ (void)getContactThread:(NSString *)cid
+           resultSuccess:(SuccessCallbackBlock)success
+            resultFailed:(FailedCallbackBlock)failed;
+
+/// 请求群组会话
+/// @param gid <#gid description#>
+/// @param success <#success description#>
+/// @param failed <#failed description#>
++ (void)getGroupThread:(NSString *)gid
+         resultSuccess:(SuccessCallbackBlock)success
+          resultFailed:(FailedCallbackBlock)failed;
 
 /**
  请求人工客服，不管此工作组是否设置为默认机器人，只要有人工客服在线，则可以直接对接人工
@@ -292,31 +479,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
 #pragma mark - 客服端接口
 
-/**
- 客服首次登录，需要提供相关信息
 
- @param username 用户名
- @param password 密码
- @param appkey appkey
- @param subDomain 企业号
- @param success 成功回调
- @param failed 失败回调
- */
-+ (void) loginWithUsername:(NSString *)username
-              withPassword:(NSString *)password
-                withAppkey:(NSString *)appkey
-             withSubdomain:(NSString *)subDomain
-             resultSuccess:(SuccessCallbackBlock)success
-              resultFailed:(FailedCallbackBlock)failed;
-
-/**
- 非首次客服登录，利用首次登录保存在本地的token请求数据
-
- @param success 成功回调
- @param failed 失败回调
- */
-+ (void) loginResultSuccess:(SuccessCallbackBlock)success
-               resultFailed:(FailedCallbackBlock)failed;
 
 /**
  数据初始化：
@@ -914,6 +1077,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  */
 + (void)addBlock:(NSString *)uid
         withNote:(NSString *)note
+         withWid:(NSString *)wid
    resultSuccess:(SuccessCallbackBlock)success
     resultFailed:(FailedCallbackBlock)failed;
 
@@ -930,26 +1094,6 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
 
 #pragma mark - 公共接口
-
-/**
- <#Description#>
-
- @param email <#email description#>
- @param password <#password description#>
- @param success 成功回调函数
- @param failed 失败回调函数
- */
-+ (void)registerAdmin:(NSString *)email
-         withPassword:(NSString *)password
-        resultSuccess:(SuccessCallbackBlock)success
-         resultFailed:(FailedCallbackBlock)failed;
-
-/**
- <#Description#>
-
- @return <#return value description#>
- */
-+ (BOOL)loginAsVisitor;
 
 /**
  <#Description#>
@@ -1615,6 +1759,12 @@ destroyAfterReading:(BOOL)destroyAfterReading
           resultSuccess:(SuccessCallbackBlock)success
                resultFailed:(FailedCallbackBlock)failed;
 
+
++ (void)getTickets:(NSUInteger)page
+          withSize:(NSUInteger)size
+     resultSuccess:(SuccessCallbackBlock)success
+      resultFailed:(FailedCallbackBlock)failed;
+
 /**
  <#Description#>
  
@@ -1646,6 +1796,12 @@ destroyAfterReading:(BOOL)destroyAfterReading
 + (void)getFeedbackCategories:(NSString *)uid
                 resultSuccess:(SuccessCallbackBlock)success
                  resultFailed:(FailedCallbackBlock)failed;
+
+
++ (void)getFeedbacks:(NSUInteger)page
+            withSize:(NSUInteger)size
+       resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
 
 /**
  <#Description#>
@@ -1856,23 +2012,6 @@ destroyAfterReading:(BOOL)destroyAfterReading
         resultSuccess:(SuccessCallbackBlock)success
          resultFailed:(FailedCallbackBlock)failed;
 
-/**
- <#Description#>
-
- @param unionid <#unionid description#>
- @param openid <#openid description#>
- @param nickname <#nickname description#>
- @param avatar <#avatar description#>
- @param success 成功回调函数
- @param failed 失败回调函数
- */
-+ (void)registerWeChat:(NSString *)unionid
-            withOpenId:(NSString *)openid
-          withNickname:(NSString *)nickname
-            withAvatar:(NSString *)avatar
-         resultSuccess:(SuccessCallbackBlock)success
-          resultFailed:(FailedCallbackBlock)failed;
-
 #pragma mark - device token
 
 /**
@@ -1910,6 +2049,17 @@ destroyAfterReading:(BOOL)destroyAfterReading
  <#Description#>
  */
 + (void)cancelAllHttpRequest;
+
+
+#pragma mark - Mars
+
+//+ (void)disconnect;
+
++ (void)didEnterBackground;
+
++ (void)willEnterForground;
+
++ (void)willTerminate;
 
 @end
 

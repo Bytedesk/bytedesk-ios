@@ -16,12 +16,15 @@
 // 默认json格式
 #define BD_MQTT_TOPIC_MESSAGE               @"message/mqtt"
 #define BD_MQTT_TOPIC_RECEIPT               @"receipt/mqtt"
+#define BD_MQTT_TOPIC_RECALL                @"recall/mqtt"
 #define BD_MQTT_TOPIC_WEBRTC                @"webrtc/mqtt"
 
 // 发送protobuf格式: TODO
-#define BD_MQTT_TOPIC_MESSAGE_PROTOBUF      @"message/mqtt/protobuf"
+#define BD_MQTT_TOPIC_MESSAGE_PROTOBUF      @"protobuf/message/mqtt"
+
 #define BD_MQTT_TOPIC_STATUS                @"status/mqtt"
 #define BD_MQTT_TOPIC_LASTWILL              @"lastWill/mqtt"
+#define BD_MQTT_TOPIC_PROTOBUF_PREFIX       @"protobuf/"
 
 // 测试域名
 // web后台此域名非统一的，而是每一家使用自己独特的二级域名
@@ -68,6 +71,7 @@
 #define BD_MESSAGE_SESSION_TYPE_GROUP       @"group"   // 群组
 #define BD_MESSAGE_SESSION_TYPE_ROBOT       @"robot" // 机器人会话
 
+#define CLIENT_MQTT                         @"ios_mqtt"
 // passport 授权访客端参数
 #define CLIENT_ID_VISITOR                   @"ios"
 #define CLIENT_SECRET_VISITOR               @"XSf9jKCAPpeMwDZakt8AkvKppHEmXAb5sX0FtXwn"
@@ -142,9 +146,10 @@
 #define BD_NOTIFICATION_QUEUE_ACCEPT        @"bd_notification_queue_accept"
 
 // 通知UI message状态
+#define BD_NOTIFICATION_MESSAGE_LOCALID     @"bd_notification_message_localid"
 #define BD_NOTIFICATION_MESSAGE_ADD         @"bd_notification_message_add"
 #define BD_NOTIFICATION_MESSAGE_DELETE      @"bd_notification_message_delete"
-#define BD_NOTIFICATION_MESSAGE_RETRACT     @"bd_notification_message_retract"
+#define BD_NOTIFICATION_MESSAGE_RECALL     @"bd_notification_message_recall"
 #define BD_NOTIFICATION_MESSAGE_STATUS      @"bd_notification_message_status"
 #define BD_NOTIFICATION_MESSAGE_PREVIEW     @"bd_notification_message_preview"
 
@@ -207,6 +212,7 @@
 #define BD_MESSAGE_STATUS_STORED            @"stored" // 发送到服务器，成功存储数据库中
 #define BD_MESSAGE_STATUS_ERROR             @"error" // 发送错误
 #define BD_MESSAGE_STATUS_DESTROYED         @"destroyed" // 阅后即焚已销毁
+#define BD_MESSAGE_STATUS_RECALL            @"recall" // 消息撤回
 
 // 消息类型
 #define BD_MESSAGE_TYPE_TEXT                @"text"  // 文本消息类型
@@ -267,12 +273,15 @@
 #define BD_MESSAGE_TYPE_NOTIFICATION_ACCEPT_STATUS      @"notification_accept_status"
 // 消息预知
 #define BD_MESSAGE_TYPE_NOTIFICATION_PREVIEW            @"notification_preview"
+// 消息撤回
+#define BD_MESSAGE_TYPE_NOTIFICATION_RECALL             @"notification_recall"
 // 消息回执：收到消息之后回复给消息发送方
 #define BD_MESSAGE_TYPE_NOTIFICATION_RECEIPT            @"notification_receipt"
 // 踢掉其他客户端
 #define BD_MESSAGE_TYPE_NOTIFICATION_KICKOFF            @"notification_kickoff"
 // webrtc通知初始化localStream
-#define BD_MESSAGE_TYPE_NOTIFICATION_WEBRTC_INVITE     @"notification_webrtc_invite"
+#define BD_MESSAGE_TYPE_NOTIFICATION_WEBRTC_INVITE_VIDEO     @"notification_webrtc_invite_video"
+#define BD_MESSAGE_TYPE_NOTIFICATION_WEBRTC_INVITE_AUDIO     @"notification_webrtc_invite_audio"
 // webrtc取消邀请
 #define BD_MESSAGE_TYPE_NOTIFICATION_WEBRTC_CANCEL     @"notification_webrtc_cancel"
 // webrtc邀请视频会话

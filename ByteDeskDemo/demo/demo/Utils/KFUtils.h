@@ -3,7 +3,7 @@
 //  kefu
 //
 //  Created by 萝卜丝 on 2017/11/28.
-//  Copyright © 2017年 KeFuDaShi. All rights reserved.
+//  Copyright © 2017年 bytedesk.com. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

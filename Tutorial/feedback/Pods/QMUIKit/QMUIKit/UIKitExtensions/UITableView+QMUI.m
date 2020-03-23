@@ -13,6 +13,7 @@
 //  Created by QMUI Team on 15/7/20.
 //
 
+#import "UIView+QMUI.h"
 #import "UITableView+QMUI.h"
 #import "QMUICore.h"
 #import "UIScrollView+QMUI.h"
@@ -46,10 +47,7 @@ const NSUInteger kFloatValuePrecision = 4;// 统一一个小数点运算精度
         
         OverrideImplementation([UITableView class], @selector(sizeThatFits:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^CGSize(UITableView *selfObject, CGSize size) {
-                // avoid superclass
-                if ([selfObject isKindOfClass:originClass]) {
-                    [selfObject alertEstimatedHeightUsageIfDetected];
-                }
+                [selfObject alertEstimatedHeightUsageIfDetected];
                 
                 // call super
                 CGSize (*originSelectorIMP)(id, SEL, CGSize);
@@ -63,27 +61,24 @@ const NSUInteger kFloatValuePrecision = 4;// 统一一个小数点运算精度
         OverrideImplementation([UITableView class], @selector(scrollToRowAtIndexPath:atScrollPosition:animated:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UITableView *selfObject, NSIndexPath *indexPath, UITableViewScrollPosition scrollPosition, BOOL animated) {
                 
-                // avoid superclass
-                if ([selfObject isKindOfClass:originClass]) {
-                    if (!indexPath) {
-                        return;
+                if (!indexPath) {
+                    return;
+                }
+                
+                BOOL isIndexPathLegal = YES;
+                NSInteger numberOfSections = [selfObject numberOfSections];
+                if (indexPath.section >= numberOfSections) {
+                    isIndexPathLegal = NO;
+                } else if (indexPath.row != NSNotFound) {
+                    NSInteger rows = [selfObject numberOfRowsInSection:indexPath.section];
+                    isIndexPathLegal = indexPath.row < rows;
+                }
+                if (!isIndexPathLegal) {
+                    QMUILogWarn(@"UITableView (QMUI)", @"%@ - target indexPath : %@ ，不合法的indexPath。\n%@", selfObject, indexPath, [NSThread callStackSymbols]);
+                    if (QMUICMIActivated && !ShouldPrintQMUIWarnLogToConsole) {
+                        NSAssert(NO, @"出现不合法的indexPath");
                     }
-                    
-                    BOOL isIndexPathLegal = YES;
-                    NSInteger numberOfSections = [selfObject numberOfSections];
-                    if (indexPath.section >= numberOfSections) {
-                        isIndexPathLegal = NO;
-                    } else if (indexPath.row != NSNotFound) {
-                        NSInteger rows = [selfObject numberOfRowsInSection:indexPath.section];
-                        isIndexPathLegal = indexPath.row < rows;
-                    }
-                    if (!isIndexPathLegal) {
-                        QMUILogWarn(@"UITableView (QMUI)", @"%@ - target indexPath : %@ ，不合法的indexPath。\n%@", selfObject, indexPath, [NSThread callStackSymbols]);
-                        if (QMUICMIActivated && !ShouldPrintQMUIWarnLogToConsole) {
-                            NSAssert(NO, @"出现不合法的indexPath");
-                        }
-                        return;
-                    }
+                    return;
                 }
                 
                 // call super
@@ -92,6 +87,22 @@ const NSUInteger kFloatValuePrecision = 4;// 统一一个小数点运算精度
                 originSelectorIMP(selfObject, originCMD, indexPath, scrollPosition, animated);
             };
         });
+        
+        // 修复 iOS 13.0 UIButton 作为 cell.accessoryView 时布局错误的问题
+        // https://github.com/Tencent/QMUI_iOS/issues/693
+        if (@available(iOS 13.0, *)) {
+            if (@available(iOS 13.1, *)) {
+            } else {
+                ExtendImplementationOfVoidMethodWithoutArguments([UITableViewCell class], @selector(layoutSubviews), ^(UITableViewCell *selfObject) {
+                    if ([selfObject.accessoryView isKindOfClass:[UIButton class]]) {
+                        CGFloat defaultRightMargin = 15 + SafeAreaInsetsConstantForDeviceWithNotch.right;
+                        selfObject.accessoryView.qmui_left = selfObject.qmui_width - defaultRightMargin - selfObject.accessoryView.qmui_width;
+                        selfObject.accessoryView.qmui_top = CGRectGetMinYVerticallyCenterInParentRect(selfObject.frame, selfObject.accessoryView.frame);;
+                        selfObject.contentView.qmui_right = selfObject.accessoryView.qmui_left;
+                    }
+                });
+            }
+        }
     });
 }
 
@@ -139,18 +150,6 @@ const NSUInteger kFloatValuePrecision = 4;// 统一一个小数点运算精度
     self.sectionIndexColor = TableSectionIndexColor;
     self.sectionIndexTrackingBackgroundColor = TableSectionIndexTrackingBackgroundColor;
     self.sectionIndexBackgroundColor = TableSectionIndexBackgroundColor;
-}
-
-static char kAssociatedObjectKey_initialContentInset;
-- (void)setQmui_initialContentInset:(UIEdgeInsets)qmui_initialContentInset {
-    objc_setAssociatedObject(self, &kAssociatedObjectKey_initialContentInset, [NSValue valueWithUIEdgeInsets:qmui_initialContentInset], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    self.contentInset = qmui_initialContentInset;
-    self.scrollIndicatorInsets = qmui_initialContentInset;
-    [self qmui_scrollToTopUponContentInsetTopChange];
-}
-
-- (UIEdgeInsets)qmui_initialContentInset {
-    return [((NSValue *)objc_getAssociatedObject(self, &kAssociatedObjectKey_initialContentInset)) UIEdgeInsetsValue];
 }
 
 - (NSIndexPath *)qmui_indexPathForRowAtView:(UIView *)view {

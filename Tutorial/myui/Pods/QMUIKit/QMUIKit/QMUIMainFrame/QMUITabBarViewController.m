@@ -34,10 +34,7 @@
 }
 
 - (void)didInitialize {
-    // UIView.tintColor 并不支持 UIAppearance 协议，所以不能通过 appearance 来设置，只能在实例里设置
-    if (QMUICMIActivated) {
-        self.tabBar.tintColor = TabBarTintColor;
-    }
+    // subclass hooking
 }
 
 #pragma mark - StatusBar
@@ -58,14 +55,20 @@
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     
-    // fix iOS 9 UIAlertController bug: UIAlertController:supportedInterfaceOrientations was invoked recursively!
+    // fix UIAlertController:supportedInterfaceOrientations was invoked recursively!
+    // crash in iOS 9 and show log in iOS 10 and later
     // https://github.com/Tencent/QMUI_iOS/issues/502
-    UIViewController *presentedViewController = self.presentedViewController;
-    if (IOS_VERSION_NUMBER < 100000 && presentedViewController && [presentedViewController isKindOfClass:UIAlertController.class]) {
-        presentedViewController = nil;
+    // https://github.com/Tencent/QMUI_iOS/issues/632
+    UIViewController *visibleViewController = self.presentedViewController;
+    if (!visibleViewController || visibleViewController.isBeingDismissed || [visibleViewController isKindOfClass:UIAlertController.class]) {
+        visibleViewController = self.selectedViewController;
     }
     
-    return presentedViewController ? [presentedViewController supportedInterfaceOrientations] : ([self.selectedViewController qmui_hasOverrideUIKitMethod:_cmd] ? [self.selectedViewController supportedInterfaceOrientations] : SupportedOrientationMask);
+    if ([visibleViewController isKindOfClass:NSClassFromString(@"AVFullScreenViewController")]) {
+        return visibleViewController.supportedInterfaceOrientations;
+    }
+    
+    return [visibleViewController qmui_hasOverrideUIKitMethod:_cmd] ? [visibleViewController supportedInterfaceOrientations] : SupportedOrientationMask;
 }
 
 #pragma mark - HomeIndicator

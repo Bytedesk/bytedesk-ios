@@ -11,7 +11,6 @@
 //  QMUIKit
 //
 //  Created by MoLice on 2019/J/15.
-//  Copyright © 2019 QMUI Team. All rights reserved.
 //
 
 #import "QMUILog+QMUIConsole.h"
@@ -30,9 +29,6 @@
                 void (*originSelectorIMP)(id, SEL, const char *, int, const char *, QMUILogItem *);
                 originSelectorIMP = (void (*)(id, SEL, const char *, int, const char *, QMUILogItem *))originalIMPProvider();
                 originSelectorIMP(selfObject, originCMD, file, line, func, logItem);
-                
-                // avoid superclass
-                if (![selfObject isKindOfClass:originClass]) return;
                 
                 if (!QMUICMIActivated || !ShouldPrintQMUIWarnLogToConsole) return;
                 if (!logItem.enabled) return;

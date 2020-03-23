@@ -51,7 +51,7 @@ pod 'HCSStarRatingView'
 pod 'CocoaLumberjack'
 
 # 集成萝卜丝核心协议库core
-pod 'bytedesk-core'
+pod 'bytedesk-core', '2.0.1'
 ```
 
 添加bdui相关pod
@@ -75,7 +75,7 @@ target 'bytedesk-ui' do
   pod 'CocoaLumberjack'
 
   # 集成核心协议库core
-  pod 'bytedesk-core'
+  pod 'bytedesk-core', '2.0.1'
 
   target 'bduiTests' do
   end

@@ -767,6 +767,7 @@
 		3DCDC52B22F1870D000438E6 /* BDFeedbackRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDFeedbackRecordViewController.m; sourceTree = "<group>"; };
 		3DCDC52E22F1872E000438E6 /* BDTicketRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDTicketRecordViewController.h; sourceTree = "<group>"; };
 		3DCDC52F22F1872E000438E6 /* BDTicketRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDTicketRecordViewController.m; sourceTree = "<group>"; };
+		3DD0693423700A2E00DC2ED5 /* bytedesk-mars.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "bytedesk-mars.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DD5C6982238F0AF002C4693 /* KFEmotionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFEmotionView.m; sourceTree = "<group>"; };
 		3DD5C6992238F0AF002C4693 /* KFPlusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFPlusView.h; sourceTree = "<group>"; };
 		3DD5C69A2238F0AF002C4693 /* KFPlusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFPlusView.m; sourceTree = "<group>"; };
@@ -877,12 +878,12 @@
 		3D0345A9226E8A5D00F1BB44 /* chat */ = {
 			isa = PBXGroup;
 			children = (
+				3D3C28DC2236804700E288AF /* BDChatBaseViewController.h */,
+				3D3C28DD2236804700E288AF /* BDChatBaseViewController.m */,
 				3D1996B31FCE2B9600219FEF /* BDChatKFViewController.h */,
 				3D1996B41FCE2B9600219FEF /* BDChatKFViewController.m */,
 				3DD5C6B62238FBA8002C4693 /* BDChatIMViewController.h */,
 				3DD5C6B52238FBA7002C4693 /* BDChatIMViewController.m */,
-				3D3C28DC2236804700E288AF /* BDChatBaseViewController.h */,
-				3D3C28DD2236804700E288AF /* BDChatBaseViewController.m */,
 				3DAC0B5E2302B04A00B026C2 /* BDChatAtViewController.h */,
 				3DAC0B5F2302B04A00B026C2 /* BDChatAtViewController.m */,
 			);
@@ -1556,6 +1557,7 @@
 		9B25B14F6667DB6DFB115DB7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3DD0693423700A2E00DC2ED5 /* bytedesk-mars.framework */,
 				EA5D5B9D19C760007972848C /* Pods_bytedesk_ui.framework */,
 				8F09F1F4AE17C93E536D2B08 /* Pods_bytedesk_ui_bduiTests.framework */,
 			);
@@ -1711,7 +1713,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = KeFuDaShi;
 				TargetAttributes = {
 					3D3150881F1A1D530005DB6C = {
@@ -1728,11 +1730,11 @@
 			};
 			buildConfigurationList = 3D3150831F1A1D530005DB6C /* Build configuration list for PBXProject "bdui" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				Base,
 			);
 			mainGroup = 3D31507F1F1A1D530005DB6C;
 			productRefGroup = 3D31508A1F1A1D530005DB6C /* Products */;
@@ -2078,9 +2080,6 @@
 				"${BUILT_PRODUCTS_DIR}/MQTTClient/MQTTClient.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SQLiteRepairKit/sqliterk.framework",
-				"${BUILT_PRODUCTS_DIR}/WCDB/WCDB.framework",
-				"${BUILT_PRODUCTS_DIR}/WCDBOptimizedSQLCipher/sqlcipher.framework",
 				"${PODS_ROOT}/bytedesk-core/frameworks/cocoapods/bytedesk-core.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -2094,9 +2093,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MQTTClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QMUIKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sqliterk.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WCDB.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sqlcipher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bytedesk-core.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2198,6 +2194,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -2260,6 +2257,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -2332,7 +2330,7 @@
 					"$(PROJECT_DIR)/bdui/vendors/arm/lib",
 					"$(PROJECT_DIR)/bdui/vendors/MLAudioRecorder/amr_en_de/lib",
 				);
-				MARKETING_VERSION = 1.7.2;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -2391,7 +2389,7 @@
 					"$(PROJECT_DIR)/bdui/vendors/arm/lib",
 					"$(PROJECT_DIR)/bdui/vendors/MLAudioRecorder/amr_en_de/lib",
 				);
-				MARKETING_VERSION = 1.7.2;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",

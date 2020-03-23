@@ -3,7 +3,7 @@
 //  bytedesk-ui
 //
 //  Created by 萝卜丝 on 2019/4/1.
-//  Copyright © 2019 KeFuDaShi. All rights reserved.
+//  Copyright © 2019 bytedesk.com. All rights reserved.
 //
 
 #import "BDMsgFileContentView.h"

@@ -17,22 +17,50 @@
 #import "QMUICore.h"
 #import "NSNumber+QMUI.h"
 #import "UIView+QMUI.h"
+#import "UIViewController+QMUI.h"
 
 @interface UIScrollView ()
 
 @property(nonatomic, assign) CGFloat qmuiscroll_lastInsetTopWhenScrollToTop;
+@property(nonatomic, assign) BOOL qmuiscroll_hasSetInitialContentInset;
 @end
 
 @implementation UIScrollView (QMUI)
 
 QMUISynthesizeCGFloatProperty(qmuiscroll_lastInsetTopWhenScrollToTop, setQmuiscroll_lastInsetTopWhenScrollToTop)
+QMUISynthesizeBOOLProperty(qmuiscroll_hasSetInitialContentInset, setQmuiscroll_hasSetInitialContentInset)
 
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         ExtendImplementationOfNonVoidMethodWithoutArguments([UIScrollView class], @selector(description), NSString *, ^NSString *(UIScrollView *selfObject, NSString *originReturnValue) {
-            return ([NSString stringWithFormat:@"%@, contentInset = %@", originReturnValue, NSStringFromUIEdgeInsets(selfObject.contentInset)]);
+            originReturnValue = ([NSString stringWithFormat:@"%@, contentInset = %@", originReturnValue, NSStringFromUIEdgeInsets(selfObject.contentInset)]);
+            if (@available(iOS 13.0, *)) {
+                return originReturnValue.mutableCopy;
+            }
+            return originReturnValue;
         });
+#ifdef IOS13_SDK_ALLOWED
+        if (@available(iOS 13.0, *)) {
+            if (QMUICMIActivated && AdjustScrollIndicatorInsetsByContentInsetAdjustment) {
+                OverrideImplementation([UIScrollView class], @selector(setContentInsetAdjustmentBehavior:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+                    return ^(UIScrollView *selfObject, UIScrollViewContentInsetAdjustmentBehavior firstArgv) {
+                        
+                        // call super
+                        void (*originSelectorIMP)(id, SEL, UIScrollViewContentInsetAdjustmentBehavior);
+                        originSelectorIMP = (void (*)(id, SEL, UIScrollViewContentInsetAdjustmentBehavior))originalIMPProvider();
+                        originSelectorIMP(selfObject, originCMD, firstArgv);
+                        
+                        if (firstArgv == UIScrollViewContentInsetAdjustmentNever) {
+                            selfObject.automaticallyAdjustsScrollIndicatorInsets = NO;
+                        } else {
+                            selfObject.automaticallyAdjustsScrollIndicatorInsets = YES;
+                        }
+                    };
+                });
+            }
+        }
+#endif
     });
 }
 
@@ -62,6 +90,21 @@ QMUISynthesizeCGFloatProperty(qmuiscroll_lastInsetTopWhenScrollToTop, setQmuiscr
     } else {
         return self.contentInset;
     }
+}
+
+static char kAssociatedObjectKey_initialContentInset;
+- (void)setQmui_initialContentInset:(UIEdgeInsets)qmui_initialContentInset {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_initialContentInset, [NSValue valueWithUIEdgeInsets:qmui_initialContentInset], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    self.contentInset = qmui_initialContentInset;
+    self.scrollIndicatorInsets = qmui_initialContentInset;
+    if (!self.qmuiscroll_hasSetInitialContentInset || !self.qmui_viewController || self.qmui_viewController.qmui_visibleState < QMUIViewControllerDidAppear) {
+        [self qmui_scrollToTopUponContentInsetTopChange];
+    }
+    self.qmuiscroll_hasSetInitialContentInset = YES;
+}
+
+- (UIEdgeInsets)qmui_initialContentInset {
+    return [((NSValue *)objc_getAssociatedObject(self, &kAssociatedObjectKey_initialContentInset)) UIEdgeInsetsValue];
 }
 
 - (BOOL)qmui_canScroll {

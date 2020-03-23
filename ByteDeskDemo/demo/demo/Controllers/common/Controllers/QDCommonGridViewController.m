@@ -2,16 +2,11 @@
 //  QDCommonGridViewController.m
 //  qmuidemo
 //
-//  Created by MoLice on 2016/10/10.
+//  Created by QMUI Team on 2016/10/10.
 //  Copyright © 2016年 QMUI Team. All rights reserved.
 //
 
 #import "QDCommonGridViewController.h"
-
-@interface QDCommonGridViewController ()
-
-@property(nonatomic, strong) UIScrollView *scrollView;
-@end
 
 @interface QDCommonGridButton : QMUIButton
 
@@ -27,7 +22,7 @@
 - (void)initSubviews {
     [super initSubviews];
     
-    self.scrollView = [[UIScrollView alloc] init];
+    _scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.scrollView];
     
     _gridView = [[QMUIGridView alloc] init];
@@ -83,18 +78,12 @@
 
 - (QDCommonGridButton *)generateButtonAtIndex:(NSInteger)index {
     NSString *keyName = self.dataSource.allKeys[index];
-    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:keyName attributes:@{NSForegroundColorAttributeName: UIColorGray6, NSFontAttributeName: UIFontMake(11), NSParagraphStyleAttributeName: [NSMutableParagraphStyle qmui_paragraphStyleWithLineHeight:12 lineBreakMode:NSLineBreakByTruncatingTail textAlignment:NSTextAlignmentCenter]}];
+    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:keyName attributes:@{NSForegroundColorAttributeName: UIColor.qd_descriptionTextColor, NSFontAttributeName: UIFontMake(11), NSParagraphStyleAttributeName: [NSMutableParagraphStyle qmui_paragraphStyleWithLineHeight:12 lineBreakMode:NSLineBreakByTruncatingTail textAlignment:NSTextAlignmentCenter]}];
     UIImage *image = (UIImage *)[self.dataSource objectForKey:keyName];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     
     QDCommonGridButton *button = [[QDCommonGridButton alloc] init];
-    UIColor *tintColor = [QDThemeManager sharedInstance].currentTheme.themeGridItemTintColor;
-    if (tintColor) {
-        button.tintColor = tintColor;
-        button.adjustsImageTintColorAutomatically = YES;
-    } else {
-        button.tintColor = nil;
-        button.adjustsImageTintColorAutomatically = NO;
-    }
+    button.tintColor = UIColor.qd_gridItemTintColor;
     [button setAttributedTitle:attributedString forState:UIControlStateNormal];
     [button setImage:image forState:UIControlStateNormal];
     button.tag = index;
@@ -105,22 +94,6 @@
 - (void)handleGirdButtonEvent:(QDCommonGridButton *)button {
     NSString *keyName = self.dataSource.allKeys[button.tag];
     [self didSelectCellWithTitle:keyName];
-}
-
-#pragma mark - <QDChangingThemeDelegate>
-
-- (void)themeBeforeChanged:(NSObject<QDThemeProtocol> *)themeBeforeChanged afterChanged:(NSObject<QDThemeProtocol> *)themeAfterChanged {
-    [super themeBeforeChanged:themeBeforeChanged afterChanged:themeAfterChanged];
-    for (QDCommonGridButton *button in self.gridView.subviews) {
-        UIColor *tintColor = themeAfterChanged.themeGridItemTintColor;
-        if (tintColor) {
-            button.tintColor = tintColor;
-            button.adjustsImageTintColorAutomatically = YES;
-        } else {
-            button.tintColor = nil;
-            button.adjustsImageTintColorAutomatically = NO;
-        }
-    }
 }
 
 @end

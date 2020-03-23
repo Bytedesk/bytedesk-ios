@@ -3,7 +3,7 @@
 //  bytedesk-ui
 //
 //  Created by 萝卜丝 on 2018/12/12.
-//  Copyright © 2018 KeFuDaShi. All rights reserved.
+//  Copyright © 2018 bytedesk.com. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

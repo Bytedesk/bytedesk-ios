@@ -37,7 +37,7 @@
         d.cellForRowBlock = ^(UITableView *tableView, __kindof QMUITableViewCell *cell, QMUIStaticTableViewCellData *cellData) {
             UISwitch *switchControl = (UISwitch *)cell.accessoryView;
             switchControl.tag = 0;
-            switchControl.onTintColor = [QDThemeManager sharedInstance].currentTheme.themeTintColor;
+//            switchControl.onTintColor = [QDThemeManager sharedInstance].currentTheme.themeTintColor;
             switchControl.tintColor = switchControl.onTintColor;
             switchControl.on = [BDSettings shouldVibrateWhenReceiveMessage];
         };
@@ -54,7 +54,7 @@
         d.cellForRowBlock = ^(UITableView *tableView, __kindof QMUITableViewCell *cell, QMUIStaticTableViewCellData *cellData) {
             UISwitch *switchControl = (UISwitch *)cell.accessoryView;
             switchControl.tag = 1;
-            switchControl.onTintColor = [QDThemeManager sharedInstance].currentTheme.themeTintColor;
+//            switchControl.onTintColor = [QDThemeManager sharedInstance].currentTheme.themeTintColor;
             switchControl.tintColor = switchControl.onTintColor;
             switchControl.on = [BDSettings shouldRingWhenSendMessage];
         };
@@ -71,7 +71,7 @@
         d.cellForRowBlock = ^(UITableView *tableView, __kindof QMUITableViewCell *cell, QMUIStaticTableViewCellData *cellData) {
             UISwitch *switchControl = (UISwitch *)cell.accessoryView;
             switchControl.tag = 2;
-            switchControl.onTintColor = [QDThemeManager sharedInstance].currentTheme.themeTintColor;
+//            switchControl.onTintColor = [QDThemeManager sharedInstance].currentTheme.themeTintColor;
             switchControl.tintColor = switchControl.onTintColor;
             switchControl.on = [BDSettings shouldRingWhenReceiveMessage];
         };

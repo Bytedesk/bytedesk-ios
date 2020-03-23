@@ -3,7 +3,7 @@
 //  bdcore
 //
 //  Created by 萝卜丝 on 2018/5/20.
-//  Copyright © 2018年 KeFuDaShi. All rights reserved.
+//  Copyright © 2018年 bytedesk.com. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -70,31 +70,30 @@
 
  @param content <#content description#>
  @param tId <#tId description#>
- @param localId <#localId description#>
  @param sessiontype <#sessiontype description#>
  */
-- (void)sendPreviewMessage:(NSString *)content toTid:(NSString *)tId localId:(NSString *)localId sessionType:(NSString *)sessiontype;
+- (void)sendPreviewMessage:(NSString *)content toTid:(NSString *)tId sessionType:(NSString *)sessiontype;
 
 /**
   发送消息送达通知
 
  @param mId 消息唯一mid
  */
-- (void)sendReceiptReceivedMessage:(NSString *)mId;
+- (void)sendReceiptReceivedMessage:(NSString *)mId threadTid:(NSString *)tId;
 
 /**
   发送消息已读通知
 
  @param mId 消息唯一mid
  */
-- (void)sendReceiptReadMessage:(NSString *)mId;
+- (void)sendReceiptReadMessage:(NSString *)mId threadTid:(NSString *)tId;
 
 /**
  发送消息销毁通知
 
  @param mId 消息唯一mid
  */
-- (void)sendReceiptDestroyedMessage:(NSString *)mId;
+- (void)sendReceiptDestroyedMessage:(NSString *)mId threadTid:(NSString *)tId;
 
 /**
  发送消息回执通知
@@ -102,97 +101,37 @@
  @param mId mid
  @param status status
  */
-- (void)sendReceiptMessage:(NSString *)mId status:(NSString *)status;
+- (void)sendReceiptMessage:(NSString *)mId threadTid:(NSString *)tId status:(NSString *)status;
 
-//- (void)sendWebRTCKeFuInviteMessage:(NSString *)uuid;
 
-/**
- <#Description#>
+- (void)sendWebRTCInviteVideoMessage:(NSString *)uid sessionType:(NSString *)sessionType;
 
- @param uuid <#uuid description#>
- @param type <#type description#>
- */
-- (void)sendWebRTCKeFuMessage:(NSString *)uuid type:(NSString *)type;
 
-//- (void)sendWebRTCContactInviteMessage:(NSString *)uuid;
+- (void)sendWebRTCInviteAudioMessage:(NSString *)uid sessionType:(NSString *)sessionType;
 
-/**
- <#Description#>
 
- @param uuid <#uuid description#>
- @param sdp <#sdp description#>
- */
-- (void)sendWebRTCContactOfferVideoMessage:(NSString *)uuid sdp:(NSString *)sdp;
+- (void)sendWebRTCOfferVideoSDP:(NSString *)uid sessionType:(NSString *)sessionType content:(NSString *)content;
 
-/**
- <#Description#>
 
- @param uuid <#uuid description#>
- @param sdp <#sdp description#>
- */
-- (void)sendWebRTCContactOfferAudioMessage:(NSString *)uuid sdp:(NSString *)sdp;
+- (void)sendWebRTCOfferAudioSDP:(NSString *)uid sessionType:(NSString *)sessionType content:(NSString *)content;
 
-/**
- <#Description#>
 
- @param uuid <#uuid description#>
- @param sdp <#sdp description#>
- */
-- (void)sendWebRTCContactAnswerMessage:(NSString *)uuid sdp:(NSString *)sdp;
+- (void)sendWebRTCAnswerSDP:(NSString *)uid sessionType:(NSString *)sessionType content:(NSString *)content;
 
-/**
- <#Description#>
 
- @param uuid <#uuid description#>
- @param candidate <#candidate description#>
- */
-- (void)sendWebRTCContactCandidateMessage:(NSString *)uuid candidate:(NSString *)candidate;
+- (void)sendWebRTCICECandidate:(NSString *)uid sessionType:(NSString *)sessionType content:(NSString *)content;
 
-/**
- <#Description#>
 
- @param uuid <#uuid description#>
- */
-- (void)sendWebRTCContactCancelMessage:(NSString *)uuid;
+- (void)sendWebRTCCancelMessage:(NSString *)uid sessionType:(NSString *)sessionType;
 
-/**
- <#Description#>
 
- @param uuid <#uuid description#>
- */
-- (void)sendWebRTCContactAcceptMessage:(NSString *)uuid;
+- (void)sendWebRTCAcceptMessage:(NSString *)uid sessionType:(NSString *)sessionType;
 
-/**
- <#Description#>
 
- @param uuid <#uuid description#>
- */
-- (void)sendWebRTCContactRejectMessage:(NSString *)uuid;
+- (void)sendWebRTCRejectMessage:(NSString *)uid sessionType:(NSString *)sessionType;
 
-/**
- <#Description#>
 
- @param uuid <#uuid description#>
- */
-- (void)sendWebRTCContactCloseMessage:(NSString *)uuid;
-
-/**
- <#Description#>
-
- @param uuid <#uuid description#>
- @param type <#type description#>
- */
-- (void)sendWebRTCContactMessage:(NSString *)uuid type:(NSString *)type;
-
-//- (void)sendWebRTCGroupInviteMessage:(NSString *)uuid;
-
-/**
- <#Description#>
-
- @param uuid <#uuid description#>
- @param type <#type description#>
- */
-- (void)sendWebRTCGroupMessage:(NSString *)uuid type:(NSString *)type;
+- (void)sendWebRTCCloseMessage:(NSString *)uid sessionType:(NSString *)sessionType;
 
 /**
  发送webrtc消息
@@ -212,6 +151,42 @@
  @param sessiontype <#stype description#>
  */
 - (void)sendMessage:(NSString *)content type:(NSString *)type toTid:(NSString *)tId localId:(NSString *)localId sessionType:(NSString *)sessiontype;
+
+
+/// 发送消息
+/// @param mid message唯一mid
+/// @param type 消息类型
+/// @param content 消息内容
+/// @param tId 会话thread唯一tid
+/// @param topic 会话topic
+/// @param threadType 会话类型
+/// @param threadNickname 会话昵称
+/// @param threadAvatar 会话头像
+- (void)sendMessageProtobuf:(NSString *)mid type:(NSString *)type content:(NSString *)content tid:(NSString *)tId topic:(NSString *)topic threadType:(NSString *)threadType threadNickname:(NSString *)threadNickname threadAvatar:(NSString *)threadAvatar;
+
+- (void)sendTextMessageProtobuf:(NSString *)mid content:(NSString *)content tid:(NSString *)tId topic:(NSString *)topic threadType:(NSString *)threadType threadNickname:(NSString *)threadNickname threadAvatar:(NSString *)threadAvatar;
+
+- (void)sendImageMessageProtobuf:(NSString *)mid content:(NSString *)imageUrl tid:(NSString *)tId topic:(NSString *)topic threadType:(NSString *)threadType threadNickname:(NSString *)threadNickname threadAvatar:(NSString *)threadAvatar;
+
+- (void)sendVoiceMessageProtobuf:(NSString *)mid content:(NSString *)voiceUrl tid:(NSString *)tId topic:(NSString *)topic threadType:(NSString *)threadType threadNickname:(NSString *)threadNickname threadAvatar:(NSString *)threadAvatar;
+
+- (void)sendFileMessageProtobuf:(NSString *)mid content:(NSString *)fileUrl tid:(NSString *)tId topic:(NSString *)topic threadType:(NSString *)threadType threadNickname:(NSString *)threadNickname threadAvatar:(NSString *)threadAvatar;
+
+- (void)sendPreviewMessageProtobuf:(NSString *)mid content:(NSString *)fileUrl tid:(NSString *)tId topic:(NSString *)topic threadType:(NSString *)threadType threadNickname:(NSString *)threadNickname threadAvatar:(NSString *)threadAvatar;
+
+- (void)sendReceiptMessageProtobuf:(NSString *)mid content:(NSString *)fileUrl tid:(NSString *)tId topic:(NSString *)topic threadType:(NSString *)threadType threadNickname:(NSString *)threadNickname threadAvatar:(NSString *)threadAvatar;
+
+- (void)sendTransferMessageProtobuf:(NSString *)mid content:(NSString *)fileUrl tid:(NSString *)tId topic:(NSString *)topic threadType:(NSString *)threadType threadNickname:(NSString *)threadNickname threadAvatar:(NSString *)threadAvatar;
+
+- (void)sendTransferAcceptMessageProtobuf:(NSString *)mid content:(NSString *)fileUrl tid:(NSString *)tId topic:(NSString *)topic threadType:(NSString *)threadType threadNickname:(NSString *)threadNickname threadAvatar:(NSString *)threadAvatar;
+
+- (void)sendTransferRejectMessageProtobuf:(NSString *)mid content:(NSString *)fileUrl tid:(NSString *)tId topic:(NSString *)topic threadType:(NSString *)threadType threadNickname:(NSString *)threadNickname threadAvatar:(NSString *)threadAvatar;
+
+- (void)sendInviteMessageProtobuf:(NSString *)mid content:(NSString *)fileUrl tid:(NSString *)tId topic:(NSString *)topic threadType:(NSString *)threadType threadNickname:(NSString *)threadNickname threadAvatar:(NSString *)threadAvatar;
+
+- (void)sendInviteAcceptMessageProtobuf:(NSString *)mid content:(NSString *)fileUrl tid:(NSString *)tId topic:(NSString *)topic threadType:(NSString *)threadType threadNickname:(NSString *)threadNickname threadAvatar:(NSString *)threadAvatar;
+
+- (void)sendInviteRejectMessageProtobuf:(NSString *)mid content:(NSString *)fileUrl tid:(NSString *)tId topic:(NSString *)topic threadType:(NSString *)threadType threadNickname:(NSString *)threadNickname threadAvatar:(NSString *)threadAvatar;
 
 /**
  设置在线状态

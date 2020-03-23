@@ -17,9 +17,11 @@
 #import "QMUICore.h"
 #import "QMUIButton.h"
 #import "UITableView+QMUI.h"
+#import "UITableViewCell+QMUI.h"
 
 @interface QMUITableViewCell() <UIScrollViewDelegate>
 
+@property(nonatomic, assign) BOOL initByTableView;
 @property(nonatomic, assign, readwrite) QMUITableViewCellPosition cellPosition;
 @property(nonatomic, assign, readwrite) UITableViewCellStyle style;
 @property(nonatomic, strong) UIImageView *defaultAccessoryImageView;
@@ -31,14 +33,18 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        [self didInitializeWithStyle:style];
+        if (!self.initByTableView) {
+            [self didInitializeWithStyle:style];
+        }
     }
     return self;
 }
 
 - (instancetype)initForTableView:(UITableView *)tableView withStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self.initByTableView = YES;
     if (self = [self initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.parentTableView = tableView;
+        [self didInitializeWithStyle:style];// _isGroupedStyle 的值因为 parentTableView 的变化而变化，所以这里重新执行一次 didInitializeWithStyle: 里的 qmui_styledAsQMUITableViewCell
     }
     return self;
 }
@@ -52,15 +58,6 @@
         [self didInitializeWithStyle:UITableViewCellStyleDefault];
     }
     return self;
-}
-
-- (void)dealloc {
-    self.parentTableView = nil;
-}
-
-// 解决 iOS 8 以后的 cell 中 separatorInset 受 layoutMargins 影响的问题
-- (UIEdgeInsets)layoutMargins {
-    return UIEdgeInsetsZero;
 }
 
 - (void)layoutSubviews {
@@ -133,6 +130,10 @@
     }
 }
 
+- (BOOL)_isGroupedStyle {
+    return self.parentTableView && self.parentTableView.style == UITableViewStyleGrouped;
+}
+
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
     [super setBackgroundColor:backgroundColor];
     if (self.backgroundView) {
@@ -144,11 +145,11 @@
     if (_enabled != enabled) {
         if (enabled) {
             self.userInteractionEnabled = YES;
-            UIColor *titleLabelColor = TableViewCellTitleLabelColor;
+            UIColor *titleLabelColor = self.qmui_styledTextLabelColor;
             if (titleLabelColor) {
                 self.textLabel.textColor = titleLabelColor;
             }
-            UIColor *detailLabelColor = TableViewCellDetailLabelColor;
+            UIColor *detailLabelColor = self.qmui_styledDetailTextLabelColor;
             if (detailLabelColor) {
                 self.detailTextLabel.textColor = detailLabelColor;
             }
@@ -303,8 +304,8 @@
 }
 
 - (void)handleAccessoryButtonEvent:(QMUIButton *)detailButton {
-    if ([self.parentTableView.delegate respondsToSelector:@selector(tableView:accessoryButtonTappedForRowWithIndexPath:)]) {
-        [self.parentTableView.delegate tableView:self.parentTableView accessoryButtonTappedForRowWithIndexPath:[self.parentTableView qmui_indexPathForRowAtView:detailButton]];
+    if ([self.qmui_tableView.delegate respondsToSelector:@selector(tableView:accessoryButtonTappedForRowWithIndexPath:)]) {
+        [self.qmui_tableView.delegate tableView:self.qmui_tableView accessoryButtonTappedForRowWithIndexPath:[self.qmui_tableView qmui_indexPathForRowAtView:detailButton]];
     }
 }
 
@@ -313,43 +314,20 @@
 @implementation QMUITableViewCell(QMUISubclassingHooks)
 
 - (void)didInitializeWithStyle:(UITableViewCellStyle)style {
+    self.initByTableView = NO;
     _cellPosition = QMUITableViewCellPositionNone;
     
     _style = style;
     _enabled = YES;
     _accessoryHitTestEdgeInsets = UIEdgeInsetsMake(-12, -12, -12, -12);
     
-    self.textLabel.font = UIFontMake(16);
-    self.textLabel.backgroundColor = UIColorClear;
-    UIColor *titleLabelColor = TableViewCellTitleLabelColor;
-    if (titleLabelColor) {
-        self.textLabel.textColor = titleLabelColor;
-    }
-    
-    self.detailTextLabel.font = UIFontMake(15);
-    self.detailTextLabel.backgroundColor = UIColorClear;
-    UIColor *detailLabelColor = TableViewCellDetailLabelColor;
-    if (detailLabelColor) {
-        self.detailTextLabel.textColor = detailLabelColor;
-    }
-    
-    UIColor *backgroundColor = TableViewCellBackgroundColor;
-    if (backgroundColor) {
-        self.backgroundColor = backgroundColor;
-    }
-    
-    UIColor *selectedBackgroundColor = TableViewCellSelectedBackgroundColor;
-    if (selectedBackgroundColor) {
-        UIView *selectedBackgroundView = [[UIView alloc] init];
-        selectedBackgroundView.backgroundColor = selectedBackgroundColor;
-        self.selectedBackgroundView = selectedBackgroundView;
-    }
-    
     // 因为在hitTest里扩大了accessoryView的响应范围，因此提高了系统一个与此相关的bug的出现几率，所以又在scrollView.delegate里做一些补丁性质的东西来修复
     if ([self.subviews.firstObject isKindOfClass:[UIScrollView class]]) {
         UIScrollView *scrollView = (UIScrollView *)[self.subviews objectAtIndex:0];
         scrollView.delegate = self;
     }
+    
+    [self qmui_styledAsQMUITableViewCell];
 }
 
 - (void)updateCellAppearanceWithIndexPath:(NSIndexPath *)indexPath {

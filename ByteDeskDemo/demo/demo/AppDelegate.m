@@ -14,10 +14,14 @@
 #import "KFIMApiViewController.h"
 
 //#import "KFNavigationController.h"
+#import "QDCommonUI.h"
 #import "QDNavigationController.h"
+#import "QMUIConfigurationTemplateGrapefruit.h"
+#import "QMUIConfigurationTemplateGrass.h"
+#import "QMUIConfigurationTemplatePinkRose.h"
+#import "QMUIConfigurationTemplateDark.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-
 
 @interface AppDelegate ()
 
@@ -29,21 +33,16 @@
     // Override point for customization after application launch.
     
     // 添加DDASLLogger，你的日志语句将被发送到Xcode控制台
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+//    [DDLog addLogger:[DDTTYLogger sharedInstance]];
     // 添加DDTTYLogger，你的日志语句将被发送到Console.app
     // [DDLog addLogger:[DDASLLogger sharedInstance]];
     
     [self initQMUI];
     
-    // 修改导航背景色
-    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x007bff)];
-    // 修改导航字体颜色
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-    
-    //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(userDidTakeScreenshot:)
-                                                 name:UIApplicationUserDidTakeScreenshotNotification object:nil];
+//    //注册通知
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(userDidTakeScreenshot:)
+//                                                 name:UIApplicationUserDidTakeScreenshotNotification object:nil];
 
     // 界面
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -64,6 +63,7 @@
             [application registerForRemoteNotifications];
         }
     }
+    
     return YES;
 }
 
@@ -77,13 +77,14 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [BDCoreApis didEnterBackground];
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    [BDCoreApis willEnterForground];
     // TODO: 增加网络检测，如果无网络则提示
-    
     // TODO: 根据实际未读数目设置AppIcon数字
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     //
@@ -101,42 +102,54 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [BDCoreApis willTerminate];
 }
 
 #pragma mark - 离线消息推送
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    
-    //同步deviceToken便于离线消息推送, 同时必须在管理后台上传 .pem文件才能生效
-    NSString* newToken = [deviceToken description];
-    newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-    newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
-    // upload deviceToken: 4a89d8b0e971a3ff0ae6d1712ac62fa6bc1d6099756fa71b5d98d1708d12dfca
-    DDLogInfo(@"deviceToken:%@", newToken);
-    
+    //
+    NSString *uploadToken;
+    if (@available(iOS 13.0, *)) {
+        NSMutableString *deviceTokenString = [NSMutableString string];
+        const char *bytes = deviceToken.bytes;
+        NSInteger count = deviceToken.length;
+        for (int i = 0; i < count; i++) {
+            [deviceTokenString appendFormat:@"%02x", bytes[i]&0x000000FF];
+        }
+        //
+        NSLog(@"token 13 %@", deviceTokenString);
+        uploadToken = deviceTokenString;
+    } else {
+        //同步deviceToken便于离线消息推送, 同时必须在管理后台上传 .pem文件才能生效
+        NSString* newToken = [deviceToken description];
+        DDLogInfo(@"%s, newToken %@", __PRETTY_FUNCTION__, newToken);
+        newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+        newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+        // upload deviceToken: 4a89d8b0e971a3ff0ae6d1712ac62fa6bc1d6099756fa71b5d98d1708d12dfca
+        DDLogInfo(@"%s, deviceToken:%@", __PRETTY_FUNCTION__, newToken);
+        uploadToken = newToken;
+    }
     // TODO: 判断是否已经上传，无需重复上传；如果没有上传，则引导提示用户开启推送
-    [BDCoreApis updateDeviceToken:newToken resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis updateDeviceToken:uploadToken resultSuccess:^(NSDictionary *dict) {
+        //
+        NSString *message = [dict objectForKey:@"message"];
+        NSNumber *status_code = [dict objectForKey:@"status_code"];
+        DDLogInfo(@"%s, message: %@, code: %@", __PRETTY_FUNCTION__, message, status_code);
+        
+        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            
+        } else {
+//            [self showLoginVC];
+        }
         
     } resultFailed:^(NSError *error) {
-        
+        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, error);
     }];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     NSLog(@"收到推送消息。%@", userInfo);
-    /*
-     {
-     aps = {
-         alert = {
-             body = world;
-             title = Hello;
-         };
-         badge = 5;
-         "content-available" = 1;
-         sound = default;
-        };
-     }
-     */
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -148,119 +161,150 @@
 
 -(void) initQMUI {
     
-    QMUICMI.navBarHighlightedAlpha = 0.2f;                                      // NavBarHighlightedAlpha : QMUINavigationButton 在 highlighted 时的 alpha
-    QMUICMI.navBarDisabledAlpha = 0.2f;                                         // NavBarDisabledAlpha : QMUINavigationButton 在 disabled 时的 alpha
-    QMUICMI.navBarButtonFont = UIFontMake(17);                                  // NavBarButtonFont : QMUINavigationButtonTypeNormal 的字体（由于系统存在一些 bug，这个属性默认不对 UIBarButtonItem 生效）
-    QMUICMI.navBarButtonFontBold = UIFontBoldMake(17);                          // NavBarButtonFontBold : QMUINavigationButtonTypeBold 的字体
-    //    QMUICMI.navBarBackgroundImage = UIImageMake(@"navigationbar_background");   // NavBarBackgroundImage : UINavigationBar 的背景图
-    //    QMUICMI.navBarShadowImage = [UIImage new];                                  // NavBarShadowImage : UINavigationBar.shadowImage，也即导航栏底部那条分隔线
-    QMUICMI.navBarBarTintColor = UIColorFromRGB(0x007bff);                      // NavBarBarTintColor : UINavigationBar.barTintColor，也即背景色
-    QMUICMI.navBarTintColor = UIColorWhite;                                     // NavBarTintColor : QMUINavigationBar 的 tintColor，也即导航栏上面的按钮颜色
-    QMUICMI.navBarTitleColor = NavBarTintColor;                                 // NavBarTitleColor : UINavigationBar 的标题颜色，以及 QMUINavigationTitleView 的默认文字颜色
-    QMUICMI.navBarTitleFont = UIFontBoldMake(17);                               // NavBarTitleFont : UINavigationBar 的标题字体，以及 QMUINavigationTitleView 的默认字体
-    //    QMUICMI.navBarLargeTitleColor = nil;                                        // NavBarLargeTitleColor : UINavigationBar 在大标题模式下的标题颜色，仅在 iOS 11 之后才有效
-    //    QMUICMI.navBarLargeTitleFont = nil;                                         // NavBarLargeTitleFont : UINavigationBar 在大标题模式下的标题字体，仅在 iOS 11 之后才有效
-    QMUICMI.navBarBackButtonTitlePositionAdjustment = UIOffsetZero;             // NavBarBarBackButtonTitlePositionAdjustment : 导航栏返回按钮的文字偏移
-    QMUICMI.navBarBackIndicatorImage = [UIImage qmui_imageWithShape:QMUIImageShapeNavBack size:CGSizeMake(12, 20) tintColor:NavBarTintColor];                                     // NavBarBackIndicatorImage : 导航栏的返回按钮的图片
-    QMUICMI.navBarCloseButtonImage = [UIImage qmui_imageWithShape:QMUIImageShapeNavClose size:CGSizeMake(16, 16) tintColor:NavBarTintColor];     // NavBarCloseButtonImage : QMUINavigationButton 用到的 × 的按钮图片
+    // 1. 先注册主题监听，在回调里将主题持久化存储，避免启动过程中主题发生变化时读取到错误的值
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleThemeDidChangeNotification:) name:QMUIThemeDidChangeNotification object:nil];
     
-    QMUICMI.navBarLoadingMarginRight = 3;                                       // NavBarLoadingMarginRight : QMUINavigationTitleView 里左边 loading 的右边距
-    QMUICMI.navBarAccessoryViewMarginLeft = 5;                                  // NavBarAccessoryViewMarginLeft : QMUINavigationTitleView 里右边 accessoryView 的左边距
-    QMUICMI.navBarActivityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;// NavBarActivityIndicatorViewStyle : QMUINavigationTitleView 里左边 loading 的主题
-    QMUICMI.navBarAccessoryViewTypeDisclosureIndicatorImage = [UIImage qmui_imageWithShape:QMUIImageShapeTriangle size:CGSizeMake(8, 5) tintColor:UIColorWhite];     // NavBarAccessoryViewTypeDisclosureIndicatorImage : QMUINavigationTitleView 右边箭头的图片
+    // 2. 然后设置主题的生成器
+    QMUIThemeManagerCenter.defaultThemeManager.themeGenerator = ^__kindof NSObject * _Nonnull(NSString * _Nonnull identifier) {
+        if ([identifier isEqualToString:QDThemeIdentifierDefault]) return QMUIConfigurationTemplate.new;
+        if ([identifier isEqualToString:QDThemeIdentifierGrapefruit]) return QMUIConfigurationTemplateGrapefruit.new;
+        if ([identifier isEqualToString:QDThemeIdentifierGrass]) return QMUIConfigurationTemplateGrass.new;
+        if ([identifier isEqualToString:QDThemeIdentifierPinkRose]) return QMUIConfigurationTemplatePinkRose.new;
+        if ([identifier isEqualToString:QDThemeIdentifierDark]) return QMUIConfigurationTemplateDark.new;
+        return nil;
+    };
     
-    QMUICMI.statusbarStyleLightInitially = YES;                                 // StatusbarStyleLightInitially : 默认的状态栏内容是否使用白色，默认为 NO，也即黑色
-    QMUICMI.needsBackBarButtonItemTitle = NO;                                   // NeedsBackBarButtonItemTitle : 全局是否需要返回按钮的 title，不需要则只显示一个返回image
-}
-
-
-#pragma mark - 截屏响应
-
-- (void)userDidTakeScreenshot:(NSNotification *)notification {
-    //
-    DDLogInfo(@"检测到截屏");
-    //人为截屏, 模拟用户截屏行为, 获取所截图片
-    UIImage *image_ = [self imageWithScreenshot];
-    //添加显示
-    UIImageView *imgvPhoto = [[UIImageView alloc]initWithImage:image_];
-    imgvPhoto.frame = CGRectMake(self.window.frame.size.width/2, self.window.frame.size.height/2, self.window.frame.size.width/2, self.window.frame.size.height/2);
-    //添加边框
-    CALayer * layer = [imgvPhoto layer];
-    layer.borderColor = [[UIColor whiteColor] CGColor];
-    layer.borderWidth = 5.0f;
-    //添加四个边阴影
-    imgvPhoto.layer.shadowColor = [UIColor blackColor].CGColor;
-    imgvPhoto.layer.shadowOffset = CGSizeMake(0, 0);
-    imgvPhoto.layer.shadowOpacity = 0.5;
-    imgvPhoto.layer.shadowRadius = 10.0;
-    //添加两个边阴影
-    imgvPhoto.layer.shadowColor = [UIColor blackColor].CGColor;
-    imgvPhoto.layer.shadowOffset = CGSizeMake(4, 4);
-    imgvPhoto.layer.shadowOpacity = 0.5;
-    imgvPhoto.layer.shadowRadius = 2.0;
-    
-    [self.window addSubview:imgvPhoto];
-}
-
-/**
- *  截取当前屏幕
- *
- *  @return NSData *
- */
-- (NSData *)dataWithScreenshotInPNGFormat {
-    //
-    CGSize imageSize = CGSizeZero;
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    if (UIInterfaceOrientationIsPortrait(orientation))
-        imageSize = [UIScreen mainScreen].bounds.size;
-    else
-        imageSize = CGSizeMake([UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
-    
-    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    for (UIWindow *window in [[UIApplication sharedApplication] windows])
-    {
-        CGContextSaveGState(context);
-        CGContextTranslateCTM(context, window.center.x, window.center.y);
-        CGContextConcatCTM(context, window.transform);
-        CGContextTranslateCTM(context, -window.bounds.size.width * window.layer.anchorPoint.x, -window.bounds.size.height * window.layer.anchorPoint.y);
-        if (orientation == UIInterfaceOrientationLandscapeLeft)
-        {
-            CGContextRotateCTM(context, M_PI_2);
-            CGContextTranslateCTM(context, 0, -imageSize.width);
+    // 3. 再针对 iOS 13 开启自动响应系统的 Dark Mode 切换
+    // 如果不需要这个功能，则不需要这一段代码
+    if (@available(iOS 13.0, *)) {
+        // 做这个 if(currentThemeIdentifier) 的保护只是为了避免 QD 里的配置表没启动时，没人为 currentTheme/currentThemeIdentifier 赋值，导致后续的逻辑会 crash，业务项目里理论上不会有这种情况出现，所以可以省略这个 if 块
+        if (QMUIThemeManagerCenter.defaultThemeManager.currentThemeIdentifier) {
+            QMUIThemeManagerCenter.defaultThemeManager.identifierForTrait = ^__kindof NSObject<NSCopying> * _Nonnull(UITraitCollection * _Nonnull trait) {
+                if (trait.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                    return QDThemeIdentifierDark;
+                }
+                
+                if ([QMUIThemeManagerCenter.defaultThemeManager.currentThemeIdentifier isEqual:QDThemeIdentifierDark]) {
+                    return QDThemeIdentifierDefault;
+                }
+                
+                return QMUIThemeManagerCenter.defaultThemeManager.currentThemeIdentifier;
+            };
+            QMUIThemeManagerCenter.defaultThemeManager.respondsSystemStyleAutomatically = YES;
         }
-        else if (orientation == UIInterfaceOrientationLandscapeRight)
-        {
-            CGContextRotateCTM(context, -M_PI_2);
-            CGContextTranslateCTM(context, -imageSize.height, 0);
-        } else if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
-            CGContextRotateCTM(context, M_PI);
-            CGContextTranslateCTM(context, -imageSize.width, -imageSize.height);
-        }
-        if ([window respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)])
-        {
-            [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:YES];
-        }
-        else{
-            [window.layer renderInContext:context];
-        }
-        CGContextRestoreGState(context);
     }
     
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return UIImagePNGRepresentation(image);
+//    QMUIThemeManagerCenter.defaultThemeManager.currentThemeIdentifier = @"Default";
+    // QMUIConsole 默认只在 DEBUG 下会显示，作为 Demo，改为不管什么环境都允许显示
+//    [QMUIConsole sharedInstance].canShow = YES;
+    // QD自定义的全局样式渲染
+    [QDCommonUI renderGlobalAppearances];
+
 }
 
-/**
- *  返回截取到的图片
- *
- *  @return UIImage *
- */
-- (UIImage *)imageWithScreenshot {
-    NSData *imageData = [self dataWithScreenshotInPNGFormat];
-    return [UIImage imageWithData:imageData];
+- (void)handleThemeDidChangeNotification:(NSNotification *)notification {
+    
+    QMUIThemeManager *manager = notification.object;
+    if (![manager.name isEqual:QMUIThemeManagerNameDefault]) return;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:manager.currentThemeIdentifier forKey:QDSelectedThemeIdentifier];
+    
+    [QDThemeManager.currentTheme applyConfigurationTemplate];
+    
+    // 主题发生变化，在这里更新全局 UI 控件的 appearance
+    [QDCommonUI renderGlobalAppearances];
+    // 更新表情 icon 的颜色
+//    [QDUIHelper updateEmotionImages];
 }
+
+
+//#pragma mark - 截屏响应
+//
+//- (void)userDidTakeScreenshot:(NSNotification *)notification {
+//    //
+//    DDLogInfo(@"检测到截屏");
+//    //人为截屏, 模拟用户截屏行为, 获取所截图片
+//    UIImage *image_ = [self imageWithScreenshot];
+//    //添加显示
+//    UIImageView *imgvPhoto = [[UIImageView alloc]initWithImage:image_];
+//    imgvPhoto.frame = CGRectMake(self.window.frame.size.width/2, self.window.frame.size.height/2, self.window.frame.size.width/2, self.window.frame.size.height/2);
+//    //添加边框
+//    CALayer * layer = [imgvPhoto layer];
+//    layer.borderColor = [[UIColor whiteColor] CGColor];
+//    layer.borderWidth = 5.0f;
+//    //添加四个边阴影
+//    imgvPhoto.layer.shadowColor = [UIColor blackColor].CGColor;
+//    imgvPhoto.layer.shadowOffset = CGSizeMake(0, 0);
+//    imgvPhoto.layer.shadowOpacity = 0.5;
+//    imgvPhoto.layer.shadowRadius = 10.0;
+//    //添加两个边阴影
+//    imgvPhoto.layer.shadowColor = [UIColor blackColor].CGColor;
+//    imgvPhoto.layer.shadowOffset = CGSizeMake(4, 4);
+//    imgvPhoto.layer.shadowOpacity = 0.5;
+//    imgvPhoto.layer.shadowRadius = 2.0;
+//
+//    [self.window addSubview:imgvPhoto];
+//}
+//
+///**
+// *  截取当前屏幕
+// *
+// *  @return NSData *
+// */
+//- (NSData *)dataWithScreenshotInPNGFormat {
+//    //
+//    CGSize imageSize = CGSizeZero;
+//    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+//    if (UIInterfaceOrientationIsPortrait(orientation))
+//        imageSize = [UIScreen mainScreen].bounds.size;
+//    else
+//        imageSize = CGSizeMake([UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
+//
+//    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    for (UIWindow *window in [[UIApplication sharedApplication] windows])
+//    {
+//        CGContextSaveGState(context);
+//        CGContextTranslateCTM(context, window.center.x, window.center.y);
+//        CGContextConcatCTM(context, window.transform);
+//        CGContextTranslateCTM(context, -window.bounds.size.width * window.layer.anchorPoint.x, -window.bounds.size.height * window.layer.anchorPoint.y);
+//        if (orientation == UIInterfaceOrientationLandscapeLeft)
+//        {
+//            CGContextRotateCTM(context, M_PI_2);
+//            CGContextTranslateCTM(context, 0, -imageSize.width);
+//        }
+//        else if (orientation == UIInterfaceOrientationLandscapeRight)
+//        {
+//            CGContextRotateCTM(context, -M_PI_2);
+//            CGContextTranslateCTM(context, -imageSize.height, 0);
+//        } else if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
+//            CGContextRotateCTM(context, M_PI);
+//            CGContextTranslateCTM(context, -imageSize.width, -imageSize.height);
+//        }
+//        if ([window respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)])
+//        {
+//            [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:YES];
+//        }
+//        else{
+//            [window.layer renderInContext:context];
+//        }
+//        CGContextRestoreGState(context);
+//    }
+//
+//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//
+//    return UIImagePNGRepresentation(image);
+//}
+//
+///**
+// *  返回截取到的图片
+// *
+// *  @return UIImage *
+// */
+//- (UIImage *)imageWithScreenshot {
+//    NSData *imageData = [self dataWithScreenshotInPNGFormat];
+//    return [UIImage imageWithData:imageData];
+//}
 
 @end

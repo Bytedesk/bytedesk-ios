@@ -3,7 +3,7 @@
 //  demo
 //
 //  Created by 萝卜丝 on 2019/3/28.
-//  Copyright © 2019 KeFuDaShi. All rights reserved.
+//  Copyright © 2019 bytedesk.com. All rights reserved.
 //
 
 #import "KFServerViewController.h"
@@ -45,11 +45,11 @@
 //    }];
 
     // for testing post
-    [[BDIMHttpApis sharedInstance] postProto:@"" resultSuccess:^(NSDictionary * _Nonnull dict) {
-
-    } resultFailed:^(NSError * _Nonnull error) {
-
-    }];
+//    [[BDIMHttpApis sharedInstance] postProto:@"" resultSuccess:^(NSDictionary * _Nonnull dict) {
+//
+//    } resultFailed:^(NSError * _Nonnull error) {
+//
+//    }];
     
 }
 

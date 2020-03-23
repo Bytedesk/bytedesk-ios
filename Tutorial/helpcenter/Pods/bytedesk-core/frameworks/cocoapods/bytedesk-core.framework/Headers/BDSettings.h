@@ -5,7 +5,7 @@
 //  Created by 萝卜丝 on 2018/11/23.
 //  Copyright © 2018年 Bytedesk.com. All rights reserved.
 //
-
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
 #define BD_USERNAME               @"bd_username"
@@ -23,6 +23,7 @@
 #define BD_STATUS                 @"bd_status"
 #define BD_CURRENT_TID            @"bd_current_tid"
 #define BD_DEVICE_TOKEN           @"bd_device_token"
+#define BD_CLIENT_UUID            @"bd_client_uuid"
 
 #define BD_IS_ALREADY_LOGIN       @"bd_is_already_login"
 
@@ -35,12 +36,6 @@
 @interface BDSettings : NSObject
 
 + (BOOL)loginAsVisitor;
-
-/**
- @deprecated 请使用 isAlreadyLogin
- @return boolean
- */
-+ (BOOL)getIsAlreadyLogin DEPRECATED_ATTRIBUTE;
 
 /**
  <#Description#>
@@ -324,6 +319,13 @@
 
 /**
  <#Description#>
+
+ @return <#return value description#>
+ */
++ (NSString *)getClientUUID;
+
+/**
+ <#Description#>
  */
 + (void)clear;
 
@@ -354,7 +356,7 @@
  @param sessionType <#sessionType description#>
  @return <#return value description#>
  */
-+ (NSInteger)getDestroyAfterLength:(NSString *)tidOrUidOrGid sessionType:(NSString *)sessionType;
++ (uint32_t)getDestroyAfterLength:(NSString *)tidOrUidOrGid sessionType:(NSString *)sessionType;
 
 /**
  <#Description#>
@@ -363,7 +365,7 @@
  @param sessionType <#sessionType description#>
  @param length <#length description#>
  */
-+ (void)setDestroyAfterLength:(NSString *)tidOrUidOrGid sessionType:(NSString *)sessionType length:(NSInteger)length;
++ (void)setDestroyAfterLength:(NSString *)tidOrUidOrGid sessionType:(NSString *)sessionType length:(uint32_t)length;
 
 
 #pragma mark - 新消息提示

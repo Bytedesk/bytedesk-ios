@@ -72,13 +72,11 @@
 
 - (void)anonymouseLogin {
     // 访客登录
-    [BDCoreApis visitorLoginWithAppkey:DEFAULT_TEST_APPKEY withSubdomain:DEFAULT_TEST_SUBDOMAIN resultSuccess:^(NSDictionary *dict) {
-        // 登录成功
-        NSLog(@"%s, %@", __PRETTY_FUNCTION__, dict);
-    } resultFailed:^(NSError *error) {
-        // 登录失败
-        NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
-    }];
+    [BDCoreApis loginWithAppkey:DEFAULT_TEST_APPKEY withSubdomain:DEFAULT_TEST_SUBDOMAIN resultSuccess:^(NSDictionary *dict) {
+         // 登录成功
+     } resultFailed:^(NSError *error) {
+         // 登录失败
+     }];
 }
 
 @end

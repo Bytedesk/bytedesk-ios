@@ -184,7 +184,7 @@ CGFloat const kFontSize = 17.0f;
         inputToolbar.frame = frame;
         [inputToolbar setBarStyle:UIBarStyleDefault];
         [inputToolbar setTranslucent:YES];
-        [inputToolbar setTintColor:[UIColor whiteColor]];
+//            [inputToolbar setTintColor:[UIColor whiteColor]];
         [inputToolbar setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin];
     }
     
@@ -253,7 +253,7 @@ CGFloat const kFontSize = 17.0f;
         inputTextView.scrollEnabled = YES;
         inputTextView.scrollsToTop = NO;
         inputTextView.userInteractionEnabled = YES;
-        inputTextView.textColor = [UIColor blackColor];
+//        inputTextView.textColor = [UIColor blackColor];
         inputTextView.keyboardAppearance = UIKeyboardAppearanceDefault;
         inputTextView.keyboardType = UIKeyboardTypeDefault;
         inputTextView.returnKeyType = UIReturnKeySend;

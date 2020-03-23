@@ -3,7 +3,7 @@
 //  bytedesk-ui
 //
 //  Created by 萝卜丝 on 2019/3/11.
-//  Copyright © 2019 KeFuDaShi. All rights reserved.
+//  Copyright © 2019 bytedesk.com. All rights reserved.
 //
 
 #import "BDChatIMViewController.h"
@@ -24,7 +24,10 @@
 #import "KFUIUtils.h"
 
 #import <HCSStarRatingView/HCSStarRatingView.h>
+
+// core或者mars二选一即可
 #import <bytedesk-core/bdcore.h>
+//#import <bytedesk-mars/bdmars.h>
 
 #define MaxSelectedImageCount 9
 #define NormalImagePickingTag 1045
@@ -84,7 +87,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 @property(nonatomic, strong) NSString *mUid; // visitorUid/cid/gid
 @property(nonatomic, strong) NSString *mWorkGroupWid; // 工作组wid
-@property(nonatomic, strong) NSString *mTidOrUidOrGid; // 统一代表：thread.tid/contact.uid/group.gid
 @property(nonatomic, strong) NSString *mAgentUid; // 指定坐席uid
 @property(nonatomic, strong) NSString *mThreadType; // 区分客服会话thread、同事会话contact、群组会话group
 @property(nonatomic, strong) NSString *mRequestType; // 区分工作组会话、指定客服会话
@@ -138,393 +140,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             keyboardHeight,
             isEmotionPlusPressedToHideKeyboard;
 
-#pragma mark - 访客端接口
-
-// 请求工作组
-- (void)initWithWorkGroupWid:(NSString *)wId withTitle:(NSString *)title withPush:(BOOL)isPush {
-    // titleView状态：1. 连接中...(发送请求到服务器，进入队列)，2. 排队中...(队列中等待客服接入会话), 3. 接入会话（一闪而过）
-    self.mIsVisitor = YES;
-    self.mIsPush = isPush;
-    self.mIsThreadClosed = NO;
-    self.titleView.needsLoadingView = YES;
-    self.titleView.loadingViewHidden = NO;
-    self.mTitle = title;
-    self.titleView.title = _mTitle;
-    self.titleView.subtitle = @"连接中...";
-    self.titleView.style = QMUINavigationTitleViewStyleSubTitleVertical;
-    //
-    self.mWorkGroupWid = wId;
-    self.mThreadModel = [[BDThreadModel alloc] init];
-    self.mThreadType = BD_THREAD_TYPE_THREAD;
-    self.mRequestType = BD_THREAD_REQUEST_TYPE_WORK_GROUP;
-    //
-    self.rateScore = 5;
-    self.rateNote = @"";
-    self.rateInvite = false;
-    self.mLastMessageId = INT_MAX;
-    
-    // TDOO: 暂时隐藏
-//    UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithButton:[[QMUINavigationButton alloc] initWithType:QMUINavigationButtonTypeNormal title:@"评价"] target:self action:@selector(handleRightBarButtonItemClicked:)];
-//    self.navigationItem.rightBarButtonItem = rightItem;
-    
-    //
-    [BDCoreApis requestThreadWithWorkGroupWid:wId resultSuccess:^(NSDictionary *dict) {
-        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
-        //
-        [self dealWithRequestThreadResult:dict];
-        
-    } resultFailed:^(NSError *error) {
-        DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
-        if (error) {
-            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
-        }
-    }];
-}
-
-- (void) initWithWorkGroupWid:(NSString *)wId withTitle:(NSString *)title withPush:(BOOL)isPush withCustom:(NSDictionary *)custom {
-    //
-    self.mWithCustomDict = TRUE;
-    self.mCustomDict = custom;
-    //
-    [self initWithWorkGroupWid:wId withTitle:title withPush:isPush];
-}
-
-// 指定坐席
-- (void) initWithAgentUid:(NSString *)uId withTitle:(NSString *)title withPush:(BOOL)isPush {
-    //
-    self.mIsVisitor = YES;
-    self.mIsPush = isPush;
-    self.mIsThreadClosed = NO;
-    self.titleView.needsLoadingView = YES;
-    self.titleView.loadingViewHidden = NO;
-    self.mTitle = title;
-    self.titleView.title = _mTitle;
-    self.titleView.subtitle = @"连接中...";
-    self.titleView.style = QMUINavigationTitleViewStyleSubTitleVertical;
-    //
-    self.mAgentUid = uId;
-    self.mThreadModel = [[BDThreadModel alloc] init];
-    self.mThreadType = BD_THREAD_TYPE_THREAD;
-    self.mRequestType = BD_THREAD_REQUEST_TYPE_APPOINTED;
-    //
-    self.rateScore = 5;
-    self.rateNote = @"";
-    self.rateInvite = false;
-    self.mLastMessageId = INT_MAX;
-    //
-    [BDCoreApis requestThreadWithAgentUid:uId resultSuccess:^(NSDictionary *dict) {
-        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
-        //
-        [self dealWithRequestThreadResult:dict];
-        
-    } resultFailed:^(NSError *error) {
-        DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
-        if (error) {
-            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
-        }
-    }];
-}
-
-- (void) initWithAgentUid:(NSString *)uId withTitle:(NSString *)title withPush:(BOOL)isPush withCustom:(NSDictionary *)custom {
-    //
-    self.mWithCustomDict = TRUE;
-    self.mCustomDict = custom;
-    //
-    [self initWithAgentUid:uId withTitle:title withPush:isPush];
-}
-
-/**
- * 返回结果代码：
- *
- * 200：请求会话成功-创建新会话
- * 201：请求会话成功-继续进行中会话
- * 202：请求会话成功-排队中
- * 203：请求会话成功-当前非工作时间，请自助查询或留言
- * 204：请求会话成功-当前无客服在线，请自助查询或留言
- *
- * -1: 请求会话失败-access token无效
- * -2：请求会话失败-wId不存在
- */
-- (void)dealWithRequestThreadResult:(NSDictionary *)dict {
-    // 如果点击了左上角返回或关闭按钮之后，网络请求才返回m，则不需要继续处理此返回结果
-    if (self.mIsViewControllerClosed) {
-        return;
-    }
-    //
-    NSString *message = [dict objectForKey:@"message"];
-    NSNumber *status_code = [dict objectForKey:@"status_code"];
-    DDLogInfo(@"%s message:%@, status_code:%@", __PRETTY_FUNCTION__, message, status_code);
-    
-    if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]] ||
-        [status_code isEqualToNumber:[NSNumber numberWithInt:201]]) {
-        // 创建新会话 / 继续进行中会话
-        
-        // 解析数据
-        self.mThreadModel = [[BDThreadModel alloc] initWithDictionary:dict[@"data"][@"thread"]];
-        self.mTidOrUidOrGid = self.mThreadModel.tid;
-        self.threadTopic = [NSString stringWithFormat:@"thread/%@", self.mTidOrUidOrGid];
-        
-        // 订阅主题
-        [[BDMQTTApis sharedInstance] subscribeTopic:self.threadTopic];
-        
-        // 修改UI界面
-        NSNumber *appointed = dict[@"data"][@"thread"][@"appointed"];
-        if ([appointed boolValue]) {
-            self.titleView.title = dict[@"data"][@"thread"][@"agent"][@"nickname"];
-        } else {
-            self.titleView.title = dict[@"data"][@"thread"][@"workGroup"][@"nickname"];
-        }
-        self.titleView.subtitle = dict[@"message"];
-        self.titleView.needsLoadingView = NO;
-        
-        // 保存聊天记录
-        BDMessageModel *messageModel = [[BDMessageModel alloc] initWithDictionary:dict[@"data"]];
-        [[BDDBApis sharedInstance] insertMessage:messageModel];
-        //
-        [self reloadTableData];
-        
-        // TODO: 发送商品信息
-        if (self.mWithCustomDict) {
-            NSString *customJson = [BDUtils dictToJson:self.mCustomDict];
-            [self sendCommodityMessage:customJson];
-        }
-        
-    } else if ([status_code isEqualToNumber:[NSNumber numberWithInt:202]]) {
-        // 提示排队中
-        
-        // 解析数据
-        self.mThreadModel = [[BDThreadModel alloc] initWithDictionary:dict[@"data"][@"thread"]];
-        self.mTidOrUidOrGid = self.mThreadModel.tid;
-        self.threadTopic = [NSString stringWithFormat:@"thread/%@", self.mTidOrUidOrGid];
-        
-        // 订阅主题
-        [[BDMQTTApis sharedInstance] subscribeTopic:self.threadTopic];
-        
-        // 修改UI界面
-        NSNumber *appointed = dict[@"data"][@"thread"][@"appointed"];
-        if ([appointed boolValue]) {
-            self.titleView.title = dict[@"data"][@"thread"][@"agent"][@"nickname"];
-        } else {
-            self.titleView.title = dict[@"data"][@"thread"][@"workGroup"][@"nickname"];
-        }
-        self.titleView.subtitle = dict[@"message"];
-        self.titleView.needsLoadingView = NO;
-        
-        // 保存聊天记录
-        BDMessageModel *messageModel = [[BDMessageModel alloc] initWithDictionary:dict[@"data"]];
-        [[BDDBApis sharedInstance] insertMessage:messageModel];
-        [self reloadTableData];
-        
-        // TODO: 发送商品信息
-        if (self.mWithCustomDict) {
-            NSString *customJson = [BDUtils dictToJson:self.mCustomDict];
-            [self sendCommodityMessage:customJson];
-        }
-        
-    } else if ([status_code isEqualToNumber:[NSNumber numberWithInt:203]]) {
-        // 当前非工作时间，请自助查询或留言
-        
-        // 解析数据
-        self.mThreadModel = [[BDThreadModel alloc] initWithDictionary:dict[@"data"][@"thread"]];
-        self.mTidOrUidOrGid = self.mThreadModel.tid;
-        self.threadTopic = [NSString stringWithFormat:@"thread/%@", self.mTidOrUidOrGid];
-        
-        // 订阅主题
-        [[BDMQTTApis sharedInstance] subscribeTopic:self.threadTopic];
-        
-        // 修改UI界面
-        NSNumber *appointed = dict[@"data"][@"thread"][@"appointed"];
-        if ([appointed boolValue]) {
-            self.titleView.title = dict[@"data"][@"thread"][@"agent"][@"nickname"];
-        } else {
-            self.titleView.title = dict[@"data"][@"thread"][@"workGroup"][@"nickname"];
-        }
-        self.titleView.subtitle = dict[@"message"];
-        self.titleView.needsLoadingView = NO;
-        
-        // 保存聊天记录
-        BDMessageModel *messageModel = [[BDMessageModel alloc] initWithDictionary:dict[@"data"]];
-        [[BDDBApis sharedInstance] insertMessage:messageModel];
-        [self reloadTableData];
-        
-    } else if ([status_code isEqualToNumber:[NSNumber numberWithInt:204]]) {
-        // 当前无客服在线，请自助查询或留言
-        
-        // 解析数据
-        self.mThreadModel = [[BDThreadModel alloc] initWithDictionary:dict[@"data"][@"thread"]];
-        self.mTidOrUidOrGid = self.mThreadModel.tid;
-        self.threadTopic = [NSString stringWithFormat:@"thread/%@", self.mTidOrUidOrGid];
-        
-        // 订阅主题
-        [[BDMQTTApis sharedInstance] subscribeTopic:self.threadTopic];
-        
-        // 修改UI界面
-        NSNumber *appointed = dict[@"data"][@"thread"][@"appointed"];
-        if ([appointed boolValue]) {
-            self.titleView.title = dict[@"data"][@"thread"][@"agent"][@"nickname"];
-        } else {
-            self.titleView.title = dict[@"data"][@"thread"][@"workGroup"][@"nickname"];
-        }
-        self.titleView.subtitle = dict[@"message"];
-        self.titleView.needsLoadingView = NO;
-        
-        // 保存聊天记录
-        BDMessageModel *messageModel = [[BDMessageModel alloc] initWithDictionary:dict[@"data"]];
-        [[BDDBApis sharedInstance] insertMessage:messageModel];
-        [self reloadTableData];
-        
-    } else if ([status_code isEqualToNumber:[NSNumber numberWithInt:205]]) {
-        // TODO: 咨询前问卷
-        
-        // 修改UI界面
-        self.titleView.title = dict[@"data"][@"thread"][@"workGroup"][@"nickname"];
-        //        self.titleView.subtitle = dict[@"message"];
-        self.titleView.needsLoadingView = NO;
-        self.mTidOrUidOrGid = dict[@"data"][@"thread"][@"tid"];
-        
-        // 弹窗标题
-        NSString *title = @"";
-        // 存储key/value: content/qid
-        NSMutableDictionary *questionDict = [[NSMutableDictionary alloc] init];
-        // 存储key/value: content/workGroups
-        NSMutableDictionary *workGroupDict = [[NSMutableDictionary alloc] init];
-        // content数组
-        NSMutableArray *questionArray = [[NSMutableArray alloc] init];
-        //
-        NSMutableArray *questionnaireItemsArray = dict[@"data"][@"questionnaire"][@"questionnaireItems"];
-        for (NSDictionary *questionItemDict in questionnaireItemsArray) {
-            // for循环目前只有一个元素
-            title = questionItemDict[@"title"];
-            //
-            NSMutableArray *questionnaireItemItemsArray = questionItemDict[@"questionnaireItemItems"];
-            for (NSDictionary *questionnaireItemItemsDict in questionnaireItemItemsArray) {
-                //
-                NSLog(@"content %@", questionnaireItemItemsDict[@"content"]);
-                questionDict[questionnaireItemItemsDict[@"content"]] = questionnaireItemItemsDict[@"qid"];
-                workGroupDict[questionnaireItemItemsDict[@"content"]] = questionnaireItemItemsDict[@"workGroups"];
-                [questionArray addObject:questionnaireItemItemsDict[@"content"]];
-            }
-        }
-        
-        QMUIDialogSelectionViewController *dialogViewController = [[QMUIDialogSelectionViewController alloc] init];
-        dialogViewController.title = title;
-        dialogViewController.items = questionArray;
-        dialogViewController.cellForItemBlock = ^(QMUIDialogSelectionViewController *aDialogViewController, QMUITableViewCell *cell, NSUInteger itemIndex) {
-            cell.accessoryType = UITableViewCellAccessoryNone;// 移除点击时默认加上右边的checkbox
-        };
-        dialogViewController.heightForItemBlock = ^CGFloat (QMUIDialogSelectionViewController *aDialogViewController, NSUInteger itemIndex) {
-            return 54;// 修改默认的行高，默认为 TableViewCellNormalHeight
-        };
-        dialogViewController.didSelectItemBlock = ^(QMUIDialogSelectionViewController *aDialogViewController, NSUInteger itemIndex) {
-            //
-            NSString *content = questionArray[itemIndex];
-            NSString *qid = questionDict[content];
-            DDLogInfo(@"content: %@, qid: %@", content, qid);
-            // 留学: 意向国家 qid = '201810061551181'
-            // 移民：意向国家 qid = '201810061551183'
-            // 语培：意向类别 qid = '201810061551182'
-            // 其他：意向类别 qid = '201810061551184'
-            // 院校：意向院校 qid = '201810061551185'
-            
-            NSMutableArray *workGroupsArray = workGroupDict[content];
-            if ([qid isEqualToString:@"201810061551181"]) {
-                // 单独处理 留学: 意向国家 qid = '201810061551181'
-                //                [self requestQuestionnaire:qid];
-                [self showWorkGroupDialog:workGroupsArray isLiuXue:YES];
-            } else {
-                [self showWorkGroupDialog:workGroupsArray isLiuXue:NO];
-            }
-            
-            [aDialogViewController hide];
-        };
-        [dialogViewController show];
-        
-// 保存聊天记录
-//        BDMessageModel *messageModel = [[BDMessageModel alloc] initWithDictionary:dict[@"data"]];
-//        [[BDDBApis sharedInstance] insertMessage:messageModel];
-//        [self reloadTableData];
-        
-    } else if ([status_code isEqualToNumber:[NSNumber numberWithInt:206]]) {
-        
-        //
-        
-        
-    } else {
-        // 请求会话失败
-        [QMUITips showError:dict[@"message"] inView:self.view hideAfterDelay:2.0f];
-    }
-}
-
-- (void)showWorkGroupDialog:(NSMutableArray *)workGroupsArray isLiuXue:(BOOL)isLiuXue {
-    
-    NSMutableDictionary *workGroupDict = [[NSMutableDictionary alloc] init];
-    NSMutableArray *workGroupNamesArray = [[NSMutableArray alloc] init];
-    //
-    for (NSDictionary *workGroupObjectDict in workGroupsArray) {
-        //
-        workGroupDict[workGroupObjectDict[@"nickname"]] = workGroupObjectDict[@"wid"];
-        [workGroupNamesArray addObject:workGroupObjectDict[@"nickname"]];
-    }
-    //
-    QMUIDialogSelectionViewController *dialogViewController = [[QMUIDialogSelectionViewController alloc] init];
-    dialogViewController.title = @"请选择";
-    dialogViewController.items = workGroupNamesArray;
-    dialogViewController.cellForItemBlock = ^(QMUIDialogSelectionViewController *aDialogViewController, QMUITableViewCell *cell, NSUInteger itemIndex) {
-        cell.accessoryType = UITableViewCellAccessoryNone;// 移除点击时默认加上右边的checkbox
-    };
-    dialogViewController.heightForItemBlock = ^CGFloat (QMUIDialogSelectionViewController *aDialogViewController, NSUInteger itemIndex) {
-        return 54;// 修改默认的行高，默认为 TableViewCellNormalHeight
-    };
-    dialogViewController.didSelectItemBlock = ^(QMUIDialogSelectionViewController *aDialogViewController, NSUInteger itemIndex) {
-        //
-        NSString *nickname = workGroupNamesArray[itemIndex];
-        NSString *wid = workGroupDict[nickname];
-        DDLogInfo(@"nickname: %@, wid: %@", nickname, wid);
-        //
-        if (isLiuXue) {
-            [self chooseWorkGroupLiuXue:wid withWorkGroupNickname:nickname];
-        } else {
-            [self chooseWorkGroup:wid];
-        }
-        
-        [aDialogViewController hide];
-    };
-    [dialogViewController show];
-}
-
-- (void)chooseWorkGroup:(NSString *)workGroupWid {
-    
-    [BDCoreApis requestChooseWorkGroup:workGroupWid resultSuccess:^(NSDictionary *dict) {
-        //        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
-        
-        self.mWorkGroupWid = workGroupWid;
-        
-        [self dealWithRequestThreadResult:dict];
-        
-    } resultFailed:^(NSError *error) {
-        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-        if (error) {
-            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
-        }
-    }];
-}
-
-- (void)chooseWorkGroupLiuXue:(NSString *)workGroupWid withWorkGroupNickname:(NSString *)nickname {
-    
-    [BDCoreApis requestChooseWorkGroupLiuXue:workGroupWid withWorkGroupNickname:nickname resultSuccess:^(NSDictionary *dict) {
-        //        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
-        
-        self.mWorkGroupWid = workGroupWid;
-        
-        [self dealWithRequestThreadResult:dict];
-        
-    } resultFailed:^(NSError *error) {
-        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-        if (error) {
-            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
-        }
-    }];
-}
 
 #pragma mark - 客服端接口
 
@@ -538,19 +153,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.mThreadType = threadModel.type;
     self.mLastMessageId = INT_MAX;
     //
-    if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_THREAD]) {
-        // 客服会话
-        self.mTidOrUidOrGid = self.mThreadModel.tid;
-        self.mUid = self.mThreadModel.visitor_uid;
-    } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_CONTACT]) {
-        // 联系人会话
-        self.mTidOrUidOrGid = self.mThreadModel.contact_uid;
-        self.mUid = self.mThreadModel.contact_uid;
-    } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_GROUP]) {
-        // 群组会话
-        self.mTidOrUidOrGid = self.mThreadModel.group_gid;
-        self.mUid = self.mThreadModel.group_gid;
-    }
+    self.mUid = self.mThreadModel.tid;
     // 右上角按钮
     UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithImage:[UIImage imageNamed:@"icon_more" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] target:self action:@selector(handleRightBarButtonItemClicked:)];
     self.navigationItem.rightBarButtonItem = rightItem;
@@ -572,7 +175,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.mIsVisitor = NO;
     self.mIsPush = isPush;
     self.mContactModel = contactModel;
-    self.mTidOrUidOrGid = self.mContactModel.uid;
     self.mUid = self.mContactModel.uid;
     self.mThreadType = BD_THREAD_TYPE_CONTACT;
     self.mTitle = self.mContactModel.real_name;
@@ -581,6 +183,19 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     // FIXME: 因为点击右上角按钮初始化需要用到threadModel, 暂时隐藏不启用右上角按钮
     UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithImage:[UIImage imageNamed:@"icon_about" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] target:self action:@selector(handleRightBarButtonItemClicked:)];
     self.navigationItem.rightBarButtonItem = rightItem;
+    
+    //
+    [BDCoreApis getContactThread:self.mUid resultSuccess:^(NSDictionary *dict) {
+        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+        
+        self.mUid = dict[@"data"][@"tid"];
+        self.mThreadModel = [[BDThreadModel alloc] initWithDictionary:dict[@"data"]];
+
+        [self reloadTableData];
+        
+    } resultFailed:^(NSError *error) {
+        
+    }];
 }
 
 - (void) initWithContactModel:(BDContactModel *)contactModel withPush:(BOOL)isPush withCustom:(NSDictionary *)custom {
@@ -599,7 +214,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.mIsVisitor = NO;
     self.mIsPush = isPush;
     self.mGroupModel = groupModel;
-    self.mTidOrUidOrGid = self.mGroupModel.gid;
     self.mUid = self.mGroupModel.gid;
     self.mThreadType = BD_THREAD_TYPE_GROUP;
     self.mTitle = self.mGroupModel.nickname;
@@ -608,6 +222,19 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     // 右上角按钮
     UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithImage:[UIImage imageNamed:@"icon_about" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] target:self action:@selector(handleRightBarButtonItemClicked:)];
     self.navigationItem.rightBarButtonItem = rightItem;
+    
+    //
+    [BDCoreApis getGroupThread:self.mUid resultSuccess:^(NSDictionary *dict) {
+        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+        
+        self.mUid = dict[@"data"][@"tid"];
+        self.mThreadModel = [[BDThreadModel alloc] initWithDictionary:dict[@"data"]];
+                
+        [self reloadTableData];
+        
+    } resultFailed:^(NSError *error) {
+        
+    }];
 }
 
 - (void) initWithGroupModel:(BDGroupModel *)groupModel withPush:(BOOL)isPush withCustom:(NSDictionary *)custom {
@@ -634,7 +261,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self.tableView addGestureRecognizer:singleFingerTap];
     
     //输入框Toolbar
-    //    self.kfInputView = [[self.kfInputView alloc] init];
     CGRect inputViewFrame = CGRectMake(0.0f, self.view.frame.size.height - INPUTBAR_HEIGHT, self.view.frame.size.width, INPUTBAR_HEIGHT);
     self.kfInputView = [[KFInputView alloc] initWithFrame:inputViewFrame];
     self.kfInputView.delegate = self;
@@ -720,8 +346,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     //
     [self registerNotifications];
     [self reloadTableData];
-    // 从服务器加载聊天记录
-    [self refreshMessages];
+    // 从服务器加载聊天记录, 暂时不从服务器加载
+    // [self refreshMessages];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -750,22 +376,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
 }
 
-//#pragma mark - <QMUINavigationControllerDelegate>
-//
-//- (void)navigationController:(QMUINavigationController *)navigationController poppingByInteractiveGestureRecognizer:(UIScreenEdgePanGestureRecognizer *)gestureRecognizer viewControllerWillDisappear:(UIViewController *)viewControllerWillDisappear viewControllerWillAppear:(UIViewController *)viewControllerWillAppear {
-//    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
-//
-//    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-//        if (viewControllerWillDisappear == self) {
-//            self.mIsViewControllerClosed = YES;
-//            [QMUITips showSucceed:@"松手了，界面发生切换"];
-//        } else if (viewControllerWillAppear == self) {
-//            [QMUITips showInfo:@"松手了，没有触发界面切换"];
-//        }
-//        return;
-//    }
-//}
-
 - (BOOL)forceEnableInteractivePopGestureRecognizer {
     return self.forceEnableBackGesture;
 }
@@ -780,7 +390,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         
     } else {
         //
-        if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_THREAD]) {
+        if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_WORKGROUP]) {
             // 客服会话
             QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
             }];
@@ -941,26 +551,17 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (void)reloadTableData {
     //
-    if (self.mIsVisitor) {
-        //
-        if ([self.mRequestType isEqualToString:BD_THREAD_REQUEST_TYPE_APPOINTED]) {
-            DDLogInfo(@"1. 访客端获取聊天记录: 指定坐席 %@", self.mTidOrUidOrGid);
-            self.mMessageArray = [BDCoreApis getMessagesWithThread:self.mTidOrUidOrGid];
-        } else {
-            DDLogInfo(@"1. 访客端获取聊天记录：工作组 %@", self.mWorkGroupWid);
-            self.mMessageArray = [BDCoreApis getMessagesWithWorkGroup:self.mWorkGroupWid];
-        }
-    } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_THREAD]) {
-        DDLogInfo(@"2. 客服端获取聊天记录 %@", self.mUid);
-        self.mMessageArray = [BDCoreApis getMessagesWithUser:self.mUid];
-        // 更新当前会话
-        [self updateCurrentThread];
-    } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_CONTACT]) {
+    if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_CONTACT]) {
         DDLogInfo(@"3. 客服端：联系人聊天记录 %@", self.mUid);
         self.mMessageArray = [BDCoreApis getMessagesWithContact:self.mUid];
     } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_GROUP]) {
         DDLogInfo(@"4. 客服端：群组聊天记录 %@", self.mUid);
         self.mMessageArray = [BDCoreApis getMessagesWithGroup:self.mUid];
+    } else {
+        DDLogInfo(@"2. 客服端: 客服聊天记录 %@", self.mUid);
+        self.mMessageArray = [BDCoreApis getMessagesWithThread:self.mUid];
+        // 更新当前会话
+        [self updateCurrentThread];
     }
     //
     if ([self.mMessageArray count] == 0) {
@@ -1009,9 +610,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (void)updateCurrentThread {
     NSString *preTid = [BDSettings getCurrentTid];
-    [BDCoreApis updateCurrentThread:preTid currentTid:self.mTidOrUidOrGid resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis updateCurrentThread:preTid currentTid:self.mUid resultSuccess:^(NSDictionary *dict) {
         
-        [BDSettings setCurrentTid:self.mTidOrUidOrGid];
+        [BDSettings setCurrentTid:self.mUid];
         
     } resultFailed:^(NSError *error) {
         DDLogError(@"updateCurrentThread %@", error);
@@ -1049,9 +650,11 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyQueueAccept:) name:BD_NOTIFICATION_QUEUE_ACCEPT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyThreadClose:) name:BD_NOTIFICATION_THREAD_CLOSE object:nil];
     //
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyReloadCellSuccess:) name:BD_NOTIFICATION_MESSAGE_LOCALID object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyMessageAdd:) name:BD_NOTIFICATION_MESSAGE_ADD object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyMessageDelete:) name:BD_NOTIFICATION_MESSAGE_DELETE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyMessageRetract:) name:BD_NOTIFICATION_MESSAGE_RETRACT object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyMessagePreview::) name:BD_NOTIFICATION_MESSAGE_PREVIEW object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyMessageRecall:) name:BD_NOTIFICATION_MESSAGE_RECALL object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyMessageStatus:) name:BD_NOTIFICATION_MESSAGE_STATUS object:nil];
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyKickoff:) name:BD_NOTIFICATION_KICKOFF object:nil];
@@ -1205,13 +808,15 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 // TODO: 区分发送消息
 -(void)sendTextMessage:(NSString *)content {
-    DDLogInfo(@"%s, content:%@, tid:%@, sessionType:%@ ", __PRETTY_FUNCTION__, content, self.mTidOrUidOrGid,  self.mThreadType);
+    DDLogInfo(@"%s, content:%@, tid:%@, sessionType:%@ ", __PRETTY_FUNCTION__, content, self.mUid,  self.mThreadType);
+    
+    // TODO: 增加判断content长度，限制<512
     
     // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
     NSString *localId = [[NSUUID UUID] UUIDString];
     
     // 插入本地消息, 可通过返回的messageModel首先更新本地UI，然后再发送消息
-    BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertTextMessageLocal:self.mTidOrUidOrGid withWorkGroupWid:self.mWorkGroupWid withContent:content withLocalId:localId withSessionType:self.mThreadType];
+    BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertTextMessageLocal:self.mUid withWorkGroupWid:self.mWorkGroupWid withContent:content withLocalId:localId withSessionType:self.mThreadType];
     DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.content);
     
     // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
@@ -1223,43 +828,52 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
     [self.tableView endUpdates];
     [self tableViewScrollToBottom:NO];
+     
+    // 异步发送消息
+//    [[BDMQTTApis sharedInstance] sendTextMessage:content toTid:self.mUid localId:localId sessionType:self.mThreadType];
+    
+    [[BDMQTTApis sharedInstance] sendTextMessageProtobuf:localId content:content
+        tid:self.mUid topic:self.mThreadModel.topic threadType:self.mThreadType threadNickname:self.mThreadModel.nickname threadAvatar:self.mThreadModel.avatar];
+    
+    // 加密之后发送
+//     [[BDMarsApis sharedInstance] sendMessage:content topic:self.mUid];
 
-    // 同步发送消息
-    [BDCoreApis sendTextMessage:content toTid:self.mTidOrUidOrGid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {
-        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
-        //
-        NSNumber *status_code = [dict objectForKey:@"status_code"];
-        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            // 发送成功
-
-            // 服务器返回自定义消息本地id
-            NSString *localId = dict[@"data"][@"localId"];
-            DDLogInfo(@"callback localId: %@", localId);
-
-            // 修改本地消息发送状态为成功
-            [[BDDBApis sharedInstance] updateMessageSuccess:localId];
-            [self reloadCellDataSuccess:localId];
-
-        } else {
-            // 修改本地消息发送状态为error
-            [[BDDBApis sharedInstance] updateMessageError:localId];
-            [self reloadCellDataError:localId];
-            
-            //
-            NSString *message = dict[@"message"];
-            DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
-            [QMUITips showError:message inView:self.view hideAfterDelay:3];
-        }
-    } resultFailed:^(NSError *error) {
-        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-        // 修改本地消息发送状态为error
-        [[BDDBApis sharedInstance] updateMessageError:localId];
-        [self reloadCellDataError:localId];
-        //
-        if (error) {
-            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
-        }
-    }];
+//    // 同步发送消息
+//    [BDCoreApis sendTextMessage:content toTid:self.mUid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {
+//        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+//        //
+//        NSNumber *status_code = [dict objectForKey:@"status_code"];
+//        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+//            // 发送成功
+//
+//            // 服务器返回自定义消息本地id
+//            NSString *localId = dict[@"data"][@"localId"];
+//            DDLogInfo(@"callback localId: %@", localId);
+//
+//            // 修改本地消息发送状态为成功
+//            [[BDDBApis sharedInstance] updateMessageSuccess:localId];
+//            [self reloadCellDataSuccess:localId];
+//
+//        } else {
+//            // 修改本地消息发送状态为error
+//            [[BDDBApis sharedInstance] updateMessageError:localId];
+//            [self reloadCellDataError:localId];
+//
+//            //
+//            NSString *message = dict[@"message"];
+//            DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
+//            [QMUITips showError:message inView:self.view hideAfterDelay:3];
+//        }
+//    } resultFailed:^(NSError *error) {
+//        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+//        // 修改本地消息发送状态为error
+//        [[BDDBApis sharedInstance] updateMessageError:localId];
+//        [self reloadCellDataError:localId];
+//        //
+//        if (error) {
+//            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+//        }
+//    }];
 }
 
 //
@@ -1281,7 +895,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             NSString *imageUrl = dict[@"data"];
             
             // 插入本地消息
-            BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertImageMessageLocal:self.mTidOrUidOrGid withWorkGroupWid:self.mWorkGroupWid withContent:imageUrl withLocalId:localId withSessionType:self.mThreadType];
+            BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertImageMessageLocal:self.mUid withWorkGroupWid:self.mWorkGroupWid withContent:imageUrl withLocalId:localId withSessionType:self.mThreadType];
             DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.image_url);
             
             // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
@@ -1293,41 +907,45 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             [self.tableView endUpdates];
             [self tableViewScrollToBottom:YES];
 
+            //
+            [[BDMQTTApis sharedInstance] sendImageMessageProtobuf:localId content:imageUrl
+            tid:self.mUid topic:self.mThreadModel.topic threadType:self.mThreadType threadNickname:self.mThreadModel.nickname threadAvatar:self.mThreadModel.avatar];
+            
             // 同步发送图片消息
-            [BDCoreApis sendImageMessage:imageUrl toTid:self.mTidOrUidOrGid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {
-                DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
-                //
-                NSNumber *status_code = [dict objectForKey:@"status_code"];
-                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                    // 发送成功
-                    
-                    // 服务器返回自定义消息本地id
-                    NSString *localId = dict[@"data"][@"localId"];
-                    DDLogInfo(@"callback localId: %@", localId);
-                    
-                    // 修改本地消息发送状态为成功
-                    [[BDDBApis sharedInstance] updateMessageSuccess:localId];
-                    [self reloadCellDataSuccess:localId];
-                    
-                } else {
-                    // 修改本地消息发送状态为error
-                    [[BDDBApis sharedInstance] updateMessageError:localId];
-                    [self reloadCellDataError:localId];
-                    //
-                    NSString *message = dict[@"message"];
-                    DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
-                    [QMUITips showError:message inView:self.view hideAfterDelay:2];
-                }
-            } resultFailed:^(NSError *error) {
-                DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-                // 修改本地消息发送状态为error
-                [[BDDBApis sharedInstance] updateMessageError:localId];
-                [self reloadCellDataError:localId];
-                //
-                if (error) {
-                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:2];
-                }
-            }];
+//            [BDCoreApis sendImageMessage:imageUrl toTid:self.mUid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {
+//                DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+//                //
+//                NSNumber *status_code = [dict objectForKey:@"status_code"];
+//                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+//                    // 发送成功
+//
+//                    // 服务器返回自定义消息本地id
+//                    NSString *localId = dict[@"data"][@"localId"];
+//                    DDLogInfo(@"callback localId: %@", localId);
+//
+//                    // 修改本地消息发送状态为成功
+//                    [[BDDBApis sharedInstance] updateMessageSuccess:localId];
+//                    [self reloadCellDataSuccess:localId];
+//
+//                } else {
+//                    // 修改本地消息发送状态为error
+//                    [[BDDBApis sharedInstance] updateMessageError:localId];
+//                    [self reloadCellDataError:localId];
+//                    //
+//                    NSString *message = dict[@"message"];
+//                    DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
+//                    [QMUITips showError:message inView:self.view hideAfterDelay:2];
+//                }
+//            } resultFailed:^(NSError *error) {
+//                DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+//                // 修改本地消息发送状态为error
+//                [[BDDBApis sharedInstance] updateMessageError:localId];
+//                [self reloadCellDataError:localId];
+//                //
+//                if (error) {
+//                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:2];
+//                }
+//            }];
             
         } else {
             [QMUITips showError:@"发送图片错误" inView:self.view hideAfterDelay:2];
@@ -1363,7 +981,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             NSString *voiceUrl = dict[@"data"];
             
             // 插入本地消息
-            BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertVoiceMessageLocal:self.mTidOrUidOrGid withWorkGroupWid:self.mWorkGroupWid withContent:voiceUrl withLocalId:localId withSessionType:self.mThreadType withVoiceLength:voiceLength  withFormat:@"amr"];
+            BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertVoiceMessageLocal:self.mUid withWorkGroupWid:self.mWorkGroupWid withContent:voiceUrl withLocalId:localId withSessionType:self.mThreadType withVoiceLength:voiceLength  withFormat:@"amr"];
             DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.voice_url);
             
             // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
@@ -1375,42 +993,46 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             [self.tableView endUpdates];
             [self tableViewScrollToBottom:YES];
             
+            //
+            [[BDMQTTApis sharedInstance] sendVoiceMessageProtobuf:localId content:voiceUrl
+            tid:self.mUid topic:self.mThreadModel.topic threadType:self.mThreadType threadNickname:self.mThreadModel.nickname threadAvatar:self.mThreadModel.avatar];
+            
             // 同步发送录音消息
-            [BDCoreApis sendVoiceMessage:voiceUrl toTid:self.mTidOrUidOrGid localId:localId sessionType:self.mThreadType voiceLength:voiceLength format:@"amr" resultSuccess:^(NSDictionary *dict) {
-                DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
-                //
-                NSNumber *status_code = [dict objectForKey:@"status_code"];
-                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                    // 发送成功
-                    
-                    // 服务器返回自定义消息本地id
-                    NSString *localId = dict[@"data"][@"localId"];
-                    DDLogInfo(@"callback localId: %@", localId);
-                    
-                    // 修改本地消息发送状态为成功
-                    [[BDDBApis sharedInstance] updateMessageSuccess:localId];
-                    [self reloadCellDataSuccess:localId];
-                    
-                } else {
-                    // 修改本地消息发送状态为error
-                    [[BDDBApis sharedInstance] updateMessageError:localId];
-                    [self reloadCellDataError:localId];
-                    //
-                    NSString *message = dict[@"message"];
-                    DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
-                    [QMUITips showError:message inView:self.view hideAfterDelay:2];
-                }
-                
-            } resultFailed:^(NSError *error) {
-                DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-                // 修改本地消息发送状态为error
-                [[BDDBApis sharedInstance] updateMessageError:localId];
-                [self reloadCellDataError:localId];
-                //
-                if (error) {
-                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:2];
-                }
-            }];
+//            [BDCoreApis sendVoiceMessage:voiceUrl toTid:self.mUid localId:localId sessionType:self.mThreadType voiceLength:voiceLength format:@"amr" resultSuccess:^(NSDictionary *dict) {
+//                DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+//                //
+//                NSNumber *status_code = [dict objectForKey:@"status_code"];
+//                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+//                    // 发送成功
+//
+//                    // 服务器返回自定义消息本地id
+//                    NSString *localId = dict[@"data"][@"localId"];
+//                    DDLogInfo(@"callback localId: %@", localId);
+//
+//                    // 修改本地消息发送状态为成功
+//                    [[BDDBApis sharedInstance] updateMessageSuccess:localId];
+//                    [self reloadCellDataSuccess:localId];
+//
+//                } else {
+//                    // 修改本地消息发送状态为error
+//                    [[BDDBApis sharedInstance] updateMessageError:localId];
+//                    [self reloadCellDataError:localId];
+//                    //
+//                    NSString *message = dict[@"message"];
+//                    DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
+//                    [QMUITips showError:message inView:self.view hideAfterDelay:2];
+//                }
+//
+//            } resultFailed:^(NSError *error) {
+//                DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+//                // 修改本地消息发送状态为error
+//                [[BDDBApis sharedInstance] updateMessageError:localId];
+//                [self reloadCellDataError:localId];
+//                //
+//                if (error) {
+//                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:2];
+//                }
+//            }];
             
         } else {
             [QMUITips showError:@"发送录音错误" inView:self.view hideAfterDelay:2];
@@ -1426,13 +1048,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 // 发送商品消息
 -(void)sendCommodityMessage:(NSString *)content {
-    DDLogInfo(@"%s, content:%@, tid:%@, sessionType:%@ ", __PRETTY_FUNCTION__, content, self.mTidOrUidOrGid,  self.mThreadType);
+    DDLogInfo(@"%s, content:%@, tid:%@, sessionType:%@ ", __PRETTY_FUNCTION__, content, self.mUid,  self.mThreadType);
     
     // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
     NSString *localId = [[NSUUID UUID] UUIDString];
     
     // 插入本地消息, 可通过返回的messageModel首先更新本地UI，然后再发送消息
-    BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertCommodityMessageLocal:self.mTidOrUidOrGid withWorkGroupWid:self.mWorkGroupWid withContent:content withLocalId:localId withSessionType:self.mThreadType];
+    BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertCommodityMessageLocal:self.mUid withWorkGroupWid:self.mWorkGroupWid withContent:content withLocalId:localId withSessionType:self.mThreadType];
     DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.content);
 
     // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
@@ -1444,55 +1066,58 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self.tableView endUpdates];
     [self tableViewScrollToBottom:YES];
     
+    //
+    
+    
     // 同步发送消息
-    [BDCoreApis sendCommodityMessage:content toTid:self.mTidOrUidOrGid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {
-        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
-        //
-        NSNumber *status_code = [dict objectForKey:@"status_code"];
-        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            // 发送成功
-            
-            // 服务器返回自定义消息本地id
-            NSString *localId = dict[@"data"][@"localId"];
-            DDLogInfo(@"callback localId: %@", localId);
-            
-            // reloadRowsAtIndexPaths
-            
-            // 修改本地消息发送状态为成功
-            [[BDDBApis sharedInstance] updateMessageSuccess:localId];
-            [self reloadCellDataSuccess:localId];
-            
-            
-        } else {
-            // 修改本地消息发送状态为error
-            [[BDDBApis sharedInstance] updateMessageError:localId];
-            [self reloadCellDataError:localId];
-            //
-            NSString *message = dict[@"message"];
-            DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
-            [QMUITips showError:message inView:self.view hideAfterDelay:2];
-        }
-    } resultFailed:^(NSError *error) {
-        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-        // 修改本地消息发送状态为error
-        [[BDDBApis sharedInstance] updateMessageError:localId];
-        [self reloadCellDataError:localId];
-        //
-        if (error) {
-            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:2];
-        }
-    }];
+//    [BDCoreApis sendCommodityMessage:content toTid:self.mUid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {
+//        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+//        //
+//        NSNumber *status_code = [dict objectForKey:@"status_code"];
+//        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+//            // 发送成功
+//
+//            // 服务器返回自定义消息本地id
+//            NSString *localId = dict[@"data"][@"localId"];
+//            DDLogInfo(@"callback localId: %@", localId);
+//
+//            // reloadRowsAtIndexPaths
+//
+//            // 修改本地消息发送状态为成功
+//            [[BDDBApis sharedInstance] updateMessageSuccess:localId];
+//            [self reloadCellDataSuccess:localId];
+//
+//
+//        } else {
+//            // 修改本地消息发送状态为error
+//            [[BDDBApis sharedInstance] updateMessageError:localId];
+//            [self reloadCellDataError:localId];
+//            //
+//            NSString *message = dict[@"message"];
+//            DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
+//            [QMUITips showError:message inView:self.view hideAfterDelay:2];
+//        }
+//    } resultFailed:^(NSError *error) {
+//        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+//        // 修改本地消息发送状态为error
+//        [[BDDBApis sharedInstance] updateMessageError:localId];
+//        [self reloadCellDataError:localId];
+//        //
+//        if (error) {
+//            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:2];
+//        }
+//    }];
 }
 
 // 发送红包消息
 -(void)sendRedPacketMessage:(NSString *)content {
-    DDLogInfo(@"%s, content:%@, tid:%@, sessionType:%@ ", __PRETTY_FUNCTION__, content, self.mTidOrUidOrGid,  self.mThreadType);
+    DDLogInfo(@"%s, content:%@, tid:%@, sessionType:%@ ", __PRETTY_FUNCTION__, content, self.mUid,  self.mThreadType);
     
     // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
     NSString *localId = [[NSUUID UUID] UUIDString];
     
     // 插入本地消息, 可通过返回的messageModel首先更新本地UI，然后再发送消息
-    BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertRedPacketMessageLocal:self.mTidOrUidOrGid withWorkGroupWid:self.mWorkGroupWid withContent:content withLocalId:localId withSessionType:self.mThreadType];
+    BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertRedPacketMessageLocal:self.mUid withWorkGroupWid:self.mWorkGroupWid withContent:content withLocalId:localId withSessionType:self.mThreadType];
     DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.content);
     
     // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
@@ -1504,43 +1129,46 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self.tableView endUpdates];
     [self tableViewScrollToBottom:YES];
     
+    //
+    
+    
     // 同步发送消息
-    [BDCoreApis sendRedPacketMessage:content toTid:self.mTidOrUidOrGid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {
-        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
-        //
-        NSNumber *status_code = [dict objectForKey:@"status_code"];
-        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            // 发送成功
-            
-            // 服务器返回自定义消息本地id
-            NSString *localId = dict[@"data"][@"localId"];
-            DDLogInfo(@"callback localId: %@", localId);
-            
-            // reloadRowsAtIndexPaths
-            
-            // 修改本地消息发送状态为成功
-            [[BDDBApis sharedInstance] updateMessageSuccess:localId];
-            [self reloadCellDataSuccess:localId];
-            
-        } else {
-            // 修改本地消息发送状态为error
-            [[BDDBApis sharedInstance] updateMessageError:localId];
-            [self reloadCellDataError:localId];
-            //
-            NSString *message = dict[@"message"];
-            DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
-            [QMUITips showError:message inView:self.view hideAfterDelay:2];
-        }
-    } resultFailed:^(NSError *error) {
-        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-        // 修改本地消息发送状态为error
-        [[BDDBApis sharedInstance] updateMessageError:localId];
-        [self reloadCellDataError:localId];
-        //
-        if (error) {
-            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:2];
-        }
-    }];
+//    [BDCoreApis sendRedPacketMessage:content toTid:self.mUid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {
+//        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+//        //
+//        NSNumber *status_code = [dict objectForKey:@"status_code"];
+//        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+//            // 发送成功
+//
+//            // 服务器返回自定义消息本地id
+//            NSString *localId = dict[@"data"][@"localId"];
+//            DDLogInfo(@"callback localId: %@", localId);
+//
+//            // reloadRowsAtIndexPaths
+//
+//            // 修改本地消息发送状态为成功
+//            [[BDDBApis sharedInstance] updateMessageSuccess:localId];
+//            [self reloadCellDataSuccess:localId];
+//
+//        } else {
+//            // 修改本地消息发送状态为error
+//            [[BDDBApis sharedInstance] updateMessageError:localId];
+//            [self reloadCellDataError:localId];
+//            //
+//            NSString *message = dict[@"message"];
+//            DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
+//            [QMUITips showError:message inView:self.view hideAfterDelay:2];
+//        }
+//    } resultFailed:^(NSError *error) {
+//        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+//        // 修改本地消息发送状态为error
+//        [[BDDBApis sharedInstance] updateMessageError:localId];
+//        [self reloadCellDataError:localId];
+//        //
+//        if (error) {
+//            [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:2];
+//        }
+//    }];
 }
 
 #pragma mark - 表情
@@ -1639,7 +1267,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     else if(authStatus == AVAuthorizationStatusAuthorized) {//允许访问
         // The user has explicitly granted permission for media capture,
         //or explicit user permission is not necessary for the media type in question.
-        mImagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+             self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        });
         [self presentViewController:mImagePickerController animated:YES completion:nil];
         
     }else if(authStatus == AVAuthorizationStatusNotDetermined){
@@ -1648,7 +1278,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             if(granted){//点击允许访问时调用
                 //用户明确许可与否，媒体需要捕获，但用户尚未授予或拒绝许可。
                 //DDLogInfo(@"Granted access to %@", AVMediaTypeVideo);
-                self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                     self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+                });
                 [self presentViewController:self.mImagePickerController animated:YES completion:nil];
             }
             else {
@@ -1822,7 +1454,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             NSString *fileUrl = dict[@"data"];
             
             // 插入本地消息
-            BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertFileMessageLocal:self.mTidOrUidOrGid withWorkGroupWid:self.mWorkGroupWid withContent:fileUrl withLocalId:localId withSessionType:self.mThreadType withFormat:fileType withFileName:fileName withFileSize:fileSize];
+            BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertFileMessageLocal:self.mUid withWorkGroupWid:self.mWorkGroupWid withContent:fileUrl withLocalId:localId withSessionType:self.mThreadType withFormat:fileType withFileName:fileName withFileSize:fileSize];
             DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.file_url);
             
             // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
@@ -1835,7 +1467,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             [self tableViewScrollToBottom:YES];
             
             // 同步发送文件消息
-            [BDCoreApis sendFileMessage:fileUrl toTid:self.mTidOrUidOrGid localId:localId sessionType:self.mThreadType format:fileType fileName:fileName fileSize:fileSize resultSuccess:^(NSDictionary *dict) {
+            [BDCoreApis sendFileMessage:fileUrl toTid:self.mUid localId:localId sessionType:self.mThreadType format:fileType fileName:fileName fileSize:fileSize resultSuccess:^(NSDictionary *dict) {
                 DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
                 //
                 NSNumber *status_code = [dict objectForKey:@"status_code"];
@@ -2330,7 +1962,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         //显示录音HUD
         self.kfRecordVoiceViewHUD.hidden = FALSE;
         //开始录音
-        [self.kfRecordVoiceViewHUD startVoiceRecordingToUsername:self.mTidOrUidOrGid];
+        [self.kfRecordVoiceViewHUD startVoiceRecordingToUsername:self.mUid];
     
         //添加录音虚拟气泡
 //        KFMessageItem *inputtingVoiceMessage = [[KFMessageItem alloc] init];
@@ -2681,6 +2313,19 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.mIsThreadClosed = YES;
 }
 
+/**
+ Description
+ 
+ @param notification <#notification description#>
+ */
+- (void)notifyReloadCellSuccess:(NSNotification *)notification {
+    NSMutableDictionary *dict = [notification object];
+    NSString *localId = dict[@"localId"];
+//    NSString *status = dict[@"status"];
+    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, localId);
+    //
+    [self reloadCellDataSuccess:localId];
+}
 
 /**
  收到新消息通知
@@ -2716,13 +2361,14 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                 [messageModel.status isEqualToString:BD_MESSAGE_STATUS_STORED]) {
                 // TODO: 更新本地消息为已读
                 
-                // 发送已读回执，通知服务器更新状态
-                [[BDMQTTApis sharedInstance] sendReceiptReadMessage:messageModel.mid];
+                // 不是自己发送的消息，发送已读回执
+                if (![messageModel.uid isEqualToString:[BDSettings getUid]]) {
+                    [[BDMQTTApis sharedInstance] sendReceiptReadMessage:messageModel.mid threadTid:self.mUid];
+                }
             }
         }
         
         // TODO: 判断是否阅后即焚消息，如果是，则倒计时销毁
-        
     }
     
 }
@@ -2746,7 +2392,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
  
  @param notification <#notification description#>
  */
-- (void)notifyMessageRetract:(NSNotification *)notification {
+- (void)notifyMessageRecall:(NSNotification *)notification {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
     // TODO: 优化处理

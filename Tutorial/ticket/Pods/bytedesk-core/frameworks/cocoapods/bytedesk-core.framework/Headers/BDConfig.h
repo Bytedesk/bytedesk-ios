@@ -3,7 +3,7 @@
 //  bytedesk-core
 //
 //  Created by 萝卜丝 on 2019/3/26.
-//  Copyright © 2019 KeFuDaShi. All rights reserved.
+//  Copyright © 2019 bytedesk.com. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSInteger)getMqttPort;
 
-+ (void)setMqttPort:(NSInteger)port;
++ (void)setMqttPort:(uint32_t)port;
 
 /**
  消息服务器用户名
@@ -160,6 +160,21 @@ WebRTC TURN server
  @return <#return value description#>
  */
 + (NSString *)getPasswordOAuthTokenUrl;
+
+/// 手机验证码登录
++ (NSString *)getMobileOAuthTokenUrl;
+
+/// 邮箱验证码
++ (NSString *)getEmailOAuthTokenUrl;
+
+/// 微信登录
++ (NSString *)getWeChatOAuthTokenUrl;
+
+/// 发送短信验证码URL
++ (NSString *)getMobileCodeUrl;
+
+/// 发送邮箱验证码URL
++ (NSString *)getEmailCodeUrl;
 
 /**
  <#Description#>

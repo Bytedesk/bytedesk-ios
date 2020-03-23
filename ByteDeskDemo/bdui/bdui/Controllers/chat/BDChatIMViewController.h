@@ -3,7 +3,7 @@
 //  bytedesk-ui
 //
 //  Created by 萝卜丝 on 2019/3/11.
-//  Copyright © 2019 KeFuDaShi. All rights reserved.
+//  Copyright © 2019 bytedesk.com. All rights reserved.
 //
 
 #import <QMUIKit/QMUIKit.h>
@@ -15,32 +15,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BDChatIMViewController : BDChatBaseViewController
-
-#pragma mark - 访客端接口
-
-/**
- 工作组会话
- 
- @param wId <#wId description#>
- @param title <#title description#>
- @param isPush <#isPush description#>
- */
-- (void) initWithWorkGroupWid:(NSString *)wId withTitle:(NSString *)title withPush:(BOOL)isPush;
-
-- (void) initWithWorkGroupWid:(NSString *)wId withTitle:(NSString *)title withPush:(BOOL)isPush withCustom:(NSDictionary *)custom;
-
-/**
- 指定坐席会话
- 
- @param uId <#uId description#>
- @param title <#title description#>
- @param isPush <#isPush description#>
- */
-- (void) initWithAgentUid:(NSString *)uId withTitle:(NSString *)title withPush:(BOOL)isPush;
-
-- (void) initWithAgentUid:(NSString *)uId withTitle:(NSString *)title withPush:(BOOL)isPush withCustom:(NSDictionary *)custom;
-
-#pragma mark - 客服端接口
 
 /**
  从会话列表进入：访客会话、联系人会话、群组会话
@@ -72,8 +46,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void) initWithGroupModel:(BDGroupModel *)groupModel withPush:(BOOL)isPush withCustom:(NSDictionary *)custom;
 
-
-#pragma mark - 公共接口
 
 @end
 

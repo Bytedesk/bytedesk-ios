@@ -141,7 +141,7 @@
 - (void)login {
     
     // 访客登录
-    [BDCoreApis visitorLoginWithAppkey:DEFAULT_TEST_APPKEY withSubdomain:DEFAULT_TEST_SUBDOMAIN resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis loginWithAppkey:DEFAULT_TEST_APPKEY withSubdomain:DEFAULT_TEST_SUBDOMAIN resultSuccess:^(NSDictionary *dict) {
         // 登录成功
         DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
     } resultFailed:^(NSError *error) {

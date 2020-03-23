@@ -15,8 +15,8 @@
 @class BDWorkGroupModel;
 @class BDContactModel;
 
-typedef void (^SuccessCallbackBlock)(NSDictionary *dict);
-typedef void (^FailedCallbackBlock)(NSError *error);
+//typedef void (^SuccessCallbackBlock)(NSDictionary *dict);
+//typedef void (^FailedCallbackBlock)(NSError *error);
 
 @interface BDDBApis : NSObject
 

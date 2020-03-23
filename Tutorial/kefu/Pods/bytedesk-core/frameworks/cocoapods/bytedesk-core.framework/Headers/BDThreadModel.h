@@ -12,12 +12,16 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
+- (instancetype)initWithKeFuRequestDictionary:(NSDictionary *)dictionary;
+
 // 本地表主键id
 @property(nonatomic, strong) NSNumber *uu_id;
 // 服务器端主键
 @property(nonatomic, strong) NSNumber *server_id;
 // 唯一数字id，保证唯一性
 @property(nonatomic, strong) NSString *tid;
+//
+@property(nonatomic, strong) NSString *topic;
 // 公众号、小程序 token
 @property(nonatomic, strong) NSString *token;
 // 来自stomp的session id
@@ -41,7 +45,8 @@
 // 访客，只能有一个访客
 @property(nonatomic, strong) NSString *visitor_uid;
 // 访客来源客户端
-@property(nonatomic, strong) NSString *visitor_client;
+//@property(nonatomic, strong) NSString *visitor_client;
+@property(nonatomic, strong) NSString *client;
 // 一对一会话：Contact
 @property(nonatomic, strong) NSString *contact_uid;
 // 群组会话：Group

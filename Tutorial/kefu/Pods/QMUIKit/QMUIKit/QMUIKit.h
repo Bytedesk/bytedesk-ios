@@ -13,7 +13,7 @@
 #ifndef QMUIKit_h
 #define QMUIKit_h
 
-static NSString * const QMUI_VERSION = @"3.2.1";
+static NSString * const QMUI_VERSION = @"4.0.4";
 
 #if __has_include("CAAnimation+QMUI.h")
 #import "CAAnimation+QMUI.h"
@@ -73,6 +73,10 @@ static NSString * const QMUI_VERSION = @"3.2.1";
 
 #if __has_include("QMUIAlertController.h")
 #import "QMUIAlertController.h"
+#endif
+
+#if __has_include("QMUIAnimationHelper.h")
+#import "QMUIAnimationHelper.h"
 #endif
 
 #if __has_include("QMUIAsset.h")
@@ -145,6 +149,14 @@ static NSString * const QMUI_VERSION = @"3.2.1";
 
 #if __has_include("QMUIDialogViewController.h")
 #import "QMUIDialogViewController.h"
+#endif
+
+#if __has_include("QMUIDisplayLinkAnimation.h")
+#import "QMUIDisplayLinkAnimation.h"
+#endif
+
+#if __has_include("QMUIEasings.h")
+#import "QMUIEasings.h"
 #endif
 
 #if __has_include("QMUIEmotionInputManager.h")
@@ -379,6 +391,18 @@ static NSString * const QMUI_VERSION = @"3.2.1";
 #import "QMUITextView.h"
 #endif
 
+#if __has_include("QMUITheme.h")
+#import "QMUITheme.h"
+#endif
+
+#if __has_include("QMUIThemeManager.h")
+#import "QMUIThemeManager.h"
+#endif
+
+#if __has_include("QMUIThemeManagerCenter.h")
+#import "QMUIThemeManagerCenter.h"
+#endif
+
 #if __has_include("QMUITips.h")
 #import "QMUITips.h"
 #endif
@@ -409,6 +433,10 @@ static NSString * const QMUI_VERSION = @"3.2.1";
 
 #if __has_include("QMUIWeakObjectContainer.h")
 #import "QMUIWeakObjectContainer.h"
+#endif
+
+#if __has_include("QMUIWindowSizeMonitor.h")
+#import "QMUIWindowSizeMonitor.h"
 #endif
 
 #if __has_include("QMUIZoomImageView.h")
@@ -447,6 +475,10 @@ static NSString * const QMUI_VERSION = @"3.2.1";
 #import "UIColor+QMUI.h"
 #endif
 
+#if __has_include("UIColor+QMUITheme.h")
+#import "UIColor+QMUITheme.h"
+#endif
+
 #if __has_include("UIControl+QMUI.h")
 #import "UIControl+QMUI.h"
 #endif
@@ -463,6 +495,10 @@ static NSString * const QMUI_VERSION = @"3.2.1";
 #import "UIImage+QMUI.h"
 #endif
 
+#if __has_include("UIImage+QMUITheme.h")
+#import "UIImage+QMUITheme.h"
+#endif
+
 #if __has_include("UIImageView+QMUI.h")
 #import "UIImageView+QMUI.h"
 #endif
@@ -473,6 +509,10 @@ static NSString * const QMUI_VERSION = @"3.2.1";
 
 #if __has_include("UILabel+QMUI.h")
 #import "UILabel+QMUI.h"
+#endif
+
+#if __has_include("UIMenuController+QMUI.h")
+#import "UIMenuController+QMUI.h"
 #endif
 
 #if __has_include("UINavigationBar+QMUI.h")
@@ -497,6 +537,14 @@ static NSString * const QMUI_VERSION = @"3.2.1";
 
 #if __has_include("UISearchBar+QMUI.h")
 #import "UISearchBar+QMUI.h"
+#endif
+
+#if __has_include("UISearchController+QMUI.h")
+#import "UISearchController+QMUI.h"
+#endif
+
+#if __has_include("UISwitch+QMUI.h")
+#import "UISwitch+QMUI.h"
 #endif
 
 #if __has_include("UITabBar+QMUI.h")
@@ -527,16 +575,36 @@ static NSString * const QMUI_VERSION = @"3.2.1";
 #import "UITextField+QMUI.h"
 #endif
 
+#if __has_include("UITextInputTraits+QMUI.h")
+#import "UITextInputTraits+QMUI.h"
+#endif
+
 #if __has_include("UITextView+QMUI.h")
 #import "UITextView+QMUI.h"
+#endif
+
+#if __has_include("UITraitCollection+QMUI.h")
+#import "UITraitCollection+QMUI.h"
 #endif
 
 #if __has_include("UIView+QMUI.h")
 #import "UIView+QMUI.h"
 #endif
 
+#if __has_include("UIView+QMUITheme.h")
+#import "UIView+QMUITheme.h"
+#endif
+
 #if __has_include("UIViewController+QMUI.h")
 #import "UIViewController+QMUI.h"
+#endif
+
+#if __has_include("UIViewController+QMUITheme.h")
+#import "UIViewController+QMUITheme.h"
+#endif
+
+#if __has_include("UIVisualEffect+QMUITheme.h")
+#import "UIVisualEffect+QMUITheme.h"
 #endif
 
 #if __has_include("UIWindow+QMUI.h")

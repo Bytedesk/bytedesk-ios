@@ -9,9 +9,9 @@ target 'ticket' do
   
   # 第一步：添加pod库
   # 集成萝卜丝核心协议库core
-  pod 'bytedesk-core'
+  pod 'bytedesk-core', '2.0.1'
   # 集成萝卜丝UI库
-  pod 'bytedesk-ui'
+  pod 'bytedesk-ui', '2.0.1'
 
   target 'ticketTests' do
     inherit! :search_paths

@@ -14,6 +14,9 @@
 //
 
 #import "QMUIRuntime.h"
+#import "QMUICommonDefines.h"
+#include <mach-o/getsect.h>
+#include <mach-o/dyld.h>
 
 @implementation QMUIPropertyDescriptor
 
@@ -31,7 +34,7 @@
     
     // setter
     char *setterChar = property_copyAttributeValue(property, "S");
-    NSString *setterString = setterChar != NULL ? [NSString stringWithUTF8String:setterChar] : [QMUIPropertyDescriptor defaultSetterStringWithPropertyName:propertyName];
+    NSString *setterString = setterChar != NULL ? [NSString stringWithUTF8String:setterChar] : NSStringFromSelector(setterWithGetter(NSSelectorFromString(propertyName)));
     descriptor.setter = NSSelectorFromString(setterString);
     if (setterChar != NULL) {
         free(setterChar);
@@ -93,21 +96,13 @@
     [result appendString:self.isAssign ? @"assign" : (self.isWeak ? @"weak" : (self.isStrong ? @"strong" : @"copy"))];
     if (self.isReadonly) [result appendString:@", readonly"];
     if (![NSStringFromSelector(self.getter) isEqualToString:self.name]) [result appendFormat:@", getter=%@", NSStringFromSelector(self.getter)];
-    if (self.setter != NSSelectorFromString([QMUIPropertyDescriptor defaultSetterStringWithPropertyName:self.name])) [result appendFormat:@", setter=%@", NSStringFromSelector(self.setter)];
+    if (self.setter != setterWithGetter(NSSelectorFromString(self.name))) [result appendFormat:@", setter=%@", NSStringFromSelector(self.setter)];
     [result appendString:@") "];
     [result appendString:self.type];
     [result appendString:@" "];
     [result appendString:self.name];
     [result appendString:@";"];
     return result.copy;
-}
-
-+ (NSString *)defaultSetterStringWithPropertyName:(NSString *)propertyName {
-    NSMutableString *string = [[NSMutableString alloc] initWithString:@"set"];
-    [string appendString:[propertyName substringToIndex:1].uppercaseString];
-    [string appendString:[propertyName substringFromIndex:1]];
-    [string appendString:@":"];
-    return string.copy;
 }
 
 #define _DetectTypeAndReturn(_type) if (strncmp(@encode(_type), typeEncoding, strlen(@encode(_type))) == 0) return @#_type;
@@ -153,3 +148,58 @@
 }
 
 @end
+
+#ifndef __LP64__
+typedef struct mach_header headerType;
+#else
+typedef struct mach_header_64 headerType;
+#endif
+
+static BOOL strendswith(const char *str, const char *suffix) {
+    if (!str || !suffix) return NO;
+    size_t lenstr = strlen(str);
+    size_t lensuffix = strlen(suffix);
+    if (lensuffix > lenstr) return NO;
+    return strncmp(str + lenstr - lensuffix, suffix, lensuffix) == 0;
+}
+
+static const headerType *getProjectImageHeader() {
+    const uint32_t imageCount = _dyld_image_count();
+    const char *target_image_name = ((NSString *)[[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleExecutableKey]).UTF8String;
+    if (!target_image_name || strlen(target_image_name) <= 0) return nil;
+    const headerType *target_image_header = 0;
+    for (uint32_t i = 0; i < imageCount; i++) {
+        const char *image_name = _dyld_get_image_name(i);// name 是一串完整的文件路径，以 image 名结尾
+        if (strendswith(image_name, target_image_name)) {
+            target_image_header = (headerType *)_dyld_get_image_header(i);
+            break;
+        }
+    }
+    return target_image_header;
+}
+
+// from https://github.com/opensource-apple/objc4/blob/master/runtime/objc-file.mm
+static classref_t *getDataSection(const headerType *machHeader, const char *sectname, size_t *outCount) {
+    if (!machHeader) return nil;
+    
+    unsigned long byteCount = 0;
+    classref_t *data = (classref_t *)getsectiondata(machHeader, "__DATA", sectname, &byteCount);
+    if (!data) {
+        data = (classref_t *)getsectiondata(machHeader, "__DATA_CONST", sectname, &byteCount);
+    }
+    if (!data) {
+        data = (classref_t *)getsectiondata(machHeader, "__DATA_DIRTY", sectname, &byteCount);
+    }
+    if (outCount) *outCount = byteCount / sizeof(classref_t);
+    return data;
+}
+
+int qmui_getProjectClassList(classref_t **classes) {
+    size_t count = 0;
+    if (!!classes) {
+        *classes = getDataSection(getProjectImageHeader(), "__objc_classlist", &count);
+    } else {
+        getDataSection(getProjectImageHeader(), "__objc_classlist", &count);
+    }
+    return (int)count;
+}

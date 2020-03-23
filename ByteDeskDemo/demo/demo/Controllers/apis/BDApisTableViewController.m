@@ -3,7 +3,7 @@
 //  demo
 //
 //  Created by 萝卜丝1.5.9 on 2018/4/12.
-//  Copyright © 2018年 KeFuDaShi. All rights reserved.
+//  Copyright © 2018年 bytedesk.com. All rights reserved.
 //
 
 #import "BDApisTableViewController.h"
@@ -445,7 +445,7 @@
 - (void)anonymouseLogin {
     [QMUITips showLoading:@"登录中..." inView:self.view];
     // 访客登录
-    [BDCoreApis visitorLoginWithAppkey:DEFAULT_TEST_APPKEY withSubdomain:DEFAULT_TEST_SUBDOMAIN resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis loginWithAppkey:DEFAULT_TEST_APPKEY withSubdomain:DEFAULT_TEST_SUBDOMAIN resultSuccess:^(NSDictionary *dict) {
         // 登录成功
         DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
         [QMUITips hideAllToastInView:self.view animated:YES];

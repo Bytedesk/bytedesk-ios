@@ -216,14 +216,13 @@
 - (void)setSourceBarItem:(__kindof UIBarItem *)sourceBarItem {
     _sourceBarItem = sourceBarItem;
     __weak __typeof(self)weakSelf = self;
-    if (!sourceBarItem.qmui_viewLayoutDidChangeBlock) {
-        sourceBarItem.qmui_viewLayoutDidChangeBlock = ^(__kindof UIBarItem * _Nonnull item, UIView * _Nullable view) {
-            if (!view.window || !weakSelf.superview) return;
-            UIView *convertToView = weakSelf.popupWindow ? UIApplication.sharedApplication.delegate.window : weakSelf.superview;// 对于以 window 方式显示的情况，由于横竖屏旋转时，不同 window 的旋转顺序不同，所以可能导致 sourceBarItem 所在的 window 已经旋转了但 popupWindow 还没旋转（iOS 11 及以后），那么计算出来的坐标就错了，所以这里改为用 UIApplication window
-            CGRect rect = [view qmui_convertRect:view.bounds toView:convertToView];
-            weakSelf.sourceRect = rect;
-        };
-    }
+    // 每次都要重新定义 block，否则当不同的 popup 在同一个 sourceBarItem 显示，这个 block 内部得到的 weakSelf 可能是前一次的
+    sourceBarItem.qmui_viewLayoutDidChangeBlock = ^(__kindof UIBarItem * _Nonnull item, UIView * _Nullable view) {
+        if (!view.window || !weakSelf.superview) return;
+        UIView *convertToView = weakSelf.popupWindow ? UIApplication.sharedApplication.delegate.window : weakSelf.superview;// 对于以 window 方式显示的情况，由于横竖屏旋转时，不同 window 的旋转顺序不同，所以可能导致 sourceBarItem 所在的 window 已经旋转了但 popupWindow 还没旋转（iOS 11 及以后），那么计算出来的坐标就错了，所以这里改为用 UIApplication window
+        CGRect rect = [view qmui_convertRect:view.bounds toView:convertToView];
+        weakSelf.sourceRect = rect;
+    };
     if (sourceBarItem.qmui_view && sourceBarItem.qmui_viewLayoutDidChangeBlock) {
         sourceBarItem.qmui_viewLayoutDidChangeBlock(sourceBarItem, sourceBarItem.qmui_view);// update layout immediately
     }
@@ -382,7 +381,7 @@
         QMUICommonViewController *viewController = (QMUICommonViewController *)self.popupWindow.rootViewController;
         viewController.supportedOrientationMask = [QMUIHelper visibleViewController].supportedInterfaceOrientations;
         
-        self.previousKeyWindow = [UIApplication sharedApplication].keyWindow;
+        self.previousKeyWindow = UIApplication.sharedApplication.keyWindow;
         [self.popupWindow makeKeyAndVisible];
         
         isShowingByWindowMode = YES;
@@ -458,7 +457,7 @@
 - (void)hideCompletionWithWindowMode:(BOOL)windowMode completion:(void (^)(BOOL))completion {
     if (windowMode) {
         // 恢复 keyWindow 之前做一下检查，避免类似问题 https://github.com/Tencent/QMUI_iOS/issues/90
-        if ([[UIApplication sharedApplication] keyWindow] == self.popupWindow) {
+        if (UIApplication.sharedApplication.keyWindow == self.popupWindow) {
             [self.previousKeyWindow makeKeyWindow];
         }
         

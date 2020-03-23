@@ -147,6 +147,7 @@
 #import "UITableView+QMUI.h"
 #import "UITableViewCell+QMUI.h"
 #import "UITextField+QMUI.h"
+#import "UITextInputTraits+QMUI.h"
 #import "UITextView+QMUI.h"
 #import "UITraitCollection+QMUI.h"
 #import "UIView+QMUI.h"

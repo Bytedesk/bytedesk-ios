@@ -68,6 +68,7 @@ static BDUIApis *sharedInstance = nil;
     [chatViewController initWithWorkGroupWid:wId withTitle:title withPush:NO];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    chatNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
         
     }];
@@ -85,6 +86,7 @@ static BDUIApis *sharedInstance = nil;
     [chatViewController initWithWorkGroupWid:wId withTitle:title withPush:NO withCustom:custom];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    chatNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
         
     }];
@@ -128,6 +130,7 @@ static BDUIApis *sharedInstance = nil;
     [chatViewController initWithAgentUid:uId withTitle:title withPush:NO];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    chatNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
         
     }];
@@ -144,6 +147,7 @@ static BDUIApis *sharedInstance = nil;
     [chatViewController initWithAgentUid:uId withTitle:title withPush:NO withCustom:custom];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    chatNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
         
     }];
@@ -225,6 +229,7 @@ static BDUIApis *sharedInstance = nil;
     [chatViewController initWithThreadModel:threadModel withPush:NO];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    chatNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
         
     }];
@@ -240,6 +245,7 @@ static BDUIApis *sharedInstance = nil;
     [chatViewController initWithThreadModel:threadModel withPush:NO withCustom:custom];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    chatNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
         
     }];
@@ -275,6 +281,7 @@ static BDUIApis *sharedInstance = nil;
     [chatViewController initWithContactModel:contactModel withPush:NO];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    chatNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
         
     }];
@@ -290,6 +297,7 @@ static BDUIApis *sharedInstance = nil;
     [chatViewController initWithContactModel:contactModel withPush:NO withCustom:custom];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    chatNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
         
     }];
@@ -325,6 +333,7 @@ static BDUIApis *sharedInstance = nil;
     [chatViewController initWithGroupModel:groupModel withPush:NO];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    chatNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
         
     }];
@@ -340,6 +349,7 @@ static BDUIApis *sharedInstance = nil;
     [chatViewController initWithGroupModel:groupModel withPush:NO withCustom:custom];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    chatNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
         
     }];
@@ -377,6 +387,7 @@ static BDUIApis *sharedInstance = nil;
     [chatViewController initWithThreadModel:threadModel withPush:NO];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    chatNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
 
     }];
@@ -392,6 +403,7 @@ static BDUIApis *sharedInstance = nil;
     [chatViewController initWithThreadModel:threadModel withPush:NO withCustom:custom];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    chatNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
 
     }];
@@ -427,6 +439,7 @@ static BDUIApis *sharedInstance = nil;
     [chatViewController initWithContactModel:contactModel withPush:NO];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    chatNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
 
     }];
@@ -442,6 +455,7 @@ static BDUIApis *sharedInstance = nil;
     [chatViewController initWithContactModel:contactModel withPush:NO withCustom:custom];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    chatNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
 
     }];
@@ -477,6 +491,7 @@ static BDUIApis *sharedInstance = nil;
     [chatViewController initWithGroupModel:groupModel withPush:NO];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    chatNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
 
     }];
@@ -492,6 +507,7 @@ static BDUIApis *sharedInstance = nil;
     [chatViewController initWithGroupModel:groupModel withPush:NO withCustom:custom];
     //
     QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:chatViewController];
+    chatNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [navigationController presentViewController:chatNavigationController animated:YES completion:^{
 
     }];

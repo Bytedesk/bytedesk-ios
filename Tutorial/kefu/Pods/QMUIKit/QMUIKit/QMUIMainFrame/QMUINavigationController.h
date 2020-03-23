@@ -93,11 +93,6 @@
 
 @optional
 
-/// 是否需要将状态栏改为浅色文字，对于 QMUICommonViewController 子类，返回值默认为宏 StatusbarStyleLightInitially 的值，对于 UIViewController，不实现该方法则视为返回 NO。
-/// @warning 需在项目的 Info.plist 文件内设置字段 “View controller-based status bar appearance” 的值为 NO 才能生效，如果不设置，或者值为 YES，则请使用系统提供的 - preferredStatusBarStyle 方法
-/// 该方法已废弃，请使用系统提供的 - preferredStatusBarStyle 方法。
-- (BOOL)shouldSetStatusBarStyleLight DEPRECATED_ATTRIBUTE;
-
 /// 设置 titleView 的 tintColor
 - (nullable UIColor *)titleViewTintColor;
 
@@ -110,10 +105,13 @@
 /// 设置当前导航栏的 barTintColor，默认为 NavBarBarTintColor
 - (nullable UIColor *)navigationBarBarTintColor;
 
+/// 设置当前导航栏的 barStyle，默认为 NavBarStyle
+- (UIBarStyle)navigationBarStyle;
+
 /// 设置当前导航栏的 UIBarButtonItem 的 tintColor，默认为NavBarTintColor
 - (nullable UIColor *)navigationBarTintColor;
 
-/// 设置系统返回按钮title，如果返回nil则使用系统默认的返回按钮标题
+/// 设置系统返回按钮title，如果返回nil则使用系统默认的返回按钮标题。当实现了这个方法时，会无视配置表 NeedsBackBarButtonItemTitle 的值
 - (nullable NSString *)backBarButtonItemTitleWithPreviousViewController:(nullable UIViewController *)viewController;
 
 @end

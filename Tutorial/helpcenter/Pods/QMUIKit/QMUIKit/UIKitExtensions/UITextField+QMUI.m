@@ -14,7 +14,8 @@
 //
 
 #import "UITextField+QMUI.h"
-#import <objc/runtime.h>
+#import "NSObject+QMUI.h"
+#import "QMUICore.h"
 
 @implementation UITextField (QMUI)
 
@@ -25,7 +26,7 @@
 }
 
 - (UIButton *)qmui_clearButton {
-    return [self valueForKey:@"clearButton"];
+    return [self qmui_valueForKey:@"clearButton"];
 }
 
 static char kAssociatedObjectKey_clearButtonImage;
