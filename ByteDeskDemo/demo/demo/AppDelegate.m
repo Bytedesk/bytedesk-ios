@@ -44,6 +44,7 @@
 //                                             selector:@selector(userDidTakeScreenshot:)
 //                                                 name:UIApplicationUserDidTakeScreenshotNotification object:nil];
 
+    [UINavigationBar appearance].barTintColor = UIColor.qd_tintColor;
     // 界面
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     //
