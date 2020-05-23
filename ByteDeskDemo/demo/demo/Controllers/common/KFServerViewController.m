@@ -65,7 +65,7 @@
     } else if (section == 1) {
         return 4;
     } else if (section == 2){
-        return 4;
+        return 2;
     }
     return 1;
 }
@@ -132,15 +132,6 @@
             cell.textLabel.text = @"端口号";
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)[BDConfig getMqttPort]];
             
-        } else if (indexPath.row == 2) {
-            
-            cell.textLabel.text = @"用户名";
-            cell.detailTextLabel.text = [BDConfig getMqttAuthUsername];
-            
-        } else {
-            
-            cell.textLabel.text = @"密码";
-            cell.detailTextLabel.text = [BDConfig getMqttAuthPassword];
         }
         
     } else if (indexPath.section == 3) {

@@ -135,7 +135,7 @@
         
         m_scrollViewWidth = [[UIScreen mainScreen] bounds].size.width;
         
-        self.backgroundColor = UIColorFromRGB(0XEBEBEB);
+//        self.backgroundColor = UIColorFromRGB(0XEBEBEB);
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin;
         
         [self setUpViews];

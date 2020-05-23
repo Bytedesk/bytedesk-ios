@@ -45,18 +45,18 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return nsstring
  */
-+ (NSString *)getMqttAuthUsername;
-
-+ (void)setMqttAuthUsername:(NSString *)username;
+//+ (NSString *)getMqttAuthUsername;
+//
+//+ (void)setMqttAuthUsername:(NSString *)username;
 
 /**
  消息服务器密码
 
  @return nsstring
  */
-+ (NSString *)getMqttAuthPassword;
-
-+ (void)setMqttAuthPassword:(NSString *)password;
+//+ (NSString *)getMqttAuthPassword;
+//
+//+ (void)setMqttAuthPassword:(NSString *)password;
 
 /**
  WebRTC STUN server

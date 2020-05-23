@@ -157,6 +157,7 @@
 #define BD_NOTIFICATION_CONNECTION_STATUS               @"notification_connection_status"
 
 // 通知webrtc
+#define BD_NOTIFICATION_WEBRTC_MESSAGE       @"bd_notification_webrtc_message"
 // 接受webrtc邀请
 #define BD_NOTIFICATION_WEBRTC_INVITE       @"bd_notification_webrtc_invite"
 // webrtc取消邀请

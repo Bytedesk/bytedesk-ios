@@ -32,6 +32,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [DDLog addLogger:[DDOSLogger sharedInstance]];
     // 添加DDASLLogger，你的日志语句将被发送到Xcode控制台
 //    [DDLog addLogger:[DDTTYLogger sharedInstance]];
     // 添加DDTTYLogger，你的日志语句将被发送到Console.app
@@ -44,7 +45,8 @@
 //                                             selector:@selector(userDidTakeScreenshot:)
 //                                                 name:UIApplicationUserDidTakeScreenshotNotification object:nil];
 
-    [UINavigationBar appearance].barTintColor = UIColor.qd_tintColor;
+//    [UINavigationBar appearance].barTintColor = UIColor.qd_tintColor;
+    
     // 界面
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     //
@@ -195,15 +197,15 @@
         }
     }
     
-//    QMUIThemeManagerCenter.defaultThemeManager.currentThemeIdentifier = @"Default";
     // QMUIConsole 默认只在 DEBUG 下会显示，作为 Demo，改为不管什么环境都允许显示
-//    [QMUIConsole sharedInstance].canShow = YES;
+    [QMUIConsole sharedInstance].canShow = YES;
     // QD自定义的全局样式渲染
     [QDCommonUI renderGlobalAppearances];
 
 }
 
 - (void)handleThemeDidChangeNotification:(NSNotification *)notification {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
     QMUIThemeManager *manager = notification.object;
     if (![manager.name isEqual:QMUIThemeManagerNameDefault]) return;

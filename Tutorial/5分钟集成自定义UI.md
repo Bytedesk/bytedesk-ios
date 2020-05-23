@@ -5,9 +5,12 @@
 ## 准备工作
 
 - 到[萝卜丝官网](https://www.bytedesk.com/antv/user/login)注册管理员账号，并登录管理后台。
-- 到 所有设置->应用管理->App 添加应用，填写相关信息之后点击确定，在生成记录中可见appkey，后面会用到。
-- 到 所有设置->客服管理->客服账号 添加客服账号。注意：生成记录中有一列 ‘唯一ID(uid)’ 会在指定客服接口中使用
-- 到 所有设置->客服管理->技能组 添加技能组，并可将客服账号添加到相关技能组。注意：生成记录中有一列 ‘唯一ID（wId）’ 会在工作组会话中用到
+- 到 客服->渠道 添加网站/App
+- 到 客服->账号 添加客服账号。注意：生成记录中有一列 ‘唯一ID(uid)’ 会在指定客服接口中使用
+- 到 客服->技能组 添加技能组，并可将客服账号添加到相关技能组。注意：生成记录中有一列 ‘唯一ID（wId）’ 会在工作组会话中用到
+- 获取管理员uid, 登录后台->客服->账号->管理员账号(唯一ID(uid))列
+- 获取appkey，登录后台->客服->渠道->添加应用->appkey
+- 获取subDomain，也即企业号：登录后台->客服->账号->企业号
 
 ## 开始集成
 
@@ -51,7 +54,7 @@ pod 'HCSStarRatingView'
 pod 'CocoaLumberjack'
 
 # 集成萝卜丝核心协议库core
-pod 'bytedesk-core', '2.0.1'
+pod 'bytedesk-core', '2.0.2'
 ```
 
 添加bdui相关pod
@@ -75,7 +78,7 @@ target 'bytedesk-ui' do
   pod 'CocoaLumberjack'
 
   # 集成核心协议库core
-  pod 'bytedesk-core', '2.0.1'
+  pod 'bytedesk-core', '2.0.2'
 
   target 'bduiTests' do
   end

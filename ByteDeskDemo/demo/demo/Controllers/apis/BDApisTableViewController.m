@@ -73,9 +73,9 @@
     // 公共接口
     self.commonApisArray = @[
                              @"自定义服务器",
-                             @"注册接口",
-                             @"登录接口",
-                             @"退出登录接口",
+                             @"点我注册",
+                             @"点我登录",
+                             @"退出登录",
                              @"二维码",
                              @"多账号管理(TODO)"
                              ];
@@ -251,8 +251,8 @@
              viewController = [[KFSupportViewController alloc] initWithStyle:UITableViewStyleGrouped];
         } else if (indexPath.row == 7) {
             // 网页形式接入
-            // 注意: 登录后台->所有设置->所有客服->工作组->获取代码 获取相应URL
-            NSURL *url = [NSURL URLWithString:@"https://vip.bytedesk.com/chat?uid=201808221551193&wid=201807171659201&type=workGroup&aid=&ph=ph"];
+            // 注意: 登录后台->客服->技能组/账号->获取代码 获取相应URL
+            NSURL *url = [NSURL URLWithString:@"https://www.bytedesk.com/chat?sub=vip&uid=201808221551193&wid=201807171659201&type=workGroup&aid=&ph=ph"];
             SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:url];
             safariVC.delegate = self;
             // 建议

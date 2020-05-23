@@ -79,8 +79,7 @@
         
         m_buttonMargin = ([UIScreen mainScreen].bounds.size.width - SHAREMORE_ITEMS_WIDTH*4)/5;
         
-        
-        self.backgroundColor = UIColorFromRGB(0XEBEBEB);
+//        self.backgroundColor = UIColorFromRGB(0XEBEBEB);
         self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleWidth;
 
         [self setUpSubViews];

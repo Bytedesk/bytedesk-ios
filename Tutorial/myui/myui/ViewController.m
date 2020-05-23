@@ -13,9 +13,9 @@
 
 #define kDefaultTitle @"在线客服"
 
-// 管理后台：https://www.bytedesk.com/admin#/login
-// 获取wid, 所有设置->客服管理->技能组->唯一ID（wId）
-#define DEFAULT_TEST_WID @"201807171659201"
+// 管理后台：https://www.bytedesk.com/antv/user/login
+// 获取adminUid, 登录后台->客服->账号->管理员uid列
+#define DEFAULT_TEST_ADMIN_UID @"201808221551193"
 
 
 @interface ViewController ()

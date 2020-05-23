@@ -11,8 +11,8 @@
 // 第四步：添加头文件
 #import <bytedesk-ui/bdui.h>
 
-// 管理后台：https://www.bytedesk.com/admin#/login
-// 获取adminUid, 登录后台->所有设置->客服账号->管理员uid列
+// 管理后台：https://www.bytedesk.com/antv/user/login
+// 获取adminUid, 登录后台->客服->账号->管理员uid列
 #define DEFAULT_TEST_ADMIN_UID @"201808221551193"
 
 

@@ -190,82 +190,86 @@
  */
 + (void)notifyKickoff:(NSString *)content;
 
-/**
- <#Description#>
 
- @param dict <#dict description#>
- */
-+ (void)notifyWebRTCInvite:(NSDictionary *)dict;
++ (void)notifyWebRTCMessage:(BDMessageModel *)message;
 
-/**
- <#Description#>
-
- @param dict <#dict description#>
- */
-+ (void)notifyWebRTCCancel:(NSDictionary *)dict;
-
-/**
- <#Description#>
-
- @param dict <#dict description#>
- */
-+ (void)notifyWebRTCOfferVideo:(NSDictionary *)dict;
-
-/**
- <#Description#>
-
- @param dict <#dict description#>
- */
-+ (void)notifyWebRTCOfferAudio:(NSDictionary *)dict;
-
-/**
- <#Description#>
-
- @param dict <#dict description#>
- */
-+ (void)notifyWebRTCAnswer:(NSDictionary *)dict;
-
-/**
- <#Description#>
-
- @param dict <#dict description#>
- */
-+ (void)notifyWebRTCCandidate:(NSDictionary *)dict;
-
-/**
- <#Description#>
-
- @param dict <#dict description#>
- */
-+ (void)notifyWebRTCAccept:(NSDictionary *)dict;
-
-/**
- <#Description#>
-
- @param dict <#dict description#>
- */
-+ (void)notifyWebRTCReject:(NSDictionary *)dict;
-
-/**
- <#Description#>
-
- @param dict <#dict description#>
- */
-+ (void)notifyWebRTCReady:(NSDictionary *)dict;
-
-/**
- <#Description#>
-
- @param dict <#dict description#>
- */
-+ (void)notifyWebRTCBusy:(NSDictionary *)dict;
-
-/**
- <#Description#>
-
- @param dict <#dict description#>
- */
-+ (void)notifyWebRTCClose:(NSDictionary *)dict;
+//
+///**
+// <#Description#>
+//
+// @param dict <#dict description#>
+// */
+//+ (void)notifyWebRTCInvite:(NSDictionary *)dict;
+//
+///**
+// <#Description#>
+//
+// @param dict <#dict description#>
+// */
+//+ (void)notifyWebRTCCancel:(NSDictionary *)dict;
+//
+///**
+// <#Description#>
+//
+// @param dict <#dict description#>
+// */
+//+ (void)notifyWebRTCOfferVideo:(NSDictionary *)dict;
+//
+///**
+// <#Description#>
+//
+// @param dict <#dict description#>
+// */
+//+ (void)notifyWebRTCOfferAudio:(NSDictionary *)dict;
+//
+///**
+// <#Description#>
+//
+// @param dict <#dict description#>
+// */
+//+ (void)notifyWebRTCAnswer:(NSDictionary *)dict;
+//
+///**
+// <#Description#>
+//
+// @param dict <#dict description#>
+// */
+//+ (void)notifyWebRTCCandidate:(NSDictionary *)dict;
+//
+///**
+// <#Description#>
+//
+// @param dict <#dict description#>
+// */
+//+ (void)notifyWebRTCAccept:(NSDictionary *)dict;
+//
+///**
+// <#Description#>
+//
+// @param dict <#dict description#>
+// */
+//+ (void)notifyWebRTCReject:(NSDictionary *)dict;
+//
+///**
+// <#Description#>
+//
+// @param dict <#dict description#>
+// */
+//+ (void)notifyWebRTCReady:(NSDictionary *)dict;
+//
+///**
+// <#Description#>
+//
+// @param dict <#dict description#>
+// */
+//+ (void)notifyWebRTCBusy:(NSDictionary *)dict;
+//
+///**
+// <#Description#>
+//
+// @param dict <#dict description#>
+// */
+//+ (void)notifyWebRTCClose:(NSDictionary *)dict;
 
 #pragma mark - 微信
 

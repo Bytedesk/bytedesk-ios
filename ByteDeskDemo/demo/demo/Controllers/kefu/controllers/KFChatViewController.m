@@ -150,7 +150,9 @@
                                   @"商品详情", @"content",
                                   @"¥9.99", @"price",
                                   @"https://item.m.jd.com/product/12172344.html", @"url",
-                                  @"https://m.360buyimg.com/mobilecms/s750x750_jfs/t4483/332/2284794111/122812/4bf353/58ed7f42Nf16d6b20.jpg!q80.dpg", @"imageUrl",
+                                  @"https://bytedesk.oss-cn-shenzhen.aliyuncs.com/images/123.webp", @"imageUrl",
+                                  @"123", @"id",
+                                  @"345", @"categoryCode",
                                   nil];
             [BDUIApis pushWorkGroupChat:self.navigationController withWorkGroupWid:kDefaultWorkGroupWid withTitle:title withCustom:dict];
         } else {
@@ -161,8 +163,9 @@
                                   @"商品详情", @"content",
                                   @"¥9.99", @"price",
                                   @"https://item.m.jd.com/product/12172344.html", @"url",
-                                  @"https://m.360buyimg.com/mobilecms/s750x750_jfs/t4483/332/2284794111/122812/4bf353/58ed7f42Nf16d6b20.jpg!q80.dpg",
-                                  @"imageUrl",
+                                  @"https://bytedesk.oss-cn-shenzhen.aliyuncs.com/images/123.webp",@"imageUrl",
+                                  @"123", @"id",
+                                  @"345", @"categoryCode",
                                   nil];
             [BDUIApis pushAppointChat:self.navigationController withAgentUid:kDefaultAgentUid withTitle:title withCustom:dict];
         }

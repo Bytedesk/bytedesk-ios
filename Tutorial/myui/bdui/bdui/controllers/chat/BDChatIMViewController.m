@@ -832,8 +832,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     // 异步发送消息
 //    [[BDMQTTApis sharedInstance] sendTextMessage:content toTid:self.mUid localId:localId sessionType:self.mThreadType];
     
-    [[BDMQTTApis sharedInstance] sendTextMessageProtobuf:localId content:content
-        tid:self.mUid topic:self.mThreadModel.topic threadType:self.mThreadType threadNickname:self.mThreadModel.nickname threadAvatar:self.mThreadModel.avatar];
+    [[BDMQTTApis sharedInstance] sendTextMessageProtobuf:localId content:content thread:self.mThreadModel];
+//    [[BDMQTTApis sharedInstance] sendTextMessageProtobuf:localId content:content
+//        tid:self.mUid topic:self.mThreadModel.topic threadType:self.mThreadType threadNickname:self.mThreadModel.nickname threadAvatar:self.mThreadModel.avatar];
     
     // 加密之后发送
 //     [[BDMarsApis sharedInstance] sendMessage:content topic:self.mUid];
@@ -908,8 +909,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             [self tableViewScrollToBottom:YES];
 
             //
-            [[BDMQTTApis sharedInstance] sendImageMessageProtobuf:localId content:imageUrl
-            tid:self.mUid topic:self.mThreadModel.topic threadType:self.mThreadType threadNickname:self.mThreadModel.nickname threadAvatar:self.mThreadModel.avatar];
+            [[BDMQTTApis sharedInstance] sendImageMessageProtobuf:localId content:imageUrl thread:self.mThreadModel];
+//            [[BDMQTTApis sharedInstance] sendImageMessageProtobuf:localId content:imageUrl
+//            tid:self.mUid topic:self.mThreadModel.topic threadType:self.mThreadType threadNickname:self.mThreadModel.nickname threadAvatar:self.mThreadModel.avatar];
             
             // 同步发送图片消息
 //            [BDCoreApis sendImageMessage:imageUrl toTid:self.mUid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {
@@ -994,8 +996,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             [self tableViewScrollToBottom:YES];
             
             //
-            [[BDMQTTApis sharedInstance] sendVoiceMessageProtobuf:localId content:voiceUrl
-            tid:self.mUid topic:self.mThreadModel.topic threadType:self.mThreadType threadNickname:self.mThreadModel.nickname threadAvatar:self.mThreadModel.avatar];
+            [[BDMQTTApis sharedInstance] sendVoiceMessageProtobuf:localId content:voiceUrl thread:self.mThreadModel];
+//            [[BDMQTTApis sharedInstance] sendVoiceMessageProtobuf:localId content:voiceUrl
+//            tid:self.mUid topic:self.mThreadModel.topic threadType:self.mThreadType threadNickname:self.mThreadModel.nickname threadAvatar:self.mThreadModel.avatar];
             
             // 同步发送录音消息
 //            [BDCoreApis sendVoiceMessage:voiceUrl toTid:self.mUid localId:localId sessionType:self.mThreadType voiceLength:voiceLength format:@"amr" resultSuccess:^(NSDictionary *dict) {
@@ -1267,9 +1270,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     else if(authStatus == AVAuthorizationStatusAuthorized) {//允许访问
         // The user has explicitly granted permission for media capture,
         //or explicit user permission is not necessary for the media type in question.
-        dispatch_sync(dispatch_get_main_queue(), ^{
-             self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        });
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+        self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        });
         [self presentViewController:mImagePickerController animated:YES completion:nil];
         
     }else if(authStatus == AVAuthorizationStatusNotDetermined){
@@ -1278,9 +1281,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             if(granted){//点击允许访问时调用
                 //用户明确许可与否，媒体需要捕获，但用户尚未授予或拒绝许可。
                 //DDLogInfo(@"Granted access to %@", AVMediaTypeVideo);
-                dispatch_sync(dispatch_get_main_queue(), ^{
+//                dispatch_sync(dispatch_get_main_queue(), ^{
                      self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-                });
+//                });
                 [self presentViewController:self.mImagePickerController animated:YES completion:nil];
             }
             else {
@@ -2363,7 +2366,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                 
                 // 不是自己发送的消息，发送已读回执
                 if (![messageModel.uid isEqualToString:[BDSettings getUid]]) {
-                    [[BDMQTTApis sharedInstance] sendReceiptReadMessage:messageModel.mid threadTid:self.mUid];
+//                    [[BDMQTTApis sharedInstance] sendReceiptReadMessage:messageModel.mid threadTid:self.mUid];
+                    [[BDMQTTApis sharedInstance] sendReceiptReadMessageProtobufThread:self.mThreadModel receiptMid:messageModel.mid];
                 }
             }
         }

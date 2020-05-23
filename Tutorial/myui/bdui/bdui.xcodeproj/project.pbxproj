@@ -2044,7 +2044,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		40E4D3F06829C4C7A96FAE25 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2330,7 +2331,7 @@
 					"$(PROJECT_DIR)/bdui/vendors/arm/lib",
 					"$(PROJECT_DIR)/bdui/vendors/MLAudioRecorder/amr_en_de/lib",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.2;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -2389,7 +2390,7 @@
 					"$(PROJECT_DIR)/bdui/vendors/arm/lib",
 					"$(PROJECT_DIR)/bdui/vendors/MLAudioRecorder/amr_en_de/lib",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.2;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
