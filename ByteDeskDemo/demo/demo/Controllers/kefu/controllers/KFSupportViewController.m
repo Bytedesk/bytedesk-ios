@@ -72,7 +72,7 @@
     
     if (indexPath.section == 0) {
         // 替换：URL参数uid
-        // 注意: 登录后台->所有设置->所有客服->管理员唯一uid
+        // 注意: 登录后台->客服->管理员唯一uid
         [BDUIApis presentSupportURL:self.navigationController withAdminUid:DEFAULT_TEST_ADMIN_UID];
         
     } else {

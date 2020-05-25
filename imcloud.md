@@ -8,7 +8,7 @@
 
 - [注册账号](https://www.bytedesk.com/antv/user/login)
 - [登录后台](https://www.bytedesk.com/admin#/login)
-- 分配应用：登录后台->所有设置->应用管理->APP
+- 分配应用：登录后台->客服->渠道->添加App
 
 ## 功能简介
 
