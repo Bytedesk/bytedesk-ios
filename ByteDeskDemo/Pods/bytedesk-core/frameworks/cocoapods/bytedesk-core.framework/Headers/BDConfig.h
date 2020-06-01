@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BDConfig : NSObject
 
++ (BOOL)isTlsConnection;
+
 /**
  恢复默认值
  */

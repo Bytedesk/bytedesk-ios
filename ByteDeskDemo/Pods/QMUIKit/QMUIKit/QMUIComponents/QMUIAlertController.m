@@ -1,10 +1,10 @@
-/*****
+/**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2019 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
- *****/
+ */
 
 //
 //  QMUIAlertController.m
@@ -23,6 +23,7 @@
 #import "UIImage+QMUI.h"
 #import "CALayer+QMUI.h"
 #import "QMUIKeyboardManager.h"
+#import "QMUIAppearance.h"
 
 static NSUInteger alertControllerCount = 0;
 
@@ -111,66 +112,58 @@ static NSUInteger alertControllerCount = 0;
 
 @implementation QMUIAlertController (UIAppearance)
 
++ (instancetype)appearance {
+    return [QMUIAppearance appearanceForClass:self];
+}
+
 + (void)initialize {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [self appearance];
+        [self initAppearance];
     });
 }
 
-static QMUIAlertController *alertControllerAppearance;
-+ (nonnull instancetype)appearance {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [self resetAppearance];
-    });
-    return alertControllerAppearance;
-}
-
-+ (void)resetAppearance {
-    if (!alertControllerAppearance) {
-        
-        alertControllerAppearance = [[QMUIAlertController alloc] init];
-        
-        alertControllerAppearance.alertContentMargin = UIEdgeInsetsMake(0, 0, 0, 0);
-        alertControllerAppearance.alertContentMaximumWidth = 270;
-        alertControllerAppearance.alertSeparatorColor = UIColorMake(211, 211, 219);
-        alertControllerAppearance.alertTitleAttributes = @{NSForegroundColorAttributeName:UIColorBlack,NSFontAttributeName:UIFontBoldMake(17),NSParagraphStyleAttributeName:[NSMutableParagraphStyle qmui_paragraphStyleWithLineHeight:0 lineBreakMode:NSLineBreakByTruncatingTail textAlignment:NSTextAlignmentCenter]};
-        alertControllerAppearance.alertMessageAttributes = @{NSForegroundColorAttributeName:UIColorBlack,NSFontAttributeName:UIFontMake(13),NSParagraphStyleAttributeName:[NSMutableParagraphStyle qmui_paragraphStyleWithLineHeight:0 lineBreakMode:NSLineBreakByTruncatingTail textAlignment:NSTextAlignmentCenter]};
-        alertControllerAppearance.alertButtonAttributes = @{NSForegroundColorAttributeName:UIColorBlue,NSFontAttributeName:UIFontMake(17),NSKernAttributeName:@(0)};
-        alertControllerAppearance.alertButtonDisabledAttributes = @{NSForegroundColorAttributeName:UIColorMake(129, 129, 129),NSFontAttributeName:UIFontMake(17),NSKernAttributeName:@(0)};
-        alertControllerAppearance.alertCancelButtonAttributes = @{NSForegroundColorAttributeName:UIColorBlue,NSFontAttributeName:UIFontBoldMake(17),NSKernAttributeName:@(0)};
-        alertControllerAppearance.alertDestructiveButtonAttributes = @{NSForegroundColorAttributeName:UIColorRed,NSFontAttributeName:UIFontMake(17),NSKernAttributeName:@(0)};
-        alertControllerAppearance.alertContentCornerRadius = 13;
-        alertControllerAppearance.alertButtonHeight = 44;
-        alertControllerAppearance.alertHeaderBackgroundColor = UIColorMakeWithRGBA(247, 247, 247, 1);
-        alertControllerAppearance.alertButtonBackgroundColor = alertControllerAppearance.alertHeaderBackgroundColor;
-        alertControllerAppearance.alertButtonHighlightBackgroundColor = UIColorMake(232, 232, 232);
-        alertControllerAppearance.alertHeaderInsets = UIEdgeInsetsMake(20, 16, 20, 16);
-        alertControllerAppearance.alertTitleMessageSpacing = 3;
-        alertControllerAppearance.alertTextFieldFont = UIFontMake(14);
-        alertControllerAppearance.alertTextFieldTextColor = UIColorBlack;
-        alertControllerAppearance.alertTextFieldBorderColor = UIColorMake(210, 210, 210);
-        
-        alertControllerAppearance.sheetContentMargin = UIEdgeInsetsMake(10, 10, 10, 10);
-        alertControllerAppearance.sheetContentMaximumWidth = [QMUIHelper screenSizeFor55Inch].width - UIEdgeInsetsGetHorizontalValue(alertControllerAppearance.sheetContentMargin);
-        alertControllerAppearance.sheetSeparatorColor = UIColorMake(211, 211, 219);
-        alertControllerAppearance.sheetTitleAttributes = @{NSForegroundColorAttributeName:UIColorMake(143, 143, 143),NSFontAttributeName:UIFontBoldMake(13),NSParagraphStyleAttributeName:[NSMutableParagraphStyle qmui_paragraphStyleWithLineHeight:0 lineBreakMode:NSLineBreakByTruncatingTail textAlignment:NSTextAlignmentCenter]};
-        alertControllerAppearance.sheetMessageAttributes = @{NSForegroundColorAttributeName:UIColorMake(143, 143, 143),NSFontAttributeName:UIFontMake(13),NSParagraphStyleAttributeName:[NSMutableParagraphStyle qmui_paragraphStyleWithLineHeight:0 lineBreakMode:NSLineBreakByTruncatingTail textAlignment:NSTextAlignmentCenter]};
-        alertControllerAppearance.sheetButtonAttributes = @{NSForegroundColorAttributeName:UIColorBlue,NSFontAttributeName:UIFontMake(20),NSKernAttributeName:@(0)};
-        alertControllerAppearance.sheetButtonDisabledAttributes = @{NSForegroundColorAttributeName:UIColorMake(129, 129, 129),NSFontAttributeName:UIFontMake(20),NSKernAttributeName:@(0)};
-        alertControllerAppearance.sheetCancelButtonAttributes = @{NSForegroundColorAttributeName:UIColorBlue,NSFontAttributeName:UIFontBoldMake(20),NSKernAttributeName:@(0)};
-        alertControllerAppearance.sheetDestructiveButtonAttributes = @{NSForegroundColorAttributeName:UIColorRed,NSFontAttributeName:UIFontMake(20),NSKernAttributeName:@(0)};
-        alertControllerAppearance.sheetCancelButtonMarginTop = 8;
-        alertControllerAppearance.sheetContentCornerRadius = 13;
-        alertControllerAppearance.sheetButtonHeight = 57;
-        alertControllerAppearance.sheetHeaderBackgroundColor = UIColorMakeWithRGBA(247, 247, 247, 1);
-        alertControllerAppearance.sheetButtonBackgroundColor = alertControllerAppearance.sheetHeaderBackgroundColor;
-        alertControllerAppearance.sheetButtonHighlightBackgroundColor = UIColorMake(232, 232, 232);
-        alertControllerAppearance.sheetHeaderInsets = UIEdgeInsetsMake(16, 16, 16, 16);
-        alertControllerAppearance.sheetTitleMessageSpacing = 8;
-        alertControllerAppearance.isExtendBottomLayout = NO;
-    }
++ (void)initAppearance {
+    QMUIAlertController *alertControllerAppearance = QMUIAlertController.appearance;
+    alertControllerAppearance.alertContentMargin = UIEdgeInsetsMake(0, 0, 0, 0);
+    alertControllerAppearance.alertContentMaximumWidth = 270;
+    alertControllerAppearance.alertSeparatorColor = UIColorMake(211, 211, 219);
+    alertControllerAppearance.alertTitleAttributes = @{NSForegroundColorAttributeName:UIColorBlack,NSFontAttributeName:UIFontBoldMake(17),NSParagraphStyleAttributeName:[NSMutableParagraphStyle qmui_paragraphStyleWithLineHeight:0 lineBreakMode:NSLineBreakByTruncatingTail textAlignment:NSTextAlignmentCenter]};
+    alertControllerAppearance.alertMessageAttributes = @{NSForegroundColorAttributeName:UIColorBlack,NSFontAttributeName:UIFontMake(13),NSParagraphStyleAttributeName:[NSMutableParagraphStyle qmui_paragraphStyleWithLineHeight:0 lineBreakMode:NSLineBreakByTruncatingTail textAlignment:NSTextAlignmentCenter]};
+    alertControllerAppearance.alertButtonAttributes = @{NSForegroundColorAttributeName:UIColorBlue,NSFontAttributeName:UIFontMake(17),NSKernAttributeName:@(0)};
+    alertControllerAppearance.alertButtonDisabledAttributes = @{NSForegroundColorAttributeName:UIColorMake(129, 129, 129),NSFontAttributeName:UIFontMake(17),NSKernAttributeName:@(0)};
+    alertControllerAppearance.alertCancelButtonAttributes = @{NSForegroundColorAttributeName:UIColorBlue,NSFontAttributeName:UIFontBoldMake(17),NSKernAttributeName:@(0)};
+    alertControllerAppearance.alertDestructiveButtonAttributes = @{NSForegroundColorAttributeName:UIColorRed,NSFontAttributeName:UIFontMake(17),NSKernAttributeName:@(0)};
+    alertControllerAppearance.alertContentCornerRadius = 13;
+    alertControllerAppearance.alertButtonHeight = 44;
+    alertControllerAppearance.alertHeaderBackgroundColor = UIColorMakeWithRGBA(247, 247, 247, 1);
+    alertControllerAppearance.alertButtonBackgroundColor = alertControllerAppearance.alertHeaderBackgroundColor;
+    alertControllerAppearance.alertButtonHighlightBackgroundColor = UIColorMake(232, 232, 232);
+    alertControllerAppearance.alertHeaderInsets = UIEdgeInsetsMake(20, 16, 20, 16);
+    alertControllerAppearance.alertTitleMessageSpacing = 3;
+    alertControllerAppearance.alertTextFieldFont = UIFontMake(14);
+    alertControllerAppearance.alertTextFieldTextColor = UIColorBlack;
+    alertControllerAppearance.alertTextFieldBorderColor = UIColorMake(210, 210, 210);
+    
+    alertControllerAppearance.sheetContentMargin = UIEdgeInsetsMake(10, 10, 10, 10);
+    alertControllerAppearance.sheetContentMaximumWidth = [QMUIHelper screenSizeFor55Inch].width - UIEdgeInsetsGetHorizontalValue(alertControllerAppearance.sheetContentMargin);
+    alertControllerAppearance.sheetSeparatorColor = UIColorMake(211, 211, 219);
+    alertControllerAppearance.sheetTitleAttributes = @{NSForegroundColorAttributeName:UIColorMake(143, 143, 143),NSFontAttributeName:UIFontBoldMake(13),NSParagraphStyleAttributeName:[NSMutableParagraphStyle qmui_paragraphStyleWithLineHeight:0 lineBreakMode:NSLineBreakByTruncatingTail textAlignment:NSTextAlignmentCenter]};
+    alertControllerAppearance.sheetMessageAttributes = @{NSForegroundColorAttributeName:UIColorMake(143, 143, 143),NSFontAttributeName:UIFontMake(13),NSParagraphStyleAttributeName:[NSMutableParagraphStyle qmui_paragraphStyleWithLineHeight:0 lineBreakMode:NSLineBreakByTruncatingTail textAlignment:NSTextAlignmentCenter]};
+    alertControllerAppearance.sheetButtonAttributes = @{NSForegroundColorAttributeName:UIColorBlue,NSFontAttributeName:UIFontMake(20),NSKernAttributeName:@(0)};
+    alertControllerAppearance.sheetButtonDisabledAttributes = @{NSForegroundColorAttributeName:UIColorMake(129, 129, 129),NSFontAttributeName:UIFontMake(20),NSKernAttributeName:@(0)};
+    alertControllerAppearance.sheetCancelButtonAttributes = @{NSForegroundColorAttributeName:UIColorBlue,NSFontAttributeName:UIFontBoldMake(20),NSKernAttributeName:@(0)};
+    alertControllerAppearance.sheetDestructiveButtonAttributes = @{NSForegroundColorAttributeName:UIColorRed,NSFontAttributeName:UIFontMake(20),NSKernAttributeName:@(0)};
+    alertControllerAppearance.sheetCancelButtonMarginTop = 8;
+    alertControllerAppearance.sheetContentCornerRadius = 13;
+    alertControllerAppearance.sheetButtonHeight = 57;
+    alertControllerAppearance.sheetHeaderBackgroundColor = UIColorMakeWithRGBA(247, 247, 247, 1);
+    alertControllerAppearance.sheetButtonBackgroundColor = alertControllerAppearance.sheetHeaderBackgroundColor;
+    alertControllerAppearance.sheetButtonHighlightBackgroundColor = UIColorMake(232, 232, 232);
+    alertControllerAppearance.sheetHeaderInsets = UIEdgeInsetsMake(16, 16, 16, 16);
+    alertControllerAppearance.sheetTitleMessageSpacing = 8;
+    alertControllerAppearance.sheetButtonColumnCount = 1;
+    alertControllerAppearance.isExtendBottomLayout = NO;
 }
 
 @end
@@ -237,47 +230,7 @@ static QMUIAlertController *alertControllerAppearance;
 }
 
 - (void)didInitialize {
-    if (alertControllerAppearance) {
-        self.alertContentMargin = [QMUIAlertController appearance].alertContentMargin;
-        self.alertContentMaximumWidth = [QMUIAlertController appearance].alertContentMaximumWidth;
-        self.alertSeparatorColor = [QMUIAlertController appearance].alertSeparatorColor;
-        self.alertContentCornerRadius = [QMUIAlertController appearance].alertContentCornerRadius;
-        self.alertTitleAttributes = [QMUIAlertController appearance].alertTitleAttributes;
-        self.alertMessageAttributes = [QMUIAlertController appearance].alertMessageAttributes;
-        self.alertButtonAttributes = [QMUIAlertController appearance].alertButtonAttributes;
-        self.alertButtonDisabledAttributes = [QMUIAlertController appearance].alertButtonDisabledAttributes;
-        self.alertCancelButtonAttributes = [QMUIAlertController appearance].alertCancelButtonAttributes;
-        self.alertDestructiveButtonAttributes = [QMUIAlertController appearance].alertDestructiveButtonAttributes;
-        self.alertButtonHeight = [QMUIAlertController appearance].alertButtonHeight;
-        self.alertHeaderBackgroundColor = [QMUIAlertController appearance].alertHeaderBackgroundColor;
-        self.alertButtonBackgroundColor = [QMUIAlertController appearance].alertButtonBackgroundColor;
-        self.alertButtonHighlightBackgroundColor = [QMUIAlertController appearance].alertButtonHighlightBackgroundColor;
-        self.alertHeaderInsets = [QMUIAlertController appearance].alertHeaderInsets;
-        self.alertTitleMessageSpacing = [QMUIAlertController appearance].alertTitleMessageSpacing;
-        self.alertTextFieldFont = [QMUIAlertController appearance].alertTextFieldFont;
-        self.alertTextFieldTextColor = [QMUIAlertController appearance].alertTextFieldTextColor;
-        self.alertTextFieldBorderColor = [QMUIAlertController appearance].alertTextFieldBorderColor;
-        
-        self.sheetContentMargin = [QMUIAlertController appearance].sheetContentMargin;
-        self.sheetContentMaximumWidth = [QMUIAlertController appearance].sheetContentMaximumWidth;
-        self.sheetSeparatorColor = [QMUIAlertController appearance].sheetSeparatorColor;
-        self.sheetTitleAttributes = [QMUIAlertController appearance].sheetTitleAttributes;
-        self.sheetMessageAttributes = [QMUIAlertController appearance].sheetMessageAttributes;
-        self.sheetButtonAttributes = [QMUIAlertController appearance].sheetButtonAttributes;
-        self.sheetButtonDisabledAttributes = [QMUIAlertController appearance].sheetButtonDisabledAttributes;
-        self.sheetCancelButtonAttributes = [QMUIAlertController appearance].sheetCancelButtonAttributes;
-        self.sheetDestructiveButtonAttributes = [QMUIAlertController appearance].sheetDestructiveButtonAttributes;
-        self.sheetCancelButtonMarginTop = [QMUIAlertController appearance].sheetCancelButtonMarginTop;
-        self.sheetContentCornerRadius = [QMUIAlertController appearance].sheetContentCornerRadius;
-        self.sheetButtonHeight = [QMUIAlertController appearance].sheetButtonHeight;
-        self.sheetHeaderBackgroundColor = [QMUIAlertController appearance].sheetHeaderBackgroundColor;
-        self.sheetButtonBackgroundColor = [QMUIAlertController appearance].sheetButtonBackgroundColor;
-        self.sheetButtonHighlightBackgroundColor = [QMUIAlertController appearance].sheetButtonHighlightBackgroundColor;
-        self.sheetHeaderInsets = [QMUIAlertController appearance].sheetHeaderInsets;
-        self.sheetTitleMessageSpacing = [QMUIAlertController appearance].sheetTitleMessageSpacing;
-        self.isExtendBottomLayout = [QMUIAlertController appearance].isExtendBottomLayout;
-    }
-    
+    [self qmui_applyAppearance];
     self.shouldManageTextFieldsReturnEventAutomatically = YES;
     self.dismissKeyboardAutomatically = YES;
 }
@@ -375,9 +328,9 @@ static QMUIAlertController *alertControllerAppearance;
 
 - (void)updateHeaderBackgrondColor {
     if (self.preferredStyle == QMUIAlertControllerStyleActionSheet) {
-        if (self.headerScrollView) { self.headerScrollView.backgroundColor = self.sheetHeaderBackgroundColor; }
+        if (_headerScrollView) { _headerScrollView.backgroundColor = self.sheetHeaderBackgroundColor; }
     } else if (self.preferredStyle == QMUIAlertControllerStyleAlert) {
-        if (self.headerScrollView) { self.headerScrollView.backgroundColor = self.alertHeaderBackgroundColor; }
+        if (_headerScrollView) { _headerScrollView.backgroundColor = self.alertHeaderBackgroundColor; }
     }
 }
 
@@ -419,8 +372,8 @@ static QMUIAlertController *alertControllerAppearance;
 }
 
 - (void)updateExtendLayerAppearance {
-    if (self.extendLayer) {
-        self.extendLayer.backgroundColor = self.sheetButtonBackgroundColor.CGColor;
+    if (_extendLayer) {
+        _extendLayer.backgroundColor = self.sheetButtonBackgroundColor.CGColor;
     }
 }
 
@@ -530,35 +483,11 @@ static QMUIAlertController *alertControllerAppearance;
         self.alertTextFields = [[NSMutableArray alloc] init];
         self.destructiveActions = [[NSMutableArray alloc] init];
         
-        self.containerView = [[UIView alloc] init];
-        
-        self.maskView = [[UIControl alloc] init];
-        self.maskView.alpha = 0;
-        self.maskView.backgroundColor = UIColorMask;
-        [self.maskView addTarget:self action:@selector(handleMaskViewEvent:) forControlEvents:UIControlEventTouchUpInside];
-        
-        self.scrollWrapView = [[UIView alloc] init];
-        self.mainVisualEffectView = [[UIView alloc] init];
-        self.cancelButtonVisualEffectView = [[UIView alloc] init];
-        self.headerScrollView = [[UIScrollView alloc] init];
-        self.headerScrollView.scrollsToTop = NO;
-        self.buttonScrollView = [[UIScrollView alloc] init];
-        self.buttonScrollView.scrollsToTop = NO;
-        if (@available(iOS 11, *)) {
-            self.headerScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-            self.buttonScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        }
-        
-        self.extendLayer = [CALayer layer];
-        self.extendLayer.hidden = !self.isExtendBottomLayout;
-        [self.extendLayer qmui_removeDefaultAnimations];
-        
         self.title = title;
         self.message = message;
         
-        [self updateHeaderBackgrondColor];
-        [self updateExtendLayerAppearance];
-        
+        self.mainVisualEffectView = [[UIView alloc] init];
+        self.cancelButtonVisualEffectView = [[UIView alloc] init];
     }
     return self;
 }
@@ -569,6 +498,7 @@ static QMUIAlertController *alertControllerAppearance;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self.view addSubview:self.maskView];
     [self.view addSubview:self.containerView];
     [self.containerView addSubview:self.scrollWrapView];
@@ -727,18 +657,50 @@ static QMUIAlertController *alertControllerAppearance;
         contentOriginY = CGRectGetMaxY(self.headerScrollView.frame);
         // 按钮的布局
         self.buttonScrollView.frame = CGRectMake(0, contentOriginY, CGRectGetWidth(self.containerView.bounds), 0);
-        contentOriginY = 0;
         NSArray<QMUIAlertAction *> *newOrderActions = [self orderedAlertActions:self.alertActions];
+        if (self.sheetButtonColumnCount > 1) {
+            // 如果是多列，则为了布局，补齐 item 个数
+            NSMutableArray<QMUIAlertAction *> *fixedActions = [newOrderActions mutableCopy];
+            [fixedActions removeObject:self.cancelAction];
+            
+            if (fmodf(fixedActions.count, self.sheetButtonColumnCount) != 0) {
+                NSInteger increment = self.sheetButtonColumnCount - fmodf(fixedActions.count, self.sheetButtonColumnCount);
+                for (NSInteger i = 0; i < increment; i++) {
+                    QMUIAlertAction *action = [[QMUIAlertAction alloc] init];
+                    action.title = @"";
+                    action.style = QMUIAlertActionStyleDefault;
+                    action.handler = nil;
+                    [self.buttonScrollView addSubview:action.button];
+                    [fixedActions addObject:action];
+                }
+                
+                [fixedActions addObject:self.cancelAction];
+                newOrderActions = [fixedActions copy];
+            }
+        }
+        
+        CGFloat columnCount = self.sheetButtonColumnCount;
+        CGFloat alertActionsWidth = CGRectGetWidth(self.buttonScrollView.bounds) / columnCount;
+        CGFloat alertActionsLayoutX = 0;
+        CGFloat alertActionsLayoutY = 0;
+        contentOriginY = 0;
         if (self.alertActions.count > 0) {
-            contentOriginY = (hasTitle || hasMessage || hasCustomView) ? contentOriginY : contentOriginY;
             for (int i = 0; i < newOrderActions.count; i++) {
                 QMUIAlertAction *action = newOrderActions[i];
                 if (action.style == QMUIAlertActionStyleCancel && i == newOrderActions.count - 1) {
                     continue;
                 } else {
-                    action.button.frame = CGRectMake(0, contentOriginY, CGRectGetWidth(self.buttonScrollView.bounds), self.sheetButtonHeight);
-                    action.button.qmui_borderPosition = QMUIViewBorderPositionTop;
-                    contentOriginY = CGRectGetMaxY(action.button.frame);
+                    action.button.frame = CGRectMake(alertActionsLayoutX, alertActionsLayoutY, alertActionsWidth, self.sheetButtonHeight);
+                    if (fmodf(i + 1, columnCount) == 0) {
+                        action.button.qmui_borderPosition = QMUIViewBorderPositionTop;
+                        alertActionsLayoutX = 0;
+                        alertActionsLayoutY = CGRectGetMaxY(action.button.frame);
+                    } else {
+                        action.button.qmui_borderPosition = QMUIViewBorderPositionTop|QMUIViewBorderPositionRight;
+                        alertActionsLayoutX += alertActionsWidth;
+                    }
+                    
+                    contentOriginY = MAX(contentOriginY, CGRectGetMaxY(action.button.frame));
                 }
             }
         }
@@ -1174,6 +1136,65 @@ static QMUIAlertController *alertControllerAppearance;
     if (_shouldRespondMaskViewTouch) {
         [self hideWithAnimated:YES completion:NULL];
     }
+}
+
+#pragma mark - Getters & Setters
+
+- (UIControl *)maskView {
+    if (!_maskView) {
+        _maskView = [[UIControl alloc] init];
+        _maskView.alpha = 0;
+        _maskView.backgroundColor = UIColorMask;
+        [_maskView addTarget:self action:@selector(handleMaskViewEvent:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _maskView;
+}
+
+- (UIView *)containerView {
+    if (!_containerView) {
+        _containerView = [[UIView alloc] init];
+    }
+    return _containerView;
+}
+
+- (UIView *)scrollWrapView {
+    if (!_scrollWrapView) {
+        _scrollWrapView = [[UIView alloc] init];
+    }
+    return _scrollWrapView;
+}
+
+- (UIScrollView *)headerScrollView {
+    if (!_headerScrollView) {
+        _headerScrollView = [[UIScrollView alloc] init];
+        _headerScrollView.scrollsToTop = NO;
+        if (@available(iOS 11, *)) {
+            _headerScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
+        [self updateHeaderBackgrondColor];
+    }
+    return _headerScrollView;
+}
+
+- (UIScrollView *)buttonScrollView {
+    if (!_buttonScrollView) {
+        _buttonScrollView = [[UIScrollView alloc] init];
+        _buttonScrollView.scrollsToTop = NO;
+        if (@available(iOS 11, *)) {
+            _buttonScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
+    }
+    return _buttonScrollView;
+}
+
+- (CALayer *)extendLayer {
+    if (!_extendLayer) {
+        _extendLayer = [CALayer layer];
+        _extendLayer.hidden = !self.isExtendBottomLayout;
+        [_extendLayer qmui_removeDefaultAnimations];
+        [self updateExtendLayerAppearance];
+    }
+    return _extendLayer;
 }
 
 #pragma mark - <QMUIAlertActionDelegate>
