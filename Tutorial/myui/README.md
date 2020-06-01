@@ -1,13 +1,16 @@
-# 5分钟集成自定义UI
+# 5分钟集成在线客服
 
 - [Demo](https://github.com/Bytedesk/bytedesk-ios/tree/master/Tutorial/myui)
 
 ## 准备工作
 
 - 到[萝卜丝官网](https://www.bytedesk.com/antv/user/login)注册管理员账号，并登录管理后台。
-- 到 所有设置->应用管理->App 添加应用，填写相关信息之后点击确定，在生成记录中可见appkey，后面会用到。
-- 到 所有设置->客服管理->客服账号 添加客服账号。注意：生成记录中有一列 ‘唯一ID(uid)’ 会在指定客服接口中使用
-- 到 所有设置->客服管理->技能组 添加技能组，并可将客服账号添加到相关技能组。注意：生成记录中有一列 ‘唯一ID（wId）’ 会在工作组会话中用到
+- 到 客服->渠道 添加网站/App
+- 到 客服->账号 添加客服账号。注意：生成记录中有一列 ‘唯一ID(uid)’ 会在指定客服接口中使用
+- 到 客服->技能组 添加技能组，并可将客服账号添加到相关技能组。注意：生成记录中有一列 ‘唯一ID（wId）’ 会在工作组会话中用到
+- 获取管理员uid, 登录后台->客服->账号->管理员账号(唯一ID(uid))列
+- 获取appkey，登录后台->客服->渠道->添加应用->appkey
+- 获取subDomain，也即企业号：登录后台->客服->账号->企业号
 
 ## 开始集成
 
@@ -41,6 +44,8 @@ workspace 'myui'
 
 # 第三方依赖
 pod 'FMDB'
+pod 'WCDB'
+pod 'MMKV'
 pod 'MQTTClient'
 pod 'AFNetworking'
 pod 'QMUIKit'
@@ -49,7 +54,7 @@ pod 'HCSStarRatingView'
 pod 'CocoaLumberjack'
 
 # 集成萝卜丝核心协议库core
-pod 'bytedesk-core'
+pod 'bytedesk-core', '2.0.3'
 ```
 
 添加bdui相关pod
@@ -63,6 +68,8 @@ target 'bytedesk-ui' do
 
   # Pods for bdui
   pod 'FMDB'
+  pod 'WCDB'
+  pod 'MMKV'
   pod 'MQTTClient'
   pod 'AFNetworking'
   pod 'QMUIKit'
@@ -71,7 +78,7 @@ target 'bytedesk-ui' do
   pod 'CocoaLumberjack'
 
   # 集成核心协议库core
-  pod 'bytedesk-core'
+  pod 'bytedesk-core', '2.0.3'
 
   target 'bduiTests' do
   end
@@ -112,9 +119,9 @@ end
 
 > 第三步：项目添加bytedesk-ui.framework
 
-![选择binary](../img/select-binary.png)
+![选择binary](./img/select-binary.png)
 
-![选择framework](../img/choose-framework.png)
+![选择framework](./img/choose-framework.png)
 
 > 第四步：在AppDelegate.m文件中添加头文件
 
@@ -147,6 +154,6 @@ end
 
 > 第九步：如果要在真机运行，需要修改项目Scheme为Release
 
-![选择binary](../img/scheme-release.jpg)
+![选择binary](./img/scheme-release.jpg)
 
 ## 集成完毕

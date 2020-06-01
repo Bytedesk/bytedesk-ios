@@ -45,7 +45,7 @@
 //                                             selector:@selector(userDidTakeScreenshot:)
 //                                                 name:UIApplicationUserDidTakeScreenshotNotification object:nil];
 
-//    [UINavigationBar appearance].barTintColor = UIColor.qd_tintColor;
+    [UINavigationBar appearance].barTintColor = UIColor.qd_tintColor;
     
     // 界面
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -65,6 +65,8 @@
             
             [application registerForRemoteNotifications];
         }
+    } else {
+        [self anonymouseLogin];
     }
     
     return YES;
@@ -218,6 +220,19 @@
     [QDCommonUI renderGlobalAppearances];
     // 更新表情 icon 的颜色
 //    [QDUIHelper updateEmotionImages];
+}
+
+#pragma mark - 匿名登录
+
+- (void)anonymouseLogin {
+    // 访客登录
+    [BDCoreApis loginWithAppkey:DEFAULT_TEST_APPKEY withSubdomain:DEFAULT_TEST_SUBDOMAIN resultSuccess:^(NSDictionary *dict) {
+        // 登录成功
+        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
+    } resultFailed:^(NSError *error) {
+        // 登录失败
+        DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+    }];
 }
 
 

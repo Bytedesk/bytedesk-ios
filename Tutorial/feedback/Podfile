@@ -11,9 +11,9 @@ target 'feedback' do
   
   # 第一步：添加pod库
   # 集成萝卜丝核心协议库core
-  pod 'bytedesk-core', '2.0.2'
+  pod 'bytedesk-core', '2.0.3'
   # 集成萝卜丝UI库
-  pod 'bytedesk-ui', '2.0.2'
+  pod 'bytedesk-ui', '2.0.3'
 
   target 'feedbackTests' do
     inherit! :search_paths

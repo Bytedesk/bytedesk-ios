@@ -35,7 +35,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 
 //开发文档：https://github.com/pengjinning/bytedesk-ios
-//获取appkey：登录后台->客服->渠道->添加App->appkey列
+//获取appkey：登录后台->渠道->APP->appkey列
 //获取subDomain，也即企业号：登录后台->客服->账号->企业号列
 // 需要替换为真实的
 #define DEFAULT_TEST_APPKEY @"a3f79509-5cb6-4185-8df9-b1ce13d3c655"
