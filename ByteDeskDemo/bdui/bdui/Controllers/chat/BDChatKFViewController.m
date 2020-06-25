@@ -218,7 +218,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     NSString *message = [dict objectForKey:@"message"];
     NSNumber *status_code = [dict objectForKey:@"status_code"];
     DDLogInfo(@"%s message:%@, status_code:%@", __PRETTY_FUNCTION__, message, status_code);
-    
+    self.mIsRobot = FALSE;
+    //
     if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]] ||
         [status_code isEqualToNumber:[NSNumber numberWithInt:201]]) {
         // 创建新会话 / 继续进行中会话
@@ -1697,6 +1698,25 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+- (void)recallCellWith:(NSInteger)tag {
+    //
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:tag inSection:0];
+    if (indexPath.row < [self.mMessageArray count]) {
+        BDMessageModel *itemToDelete = [self.mMessageArray objectAtIndex:indexPath.row];
+        //
+        [BDCoreApis markDeletedMessage:itemToDelete.mid resultSuccess:^(NSDictionary *dict) {
+            //
+            [self.mMessageArray removeObjectAtIndex:indexPath.row];
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            //
+            [[BDMQTTApis sharedInstance] sendRecallMessageProtobufThread:self.mThreadModel recallMid:itemToDelete.mid];
+            
+        } resultFailed:^(NSError *error) {
+             [QMUITips showError:@"撤回失败" inView:self.view hideAfterDelay:2.0f];
+        }];
+    }
+}
+
 #pragma mark 点击客服头像跳转到客服详情页面：展示客服评价记录
 #pragma mark 点击访客头像进入个人详情页
 
@@ -2455,8 +2475,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         BDMessageModel *message = [self.mMessageArray objectAtIndex:i];
 //        DDLogInfo(@"mid: %@, message.mid: %@", mid, message.mid);
         //
-        if (![message.mid isKindOfClass:[NSNull class]] &&
-            [message.mid isEqualToString:mid]) {
+        if (![message.mid isKindOfClass:[NSNull class]] && [message.mid isEqualToString:mid]) {
             //
             [self.mMessageArray removeObjectAtIndex:i];
             // TODO: 优化处理

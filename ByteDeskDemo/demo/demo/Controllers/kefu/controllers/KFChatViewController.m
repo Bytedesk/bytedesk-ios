@@ -39,8 +39,8 @@
                        @"指定坐席Present:",
                        @"电商客服Push:",
                        @"电商客服Present:",
-                       @"前置选择Push:",
-                       @"前置选择Present:",
+//                       @"前置选择Push:",
+//                       @"前置选择Present:",
                        @"默认机器人Push:",
                        @"默认机器人Present:",];
 }
@@ -48,7 +48,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return 4;
 }
 
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -61,9 +61,11 @@
             return @"指定坐席会话";
         } else if (section == 2){
             return @"电商客服";
-        } else if (section == 3) {
-            return @"前置选择";
-        } else if (section == 4) {
+        }
+//        else if (section == 3) {
+//            return @"前置选择";
+//        }
+        else if (section == 3) {
             return @"默认机器人";
         }
     }
@@ -74,9 +76,10 @@
     //
     if (tableView == self.tableView) {
         //
+//        if (section == 3) {
+//            return @"后台设置问卷选择";
+//        } else
         if (section == 3) {
-            return @"后台设置问卷选择";
-        } else if (section == 4) {
             return @"后台设置默认机器人";
         }
     }
@@ -107,11 +110,13 @@
     } else if (indexPath.section == 2){
         cell.textLabel.text = [self.apisArray objectAtIndex:indexPath.row+4];
         cell.detailTextLabel.text = kDefaultAgentUid;
-    } else if (indexPath.section == 3) {
+    }
+//    else if (indexPath.section == 3) {
+//        cell.textLabel.text = [self.apisArray objectAtIndex:indexPath.row+6];
+//        cell.detailTextLabel.text = kPreWorkGroupWid;
+//    }
+    else if (indexPath.section == 3) {
         cell.textLabel.text = [self.apisArray objectAtIndex:indexPath.row+6];
-        cell.detailTextLabel.text = kPreWorkGroupWid;
-    } else if (indexPath.section == 4) {
-        cell.textLabel.text = [self.apisArray objectAtIndex:indexPath.row+8];
         cell.detailTextLabel.text = kRobotWorkGroupWid;
     }
     
@@ -169,16 +174,18 @@
                                   nil];
             [BDUIApis pushAppointChat:self.navigationController withAgentUid:kDefaultAgentUid withTitle:title withCustom:dict];
         }
-    } else if (indexPath.section == 3) {
-        //
-        if (indexPath.row == 0) {
-            // push工作组会话
-            [BDUIApis pushWorkGroupChat:self.navigationController withWorkGroupWid:kPreWorkGroupWid withTitle:title];
-        } else {
-            // present工作组会话
-            [BDUIApis presentWorkGroupChat:self.navigationController withWorkGroupWid:kPreWorkGroupWid withTitle:title];
-        }
-    } else {
+    }
+//    else if (indexPath.section == 3) {
+//        //
+//        if (indexPath.row == 0) {
+//            // push工作组会话
+//            [BDUIApis pushWorkGroupChat:self.navigationController withWorkGroupWid:kPreWorkGroupWid withTitle:title];
+//        } else {
+//            // present工作组会话
+//            [BDUIApis presentWorkGroupChat:self.navigationController withWorkGroupWid:kPreWorkGroupWid withTitle:title];
+//        }
+//    }
+    else {
         //
         if (indexPath.row == 0) {
             // push工作组会话

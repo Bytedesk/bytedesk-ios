@@ -14,7 +14,7 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
-  - bytedesk-core (2.0.3):
+  - bytedesk-core (2.0.4):
     - AFNetworking
     - CocoaLumberjack
     - FMDB
@@ -354,7 +354,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 4.0.1)
-  - bytedesk-core (= 2.0.3)
+  - bytedesk-core (= 2.0.4)
   - CocoaLumberjack (~> 3.6.1)
   - FMDB (~> 2.7.5)
   - HCSStarRatingView (~> 1.5)
@@ -384,7 +384,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
-  bytedesk-core: 2bba7c0c710ce922697f92a3a345a8c372541223
+  bytedesk-core: 3d8d357ad496a49a6b3b45c2ce8af9ed1af1da75
   CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
@@ -397,6 +397,6 @@ SPEC CHECKSUMS:
   QMUIKit: 1063a99f90aedd6e2dd65026ce0df46e6785e67b
   SDAutoLayout: 8bf6b3bbc8b01f775d4defbb4fda2ace805461be
 
-PODFILE CHECKSUM: 5bfb95bbd6f6966f338f7d453121c0baf792956d
+PODFILE CHECKSUM: 593022ade6fc581bb97197fc7769bd31d8bd19d2
 
 COCOAPODS: 1.9.3

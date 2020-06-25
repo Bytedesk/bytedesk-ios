@@ -2331,7 +2331,7 @@
 					"$(PROJECT_DIR)/bdui/vendors/arm/lib",
 					"$(PROJECT_DIR)/bdui/vendors/MLAudioRecorder/amr_en_de/lib",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -2390,7 +2390,7 @@
 					"$(PROJECT_DIR)/bdui/vendors/arm/lib",
 					"$(PROJECT_DIR)/bdui/vendors/MLAudioRecorder/amr_en_de/lib",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",

@@ -80,6 +80,9 @@
     else if (action == @selector(mydelete:)) {
         return YES;
     }
+    else if (action == @selector(myrecall:)) {
+        return YES;
+    }
     
     return NO;
 }
@@ -118,6 +121,14 @@
     
     if ([_delegate respondsToSelector:@selector(removeCellWith:)]) {
         [_delegate removeCellWith:self.tag];
+    }
+}
+
+-(void)myrecall:(id)sender {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+    if ([_delegate respondsToSelector:@selector(recallCellWith:)]) {
+        [_delegate recallCellWith:self.tag];
     }
 }
 
@@ -418,7 +429,8 @@
         //添加你要自定义的MenuItem
         UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(mycopy:)];
         UIMenuItem *item2 = [[UIMenuItem alloc] initWithTitle:@"删除" action:@selector(mydelete:)];
-        menu.menuItems = [NSArray arrayWithObjects:item,item2,nil];
+        UIMenuItem *item3 = [[UIMenuItem alloc] initWithTitle:@"撤回" action:@selector(myrecall:)];
+        menu.menuItems = [NSArray arrayWithObjects:item,item2,item3,nil];
         [menu setMenuVisible:YES animated:YES];
         
         if ([menu isMenuVisible]) {
