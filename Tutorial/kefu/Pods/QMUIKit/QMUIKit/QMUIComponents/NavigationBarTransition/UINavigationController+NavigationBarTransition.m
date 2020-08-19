@@ -1,10 +1,10 @@
-/*****
+/**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2019 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
- *****/
+ */
 
 //
 //  UINavigationController+NavigationBarTransition.m
@@ -100,18 +100,18 @@ QMUISynthesizeIdStrongProperty(qmui_specifiedTextColor, setQmui_specifiedTextCol
 
 /// 获取 iOS 11之后的系统自带的返回按钮 Label，如果在转场时，会获取到最上面控制器的。
 - (UILabel *)qmui_backButtonLabel {
-    if (@available(iOS 11, *)) ; else return nil;
-    
-    UIView *navigationBarContentView = [self valueForKeyPath:@"visualProvider.contentView"];
-    __block UILabel *backButtonLabel = nil;
-    [navigationBarContentView.subviews enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(__kindof UIView * _Nonnull subview, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([subview isKindOfClass:NSClassFromString(@"_UIButtonBarButton")]) {
-            UIButton *titleButton = [subview valueForKeyPath:@"visualProvider.titleButton"];
-            backButtonLabel = titleButton.titleLabel;
-            *stop = YES;
-        }
-    }];
-    return backButtonLabel;
+    if (@available(iOS 11, *)) {
+        __block UILabel *backButtonLabel = nil;
+        [self.qmui_contentView.subviews enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(__kindof UIView * _Nonnull subview, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([subview isKindOfClass:NSClassFromString(@"_UIButtonBarButton")]) {
+                UIButton *titleButton = [subview valueForKeyPath:@"visualProvider.titleButton"];
+                backButtonLabel = titleButton.titleLabel;
+                *stop = YES;
+            }
+        }];
+        return backButtonLabel;
+    }
+    return nil;
 }
 
 @end
@@ -338,11 +338,9 @@ QMUISynthesizeIdStrongProperty(qmui_specifiedTextColor, setQmui_specifiedTextCol
         
         // 导航栏底部的分隔线
         if ([vc respondsToSelector:@selector(navigationBarShadowImage)]) {
-            UIImage *shadowImage = [vc navigationBarShadowImage];
-            [viewController.navigationController.navigationBar setShadowImage:shadowImage];
+            viewController.navigationController.navigationBar.shadowImage = [vc navigationBarShadowImage];
         } else if (QMUICMIActivated) {
-            // 分隔线的实际控制权在 NavBarShadowImageColor 上，但这里又不适合重新使用 NavBarShadowImageColor 再生成一遍 image，而配置表的值最终都是设置到 appearance 上，所以这里用 appearance 来获取值，而不是直接读取 NavBarShadowImage
-            [viewController.navigationController.navigationBar setShadowImage:UINavigationBar.appearance.shadowImage];
+            viewController.navigationController.navigationBar.shadowImage = NavBarShadowImage;
         }
         
         // 导航栏上控件的主题色

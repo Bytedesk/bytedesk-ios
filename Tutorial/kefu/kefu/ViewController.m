@@ -16,7 +16,8 @@
 // 管理后台：https://www.bytedesk.com/antv/user/login
 // 获取adminUid, 登录后台->客服->账号->管理员uid列
 #define DEFAULT_TEST_ADMIN_UID @"201808221551193"
-
+// 默认设置工作组wid
+#define kDefaultWorkGroupWid @"201807171659201"
 
 @interface ViewController ()
 
@@ -44,7 +45,7 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     // 第五步：打开在线客服会话窗口
-    [BDUIApis pushWorkGroupChat:self.navigationController withWorkGroupWid:DEFAULT_TEST_WID withTitle:kDefaultTitle];
+    [BDUIApis pushWorkGroupChat:self.navigationController withWorkGroupWid:kDefaultWorkGroupWid withTitle:kDefaultTitle];
 }
 
 

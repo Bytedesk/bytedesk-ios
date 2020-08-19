@@ -6,16 +6,16 @@
 
 ## 准备工作
 
-- [注册账号](https://www.bytedesk.com/antv/user/login)
+- [注册账号](https://www.bytedesk.com/admin#/register)
 - [登录后台](https://www.bytedesk.com/admin#/login)
-- 分配应用：登录后台->客服->渠道->添加App
+- 分配应用：登录后台->所有设置->应用管理->APP
 
 ## 集成SDK
 
 萝卜丝·云客服在经典版[微客服](http://www.weikefu.net)基础上面做了重构，将原先一个SDK一分为二为两个sdk：
 
-- 核心库：[![bytedesk-core](https://img.shields.io/badge/bytedesk--core-1.5.0-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-core)
-- 界面库，完全开源(Demo中的bdui项目)，方便开发者自定义界面：[![bytedesk--ui](https://img.shields.io/badge/bytedesk--ui-1.5.0-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-ui#bytedesk-ui-pod)
+- 核心库：[![bytedesk-core](https://img.shields.io/badge/bytedesk--core-2.0.2-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-core)
+- 界面库，完全开源(Demo中的bdui项目)，方便开发者自定义界面：[![bytedesk--ui](https://img.shields.io/badge/bytedesk--ui-2.0.2-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-ui#bytedesk-ui-pod)
 
 ## 开发文档
 
