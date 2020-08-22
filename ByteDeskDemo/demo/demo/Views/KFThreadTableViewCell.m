@@ -69,7 +69,8 @@ mTitleLabel;
     //
     if ([threadModel.is_temp boolValue]) {
         mContentLabel.text = [NSString stringWithFormat:@"%@[临时会话]", threadModel.content];
-    } else if ([threadModel.type isEqualToString:BD_MESSAGE_SESSION_TYPE_THREAD]) {
+    } else if ([threadModel.type isEqualToString:BD_MESSAGE_SESSION_TYPE_WORKGROUP] ||
+               [threadModel.type isEqualToString:BD_MESSAGE_SESSION_TYPE_APPOINTED]) {
         mContentLabel.text = [NSString stringWithFormat:@"%@[客服会话]", threadModel.content];
     }  else {
         mContentLabel.text = threadModel.content;
