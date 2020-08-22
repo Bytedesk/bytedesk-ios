@@ -21,12 +21,19 @@
 #ifndef MMKV_SRC_MMKVPREDEF_H
 #define MMKV_SRC_MMKVPREDEF_H
 
+// disable encryption & decryption to reduce some code
+//#define MMKV_DISABLE_CRYPT
+
+// using POSIX implementation
+//#define FORCE_POSIX
+
 #ifdef __cplusplus
 
 #include <string>
+#include <vector>
 #include <unordered_map>
 
-constexpr auto MMKV_VERSION = "v1.1.2";
+constexpr auto MMKV_VERSION = "v1.2.2";
 
 #ifdef __ANDROID__
 #    define MMKV_ANDROID
@@ -140,6 +147,13 @@ extern size_t DEFAULT_MMAP_SIZE;
 #define DEFAULT_MMAP_ID "mmkv.default"
 
 class MMBuffer;
+struct KeyValueHolder;
+
+#ifdef MMKV_DISABLE_CRYPT
+using KeyValueHolderCrypt = KeyValueHolder;
+#else
+struct KeyValueHolderCrypt;
+#endif
 
 #ifdef MMKV_APPLE
 struct KeyHasher {
@@ -155,13 +169,20 @@ struct KeyEqualer {
     }
 };
 
-using MMKVMap = std::unordered_map<NSString *, mmkv::MMBuffer, KeyHasher, KeyEqualer>;
+using MMKVVector = std::vector<std::pair<NSString *, mmkv::MMBuffer>>;
+using MMKVMap = std::unordered_map<NSString *, mmkv::KeyValueHolder, KeyHasher, KeyEqualer>;
+using MMKVMapCrypt = std::unordered_map<NSString *, mmkv::KeyValueHolderCrypt, KeyHasher, KeyEqualer>;
 #else
-using MMKVMap = std::unordered_map<std::string, mmkv::MMBuffer>;
+using MMKVVector = std::vector<std::pair<std::string, mmkv::MMBuffer>>;
+using MMKVMap = std::unordered_map<std::string, mmkv::KeyValueHolder>;
+using MMKVMapCrypt = std::unordered_map<std::string, mmkv::KeyValueHolderCrypt>;
 #endif // MMKV_APPLE
 
 template <typename T>
 void unused(const T &) {}
+
+constexpr size_t AES_KEY_LEN = 16;
+constexpr size_t AES_KEY_BITSET_LEN = 128;
 
 } // namespace mmkv
 

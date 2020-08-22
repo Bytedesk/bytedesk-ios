@@ -2152,7 +2152,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         //             [self.mRefreshControl endRefreshing];
         //         }];
         
-    } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_THREAD]) {
+    } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_WORKGROUP] ||
+               [self.mThreadType isEqualToString:BD_THREAD_TYPE_APPOINTED]) {
         DDLogInfo(@"2. 客服会话：客服端拉取服务器访客聊天记录%@, %li", self.mUid, (long)self.mLastMessageId);
         
         //        根据最旧一条聊天记录加载之前20条聊天记录

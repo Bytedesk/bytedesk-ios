@@ -18,9 +18,9 @@
 
 ```md
 # 集成萝卜丝核心协议库core
-pod 'bytedesk-core', '2.0.4'
+pod 'bytedesk-core', '2.0.5'
 # 集成萝卜丝UI库
-pod 'bytedesk-ui', '2.0.4'
+pod 'bytedesk-ui', '2.0.5'
 ```
 
 > 第二步：在AppDelegate.m文件中添加头文件

@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '9.0'
+platform :ios, '10.0'
 workspace 'myui'
 
 source 'https://github.com/CocoaPods/Specs.git'
@@ -20,7 +20,7 @@ target 'myui' do
   pod 'CocoaLumberjack'
 
   # 集成萝卜丝核心协议库core
-  pod 'bytedesk-core', '2.0.4'
+  pod 'bytedesk-core', '2.0.5'
 
   target 'myuiTests' do
     inherit! :search_paths
@@ -45,7 +45,7 @@ target 'bytedesk-ui' do
   pod 'CocoaLumberjack'
 
   # 集成核心协议库core
-  pod 'bytedesk-core', '2.0.4'
+  pod 'bytedesk-core', '2.0.5'
 
   target 'bduiTests' do
   end

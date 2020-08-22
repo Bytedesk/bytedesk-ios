@@ -2,7 +2,7 @@
 //  KFSocialApiViewController.m
 //  demo
 //
-//  Created by 萝卜丝1.5.9 on 2018/4/12.
+//  Created by 萝卜丝客服1.5.9 on 2018/4/12.
 //  Copyright © 2018年 bytedesk.com. All rights reserved.
 //
 
@@ -23,17 +23,6 @@
 //#import "KFTicketViewController.h"
 #import "KFAppRateViewController.h"
 #import "KFAppUpgrateViewController.h"
-
-// IM接口演示
-#import "KFContactViewController.h"
-#import "KFFriendViewController.h"
-#import "KFGroupViewController.h"
-#import "KFQueueViewController.h"
-#import "KFThreadViewController.h"
-#import "KFMomentViewController.h"
-#import "KFProfileViewController.h"
-#import "KFNoticeViewController.h"
-#import "KFSettingViewController.h"
 
 #import <bytedesk-core/bdcore.h>
 #import <bytedesk-ui/bdui.h>
@@ -64,9 +53,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    self.navigationItem.title = @"萝卜丝1.5.9(未连接)";
+//    self.navigationItem.title = @"萝卜丝客服1.5.9(未连接)";
     self.demoVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    self.title = [NSString stringWithFormat:@"萝卜丝%@(未连接)", self.demoVersion];
+    self.title = [NSString stringWithFormat:@"萝卜丝客服%@(未连接)", self.demoVersion];
     //
     self.mLoginItemDetailText = @"当前未连接，点我建立连接";
     
@@ -92,18 +81,7 @@
 //                           @"引导应用商店好评(TODO)",
 //                           @"引导新版本升级(TODO)"
                            ];
-    // IM接口
-    self.imApisArray = @[
-                       @"好友关系",
-                       @"联系人",
-                       @"群组",
-                       @"会话",
-                       @"朋友圈(TODO)",
-                       @"排队",
-                       @"系统消息",
-                       @"个人资料",
-                       @"设置",
-                       ];
+
     // 监听消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOAuthResult:) name:BD_NOTIFICATION_OAUTH_RESULT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyConnectionStatus:) name:BD_NOTIFICATION_CONNECTION_STATUS object:nil];
@@ -129,17 +107,15 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 3;
+    return 2;
 }
 
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     //
     if (section == 0) {
         return @"公共接口";
-    } else if (section == 1) {
-        return @"客服接口";
     } else {
-        return @"IM接口";
+        return @"客服接口";
     }
 }
 
@@ -147,10 +123,8 @@
     // Return the number of rows in the section.
     if (section == 0) {
         return [self.commonApisArray count];
-    } else if (section == 1) {
-        return [self.kefuApisArray count];
     } else {
-        return [self.imApisArray count];
+        return [self.kefuApisArray count];
     }
 }
 
@@ -174,22 +148,11 @@
             cell.detailTextLabel.text = @"";
         }
 
-    } else if (indexPath.section == 1) {
+    } else {
         
         [cell.textLabel setText:[NSString stringWithFormat:@"%ld. %@", (long)(indexPath.row+1), [self.kefuApisArray objectAtIndex:indexPath.row]]];
         cell.detailTextLabel.text = @"";
 
-    } else if (indexPath.section == 2) {
-        
-        [cell.textLabel setText:[NSString stringWithFormat:@"%ld. %@", (long)(indexPath.row+1), [self.imApisArray objectAtIndex:indexPath.row]]];
-        
-        if (indexPath.row == 0) {
-            cell.detailTextLabel.text = @"社交: 关注/粉丝/好友/拉黑";
-        } else if (indexPath.row == 1) {
-            cell.detailTextLabel.text = @"客服同事";
-        } else {
-            cell.detailTextLabel.text = @"";
-        }
     }
 
     return cell;
@@ -221,7 +184,7 @@
             // TODO: 多账号管理
         }
         
-    } else if (indexPath.section == 1) {
+    } else {
         // 客服接口
         UIViewController *viewController = nil;
         if (indexPath.row == 0) {
@@ -269,41 +232,6 @@
         viewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:viewController animated:YES];
         
-    } else if (indexPath.section == 2) {
-        
-        // IM接口
-        UIViewController *viewController = nil;
-        if (indexPath.row == 0) {
-            // 好友接口
-            viewController = [[KFFriendViewController alloc] init];
-        } else if (indexPath.row == 1) {
-            // 联系人接口
-            viewController = [[KFContactViewController alloc] init];
-        } else if (indexPath.row == 2) {
-            // 群组接口
-            viewController = [[KFGroupViewController alloc] init];
-        } else if (indexPath.row == 3) {
-            // 会话接口
-            viewController = [[KFThreadViewController alloc] init];
-        } else if (indexPath.row == 4) {
-            // 朋友圈接口
-            viewController = [[KFMomentViewController alloc] init];
-        } else if (indexPath.row == 5) {
-            // 排队接口
-            viewController = [[KFQueueViewController alloc] init];
-        } else if (indexPath.row == 6) {
-            // TODO: 系统消息接口
-            viewController = [[KFNoticeViewController alloc] init];
-        } else if (indexPath.row == 7) {
-            // 个人资料接口
-            viewController = [[KFProfileViewController alloc] init];
-        } else if (indexPath.row == 8) {
-            // 设置接口
-            viewController = [[KFSettingViewController alloc] init];
-        }
-        viewController.title = [self.imApisArray objectAtIndex:indexPath.row];
-        viewController.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:viewController animated:YES];
     }
     
 }
@@ -536,12 +464,12 @@
     DDLogInfo(@"%s status:%@", __PRETTY_FUNCTION__, status);
     //
     if ([status isEqualToString:BD_USER_STATUS_CONNECTING]) {
-        self.title = [NSString stringWithFormat:@"萝卜丝%@(连接中...)", self.demoVersion];
+        self.title = [NSString stringWithFormat:@"萝卜丝客服%@(连接中...)", self.demoVersion];
     } else if ([status isEqualToString:BD_USER_STATUS_CONNECTED]){
-        self.title = [NSString stringWithFormat:@"萝卜丝%@(已连接)", self.demoVersion];
+        self.title = [NSString stringWithFormat:@"萝卜丝客服%@(已连接)", self.demoVersion];
         self.mLoginItemDetailText = [NSString stringWithFormat:@"当前已连接: %@", [BDSettings getUsername]];
     } else {
-        self.title = [NSString stringWithFormat:@"萝卜丝%@(连接断开)", self.demoVersion];
+        self.title = [NSString stringWithFormat:@"萝卜丝客服%@(连接断开)", self.demoVersion];
         self.mLoginItemDetailText = @"当前未连接";
     }
     [self.tableView reloadData];

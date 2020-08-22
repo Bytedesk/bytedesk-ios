@@ -33,7 +33,7 @@
 
 ```md
 # 如果pod库原先没有添加workspace的话，需要添加，如：
-platform :ios, '9.0'
+platform :ios, '10.0'
 # 注意: 'myui' 需要修改为自己项目真实的名称
 workspace 'myui'
 ```
@@ -54,7 +54,7 @@ pod 'HCSStarRatingView'
 pod 'CocoaLumberjack'
 
 # 集成萝卜丝核心协议库core
-pod 'bytedesk-core', '2.0.4'
+pod 'bytedesk-core', '2.0.5'
 ```
 
 添加bdui相关pod
@@ -78,7 +78,7 @@ target 'bytedesk-ui' do
   pod 'CocoaLumberjack'
 
   # 集成核心协议库core
-  pod 'bytedesk-core', '2.0.4'
+  pod 'bytedesk-core', '2.0.5'
 
   target 'bduiTests' do
   end

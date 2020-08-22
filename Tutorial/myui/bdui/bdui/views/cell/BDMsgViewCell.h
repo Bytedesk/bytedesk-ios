@@ -15,7 +15,11 @@
 @optional
 
 //- (void)tapCellWith:(NSInteger)tag;
+
 - (void)removeCellWith:(NSInteger)tag;
+
+- (void)recallCellWith:(NSInteger)tag;
+
 - (void)avatarClicked:(BDMessageModel *)messageModel;
 
 //- (void)onTapCell:(NIMKitEvent *)event;

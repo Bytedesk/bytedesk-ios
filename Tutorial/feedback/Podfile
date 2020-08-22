@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '9.0'
+platform :ios, '10.0'
 
 source 'https://github.com/CocoaPods/Specs.git'
 
@@ -11,9 +11,9 @@ target 'feedback' do
   
   # 第一步：添加pod库
   # 集成萝卜丝核心协议库core
-  pod 'bytedesk-core', '2.0.4'
+  pod 'bytedesk-core', '2.0.5'
   # 集成萝卜丝UI库
-  pod 'bytedesk-ui', '2.0.4'
+  pod 'bytedesk-ui', '2.0.5'
 
   target 'feedbackTests' do
     inherit! :search_paths

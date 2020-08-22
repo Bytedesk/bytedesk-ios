@@ -124,8 +124,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.rateInvite = false;
     self.mLastMessageId = INT_MAX;
     //
-//    UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithButton:[[QMUINavigationButton alloc] initWithType:QMUINavigationButtonTypeNormal title:@"评价"] target:self action:@selector(handleRightBarButtonItemClicked:)];
-    
     UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithImage:[UIImage imageNamed:@"icon_more" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] target:self action:@selector(handleRightBarButtonItemClicked:)];
     self.navigationItem.rightBarButtonItem = rightItem;
     
@@ -241,9 +239,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         self.titleView.needsLoadingView = NO;
 
         // 保存聊天记录
-//        BDMessageModel *messageModel = [[BDMessageModel alloc] initWithDictionary:dict[@"data"]];
-//        [[BDDBApis sharedInstance] insertMessage:messageModel];
-//        [self reloadTableData];
+        BDMessageModel *messageModel = [[BDMessageModel alloc] initWithDictionary:dict[@"data"]];
+        [[BDDBApis sharedInstance] insertMessage:messageModel];
+        [self reloadTableData];
         
         // TODO: 发送商品信息
         if (self.mWithCustomDict) {
@@ -470,9 +468,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
     [BDCoreApis requestChooseWorkGroup:workGroupWid resultSuccess:^(NSDictionary *dict) {
 //        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
-        
         self.mWorkGroupWid = workGroupWid;
-        
         [self dealWithRequestThreadResult:dict];
         
     } resultFailed:^(NSError *error) {
@@ -1154,10 +1150,11 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 #pragma mark - TableViewRelated
 
 -(void)tableViewScrollToBottom:(BOOL)animated {
-//    DDLogInfo(@"tableViewScrollToBottom");
+    DDLogInfo(@"tableViewScrollToBottom");
+    
+//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.mMessageArray count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     
     NSInteger rows = [self.tableView numberOfRowsInSection:0];
-    
     if(rows > 0) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:rows - 1 inSection:0]
                               atScrollPosition:UITableViewScrollPositionBottom
@@ -1172,10 +1169,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
     [self.view endEditing:YES];
 
-//    self.mInputView.frame = CGRectMake(0, KFDSScreen.height - BD_INPUTBAR_HEIGHT, KFDSScreen.width, BD_INPUTBAR_HEIGHT);
-//    [self.mInputView.emotionView setHidden:TRUE];
-//    [self.mInputView.plusView setHidden:TRUE];
-    
     UIEdgeInsets tableViewInsets = self.tableView.contentInset;
     tableViewInsets.bottom = BD_INPUTBAR_HEIGHT;
     self.tableView.contentInset = tableViewInsets;
@@ -1238,10 +1231,10 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                          self.tableView.scrollIndicatorInsets = tableViewInsets;
 
                      } completion:^(BOOL finished) {
-
+                        
                      }];
-
     [self tableViewScrollToBottom:YES];
+    
 }
 
 #pragma mark - KFDSInputViewDelegate
@@ -1252,7 +1245,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
     // 发送消息预知
     [[BDMQTTApis sharedInstance] sendPreviewMessageProtobufThread:self.mThreadModel previewContent:content];
-//    [[BDMQTTApis sharedInstance] sendPreviewMessage:content toTid:self.mTidOrUidOrGid sessionType:self.mThreadType];
 }
 
 #pragma mark - 发送消息
@@ -1261,6 +1253,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 -(void)sendTextMessage:(NSString *)content {
     
     // TODO: 增加判断content长度，限制<512
+    if ([content length] > 500) {
+        return;
+    }
     
     // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
     NSString *localId = [[NSUUID UUID] UUIDString];
@@ -1270,19 +1265,20 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertTextMessageLocal:self.mTidOrUidOrGid withWorkGroupWid:self.mWorkGroupWid withContent:content withLocalId:localId withSessionType:self.mThreadType];
     
     // 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
-    NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
     [self.mMessageArray addObject:messageModel];
+    NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count]-1 inSection:0];
     //
     [self.tableView beginUpdates];
-    [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView insertRowsAtIndexPaths:@[insertIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
     [self.tableView endUpdates];
+//    [self.tableView reloadData];
+    // FIXME: 未往上滚动？
     [self tableViewScrollToBottom:NO];
+    //
+//    [self reloadTableData];
     
     // 异步发送消息
-//    [[BDMQTTApis sharedInstance] sendTextMessageProtobuf:localId content:content
-//        tid:self.mTidOrUidOrGid topic:self.mThreadModel.topic threadType:self.mThreadType threadNickname:self.mThreadModel.nickname threadAvatar:self.mThreadModel.avatar];
     [[BDMQTTApis sharedInstance] sendTextMessageProtobuf:localId content:content thread:self.mThreadModel];
-    
 }
 
 - (void)sendRobotMessage:(NSString *)content {
@@ -2124,8 +2120,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 }
 
 - (void)handlePlusButtonEvent:(id)sender {
-//    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
-    
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    //
     QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
     }];
     QMUIAlertAction *pickAction = [QMUIAlertAction actionWithTitle:@"照片" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
@@ -2397,13 +2393,17 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
     // 接收到其他人发送的消息
     if (!messageModel.isSend) {
-        NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
+//        NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
         [self.mMessageArray addObject:messageModel];
-    
-        [self.tableView beginUpdates];
-        [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
-        [self.tableView endUpdates];
-        [self tableViewScrollToBottom:YES];
+        //
+//        [self.tableView beginUpdates];
+//        [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
+//        [self.tableView endUpdates];
+//        [self.tableView reloadData];
+        // FIXME: 未往上滚动？
+//        [self tableViewScrollToBottom:NO];
+        
+        [self reloadTableData];
         
         // FIXME: 仅针对单聊和客服会话有效，群聊暂不发送已读状态
         // TODO: 发送消息已读回执
@@ -2416,7 +2416,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                 
                 // 不是自己发送的消息，发送已读回执
                 if (![messageModel.uid isEqualToString:[BDSettings getUid]]) {
-//                    [[BDMQTTApis sharedInstance] sendReceiptReadMessage:messageModel.mid threadTid:self.mTidOrUidOrGid];
                     [[BDMQTTApis sharedInstance] sendReceiptReadMessageProtobufThread:self.mThreadModel receiptMid:messageModel.mid];
                 }
             }
