@@ -1438,6 +1438,9 @@ destroyAfterReading:(BOOL)destroyAfterReading
  */
 + (NSMutableArray *)getMessagesWithThread:(NSString *)tid;
 
+
++ (NSMutableArray *)getMessagesWithAppointed:(NSString *)tid;
+
 /**
  <#Description#>
 

@@ -47,6 +47,7 @@
 
 // 加载聊天记录
 #define BD_GET_MESSAGE_TYPE_WORKGROUP            @"workGroup"  // 加载工作组会话
+#define BD_GET_MESSAGE_TYPE_APPOINTED            @"appointed"  // 指定坐席
 #define BD_GET_MESSAGE_TYPE_USER                 @"user"  // 加载所有访客会话
 #define BD_GET_MESSAGE_TYPE_THREAD               @"thread"  // 加载thread会话
 #define BD_GET_MESSAGE_TYPE_CONTACT              @"contact" // 一对一
@@ -56,7 +57,7 @@
 #define BD_THREAD_REQUEST_TYPE_APPOINTED        @"appointed"
 
 // 会话类型
-#define BD_THREAD_TYPE_THREAD               @"thread"  // 客服会话
+//#define BD_THREAD_TYPE_THREAD               @"thread"  // 客服会话
 #define BD_THREAD_TYPE_WORKGROUP            @"workgroup" // 工作组会话
 #define BD_THREAD_TYPE_APPOINTED            @"appointed" // 指定坐席
 #define BD_THREAD_TYPE_CONTACT              @"contact" // 一对一
@@ -64,7 +65,7 @@
 #define BD_THREAD_TYPE_ROBOT                @"robot" // 机器人会话
 
 // 消息会话类型
-#define BD_MESSAGE_SESSION_TYPE_THREAD      @"thread"  // 访客会话
+//#define BD_MESSAGE_SESSION_TYPE_THREAD      @"thread"  // 访客会话
 #define BD_MESSAGE_SESSION_TYPE_WORKGROUP   @"workgroup" // 工作组会话
 #define BD_MESSAGE_SESSION_TYPE_APPOINTED   @"appointed" // 指定坐席
 #define BD_MESSAGE_SESSION_TYPE_CONTACT     @"contact" // 一对一
@@ -157,6 +158,7 @@
 #define BD_NOTIFICATION_CONNECTION_STATUS               @"notification_connection_status"
 
 // 通知webrtc
+#define BD_NOTIFICATION_WEBRTC_MESSAGE       @"bd_notification_webrtc_message"
 // 接受webrtc邀请
 #define BD_NOTIFICATION_WEBRTC_INVITE       @"bd_notification_webrtc_invite"
 // webrtc取消邀请
