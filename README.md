@@ -16,7 +16,7 @@
 
 - 核心库：[![bytedesk-core](https://img.shields.io/badge/bytedesk--core-2.0.5-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-core)
 - 界面库，完全开源(Demo中的bdui项目)，方便开发者自定义界面：[![bytedesk--ui](https://img.shields.io/badge/bytedesk--ui-2.0.5-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-ui#bytedesk-ui-pod)
-- platform :ios, '9.1'
+- platform :ios, '10.0'
 
 ## 开发文档
 
