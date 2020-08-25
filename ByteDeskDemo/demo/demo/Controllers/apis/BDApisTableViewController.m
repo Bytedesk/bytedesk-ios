@@ -29,7 +29,7 @@
 
 //开发文档：https://github.com/pengjinning/bytedesk-ios
 //获取appkey：登录后台->渠道->APP->appkey列
-//获取subDomain，也即企业号：登录后台->客服->账号->企业号
+//获取subDomain，也即企业号：登录后台->客服管理->客服账号->企业号
 // 需要替换为真实的
 #define DEFAULT_TEST_APPKEY @"a3f79509-5cb6-4185-8df9-b1ce13d3c655"
 #define DEFAULT_TEST_SUBDOMAIN @"vip"
@@ -214,7 +214,7 @@
              viewController = [[KFSupportViewController alloc] initWithStyle:UITableViewStyleGrouped];
         } else if (indexPath.row == 7) {
             // 网页形式接入
-            // 注意: 登录后台->客服->技能组/账号->获取代码 获取相应URL
+            // 注意: 登录后台->客服管理->技能组/账号->获取代码 获取相应URL
             NSURL *url = [NSURL URLWithString:@"https://www.bytedesk.com/chat?sub=vip&uid=201808221551193&wid=201807171659201&type=workGroup&aid=&ph=ph"];
             SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:url];
             safariVC.delegate = self;
@@ -357,7 +357,7 @@
     
     [QMUITips showLoading:@"登录中..." inView:self.view];
     // 参考文档：https://github.com/pengjinning/bytedesk-ios
-    // 获取subDomain，也即企业号：登录后台->客服->账号->企业号
+    // 获取subDomain，也即企业号：登录后台->客服管理->客服账号->企业号
     NSString *subDomain = @"vip";
     // 登录
     [BDCoreApis loginWithUsername:[username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] withPassword:password withAppkey:DEFAULT_TEST_APPKEY withSubdomain:subDomain resultSuccess:^(NSDictionary *dict) {
@@ -426,7 +426,7 @@
 - (void)registerUser:(NSString *)username withPassword:(NSString *)password {
     
     NSString *nickname = [NSString stringWithFormat:@"自定义测试%@", username];
-    // 获取subDomain，也即企业号：登录后台->客服->账号->企业号
+    // 获取subDomain，也即企业号：登录后台->客服管理->客服账号->企业号
     NSString *subDomain = @"vip";
     //
     [BDCoreApis registerUser:[username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] withNickname:nickname withPassword:[password stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] withSubDomain:subDomain resultSuccess:^(NSDictionary *dict) {
