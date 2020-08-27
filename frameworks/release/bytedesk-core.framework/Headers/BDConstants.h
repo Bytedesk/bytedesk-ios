@@ -277,10 +277,14 @@
 #define BD_MESSAGE_TYPE_NOTIFICATION_PREVIEW            @"notification_preview"
 // 消息撤回
 #define BD_MESSAGE_TYPE_NOTIFICATION_RECALL             @"notification_recall"
+// 消息被拒绝
+#define BD_MESSAGE_TYPE_NOTIFICATION_BLOCK              @"notification_block";
 // 消息回执：收到消息之后回复给消息发送方
 #define BD_MESSAGE_TYPE_NOTIFICATION_RECEIPT            @"notification_receipt"
 // 踢掉其他客户端
 #define BD_MESSAGE_TYPE_NOTIFICATION_KICKOFF            @"notification_kickoff"
+// 发送表单请求
+#define BD_MESSAGE_TYPE_NOTIFICATION_FORM               @"notification_form"
 // webrtc通知初始化localStream
 #define BD_MESSAGE_TYPE_NOTIFICATION_WEBRTC_INVITE_VIDEO     @"notification_webrtc_invite_video"
 #define BD_MESSAGE_TYPE_NOTIFICATION_WEBRTC_INVITE_AUDIO     @"notification_webrtc_invite_audio"

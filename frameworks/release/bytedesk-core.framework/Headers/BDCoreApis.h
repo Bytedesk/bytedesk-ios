@@ -1105,13 +1105,21 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 + (NSMutableArray *)getIMThreads;
 
 /**
- <#Description#>
+ 加载会话列表: 当前进行中
 
  @param success 成功回调
  @param failed 失败回调
  */
 + (void)getThreadResultSuccess:(SuccessCallbackBlock)success
                   resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 客服端分页加载-客服自己的历史会话：客服会话
+ */
++ (void)getThreadHistoryRecords:(int)page
+                       withSize:(int)size
+                  resultSuccess:(SuccessCallbackBlock)success
+                   resultFailed:(FailedCallbackBlock)failed;
 
 /**
  <#Description#>

@@ -473,6 +473,16 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                        resultFailed:(FailedCallbackBlock)failed;
 
 /**
+ 客服端分页加载-客服自己的历史会话：客服会话
+ */
+- (void)agentThreadHistoryRecords:(int)page
+                         withSize:(int)size
+                    resultSuccess:(SuccessCallbackBlock)success
+                    resultFailed:(FailedCallbackBlock)failed;
+
+
+
+/**
  <#Description#>
 
  @param nickname <#nickname description#>
