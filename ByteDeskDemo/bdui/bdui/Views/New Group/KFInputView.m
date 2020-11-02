@@ -11,7 +11,7 @@
 #define INPUTBAR_HEIGHT 60.0f
 #define INPUTBAR_MAX_HEIGHT 200.0f
 
-#define INPUTBAR_SHOWMENU_BUTTON_WIDTH 46.0f
+#define INPUTBAR_SHOWMENU_BUTTON_WIDTH_HEIGHT 40.0f
 
 #define INPUTBAR_SWITCH_EMOTION_PLUS_BUTTON_WIDTH_HEIGHT 36.0f
 
@@ -195,7 +195,9 @@ CGFloat const kFontSize = 17.0f;
 {
     if (!showMenuButton) {
         
-        showMenuButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 0, INPUTBAR_SHOWMENU_BUTTON_WIDTH, INPUTBAR_HEIGHT)];
+        showMenuButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 0,
+                                                                    INPUTBAR_SHOWMENU_BUTTON_WIDTH_HEIGHT,
+                                                                    INPUTBAR_SHOWMENU_BUTTON_WIDTH_HEIGHT)];
         [showMenuButton setImage:[UIImage imageNamed:@"Mode_texttolist_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         [showMenuButton setImage:[UIImage imageNamed:@"Mode_texttolistHL_ios7" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
         
@@ -208,13 +210,8 @@ CGFloat const kFontSize = 17.0f;
 -(UIView *)verticalLineView
 {
     if (!verticalLineView) {
-        
-        verticalLineView = [[UIView alloc] initWithFrame:CGRectMake(INPUTBAR_SHOWMENU_BUTTON_WIDTH,
-                                                                    0,
-                                                                    0.5f,
-                                                                    INPUTBAR_SHOWMENU_BUTTON_WIDTH)];
+        verticalLineView = [[UIView alloc] initWithFrame:CGRectMake(INPUTBAR_SHOWMENU_BUTTON_WIDTH_HEIGHT, 0, 0.5f, INPUTBAR_SHOWMENU_BUTTON_WIDTH_HEIGHT)];
         [verticalLineView setBackgroundColor:[UIColor lightGrayColor]];
-        
     }
     
     return verticalLineView;
@@ -224,7 +221,7 @@ CGFloat const kFontSize = 17.0f;
 {
     if (!switchVoiceButton) {
         
-        switchVoiceButton = [[UIButton alloc] initWithFrame:CGRectMake(shouldShowInputBarSwitchMenu ? INPUTBAR_SHOWMENU_BUTTON_WIDTH + INPUTBAR_SWITCH_VOICE_LEFT_MARGIN : INPUTBAR_SWITCH_VOICE_LEFT_MARGIN,
+        switchVoiceButton = [[UIButton alloc] initWithFrame:CGRectMake(shouldShowInputBarSwitchMenu ? INPUTBAR_SHOWMENU_BUTTON_WIDTH_HEIGHT + INPUTBAR_SWITCH_VOICE_LEFT_MARGIN : INPUTBAR_SWITCH_VOICE_LEFT_MARGIN,
                                                                        INPUTBAR_SWITCH_VOICE_TOP_MARGIN,
                                                                        INPUTBAR_SWITCH_VOICE_BUTTON_WIDTH_HEIGHT,
                                                                        INPUTBAR_SWITCH_VOICE_BUTTON_WIDTH_HEIGHT)];
@@ -241,10 +238,10 @@ CGFloat const kFontSize = 17.0f;
 {
     if (!inputTextView) {
         
-        CGRect frame = CGRectMake( (shouldShowInputBarSwitchMenu ? INPUTBAR_SHOWMENU_BUTTON_WIDTH + INPUTBAR_SWITCH_VOICE_LEFT_MARGIN : INPUTBAR_SWITCH_VOICE_LEFT_MARGIN)
+        CGRect frame = CGRectMake( (shouldShowInputBarSwitchMenu ? INPUTBAR_SHOWMENU_BUTTON_WIDTH_HEIGHT + INPUTBAR_SWITCH_VOICE_LEFT_MARGIN : INPUTBAR_SWITCH_VOICE_LEFT_MARGIN)
                                   + INPUTBAR_SWITCH_VOICE_BUTTON_WIDTH_HEIGHT + INPUTBAR_INPUT_TEXTVIEW_LEFT_MARGIN,
                                   INPUTBAR_INPUT_TEXTVIEW_TOP_MARGIN,
-                                  self.bounds.size.width - (shouldShowInputBarSwitchMenu ? INPUTBAR_SHOWMENU_BUTTON_WIDTH + INPUTBAR_SWITCH_VOICE_LEFT_MARGIN : 0) - INPUTBAR_SWITCH_VOICE_BUTTON_WIDTH_HEIGHT - INPUTBAR_INPUT_TEXTVIEW_LEFT_MARGIN - INPUTBAR_SWITCH_EMOTION_PLUS_BUTTON_WIDTH_HEIGHT*2 - INPUTBAR_SWITCH_EMOTION_LEFT_MARGIN - INPUTBAR_SWITCH_EMOTION_RIGHT_MARGIN - INPUTBAR_SWITCH_PLUS_RIGHT_MARGIN * 2,
+                                  self.bounds.size.width - (shouldShowInputBarSwitchMenu ? INPUTBAR_SHOWMENU_BUTTON_WIDTH_HEIGHT + INPUTBAR_SWITCH_VOICE_LEFT_MARGIN : 0) - INPUTBAR_SWITCH_VOICE_BUTTON_WIDTH_HEIGHT - INPUTBAR_INPUT_TEXTVIEW_LEFT_MARGIN - INPUTBAR_SWITCH_EMOTION_PLUS_BUTTON_WIDTH_HEIGHT*2 - INPUTBAR_SWITCH_EMOTION_LEFT_MARGIN - INPUTBAR_SWITCH_EMOTION_RIGHT_MARGIN - INPUTBAR_SWITCH_PLUS_RIGHT_MARGIN * 2,
                                   INPUTBAR_INPUT_TEXTVIEW_HEIGHT);
         
         inputTextView = [[UITextView alloc] initWithFrame:frame];
@@ -368,22 +365,16 @@ CGFloat const kFontSize = 17.0f;
     if(![textView hasText] && [text isEqualToString:@""]) {
         return NO;
     }
-    
 	if ([text isEqualToString:@"\n"]) {
-        
         NSString *content = [textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        
         if ([content length] == 0) {
             return NO;
         }
-        
         if ([delegate respondsToSelector:@selector(sendMessage:)]) {
             [delegate performSelector:@selector(sendMessage:) withObject:content];
         }
-        
         //
         [self textViewDidChange:textView];
-
         return NO;
 	}
     
@@ -394,15 +385,11 @@ CGFloat const kFontSize = 17.0f;
 //    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
     CGFloat previewHeight = [self inputTextViewPreviousTextHeight];
-    
     CGFloat textViewHeight = [self inputTextViewHeight];
-    
     if (textViewHeight > 150) {
         return;
     }
-    
     CGFloat deltaHeight = textViewHeight - previewHeight;
-    
     inputTextViewPreviousTextHeight = textViewHeight;
     
     [UIView animateWithDuration:0.20
@@ -475,8 +462,8 @@ CGFloat const kFontSize = 17.0f;
                          
                          CGRect verticalLineFrame = [[self verticalLineView] frame];
                          verticalLineFrame.size.height += deltaHeight;
-                         if (verticalLineFrame.size.height < INPUTBAR_SHOWMENU_BUTTON_WIDTH) {
-                             verticalLineFrame.size.height = INPUTBAR_SHOWMENU_BUTTON_WIDTH;
+                         if (verticalLineFrame.size.height < INPUTBAR_SHOWMENU_BUTTON_WIDTH_HEIGHT) {
+                             verticalLineFrame.size.height = INPUTBAR_SHOWMENU_BUTTON_WIDTH_HEIGHT;
                          }
                          else if (verticalLineFrame.size.height > INPUTBAR_MAX_HEIGHT)
                          {
@@ -499,7 +486,6 @@ CGFloat const kFontSize = 17.0f;
     if (!inputTextViewPreviousTextHeight) {
         inputTextViewPreviousTextHeight = [self inputTextViewHeight];
     }
-    
     return inputTextViewPreviousTextHeight;
 }
 

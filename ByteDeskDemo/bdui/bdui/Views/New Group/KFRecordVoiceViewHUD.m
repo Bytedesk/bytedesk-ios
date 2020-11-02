@@ -12,7 +12,7 @@
 //#import "KFProgressHUD.h"
 
 #import <AVFoundation/AVFoundation.h>
-#import "VoiceConverter.h"
+//#import "VoiceConverter.h"
 
 #define MICROPHONE_WIDTH        50.0f
 #define MICROPHONE_HEIGHT       100.0f
@@ -334,7 +334,7 @@
     
 //    转成amr格式
 //    [KFUtils wavToAmr:wavVoicePath amrSavePath:amrVoicePath];
-    [VoiceConverter wavToAmr:wavVoicePath amrSavePath:amrVoicePath];
+//    [VoiceConverter wavToAmr:wavVoicePath amrSavePath:amrVoicePath]; // 实际使用
     
 //    发送语音文件
 //    [[KFUtils sharedInstance] uploadVoice:amrVoiceFileName workgroupName:workgroupName];

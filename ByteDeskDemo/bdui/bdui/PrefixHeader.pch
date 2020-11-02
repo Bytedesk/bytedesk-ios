@@ -29,12 +29,12 @@ NSLocalizedStringFromTableInBundle((key), @"AppKeFu", [NSBundle bundleWithPath:[
 
 //开发文档：https://github.com/pengjinning/bytedesk-ios
 //获取appkey：登录后台->渠道->APP->appkey列
-//获取subDomain，也即企业号：登录后台->客服管理->客服账号->企业号列
+//获取subDomain，也即企业号：登录后台->客服->账号->企业号列
 // 需要替换为真实的
 //#define DEFAULT_TEST_APPKEY @"a3f79509-5cb6-4185-8df9-b1ce13d3c655"
 //#define DEFAULT_TEST_SUBDOMAIN @"vip"
 
-// 获取adminUid, 登录后台->客服管理->客服账号->管理员uid列
+// 获取adminUid, 登录后台->客服->账号->管理员uid列
 //#define DEFAULT_TEST_ADMIN_UID @"201808221551193"
 
 
@@ -59,13 +59,13 @@ NSLocalizedStringFromTableInBundle((key), @"AppKeFu", [NSBundle bundleWithPath:[
 //
 //# 如果已经存在，则删除
 //
-//if [ -d "${INSTALL_DIR}"]
+//#if [ -d "${INSTALL_DIR}"]
 //
-//then
+//#then
 //
-//rm -rf "${INSTALL_DIR}"
+//#rm -rf "${INSTALL_DIR}"
 //
-//fi
+//#fi
 //
 //# 创建目录
 //
@@ -83,7 +83,7 @@ NSLocalizedStringFromTableInBundle((key), @"AppKeFu", [NSBundle bundleWithPath:[
 //
 //#open "${DEVICE_DIR}"
 //
-//open "${SRCROOT}/products/${PRODUCT_NAME}.framework"
+//#open "${SRCROOT}/products/${PRODUCT_NAME}.framework"
 //
 //fi
 //

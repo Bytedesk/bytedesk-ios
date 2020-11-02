@@ -11,7 +11,7 @@
 //#import "KFDSMessageModel.h"
 #import "KFDSUConstants.h"
 #import <AVFoundation/AVFoundation.h>
-#import "VoiceConverter.h"
+//#import "VoiceConverter.h"
 
 @import AFNetworking;
 
@@ -222,7 +222,7 @@
                     NSLog(@"%@ downloaded", self.model.voice_url);
                     if ([self.voiceName hasSuffix:@".amr"]) {
                         NSLog(@"is amr");
-                        [VoiceConverter amrToWav:amrSavePath wavSavePath:voicePath];
+//                        [VoiceConverter amrToWav:amrSavePath wavSavePath:voicePath]; // 实际使用
 //                        [KFUtils amrToWav:amrSavePath wavSavePath:voicePath];
                     }
                     else if ([self.voiceName hasSuffix:@".wav"]) {

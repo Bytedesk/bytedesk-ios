@@ -15,6 +15,9 @@
 #import "BDSingleImagePickerPreviewViewController.h"
 #import "KFDSUConstants.h"
 #import "BDGroupProfileViewController.h"
+#import "BDCuwViewController.h"
+#import "BDChatAtViewController.h"
+#import "BDVisitorInfoViewController.h"
 
 #import "KFInputView.h"
 #import "KFEmotionView.h"
@@ -47,7 +50,7 @@ static CGFloat const kToolbarHeight = 60;
 
 static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPhoto;
 
-@interface BDChatIMViewController ()<UINavigationControllerBackButtonHandlerProtocol, KFDSMsgViewCellDelegate, QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,BDSingleImagePickerPreviewViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, QMUITextFieldDelegate, QMUIImagePreviewViewDelegate, KFEmotionViewDelegate, KFPlusViewDelegate, KFInputViewDelegate, BDGroupProfileViewControllerDelegate, BDContactProfileViewControllerDelegate,
+@interface BDChatIMViewController ()<UINavigationControllerBackButtonHandlerProtocol, KFDSMsgViewCellDelegate, QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,BDSingleImagePickerPreviewViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, QMUITextFieldDelegate, QMUIImagePreviewViewDelegate, KFEmotionViewDelegate, KFPlusViewDelegate, KFInputViewDelegate, BDGroupProfileViewControllerDelegate, BDContactProfileViewControllerDelegate, BDCuwViewControllerDelegate,
     UIDocumentPickerDelegate,
     UIDocumentInteractionControllerDelegate,
     UIDocumentMenuDelegate,
@@ -106,6 +109,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 @property(nonatomic, strong) NSDictionary *mCustomDict;
 
 //客服端
+@property(nonatomic, strong) QMUIPopupMenuView *popupAtBarButtonItem;
 @property (nonatomic, strong) UIImagePickerController *mImagePickerController;
 @property(nonatomic, assign) BOOL forceEnableBackGesture;
 
@@ -124,6 +128,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 @property (nonatomic, strong) NSArray *documentTypes;
 @property(nonatomic, assign) BOOL mViewDidAppeared;
+
+@property(nonatomic, strong) NSString *mBlockReason;
 
 @end
 
@@ -255,7 +261,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.tableView.separatorColor = [UIColor clearColor];
     //
     self.mGetMessageFromChannelPage = 0;
-    
     UITapGestureRecognizer *singleFingerTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     [self.tableView addGestureRecognizer:singleFingerTap];
@@ -264,6 +269,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     CGRect inputViewFrame = CGRectMake(0.0f, self.view.frame.size.height - INPUTBAR_HEIGHT, self.view.frame.size.width, INPUTBAR_HEIGHT);
     self.kfInputView = [[KFInputView alloc] initWithFrame:inputViewFrame];
     self.kfInputView.delegate = self;
+    self.kfInputView.shouldShowInputBarSwitchMenu = true;
     [self.view addSubview:self.kfInputView];
     //
     self.emotionToTextDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:self.class] pathForResource:@"EmotionToText" ofType:@"plist"]];
@@ -390,40 +396,133 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         
     } else {
         //
-        if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_WORKGROUP]) {
-            // 客服会话
-            QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
-            }];
-            QMUIAlertAction *closeAction = [QMUIAlertAction actionWithTitle:@"关闭" style:QMUIAlertActionStyleDestructive handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
-                // 客服关闭会话
-                [BDCoreApis agentCloseThread:self.mThreadModel.tid resultSuccess:^(NSDictionary *dict) {
+        if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_WORKGROUP] ||
+            [self.mThreadType isEqualToString:BD_THREAD_TYPE_APPOINTED] ||
+            [self.mThreadType isEqualToString:BD_THREAD_TYPE_ROBOT]) {
+            
+            // 在 UIBarButtonItem 上显示
+            self.popupAtBarButtonItem = [[QMUIPopupMenuView alloc] init];
+            self.popupAtBarButtonItem.automaticallyHidesWhenUserTap = YES;// 点击空白地方消失浮层
+            self.popupAtBarButtonItem.maximumWidth = 180;
+            self.popupAtBarButtonItem.shouldShowItemSeparator = YES;
+//            self.popupAtBarButtonItem.tintColor = UIColor.qd_tintColor;
+            self.popupAtBarButtonItem.items = @[
+                [QMUIPopupMenuButtonItem itemWithImage:nil title:@"用户信息" handler:^(QMUIPopupMenuButtonItem * _Nonnull aItem) {
+                    [self.popupAtBarButtonItem hideWithAnimated:YES];
+                    // 客户信息 + 用户设备信息
+                    NSString *uid = [self.mThreadModel.topic componentsSeparatedByString:@"/"][1];
+                    BDVisitorInfoViewController *visitorInfoViewController = [[BDVisitorInfoViewController alloc] init];
+                    [visitorInfoViewController initWithUid:uid];
+                    //
+                    QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:visitorInfoViewController];
+                    [self presentViewController:chatNavigationController animated:YES completion:^{
+                        
+                    }];
+                }],
+//                TODO: 弹窗选择在线的客服
+//                [QMUIPopupMenuButtonItem itemWithImage:nil title:@"转接会话" handler:^(QMUIPopupMenuButtonItem * _Nonnull aItem) {
+//                    [self.popupAtBarButtonItem hideWithAnimated:YES];
+//                    // 转接会话
+//                    // TODO: 弹窗选择在线的客服
+//                    [BDCoreApis getOnlineAgents:0 withSize:100 resultSuccess:^(NSDictionary *dict) {
+//                        //
+//
+//                    } resultFailed:^(NSError *error) {
+//
+//                    }];
+//                }],
+                [QMUIPopupMenuButtonItem itemWithImage:nil title:@"邀请评价" handler:^(QMUIPopupMenuButtonItem * _Nonnull aItem) {
+                    [self.popupAtBarButtonItem hideWithAnimated:YES];
+                    // 邀请评价
+                    NSString *localId = [[NSUUID UUID] UUIDString];
+                    [[BDMQTTApis sharedInstance] sendInviteRateMessageProtobuf:localId content:@"邀请评价" thread:self.mThreadModel];
+                }],
+                [QMUIPopupMenuButtonItem itemWithImage:nil title:@"发送表单" handler:^(QMUIPopupMenuButtonItem * _Nonnull aItem) {
+                    [self.popupAtBarButtonItem hideWithAnimated:YES];
+                    // 发送表单
+                    // TODO: 弹窗选择字段
+                    NSString *localId = [[NSUUID UUID] UUIDString];
+                    NSString *formContent = @"{ 'form': [ '姓名', '手机' ]}";
+                    [[BDMQTTApis sharedInstance] sendFormRequestMessageProtobuf:localId content:formContent thread:self.mThreadModel];
+                }],
+                [QMUIPopupMenuButtonItem itemWithImage:nil title:@"关闭会话" handler:^(QMUIPopupMenuButtonItem * _Nonnull aItem) {
+                    [self.popupAtBarButtonItem hideWithAnimated:YES];
+                    // 关闭会话
+                    QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"关闭" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
+                        // TODO: 弹窗确认
+                        [BDCoreApis agentCloseThread:self.mThreadModel.tid resultSuccess:^(NSDictionary *dict) {
+                            
+                        } resultFailed:^(NSError *error) {
+                            
+                        }];
+                    }];
+                    QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"提示" message:@"确定要关闭会话？" preferredStyle:QMUIAlertControllerStyleAlert];
+                    [alertController addCancelAction];
+                    [alertController addAction:action2];
+                    [alertController showWithAnimated:YES];
+                }],
+                [QMUIPopupMenuButtonItem itemWithImage:nil title:@"拉黑用户" handler:^(QMUIPopupMenuButtonItem * _Nonnull aItem) {
+                    [self.popupAtBarButtonItem hideWithAnimated:YES];
+                    // 拉入黑名单
+                    QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"提示" message:@"请输入拉黑理由" preferredStyle:QMUIAlertControllerStyleAlert];
+                    [alertController addAction:[QMUIAlertAction actionWithTitle:@"确定" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
+                        // TODO: 备注内容
+                        NSString *uid = [self.mThreadModel.topic componentsSeparatedByString:@"/"][1];
+                        [BDCoreApis addBlock:uid withNote:@"添加备注" resultSuccess:^(NSDictionary *dict) {
+                            //
+                        } resultFailed:^(NSError *error) {
+                            //
+                        }];
+                    }]];
+                    [alertController addCancelAction];
+                    [alertController addTextFieldWithConfigurationHandler:^(QMUITextField * _Nonnull textField) {
+                        textField.placeholder = @"拉黑理由";
+                    }];
+                    [alertController showWithAnimated:YES];
                     
-                    NSNumber *status_code = [dict objectForKey:@"status_code"];
-                    if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                        // 关闭成功
-                        // 关闭当前会话窗口
-                        if (self.mIsPush) {
-                            [self.navigationController popViewControllerAnimated:YES];
-                        } else {
-                            [self.navigationController dismissViewControllerAnimated:YES completion:^{}];
-                        }
-                    } else {
-                        NSString *message = dict[@"message"];
-                        DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
-                        [QMUITips showError:message inView:self.view hideAfterDelay:2];
-                    }
-                    
-                } resultFailed:^(NSError *error) {
-                    DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-                    if (error) {
-                        [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
-                    }
-                }];
-            }];
-            QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"确定关闭会话？" message:@"" preferredStyle:QMUIAlertControllerStyleAlert];
-            [alertController addAction:cancelAction];
-            [alertController addAction:closeAction];
-            [alertController showWithAnimated:YES];
+                }]];
+            if (self.popupAtBarButtonItem.isShowing) {
+                [self.popupAtBarButtonItem hideWithAnimated:YES];
+            } else {
+                // 相对于右上角的按钮布局
+                self.popupAtBarButtonItem.sourceBarItem = self.navigationItem.rightBarButtonItem;
+                [self.popupAtBarButtonItem showWithAnimated:YES];
+            }
+            
+//            // 客服会话
+//            QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+//            }];
+//            QMUIAlertAction *closeAction = [QMUIAlertAction actionWithTitle:@"关闭" style:QMUIAlertActionStyleDestructive handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+//                // 客服关闭会话
+//                [BDCoreApis agentCloseThread:self.mThreadModel.tid resultSuccess:^(NSDictionary *dict) {
+//
+//                    NSNumber *status_code = [dict objectForKey:@"status_code"];
+//                    if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+//                        // 关闭成功
+//                        // 关闭当前会话窗口
+//                        if (self.mIsPush) {
+//                            [self.navigationController popViewControllerAnimated:YES];
+//                        } else {
+//                            [self.navigationController dismissViewControllerAnimated:YES completion:^{}];
+//                        }
+//                    } else {
+//
+//                        NSString *message = dict[@"message"];
+//                        DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
+//                        [QMUITips showError:message inView:self.view hideAfterDelay:2];
+//                    }
+//
+//                } resultFailed:^(NSError *error) {
+//                     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+//                    if (error) {
+//                        [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+//                    }
+//                }];
+//            }];
+//            QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"确定关闭会话？" message:@"" preferredStyle:QMUIAlertControllerStyleAlert];
+//            [alertController addAction:cancelAction];
+//            [alertController addAction:closeAction];
+//            [alertController showWithAnimated:YES];
         } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_CONTACT]) {
             // 联系人会话
             BDContactProfileViewController *contactViewController = [[BDContactProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
@@ -658,6 +757,10 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyMessageStatus:) name:BD_NOTIFICATION_MESSAGE_STATUS object:nil];
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyKickoff:) name:BD_NOTIFICATION_KICKOFF object:nil];
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyTransfer:) name:BD_NOTIFICATION_TRANSFER object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyTransferAccept:) name:BD_NOTIFICATION_TRANSFER_ACCEPT object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyTransferReject:) name:BD_NOTIFICATION_TRANSFER_REJECT object:nil];
     
 }
 
@@ -810,7 +913,11 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 -(void)sendTextMessage:(NSString *)content {
     DDLogInfo(@"%s, content:%@, tid:%@, sessionType:%@ ", __PRETTY_FUNCTION__, content, self.mUid,  self.mThreadType);
     
-    // TODO: 增加判断content长度，限制<512
+    // 增加判断content长度，限制<512
+    if ([content length] >= 500) {
+        [QMUITips showError:@"消息太长，请分多次发送" inView:self.view hideAfterDelay:2];
+        return;
+    }
     
     // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
     NSString *localId = [[NSUUID UUID] UUIDString];
@@ -2433,12 +2540,43 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [alertController showWithAnimated:YES];
 }
 
+// 收到被转接会话
+- (void)notifyTransfer:(NSNotification *)notification {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+//    BDMessageModel *messageModel = [notification object];
+    //
+    
+}
+
+// 对方接受转接
+- (void)notifyTransferAccept:(NSNotification *)notification {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+//    BDMessageModel *messageModel = [notification object];
+    //
+    [QMUITips showInfo:@"转接会话被接受"];
+}
+
+// 对方拒绝转接
+- (void)notifyTransferReject:(NSNotification *)notification {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+//    BDMessageModel *messageModel = [notification object];
+    //
+    [QMUITips showInfo:@"转接会话被拒绝"];
+}
+
 #pragma mark - KFInputViewDelegate
 
 -(void)showMenuButtonPressed:(id)sender
 {
     [self.view endEditing:YES];
-
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    //
+    BDCuwViewController *cuwViewController = [[BDCuwViewController alloc] init];
+    cuwViewController.delegate = self;
+    QMUINavigationController *cuwNavigationController = [[QMUINavigationController alloc] initWithRootViewController:cuwViewController];
+    [self presentViewController:cuwNavigationController animated:YES completion:^{
+        
+    }];
 }
 
 -(void)switchVoiceButtonPressed:(id)sender
@@ -2447,20 +2585,15 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
     //如果当前按住说话按钮隐藏，则将其显示，并隐藏输入框
     if ([self.kfInputView recordVoiceButton].hidden) {
-        
         [self.kfInputView recordVoiceButton].hidden = FALSE;
-        
         [[self.kfInputView inputTextView] resignFirstResponder];
-        
         [self.kfInputView inputTextView].hidden = TRUE;
     }
     //如果当前按住说话按钮显示，则将其隐藏，并显示输入框，并将其获取焦点
     else
     {
         [self.kfInputView recordVoiceButton].hidden = TRUE;
-        
         [self.kfInputView inputTextView].hidden = FALSE;
-        
         [[self.kfInputView inputTextView] becomeFirstResponder];
     }
     
@@ -2807,6 +2940,11 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self reloadTableData];
 }
 
+#pragma mark - BDCuwViewControllerDelegate
 
+-(void)cuwSelected:(NSString *)content {
+    DDLogInfo(@"cuw %@", content);
+    [self sendTextMessage:content];
+}
 
 @end
