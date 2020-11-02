@@ -193,6 +193,18 @@
 
 + (void)notifyWebRTCMessage:(BDMessageModel *)message;
 
+// 账号过期，待续费
++ (void)notifyOutOfDate;
+
+// 收到转接会话
++ (void)notifyTransferMessage:(BDMessageModel *)message;
+
+// 收到接受转接
++ (void)notifyTransferAcceptMessage:(BDMessageModel *)message;
+
+// 收到拒绝转接
++ (void)notifyTransferRejectMessage:(BDMessageModel *)message;
+
 //
 ///**
 // <#Description#>

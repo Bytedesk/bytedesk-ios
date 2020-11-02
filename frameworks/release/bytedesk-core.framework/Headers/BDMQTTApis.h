@@ -65,6 +65,10 @@
 
 - (void)sendCommodityMessageProtobuf:(NSString *)mid content:(NSString *)content thread:(BDThreadModel *)thread;
 
+- (void)sendInviteRateMessageProtobuf:(NSString *)mid content:(NSString *)content thread:(BDThreadModel *)thread;
+
+- (void)sendFormRequestMessageProtobuf:(NSString *)mid content:(NSString *)content thread:(BDThreadModel *)thread;
+
 - (void)sendPreviewMessageProtobufThread:(BDThreadModel *)thread previewContent:(NSString *)previewContent;
 
 - (void)sendRecallMessageProtobufThread:(BDThreadModel *)thread recallMid:(NSString *)recallMid;
@@ -74,6 +78,12 @@
 - (void)sendReceiptReadMessageProtobufThread:(BDThreadModel *)thread receiptMid:(NSString *)receiptMid;
 
 - (void)sendReceiptMessageProtobufThread:(BDThreadModel *)thread receiptMid:(NSString *)receiptMid receiptStatus:(NSString *)receiptStatus;
+
+- (void)sendTransferMessageProtobufThread:(BDThreadModel *)thread transferTopic:(NSString *)transferTopic transferContent:(NSString *)transferContent;
+
+- (void)sendTransferAcceptMessageProtobufThread:(BDThreadModel *)thread transferTopic:(NSString *)transferTopic;
+
+- (void)sendTransferRejectMessageProtobufThread:(BDThreadModel *)thread transferTopic:(NSString *)transferTopic;
 
 //
 - (void)sendWebRTCOfferVideoSDP:(NSString *)content thread:(BDThreadModel *)threadModel;

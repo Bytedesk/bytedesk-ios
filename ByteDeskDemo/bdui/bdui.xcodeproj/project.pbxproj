@@ -1913,7 +1913,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n\n# 编译的时候\n\nif [ \"${ACTION}\" = \"build\" ]\n\nthen\n\n# 生成通用framework的目录\n\nINSTALL_DIR=${SRCROOT}/products/${PRODUCT_NAME}.framework\n\n# 需要合并的framework\n\nDEVICE_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphoneos/${PRODUCT_NAME}.framework\n\nSIMULATOR_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphonesimulator/${PRODUCT_NAME}.framework\n\n# 如果已经存在，则删除\n\n#if [ -d \"${INSTALL_DIR}\"]\n\n#then\n\n#rm -rf \"${INSTALL_DIR}\"\n\n#fi\n\n# 创建目录\n\nmkdir -p \"${INSTALL_DIR}\"\n\n# 拷贝Header到目标目录\n\ncp -R \"${DEVICE_DIR}/\" \"${INSTALL_DIR}/\"\n\n# 合并framework\n\nlipo -create \"${DEVICE_DIR}/${PRODUCT_NAME}\" \"${SIMULATOR_DIR}/${PRODUCT_NAME}\" -output \"${INSTALL_DIR}/${PRODUCT_NAME}\"\n\n# 编译完成后打开文件夹\n\n#open \"${DEVICE_DIR}\"\n\n#open \"${SRCROOT}/products/${PRODUCT_NAME}.framework\"\n\nfi\n";
+			shellScript = "
+";
 		};
 		40E4D3F06829C4C7A96FAE25 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2195,7 +2196,7 @@
 					"$(PROJECT_DIR)/bdui/vendors/arm/lib",
 					"$(PROJECT_DIR)/bdui/vendors/MLAudioRecorder/amr_en_de/lib",
 				);
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.1.2;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -2258,7 +2259,7 @@
 					"$(PROJECT_DIR)/bdui/vendors/arm/lib",
 					"$(PROJECT_DIR)/bdui/vendors/MLAudioRecorder/amr_en_de/lib",
 				);
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.1.2;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",

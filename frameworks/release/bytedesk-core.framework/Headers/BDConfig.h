@@ -105,7 +105,6 @@ WebRTC TURN server
 
 + (void)setRestApiHost:(NSString *)host;
 
-
 /**
  <#Description#>
 

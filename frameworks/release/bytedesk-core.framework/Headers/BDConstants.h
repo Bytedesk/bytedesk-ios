@@ -63,6 +63,9 @@
 #define BD_THREAD_TYPE_CONTACT              @"contact" // 一对一
 #define BD_THREAD_TYPE_GROUP                @"group"   // 群组
 #define BD_THREAD_TYPE_ROBOT                @"robot" // 机器人会话
+#define BD_THREAD_TYPE_ROBOT_TO_AGENT       @"robot_to_agent" // 机器转人工
+#define BD_THREAD_TYPE_TICKET_WORKGROUP     @"ticket_workgroup" // 技能组工单
+#define BD_THREAD_TYPE_TICKET_APPOINTED     @"ticket_appointed" // 一对一工单
 
 // 消息会话类型
 //#define BD_MESSAGE_SESSION_TYPE_THREAD      @"thread"  // 访客会话
@@ -131,6 +134,10 @@
 
 // 账号异地登录
 #define BD_NOTIFICATION_KICKOFF             @"bd_notification_kickoff"
+#define BD_NOTIFICATION_OUTOFDATE           @"bd_notification_outofdate"
+#define BD_NOTIFICATION_TRANSFER            @"bd_notification_transfer"
+#define BD_NOTIFICATION_TRANSFER_ACCEPT     @"bd_notification_transfer_accept"
+#define BD_NOTIFICATION_TRANSFER_REJECT     @"bd_notification_transfer_reject"
 
 // 通知UI thread状态
 #define BD_NOTIFICATION_THREAD              @"bd_notification_thread"
@@ -244,6 +251,7 @@
 #define BD_MESSAGE_TYPE_NOTIFICATION_BROWSE_INVITE_REJECT @"notification_browse_invite_reject" // 访客拒绝邀请
 #define BD_MESSAGE_TYPE_NOTIFICATION_THREAD             @"notification_thread"  // 新会话thread
 #define BD_MESSAGE_TYPE_NOTIFICATION_THREAD_REENTRY     @"notification_thread_reentry" // 重新进入会话
+#define BD_MESSAGE_TYPE_NOTIFICATION_TICKET             @"notification_ticket"  // 新建工单
 #define BD_MESSAGE_TYPE_NOTIFICATION_QUEUE              @"notification_queue"    // 排队通知类型
 // 排队中离开
 #define BD_MESSAGE_TYPE_NOTIFICATION_QUEUE_LEAVE        @"notification_queue_leave"
@@ -261,6 +269,8 @@
 #define BD_MESSAGE_TYPE_NOTIFICATION_INVITE             @"notification_invite"  // 邀请会话
 #define BD_MESSAGE_TYPE_NOTIFICATION_INVITE_ACCEPT      @"notification_invite_accept"    // 接受邀请
 #define BD_MESSAGE_TYPE_NOTIFICATION_INVITE_REJECT      @"notification_invite_reject"    // 拒绝邀请
+#define BD_MESSAGE_TYPE_NOTIFICATION_INVITE_RATE        @"notification_invite_rate" // 邀请评价
+#define BD_MESSAGE_TYPE_NOTIFICATION_RATE_RESULT        @"notification_rate_result" // 评价结果
 #define BD_MESSAGE_TYPE_NOTIFICATION_TRANSFER           @"notification_transfer"  // 转接会话
 #define BD_MESSAGE_TYPE_NOTIFICATION_TRANSFER_ACCEPT    @"notification_transfer_accept"    // 接受转接
 #define BD_MESSAGE_TYPE_NOTIFICATION_TRANSFER_REJECT    @"notification_transfer_reject"    // 拒绝转接
@@ -284,7 +294,10 @@
 // 踢掉其他客户端
 #define BD_MESSAGE_TYPE_NOTIFICATION_KICKOFF            @"notification_kickoff"
 // 发送表单请求
-#define BD_MESSAGE_TYPE_NOTIFICATION_FORM               @"notification_form"
+//#define BD_MESSAGE_TYPE_NOTIFICATION_FORM               @"notification_form"
+// 表单内嵌类型
+#define BD_MESSAGE_TYPE_NOTIFICATION_FORM_REQUEST       @"notification_form_request"
+#define BD_MESSAGE_TYPE_NOTIFICATION_FORM_RESULT        @"notification_form_result"
 // webrtc通知初始化localStream
 #define BD_MESSAGE_TYPE_NOTIFICATION_WEBRTC_INVITE_VIDEO     @"notification_webrtc_invite_video"
 #define BD_MESSAGE_TYPE_NOTIFICATION_WEBRTC_INVITE_AUDIO     @"notification_webrtc_invite_audio"

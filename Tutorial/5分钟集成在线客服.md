@@ -1,4 +1,4 @@
-# 5分钟集成在线客服
+# 5 分钟集成在线客服
 
 - [Demo](https://github.com/Bytedesk/bytedesk-ios/tree/master/Tutorial/kefu)
 
@@ -6,30 +6,33 @@
 
 - 到[萝卜丝官网](https://www.bytedesk.com/antv/user/login)注册管理员账号，并登录管理后台。
 - 到 客服管理->渠道管理 添加网站/App
-- 到 客服管理->客服账号 添加客服账号。注意：生成记录中有一列 ‘唯一ID(uid)’ 会在指定客服接口中使用
-- 到 客服管理->技能组 添加技能组，并可将客服账号添加到相关技能组。注意：生成记录中有一列 ‘唯一ID（wId）’ 会在工作组会话中用到
-- 获取管理员uid, 登录后台->客服管理->客服账号->管理员账号(唯一ID(uid))列
-- 获取appkey，登录后台->客服管理->渠道管理->添加应用->appkey
-- 获取subDomain，也即企业号：登录后台->客服管理->客服账号->企业号
+- 到 客服管理->客服账号 添加客服账号。注意：生成记录中有一列 ‘唯一 ID(uid)’ 会在指定客服接口中使用
+- 到 客服管理->技能组 添加技能组，并可将客服账号添加到相关技能组。注意：生成记录中有一列 ‘唯一 ID（wId）’ 会在工作组会话中用到
+- 获取管理员 uid, 登录后台->客服管理->客服账号->管理员账号(唯一 ID(uid))列
+- 获取 appkey，登录后台->客服管理->渠道管理->添加应用->appkey
+- 获取 subDomain，也即企业号：登录后台->客服管理->客服账号->企业号
 
 ## 开始集成
 
-> 第一步：添加pod库
+> 第一步：添加 pod 库
 
 ```md
-# 集成萝卜丝核心协议库core
-pod 'bytedesk-core', '2.0.6'
-# 集成萝卜丝UI库
-pod 'bytedesk-ui', '2.0.6'
+# 集成萝卜丝核心协议库 core
+
+pod 'bytedesk-core', '2.1.2'
+
+# 集成萝卜丝 UI 库
+
+pod 'bytedesk-ui', '2.1.2'
 ```
 
-> 第二步：在AppDelegate.m文件中添加头文件
+> 第二步：在 AppDelegate.m 文件中添加头文件
 
 ```c++
 #import <bytedesk-core/bdcore.h>
 ```
 
-> 第三步：在AppDelegate.m建立萝卜丝长连接
+> 第三步：在 AppDelegate.m 建立萝卜丝长连接
 
 ```c++
 // 1. 在 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions中添加
@@ -38,18 +41,18 @@ pod 'bytedesk-ui', '2.0.6'
 [self anonymouseLogin];
 ```
 
-> 第四步：在ViewController.m中添加头文件
+> 第四步：在 ViewController.m 中添加头文件
 
 ```c++
 #import <bytedesk-ui/bdui.h>
 ```
 
-> 第五步：在ViewController.m打开在线客服会话窗口
+> 第五步：在 ViewController.m 打开在线客服会话窗口
 
 ```c++
 [BDUIApis pushWorkGroupChat:self.navigationController withWorkGroupWid:DEFAULT_TEST_WID withTitle:kDefaultTitle];
 ```
 
-> 第六步：在Info.plist添加 相册 + 拍照 权限，可参考demo
+> 第六步：在 Info.plist 添加 相册 + 拍照 权限，可参考 demo
 
 ## 集成完毕

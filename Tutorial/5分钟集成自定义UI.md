@@ -1,4 +1,4 @@
-# 5分钟集成在线客服
+# 5 分钟集成在线客服
 
 - [Demo](https://github.com/Bytedesk/bytedesk-ios/tree/master/Tutorial/myui)
 
@@ -6,11 +6,11 @@
 
 - 到[萝卜丝官网](https://www.bytedesk.com/antv/user/login)注册管理员账号，并登录管理后台。
 - 到 客服管理->渠道管理 添加网站/App
-- 到 客服管理->客服账号 添加客服账号。注意：生成记录中有一列 ‘唯一ID(uid)’ 会在指定客服接口中使用
-- 到 客服管理->技能组 添加技能组，并可将客服账号添加到相关技能组。注意：生成记录中有一列 ‘唯一ID（wId）’ 会在工作组会话中用到
-- 获取管理员uid, 登录后台->客服管理->客服账号->管理员账号(唯一ID(uid))列
-- 获取appkey，登录后台->客服管理->渠道管理->添加应用->appkey
-- 获取subDomain，也即企业号：登录后台->客服管理->客服账号->企业号
+- 到 客服管理->客服账号 添加客服账号。注意：生成记录中有一列 ‘唯一 ID(uid)’ 会在指定客服接口中使用
+- 到 客服管理->技能组 添加技能组，并可将客服账号添加到相关技能组。注意：生成记录中有一列 ‘唯一 ID（wId）’ 会在工作组会话中用到
+- 获取管理员 uid, 登录后台->客服管理->客服账号->管理员账号(唯一 ID(uid))列
+- 获取 appkey，登录后台->客服管理->渠道管理->添加应用->appkey
+- 获取 subDomain，也即企业号：登录后台->客服管理->客服账号->企业号
 
 ## 开始集成
 
@@ -19,7 +19,7 @@
 ```md
 .
 ├─ bdui
-│  └─ *
+│ └─ \*
 ├─ myui
 ├─ myuiTests
 ├─ Pods
@@ -29,20 +29,23 @@
 └─ Podfile.lock
 ```
 
-> 第二步：添加pod库
+> 第二步：添加 pod 库
 
 ```md
-# 如果pod库原先没有添加workspace的话，需要添加，如：
+# 如果 pod 库原先没有添加 workspace 的话，需要添加，如：
+
 platform :ios, '10.0'
+
 # 注意: 'myui' 需要修改为自己项目真实的名称
+
 workspace 'myui'
 ```
 
-在需要引入在线客服的项目pod中添加
+在需要引入在线客服的项目 pod 中添加
 
 ```md
-
 # 第三方依赖
+
 pod 'FMDB'
 pod 'WCDB'
 pod 'MMKV'
@@ -53,47 +56,52 @@ pod 'M80AttributedLabel'
 pod 'HCSStarRatingView'
 pod 'CocoaLumberjack'
 
-# 集成萝卜丝核心协议库core
-pod 'bytedesk-core', '2.0.6'
+# 集成萝卜丝核心协议库 core
+
+pod 'bytedesk-core', '2.1.2'
 ```
 
-添加bdui相关pod
+添加 bdui 相关 pod
 
 ```md
 target 'bytedesk-ui' do
-  # Comment this line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
 
-  project 'bdui/bdui.xcodeproj'
+# Comment this line if you're not using Swift and don't want to use dynamic frameworks
 
-  # Pods for bdui
-  pod 'FMDB'
-  pod 'WCDB'
-  pod 'MMKV'
-  pod 'MQTTClient'
-  pod 'AFNetworking'
-  pod 'QMUIKit'
-  pod 'M80AttributedLabel'
-  pod 'HCSStarRatingView'
-  pod 'CocoaLumberjack'
+use_frameworks!
 
-  # 集成核心协议库core
-  pod 'bytedesk-core', '2.0.6'
+project 'bdui/bdui.xcodeproj'
 
-  target 'bduiTests' do
-  end
+# Pods for bdui
+
+pod 'FMDB'
+pod 'WCDB'
+pod 'MMKV'
+pod 'MQTTClient'
+pod 'AFNetworking'
+pod 'QMUIKit'
+pod 'M80AttributedLabel'
+pod 'HCSStarRatingView'
+pod 'CocoaLumberjack'
+
+# 集成核心协议库 core
+
+pod 'bytedesk-core', '2.1.2'
+
+target 'bduiTests' do
+end
 
 end
 ```
 
-支持bitcode
+支持 bitcode
 
 ```md
 #bitcode enable
 post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['ENABLE_BITCODE'] = 'YES'
+installer.pods_project.targets.each do |target|
+target.build_configurations.each do |config|
+config.build_settings['ENABLE_BITCODE'] = 'YES'
 
       if config.name == 'Release'
         config.build_settings['BITCODE_GENERATION_MODE'] = 'bitcode'
@@ -111,25 +119,26 @@ post_install do |installer|
 
       config.build_settings['OTHER_CFLAGS'] = cflags
     end
-  end
+
+end
 end
 ```
 
-添加完毕之后，关闭Xcode，执行 `pod install`
+添加完毕之后，关闭 Xcode，执行 `pod install`
 
-> 第三步：项目添加bytedesk-ui.framework
+> 第三步：项目添加 bytedesk-ui.framework
 
 ![选择binary](./img/select-binary.png)
 
 ![选择framework](./img/choose-framework.png)
 
-> 第四步：在AppDelegate.m文件中添加头文件
+> 第四步：在 AppDelegate.m 文件中添加头文件
 
 ```c
 #import <bytedesk-core/bdcore.h>
 ```
 
-> 第五步：在AppDelegate.m建立萝卜丝长连接
+> 第五步：在 AppDelegate.m 建立萝卜丝长连接
 
 ```c
 // 1. 在 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions中添加
@@ -138,21 +147,21 @@ end
 [self anonymouseLogin];
 ```
 
-> 第六步：在ViewController.m中添加头文件
+> 第六步：在 ViewController.m 中添加头文件
 
 ```c
 #import <bytedesk-ui/bdui.h>
 ```
 
-> 第七步：在ViewController.m打开在线客服会话窗口
+> 第七步：在 ViewController.m 打开在线客服会话窗口
 
 ```c
 [BDUIApis pushWorkGroupChat:self.navigationController withWorkGroupWid:DEFAULT_TEST_WID withTitle:kDefaultTitle];
 ```
 
-> 第八步：在Info.plist添加 相册 + 拍照 权限，可参考demo
+> 第八步：在 Info.plist 添加 相册 + 拍照 权限，可参考 demo
 
-> 第九步：如果要在真机运行，需要修改项目Scheme为Release
+> 第九步：如果要在真机运行，需要修改项目 Scheme 为 Release
 
 ![选择binary](./img/scheme-release.jpg)
 
