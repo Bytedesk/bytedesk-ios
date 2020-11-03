@@ -39,10 +39,17 @@
 
 ## 截图
 
+<!-- 
 <img src="./img/1.png" width="25%" height="25%"/>
 <img src="./img/2.png" width="25%" height="25%"/>
 <img src="./img/3.png" width="25%" height="25%"/>
 <img src="./img/4.png" width="25%" height="25%"/>
 <img src="./img/5.png" width="25%" height="25%"/>
 <img src="./img/6.png" width="25%" height="25%"/>
-<img src="./img/7.png" width="25%" height="25%"/>
+<img src="./img/7.png" width="25%" height="25%"/> -->
+
+| image1 | image2 | image3 |
+| :----------: | :----------: | :----------: |
+| <img src="./img/home.jpeg?raw=true" width="250"> | <img src="./img/robot.jpeg?raw=true" width="250"> | <img src="./img/notice.jpeg?raw=true" width="250"> |
+| <img src="./img/chat.png?raw=true" width="250"> | <img src="./img/status.jpeg?raw=true" width="250"> |<img src="./img/userinfo.jpeg?raw=true" width="250"> |
+
