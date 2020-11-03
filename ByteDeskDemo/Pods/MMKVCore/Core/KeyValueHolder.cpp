@@ -111,9 +111,21 @@ KeyValueHolderCrypt::~KeyValueHolderCrypt() {
     }
 }
 
+uint32_t KeyValueHolderCrypt::realValueSize() const {
+    switch (type) {
+        case KeyValueHolderType_Direct:
+            return paddedSize;
+        case KeyValueHolderType_Offset:
+            return valueSize;
+        case KeyValueHolderType_Memory:
+            return memSize;
+    }
+    return 0;
+}
+
 // get decrypt data with [position, -1)
 static MMBuffer decryptBuffer(AESCrypt &crypter, const MMBuffer &inputBuffer, size_t position) {
-    static uint8_t smallBuffer[16];
+    static size_t smallBuffer[16 / sizeof(size_t)];
     auto basePtr = (uint8_t *) inputBuffer.getPtr();
     auto ptr = basePtr;
     for (size_t index = sizeof(smallBuffer); index < position; index += sizeof(smallBuffer)) {
@@ -153,7 +165,7 @@ MMBuffer KeyValueHolderCrypt::toMMBuffer(const void *basePtr, const AESCrypt *cr
 
 } // namespace mmkv
 
-#if !defined(MMKV_DISABLE_CRYPT) && !defined(NDEBUG)
+#if !defined(MMKV_DISABLE_CRYPT) && defined(MMKV_DEBUG)
 #    include "CodedInputData.h"
 #    include "CodedOutputData.h"
 #    include "MMKVLog.h"

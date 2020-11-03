@@ -424,6 +424,16 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                  resultFailed:(FailedCallbackBlock)failed;
 
 /**
+ 获取设备信息
+
+ @param success 成功回调
+ @param failed 失败回调
+ */
++ (void)getDeviceInfoByUid:(NSString *)uid
+                    resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
+/**
  自定义设置用户属性
  */
 + (void)setFingerPrint:(NSString *)name
@@ -507,6 +517,17 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  */
 + (void)userProfileResultSuccess:(SuccessCallbackBlock)success
                     resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 当前在线的客服
+
+ @param success 成功回调函数
+ @param failed 失败回调函数
+ */
++ (void)getOnlineAgents:(int)page
+        withSize:(int)size
+    resultSuccess:(SuccessCallbackBlock)success
+    resultFailed:(FailedCallbackBlock)failed;
 
 /**
  他人加载用户详情
@@ -1077,7 +1098,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  */
 + (void)addBlock:(NSString *)uid
         withNote:(NSString *)note
-         withWid:(NSString *)wid
+//         withWid:(NSString *)wid
    resultSuccess:(SuccessCallbackBlock)success
     resultFailed:(FailedCallbackBlock)failed;
 
@@ -1105,13 +1126,21 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 + (NSMutableArray *)getIMThreads;
 
 /**
- <#Description#>
+ 加载会话列表: 当前进行中
 
  @param success 成功回调
  @param failed 失败回调
  */
 + (void)getThreadResultSuccess:(SuccessCallbackBlock)success
                   resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 客服端分页加载-客服自己的历史会话：客服会话
+ */
++ (void)getThreadHistoryRecords:(int)page
+                       withSize:(int)size
+                  resultSuccess:(SuccessCallbackBlock)success
+                   resultFailed:(FailedCallbackBlock)failed;
 
 /**
  <#Description#>
@@ -1748,6 +1777,28 @@ destroyAfterReading:(BOOL)destroyAfterReading
          withContent:(NSString *)content
        resultSuccess:(SuccessCallbackBlock)success
         resultFailed:(FailedCallbackBlock)failed;
+
+#pragma mark - 常用语
+
++ (void)getCuwsWithResultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
++ (void)createCuw:(int)categoryId
+         withName:(NSString *)name
+      withContent:(NSString *)content
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
++ (void)updateCuw:(int)cuwid
+         withName:(NSString *)name
+      withContent:(NSString *)content
+    resultSuccess:(SuccessCallbackBlock)success
+    resultFailed:(FailedCallbackBlock)failed;
+
++ (void)deleteCuw:(int)cuwid
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
 
 #pragma mark - 工单系统
 

@@ -17,7 +17,7 @@
 // 本地表主键id
 @property(nonatomic, strong) NSNumber *uu_id;
 // 服务器端主键
-@property(nonatomic, strong) NSNumber *server_id;
+//@property(nonatomic, strong) NSNumber *server_id;
 // 唯一数字id，保证唯一性
 @property(nonatomic, strong) NSString *tid;
 //
@@ -30,6 +30,7 @@
 @property(nonatomic, strong) NSString *content;
 // 最新消息时间戳
 @property(nonatomic, strong) NSString *timestamp;
+//@property(nonatomic, strong) NSDate *timestamp;
 // 未读消息数
 @property(nonatomic, strong) NSNumber *unread_count;
 // 是否是当前会话，客户端点击会话之后，通知服务器并保存，同时通知其他所有端

@@ -24,7 +24,7 @@ target 'demo' do
     pod 'AFNetworking', '~> 4.0.1'
     pod 'CocoaLumberjack', '~> 3.6.2'
 
-    pod 'QMUIKit', '~> 4.2.0'
+    pod 'QMUIKit', '~> 4.2.1'
     pod 'MGSwipeTableCell', '~> 1.6.11'
     pod 'M80AttributedLabel', '~> 1.9.9'
     pod 'HCSStarRatingView', '~> 1.5'
@@ -62,7 +62,7 @@ target 'bytedesk-ui' do
     pod 'AFNetworking', '~> 4.0.1'
     pod 'CocoaLumberjack', '~> 3.6.2'
 
-    pod 'QMUIKit', '~> 4.2.0'
+    pod 'QMUIKit', '~> 4.2.1'
     pod 'M80AttributedLabel', '~> 1.9.9'
     pod 'HCSStarRatingView', '~> 1.5'
     

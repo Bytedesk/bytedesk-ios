@@ -58,6 +58,10 @@
  */
 - (NSMutableArray *) getThreads;
 
+- (NSMutableArray *) getTopThreads;
+
+- (NSMutableArray *) getRecentThreads;
+
 - (NSMutableArray *) getIMThreads;
 
 /**

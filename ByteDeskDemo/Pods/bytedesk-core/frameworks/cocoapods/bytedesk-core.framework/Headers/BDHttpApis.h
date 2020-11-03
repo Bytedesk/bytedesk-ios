@@ -365,6 +365,10 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                     resultSuccess:(SuccessCallbackBlock)success
                      resultFailed:(FailedCallbackBlock)failed;
 
+- (void)getDeviceInfoByUid:(NSString *)uid
+                    resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
 /**
  <#Description#>
 
@@ -454,6 +458,17 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                  resultFailed:(FailedCallbackBlock)failed;
 
 /**
+ 当前在线的客服
+
+ @param success 成功回调函数
+ @param failed 失败回调函数
+ */
+- (void)userOnline:(int)page
+        withSize:(int)size
+    resultSuccess:(SuccessCallbackBlock)success
+    resultFailed:(FailedCallbackBlock)failed;
+
+/**
  他人加载用户详情
 
  @param success 成功回调函数
@@ -471,6 +486,16 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  */
 - (void)agentThreadsResultSuccess:(SuccessCallbackBlock)success
                        resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 客服端分页加载-客服自己的历史会话：客服会话
+ */
+- (void)agentThreadHistoryRecords:(int)page
+                         withSize:(int)size
+                    resultSuccess:(SuccessCallbackBlock)success
+                    resultFailed:(FailedCallbackBlock)failed;
+
+
 
 /**
  <#Description#>
@@ -1187,9 +1212,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param failed 失败回调函数
  */
 - (void)addBlock:(NSString *)uid
-        withType:(NSString *)type
         withNote:(NSString *)note
-         withWid:(NSString *)wid
    resultSuccess:(SuccessCallbackBlock)success
     resultFailed:(FailedCallbackBlock)failed;
 
@@ -1760,6 +1783,28 @@ destroyAfterReading:(BOOL)destroyAfterReading
  */
 - (void)rateArticle:(NSString *)aid
            withRate:(BOOL)rate
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
+
+#pragma mark - 常用语
+
+- (void)getCuwsWithResultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
+- (void)createCuw:(int)categoryId
+         withName:(NSString *)name
+      withContent:(NSString *)content
+      resultSuccess:(SuccessCallbackBlock)success
+       resultFailed:(FailedCallbackBlock)failed;
+
+- (void)updateCuw:(int)cuwid
+         withName:(NSString *)name
+      withContent:(NSString *)content
+    resultSuccess:(SuccessCallbackBlock)success
+    resultFailed:(FailedCallbackBlock)failed;
+
+- (void)deleteCuw:(int)cuwid
       resultSuccess:(SuccessCallbackBlock)success
        resultFailed:(FailedCallbackBlock)failed;
 

@@ -231,7 +231,7 @@
             
         } else if (itemIndex == 2) {
             // 拉黑
-            [BDCoreApis addBlock:contactModel.uid withNote:@"备注内容" withWid:@"im" resultSuccess:^(NSDictionary *dict) {
+            [BDCoreApis addBlock:contactModel.uid withNote:@"备注内容" resultSuccess:^(NSDictionary *dict) {
                 DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
                 //
                 NSString *message = [dict objectForKey:@"message"];
