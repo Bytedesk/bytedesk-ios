@@ -17,6 +17,8 @@
 - 核心库：[![bytedesk-core](https://img.shields.io/badge/bytedesk--core-2.1.2-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-core)
 - 界面库，完全开源(Demo 中的 bdui 项目)，方便开发者自定义界面：[![bytedesk--ui](https://img.shields.io/badge/bytedesk--ui-2.1.2-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-ui#bytedesk-ui-pod)
 - platform :ios, '10.0'
+- 开发环境: Xcode 12
+- 真机调试时，请修改Scheme为release
 
 ## 开发文档
 
