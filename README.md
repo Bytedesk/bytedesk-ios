@@ -19,6 +19,7 @@
 - platform :ios, '10.0'
 - 开发环境: Xcode 12
 - 真机调试时，请修改Scheme为release
+- 技术支持QQ 3群: 825257535
 
 ## 开发文档
 
