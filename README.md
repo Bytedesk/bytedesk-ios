@@ -57,3 +57,10 @@
 | <img src="./img/home.jpeg?raw=true" width="250"> | <img src="./img/robot.jpeg?raw=true" width="250"> | <img src="./img/notice.jpeg?raw=true" width="250"> |
 | <img src="./img/chat.png?raw=true" width="250"> | <img src="./img/status.jpeg?raw=true" width="250"> |<img src="./img/userinfo.jpeg?raw=true" width="250"> |
 
+## 注意
+
+- 针对首次进入对话页面点击输入框无反应的问题，是由QMUI引起，其最新版本4.2.1暂未修复，故提供以下解决方案：
+
+```shell
+ 打开Pods/QMUIKit/QMUICore/UITraitCollection+QMUI.m, 将三个函数体注释掉，只保留函数名定义，也即：将 {} 中的内容注释掉
+```
