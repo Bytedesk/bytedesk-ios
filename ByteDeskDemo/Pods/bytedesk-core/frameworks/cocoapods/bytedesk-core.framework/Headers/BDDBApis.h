@@ -64,6 +64,10 @@
 
 - (NSMutableArray *) getIMThreads;
 
+- (NSMutableArray *) getOnGoingThreads;
+
+- (NSMutableArray *) getHistoryThreads;
+
 /**
  <#Description#>
 

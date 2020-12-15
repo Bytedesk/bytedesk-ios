@@ -43,7 +43,7 @@
 - (NSArray *)tokens:(NSString *)text
 {
     NSArray *tokens = nil;
-    if ([text length])
+    if (![text isKindOfClass:[NSNull class]] && [text length])
     {
         tokens = [_tokens objectForKey:text];
         if (tokens == nil)

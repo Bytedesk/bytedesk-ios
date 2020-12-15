@@ -41,6 +41,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 }
 
 @property(nonatomic, strong) UIView *toolbarView;
+//@property(nonatomic, strong) UITextField *toolbarTextField;
+// FIXME: Main Thread Checker: UI API called on a background thread: -[UIWindow traitCollection]
+// 打开Pods/QMUIKit/QMUICore/UITraitCollection+QMUI.m, 将三个函数体注释掉，只保留函数名定义，也即：将 {} 中的内容注释掉
 @property(nonatomic, strong) QMUITextField *toolbarTextField;
 //@property(nonatomic, strong) QMUIButton *faceButton;
 @property(nonatomic, strong) QMUIButton *sendButton;
@@ -605,6 +608,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self.view addSubview:self.toolbarView];
     
     _toolbarTextField = [[QMUITextField alloc] init];
+//    _toolbarTextField = [[UITextField alloc] init];
     self.toolbarTextField.delegate = self;
     self.toolbarTextField.placeholder = @"请输入...";
     self.toolbarTextField.font = UIFontMake(15);
@@ -770,22 +774,18 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         }];
         
         QMUIAlertAction *leaveMessageAction = [QMUIAlertAction actionWithTitle:@"留言" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
-            
             //
             BDLeaveMessageViewController *leaveMessageVC = [[BDLeaveMessageViewController alloc] init];
             [leaveMessageVC initWithType:self.mRequestType workGroupWid:self.mWorkGroupWid agentUid:self.mAgentUid];
             [self.navigationController pushViewController:leaveMessageVC animated:YES];
-            
         }];
         
         NSString *title = self.mIsRobot ? @"人工客服" : @"机器人";
         QMUIAlertAction *robotAction = [QMUIAlertAction actionWithTitle:title style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
-            
+            //
             if (self.mIsRobot) {
-                
                 // TODO: 切换人工客服
                 if ([self.mRequestType isEqualToString:BD_THREAD_REQUEST_TYPE_WORK_GROUP]) {
-                    
                     //
                     [BDCoreApis requestThreadWithWorkGroupWid:self.mWorkGroupWid resultSuccess:^(NSDictionary *dict) {
                         //        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
@@ -797,9 +797,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                             [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
                         }
                     }];
-                    
                 } else {
-                    
                     //
                     [BDCoreApis requestThreadWithAgentUid:self.mAgentUid resultSuccess:^(NSDictionary *dict) {
                         DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
@@ -833,7 +831,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                         [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
                     }
                 }];
-                
             }
             // 置反
             self.mIsRobot = !self.mIsRobot;
@@ -1198,7 +1195,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 #pragma mark - UIScrollViewDelegate
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+//    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
     [self.view endEditing:YES];
 
@@ -1215,10 +1212,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
     CGRect keyboardRect = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-
     CGRect keyboardFrame = [self.view convertRect:keyboardRect fromView:nil];
 //    NSUInteger keyboardY = keyboardFrame.origin.y;
-
     NSUInteger keyboardHeight = keyboardFrame.size.height;
 //    DDLogInfo(@"%s keyboard height:%lu", __PRETTY_FUNCTION__, keyboardHeight);
 
@@ -1583,8 +1578,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
     [self.tableView endUpdates];
     [self tableViewScrollToBottom:YES];
-    
-    
     
 //    // 同步发送消息
 //    [BDCoreApis sendRedPacketMessage:content toTid:self.mTidOrUidOrGid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {
@@ -2479,11 +2472,16 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     // {"mid":"201908241850174","client":"web_admin","thread":{"tid":"201908241849491"},"type":"notification_preview",
     // "user":{"visitor":false,"uid":"201808221551193","username":"admin@test.com"},"content":"22222"}
-    NSDictionary *dict = [notification object];
-    NSString *threadTid = dict[@"thread"][@"tid"];
+//    NSDictionary *dict = [notification object];
+//    NSString *threadTid = dict[@"thread"][@"tid"];
 //    NSString *content = dict[@"content"];
+    BDMessageModel *messageModel = [notification object];
+    if ([messageModel isSend]) {
+//  忽略掉自己的输入状态
+        return;
+    }
     //
-    if ([threadTid isEqualToString:self.mTidOrUidOrGid]) {
+    if ([messageModel.thread_tid isEqualToString:self.mTidOrUidOrGid]) {
         self.titleView.subtitle = @"对方正在输入...";
     }
     // 延时执行，标题还原

@@ -1125,6 +1125,10 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 
 + (NSMutableArray *)getIMThreads;
 
++ (NSMutableArray *)getOnGoingThreads;
+
++ (NSMutableArray *)getHistoryThreads;
+
 /**
  加载会话列表: 当前进行中
 

@@ -14,11 +14,14 @@
 
 萝卜丝·云客服在经典版[微客服](http://www.weikefu.net)基础上面做了重构，将原先一个 SDK 一分为二为两个 sdk：
 
-- 核心库：[![bytedesk-core](https://img.shields.io/badge/bytedesk--core-2.1.2-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-core)
-- 界面库，完全开源(Demo 中的 bdui 项目)，方便开发者自定义界面：[![bytedesk--ui](https://img.shields.io/badge/bytedesk--ui-2.1.2-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-ui#bytedesk-ui-pod)
+- 核心库：[![bytedesk-core](https://img.shields.io/badge/bytedesk--core-2.1.3-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-core)
+- 界面库，完全开源(Demo 中的 bdui 项目)，方便开发者自定义界面：[![bytedesk--ui](https://img.shields.io/badge/bytedesk--ui-2.1.3-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-ui#bytedesk-ui-pod)
 - platform :ios, '10.0'
-- 开发环境: Xcode 12
+- 开发环境: Xcode 12.3
+- 最新兼容：iOS 14.2
 - 真机调试时，请修改Scheme为release
+<img src="./img/scheme-1.png?raw=true" width="250">
+<img src="./img/scheme-2.png?raw=true" width="500">
 - 技术支持QQ 3群: 825257535
 
 ## 开发文档

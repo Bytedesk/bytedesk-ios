@@ -151,7 +151,7 @@
 
  @param dict <#dict description#>
  */
-+ (void)notifyMessagePreview:(NSDictionary *)dict;
++ (void)notifyMessagePreview:(BDMessageModel *)message;
 
 /**
  <#Description#>
