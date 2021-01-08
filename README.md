@@ -34,16 +34,6 @@
   - [5 分钟集成自定义 UI](https://github.com/Bytedesk/bytedesk-ios/wiki/5%E5%88%86%E9%92%9F%E9%9B%86%E6%88%90%E8%87%AA%E5%AE%9A%E4%B9%89UI)
 - [5 分钟集成 IM](https://github.com/Bytedesk/bytedesk-ios/wiki/5%E5%88%86%E9%92%9F%E9%9B%86%E6%88%90IM)
 
-## 其他
-
-- [Flutter SDK](https://github.com/bytedesk/bytedesk-flutter)
-- [iOS SDK](https://github.com/bytedesk/bytedesk-ios)
-- [Android SDK](https://github.com/bytedesk/bytedesk-android)
-- [Web 端接口](https://github.com/bytedesk/bytedesk-web)
-- [微信公众号/小程序接口](https://github.com/bytedesk/bytedesk-wechat)
-- [服务器端接口](https://github.com/bytedesk/bytedesk-server)
-- [机器人](https://github.com/bytedesk/bytedesk-chatbot)
-
 ## 截图
 
 <!-- 
@@ -72,3 +62,14 @@
 ```shell
  打开Pods/QMUIKit/QMUICore/UITraitCollection+QMUI.m, 将三个函数体注释掉，只保留函数名定义，也即：将 {} 中的内容注释掉
 ```
+
+## 其他
+
+- [Flutter SDK](https://github.com/bytedesk/bytedesk-flutter)
+- [UniApp SDK](https://github.com/bytedesk/bytedesk-uniapp)
+- [iOS SDK](https://github.com/bytedesk/bytedesk-ios)
+- [Android SDK](https://github.com/bytedesk/bytedesk-android)
+- [Web 端接口](https://github.com/bytedesk/bytedesk-web)
+- [微信公众号/小程序接口](https://github.com/bytedesk/bytedesk-wechat)
+- [服务器端接口](https://github.com/bytedesk/bytedesk-server)
+- [机器人](https://github.com/bytedesk/bytedesk-chatbot)
