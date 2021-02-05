@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)isTlsConnection;
 
++ (BOOL)isWebSocketWssConnection;
+
 /**
  恢复默认值
  */
@@ -41,6 +43,16 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSInteger)getMqttPort;
 
 + (void)setMqttPort:(uint32_t)port;
+
+
+/**
+ websocket wss服务器地址
+
+ @return nsstring 注意：地址没有http前缀
+ */
++ (NSString *)getMqttWebSocketWssURL;
+
++ (void)setMqttWebSocketWssURL:(NSString *)mqttWebSocketWssURL;
 
 /**
  消息服务器用户名
@@ -110,9 +122,9 @@ WebRTC TURN server
 
  @return <#return value description#>
  */
-+ (NSString *)getRestApiHostIM;
-
-+ (void)setRestApiHostIM:(NSString *)host;
+//+ (NSString *)getRestApiHostIM;
+//
+//+ (void)setRestApiHostIM:(NSString *)host;
 
 
 /**
@@ -120,24 +132,24 @@ WebRTC TURN server
 
  @return <#return value description#>
  */
-+ (NSString *)getRestApiHostKF;
-
-+ (void)setRestApiHostKF:(NSString *)host;
+//+ (NSString *)getRestApiHostKF;
+//
+//+ (void)setRestApiHostKF:(NSString *)host;
 
 /**
  切换到IM+KF服务器
  */
-+ (void)switchToONE;
+//+ (void)switchToONE;
 
 /**
  分离服务器的情况下，切换到IM服务器
  */
-+ (void)switchToIM;
+//+ (void)switchToIM;
 
 /**
   分离服务器的情况下，切换到KF服务器
  */
-+ (void)switchToKF;
+//+ (void)switchToKF;
 
 ///////////////////////////////////////
 

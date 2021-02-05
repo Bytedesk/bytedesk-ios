@@ -257,6 +257,9 @@
 #define BD_MESSAGE_TYPE_NOTIFICATION_QUEUE_LEAVE        @"notification_queue_leave"
 // 接入队列访客
 #define BD_MESSAGE_TYPE_NOTIFICATION_QUEUE_ACCEPT       @"notification_queue_accept"
+#define BD_MESSAGE_TYPE_NOTIFICATION_QUEUE_IGNORE       @"notification_queue_ignore"
+#define BD_MESSAGE_TYPE_NOTIFICATION_QUEUE_TIMEOUT      @"notification_queue_timeout"
+#
 #define BD_MESSAGE_TYPE_NOTIFICATION_ACCEPT_AUTO        @"notification_accept_auto"    // 自动接入会话
 #define BD_MESSAGE_TYPE_NOTIFICATION_ACCEPT_MANUAL      @"notification_accept_manual"    // 手动接入
 #define BD_MESSAGE_TYPE_NOTIFICATION_CONNECT            @"notification_connect"    // 上线

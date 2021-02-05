@@ -391,7 +391,7 @@
         ([self.messageModel.status isEqualToString:BD_MESSAGE_STATUS_RECEIVED] ||
          [self.messageModel.status isEqualToString:BD_MESSAGE_STATUS_READ] )) {
         //
-            _statusLabel.frame = CGRectMake(_avatarImageView.frame.origin.x - self.messageModel.contentSize.width - self.messageModel.contentViewInsets.left - self.messageModel.contentViewInsets.right - 35,
+            _statusLabel.frame = CGRectMake(_avatarImageView.frame.origin.x - self.messageModel.contentSize.width - self.messageModel.contentViewInsets.left - self.messageModel.contentViewInsets.right - 30,
                                             _avatarImageView.frame.origin.y,
                                             25, 25);
         // TODO: 不直接使用汉语，修改为国际化

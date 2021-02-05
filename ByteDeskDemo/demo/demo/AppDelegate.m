@@ -13,15 +13,15 @@
 #import "KFKeFuApiViewController.h"
 #import "KFIMApiViewController.h"
 
-//#import "KFNavigationController.h"
-#import "QDCommonUI.h"
 #import "QDNavigationController.h"
+//#import "KFNavigationController.h"
+//#import "QDCommonUI.h"
 #import "QMUIConfigurationTemplateGrapefruit.h"
 #import "QMUIConfigurationTemplateGrass.h"
 #import "QMUIConfigurationTemplatePinkRose.h"
 #import "QMUIConfigurationTemplateDark.h"
 
-#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+//#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 @interface AppDelegate ()
 
@@ -126,7 +126,7 @@
         NSLog(@"token 13 %@", deviceTokenString);
         uploadToken = deviceTokenString;
     } else {
-        //同步deviceToken便于离线消息推送, 同时必须在管理后台上传 .pem文件才能生效
+        //同步deviceToken便于离线消息推送, 同时必须在管理后台上传 .p12文件才能生效
         NSString* newToken = [deviceToken description];
         DDLogInfo(@"%s, newToken %@", __PRETTY_FUNCTION__, newToken);
         newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
@@ -135,7 +135,7 @@
         DDLogInfo(@"%s, deviceToken:%@", __PRETTY_FUNCTION__, newToken);
         uploadToken = newToken;
     }
-    // TODO: 判断是否已经上传，无需重复上传；如果没有上传，则引导提示用户开启推送
+    //
     [BDCoreApis updateDeviceToken:uploadToken resultSuccess:^(NSDictionary *dict) {
         //
         NSString *message = [dict objectForKey:@"message"];
@@ -165,10 +165,10 @@
 #pragma mark - 初始化QMUI
 
 -(void) initQMUI {
-    
+
     // 1. 先注册主题监听，在回调里将主题持久化存储，避免启动过程中主题发生变化时读取到错误的值
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleThemeDidChangeNotification:) name:QMUIThemeDidChangeNotification object:nil];
-    
+
     // 2. 然后设置主题的生成器
     QMUIThemeManagerCenter.defaultThemeManager.themeGenerator = ^__kindof NSObject * _Nonnull(NSString * _Nonnull identifier) {
         if ([identifier isEqualToString:QDThemeIdentifierDefault]) return QMUIConfigurationTemplate.new;
@@ -178,7 +178,7 @@
         if ([identifier isEqualToString:QDThemeIdentifierDark]) return QMUIConfigurationTemplateDark.new;
         return nil;
     };
-    
+
     // 3. 再针对 iOS 13 开启自动响应系统的 Dark Mode 切换
     // 如果不需要这个功能，则不需要这一段代码
     if (@available(iOS 13.0, *)) {
@@ -188,17 +188,17 @@
                 if (trait.userInterfaceStyle == UIUserInterfaceStyleDark) {
                     return QDThemeIdentifierDark;
                 }
-                
+
                 if ([QMUIThemeManagerCenter.defaultThemeManager.currentThemeIdentifier isEqual:QDThemeIdentifierDark]) {
                     return QDThemeIdentifierDefault;
                 }
-                
+
                 return QMUIThemeManagerCenter.defaultThemeManager.currentThemeIdentifier;
             };
             QMUIThemeManagerCenter.defaultThemeManager.respondsSystemStyleAutomatically = YES;
         }
     }
-    
+
     // QMUIConsole 默认只在 DEBUG 下会显示，作为 Demo，改为不管什么环境都允许显示
     [QMUIConsole sharedInstance].canShow = YES;
     // QD自定义的全局样式渲染
@@ -208,16 +208,16 @@
 
 - (void)handleThemeDidChangeNotification:(NSNotification *)notification {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
-    
-    QMUIThemeManager *manager = notification.object;
-    if (![manager.name isEqual:QMUIThemeManagerNameDefault]) return;
-    
-    [[NSUserDefaults standardUserDefaults] setObject:manager.currentThemeIdentifier forKey:QDSelectedThemeIdentifier];
-    
-    [QDThemeManager.currentTheme applyConfigurationTemplate];
-    
-    // 主题发生变化，在这里更新全局 UI 控件的 appearance
-    [QDCommonUI renderGlobalAppearances];
+
+//    QMUIThemeManager *manager = notification.object;
+//    if (![manager.name isEqual:QMUIThemeManagerNameDefault]) return;
+//
+//    [[NSUserDefaults standardUserDefaults] setObject:manager.currentThemeIdentifier forKey:QDSelectedThemeIdentifier];
+//
+//    [QDThemeManager.currentTheme applyConfigurationTemplate];
+//
+//    // 主题发生变化，在这里更新全局 UI 控件的 appearance
+//    [QDCommonUI renderGlobalAppearances];
     // 更新表情 icon 的颜色
 //    [QDUIHelper updateEmotionImages];
 }

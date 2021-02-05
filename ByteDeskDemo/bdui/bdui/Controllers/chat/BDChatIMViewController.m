@@ -157,8 +157,20 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     self.mThreadType = threadModel.type;
     self.mLastMessageId = INT_MAX;
     //
-//    self.mUid = self.mThreadModel.tid;
-    self.mUid = [self.mThreadModel.topic componentsSeparatedByString:@"/"][1];
+    if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_CONTACT]) {
+//        DDLogInfo(@"3. 客服端：联系人聊天记录 %@", self.mUid);
+        self.mUid = self.mThreadModel.tid;
+    } else if ([self.mThreadType isEqualToString:BD_THREAD_TYPE_GROUP]) {
+//        DDLogInfo(@"4. 客服端：群组聊天记录 %@", self.mUid);
+        self.mUid = self.mThreadModel.tid;
+    } else {
+//        DDLogInfo(@"2. 客服端: 客服聊天记录 %@", self.mUid);
+        if ([self.mThreadModel.topic containsString:@"/"]) {
+            self.mUid = [self.mThreadModel.topic componentsSeparatedByString:@"/"][1];
+        } else {
+            self.mUid = self.mThreadModel.tid;
+        }
+    }
     // 右上角按钮
     UIBarButtonItem *rightItem = [UIBarButtonItem qmui_itemWithImage:[UIImage imageNamed:@"icon_more" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] target:self action:@selector(handleRightBarButtonItemClicked:)];
     self.navigationItem.rightBarButtonItem = rightItem;
@@ -251,7 +263,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self sendCommodityMessage:customJson];
 }
 
-
 #pragma mark - 公共函数
 
 - (void)initSubviews {
@@ -293,23 +304,23 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
     // FIXME: 加载大量图片容易引起界面卡顿，待优化
 //    dispatch_async(dispatch_get_main_queue(), ^{
-        CGRect recordVoiceViewFrame = CGRectMake((self.view.frame.size.width - RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT)/2,
-                                                 (self.view.frame.size.height - RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT)/2,
-                                                 RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT,
-                                                 RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT);
-        self.kfRecordVoiceViewHUD = [[KFRecordVoiceViewHUD alloc] initWithFrame:recordVoiceViewFrame];
-        [self.view addSubview:self.kfRecordVoiceViewHUD];
-        self.kfRecordVoiceViewHUD.hidden = TRUE;
-        //
-        CGRect emotionViewFrame = CGRectMake(0.0f, self.view.frame.size.height, self.view.frame.size.width, EMOTION_PLUS_VIEW_HEIGHT);
-        self.kfEmotionView = [[KFEmotionView alloc] initWithFrame:emotionViewFrame];
-        self.kfEmotionView.delegate = self;
-        [self.view addSubview:self.kfEmotionView];
-        //
-        CGRect plusViewFrame = emotionViewFrame;
-        self.kfPlusView = [[KFPlusView alloc] initWithFrame:plusViewFrame];
-        self.kfPlusView.delegate = self;
-        [self.view addSubview:self.kfPlusView];
+    CGRect recordVoiceViewFrame = CGRectMake((self.view.frame.size.width - RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT)/2,
+                                             (self.view.frame.size.height - RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT)/2,
+                                             RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT,
+                                             RECORD_VOICE_VIEW_HUD_WIDTH_HEIGHT);
+    self.kfRecordVoiceViewHUD = [[KFRecordVoiceViewHUD alloc] initWithFrame:recordVoiceViewFrame];
+    [self.view addSubview:self.kfRecordVoiceViewHUD];
+    self.kfRecordVoiceViewHUD.hidden = TRUE;
+    //
+    CGRect emotionViewFrame = CGRectMake(0.0f, self.view.frame.size.height, self.view.frame.size.width, EMOTION_PLUS_VIEW_HEIGHT);
+    self.kfEmotionView = [[KFEmotionView alloc] initWithFrame:emotionViewFrame];
+    self.kfEmotionView.delegate = self;
+    [self.view addSubview:self.kfEmotionView];
+    //
+    CGRect plusViewFrame = emotionViewFrame;
+    self.kfPlusView = [[KFPlusView alloc] initWithFrame:plusViewFrame];
+    self.kfPlusView.delegate = self;
+    [self.view addSubview:self.kfPlusView];
 //    });
     
     self.mViewDidAppeared = TRUE;
@@ -1510,13 +1521,30 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (void)avatarClicked:(BDMessageModel *)messageModel {
     DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, messageModel.avatar);
+    //
+    if (![messageModel isSend]) {
+        // 客户信息 + 用户设备信息
+        NSString *uid = [self.mThreadModel.topic componentsSeparatedByString:@"/"][1];
+        BDVisitorInfoViewController *visitorInfoViewController = [[BDVisitorInfoViewController alloc] init];
+        [visitorInfoViewController initWithUid:uid];
+        //
+        QMUINavigationController *chatNavigationController = [[QMUINavigationController alloc] initWithRootViewController:visitorInfoViewController];
+        [self presentViewController:chatNavigationController animated:YES completion:^{
+            
+        }];
+    }
 }
 
 - (void) linkUrlClicked:(NSString *)url {
     DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, url);
     
     NSURL *urlToOpen = [[NSURL alloc] initWithString:url];
-    [[UIApplication sharedApplication] openURL:urlToOpen];
+//    [[UIApplication sharedApplication] openURL:urlToOpen];
+    [[UIApplication sharedApplication] openURL:urlToOpen options:@{} completionHandler:^(BOOL success) {
+        if (success) {
+             NSLog(@"Opened url");
+        }
+    }];
 }
 
 //TODO: 增加上拉、下拉关闭图片
@@ -2056,8 +2084,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 // TODO: 区分加载聊天记录
 - (void)refreshMessages {
     
-    UIView *parentView = self.navigationController.view;
-    [QMUITips showLoading:@"加载中" inView:parentView];
+    [self.mRefreshControl beginRefreshing];
+//    UIView *parentView = self.navigationController.view;
+//    [QMUITips showLoading:@"加载中" inView:parentView];
     // 1. 访客端
     if (self.mIsVisitor) {
         DDLogInfo(@"1. 客服会话：访客端拉取服务器聊天记录 %li", (long)self.mLastMessageId);
@@ -2068,12 +2097,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             [self insertMessagesToTable:dict];
             //            [self reloadTableData];
             [self.mRefreshControl endRefreshing];
-            [QMUITips hideAllToastInView:parentView animated:YES];
+//            [QMUITips hideAllToastInView:parentView animated:YES];
         } resultFailed:^(NSError *error) {
             
 //            [QMUITips showError:@"加载失败" inView:self.view hideAfterDelay:2.0f];
             [self.mRefreshControl endRefreshing];
-            [QMUITips showError:@"加载失败" inView:parentView hideAfterDelay:2];
+//            [QMUITips showError:@"加载失败" inView:parentView hideAfterDelay:2];
+//            [QMUITips hideAllToastInView:parentView animated:YES];
         }];
         
         //        分页加载聊天记录
@@ -2102,12 +2132,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             [self insertMessagesToTable:dict];
             //            [self reloadTableData];
             [self.mRefreshControl endRefreshing];
-            [QMUITips hideAllToastInView:parentView animated:YES];
+//            [QMUITips hideAllToastInView:parentView animated:YES];
         } resultFailed:^(NSError *error) {
             
 //            [QMUITips showError:@"加载失败" inView:self.view hideAfterDelay:2.0f];
             [self.mRefreshControl endRefreshing];
-            [QMUITips showError:@"加载失败" inView:parentView hideAfterDelay:2];
+//            [QMUITips showError:@"加载失败" inView:parentView hideAfterDelay:2];
+//            [QMUITips hideAllToastInView:parentView animated:YES];
         }];
         
         //        分页加载聊天记录
@@ -2135,12 +2166,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             [self insertMessagesToTable:dict];
             
             [self.mRefreshControl endRefreshing];
-            [QMUITips hideAllToastInView:parentView animated:YES];
+//            [QMUITips hideAllToastInView:parentView animated:YES];
         } resultFailed:^(NSError *error) {
             
 //            [QMUITips showError:@"加载失败" inView:self.view hideAfterDelay:2.0f];
             [self.mRefreshControl endRefreshing];
-            [QMUITips showError:@"加载失败" inView:parentView hideAfterDelay:2];
+//            [QMUITips showError:@"加载失败" inView:parentView hideAfterDelay:2];
+//            [QMUITips hideAllToastInView:parentView animated:YES];
         }];
         
         //        分页加载聊天记录
@@ -2167,12 +2199,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             [self insertMessagesToTable:dict];
             //            [self reloadTableData];
             [self.mRefreshControl endRefreshing];
-            [QMUITips hideAllToastInView:parentView animated:YES];
+//            [QMUITips hideAllToastInView:parentView animated:YES];
         } resultFailed:^(NSError *error) {
             
 //            [QMUITips showError:@"加载失败" inView:self.view hideAfterDelay:2.0f];
             [self.mRefreshControl endRefreshing];
-            [QMUITips showError:@"加载失败" inView:parentView hideAfterDelay:2];
+//            [QMUITips showError:@"加载失败" inView:parentView hideAfterDelay:2];
+//            [QMUITips hideAllToastInView:parentView animated:YES];
         }];
         
         //

@@ -180,11 +180,10 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/M80AttributedLabel/M80AttributedLabel.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/MMKV/MMKV.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/MMKVCore/MMKVCore.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MQTTClient/MQTTClient.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework"
   install_framework "${PODS_ROOT}/bytedesk-core/frameworks/cocoapods/bytedesk-core.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -193,11 +192,10 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/M80AttributedLabel/M80AttributedLabel.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/MMKV/MMKV.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/MMKVCore/MMKVCore.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MQTTClient/MQTTClient.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework"
   install_framework "${PODS_ROOT}/bytedesk-core/frameworks/cocoapods/bytedesk-core.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

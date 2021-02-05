@@ -1180,7 +1180,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 #pragma mark - TableViewRelated
 
 -(void)tableViewScrollToBottom:(BOOL)animated {
-    DDLogInfo(@"tableViewScrollToBottom");
+//    DDLogInfo(@"tableViewScrollToBottom");
     
 //    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.mMessageArray count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     
@@ -1269,8 +1269,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 -(void)textFieldDidChange :(UITextField *)textField{
     NSString *content = textField.text;
-    NSLog( @"text changed: %@", content);
-    
+//    NSLog( @"text changed: %@", content);
     // 发送消息预知
     [[BDMQTTApis sharedInstance] sendPreviewMessageProtobufThread:self.mThreadModel previewContent:content];
 }
@@ -2398,7 +2397,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     NSDictionary *dict = [notification object];
     NSString *localId = dict[@"localId"];
     NSString *status = dict[@"status"];
-    DDLogInfo(@"%s %@, %@", __PRETTY_FUNCTION__, localId, status);
+//    DDLogInfo(@"%s %@, %@", __PRETTY_FUNCTION__, localId, status);
     
     [self reloadCellDataStatus:localId status:status];
 }
@@ -2409,7 +2408,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
  @param notification <#notification description#>
  */
 - (void)notifyMessageAdd:(NSNotification *)notification {
-    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+//    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     [self hideEmptyView];
     
     BDMessageModel *messageModel = [notification object];

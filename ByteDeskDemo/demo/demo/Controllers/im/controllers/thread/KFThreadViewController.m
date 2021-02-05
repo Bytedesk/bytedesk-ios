@@ -100,6 +100,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    // TODO: 从服务器同步thread列表
     //
     [self reloadTableData];
 }
