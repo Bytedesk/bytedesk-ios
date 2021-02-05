@@ -14,15 +14,15 @@
 
 萝卜丝·云客服在经典版[微客服](http://www.weikefu.net)基础上面做了重构，将原先一个 SDK 一分为二为两个 sdk：
 
-- 核心库：[![bytedesk-core](https://img.shields.io/badge/bytedesk--core-2.1.3-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-core)
-- 界面库，完全开源(Demo 中的 bdui 项目)，方便开发者自定义界面：[![bytedesk--ui](https://img.shields.io/badge/bytedesk--ui-2.1.3-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-ui#bytedesk-ui-pod)
+- 核心库：[![bytedesk-core](https://img.shields.io/badge/bytedesk--core-2.1.5-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-core)
+- 界面库，完全开源(Demo 中的 bdui 项目)，方便开发者自定义界面：[![bytedesk--ui](https://img.shields.io/badge/bytedesk--ui-2.1.5-brightgreen.svg)](https://cocoapods.org/pods/bytedesk-ui#bytedesk-ui-pod)
 - platform :ios, '10.0'
 - 开发环境: Xcode 12.3
 - 最新兼容：iOS 14.2
-- 真机调试时，请修改Scheme为release
-<img src="./img/scheme-1.png?raw=true" width="250">
-<img src="./img/scheme-2.png?raw=true" width="500">
-- 技术支持QQ 3群: 825257535
+- 真机调试时，请修改 Scheme 为 release
+  <img src="./img/scheme-1.png?raw=true" width="250">
+  <img src="./img/scheme-2.png?raw=true" width="500">
+- 技术支持 QQ 3 群: 825257535
 
 ## 开发文档
 
@@ -36,7 +36,7 @@
 
 ## 截图
 
-<!-- 
+<!--
 <img src="./img/1.png" width="25%" height="25%"/>
 <img src="./img/2.png" width="25%" height="25%"/>
 <img src="./img/3.png" width="25%" height="25%"/>
@@ -45,11 +45,10 @@
 <img src="./img/6.png" width="25%" height="25%"/>
 <img src="./img/7.png" width="25%" height="25%"/> -->
 
-| image1 | image2 | image3 |
-| :----------: | :----------: | :----------: |
-| <img src="./img/home.jpeg?raw=true" width="250"> | <img src="./img/robot.jpeg?raw=true" width="250"> | <img src="./img/notice.jpeg?raw=true" width="250"> |
-| <img src="./img/chat.png?raw=true" width="250"> | <img src="./img/status.jpeg?raw=true" width="250"> |<img src="./img/userinfo.jpeg?raw=true" width="250"> |
-
+|                      image1                      |                       image2                       |                        image3                        |
+| :----------------------------------------------: | :------------------------------------------------: | :--------------------------------------------------: |
+| <img src="./img/home.jpeg?raw=true" width="250"> | <img src="./img/robot.jpeg?raw=true" width="250">  |  <img src="./img/notice.jpeg?raw=true" width="250">  |
+| <img src="./img/chat.png?raw=true" width="250">  | <img src="./img/status.jpeg?raw=true" width="250"> | <img src="./img/userinfo.jpeg?raw=true" width="250"> |
 
 ## 公众号
 
@@ -57,7 +56,7 @@
 
 ## 注意
 
-- 针对首次进入对话页面点击输入框无反应的问题，是由QMUI引起，其最新版本4.2.1暂未修复，故提供以下解决方案：
+- 针对首次进入对话页面点击输入框无反应的问题，是由 QMUI 引起，其最新版本 4.2.1 暂未修复，故提供以下解决方案：
 
 ```shell
  打开Pods/QMUIKit/QMUICore/UITraitCollection+QMUI.m, 将三个函数体注释掉，只保留函数名定义，也即：将 {} 中的内容注释掉
