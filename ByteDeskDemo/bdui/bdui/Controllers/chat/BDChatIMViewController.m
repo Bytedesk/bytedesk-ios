@@ -648,6 +648,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             height = 90;
         } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_FILE]) {
             height = 100;
+        } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_VIDEO] ||
+                   [messageModel.type isEqualToString:BD_MESSAGE_TYPE_SHORTVIDEO]) {
+            height = 120;
         } else {
             height = 80;
         }
@@ -1228,10 +1231,10 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             if(granted){//点击允许访问时调用
                 //用户明确许可与否，媒体需要捕获，但用户尚未授予或拒绝许可。
                 //DDLogInfo(@"Granted access to %@", AVMediaTypeVideo);
-//                dispatch_sync(dispatch_get_main_queue(), ^{
-                     self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-//                });
-                [self presentViewController:self.mImagePickerController animated:YES completion:nil];
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+                    [self presentViewController:self.mImagePickerController animated:YES completion:nil];
+                });
             }
             else {
                 //DDLogInfo(@"Not granted access to %@", AVMediaTypeVideo);
@@ -1593,8 +1596,12 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
 }
 
-- (void) fileViewClicked:(id)sender {
-    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+- (void) fileViewClicked:(NSString *)fileUrl {
+    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, fileUrl);
+}
+
+- (void) videoViewClicked:(NSString *)videoUrl {
+    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, videoUrl);
 }
 
 - (void) sendErrorStatusButtonClicked:(BDMessageModel *)model {

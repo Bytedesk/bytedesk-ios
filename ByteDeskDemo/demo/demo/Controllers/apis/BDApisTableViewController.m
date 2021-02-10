@@ -61,12 +61,7 @@
     
     // 公共接口
     self.commonApisArray = @[
-                             @"自定义服务器",
-                             @"点我注册",
-                             @"点我登录",
-                             @"退出登录",
-//                             @"二维码",
-//                             @"多账号管理(TODO)"
+                             @"自定义服务器(私有部署)",
                              ];
     // 客服接口
     self.kefuApisArray = @[
@@ -112,7 +107,7 @@
 
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     //
-    if (section == 0) {
+    if (section == 1) {
         return @"公共接口";
     } else {
         return @"客服接口";
@@ -121,7 +116,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    if (section == 0) {
+    if (section == 1) {
         return [self.commonApisArray count];
     } else {
         return [self.kefuApisArray count];
@@ -138,7 +133,7 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == 1) {
         
         [cell.textLabel setText:[NSString stringWithFormat:@"%ld. %@", (long)(indexPath.row+1), [self.commonApisArray objectAtIndex:indexPath.row]]];
         
@@ -161,27 +156,12 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == 1) {
         // 公共接口
         if (indexPath.row == 0) {
             // 自定义服务器
             KFServerViewController *serverViewController = [[KFServerViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [self.navigationController pushViewController:serverViewController animated:YES];
-        } else if (indexPath.row == 1) {
-            // 注册：自定义用户名
-            [self showRegisterSheet];
-        } else if (indexPath.row == 2) {
-            // 登录
-            [self showLoginSheet];
-        } else if (indexPath.row == 3) {
-            // 退出登录
-            [self logout];
-        } else if (indexPath.row == 4) {
-            // TODO: 二维码、扫一扫
-            KFScanViewController *scanViewController = [[KFScanViewController alloc] initWithStyle:UITableViewStyleGrouped];
-            [self.navigationController pushViewController:scanViewController animated:YES];
-        } else if (indexPath.row == 5) {
-            // TODO: 多账号管理
         }
         
     } else {

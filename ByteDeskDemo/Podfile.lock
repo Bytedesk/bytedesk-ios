@@ -14,13 +14,14 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
-  - bytedesk-core (2.1.5):
+  - bytedesk-core (2.5.0):
     - AFNetworking
     - CocoaLumberjack
     - FMDB
     - MQTTClient
     - MQTTClient/Websocket
     - Protobuf
+    - SJVideoPlayer
   - CocoaLumberjack (3.6.2):
     - CocoaLumberjack/Core (= 3.6.2)
   - CocoaLumberjack/Core (3.6.2)
@@ -29,6 +30,7 @@ PODS:
   - FMDB/standard (2.7.5)
   - HCSStarRatingView (1.5)
   - M80AttributedLabel (1.9.9)
+  - Masonry (1.1.0)
   - MGSwipeTableCell (1.6.11)
   - MQTTClient (0.15.3):
     - MQTTClient/Core (= 0.15.3)
@@ -360,11 +362,71 @@ PODS:
   - QMUIKit/QMUIResources (4.2.1)
   - QMUIKit/QMUIWeakObjectContainer (4.2.1)
   - SDAutoLayout (2.2.1)
+  - SJBaseVideoPlayer (3.5.2):
+    - Masonry
+    - SJBaseVideoPlayer/AVPlayer (= 3.5.2)
+    - SJBaseVideoPlayer/Common (= 3.5.2)
+    - SJUIKit/AttributesFactory (>= 0.0.0.38)
+    - SJUIKit/ObserverHelper
+    - SJUIKit/Queues
+    - SJUIKit/SQLite3
+  - SJBaseVideoPlayer/AVPlayer (3.5.2):
+    - Masonry
+    - SJBaseVideoPlayer/Common
+    - SJUIKit/AttributesFactory (>= 0.0.0.38)
+    - SJUIKit/ObserverHelper
+    - SJUIKit/Queues
+    - SJUIKit/SQLite3
+  - SJBaseVideoPlayer/Common (3.5.2):
+    - Masonry
+    - SJBaseVideoPlayer/ResourceLoader
+    - SJUIKit/AttributesFactory (>= 0.0.0.38)
+    - SJUIKit/ObserverHelper
+    - SJUIKit/Queues
+    - SJUIKit/SQLite3
+  - SJBaseVideoPlayer/ResourceLoader (3.5.2):
+    - Masonry
+    - SJUIKit/AttributesFactory (>= 0.0.0.38)
+    - SJUIKit/ObserverHelper
+    - SJUIKit/Queues
+    - SJUIKit/SQLite3
+  - SJUIKit/AttributesFactory (0.0.0.52):
+    - SJUIKit/AttributesFactory/Deprecated (= 0.0.0.52)
+    - SJUIKit/AttributesFactory/UIKitText (= 0.0.0.52)
+  - SJUIKit/AttributesFactory/Deprecated (0.0.0.52)
+  - SJUIKit/AttributesFactory/UIKitText (0.0.0.52)
+  - SJUIKit/ObserverHelper (0.0.0.52)
+  - SJUIKit/Queues (0.0.0.52)
+  - SJUIKit/SQLite3 (0.0.0.52):
+    - SJUIKit/SQLite3/Core (= 0.0.0.52)
+    - SJUIKit/SQLite3/Protocol (= 0.0.0.52)
+    - YYModel
+  - SJUIKit/SQLite3/Core (0.0.0.52):
+    - SJUIKit/SQLite3/Protocol
+    - YYModel
+  - SJUIKit/SQLite3/Protocol (0.0.0.52):
+    - YYModel
+  - SJVideoPlayer (3.3.0):
+    - SJBaseVideoPlayer (>= 3.5.0)
+    - SJVideoPlayer/Common (= 3.3.0)
+    - SJVideoPlayer/ControlLayers (= 3.3.0)
+    - SJVideoPlayer/ResourceLoader (= 3.3.0)
+  - SJVideoPlayer/Common (3.3.0):
+    - Masonry
+    - SJBaseVideoPlayer (>= 3.5.0)
+    - SJUIKit/AttributesFactory
+    - SJVideoPlayer/ResourceLoader
+  - SJVideoPlayer/ControlLayers (3.3.0):
+    - SJBaseVideoPlayer (>= 3.5.0)
+    - SJVideoPlayer/Common
+  - SJVideoPlayer/ResourceLoader (3.3.0):
+    - SJBaseVideoPlayer (>= 3.5.0)
   - SocketRocket (0.5.1)
+  - YYModel (1.0.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 4.0.1)
-  - bytedesk-core (= 2.1.5)
+  - bytedesk-core (= 2.5.0)
   - CocoaLumberjack (~> 3.6.2)
   - FMDB (~> 2.7.5)
   - HCSStarRatingView (~> 1.5)
@@ -375,6 +437,7 @@ DEPENDENCIES:
   - Protobuf (~> 3.13.0)
   - QMUIKit (~> 4.2.1)
   - SDAutoLayout (~> 2.2.1)
+  - SJVideoPlayer
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -384,27 +447,37 @@ SPEC REPOS:
     - FMDB
     - HCSStarRatingView
     - M80AttributedLabel
+    - Masonry
     - MGSwipeTableCell
     - MQTTClient
     - Protobuf
     - QMUIKit
     - SDAutoLayout
+    - SJBaseVideoPlayer
+    - SJUIKit
+    - SJVideoPlayer
     - SocketRocket
+    - YYModel
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
-  bytedesk-core: 9e6e0d94620507767f400e7f7bf17f8568fe5fe1
+  bytedesk-core: 6e30ee147dd0d38cca327a8748a07986d34f0ce9
   CocoaLumberjack: bd155f2dd06c0e0b03f876f7a3ee55693122ec94
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   M80AttributedLabel: 77fedfe63804c989a6de0fa4d400ea8cad3ab441
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MGSwipeTableCell: b804e4e450dee439c42250be90bd50458bf67fce
   MQTTClient: 0dfa04e789479c2e461786464969895c1fcb0875
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   QMUIKit: 15294d6a350466e4a6f4df0333eac5bff474f995
   SDAutoLayout: 8bf6b3bbc8b01f775d4defbb4fda2ace805461be
+  SJBaseVideoPlayer: c8f2fdb374ec2c946c37b1f39eee24f0812a979b
+  SJUIKit: 8246b1001e616b0dbd090309fd58cdd609ae3fd4
+  SJVideoPlayer: f819c5074aea5192fe624784f8a7e820e45b85cf
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: bd61ced81d67ef187e8665c6f7f02b7fc00be908
+PODFILE CHECKSUM: f699928131f08046b054ad837be575cf7f9b9b2e
 
 COCOAPODS: 1.10.0

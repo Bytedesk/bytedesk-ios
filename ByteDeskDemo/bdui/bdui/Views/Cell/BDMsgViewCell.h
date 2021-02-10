@@ -34,7 +34,9 @@
 // 打开放大图片
 - (void) imageViewClicked:(UIImageView *)imageView;
 
-- (void) fileViewClicked:(id)sender;
+- (void) fileViewClicked:(NSString *)fileUrl;
+
+- (void) videoViewClicked:(NSString *)videoUrl;
 
 - (void) sendErrorStatusButtonClicked:(BDMessageModel *)model;
 

@@ -16,9 +16,11 @@
 #import "KFDSUConstants.h"
 #import "BDGroupProfileViewController.h"
 #import "BDLeaveMessageViewController.h"
+#import "BDChatVideoViewController.h"
 #import "KFUIUtils.h"
 
 #import <HCSStarRatingView/HCSStarRatingView.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
 // core或者mars二选一即可
 #import <bytedesk-core/bdcore.h>
@@ -33,7 +35,7 @@
 static CGFloat const kToolbarHeight = 56;
 static CGFloat const kEmotionViewHeight = 232;
 
-static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPhoto;
+//static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPhoto;
 
 @interface BDChatKFViewController ()<UINavigationControllerBackButtonHandlerProtocol, KFDSMsgViewCellDelegate, QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,BDSingleImagePickerPreviewViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, QMUITextFieldDelegate, QMUIImagePreviewViewDelegate, BDGroupProfileViewControllerDelegate, BDContactProfileViewControllerDelegate>
 {
@@ -95,7 +97,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 @property(nonatomic, assign) BOOL forceEnableBackGesture;
 
 @property (nonatomic, assign) BOOL mIsViewControllerClosed;
-
 
 @end
 
@@ -716,6 +717,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self reloadTableData];
     // 从服务器加载聊天记录, 暂时不从服务器加载
     // [self refreshMessages];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -1036,6 +1039,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             height = 90;
         } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_FILE]) {
             height = 100;
+        } else if ([messageModel.type isEqualToString:BD_MESSAGE_TYPE_VIDEO] ||
+                   [messageModel.type isEqualToString:BD_MESSAGE_TYPE_SHORTVIDEO]) {
+            height = 120;
         } else {
             height = 80;
         }
@@ -1335,14 +1341,11 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             
         } else if ([status_code isEqualToNumber:[NSNumber numberWithInt:201]]) {
             // 未匹配到答案
-            
             NSDictionary *queryMessageDict = dict[@"data"][@"query"];
             NSDictionary *replyMessageDict = dict[@"data"][@"reply"];
-            
             //
             BDMessageModel *queryMessageModel = [[BDMessageModel alloc] initWithDictionary:queryMessageDict];
             [[BDDBApis sharedInstance] insertMessage:queryMessageModel];
-            
             //
             BDMessageModel *replyMessageModel = [[BDMessageModel alloc] initWithRobotNoAnswerDictionary:replyMessageDict];
             [[BDDBApis sharedInstance] insertMessage:replyMessageModel];
@@ -1353,7 +1356,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
             [QMUITips showError:message inView:self.view hideAfterDelay:2];
         }
-        
         //
         [self reloadTableData];
         
@@ -1368,7 +1370,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 - (void)queryRobotAnswer:(NSString *)aid {
     
     // TODO: 插入本地消息，显示发送状态
-    
     //
     [BDCoreApis queryAnswer:self.mTidOrUidOrGid withQuestinQid:aid resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
@@ -1393,7 +1394,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
             [QMUITips showError:message inView:self.view hideAfterDelay:2];
         }
-        
         //
         [self reloadTableData];
         
@@ -1414,10 +1414,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         //
         NSNumber *status_code = [dict objectForKey:@"status_code"];
         if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-            
 //            NSDictionary *messageDict = dict[@"data"];
-            
-            //
 //            BDMessageModel *messageModel = [[BDMessageModel alloc] initWithDictionary:messageDict];
 //            [[BDDBApis sharedInstance] insertMessage:messageModel];
             
@@ -1452,6 +1449,45 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         if (error) {
             [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:2];
         }
+    }];
+}
+
+//
+- (void)uploadVideoData:(NSData *)videoData {
+    //
+    NSString *videoName = [NSString stringWithFormat:@"%@_%@.mp4", [BDSettings getUsername], [BDUtils getCurrentTimeString]];
+    [BDCoreApis uploadVideoData:videoData withVideoName:videoName resultSuccess:^(NSDictionary *dict) {
+        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+        //
+        NSNumber *status_code = [dict objectForKey:@"status_code"];
+        if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+            
+            // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
+            NSString *localId = [[NSUUID UUID] UUIDString];
+            NSString *videoUrl = dict[@"data"];
+            
+            // 插入本地消息
+            BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertVideoMessageLocal:self.mTidOrUidOrGid withWorkGroupWid:self.mWorkGroupWid withContent:videoUrl withLocalId:localId withSessionType:self.mThreadType];
+            DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.video_or_short_url);
+            
+            // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
+            NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
+            [self.mMessageArray addObject:messageModel];
+            
+            [self.tableView beginUpdates];
+            [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
+            [self.tableView endUpdates];
+            [self tableViewScrollToBottom:YES];
+            
+            // 异步发送视频消息
+            [[BDMQTTApis sharedInstance] sendVideoMessageProtobuf:localId content:videoUrl thread:self.mThreadModel];
+            
+        } else {
+            [QMUITips showError:@"发送视频错误" inView:self.view hideAfterDelay:2];
+        }
+        
+    } resultFailed:^(NSError *error) {
+        DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
     }];
 }
 
@@ -1620,11 +1656,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 #pragma mark - 拍照等Plus
 
+// 选择图片
 -(void)sharePickPhotoButtonPressed:(id)sender {
 //    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
-    [self authorizationPresentAlbumViewControllerWithTitle:@"选择图片"];
+    [self authorizationPresentAlbumViewControllerWithTitle:@"选择图片" contentType:QMUIAlbumContentTypeOnlyPhoto];
 }
 
+// 拍照
 -(void)shareTakePhotoButtonPressed:(id)sender {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     //
@@ -1649,16 +1687,22 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                                     }];
         [alert addAction:yesButton];
         [self presentViewController:alert animated:YES completion:nil];
-    }
-    else if(authStatus == AVAuthorizationStatusAuthorized) {//允许访问
+//        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+//                    if(granted){
+//                        NSLog(@"Granted access to %@", AVMediaTypeVideo);
+//                    } else {
+//                        NSLog(@"Not granted access to %@", AVMediaTypeVideo);
+//                    }
+//                }];
+    } else if(authStatus == AVAuthorizationStatusAuthorized) {//允许访问
         // The user has explicitly granted permission for media capture,
         //or explicit user permission is not necessary for the media type in question.
 //        dispatch_sync(dispatch_get_main_queue(), ^{
         self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-//        });
         [self presentViewController:mImagePickerController animated:YES completion:nil];
-        
-    }else if(authStatus == AVAuthorizationStatusNotDetermined){
+//        });
+
+    } else if(authStatus == AVAuthorizationStatusNotDetermined){
         // Explicit user permission is required for media capture, but the user has not yet granted or denied such permission.
         [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
             if(granted){//点击允许访问时调用
@@ -1666,8 +1710,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                 //DDLogInfo(@"Granted access to %@", AVMediaTypeVideo);
                 dispatch_sync(dispatch_get_main_queue(), ^{
                      self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+                    [self presentViewController:self.mImagePickerController animated:YES completion:nil];
                 });
-                [self presentViewController:self.mImagePickerController animated:YES completion:nil];
             }
             else {
                 //DDLogInfo(@"Not granted access to %@", AVMediaTypeVideo);
@@ -1676,6 +1720,29 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
         
     } else {
         DDLogInfo(@"Unknown authorization status");
+    }
+}
+
+// 选择视频
+-(void)pickVideoButtonPressed:(id)sender {
+    DDLogInfo(@"pick video");
+//    [self authorizationPresentAlbumViewControllerWithTitle:@"选择视频" contentType:QMUIAlbumContentTypeOnlyVideo];
+    //资源类型为视频库
+    self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    self.mImagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, nil];;
+//    [self.mImagePickerController setMediaTypes: [NSArray arrayWithObjects:(NSString *)kUTTypeMovie, nil]];
+    [self presentViewController:self.mImagePickerController animated:YES completion:nil];
+}
+
+// 录像
+-(void)takeVideoButtonPressed:(id)sender {
+    DDLogInfo(@"take video");
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        self.mImagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, nil];;
+        [self presentViewController:self.mImagePickerController animated:YES completion:nil];
+    } else {
+        [QMUITips showError:@"检测不到该设备中有可使用的摄像头" inView:self.view hideAfterDelay:2];
     }
 }
 
@@ -1751,7 +1818,12 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, url);
     
     NSURL *urlToOpen = [[NSURL alloc] initWithString:url];
-    [[UIApplication sharedApplication] openURL:urlToOpen];
+//    [[UIApplication sharedApplication] openURL:urlToOpen];
+    [[UIApplication sharedApplication] openURL:urlToOpen options:@{} completionHandler:^(BOOL success) {
+        if (success) {
+             NSLog(@"Opened url");
+        }
+    }];
 }
 
 //TODO: 增加上拉、下拉关闭图片
@@ -1794,13 +1866,20 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             }
         };
     }
-    
 //    [self.imagePreviewViewController startPreviewFromRectInScreenCoordinate:[imageView convertRect:imageView.frame toView:nil] cornerRadius:imageView.layer.cornerRadius];
     [self presentViewController:self.imagePreviewViewController animated:YES completion:nil];
 }
 
-- (void) fileViewClicked:(id)sender {
-    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+- (void) fileViewClicked:(NSString *)fileUrl {
+    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, fileUrl);
+}
+
+- (void) videoViewClicked:(NSString *)videoUrl {
+    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, videoUrl);
+    //
+    BDChatVideoViewController *videoViewController = [[BDChatVideoViewController alloc] init];
+    videoViewController.videoUrl = videoUrl;
+    [self.navigationController pushViewController:videoViewController animated:YES];
 }
 
 - (void) sendErrorStatusButtonClicked:(BDMessageModel *)model {
@@ -1869,24 +1948,24 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 #pragma mark - 选取图片
 
-- (void)authorizationPresentAlbumViewControllerWithTitle:(NSString *)title {
+- (void)authorizationPresentAlbumViewControllerWithTitle:(NSString *)title contentType:(QMUIAlbumContentType)contentType {
     if ([QMUIAssetsManager authorizationStatus] == QMUIAssetAuthorizationStatusNotDetermined) {
         [QMUIAssetsManager requestAuthorization:^(QMUIAssetAuthorizationStatus status) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self presentAlbumViewControllerWithTitle:title];
+                [self presentAlbumViewControllerWithTitle:title contentType:contentType];
             });
         }];
     } else {
-        [self presentAlbumViewControllerWithTitle:title];
+        [self presentAlbumViewControllerWithTitle:title contentType:contentType];
     }
 }
 
-- (void)presentAlbumViewControllerWithTitle:(NSString *)title {
+- (void)presentAlbumViewControllerWithTitle:(NSString *)title contentType:(QMUIAlbumContentType)contentType {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     // 创建一个 QMUIAlbumViewController 实例用于呈现相簿列表
     QMUIAlbumViewController *albumViewController = [[QMUIAlbumViewController alloc] init];
     albumViewController.albumViewControllerDelegate = self;
-    albumViewController.contentType = kAlbumContentType;
+    albumViewController.contentType = contentType; //QMUIAlbumContentTypeOnlyPhoto;
     albumViewController.title = title;
 //    albumViewController.view.tag = SingleImagePickingTag;
     
@@ -1936,12 +2015,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 #pragma mark - <QDSingleImagePickerPreviewViewControllerDelegate>
 
 - (void)imagePickerPreviewViewController:(BDSingleImagePickerPreviewViewController *)imagePickerPreviewViewController didSelectImageWithImagesAsset:(QMUIAsset *)imageAsset {
-    
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
-    
-    // 显示 loading
 //    [self startLoading];
-    
     [imageAsset requestImageData:^(NSData *imageData, NSDictionary<NSString *,id> *info, BOOL isGIF, BOOL isHEIC) {
         UIImage *targetImage = [UIImage imageWithData:imageData];
         if (isHEIC) {
@@ -1972,7 +2047,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if([mediaType isEqualToString:@"public.movie"]) {
         //被选中的是视频
-        [QMUITips showError:@"请选择图片" inView:self.view hideAfterDelay:2];
+//        [QMUITips showError:@"请选择图片" inView:self.view hideAfterDelay:2];
+        // TODO：上传视频
+        NSURL *videoURL = [info objectForKey:UIImagePickerControllerMediaURL];
+        NSLog(@"videoURL %@", [videoURL absoluteString]);
+        //
+        NSData *videoData = [NSData dataWithContentsOfURL:videoURL];
+        [self uploadVideoData:videoData];
     }
     else if([mediaType isEqualToString:@"public.image"]) {
         //获取照片实例
@@ -1985,7 +2066,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             image = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
         }
-        
         NSData *imageData = UIImageJPEGRepresentation(image, 0);
         [self uploadImageData:imageData];
     }
@@ -2156,10 +2236,18 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     QMUIAlertAction *cameraAction = [QMUIAlertAction actionWithTitle:@"拍照" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
         [self shareTakePhotoButtonPressed:nil];
     }];
+    QMUIAlertAction *pickVideoAction = [QMUIAlertAction actionWithTitle:@"上传视频" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+        [self pickVideoButtonPressed:nil];
+    }];
+    QMUIAlertAction *takeVideoAction = [QMUIAlertAction actionWithTitle:@"录制视频" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+        [self takeVideoButtonPressed:nil];
+    }];
     QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"工具栏" message:@"" preferredStyle:QMUIAlertControllerStyleActionSheet];
     [alertController addAction:cancelAction];
     [alertController addAction:pickAction];
     [alertController addAction:cameraAction];
+    [alertController addAction:pickVideoAction];
+    [alertController addAction:takeVideoAction];
     [alertController showWithAnimated:YES];
 }
 

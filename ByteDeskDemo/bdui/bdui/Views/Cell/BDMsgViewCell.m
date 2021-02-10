@@ -15,6 +15,7 @@
 #import "BDMsgImageContentView.h"
 #import "BDMsgVoiceContentView.h"
 #import "BDMsgFileContentView.h"
+#import "BDMsgVideoContentView.h"
 #import "BDMsgRobotContentView.h"
 
 #import "BDMsgQuestionnairViewCell.h"
@@ -108,6 +109,9 @@
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_FILE]) {
         //
         [[UIPasteboard generalPasteboard] setString:_messageModel.file_url];
+    } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_VIDEO]) {
+        //
+        [[UIPasteboard generalPasteboard] setString:_messageModel.video_or_short_url];
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_QUESTIONNAIRE]) {
         //
     }
@@ -180,6 +184,9 @@
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_FILE]) {
         //
         _bubbleView = [[BDMsgFileContentView alloc] initMessageContentView];
+    } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_VIDEO]) {
+        //
+        _bubbleView = [[BDMsgVideoContentView alloc] initMessageContentView];
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_QUESTIONNAIRE]) {
         //
         _bubbleView = [[BDMsgQuestionnairViewCell alloc] initMessageContentView];
@@ -494,6 +501,15 @@
     
     if ([_delegate respondsToSelector:@selector(fileViewClicked:)]) {
         [_delegate fileViewClicked:fileUrl];
+    }
+}
+
+//
+- (void) videoViewClicked:(NSString *)videoUrl {
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    
+    if ([_delegate respondsToSelector:@selector(videoViewClicked:)]) {
+        [_delegate videoViewClicked:videoUrl];
     }
 }
 

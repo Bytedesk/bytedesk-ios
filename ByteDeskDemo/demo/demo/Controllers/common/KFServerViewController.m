@@ -31,42 +31,15 @@
     doubleTap.numberOfTouchesRequired = 1;
     [self.view addGestureRecognizer:doubleTap];
     
-    // for testing get
-//    [[BDIMHttpApis sharedInstance] getProto:@"" resultSuccess:^(NSDictionary * _Nonnull dict) {
-//
-//    } resultFailed:^(NSError * _Nonnull error) {
-//
-//    }];
-    
-//    [[BDIMHttpApis sharedInstance] getProto2:@"" resultSuccess:^(NSDictionary * _Nonnull dict) {
-//
-//    } resultFailed:^(NSError * _Nonnull error) {
-//
-//    }];
-
-    // for testing post
-//    [[BDIMHttpApis sharedInstance] postProto:@"" resultSuccess:^(NSDictionary * _Nonnull dict) {
-//
-//    } resultFailed:^(NSError * _Nonnull error) {
-//
-//    }];
-    
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 1;
-    } else if (section == 1) {
-        return 4;
-    } else if (section == 2){
-        return 2;
-    }
     return 1;
 }
 
@@ -74,12 +47,9 @@
     if (section == 0) {
         return @"REST服务器,注意：以'/'结尾";
     } else if (section == 1) {
-        return @"STUN/TURN for WebRTC";
-    } else if (section == 2) {
-        return @"消息服务器, 注意：地址没有http前缀";
-    } else {
-        return @"";
+        return @"websocket长连接";
     }
+    return @"";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -94,47 +64,14 @@
     
     if (indexPath.section == 0) {
         
-        cell.textLabel.text = @"地址";
+        cell.textLabel.text = @"http地址";
         cell.detailTextLabel.text = [BDConfig getRestApiHost];
         
     } else if (indexPath.section == 1) {
         
-        if (indexPath.row == 0) {
-            
-            cell.textLabel.text = @"STUN";
-            cell.detailTextLabel.text = [BDConfig getWebRTCStunServer];
-            
-        } else if (indexPath.row == 1) {
-            
-            cell.textLabel.text = @"TURN";
-            cell.detailTextLabel.text = [BDConfig getWebRTCTurnServer];
-            
-        } else if (indexPath.row == 2) {
-            
-            cell.textLabel.text = @"username";
-            cell.detailTextLabel.text = [BDConfig getWebRTCTurnUsername];
-            
-        } else {
-            
-            cell.textLabel.text = @"password";
-            cell.detailTextLabel.text = [BDConfig getWebRTCTurnPassword];
-        }
-        
+        cell.textLabel.text = @"websocket地址";
+        cell.detailTextLabel.text = [BDConfig getMqttWebSocketWssURL];
     } else if (indexPath.section == 2) {
-        
-        if (indexPath.row == 0) {
-            
-            cell.textLabel.text = @"地址";
-            cell.detailTextLabel.text = [BDConfig getMqttHost];
-            
-        } else if (indexPath.row == 1) {
-            
-            cell.textLabel.text = @"端口号";
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)[BDConfig getMqttPort]];
-            
-        }
-        
-    } else if (indexPath.section == 3) {
         
         cell.textLabel.text = @"恢复默认值";
     }
@@ -148,36 +85,17 @@
     if (indexPath.section == 0) {
         
         // 修改为自己的服务器地址, 注意：地址以 http或https开头, '/'结尾
-        //        [BDConfig setRestApiHost:@"https://api.bytedesk.com/"];
+        //  [BDConfig setRestApiHost:@"https://api.bytedesk.com/"];
         
-    } else if (indexPath.section == 1) {
+    }
+    else if (indexPath.section == 1) {
         
-        if (indexPath.row == 0) {
-            
-            //            修改为自己消息服务器地址, 注意：地址没有http前缀
-            //            [BDConfig setMqttHost:@"mq.bytedesk.com"];
-            
-        } else if (indexPath.row == 1) {
-            
-            //            修改为自己消息服务器端口号
-            //            [BDConfig setMqttPort:1883]
-            
-        } else if (indexPath.row == 2) {
-            
-            //            修改为自己消息服务器用户名
-            //            [BDConfig setMqttAuthUsername:@"mqtt_ios"];
-            
-        } else {
-            
-            //            修改为自己消息服务器密码
-            //            [BDConfig setMqttAuthPassword:@"mqtt_ios"];
-        }
-        
-    } else if (indexPath.section == 2) {
+        // 修改websocket服务器地址
+//        [BDConfig setMqttWebSocketWssURL:@"wss://www.bytedesk.com/websocket"];
         
     } else if (indexPath.section == 3) {
         DDLogInfo(@"恢复默认值");
-        //        恢复默认值
+        
         [BDConfig restoreDefault];
         
         [self.tableView reloadData];

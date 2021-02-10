@@ -263,6 +263,23 @@
                                withFileName:(NSString *)fileName
                                withFileSize:(NSString *)fileSize;
 
+
+/**
+ <#Description#>
+
+ @param tid <#tid description#>
+ @param wid <#wid description#>
+ @param content <#content description#>
+ @param localId <#localId description#>
+ @param sessionType <#sessionType description#>
+ @return <#return value description#>
+ */
+- (BDMessageModel *) insertVideoMessageLocal:(NSString *)tid
+                            withWorkGroupWid:(NSString *)wid
+                                 withContent:(NSString *)content
+                                 withLocalId:(NSString *)localId
+                             withSessionType:(NSString *)sessionType;
+
 /**
  <#Description#>
 

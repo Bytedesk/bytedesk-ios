@@ -1513,6 +1513,20 @@ destroyAfterReading:(BOOL)destroyAfterReading
            resultFailed:(FailedCallbackBlock)failed;
 
 
+/**
+ <#Description#>
+
+ @param videoData <#fileData description#>
+ @param videoName <#fileName description#>
+ @param success 成功回调函数
+ @param failed 失败回调函数
+ */
+- (void)uploadVideoData:(NSData *)videoData
+          withVideoName:(NSString *)videoName
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
+
 #pragma mark - 机器人
 
 /**

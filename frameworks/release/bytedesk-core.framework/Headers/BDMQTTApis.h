@@ -63,6 +63,8 @@
 
 - (void)sendFileMessageProtobuf:(NSString *)mid content:(NSString *)fileUrl thread:(BDThreadModel *)thread;
 
+- (void)sendVideoMessageProtobuf:(NSString *)mid content:(NSString *)videoUrl thread:(BDThreadModel *)thread;
+
 - (void)sendCommodityMessageProtobuf:(NSString *)mid content:(NSString *)content thread:(BDThreadModel *)thread;
 
 - (void)sendInviteRateMessageProtobuf:(NSString *)mid content:(NSString *)content thread:(BDThreadModel *)thread;

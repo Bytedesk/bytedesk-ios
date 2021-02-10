@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		340535923D5815B1546DF7C8 /* Pods_bytedesk_ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5D5B9D19C760007972848C /* Pods_bytedesk_ui.framework */; };
 		3D1996B51FCE2B9600219FEF /* BDChatKFViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1996B31FCE2B9600219FEF /* BDChatKFViewController.h */; };
 		3D1996B61FCE2B9600219FEF /* BDChatKFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996B41FCE2B9600219FEF /* BDChatKFViewController.m */; };
 		3D1996C01FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1996BA1FCE5E3500219FEF /* M80AttributedLabel+KFDSUI.m */; };
@@ -314,6 +313,10 @@
 		3D4824F5215792FA00B50593 /* bytedesk-core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4824F4215792FA00B50593 /* bytedesk-core.framework */; };
 		3D5606CB2057C875000E770C /* BDSingleImagePickerPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5606C92057C874000E770C /* BDSingleImagePickerPreviewViewController.m */; };
 		3D5606CC2057C875000E770C /* BDSingleImagePickerPreviewViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D5606CA2057C874000E770C /* BDSingleImagePickerPreviewViewController.h */; };
+		3D5BFF5125D2795500DF2BBE /* BDChatVideoViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D5BFF4F25D2795500DF2BBE /* BDChatVideoViewController.h */; };
+		3D5BFF5225D2795500DF2BBE /* BDChatVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5BFF5025D2795500DF2BBE /* BDChatVideoViewController.m */; };
+		3D66DA4E25CF943C00E1508B /* BDMsgVideoContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D66DA4C25CF943C00E1508B /* BDMsgVideoContentView.h */; };
+		3D66DA4F25CF943C00E1508B /* BDMsgVideoContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D66DA4D25CF943C00E1508B /* BDMsgVideoContentView.m */; };
 		3D6D15D822B38638005BA341 /* KFCoreTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D6D15D422B38638005BA341 /* KFCoreTextView.h */; };
 		3D6D15D922B38638005BA341 /* KFCoreTextStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D6D15D522B38638005BA341 /* KFCoreTextStyle.h */; };
 		3D6D15DA22B38638005BA341 /* KFCoreTextStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D6D15D622B38638005BA341 /* KFCoreTextStyle.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -376,6 +379,7 @@
 		3DF8231022D02358003353D7 /* BDTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8230622D02358003353D7 /* BDTicketViewController.m */; };
 		5A59550DA217EEA9AAACFB2B /* Pods_bytedesk_ui_bduiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F09F1F4AE17C93E536D2B08 /* Pods_bytedesk_ui_bduiTests.framework */; };
 		81DCA33DE54CCB81B8CA020A /* Pods_bytedesk_ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953A297AD3F39573C972B590 /* Pods_bytedesk_ui.framework */; };
+		AB7537F25ED79920F92A5CBC /* Pods_bytedesk_ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5D5B9D19C760007972848C /* Pods_bytedesk_ui.framework */; };
 		F71E0A2E640D53D647C19446 /* Pods_bytedesk_ui_bduiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CEBFF73F8E899B293D07513 /* Pods_bytedesk_ui_bduiTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -706,7 +710,11 @@
 		3D548A751FC5514B003117B4 /* KFDSUConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFDSUConstants.h; sourceTree = "<group>"; };
 		3D5606C92057C874000E770C /* BDSingleImagePickerPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDSingleImagePickerPreviewViewController.m; sourceTree = "<group>"; };
 		3D5606CA2057C874000E770C /* BDSingleImagePickerPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSingleImagePickerPreviewViewController.h; sourceTree = "<group>"; };
+		3D5BFF4F25D2795500DF2BBE /* BDChatVideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDChatVideoViewController.h; sourceTree = "<group>"; };
+		3D5BFF5025D2795500DF2BBE /* BDChatVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDChatVideoViewController.m; sourceTree = "<group>"; };
 		3D62021320FC844F00A94F15 /* bdcore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = bdcore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D66DA4C25CF943C00E1508B /* BDMsgVideoContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMsgVideoContentView.h; sourceTree = "<group>"; };
+		3D66DA4D25CF943C00E1508B /* BDMsgVideoContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMsgVideoContentView.m; sourceTree = "<group>"; };
 		3D6D15D422B38638005BA341 /* KFCoreTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFCoreTextView.h; sourceTree = "<group>"; };
 		3D6D15D522B38638005BA341 /* KFCoreTextStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFCoreTextStyle.h; sourceTree = "<group>"; };
 		3D6D15D622B38638005BA341 /* KFCoreTextStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFCoreTextStyle.m; sourceTree = "<group>"; };
@@ -791,7 +799,7 @@
 			files = (
 				3D4824F5215792FA00B50593 /* bytedesk-core.framework in Frameworks */,
 				81DCA33DE54CCB81B8CA020A /* Pods_bytedesk_ui.framework in Frameworks */,
-				340535923D5815B1546DF7C8 /* Pods_bytedesk_ui.framework in Frameworks */,
+				AB7537F25ED79920F92A5CBC /* Pods_bytedesk_ui.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -852,6 +860,8 @@
 				3DC4925B251A49BE00E0CB50 /* BDCuwViewController.m */,
 				3D26F0CA251DCF8000BD7D08 /* BDVisitorInfoViewController.h */,
 				3D26F0CB251DCF8000BD7D08 /* BDVisitorInfoViewController.m */,
+				3D5BFF4F25D2795500DF2BBE /* BDChatVideoViewController.h */,
+				3D5BFF5025D2795500DF2BBE /* BDChatVideoViewController.m */,
 			);
 			path = chat;
 			sourceTree = "<group>";
@@ -905,6 +915,8 @@
 				3D1996D01FCE638700219FEF /* BDMsgImageContentView.m */,
 				3D1996CC1FCE638700219FEF /* BDMsgVoiceContentView.h */,
 				3D1996C71FCE638700219FEF /* BDMsgVoiceContentView.m */,
+				3D66DA4C25CF943C00E1508B /* BDMsgVideoContentView.h */,
+				3D66DA4D25CF943C00E1508B /* BDMsgVideoContentView.m */,
 				3D38CC3A2251954D00BA2668 /* BDMsgFileContentView.h */,
 				3D38CC3B2251954D00BA2668 /* BDMsgFileContentView.m */,
 				3DC58F7221BE6B9D008BE85D /* BDMsgListContentView.h */,
@@ -1502,6 +1514,7 @@
 				3D1998FB1FCE833900219FEF /* KFDSBadgeView.h in Headers */,
 				3D3E2271225F2026008038F5 /* KFUIUtils.h in Headers */,
 				3D1996FE1FCE638800219FEF /* KFDSInputEmotionManager.h in Headers */,
+				3D66DA4E25CF943C00E1508B /* BDMsgVideoContentView.h in Headers */,
 				3DF8230822D02358003353D7 /* BDFeedbackViewController.h in Headers */,
 				3DF8230922D02358003353D7 /* BDSupportCategoryViewController.h in Headers */,
 				3D38CC3C2251954D00BA2668 /* BDMsgFileContentView.h in Headers */,
@@ -1515,6 +1528,7 @@
 				3D1996F01FCE638800219FEF /* BDMsgBaseContentView.h in Headers */,
 				3DC58F7421BE6B9D008BE85D /* BDMsgListContentView.h in Headers */,
 				3D1996B51FCE2B9600219FEF /* BDChatKFViewController.h in Headers */,
+				3D5BFF5125D2795500DF2BBE /* BDChatVideoViewController.h in Headers */,
 				3DD5C6A52238F0B1002C4693 /* KFPlusView.h in Headers */,
 				3D3C28DE2236804700E288AF /* BDChatBaseViewController.h in Headers */,
 				3D3A7E6422462152007EEC81 /* BDNamespacedDependencies.h in Headers */,
@@ -1946,9 +1960,14 @@
 				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
 				"${BUILT_PRODUCTS_DIR}/M80AttributedLabel/M80AttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/MQTTClient/MQTTClient.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SJBaseVideoPlayer/SJBaseVideoPlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/SJUIKit/SJUIKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SJVideoPlayer/SJVideoPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
+				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
 				"${PODS_ROOT}/bytedesk-core/frameworks/cocoapods/bytedesk-core.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1959,9 +1978,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M80AttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MQTTClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QMUIKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SJBaseVideoPlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SJUIKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SJVideoPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bytedesk-core.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1984,6 +2008,7 @@
 				3D1996EF1FCE638800219FEF /* BDMsgImageContentView.m in Sources */,
 				3DD5C6AA2238F0B1002C4693 /* KFInputView.m in Sources */,
 				3D6D15DB22B38638005BA341 /* KFCoreTextView.m in Sources */,
+				3D66DA4F25CF943C00E1508B /* BDMsgVideoContentView.m in Sources */,
 				3DD5C6AC2238F0B1002C4693 /* KFRateView.m in Sources */,
 				3D1996E61FCE638800219FEF /* BDMsgVoiceContentView.m in Sources */,
 				3DD5C6A92238F0B1002C4693 /* KFStarView.m in Sources */,
@@ -1999,6 +2024,7 @@
 				3DD5C6B72238FBA9002C4693 /* BDChatIMViewController.m in Sources */,
 				3D38CC3722517D9100BA2668 /* WBDocument.m in Sources */,
 				3DD5C6AE2238F0B1002C4693 /* KFRecordVoiceViewHUD.m in Sources */,
+				3D5BFF5225D2795500DF2BBE /* BDChatVideoViewController.m in Sources */,
 				3D8A626121DE598600935617 /* BDGroupMemberTableViewCell.m in Sources */,
 				3D46C222223B895F00BA41C4 /* BDCommodityTableViewCell.m in Sources */,
 				3D1996B61FCE2B9600219FEF /* BDChatKFViewController.m in Sources */,
@@ -2180,6 +2206,7 @@
 			baseConfigurationReference = 9843616BE4D9F5EDACD39B8E /* Pods-bytedesk-ui.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 10;
 				DEFINES_MODULE = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = L5F47963M2;
@@ -2198,7 +2225,7 @@
 					"$(PROJECT_DIR)/bdui/vendors/arm/lib",
 					"$(PROJECT_DIR)/bdui/vendors/MLAudioRecorder/amr_en_de/lib",
 				);
-				MARKETING_VERSION = 2.1.5;
+				MARKETING_VERSION = 2.5.0;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -2243,6 +2270,7 @@
 			baseConfigurationReference = 771383C0F6BD1BAE336079CD /* Pods-bytedesk-ui.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 10;
 				DEFINES_MODULE = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = L5F47963M2;
@@ -2261,7 +2289,7 @@
 					"$(PROJECT_DIR)/bdui/vendors/arm/lib",
 					"$(PROJECT_DIR)/bdui/vendors/MLAudioRecorder/amr_en_de/lib",
 				);
-				MARKETING_VERSION = 2.1.5;
+				MARKETING_VERSION = 2.5.0;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
