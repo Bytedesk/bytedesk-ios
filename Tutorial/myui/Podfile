@@ -20,7 +20,7 @@ target 'myui' do
   pod 'CocoaLumberjack'
 
   # 集成萝卜丝核心协议库core
-  pod 'bytedesk-core', '2.5.0'
+  pod 'bytedesk-core', '2.5.1'
 
   target 'myuiTests' do
     inherit! :search_paths
@@ -47,7 +47,7 @@ target 'bytedesk-ui' do
   pod 'CocoaLumberjack'
 
   # 集成核心协议库core
-  pod 'bytedesk-core', '2.5.0'
+  pod 'bytedesk-core', '2.5.1'
 
   target 'bduiTests' do
   end
