@@ -369,8 +369,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 - (void)uploadImageData:(NSData *)imageData {
     //
+    NSString *localId = [[NSUUID UUID] UUIDString];
     NSString *imageName = [NSString stringWithFormat:@"%@_%@.png", [BDSettings getUsername], [BDUtils getCurrentTimeString]];
-    [BDCoreApis uploadImageData:imageData withImageName:imageName resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis uploadImageData:imageData withImageName:imageName withLocalId:localId resultSuccess:^(NSDictionary *dict) {
         //
         NSNumber *status_code = [dict objectForKey:@"status_code"];
         if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {

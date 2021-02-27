@@ -18,6 +18,7 @@
 #import "BDLeaveMessageViewController.h"
 #import "BDChatVideoViewController.h"
 #import "KFUIUtils.h"
+#import "BDVideoCompress.h"
 
 #import <HCSStarRatingView/HCSStarRatingView.h>
 #import <MobileCoreServices/MobileCoreServices.h>
@@ -1454,16 +1455,18 @@ static CGFloat const kEmotionViewHeight = 232;
 
 //
 - (void)uploadVideoData:(NSData *)videoData {
-    //
+    // TODO: 限制视频大小、压缩视频
+    // TODO: 显示上传进度
+    
+    // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
+    NSString *localId = [[NSUUID UUID] UUIDString];
     NSString *videoName = [NSString stringWithFormat:@"%@_%@.mp4", [BDSettings getUsername], [BDUtils getCurrentTimeString]];
-    [BDCoreApis uploadVideoData:videoData withVideoName:videoName resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis uploadVideoData:videoData withVideoName:videoName withLocalId:localId resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
         //
         NSNumber *status_code = [dict objectForKey:@"status_code"];
         if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
-            // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
-            NSString *localId = [[NSUUID UUID] UUIDString];
             NSString *videoUrl = dict[@"data"];
             
             // 插入本地消息
@@ -1493,16 +1496,19 @@ static CGFloat const kEmotionViewHeight = 232;
 
 // 上传并发送图片
 - (void)uploadImageData:(NSData *)imageData {
-    //
+    // TODO: 显示上传进度
+    // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
+    NSString *localId = [[NSUUID UUID] UUIDString];
     NSString *imageName = [NSString stringWithFormat:@"%@_%@.png", [BDSettings getUsername], [BDUtils getCurrentTimeString]];
-    [BDCoreApis uploadImageData:imageData withImageName:imageName resultSuccess:^(NSDictionary *dict) {
+    //
+    
+    
+    [BDCoreApis uploadImageData:imageData withImageName:imageName withLocalId:localId resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
         //
         NSNumber *status_code = [dict objectForKey:@"status_code"];
         if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
-            // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
-            NSString *localId = [[NSUUID UUID] UUIDString];
             NSString *imageUrl = dict[@"data"];
             
             // 插入本地消息
@@ -1699,6 +1705,8 @@ static CGFloat const kEmotionViewHeight = 232;
         //or explicit user permission is not necessary for the media type in question.
 //        dispatch_sync(dispatch_get_main_queue(), ^{
         self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        self.mImagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, nil];
+        self.mImagePickerController.videoQuality = UIImagePickerControllerQualityTypeLow; // 为保证发送成功率，暂时设置为low
         [self presentViewController:mImagePickerController animated:YES completion:nil];
 //        });
 
@@ -1710,6 +1718,8 @@ static CGFloat const kEmotionViewHeight = 232;
                 //DDLogInfo(@"Granted access to %@", AVMediaTypeVideo);
                 dispatch_sync(dispatch_get_main_queue(), ^{
                      self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+                    self.mImagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, nil];
+                    self.mImagePickerController.videoQuality = UIImagePickerControllerQualityTypeLow; // 为保证发送成功率，暂时设置为low
                     [self presentViewController:self.mImagePickerController animated:YES completion:nil];
                 });
             }
@@ -1726,12 +1736,18 @@ static CGFloat const kEmotionViewHeight = 232;
 // 选择视频
 -(void)pickVideoButtonPressed:(id)sender {
     DDLogInfo(@"pick video");
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum])
+    {
 //    [self authorizationPresentAlbumViewControllerWithTitle:@"选择视频" contentType:QMUIAlbumContentTypeOnlyVideo];
-    //资源类型为视频库
-    self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    self.mImagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, nil];;
-//    [self.mImagePickerController setMediaTypes: [NSArray arrayWithObjects:(NSString *)kUTTypeMovie, nil]];
-    [self presentViewController:self.mImagePickerController animated:YES completion:nil];
+        //资源类型为视频库
+        self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        self.mImagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, nil];
+        self.mImagePickerController.videoQuality = UIImagePickerControllerQualityTypeLow; // 为保证发送成功率，暂时设置为low
+    //    [self.mImagePickerController setMediaTypes: [NSArray arrayWithObjects:(NSString *)kUTTypeMovie, nil]];
+        [self presentViewController:self.mImagePickerController animated:YES completion:nil];
+    } else {
+        [QMUITips showError:@"相册不可用" inView:self.view hideAfterDelay:2];
+    }
 }
 
 // 录像
@@ -1739,7 +1755,8 @@ static CGFloat const kEmotionViewHeight = 232;
     DDLogInfo(@"take video");
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         self.mImagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        self.mImagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, nil];;
+        self.mImagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, nil];
+        self.mImagePickerController.videoQuality = UIImagePickerControllerQualityTypeLow; // 为保证发送成功率，暂时设置为low
         [self presentViewController:self.mImagePickerController animated:YES completion:nil];
     } else {
         [QMUITips showError:@"检测不到该设备中有可使用的摄像头" inView:self.view hideAfterDelay:2];
@@ -2015,16 +2032,16 @@ static CGFloat const kEmotionViewHeight = 232;
 #pragma mark - <QDSingleImagePickerPreviewViewControllerDelegate>
 
 - (void)imagePickerPreviewViewController:(BDSingleImagePickerPreviewViewController *)imagePickerPreviewViewController didSelectImageWithImagesAsset:(QMUIAsset *)imageAsset {
-    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    DDLogInfo(@"选择图片 %s", __PRETTY_FUNCTION__);
 //    [self startLoading];
     [imageAsset requestImageData:^(NSData *imageData, NSDictionary<NSString *,id> *info, BOOL isGIF, BOOL isHEIC) {
         UIImage *targetImage = [UIImage imageWithData:imageData];
         if (isHEIC) {
             // iOS 11 中新增 HEIF/HEVC 格式的资源，直接发送新格式的照片到不支持新格式的设备，照片可能会无法识别，可以先转换为通用的 JPEG 格式再进行使用。
             // 详细请浏览：https://github.com/QMUI/QMUI_iOS/issues/224
-            targetImage = [UIImage imageWithData:UIImageJPEGRepresentation(targetImage, 1)];
+            targetImage = [UIImage imageWithData:UIImageJPEGRepresentation(targetImage, 0.6)];
         }
-        NSData *imageData2 = UIImageJPEGRepresentation(targetImage, 0);
+        NSData *imageData2 = UIImageJPEGRepresentation(targetImage, 0.6); // 压缩
         [self uploadImageData:imageData2];
     }];
     
@@ -2043,7 +2060,7 @@ static CGFloat const kEmotionViewHeight = 232;
 }
 
 - (void)dealWithImage:(NSDictionary *)info {
-    
+    //
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if([mediaType isEqualToString:@"public.movie"]) {
         //被选中的是视频
@@ -2052,21 +2069,48 @@ static CGFloat const kEmotionViewHeight = 232;
         NSURL *videoURL = [info objectForKey:UIImagePickerControllerMediaURL];
         NSLog(@"videoURL %@", [videoURL absoluteString]);
         //
-        NSData *videoData = [NSData dataWithContentsOfURL:videoURL];
-        [self uploadVideoData:videoData];
+//        NSData *videoData = [NSData dataWithContentsOfURL:videoURL];
+//        [self uploadVideoData:videoData];
+        [BDVideoCompress compressVideoWithVideoUrl:videoURL withBiteRate:@(1500 * 1024) withFrameRate:@(30) withVideoWidth:@(960) withVideoHeight:@(540) compressComplete:^(id responseObjc) {
+            //
+            NSString *filePathStr = [responseObjc objectForKey:@"urlStr"];
+            NSURL *compressvideourl = [NSURL fileURLWithPath:filePathStr];
+            //
+            NSData *videoData = [NSData dataWithContentsOfURL:compressvideourl];
+            [self uploadVideoData:videoData];
+            
+//            AVURLAsset *asset = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:filePathStr]];
+//            AVAssetTrack *videoTrack = [asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
+//            //视频大小 MB
+//            unsigned long long fileSize = [[NSFileManager defaultManager] attributesOfItemAtPath:filePathStr error:nil].fileSize;
+//            float fileSizeMB = fileSize / (1024.0*1024.0);
+//            //视频宽高
+//            NSInteger videoWidth = videoTrack.naturalSize.width;
+//            NSInteger videoHeight = videoTrack.naturalSize.height;
+//            //比特率
+//            NSInteger kbps = videoTrack.estimatedDataRate / 1024;
+//            //帧率
+//            NSInteger frameRate = [videoTrack nominalFrameRate];
+//            NSLog(@"\nfileSize after compress = %.2f MB,\n videoWidth = %ld,\n videoHeight = %ld,\n video bitRate = %ld\n, video frameRate = %ld", fileSizeMB, videoWidth, videoHeight, kbps, frameRate);
+    //        NSData *videoData = [NSData dataWithContentsOfFile:filePathStr];
+            //                    NSData *videoData = [NSData dataWithContentsOfURL:asset.URL];
+            //在这里上传或者保存已经处理好的视频文件
+            //保存视频至相册
+//            UISaveVideoAtPathToSavedPhotosAlbum(filePathStr, self, @selector(videoSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
+        }];
     }
     else if([mediaType isEqualToString:@"public.image"]) {
+        DDLogInfo(@"拍照 %s", __PRETTY_FUNCTION__);
         //获取照片实例
         UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
         UIImageOrientation imageOrientation = image.imageOrientation;
         if (imageOrientation != UIImageOrientationUp) {
-            
             UIGraphicsBeginImageContext(image.size);
             [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
             image = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
         }
-        NSData *imageData = UIImageJPEGRepresentation(image, 0);
+        NSData *imageData = UIImageJPEGRepresentation(image, 0.6); // 压缩
         [self uploadImageData:imageData];
     }
 }

@@ -985,18 +985,18 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 - (void)uploadImageData:(NSData *)imageData {
     
     // TODO: 选取图片之后，上传成功之前，增加发送图片消息气泡，增加图片发送进度
-    
     //
+    // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
+    NSString *localId = [[NSUUID UUID] UUIDString];
     NSString *imageName = [NSString stringWithFormat:@"%@_%@.png", [BDSettings getUsername], [BDUtils getCurrentTimeString]];
-    [BDCoreApis uploadImageData:imageData withImageName:imageName resultSuccess:^(NSDictionary *dict) {
+    [BDCoreApis uploadImageData:imageData withImageName:imageName withLocalId:localId resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
         
         //
         NSNumber *status_code = [dict objectForKey:@"status_code"];
         if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
             
-            // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
-            NSString *localId = [[NSUUID UUID] UUIDString];
+            
             NSString *imageUrl = dict[@"data"];
             
             // 插入本地消息
@@ -1037,9 +1037,10 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 //    DDLogInfo(@"amrVoiceFileName: %@", amrVoiceFilePath);
 
     // TODO: 语音发送之后，上传成功之前，增加发送语音消息气泡
-    
-    //
-    [BDCoreApis uploadVoiceData:voiceData withVoiceName:amrVoiceFileName resultSuccess:^(NSDictionary *dict) {
+
+    // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
+    NSString *localId = [[NSUUID UUID] UUIDString];
+    [BDCoreApis uploadVoiceData:voiceData withVoiceName:amrVoiceFileName withLocalId:localId resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
         
         //
@@ -1394,8 +1395,9 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     
     // TODO: 选取文件之后，上传成功之前，增加发送文件消息气泡，增加文件发送进度
     
-    
-    [BDCoreApis uploadFileData:fileData withFileName:fileName resultSuccess:^(NSDictionary *dict) {
+    // 自定义发送消息本地id，消息发送成功之后，服务器会返回此id，可以用来判断消息发送状态
+    NSString *localId = [[NSUUID UUID] UUIDString];
+    [BDCoreApis uploadFileData:fileData withFileName:fileName withLocalId:localId resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
         
         //
@@ -1718,7 +1720,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             // 详细请浏览：https://github.com/QMUI/QMUI_iOS/issues/224
             targetImage = [UIImage imageWithData:UIImageJPEGRepresentation(targetImage, 1)];
         }
-        NSData *imageData2 = UIImageJPEGRepresentation(targetImage, 0);
+        NSData *imageData2 = UIImageJPEGRepresentation(targetImage, 0.5); // 压缩
         [self uploadImageData:imageData2];
     }];
     
@@ -1754,8 +1756,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             image = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
         }
-        
-        NSData *imageData = UIImageJPEGRepresentation(image, 0);
+        NSData *imageData = UIImageJPEGRepresentation(image, 0.5); // 压缩
         [self uploadImageData:imageData];
     }
 }

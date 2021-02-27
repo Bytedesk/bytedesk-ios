@@ -306,6 +306,8 @@
 		3D3C28DF2236804700E288AF /* BDChatBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C28DD2236804700E288AF /* BDChatBaseViewController.m */; };
 		3D3E2271225F2026008038F5 /* KFUIUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D3E226F225F2026008038F5 /* KFUIUtils.h */; };
 		3D3E2272225F2026008038F5 /* KFUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3E2270225F2026008038F5 /* KFUIUtils.m */; };
+		3D44662B25E9409B000F3061 /* BDVideoCompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D44662925E9409A000F3061 /* BDVideoCompress.m */; };
+		3D44662C25E9409B000F3061 /* BDVideoCompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D44662A25E9409A000F3061 /* BDVideoCompress.h */; };
 		3D46C221223B895F00BA41C4 /* BDCommodityTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D46C21F223B895F00BA41C4 /* BDCommodityTableViewCell.h */; };
 		3D46C222223B895F00BA41C4 /* BDCommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D46C220223B895F00BA41C4 /* BDCommodityTableViewCell.m */; };
 		3D46C225223B897200BA41C4 /* BDRedPacketTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D46C223223B897200BA41C4 /* BDRedPacketTableViewCell.h */; };
@@ -701,6 +703,8 @@
 		3D3C28DD2236804700E288AF /* BDChatBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDChatBaseViewController.m; sourceTree = "<group>"; };
 		3D3E226F225F2026008038F5 /* KFUIUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFUIUtils.h; sourceTree = "<group>"; };
 		3D3E2270225F2026008038F5 /* KFUIUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFUIUtils.m; sourceTree = "<group>"; };
+		3D44662925E9409A000F3061 /* BDVideoCompress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDVideoCompress.m; sourceTree = "<group>"; };
+		3D44662A25E9409A000F3061 /* BDVideoCompress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDVideoCompress.h; sourceTree = "<group>"; };
 		3D46C21F223B895F00BA41C4 /* BDCommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDCommodityTableViewCell.h; sourceTree = "<group>"; };
 		3D46C220223B895F00BA41C4 /* BDCommodityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDCommodityTableViewCell.m; sourceTree = "<group>"; };
 		3D46C223223B897200BA41C4 /* BDRedPacketTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDRedPacketTableViewCell.h; sourceTree = "<group>"; };
@@ -1376,6 +1380,8 @@
 		3DBAC5E01FBDE2500042215B /* util */ = {
 			isa = PBXGroup;
 			children = (
+				3D44662A25E9409A000F3061 /* BDVideoCompress.h */,
+				3D44662925E9409A000F3061 /* BDVideoCompress.m */,
 				3D548A751FC5514B003117B4 /* KFDSUConstants.h */,
 				3D3E226F225F2026008038F5 /* KFUIUtils.h */,
 				3D3E2270225F2026008038F5 /* KFUIUtils.m */,
@@ -1501,6 +1507,7 @@
 				3D1996FB1FCE638800219FEF /* KFDSInputEmotionParser.h in Headers */,
 				3D1996E81FCE638800219FEF /* BDMsgTextContentView.h in Headers */,
 				3D1996EB1FCE638800219FEF /* BDMsgVoiceContentView.h in Headers */,
+				3D44662C25E9409B000F3061 /* BDVideoCompress.h in Headers */,
 				3DD5C6B82238FBA9002C4693 /* BDChatIMViewController.h in Headers */,
 				3D6D15D922B38638005BA341 /* KFCoreTextStyle.h in Headers */,
 				3D6D15D822B38638005BA341 /* KFCoreTextView.h in Headers */,
@@ -1927,7 +1934,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		40E4D3F06829C4C7A96FAE25 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1968,7 +1976,6 @@
 				"${BUILT_PRODUCTS_DIR}/SJVideoPlayer/SJVideoPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
-				"${PODS_ROOT}/bytedesk-core/frameworks/cocoapods/bytedesk-core.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1986,7 +1993,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SJVideoPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bytedesk-core.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2017,6 +2023,7 @@
 				3D46C226223B897200BA41C4 /* BDRedPacketTableViewCell.m in Sources */,
 				3DE6FD842234F3C3006F1329 /* BDQRCodeViewController.m in Sources */,
 				3DAF8CB121EC1B4E0000E73D /* BDContactProfileViewController.m in Sources */,
+				3D44662B25E9409B000F3061 /* BDVideoCompress.m in Sources */,
 				3D3928DF21BF9ED7001E1257 /* BDGroupProfileViewController.m in Sources */,
 				3D3928E621C07B81001E1257 /* BDContactSelectViewController.m in Sources */,
 				3DAC0B612302B04A00B026C2 /* BDChatAtViewController.m in Sources */,
@@ -2206,7 +2213,7 @@
 			baseConfigurationReference = 9843616BE4D9F5EDACD39B8E /* Pods-bytedesk-ui.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEFINES_MODULE = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = L5F47963M2;
@@ -2225,7 +2232,7 @@
 					"$(PROJECT_DIR)/bdui/vendors/arm/lib",
 					"$(PROJECT_DIR)/bdui/vendors/MLAudioRecorder/amr_en_de/lib",
 				);
-				MARKETING_VERSION = 2.5.1;
+				MARKETING_VERSION = 2.5.2;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -2270,7 +2277,7 @@
 			baseConfigurationReference = 771383C0F6BD1BAE336079CD /* Pods-bytedesk-ui.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEFINES_MODULE = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = L5F47963M2;
@@ -2289,7 +2296,7 @@
 					"$(PROJECT_DIR)/bdui/vendors/arm/lib",
 					"$(PROJECT_DIR)/bdui/vendors/MLAudioRecorder/amr_en_de/lib",
 				);
-				MARKETING_VERSION = 2.5.1;
+				MARKETING_VERSION = 2.5.2;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",

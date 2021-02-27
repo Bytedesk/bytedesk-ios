@@ -54,7 +54,7 @@
 
 - (void)refresh:(BDMessageModel *)data{
     [super refresh:data];
-    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, self.model.video_or_short_url);
+//    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, self.model.video_or_short_url);
     
     // TODO: 图片大小按照图片长宽比例显示
     [_imageView setImageWithURL:[NSURL URLWithString:@"https://bytedesk.oss-cn-shenzhen.aliyuncs.com/images/videoplay.png"] placeholderImage:[UIImage imageNamed:@"Fav_Cell_File_Img"]];

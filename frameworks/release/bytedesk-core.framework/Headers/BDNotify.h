@@ -148,8 +148,6 @@
 
 /**
  <#Description#>
-
- @param dict <#dict description#>
  */
 + (void)notifyMessagePreview:(BDMessageModel *)message;
 

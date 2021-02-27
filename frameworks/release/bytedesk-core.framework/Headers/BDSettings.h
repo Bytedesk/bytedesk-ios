@@ -396,6 +396,10 @@
 +(void) setVibrateWhenReceiveMessage:(BOOL)flag;
 
 
++(BOOL) hasSetDeviceInfo;
++(void) setDeviceInfo:(BOOL)flag;
+
+
 
 @end
 
