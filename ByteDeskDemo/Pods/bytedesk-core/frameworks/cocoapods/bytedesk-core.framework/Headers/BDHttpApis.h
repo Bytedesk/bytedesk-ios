@@ -1472,6 +1472,7 @@ destroyAfterReading:(BOOL)destroyAfterReading
  */
 - (void)uploadImageData:(NSData *)imageData
           withImageName:(NSString *)imageName
+            withLocalId:(NSString *)localId
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
@@ -1483,6 +1484,7 @@ destroyAfterReading:(BOOL)destroyAfterReading
  @param failed 失败回调函数
  */
 - (void)uploadAvatarData:(NSData *)imageData
+             withLocalId:(NSString *)localId
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
@@ -1496,6 +1498,7 @@ destroyAfterReading:(BOOL)destroyAfterReading
  */
 - (void)uploadVoiceData:(NSData *)voiceData
           withVoiceName:(NSString *)voiceName
+            withLocalId:(NSString *)localId
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
@@ -1509,6 +1512,7 @@ destroyAfterReading:(BOOL)destroyAfterReading
  */
 - (void)uploadFileData:(NSData *)fileData
           withFileName:(NSString *)fileName
+           withLocalId:(NSString *)localId
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 
@@ -1523,6 +1527,7 @@ destroyAfterReading:(BOOL)destroyAfterReading
  */
 - (void)uploadVideoData:(NSData *)videoData
           withVideoName:(NSString *)videoName
+            withLocalId:(NSString *)localId
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
 

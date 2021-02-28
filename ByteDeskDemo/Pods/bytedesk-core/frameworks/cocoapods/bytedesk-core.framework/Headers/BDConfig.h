@@ -117,6 +117,12 @@ WebRTC TURN server
 
 + (void)setRestApiHost:(NSString *)host;
 
+//
++ (NSString *)getUploadApiHost;
+
++ (void)setUploadApiHost:(NSString *)host;
+
+
 /**
  <#Description#>
 
@@ -196,6 +202,8 @@ WebRTC TURN server
  */
 + (NSString *)getApiVisitorBaseUrl;
 
++ (NSString *)getUploadApiVisitorBaseUrl;
+
 /**
  <#Description#>
 
@@ -236,6 +244,13 @@ WebRTC TURN server
 
  @return <#return value description#>
  */
++ (NSString *)getUploadAvatarUrl;
+
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
 + (NSString *)getUploadVoiceUrl;
 
 /**
@@ -244,6 +259,13 @@ WebRTC TURN server
  @return <#return value description#>
  */
 + (NSString *)getUploadFileUrl;
+
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
++ (NSString *)getUploadVideoUrl;
 
 
 

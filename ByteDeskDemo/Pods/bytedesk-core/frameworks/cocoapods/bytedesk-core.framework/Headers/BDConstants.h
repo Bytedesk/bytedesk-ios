@@ -374,6 +374,7 @@
 #define BD_SHOULD_PLAY_SEND_MESSAGE_SOUND           @"bd_should_play_send_message_sound"
 #define BD_SHOULD_PLAY_RECEIVE_MESSAGE_SOUND        @"bd_should_play_receive_message_sound"
 #define BD_SHOULD_VIBRATE_ON_RECEIVE_MESSAGE        @"bd_should_vibrate_on_receiving_message"
+#define BD_SHOULD_SET_DEVICE_INFO                   @"bd_should_set_device_info"
 
 #define BD_UPLOAD_NOTIFICATION_PERCENTAGE           @"bd_upload_notification_percentage"
 #define BD_UPLOAD_NOTIFICATION_ERROR                @"bd_upload_notification_error"
