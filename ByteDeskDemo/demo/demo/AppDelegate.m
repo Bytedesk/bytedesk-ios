@@ -56,18 +56,18 @@
     [self.window makeKeyAndVisible];
     
     if ([BDSettings isAlreadyLogin]) {
-        // 建立长连接
-        [BDCoreApis connect];
-        // 注册离线消息推送
-        if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-            // iOS 8 Notifications
-            [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-            
-            [application registerForRemoteNotifications];
-        }
-    } else {
-        [self anonymouseLogin];
+//        // 注册离线消息推送
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        UNAuthorizationOptions options = UNAuthorizationOptionAlert + UNAuthorizationOptionSound;
+        [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error) {
+          if (!granted) {
+            NSLog(@"Oops, no access");
+          } else {
+              NSLog(@"notification granted");
+          }
+        }];
     }
+    [self anonymouseLogin];
     
     return YES;
 }
