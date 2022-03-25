@@ -15,7 +15,11 @@
 @property(nonatomic, weak) QMUIDialogTextFieldViewController *currentTextFieldDialogViewController;
 
 @property(nonatomic, strong) NSString *mTitle;
+
+@property(nonatomic, strong) NSString *mUid;
 @property(nonatomic, strong) NSString *mNickname;
+@property(nonatomic, strong) NSString *mDescription;
+@property(nonatomic, strong) NSString *mAvatar;
 
 @property(nonatomic, strong) NSString *mTagkey;
 @property(nonatomic, strong) NSString *mTagvalue;
@@ -55,6 +59,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return 3;
+    }
     return 1;
 }
 
@@ -76,6 +83,12 @@
         if (indexPath.row == 0) {
             cell.textLabel.text = @"昵称";
             cell.detailTextLabel.text = self.mNickname;
+        } else if (indexPath.row == 1) {
+            cell.textLabel.text = @"描述";
+            cell.detailTextLabel.text = self.mDescription;
+        } else if (indexPath.row == 2) {
+            cell.textLabel.text = @"头像";
+            cell.detailTextLabel.text = self.mAvatar;
         }
     } else if (indexPath.section == 1) {
         cell.textLabel.text = self.mTagkey;
@@ -89,20 +102,28 @@
     
     if (indexPath.section == 0) {
         
-        QMUIDialogTextFieldViewController *dialogViewController = [[QMUIDialogTextFieldViewController alloc] init];
-        dialogViewController.title = self.mTitle;
-        [dialogViewController addTextFieldWithTitle:@"昵称" configurationHandler:^(QMUILabel *titleLabel, QMUITextField *textField, CALayer *separatorLayer) {
-            textField.placeholder = @"不超过10个字符";
-            textField.maximumTextLength = 10;
-        }];
-        [dialogViewController addCancelButtonWithText:@"取消" block:nil];
-        [dialogViewController addSubmitButtonWithText:@"确定" block:^(QMUIDialogViewController *aDialogViewController) {
-            [aDialogViewController hide];
-            // 调用接口设置昵称
-            [self saveUserinfo];
-        }];
-        [dialogViewController show];
-        self.currentTextFieldDialogViewController = dialogViewController;
+        if (indexPath.row == 0) {
+            
+            QMUIDialogTextFieldViewController *dialogViewController = [[QMUIDialogTextFieldViewController alloc] init];
+            dialogViewController.title = self.mTitle;
+            [dialogViewController addTextFieldWithTitle:@"昵称" configurationHandler:^(QMUILabel *titleLabel, QMUITextField *textField, CALayer *separatorLayer) {
+                textField.placeholder = @"不超过10个字符";
+                textField.maximumTextLength = 10;
+            }];
+            [dialogViewController addCancelButtonWithText:@"取消" block:nil];
+            [dialogViewController addSubmitButtonWithText:@"确定" block:^(QMUIDialogViewController *aDialogViewController) {
+                [aDialogViewController hide];
+                // 调用接口设置昵称
+                [self saveUserinfo];
+            }];
+            [dialogViewController show];
+            self.currentTextFieldDialogViewController = dialogViewController;
+            
+        } else if (indexPath.row == 1) {
+            [self setDescription];
+        } else if (indexPath.row == 2) {
+            [self setAvatar];
+        }
         
     } else {
         //
@@ -124,6 +145,24 @@
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void) setAvatar {
+    self.mAvatar = @"https://chainsnow.oss-cn-shenzhen.aliyuncs.com/avatars/visitor_default_avatar.png";
+    [BDCoreApis setAvatar:self.mAvatar resultSuccess:^(NSDictionary *dict) {
+        [self.tableView reloadData];
+    } resultFailed:^(NSError *error) {
+        
+    }];
+}
+
+- (void) setDescription {
+    self.mDescription = @"自定义APP用户备注信息ios";
+    [BDCoreApis setDescription:self.mDescription resultSuccess:^(NSDictionary *dict) {
+        [self.tableView reloadData];
+    } resultFailed:^(NSError *error) {
+        
+    }];
 }
 
 - (void) saveUserinfo {
@@ -172,6 +211,19 @@
 
 - (void)refreshControlSelector {
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    //
+    [BDCoreApis userProfileResultSuccess:^(NSDictionary *dict) {
+        DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, dict);
+        
+        self.mUid = dict[@"data"][@"uid"];
+        self.mNickname = dict[@"data"][@"nickname"];
+        self.mDescription = dict[@"data"][@"description"];
+        self.mAvatar = dict[@"data"][@"avatar"];
+        [self.tableView reloadData];
+        
+    } resultFailed:^(NSError *error) {
+        
+    }];
     //
     [BDCoreApis getFingerPrintWithUid:[BDSettings getUid] resultSuccess:^(NSDictionary *dict) {
         DDLogInfo(@"%s, %@, %@", __PRETTY_FUNCTION__, dict, dict[@"data"][@"nickname"]);

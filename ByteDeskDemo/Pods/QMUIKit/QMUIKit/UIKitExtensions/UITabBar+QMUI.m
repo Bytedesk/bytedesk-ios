@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -19,6 +19,10 @@
 #import "UIBarItem+QMUI.h"
 #import "UIImage+QMUI.h"
 #import "UIView+QMUI.h"
+#import "UINavigationController+QMUI.h"
+#import "UIVisualEffectView+QMUI.h"
+#import "UIApplication+QMUI.h"
+#import "NSArray+QMUI.h"
 
 NSInteger const kLastTouchedTabBarItemIndexNone = -1;
 NSString *const kShouldCheckTabBarHiddenKey = @"kShouldCheckTabBarHiddenKey";
@@ -28,6 +32,8 @@ NSString *const kShouldCheckTabBarHiddenKey = @"kShouldCheckTabBarHiddenKey";
 @property(nonatomic, assign) BOOL canItemRespondDoubleTouch;
 @property(nonatomic, assign) NSInteger lastTouchedTabBarItemViewIndex;
 @property(nonatomic, assign) NSInteger tabBarItemViewTouchCount;
+@property(nonatomic, assign) BOOL qmuitb_hasSetEffect;
+@property(nonatomic, assign) BOOL qmuitb_hasSetEffectForegroundColor;
 @end
 
 @implementation UITabBar (QMUI)
@@ -35,21 +41,36 @@ NSString *const kShouldCheckTabBarHiddenKey = @"kShouldCheckTabBarHiddenKey";
 QMUISynthesizeBOOLProperty(canItemRespondDoubleTouch, setCanItemRespondDoubleTouch)
 QMUISynthesizeNSIntegerProperty(lastTouchedTabBarItemViewIndex, setLastTouchedTabBarItemViewIndex)
 QMUISynthesizeNSIntegerProperty(tabBarItemViewTouchCount, setTabBarItemViewTouchCount)
+QMUISynthesizeBOOLProperty(qmuitb_hasSetEffect, setQmuitb_hasSetEffect)
+QMUISynthesizeBOOLProperty(qmuitb_hasSetEffectForegroundColor, setQmuitb_hasSetEffectForegroundColor)
 
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
-        ExtendImplementationOfNonVoidMethodWithSingleArgument([UITabBar class], @selector(initWithFrame:), CGRect, UITabBar *, ^UITabBar *(UITabBar *selfObject, CGRect frame, UITabBar *originReturnValue) {
+        ExtendImplementationOfVoidMethodWithoutArguments([UITabBarController class], @selector(viewDidLoad), ^(UITabBarController *selfObject) {
             if (QMUICMIActivated) {
                 if (@available(iOS 13.0, *)) {
                     // iOS 13 不使用 tintColor 了，改为用 UITabBarAppearance，具体请看 QMUIConfiguration.m
                 } else {
-                    // UIView.tintColor 并不支持 UIAppearance 协议，所以不能通过 appearance 来设置，只能在实例里设置
-                    selfObject.tintColor = TabBarItemImageColorSelected;
+                    // 根据 TabBarContainerClasses 的值来决定是否设置 UITabBar.tintColor
+                    // UITabBar.tintColor 没有被添加 UI_APPEARANCE_SELECTOR 标记，所以没有采用 UIAppearance 的方式去实现（虽然它实际上是支持的）
+                    BOOL shouldSetTintColor = NO;
+                    if (TabBarContainerClasses.count) {
+                        for (Class class in TabBarContainerClasses) {
+                            if ([selfObject isKindOfClass:class]) {
+                                shouldSetTintColor = YES;
+                                break;
+                            }
+                        }
+                    } else {
+                        shouldSetTintColor = YES;
+                    }
+                    if (shouldSetTintColor) {
+                        selfObject.tabBar.tintColor = TabBarItemImageColorSelected;
+                    }
                 }
             }
-            return originReturnValue;
         });
         
         // iOS 12 及以下，如果 UITabBar backgroundImage 为 nil，则 tabBar 会显示磨砂背景，此时不管怎么修改 shadowImage 都无效，都会显示系统默认的分隔线，导致无法很好地统一不同 iOS 版本的表现（iOS 13 及以上没有这个限制），所以这里做了兼容。
@@ -69,17 +90,6 @@ QMUISynthesizeNSIntegerProperty(tabBarItemViewTouchCount, setTabBarItemViewTouch
         
         OverrideImplementation([UITabBar class], @selector(setItems:animated:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^void(UITabBar *selfObject, NSArray<UITabBarItem *> *items, BOOL animated) {
-                
-                // 应用配置表样式
-                [items enumerateObjectsUsingBlock:^(UITabBarItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
-                    if (QMUICMIActivated) {
-                        if (@available(iOS 13.0, *)) {
-                            // iOS 13 通过 appearance 的方式修改，具体请查看 QMUIConfiguration.m
-                        } else {
-                            [item qmui_updateTintColorForiOS12AndEarlier:TabBarItemImageColor];
-                        }
-                    }
-                }];
                 
                 // call super
                 void (*originSelectorIMP)(id, SEL, NSArray<UITabBarItem *> *, BOOL);
@@ -112,17 +122,22 @@ QMUISynthesizeNSIntegerProperty(tabBarItemViewTouchCount, setTabBarItemViewTouch
         
         OverrideImplementation([UITabBar class], @selector(setFrame:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UITabBar *selfObject, CGRect frame) {
-                if (QMUICMIActivated && ShouldFixTabBarTransitionBugInIPhoneX && IOS_VERSION < 11.2 && IS_58INCH_SCREEN) {
-                    if (CGRectGetHeight(frame) == TabBarHeight && CGRectGetMaxY(frame) < CGRectGetHeight(selfObject.superview.bounds)) {
-                        // iOS 11 在界面 push 的过程中 tabBar 会瞬间往上跳，所以做这个修复。这个 bug 在 iOS 11.2 里已被系统修复。
-                        // https://github.com/Tencent/QMUI_iOS/issues/217
-                        frame = CGRectSetY(frame, CGRectGetHeight(selfObject.superview.bounds) - CGRectGetHeight(frame));
-                    }
-                }
                 
-                // 修复这个 bug：https://github.com/Tencent/QMUI_iOS/issues/309
-                if (@available(iOS 11, *)) {
-                    if (IS_NOTCHED_SCREEN && ((CGRectGetHeight(frame) == 49 || CGRectGetHeight(frame) == 32))) {// 只关注全面屏设备下的这两种非正常的 tabBar 高度即可
+                if (UIApplication.sharedApplication.qmui_didFinishLaunching) {
+                    if (QMUICMIActivated && ShouldFixTabBarTransitionBugInIPhoneX && IOS_VERSION < 11.2 && IS_58INCH_SCREEN) {
+                        if (CGRectGetHeight(frame) == TabBarHeight && CGRectGetMaxY(frame) < CGRectGetHeight(selfObject.superview.bounds)) {
+                            // iOS 11 在界面 push 的过程中 tabBar 会瞬间往上跳，所以做这个修复。这个 bug 在 iOS 11.2 里已被系统修复。
+                            // https://github.com/Tencent/QMUI_iOS/issues/217
+                            frame = CGRectSetY(frame, CGRectGetHeight(selfObject.superview.bounds) - CGRectGetHeight(frame));
+                        }
+                    }
+                    
+                    // [UIKit Bug] iOS 11-12，opaque 的 tabBar 在某些情况下会高度塌陷
+                    // https://github.com/Tencent/QMUI_iOS/issues/309
+                    // [UIKit Bug] iOS 11-12，全面屏设备下，带 TabBar 的界面在 push/pop 后，UIScrollView 的滚动位置可能发生变化
+                    // https://github.com/Tencent/QMUI_iOS/issues/934
+                    if (@available(iOS 13.0, *)) {
+                    } else if (IS_NOTCHED_SCREEN && ((CGRectGetHeight(frame) == 49 || CGRectGetHeight(frame) == 32))) {// 只关注全面屏设备下的这两种非正常的 tabBar 高度即可
                         CGFloat bottomSafeAreaInsets = selfObject.safeAreaInsets.bottom > 0 ? selfObject.safeAreaInsets.bottom : selfObject.superview.safeAreaInsets.bottom;// 注意，如果只是拿 selfObject.safeAreaInsets 判断，会肉眼看到高度的跳变，因此引入 superview 的值（虽然理论上 tabBar 不一定都会布局到 UITabBarController.view 的底部）
                         if (bottomSafeAreaInsets == CGRectGetHeight(selfObject.frame)) {
                             return;// 由于这个系统 bug https://github.com/Tencent/QMUI_iOS/issues/446，这里先暂时屏蔽本次 frame 变化
@@ -141,20 +156,18 @@ QMUISynthesizeNSIntegerProperty(tabBarItemViewTouchCount, setTabBarItemViewTouch
         
         // 以下代码修复两个仅存在于 12.1.0 版本的系统 bug，实测 12.1.1 苹果已经修复
         if (@available(iOS 12.1, *)) {
-            
-            OverrideImplementation(NSClassFromString(@"UITabBarButton"), @selector(setFrame:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-                return ^(UIView *selfObject, CGRect firstArgv) {
-                    
-                    // Fixed: UITabBar layout is broken on iOS 12.1
-                    // https://github.com/Tencent/QMUI_iOS/issues/410
-                    
-                    if (IOS_VERSION_NUMBER < 120101 || (QMUICMIActivated && ShouldFixTabBarButtonBugForAll)) {
+            if (@available(iOS 12.1.1, *)) {
+            } else {
+                OverrideImplementation(NSClassFromString(@"UITabBarButton"), @selector(setFrame:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+                    return ^(UIView *selfObject, CGRect firstArgv) {
+                        
+                        // Fixed: UITabBar layout is broken on iOS 12.1
+                        // https://github.com/Tencent/QMUI_iOS/issues/410
+                        
                         if (!CGRectIsEmpty(selfObject.frame) && CGRectIsEmpty(firstArgv)) {
                             return;
                         }
-                    }
-                    
-                    if (IOS_VERSION_NUMBER < 120101) {
+                        
                         // Fixed: iOS 12.1 UITabBarItem positioning issue during swipe back gesture (when UINavigationBar is hidden)
                         // https://github.com/Tencent/QMUI_iOS/issues/422
                         if (IS_NOTCHED_SCREEN) {
@@ -162,157 +175,186 @@ QMUISynthesizeNSIntegerProperty(tabBarItemViewTouchCount, setTabBarItemViewTouch
                                 return;
                             }
                         }
-                    }
-                    
-                    // call super
-                    void (*originSelectorIMP)(id, SEL, CGRect);
-                    originSelectorIMP = (void (*)(id, SEL, CGRect))originalIMPProvider();
-                    originSelectorIMP(selfObject, originCMD, firstArgv);
-                };
-            });
-        }
-        
-        // iOS 13 下如果以 UITabBarAppearance 的方式将 UITabBarItem 的 font 大小设置为超过默认的 10，则会出现布局错误，文字被截断，所以这里做了个兼容
-        // iOS 14.0 测试过已不存在该问题
-        // https://github.com/Tencent/QMUI_iOS/issues/740
-        if (@available(iOS 13.0, *)) {
-            if (@available(iOS 14.0, *)) {
-            } else {
-                OverrideImplementation(NSClassFromString(@"UITabBarButtonLabel"), @selector(setAttributedText:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-                    return ^(UILabel *selfObject, NSAttributedString *firstArgv) {
                         
                         // call super
-                        void (*originSelectorIMP)(id, SEL, NSAttributedString *);
-                        originSelectorIMP = (void (*)(id, SEL, NSAttributedString *))originalIMPProvider();
+                        void (*originSelectorIMP)(id, SEL, CGRect);
+                        originSelectorIMP = (void (*)(id, SEL, CGRect))originalIMPProvider();
                         originSelectorIMP(selfObject, originCMD, firstArgv);
-                        
-                        CGFloat fontSize = selfObject.font.pointSize;
-                        if (fontSize > 10) {
-                            [selfObject sizeToFit];
-                        }
                     };
                 });
             }
         }
         
-        // iOS 14 修改 UITabBarAppearance.inlineLayoutAppearance.normal.titleTextAttributes[NSForegroundColor] 会导致 UITabBarItem 文字无法完整展示
-        // https://github.com/Tencent/QMUI_iOS/issues/1110
-        if (@available(iOS 14.0, *)) {
-            OverrideImplementation(NSClassFromString(@"UITabBarButtonLabel"), NSSelectorFromString(@"sizeThatFits:"), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-                return ^CGSize(UILabel *selfObject, CGSize firstArgv) {
-                    UIFont *font = selfObject.font;
-                    SEL selectorForCSSFontFamily = NSSelectorFromString(@"familyNameForCSSFontFamilyValueForWebKit:");
-                    if ([font respondsToSelector:selectorForCSSFontFamily]) {
-                        BOOL forWebKit = YES;
-                        NSString *fontFamily = [font qmui_performSelector:selectorForCSSFontFamily withArguments:&forWebKit, nil];
-                        if ([fontFamily containsString:@"UICTFontTextStyleFootnote"]) {
-                            static UILabel *standardLabel;
-                            if (!standardLabel) {
-                                standardLabel = [[UILabel alloc] init];
-                            }
-                            standardLabel.attributedText = selfObject.attributedText;
-                            CGSize result = [standardLabel sizeThatFits:firstArgv];
-                            return result;
+        if (@available(iOS 13.0, *)) {
+        } else {
+            Class tabBarButtonLabelClass = NSClassFromString(@"UITabBarButtonLabel");
+            
+            UITabBarItem *(^tabBarItemOfLabelBlock)(UILabel *label) = ^UITabBarItem *(UILabel *label) {
+                UIControl *tabBarButton = [label qmui_valueForKey:@"_tabBarButton"];
+                UITabBar *tabBar = [tabBarButton qmui_valueForKey:@"tabBar"];
+                __block UITabBarItem *tabBarItem = nil;
+                if (!tabBar) {
+                    return nil;
+                }
+                [tabBar.items enumerateObjectsUsingBlock:^(UITabBarItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if (obj.qmui_view == tabBarButton) {
+                        tabBarItem = obj;
+                        *stop = YES;
+                    }
+                }];
+                return tabBarItem;
+            };
+            
+            // iOS 12，如果用 UIAppearance 的方式设置了 UITabBar.appearance.unselectedItemTintColor，此时不管以 appearance 方式修改 UITabBarItem titleTextAttributes 的 NSForegroundColorAttributeName，或是直接修改 UITabBarItem 实例，均会被 unselectedItemTintColor 覆盖，所以这里做个保护
+            OverrideImplementation(tabBarButtonLabelClass, NSSelectorFromString(@"_setUnselectedTintColor:"), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+                return ^(UILabel *selfObject, UIColor *firstArgv) {
+                    
+                    UITabBarItem *item = tabBarItemOfLabelBlock(selfObject);
+                    if (item) {
+                        UITabBar *tabBar = [[selfObject qmui_valueForKey:@"_tabBarButton"] qmui_valueForKey:@"tabBar"];
+                        NSDictionary<NSAttributedStringKey,id> *normalAttributes = [item titleTextAttributesForState:UIControlStateNormal] ?: [UITabBarItem.qmui_appearanceConfigured titleTextAttributesForState:UIControlStateNormal];
+                        UIColor *normalColor = normalAttributes[NSForegroundColorAttributeName];
+                        UIColor *unselectedTintColor = tabBar.unselectedItemTintColor;
+                        if (normalColor && [unselectedTintColor isEqual:firstArgv] && ![normalColor isEqual:unselectedTintColor]) {
+                            return;
                         }
                     }
                     
                     // call super
-                    CGSize (*originSelectorIMP)(id, SEL, CGSize);
-                    originSelectorIMP = (CGSize (*)(id, SEL, CGSize))originalIMPProvider();
-                    CGSize result = originSelectorIMP(selfObject, originCMD, firstArgv);
-                    return result;
+                    void (*originSelectorIMP)(id, SEL, UIColor *);
+                    originSelectorIMP = (void (*)(id, SEL, UIColor *))originalIMPProvider();
+                    originSelectorIMP(selfObject, originCMD, firstArgv);
+                };
+            });
+            
+            // 修复系统在 iOS 12 及以下，通过 [UITabBarItem setTitleTextAttributes:forState:] 设置的 selected 字体无法生效的 bug（selected 的颜色是可以生效的）
+            OverrideImplementation(tabBarButtonLabelClass, @selector(setSelected:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+                return ^(UILabel *selfObject, BOOL selected) {
+                    
+                    // call super
+                    void (*originSelectorIMP)(id, SEL, BOOL);
+                    originSelectorIMP = (void (*)(id, SEL, BOOL))originalIMPProvider();
+                    originSelectorIMP(selfObject, originCMD, selected);
+                    
+                    UITabBarItem *item = tabBarItemOfLabelBlock(selfObject);
+                    if (!item) {
+                        return;
+                    }
+                    
+                    NSDictionary<NSAttributedStringKey,id> *normalAttributes = [item titleTextAttributesForState:UIControlStateNormal] ?: [UITabBarItem.qmui_appearanceConfigured titleTextAttributesForState:UIControlStateNormal];
+                    NSDictionary<NSAttributedStringKey,id> *selectedAttributes = [item titleTextAttributesForState:UIControlStateSelected] ?: [UITabBarItem.qmui_appearanceConfigured titleTextAttributesForState:UIControlStateSelected];
+                    if (normalAttributes[NSFontAttributeName] && selectedAttributes[NSFontAttributeName]) {
+                        if (selected) {
+                            selfObject.font = selectedAttributes[NSFontAttributeName];
+                        } else {
+                            selfObject.font = normalAttributes[NSFontAttributeName];
+                        }
+                        [selfObject sizeToFit];
+                        [selfObject.superview setNeedsLayout];
+                    }
+                };
+            });   
+        }
+        
+        if (@available(iOS 13.0, *)) {
+            // iOS 13 下如果以 UITabBarAppearance 的方式将 UITabBarItem 的 font 大小设置为超过默认的 10，则会出现布局错误，文字被截断，所以这里做了个兼容，iOS 14.0 测试过已不存在该问题
+            // https://github.com/Tencent/QMUI_iOS/issues/740
+            //
+            // iOS 14 修改 UITabBarAppearance.inlineLayoutAppearance.normal.titleTextAttributes[NSForegroundColor] 会导致 UITabBarItem 文字无法完整展示
+            // https://github.com/Tencent/QMUI_iOS/issues/1110
+            //
+            // [UIKit Bug] 使用 UITabBarAppearance 将 UITabBarItem 选中时的字体设置为 bold 则无法完整显示 title
+            // https://github.com/Tencent/QMUI_iOS/issues/1286
+            OverrideImplementation(NSClassFromString(@"UITabBarButtonLabel"), @selector(setAttributedText:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+                return ^(UILabel *selfObject, NSAttributedString *firstArgv) {
+                    
+                    // call super
+                    void (*originSelectorIMP)(id, SEL, NSAttributedString *);
+                    originSelectorIMP = (void (*)(id, SEL, NSAttributedString *))originalIMPProvider();
+                    originSelectorIMP(selfObject, originCMD, firstArgv);
+                    
+                    if (@available(iOS 14.0, *)) {
+                        // iOS 14 只有在 bold 时才有问题，所以把额外的 sizeToFit 做一些判断，尽量减少调用次数
+                        UIFont *font = selfObject.font;
+                        BOOL isBold = [font.fontName containsString:@"bold"];
+                        if (isBold) {
+                            [selfObject sizeToFit];
+                        }
+                    } else {
+                        // iOS 13 加粗时有 #1286 描述的问题，不加粗时有 #740 描述的问题，所以干脆只要是 iOS 13 都加粗算了
+                        [selfObject sizeToFit];
+                    }
                 };
             });
         }
         
         // iOS 14.0 如果 pop 到一个 hidesBottomBarWhenPushed = NO 的 vc，tabBar 无法正确显示出来
+        // 根据测试，iOS 14.2 开始，系统已修复该问题
         // https://github.com/Tencent/QMUI_iOS/issues/1100
         if (@available(iOS 14.0, *)) {
-            OverrideImplementation([UINavigationController class], @selector(popToViewController:animated:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-                return ^NSArray<UIViewController *> *(UINavigationController *selfObject, UIViewController *viewController, BOOL animated) {
-                    
-                    // 系统的逻辑就是，在 push N 个 vc 的过程中，只要其中出现任意一个 vc.hidesBottomBarWhenPushed = YES，则 tabBar 不会再出现（不管后续有没有 vc.hidesBottomBarWhenPushed = NO），所以在 pop 回去的时候也要遵循这个规则
-                    if (animated && selfObject.tabBarController && !viewController.hidesBottomBarWhenPushed) {
-                        BOOL systemShouldHideTabBar = NO;
-                        NSArray<UIViewController *> *viewControllers = [selfObject.viewControllers subarrayWithRange:NSMakeRange(0, [selfObject.viewControllers indexOfObject:viewController] + 1)];
-                        for (UIViewController *vc in viewControllers) {
-                            if (vc.hidesBottomBarWhenPushed) {
-                                systemShouldHideTabBar = YES;
+            if (@available(iOS 14.2, *)) {
+            } else {
+                OverrideImplementation([UINavigationController class], @selector(qmui_didInitialize), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+                    return ^(UINavigationController *selfObject) {
+                        
+                        // call super
+                        void (*originSelectorIMP)(id, SEL);
+                        originSelectorIMP = (void (*)(id, SEL))originalIMPProvider();
+                        originSelectorIMP(selfObject, originCMD);
+                        
+                        [selfObject qmui_addNavigationActionDidChangeBlock:^(QMUINavigationAction action, BOOL animated, __kindof UINavigationController * _Nullable weakNavigationController, __kindof UIViewController * _Nullable appearingViewController, NSArray<__kindof UIViewController *> * _Nullable disappearingViewControllers) {
+                            switch (action) {
+                                case QMUINavigationActionWillPop:
+                                case QMUINavigationActionWillSet: {
+                                    // 系统的逻辑就是，在 push N 个 vc 的过程中，只要其中出现任意一个 vc.hidesBottomBarWhenPushed = YES，则 tabBar 不会再出现（不管后续有没有 vc.hidesBottomBarWhenPushed = NO），所以在 pop 回去的时候也要遵循这个规则
+                                    if (animated && weakNavigationController.tabBarController && !appearingViewController.hidesBottomBarWhenPushed) {
+                                        BOOL systemShouldHideTabBar = NO;
+                                        
+                                        // setViewControllers 可能出现当前 vc 不存在已有 viewControllers 数组内的情况，要保护
+                                        // https://github.com/Tencent/QMUI_iOS/issues/1177
+                                        NSUInteger index = [weakNavigationController.viewControllers indexOfObject:appearingViewController];
+                                        
+                                        if (index != NSNotFound) {
+                                            NSArray<UIViewController *> *viewControllers = [weakNavigationController.viewControllers subarrayWithRange:NSMakeRange(0, index + 1)];
+                                            for (UIViewController *vc in viewControllers) {
+                                                if (vc.hidesBottomBarWhenPushed) {
+                                                    systemShouldHideTabBar = YES;
+                                                }
+                                            }
+                                            if (!systemShouldHideTabBar) {
+                                                [weakNavigationController qmui_bindBOOL:YES forKey:kShouldCheckTabBarHiddenKey];
+                                            }
+                                        }
+                                    }
+                                }
+                                    break;
+                                case QMUINavigationActionDidPop:
+                                case QMUINavigationActionDidSet: {
+                                    [weakNavigationController qmui_bindBOOL:NO forKey:kShouldCheckTabBarHiddenKey];
+                                }
+                                    break;
+                                    
+                                default:
+                                    break;
                             }
+                        }];
+                    };
+                });
+                
+                OverrideImplementation([UINavigationController class], NSSelectorFromString(@"_shouldBottomBarBeHidden"), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+                    return ^BOOL(UINavigationController *selfObject) {
+                        // call super
+                        BOOL (*originSelectorIMP)(id, SEL);
+                        originSelectorIMP = (BOOL (*)(id, SEL))originalIMPProvider();
+                        BOOL result = originSelectorIMP(selfObject, originCMD);
+                        
+                        if ([selfObject qmui_getBoundBOOLForKey:kShouldCheckTabBarHiddenKey]) {
+                            result = NO;
                         }
-                        if (!systemShouldHideTabBar) {
-                            [selfObject qmui_bindBOOL:YES forKey:kShouldCheckTabBarHiddenKey];
-                        }
-                    }
-                    
-                    // call super
-                    NSArray<UIViewController *> *(*originSelectorIMP)(id, SEL, UIViewController *, BOOL);
-                    originSelectorIMP = (NSArray<UIViewController *> * (*)(id, SEL, UIViewController *, BOOL))originalIMPProvider();
-                    NSArray<UIViewController *> *result = originSelectorIMP(selfObject, originCMD, viewController, animated);
-                    
-                    [selfObject qmui_bindBOOL:NO forKey:kShouldCheckTabBarHiddenKey];
-                    
-                    return result;
-                };
-            });
-            
-            OverrideImplementation([UINavigationController class], @selector(popToRootViewControllerAnimated:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-                return ^NSArray<UIViewController *> *(UINavigationController *selfObject, BOOL animated) {
-                    
-                    // 相邻两个界面的 pop 是没问题的，要超过2个才需要处理
-                    if (animated && selfObject.tabBarController && !selfObject.viewControllers.firstObject.hidesBottomBarWhenPushed && selfObject.viewControllers.count > 2) {
-                        [selfObject qmui_bindBOOL:YES forKey:kShouldCheckTabBarHiddenKey];
-                    }
-                    // call super
-                    NSArray<UIViewController *> *(*originSelectorIMP)(id, SEL, BOOL);
-                    originSelectorIMP = (NSArray<UIViewController *> *(*)(id, SEL, BOOL))originalIMPProvider();
-                    NSArray<UIViewController *> *result = originSelectorIMP(selfObject, originCMD, animated);
-                    
-                    [selfObject qmui_bindBOOL:NO forKey:kShouldCheckTabBarHiddenKey];
-                    
-                    return result;
-                };
-            });
-            
-            OverrideImplementation([UINavigationController class], @selector(setViewControllers:animated:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-                return ^(UINavigationController *selfObject, NSArray<UIViewController *> *viewControllers, BOOL animated) {
-                    
-                    // 系统的逻辑就是，在 push N 个 vc 的过程中，只要其中出现任意一个 vc.hidesBottomBarWhenPushed = YES，则 tabBar 不会再出现（不管后续有没有 vc.hidesBottomBarWhenPushed = NO），所以在 pop 回去的时候也要遵循这个规则
-                    UIViewController *viewController = viewControllers.lastObject;
-                    if (animated && selfObject.tabBarController && !viewController.hidesBottomBarWhenPushed) {
-                        BOOL systemShouldHideTabBar = NO;
-                        for (UIViewController *vc in viewControllers) {
-                            if (vc.hidesBottomBarWhenPushed) {
-                                systemShouldHideTabBar = YES;
-                            }
-                        }
-                        if (!systemShouldHideTabBar) {
-                            [selfObject qmui_bindBOOL:YES forKey:kShouldCheckTabBarHiddenKey];
-                        }
-                    }
-                    
-                    // call super
-                    void (*originSelectorIMP)(id, SEL, NSArray<UIViewController *> *, BOOL);
-                    originSelectorIMP = (void (*)(id, SEL, NSArray<UIViewController *> *, BOOL))originalIMPProvider();
-                    originSelectorIMP(selfObject, originCMD, viewControllers, animated);
-                    
-                    [selfObject qmui_bindBOOL:NO forKey:kShouldCheckTabBarHiddenKey];
-                };
-            });
-            
-            OverrideImplementation([UINavigationController class], NSSelectorFromString(@"_shouldBottomBarBeHidden"), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-                return ^BOOL(UINavigationController *selfObject) {
-                    // call super
-                    BOOL (*originSelectorIMP)(id, SEL);
-                    originSelectorIMP = (BOOL (*)(id, SEL))originalIMPProvider();
-                    BOOL result = originSelectorIMP(selfObject, originCMD);
-                    
-                    if ([selfObject qmui_getBoundBOOLForKey:kShouldCheckTabBarHiddenKey]) {
-                        result = NO;
-                    }
-                    return result;
-                };
-            });
+                        return result;
+                    };
+                });
+            }
         }
         
         
@@ -331,6 +373,13 @@ QMUISynthesizeNSIntegerProperty(tabBarItemViewTouchCount, setTabBarItemViewTouch
                     [appearance qmui_applyItemAppearanceWithBlock:itemActionBlock];
                 }
                 tabBar.standardAppearance = appearance;
+#ifdef IOS15_SDK_ALLOWED
+                if (@available(iOS 15.0, *)) {
+                    if (QMUICMIActivated && TabBarUsesStandardAppearanceOnly) {
+                        tabBar.scrollEdgeAppearance = appearance;
+                    }
+                }
+#endif
             };
             
             ExtendImplementationOfVoidMethodWithSingleArgument([UITabBar class], @selector(setTintColor:), UIColor *, ^(UITabBar *selfObject, UIColor *tintColor) {
@@ -373,7 +422,7 @@ QMUISynthesizeNSIntegerProperty(tabBarItemViewTouchCount, setTabBarItemViewTouch
             
             ExtendImplementationOfVoidMethodWithSingleArgument([UITabBar class], @selector(setBarStyle:), UIBarStyle, ^(UITabBar *selfObject, UIBarStyle barStyle) {
                 syncAppearance(selfObject, ^void(UITabBarAppearance *appearance) {
-                    appearance.backgroundEffect = [UIBlurEffect effectWithStyle:barStyle == UIBarStyleDefault ? UIBlurEffectStyleSystemMaterialLight : UIBlurEffectStyleSystemMaterialDark];
+                    appearance.backgroundEffect = [UIBlurEffect effectWithStyle:barStyle == UIBarStyleDefault ? UIBlurEffectStyleSystemChromeMaterialLight : UIBlurEffectStyleSystemChromeMaterialDark];
                 }, nil);
             });
         }
@@ -433,6 +482,130 @@ QMUISynthesizeNSIntegerProperty(tabBarItemViewTouchCount, setTabBarItemViewTouch
 - (void)revertTabBarItemTouch {
     self.lastTouchedTabBarItemViewIndex = kLastTouchedTabBarItemIndexNone;
     self.tabBarItemViewTouchCount = 0;
+}
+
+- (UIVisualEffectView *)qmui_effectView {
+    NSArray<UIVisualEffectView *> *visibleEffectViews = [self.qmui_effectViews qmui_filterWithBlock:^BOOL(UIVisualEffectView * _Nonnull item) {
+        return !item.hidden && item.alpha > 0.01 && item.superview;
+    }];
+    return visibleEffectViews.lastObject;
+}
+
+- (NSArray<UIVisualEffectView *> *)qmui_effectViews {
+    UIView *backgroundView = self.qmui_backgroundView;
+    NSMutableArray<UIVisualEffectView *> *result = NSMutableArray.new;
+    if (@available(iOS 13.0, *)) {
+        UIVisualEffectView *backgroundEffectView1 = [backgroundView valueForKey:@"_effectView1"];
+        UIVisualEffectView *backgroundEffectView2 = [backgroundView valueForKey:@"_effectView2"];
+        if (backgroundEffectView1) {
+            [result addObject:backgroundEffectView1];
+        }
+        if (backgroundEffectView2) {
+            [result addObject:backgroundEffectView2];
+        }
+    } else {
+        UIVisualEffectView *backgroundEffectView = [backgroundView qmui_valueForKey:@"_backgroundEffectView"];
+        if (backgroundEffectView) {
+            [result addObject:backgroundEffectView];
+        }
+    }
+    return result.count > 0 ? result : nil;
+}
+
+- (void)qmuitb_swizzleBackgroundView {
+    [QMUIHelper executeBlock:^{
+        Class backgroundClass = NSClassFromString(@"_UIBarBackground");
+        OverrideImplementation(backgroundClass, @selector(didAddSubview:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^(UIView *selfObject, UIView *subview) {
+                
+                // call super
+                void (*originSelectorIMP)(id, SEL, UIView *);
+                originSelectorIMP = (void (*)(id, SEL, UIView *))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, subview);
+                
+                // 注意可能存在多个 UIVisualEffectView，例如用于 shadowImage 的 _UIBarBackgroundShadowView，需要过滤掉
+                if ([selfObject.superview isKindOfClass:UITabBar.class] && [subview isMemberOfClass:UIVisualEffectView.class]) {
+                    UITabBar *tabBar = (UITabBar *)selfObject.superview;
+                    if (tabBar.qmuitb_hasSetEffect || tabBar.qmuitb_hasSetEffectForegroundColor) {
+                        [tabBar qmuitb_updateEffect];
+                    }
+                }
+            };
+        });
+        // 系统会在任意可能的时机去刷新 backgroundEffects，为了避免被系统的值覆盖，这里需要重写它
+        OverrideImplementation(UIVisualEffectView.class, NSSelectorFromString(@"setBackgroundEffects:"), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^(UIVisualEffectView *selfObject, NSArray<UIVisualEffect *> *firstArgv) {
+                
+                if ([selfObject.superview isKindOfClass:backgroundClass] && [selfObject.superview.superview isKindOfClass:UITabBar.class]) {
+                    UITabBar *tabBar = (UITabBar *)selfObject.superview.superview;
+                    if (tabBar.qmui_effectView == selfObject) {
+                        if (tabBar.qmuitb_hasSetEffect) {
+                            firstArgv = tabBar.qmuitb_backgroundEffects;
+                        }
+                    }
+                }
+                
+                // call super
+                void (*originSelectorIMP)(id, SEL, NSArray<UIVisualEffect *> *);
+                originSelectorIMP = (void (*)(id, SEL, NSArray<UIVisualEffect *> *))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, firstArgv);
+            };
+        });
+    } oncePerIdentifier:@"UITabBar (QMUI) effect"];
+}
+
+- (void)qmuitb_updateEffect {
+    if (self.qmuitb_hasSetEffect) {
+        // 这里对 iOS 13 不使用 UITabBarAppearance.backgroundEffect 来修改，是因为反正不管 iOS 10 还是 13，最终都是 setBackgroundEffects: 在起作用，而且不用 UITabBarAppearance 还可以规避与 UIAppearance 机制的冲突
+        NSArray<UIVisualEffect *> *effects = self.qmuitb_backgroundEffects;
+        [self.qmui_effectView qmui_performSelector:NSSelectorFromString(@"setBackgroundEffects:") withArguments:&effects, nil];
+    }
+    if (self.qmuitb_hasSetEffectForegroundColor) {
+        self.qmui_effectView.qmui_foregroundColor = self.qmui_effectForegroundColor;
+    }
+}
+
+// UITabBar、UIVisualEffectView  都有一个私有的方法 backgroundEffects，当 UIVisualEffectView 应用于 UITabBar 场景时，磨砂的效果实际上被放在 backgroundEffects 内，而不是公开接口的 effect 属性里，这里为了方便，将 UITabBar (QMUI).effect 转成可用于 backgroundEffects 的数组
+- (NSArray<UIVisualEffect *> *)qmuitb_backgroundEffects {
+    if (self.qmuitb_hasSetEffect) {
+        return self.qmui_effect ? @[self.qmui_effect] : nil;
+    }
+    return nil;
+}
+
+static char kAssociatedObjectKey_effect;
+- (void)setQmui_effect:(UIBlurEffect *)qmui_effect {
+    if (qmui_effect) {
+        [self qmuitb_swizzleBackgroundView];
+    }
+    
+    BOOL valueChanged = self.qmui_effect != qmui_effect;
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_effect, qmui_effect, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    if (valueChanged) {
+        self.qmuitb_hasSetEffect = YES;// QMUITheme 切换时会重新赋值，所以可能出现本来就是 nil，还给它又赋值了 nil，这种场景不应该导致 hasSet 标志位改变，所以要把标志位的设置放在 if (valueChanged) 里
+        [self qmuitb_updateEffect];
+    }
+}
+
+- (UIBlurEffect *)qmui_effect {
+    return (UIBlurEffect *)objc_getAssociatedObject(self, &kAssociatedObjectKey_effect);
+}
+
+static char kAssociatedObjectKey_effectForegroundColor;
+- (void)setQmui_effectForegroundColor:(UIColor *)qmui_effectForegroundColor {
+    if (qmui_effectForegroundColor) {
+        [self qmuitb_swizzleBackgroundView];
+    }
+    BOOL valueChanged = ![self.qmui_effectForegroundColor isEqual:qmui_effectForegroundColor];
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_effectForegroundColor, qmui_effectForegroundColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    if (valueChanged) {
+        self.qmuitb_hasSetEffectForegroundColor = YES;// QMUITheme 切换时会重新赋值，所以可能出现本来就是 nil，还给它又赋值了 nil，这种场景不应该导致 hasSet 标志位改变，所以要把标志位的设置放在 if (valueChanged) 里
+        [self qmuitb_updateEffect];
+    }
+}
+
+- (UIColor *)qmui_effectForegroundColor {
+    return (UIColor *)objc_getAssociatedObject(self, &kAssociatedObjectKey_effectForegroundColor);
 }
 
 @end

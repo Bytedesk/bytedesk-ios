@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -417,31 +417,12 @@ static char kAssociatedObjectKey_updatesIndicatorView;
     // TODO: molice 等废弃 qmui_badgeCenterOffset 系列接口后再删除
     if (!offsetByTopRight) return nil;
     
-    if (@available(iOS 11.0, *)) {
-        if ([classString isEqualToString:@"_UIButtonBarButton"]) {
-            for (UIView *subview in self.subviews) {
-                if ([subview isKindOfClass:UIButton.class]) {
-                    UIView *imageView = ((UIButton *)subview).imageView;
-                    if (imageView && !imageView.hidden) {
-                        return imageView;
-                    }
-                }
-            }
-        }
-    } else {
-        if ([classString isEqualToString:@"UINavigationButton"]) {
-            UIView *imageView = ((UIButton *)self).imageView;
-            if (imageView && !imageView.hidden) {
-                return imageView;
-            }
-        }
-        if ([classString isEqualToString:@"UIToolbarButton"]) {
-            for (UIView *subview in self.subviews) {
-                if ([subview isKindOfClass:UIButton.class]) {
-                    UIView *imageView = ((UIButton *)subview).imageView;
-                    if (imageView && !imageView.hidden) {
-                        return imageView;
-                    }
+    if ([classString isEqualToString:@"_UIButtonBarButton"]) {
+        for (UIView *subview in self.subviews) {
+            if ([subview isKindOfClass:UIButton.class]) {
+                UIView *imageView = ((UIButton *)subview).imageView;
+                if (imageView && !imageView.hidden) {
+                    return imageView;
                 }
             }
         }

@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -296,13 +296,16 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSObject (QMUI_Debug)
 
 /// 获取当前对象的所有 @property、方法，父类的方法也会分别列出
-- (NSString *)qmui_methodList;
+@property(nonatomic, copy, readonly) NSString *qmui_methodList;
 
 /// 获取当前对象的所有 @property、方法，不包含父类的
-- (NSString *)qmui_shortMethodList;
+@property(nonatomic, copy, readonly) NSString *qmui_shortMethodList;
 
 /// 获取当前对象的所有 Ivar 变量
-- (NSString *)qmui_ivarList;
+@property(nonatomic, copy, readonly) NSString *qmui_ivarList;
+
+/// 获取当前 UIView 层级树信息（只对 UIView 有效）
+@property(nonatomic, copy, readonly) NSString *qmui_viewInfo;
 @end
 
 @interface NSThread (QMUI_KVC)

@@ -39,8 +39,8 @@
 //    return YES;
 //}
 
-- (void)refresh:(BDMessageModel *)data {
-    [super refresh:data];
+- (void)refresh:(BDMessageModel *)data isAgent:(BOOL)agent{
+    [super refresh:data isAgent:agent];
 //    DDLogInfo(@"%s, type: %@, content: %@", __PRETTY_FUNCTION__, self.model.type, self.model.content);
     
     [_kfCoreTextView setText:self.model.content];
@@ -60,14 +60,19 @@
     CGRect bubbleFrame = CGRectZero;
     CGRect boundsFrame = CGRectZero;
     
-    if ([self.model isSend]) {
+    if (self.isAgent && [self.model isClientSystem]) {
         labelFrame = CGRectMake(contentInsets.left+2, contentInsets.top, size.width, size.height);
         bubbleFrame = CGRectMake(0, 0, contentInsets.left + size.width + contentInsets.right + 5, contentInsets.top + size.height + contentInsets.bottom );
         boundsFrame = CGRectMake(KFDSScreen.width - bubbleFrame.size.width - 55, 23, bubbleFrame.size.width,  bubbleFrame.size.height);
         
         _kfCoreTextView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-    }
-    else {
+    } else if ([self.model isSend]) {
+        labelFrame = CGRectMake(contentInsets.left+2, contentInsets.top, size.width, size.height);
+        bubbleFrame = CGRectMake(0, 0, contentInsets.left + size.width + contentInsets.right + 5, contentInsets.top + size.height + contentInsets.bottom );
+        boundsFrame = CGRectMake(KFDSScreen.width - bubbleFrame.size.width - 55, 23, bubbleFrame.size.width,  bubbleFrame.size.height);
+        
+        _kfCoreTextView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+    } else {
         labelFrame = CGRectMake(contentInsets.left+3, contentInsets.top, size.width, size.height);
         bubbleFrame = CGRectMake(0, 0, contentInsets.left + size.width + contentInsets.right + 5, contentInsets.top + size.height + contentInsets.bottom + 5 );
         boundsFrame = CGRectMake(50, 40, bubbleFrame.size.width, bubbleFrame.size.height);

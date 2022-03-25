@@ -19,7 +19,8 @@
 #import "BDFeedbackRecordViewController.h"
 
 #import "BDSingleImagePickerPreviewViewController.h"
-#import <AFNetworking/UIImageView+AFNetworking.h>
+//#import <AFNetworking/UIImageView+AFNetworking.h>
+#import "../../vendors/UIKit+AFNetworking/UIImageView+AFNetworking.h"
 
 #import <bytedesk-core/bdcore.h>
 

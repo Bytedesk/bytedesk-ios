@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -33,17 +33,6 @@ QMUISynthesizeIdCopyProperty(qmui_themeDidChangeBlock, setQmui_themeDidChangeBlo
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
-        // iOS 12 及以下的版本，[UIView setBackgroundColor:] 并不会保存传进来的 color，所以要自己用个变量保存起来，不然 QMUIThemeColor 对象就会被丢弃
-        if (@available(iOS 13.0, *)) {
-        } else {
-            ExtendImplementationOfVoidMethodWithSingleArgument([UIView class], @selector(setBackgroundColor:), UIColor *, ^(UIView *selfObject, UIColor *color) {
-                selfObject.qmuiTheme_backgroundColor = color;
-            });
-            ExtendImplementationOfNonVoidMethodWithoutArguments([UIView class], @selector(backgroundColor), UIColor *, ^UIColor *(UIView *selfObject, UIColor *originReturnValue) {
-                return selfObject.qmuiTheme_backgroundColor ?: originReturnValue;
-            });
-        }
         
         OverrideImplementation([UIView class], @selector(setHidden:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, BOOL firstArgv) {
@@ -104,8 +93,8 @@ QMUISynthesizeIdCopyProperty(qmui_themeDidChangeBlock, setQmui_themeDidChangeBlo
         SEL getter = NSSelectorFromString(getterString);
         SEL setter = setterWithGetter(getter);
         NSString *setterString = NSStringFromSelector(setter);
-        NSAssert([self respondsToSelector:getter], @"register theme color fails, %@ does not have method called %@", NSStringFromClass(self.class), getterString);
-        NSAssert([self respondsToSelector:setter], @"register theme color fails, %@ does not have method called %@", NSStringFromClass(self.class), setterString);
+        QMUIAssert([self respondsToSelector:getter], @"UIView (QMUITheme)", @"register theme color fails, %@ does not have method called %@", NSStringFromClass(self.class), getterString);
+        QMUIAssert([self respondsToSelector:setter], @"UIView (QMUITheme)", @"register theme color fails, %@ does not have method called %@", NSStringFromClass(self.class), setterString);
         
         if (!self.qmuiTheme_themeColorProperties) {
             self.qmuiTheme_themeColorProperties = NSMutableDictionary.new;
@@ -134,6 +123,12 @@ QMUISynthesizeIdCopyProperty(qmui_themeDidChangeBlock, setQmui_themeDidChangeBlo
         // 由于 tintColor 属性自带向下传递的性质，并且当值为 nil 时会自动从 superview 读取值，所以不需要在这里遍历修改，否则取出 tintColor 后再设置回去，会打破这个传递链
         if (getter == @selector(tintColor)) {
             if (!self.qmui_tintColorCustomized) return;
+        }
+        
+        // 如果某个 UITabBarItem 处于选中状态，此时发生了主题变化，执行了 UITabBarSwappableImageView.image = image 的动作，就会把 selectedImage 设置为 normal image，无法恢复。所以对 UITabBarSwappableImageView 屏蔽掉 setImage 的刷新操作
+        // https://github.com/Tencent/QMUI_iOS/issues/1122
+        if ([self isKindOfClass:NSClassFromString(@"UITabBarSwappableImageView")] && getter == @selector(image)) {
+            return;
         }
         
         // 注意，需要遍历的属性不一定都是 UIColor 类型，也有可能是 NSAttributedString，例如 UITextField.attributedText
@@ -165,22 +160,29 @@ QMUISynthesizeIdCopyProperty(qmui_themeDidChangeBlock, setQmui_themeDidChangeBlo
     
     // 特殊的 view 特殊处理
     // iOS 10-11 里当 UILabel.attributedText 的文字颜色都相同时，也无法使用 setNeedsDisplay 刷新样式，但只要某个 range 颜色不同就没问题，iOS 9、12-13 也没问题，这个通过 UILabel (QMUIThemeCompatibility) 兼容。
-    // iOS 9-13，当 UITextField 没有聚焦时，不需要调用 setNeedsDisplay 系统都可以自动更新文字样式，但聚焦时调用 setNeedsDisplay 也无法更新样式，这里依赖了 UITextField (QMUIThemeCompatibility) 对 setNeedsDisplay 做的兼容实现了更新
-    // 注意，iOS 11 及以下的 UITextView 直接调用 setNeedsDisplay 是无法刷新文字样式的，这里依赖了 UITextView (QMUIThemeCompatibility) 里通过 swizzle 实现了兼容，iOS 12 及以上没问题。
     static NSArray<Class> *needsDisplayClasses = nil;
-    if (!needsDisplayClasses) needsDisplayClasses = @[UILabel.class, UITextField.class, UITextView.class];
+    if (!needsDisplayClasses) needsDisplayClasses = @[UILabel.class, UITextView.class];
     [needsDisplayClasses enumerateObjectsUsingBlock:^(Class  _Nonnull class, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([self isKindOfClass:class]) [self setNeedsDisplay];
+        if ([self isKindOfClass:class]) {
+            [self setNeedsDisplay];
+        }
     }];
     
     // 输入框、搜索框的键盘跟随主题变化
-    if (QMUICMIActivated && [self conformsToProtocol:@protocol(UITextInputTraits)]) {
-        NSObject<UITextInputTraits> *input = (NSObject<UITextInputTraits> *)self;
-        if ([input respondsToSelector:@selector(keyboardAppearance)]) {
-            if (input.keyboardAppearance != KeyboardAppearance && !input.qmui_hasCustomizedKeyboardAppearance) {
-                input.qmui_keyboardAppearance = KeyboardAppearance;
+    if (QMUICMIActivated) {
+        static NSArray<Class> *inputClasses = nil;
+        if (!inputClasses) inputClasses = @[UITextField.class, UITextView.class, UISearchBar.class];// 这里的 Class 与 UITextInputTraits(QMUI) 对齐
+        [inputClasses enumerateObjectsUsingBlock:^(Class  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([self isKindOfClass:obj]) {
+                NSObject<UITextInputTraits> *input = (NSObject<UITextInputTraits> *)self;
+                if ([input respondsToSelector:@selector(keyboardAppearance)]) {
+                    if (input.keyboardAppearance != KeyboardAppearance && !input.qmui_hasCustomizedKeyboardAppearance) {
+                        input.qmui_keyboardAppearance = KeyboardAppearance;
+                    }
+                }
+                *stop = YES;
             }
-        }
+        }];
     }
     
     /** 这里去掉动画有 2 个原因：
@@ -200,7 +202,6 @@ QMUISynthesizeIdCopyProperty(qmui_themeDidChangeBlock, setQmui_themeDidChangeBlo
 
 @implementation UIView (QMUITheme_Private)
 
-QMUISynthesizeIdStrongProperty(qmuiTheme_backgroundColor, setQmuiTheme_backgroundColor)
 QMUISynthesizeIdStrongProperty(qmuiTheme_themeColorProperties, setQmuiTheme_themeColorProperties)
 
 - (BOOL)_qmui_visible {

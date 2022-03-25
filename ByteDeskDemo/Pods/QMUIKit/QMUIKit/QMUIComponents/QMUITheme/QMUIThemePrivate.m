@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -17,19 +17,20 @@
 #import "UIColor+QMUI.h"
 #import "UIVisualEffect+QMUITheme.h"
 #import "UIView+QMUITheme.h"
+#import "UISlider+QMUI.h"
 #import "UIView+QMUI.h"
 #import "UISearchBar+QMUI.h"
 #import "UITableViewCell+QMUI.h"
 #import "CALayer+QMUI.h"
 #import "UIVisualEffectView+QMUI.h"
+#import "UIBarItem+QMUI.h"
+#import "UITabBar+QMUI.h"
+#import "UITabBarItem+QMUI.h"
 
 // QMUI classes
 #import "QMUIImagePickerCollectionViewCell.h"
 #import "QMUIAlertController.h"
 #import "QMUIButton.h"
-#import "QMUIFillButton.h"
-#import "QMUIGhostButton.h"
-#import "QMUILinkButton.h"
 #import "QMUIConsole.h"
 #import "QMUIEmotionView.h"
 #import "QMUIEmptyView.h"
@@ -39,10 +40,8 @@
 #import "QMUIPopupContainerView.h"
 #import "QMUIPopupMenuButtonItem.h"
 #import "QMUIPopupMenuView.h"
-#import "QMUISlider.h"
 #import "QMUITextField.h"
 #import "QMUITextView.h"
-#import "QMUIVisualEffectView.h"
 #import "QMUIToastBackgroundView.h"
 #import "QMUIBadgeProtocol.h"
 
@@ -62,7 +61,9 @@
                     classRegisters = @{
                                        NSStringFromClass(UISlider.class):                   @[NSStringFromSelector(@selector(minimumTrackTintColor)),
                                                                                               NSStringFromSelector(@selector(maximumTrackTintColor)),
-                                                                                              NSStringFromSelector(@selector(thumbTintColor))],
+                                                                                              NSStringFromSelector(@selector(thumbTintColor)),
+                                                                                              NSStringFromSelector(@selector(qmui_thumbColor)),
+                                                                                              NSStringFromSelector(@selector(qmui_thumbShadowColor))],
                                        NSStringFromClass(UISwitch.class):                   @[NSStringFromSelector(@selector(onTintColor)),
                                                                                               NSStringFromSelector(@selector(thumbTintColor)),],
                                        NSStringFromClass(UIActivityIndicatorView.class):    @[NSStringFromSelector(@selector(color)),],
@@ -76,23 +77,28 @@
                                                                                               NSStringFromSelector(@selector(sectionIndexTrackingBackgroundColor)),
                                                                                               NSStringFromSelector(@selector(separatorColor)),],
                                        NSStringFromClass(UITableViewCell.class):            @[NSStringFromSelector(@selector(qmui_selectedBackgroundColor)),],
+                                       NSStringFromClass(UICollectionViewCell.class):            @[NSStringFromSelector(@selector(qmui_selectedBackgroundColor)),],
                                        NSStringFromClass(UINavigationBar.class):            @[NSStringFromSelector(@selector(barTintColor)),],
                                        NSStringFromClass(UIToolbar.class):                  @[NSStringFromSelector(@selector(barTintColor)),],
                                        NSStringFromClass(UITabBar.class):                   ({
-                                                                                           NSArray<NSString *> *result = nil;
-                                                                                           if (@available(iOS 13.0, *)) {
-                                                                                               // iOS 13 在 UITabBar (QMUI) 里对所有旧版接口都映射到 standardAppearance，所以重新设置一次 standardAppearance 就可以更新所有样式
-                                                                                               result = @[NSStringFromSelector(@selector(standardAppearance)),];
-                                                                                           } else {
-                                                                                               result = @[NSStringFromSelector(@selector(barTintColor)),
-                                                                                                          NSStringFromSelector(@selector(unselectedItemTintColor)),
-                                                                                                          NSStringFromSelector(@selector(selectedImageTintColor)),];
-                                                                                           }
-                                                                                           result;
-                                                                                       }),
+                                           NSMutableArray<NSString *> *result = @[
+                                               NSStringFromSelector(@selector(qmui_effect)),
+                                               NSStringFromSelector(@selector(qmui_effectForegroundColor)),
+                                           ].mutableCopy;
+                                           if (@available(iOS 13.0, *)) {
+                                               // iOS 13 在 UITabBar (QMUI) 里对所有旧版接口都映射到 standardAppearance，所以重新设置一次 standardAppearance 就可以更新所有样式
+                                               [result addObject:NSStringFromSelector(@selector(standardAppearance))];
+                                           } else {
+                                               [result addObjectsFromArray:@[NSStringFromSelector(@selector(barTintColor)),
+                                                                             NSStringFromSelector(@selector(unselectedItemTintColor)),
+                                                                             NSStringFromSelector(@selector(selectedImageTintColor)),]];
+                                           }
+                                           result.copy;
+                                       }),
                                        NSStringFromClass(UISearchBar.class):                        @[NSStringFromSelector(@selector(barTintColor)),
                                                                                                       NSStringFromSelector(@selector(qmui_placeholderColor)),
                                                                                                       NSStringFromSelector(@selector(qmui_textColor)),],
+                                       NSStringFromClass(UITextField.class):                        @[NSStringFromSelector(@selector(attributedText)),],
                                        NSStringFromClass(UIView.class):                             @[NSStringFromSelector(@selector(tintColor)),
                                                                                                       NSStringFromSelector(@selector(backgroundColor)),
                                                                                                       NSStringFromSelector(@selector(qmui_borderColor)),
@@ -108,10 +114,6 @@
                                        NSStringFromClass(QMUIButton.class):                         @[NSStringFromSelector(@selector(tintColorAdjustsTitleAndImage)),
                                                                                                       NSStringFromSelector(@selector(highlightedBackgroundColor)),
                                                                                                       NSStringFromSelector(@selector(highlightedBorderColor)),],
-                                       NSStringFromClass(QMUIFillButton.class):                     @[NSStringFromSelector(@selector(fillColor)),
-                                                                                                      NSStringFromSelector(@selector(titleTextColor)),],
-                                       NSStringFromClass(QMUIGhostButton.class):                    @[NSStringFromSelector(@selector(ghostColor)),],
-                                       NSStringFromClass(QMUILinkButton.class):                     @[NSStringFromSelector(@selector(underlineColor)),],
                                        NSStringFromClass(QMUIConsole.class):                        @[NSStringFromSelector(@selector(searchResultHighlightedBackgroundColor)),],
                                        NSStringFromClass(QMUIEmotionView.class):                    @[NSStringFromSelector(@selector(sendButtonBackgroundColor)),],
                                        NSStringFromClass(QMUIEmptyView.class):                      @[NSStringFromSelector(@selector(textLabelTextColor)),
@@ -129,16 +131,9 @@
                                        NSStringFromClass(QMUIPopupMenuView.class):                  @[NSStringFromSelector(@selector(itemSeparatorColor)),
                                                                                                       NSStringFromSelector(@selector(sectionSeparatorColor)),
                                                                                                       NSStringFromSelector(@selector(itemTitleColor))],
-                                       NSStringFromClass(QMUISlider.class):                         @[NSStringFromSelector(@selector(thumbColor)),
-                                                                                                      NSStringFromSelector(@selector(thumbShadowColor)),],
                                        NSStringFromClass(QMUITextField.class):                      @[NSStringFromSelector(@selector(placeholderColor)),],
                                        NSStringFromClass(QMUITextView.class):                       @[NSStringFromSelector(@selector(placeholderColor)),],
-                                       NSStringFromClass(QMUIVisualEffectView.class):               @[NSStringFromSelector(@selector(foregroundColor)),],
                                        NSStringFromClass(QMUIToastBackgroundView.class):            @[NSStringFromSelector(@selector(styleColor)),],
-                                       
-                                       // UITextField 支持富文本，因此不能重新设置 textColor 那些属性，会令原有的富文本信息丢失，所以这里直接把文字重新赋值进去即可
-                                       // 注意，UITextField 在未聚焦时，切换主题时系统能自动刷新文字颜色，但在聚焦时系统不会自动刷新颜色，所以需要在这里手动刷新
-//                                       NSStringFromClass(UITextField.class):                        @[NSStringFromSelector(@selector(attributedText)),],
                                        
                                        // 以下的 class 的更新依赖于 UIView (QMUITheme) 内的 setNeedsDisplay，这里不专门调用 setter
 //                                       NSStringFromClass(UILabel.class):                            @[NSStringFromSelector(@selector(textColor)),
@@ -188,20 +183,17 @@
             });
         }
         
-        OverrideImplementation([UIView class], @selector(setBackgroundColor:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-            return ^void(UIView *selfObject, UIColor *color) {
-                
-                if (selfObject.backgroundColor.qmui_isQMUIDynamicColor || color.qmui_isQMUIDynamicColor) {
-                    // -[UIView setBackgroundColor:] 会同步修改 layer 的 backgroundColor，但它内部又有一个判断条件即：如果参入传入的 color.CGColor 和当前的 self.layr.backgroundColor 一样，就不会重新设置，而如果 layer.backgroundColor 如果关联了 QMUI 的动态色，忽略这个设置，就会导致前后不一致的问题，这里要强制把 layer.backgroundColor 清空，让每次都调用 -[CALayer setBackgroundColor:] 方法
-                    selfObject.layer.backgroundColor = nil;
-                }
-                
-                void (*originSelectorIMP)(id, SEL, UIColor *);
-                originSelectorIMP = (void (*)(id, SEL, UIColor *))originalIMPProvider();
-                originSelectorIMP(selfObject, originCMD, color);
-                
-            };
-        });
+        // iOS 12 及以下的版本，[UIView setBackgroundColor:] 并不会保存传进来的 color，所以要自己用个变量保存起来，不然 QMUIThemeColor 对象就会被丢弃
+        if (@available(iOS 13.0, *)) {
+        } else {
+            ExtendImplementationOfVoidMethodWithSingleArgument([UIView class], @selector(setBackgroundColor:), UIColor *, ^(UIView *selfObject, UIColor *color) {
+                [selfObject qmui_bindObject:color forKey:@"UIView(QMUIThemeCompatibility).backgroundColor"];
+            });
+            ExtendImplementationOfNonVoidMethodWithoutArguments([UIView class], @selector(backgroundColor), UIColor *, ^UIColor *(UIView *selfObject, UIColor *originReturnValue) {
+                UIColor *color = [selfObject qmui_getBoundObjectForKey:@"UIView(QMUIThemeCompatibility).backgroundColor"];
+                return color ?: originReturnValue;
+            });
+        }
     });
 }
 
@@ -323,25 +315,43 @@
 
 @end
 
-@implementation UITableViewCell (QMUIThemeCompatibility)
+@implementation UITabBarItem (QMUIThemeCompatibility)
 
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        if (@available(iOS 13.0, *)) {
-        } else {
-            //  iOS 12 及以下，-[UITableViewCell setBackgroundColor:] 被调用时，如果参数的 backgroundColor 与当前的 backgroundColor 指针相同，则不会真正去执行颜色设置的逻辑，但这对于 dynamic color 而言是不满足需求的（同一个 dynamic color 实例在任何时候返回的 rawColor 都有可能发生变化），所以这里主动为其做一次 copy 操作，规避指针地址判断的问题
-            OverrideImplementation([UITableViewCell class], @selector(setBackgroundColor:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-                return ^(UITableViewCell *selfObject, UIColor *backgroundColor) {
-                     if (backgroundColor.qmui_isQMUIDynamicColor && backgroundColor == selfObject.backgroundColor) backgroundColor = backgroundColor.copy;
-                    
-                    // call super
-                    void (*originSelectorIMP)(id, SEL, UIColor *);
-                    originSelectorIMP = (void (*)(id, SEL, UIColor *))originalIMPProvider();
-                    originSelectorIMP(selfObject, originCMD, backgroundColor);
-                };
-            });
-        }
+        // UITabBarItem.image 会一直保存原始的 image（例如 QMUIThemeImage），但 selectedImage 只会返回 rawImage，这导致了将一个 QMUIThemeImage 设置给 selectedImage 后，主题切换后 selectedImage 无法刷新（因为 UITabBarItem 并没有保存它，保存的是它的 rawImage），所以这里自己保存 image 的引用。
+        // https://github.com/Tencent/QMUI_iOS/issues/1122
+        OverrideImplementation([UITabBarItem class], @selector(setSelectedImage:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^(UITabBarItem *selfObject, UIImage *selectedImage) {
+                
+                // 必须先保存起来再执行 super，因为 setter 的 super 里会触发 getter，如果不先保存，就会导致走到 getter 时拿到的 boundObject 还是旧值
+                // https://github.com/Tencent/QMUI_iOS/issues/1218
+                [selfObject qmui_bindObject:selectedImage.qmui_isDynamicImage ? selectedImage : nil forKey:@"UITabBarItem(QMUIThemeCompatibility).selectedImage"];
+                
+                // call super
+                void (*originSelectorIMP)(id, SEL, UIImage *);
+                originSelectorIMP = (void (*)(id, SEL, UIImage *))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, selectedImage);
+            };
+        });
+        
+        OverrideImplementation([UITabBarItem class], @selector(selectedImage), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^UIImage *(UITabBarItem *selfObject) {
+                
+                // call super
+                UIImage * (*originSelectorIMP)(id, SEL);
+                originSelectorIMP = (UIImage * (*)(id, SEL))originalIMPProvider();
+                UIImage *result = originSelectorIMP(selfObject, originCMD);
+                
+                UIImage *selectedImage = [selfObject qmui_getBoundObjectForKey:@"UITabBarItem(QMUIThemeCompatibility).selectedImage"];
+                if (selectedImage) {
+                    return selectedImage;
+                }
+                
+                return result;
+            };
+        });
     });
 }
 
@@ -388,7 +398,8 @@
                             }
                         }];
                     }
-                    if (attributedTextContainsDynamicColor) return YES;
+                    BOOL textColorIsDynamicColor = selfObject.textColor.qmui_isQMUIDynamicColor;
+                    if (attributedTextContainsDynamicColor || textColorIsDynamicColor) return YES;
                     
                     BOOL (*originSelectorIMP)(id, SEL);
                     originSelectorIMP = (BOOL (*)(id, SEL))originalIMPProvider();
@@ -396,30 +407,6 @@
                 };
             });
         }
-    });
-}
-
-@end
-
-@implementation UITextField (QMUIThemeCompatibility)
-
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        // 当 UITextField 没聚焦时系统会自动更新文字颜色（即便不手动调用 setNeedsDisplay），但聚焦的时候调用 setNeedsDisplay 也无法自动更新，因此做了这个兼容
-        // https://github.com/Tencent/QMUI_iOS/issues/777
-        ExtendImplementationOfVoidMethodWithoutArguments([UITextField class], @selector(setNeedsDisplay), ^(UITextView *selfObject) {
-            if (selfObject.isFirstResponder) {
-                UIView *fieldEditor = [selfObject qmui_valueForKey:@"_fieldEditor"];
-                if (fieldEditor) {
-                    UIView *contentView = [fieldEditor qmui_valueForKey:@"_contentView"];
-                    if (contentView) {
-                        [contentView setNeedsDisplay];
-                    }
-                }
-            }
-        });
     });
 }
 

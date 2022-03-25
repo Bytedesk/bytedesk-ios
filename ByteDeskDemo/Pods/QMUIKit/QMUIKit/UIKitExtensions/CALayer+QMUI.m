@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -48,10 +48,7 @@ QMUISynthesizeCGFloatProperty(qmui_originCornerRadius, setQmui_originCornerRadiu
                 
                 // 对非法的 bounds，Debug 下中 assert，Release 下会将其中的 NaN 改为 0，避免 crash
                 if (CGRectIsNaN(bounds)) {
-                    QMUILogWarn(@"CALayer (QMUI)", @"%@ setBounds:%@，参数包含 NaN，已被拦截并处理为 0。%@", selfObject, NSStringFromCGRect(bounds), [NSThread callStackSymbols]);
-                    if (QMUICMIActivated && !ShouldPrintQMUIWarnLogToConsole) {
-                        NSAssert(NO, @"CALayer setBounds: 出现 NaN");
-                    }
+                    QMUIAssert(NO, @"CALayer (QMUI)", @"%@ setBounds:%@，参数包含 NaN，已被拦截并处理为 0。%@", selfObject, NSStringFromCGRect(bounds), [NSThread callStackSymbols]);
                     if (!IS_DEBUG) {
                         bounds = CGRectSafeValue(bounds);
                     }
@@ -69,10 +66,7 @@ QMUISynthesizeCGFloatProperty(qmui_originCornerRadius, setQmui_originCornerRadiu
                 
                 // 对非法的 position，Debug 下中 assert，Release 下会将其中的 NaN 改为 0，避免 crash
                 if (isnan(position.x) || isnan(position.y)) {
-                    QMUILogWarn(@"CALayer (QMUI)", @"%@ setPosition:%@，参数包含 NaN，已被拦截并处理为 0。%@", selfObject, NSStringFromCGPoint(position), [NSThread callStackSymbols]);
-                    if (QMUICMIActivated && !ShouldPrintQMUIWarnLogToConsole) {
-                        NSAssert(NO, @"CALayer setPosition: 出现 NaN");
-                    }
+                    QMUIAssert(NO, @"CALayer (QMUI)", @"%@ setPosition:%@，参数包含 NaN，已被拦截并处理为 0。%@", selfObject, NSStringFromCGPoint(position), [NSThread callStackSymbols]);
                     if (!IS_DEBUG) {
                         position = CGPointMake(CGFloatSafeValue(position.x), CGFloatSafeValue(position.y));
                     }
@@ -94,25 +88,7 @@ QMUISynthesizeCGFloatProperty(qmui_originCornerRadius, setQmui_originCornerRadiu
 - (void)qmuilayer_setCornerRadius:(CGFloat)cornerRadius {
     BOOL cornerRadiusChanged = flat(self.qmui_originCornerRadius) != flat(cornerRadius);// flat 处理，避免浮点精度问题
     self.qmui_originCornerRadius = cornerRadius;
-    if (@available(iOS 11, *)) {
-        [self qmuilayer_setCornerRadius:cornerRadius];
-    } else {
-        if (self.qmui_maskedCorners && ![self hasFourCornerRadius]) {
-            [self qmuilayer_setCornerRadius:0];
-        } else {
-            [self qmuilayer_setCornerRadius:cornerRadius];
-        }
-        if (cornerRadiusChanged) {
-            // 需要刷新mask
-            if ([NSThread isMainThread]) {
-                [self setNeedsLayout];
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self setNeedsLayout];
-                });
-            }
-        }
-    }
+    [self qmuilayer_setCornerRadius:cornerRadius];
     if (cornerRadiusChanged) {
         // 需要刷新border
         if ([self.delegate respondsToSelector:@selector(layoutSublayersOfLayer:)]) {
@@ -153,23 +129,7 @@ static char kAssociatedObjectKey_maskedCorners;
 - (void)setQmui_maskedCorners:(QMUICornerMask)qmui_maskedCorners {
     BOOL maskedCornersChanged = qmui_maskedCorners != self.qmui_maskedCorners;
     objc_setAssociatedObject(self, &kAssociatedObjectKey_maskedCorners, @(qmui_maskedCorners), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    if (@available(iOS 11, *)) {
-        self.maskedCorners = (CACornerMask)qmui_maskedCorners;
-    } else {
-        if (qmui_maskedCorners && ![self hasFourCornerRadius]) {
-            [self qmuilayer_setCornerRadius:0];
-        }
-        if (maskedCornersChanged) {
-            // 需要刷新mask
-            if ([NSThread isMainThread]) {
-                [self setNeedsLayout];
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self setNeedsLayout];
-                });
-            }
-        }
-    }
+    self.maskedCorners = (CACornerMask)qmui_maskedCorners;
     if (maskedCornersChanged) {
         // 需要刷新border
         if ([self.delegate respondsToSelector:@selector(layoutSublayersOfLayer:)]) {
@@ -225,11 +185,9 @@ static char kAssociatedObjectKey_maskedCorners;
                                                                NSStringFromSelector(@selector(shadowOpacity)): [NSNull null],
                                                                NSStringFromSelector(@selector(shadowOffset)): [NSNull null],
                                                                NSStringFromSelector(@selector(shadowRadius)): [NSNull null],
-                                                               NSStringFromSelector(@selector(shadowPath)): [NSNull null]}.mutableCopy;
-    
-    if (@available(iOS 11.0, *)) {
-        [actions addEntriesFromDictionary:@{NSStringFromSelector(@selector(maskedCorners)): [NSNull null]}];
-    }
+                                                               NSStringFromSelector(@selector(shadowPath)): [NSNull null],
+                                                               NSStringFromSelector(@selector(maskedCorners)): [NSNull null],
+    }.mutableCopy;
     
     if ([self isKindOfClass:[CAShapeLayer class]]) {
         [actions addEntriesFromDictionary:@{NSStringFromSelector(@selector(path)): [NSNull null],
@@ -308,67 +266,6 @@ static char kAssociatedObjectKey_maskedCorners;
     CALayer *layer = [self qmui_separatorLayer];
     layer.backgroundColor = TableViewSeparatorColor.CGColor;
     return layer;
-}
-
-- (BOOL)hasFourCornerRadius {
-    return (self.qmui_maskedCorners & QMUILayerMinXMinYCorner) == QMUILayerMinXMinYCorner &&
-           (self.qmui_maskedCorners & QMUILayerMaxXMinYCorner) == QMUILayerMaxXMinYCorner &&
-           (self.qmui_maskedCorners & QMUILayerMinXMaxYCorner) == QMUILayerMinXMaxYCorner &&
-           (self.qmui_maskedCorners & QMUILayerMaxXMaxYCorner) == QMUILayerMaxXMaxYCorner;
-}
-
-@end
-
-@implementation UIView (QMUI_CornerRadius)
-
-static NSString *kMaskName = @"QMUI_CornerRadius_Mask";
-
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        ExtendImplementationOfVoidMethodWithoutArguments([CALayer class], @selector(layoutSublayers), ^(CALayer *selfObject) {
-            if (@available(iOS 11, *)) {
-            } else {
-                if (selfObject.mask && ![selfObject.mask.name isEqualToString:kMaskName]) {
-                    return;
-                }
-                if (selfObject.qmui_maskedCorners) {
-                    if (selfObject.qmui_originCornerRadius <= 0 || [selfObject hasFourCornerRadius]) {
-                        if (selfObject.mask) {
-                            selfObject.mask = nil;
-                        }
-                    } else {
-                        CAShapeLayer *cornerMaskLayer = [CAShapeLayer layer];
-                        cornerMaskLayer.name = kMaskName;
-                        UIRectCorner rectCorner = 0;
-                        if ((selfObject.qmui_maskedCorners & QMUILayerMinXMinYCorner) == QMUILayerMinXMinYCorner) {
-                            rectCorner |= UIRectCornerTopLeft;
-                        }
-                        if ((selfObject.qmui_maskedCorners & QMUILayerMaxXMinYCorner) == QMUILayerMaxXMinYCorner) {
-                            rectCorner |= UIRectCornerTopRight;
-                        }
-                        if ((selfObject.qmui_maskedCorners & QMUILayerMinXMaxYCorner) == QMUILayerMinXMaxYCorner) {
-                            rectCorner |= UIRectCornerBottomLeft;
-                        }
-                        if ((selfObject.qmui_maskedCorners & QMUILayerMaxXMaxYCorner) == QMUILayerMaxXMaxYCorner) {
-                            rectCorner |= UIRectCornerBottomRight;
-                        }
-                        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:selfObject.bounds byRoundingCorners:rectCorner cornerRadii:CGSizeMake(selfObject.qmui_originCornerRadius, selfObject.qmui_originCornerRadius)];
-                        cornerMaskLayer.frame = CGRectMakeWithSize(selfObject.bounds.size);
-                        cornerMaskLayer.path = path.CGPath;
-                        selfObject.mask = cornerMaskLayer;
-                    }
-                }
-            }
-        });
-    });
-}
-                
-- (BOOL)hasFourCornerRadius {
-    return (self.layer.qmui_maskedCorners & QMUILayerMinXMinYCorner) == QMUILayerMinXMinYCorner &&
-           (self.layer.qmui_maskedCorners & QMUILayerMaxXMinYCorner) == QMUILayerMaxXMinYCorner &&
-           (self.layer.qmui_maskedCorners & QMUILayerMinXMaxYCorner) == QMUILayerMinXMaxYCorner &&
-           (self.layer.qmui_maskedCorners & QMUILayerMaxXMaxYCorner) == QMUILayerMaxXMaxYCorner;
 }
 
 @end

@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -96,7 +96,7 @@ static char kAssociatedObjectKey_qmuiCacheCellSizeByKeyAutomatically;
     objc_setAssociatedObject(self, &kAssociatedObjectKey_qmuiCacheCellSizeByKeyAutomatically, @(qmui_cacheCellSizeByKeyAutomatically), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
     if (qmui_cacheCellSizeByKeyAutomatically) {
-        NSAssert([self.collectionViewLayout isKindOfClass:[UICollectionViewFlowLayout class]], @"QMUICellSizeKeyCache 只支持 UICollectionViewFlowLayout");
+        QMUIAssert([self.collectionViewLayout isKindOfClass:[UICollectionViewFlowLayout class]], @"QMUICellSizeKeyCache", @"只支持 %@", NSStringFromClass(UICollectionViewFlowLayout.class));
         
         [self replaceMethodForDelegateIfNeeded:self.delegate];
         
@@ -140,10 +140,10 @@ static char kAssociatedObjectKey_qmuiAllKeyCaches;
 - (CGFloat)widthForCacheKey {
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
     if (layout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
-        CGFloat height = CGRectGetHeight(self.bounds) - UIEdgeInsetsGetVerticalValue(self.qmui_contentInset) - UIEdgeInsetsGetVerticalValue(layout.sectionInset);
+        CGFloat height = CGRectGetHeight(self.bounds) - UIEdgeInsetsGetVerticalValue(self.adjustedContentInset) - UIEdgeInsetsGetVerticalValue(layout.sectionInset);
         return height;
     }
-    CGFloat width = CGRectGetWidth(self.bounds) - UIEdgeInsetsGetHorizontalValue(self.qmui_contentInset) - UIEdgeInsetsGetHorizontalValue(((UICollectionViewFlowLayout *)self.collectionViewLayout).sectionInset);
+    CGFloat width = CGRectGetWidth(self.bounds) - UIEdgeInsetsGetHorizontalValue(self.adjustedContentInset) - UIEdgeInsetsGetHorizontalValue(((UICollectionViewFlowLayout *)self.collectionViewLayout).sectionInset);
     return width;
 }
 
@@ -151,7 +151,8 @@ static char kAssociatedObjectKey_qmuiAllKeyCaches;
     [collectionView qmui_collectionView:collectionView willDisplayCell:cell forItemAtIndexPath:indexPath];
     if (collectionView.qmui_cacheCellSizeByKeyAutomatically) {
         if (![collectionView.delegate respondsToSelector:@selector(qmui_collectionView:cacheKeyForItemAtIndexPath:)]) {
-            NSAssert(NO, @"%@ 需要实现 %@ 方法才能自动缓存 cell 高度", collectionView.delegate, NSStringFromSelector(@selector(qmui_collectionView:cacheKeyForItemAtIndexPath:)));
+            QMUIAssert(NO, @"QMUICellSizeKeyCache", @"%@ 需要实现 %@ 方法才能自动缓存 cell 高度", collectionView.delegate, NSStringFromSelector(@selector(qmui_collectionView:cacheKeyForItemAtIndexPath:)));
+            return;
         }
         id<NSCopying> cachedKey = [((id<QMUICellSizeKeyCache_UICollectionViewDelegate>)self) qmui_collectionView:collectionView cacheKeyForItemAtIndexPath:indexPath];
         [collectionView.qmui_currentCellSizeKeyCache cacheSize:cell.frame.size forKey:cachedKey];

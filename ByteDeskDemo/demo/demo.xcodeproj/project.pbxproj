@@ -8,66 +8,57 @@
 
 /* Begin PBXBuildFile section */
 		3D0DB22B21CC607C002ACB3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D0DB22D21CC607C002ACB3E /* InfoPlist.strings */; };
-		3D2BBD1E2426EA7300751D28 /* QDCommonGroupListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBCFB2426EA7200751D28 /* QDCommonGroupListViewController.m */; };
-		3D2BBD1F2426EA7300751D28 /* QDCommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBCFE2426EA7200751D28 /* QDCommonViewController.m */; };
-		3D2BBD202426EA7300751D28 /* QDCommonGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBD012426EA7200751D28 /* QDCommonGridViewController.m */; };
-		3D2BBD212426EA7300751D28 /* QDTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBD022426EA7200751D28 /* QDTabBarViewController.m */; };
-		3D2BBD222426EA7300751D28 /* QDCommonListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBD042426EA7200751D28 /* QDCommonListViewController.m */; };
-		3D2BBD232426EA7300751D28 /* QDNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBD072426EA7200751D28 /* QDNavigationController.m */; };
-		3D2BBD242426EA7300751D28 /* QDCommonTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBD082426EA7200751D28 /* QDCommonTableViewController.m */; };
-		3D2BBD252426EA7300751D28 /* QDUIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBD0C2426EA7300751D28 /* QDUIHelper.m */; };
-		3D2BBD262426EA7300751D28 /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBD0D2426EA7300751D28 /* UIImageEffects.m */; };
-		3D2BBD272426EA7300751D28 /* QDCommonUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBD0E2426EA7300751D28 /* QDCommonUI.m */; };
-		3D2BBD282426EA7300751D28 /* QMUIConfigurationTemplateDark.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBD122426EA7300751D28 /* QMUIConfigurationTemplateDark.m */; };
-		3D2BBD292426EA7300751D28 /* QDThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBD142426EA7300751D28 /* QDThemeManager.m */; };
-		3D2BBD2A2426EA7300751D28 /* QMUIConfigurationTemplatePinkRose.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBD152426EA7300751D28 /* QMUIConfigurationTemplatePinkRose.m */; };
-		3D2BBD2B2426EA7300751D28 /* QMUIConfigurationTemplateGrass.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBD172426EA7300751D28 /* QMUIConfigurationTemplateGrass.m */; };
-		3D2BBD2C2426EA7300751D28 /* QMUIConfigurationTemplateGrapefruit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBD1A2426EA7300751D28 /* QMUIConfigurationTemplateGrapefruit.m */; };
-		3D2BBD2D2426EA7300751D28 /* QMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBD1D2426EA7300751D28 /* QMUIConfigurationTemplate.m */; };
-		3D2BBD302426EBA800751D28 /* QDSingleImagePickerPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BBD2E2426EBA800751D28 /* QDSingleImagePickerPreviewViewController.m */; };
-		3D3823D921CF5BE800AB12AD /* KFFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3823D821CF5BE800AB12AD /* KFFriendViewController.m */; };
 		3D38CC30225179A100BA2668 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D38CC2F225179A100BA2668 /* CloudKit.framework */; };
-		3D391BEA22869B5000D03C04 /* KFMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D391BE922869B5000D03C04 /* KFMomentViewController.m */; };
-		3D3928CD21BF8F20001E1257 /* KFContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928CC21BF8F20001E1257 /* KFContactViewController.m */; };
-		3D3928D021BF8F31001E1257 /* KFGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928CF21BF8F31001E1257 /* KFGroupViewController.m */; };
-		3D3928EB21C25E9E001E1257 /* KFQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928EA21C25E9E001E1257 /* KFQueueViewController.m */; };
-		3D3928EE21C25EAB001E1257 /* KFThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928ED21C25EAB001E1257 /* KFThreadViewController.m */; };
-		3D3928F721C280C8001E1257 /* KFDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928F321C280C8001E1257 /* KFDetailViewController.m */; };
-		3D3928F821C280C8001E1257 /* KFContactSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3928F521C280C8001E1257 /* KFContactSelectViewController.m */; };
 		3D39293521C28310001E1257 /* KFQueueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D39293321C28310001E1257 /* KFQueueTableViewCell.m */; };
 		3D39293621C28310001E1257 /* KFContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D39293421C28310001E1257 /* KFContactTableViewCell.m */; };
 		3D39293A21C2831A001E1257 /* KFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D39293821C2831A001E1257 /* KFUtils.m */; };
-		3D39294121C28595001E1257 /* KFProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D39294021C28595001E1257 /* KFProfileViewController.m */; };
-		3D3958A2224CC2E2000E88EE /* KFServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3958A1224CC2E2000E88EE /* KFServerViewController.m */; };
-		3D3B7C3021CA3613001FE199 /* BDApisTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3B7C2F21CA3613001FE199 /* BDApisTableViewController.m */; };
-		3D47629921D1CA190034BF83 /* KFNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D47629821D1CA190034BF83 /* KFNoticeViewController.m */; };
 		3D4824FE21579E3E00B50593 /* bytedesk-ui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4824FD21579E3E00B50593 /* bytedesk-ui.framework */; };
 		3D4824FF21579E3E00B50593 /* bytedesk-ui.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4824FD21579E3E00B50593 /* bytedesk-ui.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3D4C0B0E213131500083C8F9 /* KFIMApiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4C0B0C2131314F0083C8F9 /* KFIMApiViewController.m */; };
 		3D5489D21FC515CF003117B4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5489D11FC515CF003117B4 /* AppDelegate.m */; };
 		3D5489D81FC515CF003117B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D5489D61FC515CF003117B4 /* Main.storyboard */; };
 		3D5489DA1FC515CF003117B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D5489D91FC515CF003117B4 /* Assets.xcassets */; };
 		3D5489DD1FC515CF003117B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D5489DB1FC515CF003117B4 /* LaunchScreen.storyboard */; };
 		3D5489E01FC515CF003117B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5489DF1FC515CF003117B4 /* main.m */; };
-		3D548A431FC51906003117B4 /* KFKeFuApiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A421FC51906003117B4 /* KFKeFuApiViewController.m */; };
-		3D548A4B1FC52374003117B4 /* KFIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A4A1FC52374003117B4 /* KFIntroViewController.m */; };
-		3D548A541FC524B1003117B4 /* KFChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A531FC524B1003117B4 /* KFChatViewController.m */; };
-		3D548A571FC524D6003117B4 /* KFUserinfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A561FC524D6003117B4 /* KFUserinfoViewController.m */; };
-		3D548A5A1FC524EC003117B4 /* KFStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A591FC524EC003117B4 /* KFStatusViewController.m */; };
-		3D548A5D1FC5251B003117B4 /* KFVisitorThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D548A5C1FC5251B003117B4 /* KFVisitorThreadViewController.m */; };
 		3D5606EC205FB699000E770C /* KFThreadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5606EB205FB699000E770C /* KFThreadTableViewCell.m */; };
-		3DCA9C6D21F60FE800E63998 /* KFSupportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCA9C6C21F60FE800E63998 /* KFSupportViewController.m */; };
+		3DAB3C6927EDE8800078A56E /* QMUIInteractiveDebugger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C2027EDE87F0078A56E /* QMUIInteractiveDebugger.m */; };
+		3DAB3C6A27EDE8800078A56E /* QMUIInteractiveDebugPanelItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C2227EDE87F0078A56E /* QMUIInteractiveDebugPanelItem.m */; };
+		3DAB3C6B27EDE8800078A56E /* QMUIInteractiveDebugPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C2427EDE87F0078A56E /* QMUIInteractiveDebugPanelViewController.m */; };
+		3DAB3C6C27EDE8800078A56E /* QMUIConfigurationTemplateDark.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C2927EDE87F0078A56E /* QMUIConfigurationTemplateDark.m */; };
+		3DAB3C6D27EDE8800078A56E /* QDThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C2B27EDE87F0078A56E /* QDThemeManager.m */; };
+		3DAB3C6E27EDE8800078A56E /* QMUIConfigurationTemplatePinkRose.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C2C27EDE87F0078A56E /* QMUIConfigurationTemplatePinkRose.m */; };
+		3DAB3C6F27EDE8800078A56E /* QMUIConfigurationTemplateGrass.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C2E27EDE87F0078A56E /* QMUIConfigurationTemplateGrass.m */; };
+		3DAB3C7027EDE8800078A56E /* QMUIConfigurationTemplateGrapefruit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C3127EDE87F0078A56E /* QMUIConfigurationTemplateGrapefruit.m */; };
+		3DAB3C7127EDE8800078A56E /* QMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C3427EDE87F0078A56E /* QMUIConfigurationTemplate.m */; };
+		3DAB3C7227EDE8800078A56E /* KFAppRateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C3527EDE87F0078A56E /* KFAppRateViewController.m */; };
+		3DAB3C7327EDE8800078A56E /* QDSingleImagePickerPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C3727EDE87F0078A56E /* QDSingleImagePickerPreviewViewController.m */; };
+		3DAB3C7427EDE8800078A56E /* KFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C3827EDE87F0078A56E /* KFNavigationController.m */; };
+		3DAB3C7527EDE8800078A56E /* QDUIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C3C27EDE87F0078A56E /* QDUIHelper.m */; };
+		3DAB3C7627EDE8800078A56E /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C3D27EDE87F0078A56E /* UIImageEffects.m */; };
+		3DAB3C7727EDE8800078A56E /* QDCommonUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C3E27EDE87F0078A56E /* QDCommonUI.m */; };
+		3DAB3C7827EDE8800078A56E /* KFIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C4027EDE87F0078A56E /* KFIntroViewController.m */; };
+		3DAB3C7927EDE8800078A56E /* KFServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C4127EDE87F0078A56E /* KFServerViewController.m */; };
+		3DAB3C7A27EDE8800078A56E /* KFAppUpgrateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C4327EDE87F0078A56E /* KFAppUpgrateViewController.m */; };
+		3DAB3C7B27EDE8800078A56E /* QDCommonGroupListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C4527EDE87F0078A56E /* QDCommonGroupListViewController.m */; };
+		3DAB3C7C27EDE8800078A56E /* QDCommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C4827EDE87F0078A56E /* QDCommonViewController.m */; };
+		3DAB3C7D27EDE8800078A56E /* QDCommonGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C4B27EDE87F0078A56E /* QDCommonGridViewController.m */; };
+		3DAB3C7E27EDE8800078A56E /* QDStyleSelectableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C4C27EDE87F0078A56E /* QDStyleSelectableTableViewController.m */; };
+		3DAB3C7F27EDE8800078A56E /* QDTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C4D27EDE87F0078A56E /* QDTabBarViewController.m */; };
+		3DAB3C8027EDE8800078A56E /* QDCommonListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C4F27EDE87F0078A56E /* QDCommonListViewController.m */; };
+		3DAB3C8127EDE8800078A56E /* QDNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C5227EDE87F0078A56E /* QDNavigationController.m */; };
+		3DAB3C8227EDE8800078A56E /* QDCommonTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C5327EDE87F0078A56E /* QDCommonTableViewController.m */; };
+		3DAB3C8327EDE8800078A56E /* KFKeFuApiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C5927EDE87F0078A56E /* KFKeFuApiViewController.m */; };
+		3DAB3C8427EDE8800078A56E /* KFVisitorThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C5C27EDE87F0078A56E /* KFVisitorThreadViewController.m */; };
+		3DAB3C8527EDE8800078A56E /* KFStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C5D27EDE87F0078A56E /* KFStatusViewController.m */; };
+		3DAB3C8627EDE8800078A56E /* KFChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C6027EDE87F0078A56E /* KFChatViewController.m */; };
+		3DAB3C8727EDE8800078A56E /* KFUserinfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C6327EDE87F0078A56E /* KFUserinfoViewController.m */; };
+		3DAB3C8827EDE8800078A56E /* KFSupportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C6427EDE87F0078A56E /* KFSupportViewController.m */; };
+		3DAB3C8927EDE8800078A56E /* BDApisTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB3C6827EDE8800078A56E /* BDApisTableViewController.m */; };
 		3DCB17672267813C00E8FB16 /* SWQRCodeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB175C2267813C00E8FB16 /* SWQRCodeConfig.m */; };
 		3DCB17682267813C00E8FB16 /* SWQRCodeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB175D2267813C00E8FB16 /* SWQRCodeManager.m */; };
 		3DCB17692267813C00E8FB16 /* SWQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB17612267813C00E8FB16 /* SWQRCodeViewController.m */; };
 		3DCB176A2267813C00E8FB16 /* SWQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3DCB17622267813C00E8FB16 /* SWQRCode.bundle */; };
 		3DCB176B2267813C00E8FB16 /* SWScannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB17642267813C00E8FB16 /* SWScannerView.m */; };
-		3DCB176E2267F20900E8FB16 /* KFAppRateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB176D2267F20900E8FB16 /* KFAppRateViewController.m */; };
-		3DCB17712267F21D00E8FB16 /* KFAppUpgrateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB17702267F21D00E8FB16 /* KFAppUpgrateViewController.m */; };
-		3DCB17752267FC7300E8FB16 /* KFSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCB17742267FC7300E8FB16 /* KFSettingViewController.m */; };
-		3DD32EFA2262B24C0049FB24 /* KFScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD32EF92262B24C0049FB24 /* KFScanViewController.m */; };
 		3DE1AA7420039A7C00A32B20 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DE1AA7620039A7C00A32B20 /* Localizable.strings */; };
-		3DE6FD872235007B006F1329 /* KFQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6FD862235007B006F1329 /* KFQRCodeViewController.m */; };
 		3DE934D022DC999D00CE1C91 /* SDTimeLineTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE934AC22DC999D00CE1C91 /* SDTimeLineTableViewController.m */; };
 		3DE934D122DC999D00CE1C91 /* SDBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE934AE22DC999D00CE1C91 /* SDBaseTableViewController.m */; };
 		3DE934D222DC999D00CE1C91 /* SDBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE934AF22DC999D00CE1C91 /* SDBaseNavigationController.m */; };
@@ -142,75 +133,14 @@
 		3ABA9625A7F4C1A519864722 /* Pods_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D0DB22C21CC607C002ACB3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3D0DB22E21CC607E002ACB3E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		3D2BBCFB2426EA7200751D28 /* QDCommonGroupListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDCommonGroupListViewController.m; sourceTree = "<group>"; };
-		3D2BBCFC2426EA7200751D28 /* QDTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDTabBarViewController.h; sourceTree = "<group>"; };
-		3D2BBCFD2426EA7200751D28 /* QDCommonListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDCommonListViewController.h; sourceTree = "<group>"; };
-		3D2BBCFE2426EA7200751D28 /* QDCommonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDCommonViewController.m; sourceTree = "<group>"; };
-		3D2BBCFF2426EA7200751D28 /* QDNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDNavigationController.h; sourceTree = "<group>"; };
-		3D2BBD002426EA7200751D28 /* QDCommonTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDCommonTableViewController.h; sourceTree = "<group>"; };
-		3D2BBD012426EA7200751D28 /* QDCommonGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDCommonGridViewController.m; sourceTree = "<group>"; };
-		3D2BBD022426EA7200751D28 /* QDTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDTabBarViewController.m; sourceTree = "<group>"; };
-		3D2BBD032426EA7200751D28 /* QDCommonGroupListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDCommonGroupListViewController.h; sourceTree = "<group>"; };
-		3D2BBD042426EA7200751D28 /* QDCommonListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDCommonListViewController.m; sourceTree = "<group>"; };
-		3D2BBD052426EA7200751D28 /* QDCommonGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDCommonGridViewController.h; sourceTree = "<group>"; };
-		3D2BBD062426EA7200751D28 /* QDCommonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDCommonViewController.h; sourceTree = "<group>"; };
-		3D2BBD072426EA7200751D28 /* QDNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDNavigationController.m; sourceTree = "<group>"; };
-		3D2BBD082426EA7200751D28 /* QDCommonTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDCommonTableViewController.m; sourceTree = "<group>"; };
-		3D2BBD0A2426EA7300751D28 /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageEffects.h; sourceTree = "<group>"; };
-		3D2BBD0B2426EA7300751D28 /* QDCommonUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDCommonUI.h; sourceTree = "<group>"; };
-		3D2BBD0C2426EA7300751D28 /* QDUIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDUIHelper.m; sourceTree = "<group>"; };
-		3D2BBD0D2426EA7300751D28 /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
-		3D2BBD0E2426EA7300751D28 /* QDCommonUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDCommonUI.m; sourceTree = "<group>"; };
-		3D2BBD0F2426EA7300751D28 /* QDUIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDUIHelper.h; sourceTree = "<group>"; };
-		3D2BBD112426EA7300751D28 /* QMUIConfigurationTemplateGrass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplateGrass.h; sourceTree = "<group>"; };
-		3D2BBD122426EA7300751D28 /* QMUIConfigurationTemplateDark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplateDark.m; sourceTree = "<group>"; };
-		3D2BBD132426EA7300751D28 /* QMUIConfigurationTemplateGrapefruit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplateGrapefruit.h; sourceTree = "<group>"; };
-		3D2BBD142426EA7300751D28 /* QDThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDThemeManager.m; sourceTree = "<group>"; };
-		3D2BBD152426EA7300751D28 /* QMUIConfigurationTemplatePinkRose.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplatePinkRose.m; sourceTree = "<group>"; };
-		3D2BBD162426EA7300751D28 /* QMUIConfigurationTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplate.h; sourceTree = "<group>"; };
-		3D2BBD172426EA7300751D28 /* QMUIConfigurationTemplateGrass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplateGrass.m; sourceTree = "<group>"; };
-		3D2BBD182426EA7300751D28 /* QMUIConfigurationTemplateDark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplateDark.h; sourceTree = "<group>"; };
-		3D2BBD192426EA7300751D28 /* QDThemeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDThemeProtocol.h; sourceTree = "<group>"; };
-		3D2BBD1A2426EA7300751D28 /* QMUIConfigurationTemplateGrapefruit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplateGrapefruit.m; sourceTree = "<group>"; };
-		3D2BBD1B2426EA7300751D28 /* QDThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDThemeManager.h; sourceTree = "<group>"; };
-		3D2BBD1C2426EA7300751D28 /* QMUIConfigurationTemplatePinkRose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplatePinkRose.h; sourceTree = "<group>"; };
-		3D2BBD1D2426EA7300751D28 /* QMUIConfigurationTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplate.m; sourceTree = "<group>"; };
-		3D2BBD2E2426EBA800751D28 /* QDSingleImagePickerPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDSingleImagePickerPreviewViewController.m; sourceTree = "<group>"; };
-		3D2BBD2F2426EBA800751D28 /* QDSingleImagePickerPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDSingleImagePickerPreviewViewController.h; sourceTree = "<group>"; };
-		3D3823D721CF5BE800AB12AD /* KFFriendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFFriendViewController.h; sourceTree = "<group>"; };
-		3D3823D821CF5BE800AB12AD /* KFFriendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFFriendViewController.m; sourceTree = "<group>"; };
 		3D38CC2F225179A100BA2668 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		3D391BE822869B5000D03C04 /* KFMomentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFMomentViewController.h; sourceTree = "<group>"; };
-		3D391BE922869B5000D03C04 /* KFMomentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFMomentViewController.m; sourceTree = "<group>"; };
-		3D3928CB21BF8F20001E1257 /* KFContactViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFContactViewController.h; sourceTree = "<group>"; };
-		3D3928CC21BF8F20001E1257 /* KFContactViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFContactViewController.m; sourceTree = "<group>"; };
-		3D3928CE21BF8F31001E1257 /* KFGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFGroupViewController.h; sourceTree = "<group>"; };
-		3D3928CF21BF8F31001E1257 /* KFGroupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFGroupViewController.m; sourceTree = "<group>"; };
-		3D3928E921C25E9E001E1257 /* KFQueueViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFQueueViewController.h; sourceTree = "<group>"; };
-		3D3928EA21C25E9E001E1257 /* KFQueueViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFQueueViewController.m; sourceTree = "<group>"; };
-		3D3928EC21C25EAB001E1257 /* KFThreadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFThreadViewController.h; sourceTree = "<group>"; };
-		3D3928ED21C25EAB001E1257 /* KFThreadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFThreadViewController.m; sourceTree = "<group>"; };
-		3D3928F321C280C8001E1257 /* KFDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFDetailViewController.m; sourceTree = "<group>"; };
-		3D3928F421C280C8001E1257 /* KFContactSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFContactSelectViewController.h; sourceTree = "<group>"; };
-		3D3928F521C280C8001E1257 /* KFContactSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFContactSelectViewController.m; sourceTree = "<group>"; };
-		3D3928F621C280C8001E1257 /* KFDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFDetailViewController.h; sourceTree = "<group>"; };
 		3D39293121C28310001E1257 /* KFQueueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFQueueTableViewCell.h; sourceTree = "<group>"; };
 		3D39293221C28310001E1257 /* KFContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFContactTableViewCell.h; sourceTree = "<group>"; };
 		3D39293321C28310001E1257 /* KFQueueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFQueueTableViewCell.m; sourceTree = "<group>"; };
 		3D39293421C28310001E1257 /* KFContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFContactTableViewCell.m; sourceTree = "<group>"; };
 		3D39293821C2831A001E1257 /* KFUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFUtils.m; sourceTree = "<group>"; };
 		3D39293921C2831A001E1257 /* KFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFUtils.h; sourceTree = "<group>"; };
-		3D39293F21C28595001E1257 /* KFProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFProfileViewController.h; sourceTree = "<group>"; };
-		3D39294021C28595001E1257 /* KFProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFProfileViewController.m; sourceTree = "<group>"; };
-		3D3958A0224CC2E2000E88EE /* KFServerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFServerViewController.h; sourceTree = "<group>"; };
-		3D3958A1224CC2E2000E88EE /* KFServerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFServerViewController.m; sourceTree = "<group>"; };
-		3D3B7C2E21CA3613001FE199 /* BDApisTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDApisTableViewController.h; sourceTree = "<group>"; };
-		3D3B7C2F21CA3613001FE199 /* BDApisTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDApisTableViewController.m; sourceTree = "<group>"; };
-		3D47629721D1CA190034BF83 /* KFNoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFNoticeViewController.h; sourceTree = "<group>"; };
-		3D47629821D1CA190034BF83 /* KFNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFNoticeViewController.m; sourceTree = "<group>"; };
 		3D4824FD21579E3E00B50593 /* bytedesk-ui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "bytedesk-ui.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3D4C0B0C2131314F0083C8F9 /* KFIMApiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFIMApiViewController.m; sourceTree = "<group>"; };
-		3D4C0B0D2131314F0083C8F9 /* KFIMApiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFIMApiViewController.h; sourceTree = "<group>"; };
 		3D5489CD1FC515CF003117B4 /* demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D5489D01FC515CF003117B4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3D5489D11FC515CF003117B4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -221,23 +151,76 @@
 		3D5489DF1FC515CF003117B4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3D548A3B1FC51719003117B4 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		3D548A3C1FC51795003117B4 /* demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = demo.entitlements; sourceTree = "<group>"; };
-		3D548A411FC51906003117B4 /* KFKeFuApiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFKeFuApiViewController.h; sourceTree = "<group>"; };
-		3D548A421FC51906003117B4 /* KFKeFuApiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFKeFuApiViewController.m; sourceTree = "<group>"; };
-		3D548A491FC52374003117B4 /* KFIntroViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFIntroViewController.h; sourceTree = "<group>"; };
-		3D548A4A1FC52374003117B4 /* KFIntroViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFIntroViewController.m; sourceTree = "<group>"; };
-		3D548A521FC524B1003117B4 /* KFChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFChatViewController.h; sourceTree = "<group>"; };
-		3D548A531FC524B1003117B4 /* KFChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFChatViewController.m; sourceTree = "<group>"; };
-		3D548A551FC524D6003117B4 /* KFUserinfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFUserinfoViewController.h; sourceTree = "<group>"; };
-		3D548A561FC524D6003117B4 /* KFUserinfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFUserinfoViewController.m; sourceTree = "<group>"; };
-		3D548A581FC524EC003117B4 /* KFStatusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFStatusViewController.h; sourceTree = "<group>"; };
-		3D548A591FC524EC003117B4 /* KFStatusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFStatusViewController.m; sourceTree = "<group>"; };
-		3D548A5B1FC5251B003117B4 /* KFVisitorThreadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFVisitorThreadViewController.h; sourceTree = "<group>"; };
-		3D548A5C1FC5251B003117B4 /* KFVisitorThreadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFVisitorThreadViewController.m; sourceTree = "<group>"; };
 		3D5606EA205FB699000E770C /* KFThreadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFThreadTableViewCell.h; sourceTree = "<group>"; };
 		3D5606EB205FB699000E770C /* KFThreadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFThreadTableViewCell.m; sourceTree = "<group>"; };
 		3D93081C235EAEB600482C7D /* bytedesk-mars.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "bytedesk-mars.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3DCA9C6B21F60FE800E63998 /* KFSupportViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFSupportViewController.h; sourceTree = "<group>"; };
-		3DCA9C6C21F60FE800E63998 /* KFSupportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFSupportViewController.m; sourceTree = "<group>"; };
+		3DAB3C2027EDE87F0078A56E /* QMUIInteractiveDebugger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIInteractiveDebugger.m; sourceTree = "<group>"; };
+		3DAB3C2127EDE87F0078A56E /* QMUIInteractiveDebugPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIInteractiveDebugPanelViewController.h; sourceTree = "<group>"; };
+		3DAB3C2227EDE87F0078A56E /* QMUIInteractiveDebugPanelItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIInteractiveDebugPanelItem.m; sourceTree = "<group>"; };
+		3DAB3C2327EDE87F0078A56E /* QMUIInteractiveDebugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIInteractiveDebugger.h; sourceTree = "<group>"; };
+		3DAB3C2427EDE87F0078A56E /* QMUIInteractiveDebugPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIInteractiveDebugPanelViewController.m; sourceTree = "<group>"; };
+		3DAB3C2527EDE87F0078A56E /* QMUIInteractiveDebugPanelItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIInteractiveDebugPanelItem.h; sourceTree = "<group>"; };
+		3DAB3C2627EDE87F0078A56E /* KFServerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFServerViewController.h; sourceTree = "<group>"; };
+		3DAB3C2827EDE87F0078A56E /* QMUIConfigurationTemplateGrass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplateGrass.h; sourceTree = "<group>"; };
+		3DAB3C2927EDE87F0078A56E /* QMUIConfigurationTemplateDark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplateDark.m; sourceTree = "<group>"; };
+		3DAB3C2A27EDE87F0078A56E /* QMUIConfigurationTemplateGrapefruit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplateGrapefruit.h; sourceTree = "<group>"; };
+		3DAB3C2B27EDE87F0078A56E /* QDThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDThemeManager.m; sourceTree = "<group>"; };
+		3DAB3C2C27EDE87F0078A56E /* QMUIConfigurationTemplatePinkRose.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplatePinkRose.m; sourceTree = "<group>"; };
+		3DAB3C2D27EDE87F0078A56E /* QMUIConfigurationTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplate.h; sourceTree = "<group>"; };
+		3DAB3C2E27EDE87F0078A56E /* QMUIConfigurationTemplateGrass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplateGrass.m; sourceTree = "<group>"; };
+		3DAB3C2F27EDE87F0078A56E /* QMUIConfigurationTemplateDark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplateDark.h; sourceTree = "<group>"; };
+		3DAB3C3027EDE87F0078A56E /* QDThemeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDThemeProtocol.h; sourceTree = "<group>"; };
+		3DAB3C3127EDE87F0078A56E /* QMUIConfigurationTemplateGrapefruit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplateGrapefruit.m; sourceTree = "<group>"; };
+		3DAB3C3227EDE87F0078A56E /* QDThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDThemeManager.h; sourceTree = "<group>"; };
+		3DAB3C3327EDE87F0078A56E /* QMUIConfigurationTemplatePinkRose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplatePinkRose.h; sourceTree = "<group>"; };
+		3DAB3C3427EDE87F0078A56E /* QMUIConfigurationTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplate.m; sourceTree = "<group>"; };
+		3DAB3C3527EDE87F0078A56E /* KFAppRateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFAppRateViewController.m; sourceTree = "<group>"; };
+		3DAB3C3627EDE87F0078A56E /* KFAppUpgrateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFAppUpgrateViewController.h; sourceTree = "<group>"; };
+		3DAB3C3727EDE87F0078A56E /* QDSingleImagePickerPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDSingleImagePickerPreviewViewController.m; sourceTree = "<group>"; };
+		3DAB3C3827EDE87F0078A56E /* KFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFNavigationController.m; sourceTree = "<group>"; };
+		3DAB3C3A27EDE87F0078A56E /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageEffects.h; sourceTree = "<group>"; };
+		3DAB3C3B27EDE87F0078A56E /* QDCommonUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDCommonUI.h; sourceTree = "<group>"; };
+		3DAB3C3C27EDE87F0078A56E /* QDUIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDUIHelper.m; sourceTree = "<group>"; };
+		3DAB3C3D27EDE87F0078A56E /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
+		3DAB3C3E27EDE87F0078A56E /* QDCommonUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDCommonUI.m; sourceTree = "<group>"; };
+		3DAB3C3F27EDE87F0078A56E /* QDUIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDUIHelper.h; sourceTree = "<group>"; };
+		3DAB3C4027EDE87F0078A56E /* KFIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFIntroViewController.m; sourceTree = "<group>"; };
+		3DAB3C4127EDE87F0078A56E /* KFServerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFServerViewController.m; sourceTree = "<group>"; };
+		3DAB3C4227EDE87F0078A56E /* KFAppRateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFAppRateViewController.h; sourceTree = "<group>"; };
+		3DAB3C4327EDE87F0078A56E /* KFAppUpgrateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFAppUpgrateViewController.m; sourceTree = "<group>"; };
+		3DAB3C4527EDE87F0078A56E /* QDCommonGroupListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDCommonGroupListViewController.m; sourceTree = "<group>"; };
+		3DAB3C4627EDE87F0078A56E /* QDTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDTabBarViewController.h; sourceTree = "<group>"; };
+		3DAB3C4727EDE87F0078A56E /* QDCommonListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDCommonListViewController.h; sourceTree = "<group>"; };
+		3DAB3C4827EDE87F0078A56E /* QDCommonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDCommonViewController.m; sourceTree = "<group>"; };
+		3DAB3C4927EDE87F0078A56E /* QDNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDNavigationController.h; sourceTree = "<group>"; };
+		3DAB3C4A27EDE87F0078A56E /* QDCommonTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDCommonTableViewController.h; sourceTree = "<group>"; };
+		3DAB3C4B27EDE87F0078A56E /* QDCommonGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDCommonGridViewController.m; sourceTree = "<group>"; };
+		3DAB3C4C27EDE87F0078A56E /* QDStyleSelectableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDStyleSelectableTableViewController.m; sourceTree = "<group>"; };
+		3DAB3C4D27EDE87F0078A56E /* QDTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDTabBarViewController.m; sourceTree = "<group>"; };
+		3DAB3C4E27EDE87F0078A56E /* QDCommonGroupListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDCommonGroupListViewController.h; sourceTree = "<group>"; };
+		3DAB3C4F27EDE87F0078A56E /* QDCommonListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDCommonListViewController.m; sourceTree = "<group>"; };
+		3DAB3C5027EDE87F0078A56E /* QDCommonGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDCommonGridViewController.h; sourceTree = "<group>"; };
+		3DAB3C5127EDE87F0078A56E /* QDCommonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDCommonViewController.h; sourceTree = "<group>"; };
+		3DAB3C5227EDE87F0078A56E /* QDNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDNavigationController.m; sourceTree = "<group>"; };
+		3DAB3C5327EDE87F0078A56E /* QDCommonTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDCommonTableViewController.m; sourceTree = "<group>"; };
+		3DAB3C5427EDE87F0078A56E /* QDStyleSelectableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDStyleSelectableTableViewController.h; sourceTree = "<group>"; };
+		3DAB3C5527EDE87F0078A56E /* KFIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFIntroViewController.h; sourceTree = "<group>"; };
+		3DAB3C5627EDE87F0078A56E /* KFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFNavigationController.h; sourceTree = "<group>"; };
+		3DAB3C5727EDE87F0078A56E /* QDSingleImagePickerPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDSingleImagePickerPreviewViewController.h; sourceTree = "<group>"; };
+		3DAB3C5927EDE87F0078A56E /* KFKeFuApiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFKeFuApiViewController.m; sourceTree = "<group>"; };
+		3DAB3C5B27EDE87F0078A56E /* KFChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFChatViewController.h; sourceTree = "<group>"; };
+		3DAB3C5C27EDE87F0078A56E /* KFVisitorThreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFVisitorThreadViewController.m; sourceTree = "<group>"; };
+		3DAB3C5D27EDE87F0078A56E /* KFStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFStatusViewController.m; sourceTree = "<group>"; };
+		3DAB3C5E27EDE87F0078A56E /* KFUserinfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFUserinfoViewController.h; sourceTree = "<group>"; };
+		3DAB3C5F27EDE87F0078A56E /* KFSupportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFSupportViewController.h; sourceTree = "<group>"; };
+		3DAB3C6027EDE87F0078A56E /* KFChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFChatViewController.m; sourceTree = "<group>"; };
+		3DAB3C6127EDE87F0078A56E /* KFStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFStatusViewController.h; sourceTree = "<group>"; };
+		3DAB3C6227EDE87F0078A56E /* KFVisitorThreadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFVisitorThreadViewController.h; sourceTree = "<group>"; };
+		3DAB3C6327EDE87F0078A56E /* KFUserinfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFUserinfoViewController.m; sourceTree = "<group>"; };
+		3DAB3C6427EDE87F0078A56E /* KFSupportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFSupportViewController.m; sourceTree = "<group>"; };
+		3DAB3C6527EDE87F0078A56E /* KFKeFuApiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFKeFuApiViewController.h; sourceTree = "<group>"; };
+		3DAB3C6727EDE8800078A56E /* BDApisTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDApisTableViewController.h; sourceTree = "<group>"; };
+		3DAB3C6827EDE8800078A56E /* BDApisTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDApisTableViewController.m; sourceTree = "<group>"; };
 		3DCB175C2267813C00E8FB16 /* SWQRCodeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWQRCodeConfig.m; sourceTree = "<group>"; };
 		3DCB175D2267813C00E8FB16 /* SWQRCodeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWQRCodeManager.m; sourceTree = "<group>"; };
 		3DCB175E2267813C00E8FB16 /* SWQRCodeConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWQRCodeConfig.h; sourceTree = "<group>"; };
@@ -248,20 +231,10 @@
 		3DCB17642267813C00E8FB16 /* SWScannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWScannerView.m; sourceTree = "<group>"; };
 		3DCB17652267813C00E8FB16 /* SWScannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWScannerView.h; sourceTree = "<group>"; };
 		3DCB17662267813C00E8FB16 /* SWQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWQRCodeViewController.h; sourceTree = "<group>"; };
-		3DCB176C2267F20900E8FB16 /* KFAppRateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFAppRateViewController.h; sourceTree = "<group>"; };
-		3DCB176D2267F20900E8FB16 /* KFAppRateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFAppRateViewController.m; sourceTree = "<group>"; };
-		3DCB176F2267F21D00E8FB16 /* KFAppUpgrateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFAppUpgrateViewController.h; sourceTree = "<group>"; };
-		3DCB17702267F21D00E8FB16 /* KFAppUpgrateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFAppUpgrateViewController.m; sourceTree = "<group>"; };
-		3DCB17732267FC7300E8FB16 /* KFSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFSettingViewController.h; sourceTree = "<group>"; };
-		3DCB17742267FC7300E8FB16 /* KFSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFSettingViewController.m; sourceTree = "<group>"; };
-		3DD32EF82262B24C0049FB24 /* KFScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFScanViewController.h; sourceTree = "<group>"; };
-		3DD32EF92262B24C0049FB24 /* KFScanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFScanViewController.m; sourceTree = "<group>"; };
 		3DE1AA7520039A7C00A32B20 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3DE1AA7C20039AB300A32B20 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		3DE1AA7D20039AB300A32B20 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		3DE1AA7E20039AB300A32B20 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		3DE6FD852235007B006F1329 /* KFQRCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFQRCodeViewController.h; sourceTree = "<group>"; };
-		3DE6FD862235007B006F1329 /* KFQRCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFQRCodeViewController.m; sourceTree = "<group>"; };
 		3DE934AB22DC999D00CE1C91 /* SDTimeLineTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTimeLineTableViewController.h; sourceTree = "<group>"; };
 		3DE934AC22DC999D00CE1C91 /* SDTimeLineTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTimeLineTableViewController.m; sourceTree = "<group>"; };
 		3DE934AE22DC999D00CE1C91 /* SDBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDBaseTableViewController.m; sourceTree = "<group>"; };
@@ -373,116 +346,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3D2BBCFA2426EA7200751D28 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				3D2BBD032426EA7200751D28 /* QDCommonGroupListViewController.h */,
-				3D2BBCFB2426EA7200751D28 /* QDCommonGroupListViewController.m */,
-				3D2BBCFC2426EA7200751D28 /* QDTabBarViewController.h */,
-				3D2BBD022426EA7200751D28 /* QDTabBarViewController.m */,
-				3D2BBCFD2426EA7200751D28 /* QDCommonListViewController.h */,
-				3D2BBD042426EA7200751D28 /* QDCommonListViewController.m */,
-				3D2BBD062426EA7200751D28 /* QDCommonViewController.h */,
-				3D2BBCFE2426EA7200751D28 /* QDCommonViewController.m */,
-				3D2BBCFF2426EA7200751D28 /* QDNavigationController.h */,
-				3D2BBD072426EA7200751D28 /* QDNavigationController.m */,
-				3D2BBD002426EA7200751D28 /* QDCommonTableViewController.h */,
-				3D2BBD082426EA7200751D28 /* QDCommonTableViewController.m */,
-				3D2BBD052426EA7200751D28 /* QDCommonGridViewController.h */,
-				3D2BBD012426EA7200751D28 /* QDCommonGridViewController.m */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		3D2BBD092426EA7300751D28 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				3D2BBD0B2426EA7300751D28 /* QDCommonUI.h */,
-				3D2BBD0E2426EA7300751D28 /* QDCommonUI.m */,
-				3D2BBD0C2426EA7300751D28 /* QDUIHelper.m */,
-				3D2BBD0F2426EA7300751D28 /* QDUIHelper.h */,
-				3D2BBD0A2426EA7300751D28 /* UIImageEffects.h */,
-				3D2BBD0D2426EA7300751D28 /* UIImageEffects.m */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		3D2BBD102426EA7300751D28 /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				3D2BBD112426EA7300751D28 /* QMUIConfigurationTemplateGrass.h */,
-				3D2BBD172426EA7300751D28 /* QMUIConfigurationTemplateGrass.m */,
-				3D2BBD182426EA7300751D28 /* QMUIConfigurationTemplateDark.h */,
-				3D2BBD122426EA7300751D28 /* QMUIConfigurationTemplateDark.m */,
-				3D2BBD132426EA7300751D28 /* QMUIConfigurationTemplateGrapefruit.h */,
-				3D2BBD1A2426EA7300751D28 /* QMUIConfigurationTemplateGrapefruit.m */,
-				3D2BBD1B2426EA7300751D28 /* QDThemeManager.h */,
-				3D2BBD142426EA7300751D28 /* QDThemeManager.m */,
-				3D2BBD1C2426EA7300751D28 /* QMUIConfigurationTemplatePinkRose.h */,
-				3D2BBD152426EA7300751D28 /* QMUIConfigurationTemplatePinkRose.m */,
-				3D2BBD162426EA7300751D28 /* QMUIConfigurationTemplate.h */,
-				3D2BBD1D2426EA7300751D28 /* QMUIConfigurationTemplate.m */,
-				3D2BBD192426EA7300751D28 /* QDThemeProtocol.h */,
-			);
-			path = Configuration;
-			sourceTree = "<group>";
-		};
-		3D391BE422869A9C00D03C04 /* moment */ = {
-			isa = PBXGroup;
-			children = (
-				3D391BE822869B5000D03C04 /* KFMomentViewController.h */,
-				3D391BE922869B5000D03C04 /* KFMomentViewController.m */,
-			);
-			path = moment;
-			sourceTree = "<group>";
-		};
-		3D3928E721C25E50001E1257 /* controllers */ = {
-			isa = PBXGroup;
-			children = (
-				3D391BE422869A9C00D03C04 /* moment */,
-				3DCB17722267FC3200E8FB16 /* profile */,
-				3D47629621D1CA020034BF83 /* notice */,
-				3D39293E21C2846A001E1257 /* setting */,
-				3D39293D21C28464001E1257 /* thread */,
-				3D39293C21C2845F001E1257 /* queue */,
-				3D39293B21C28452001E1257 /* group */,
-				3D3928F221C2806E001E1257 /* contact */,
-			);
-			path = controllers;
-			sourceTree = "<group>";
-		};
-		3D3928E821C25E5F001E1257 /* controllers */ = {
-			isa = PBXGroup;
-			children = (
-				3D548A521FC524B1003117B4 /* KFChatViewController.h */,
-				3D548A531FC524B1003117B4 /* KFChatViewController.m */,
-				3D548A551FC524D6003117B4 /* KFUserinfoViewController.h */,
-				3D548A561FC524D6003117B4 /* KFUserinfoViewController.m */,
-				3D548A581FC524EC003117B4 /* KFStatusViewController.h */,
-				3D548A591FC524EC003117B4 /* KFStatusViewController.m */,
-				3D548A5B1FC5251B003117B4 /* KFVisitorThreadViewController.h */,
-				3D548A5C1FC5251B003117B4 /* KFVisitorThreadViewController.m */,
-				3DCA9C6B21F60FE800E63998 /* KFSupportViewController.h */,
-				3DCA9C6C21F60FE800E63998 /* KFSupportViewController.m */,
-			);
-			path = controllers;
-			sourceTree = "<group>";
-		};
-		3D3928F221C2806E001E1257 /* contact */ = {
-			isa = PBXGroup;
-			children = (
-				3D3928F621C280C8001E1257 /* KFDetailViewController.h */,
-				3D3928F321C280C8001E1257 /* KFDetailViewController.m */,
-				3D3928F421C280C8001E1257 /* KFContactSelectViewController.h */,
-				3D3928F521C280C8001E1257 /* KFContactSelectViewController.m */,
-				3D3928CB21BF8F20001E1257 /* KFContactViewController.h */,
-				3D3928CC21BF8F20001E1257 /* KFContactViewController.m */,
-				3D3823D721CF5BE800AB12AD /* KFFriendViewController.h */,
-				3D3823D821CF5BE800AB12AD /* KFFriendViewController.m */,
-			);
-			path = contact;
-			sourceTree = "<group>";
-		};
 		3D39293721C2831A001E1257 /* utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,70 +353,6 @@
 				3D39293821C2831A001E1257 /* KFUtils.m */,
 			);
 			path = utils;
-			sourceTree = "<group>";
-		};
-		3D39293B21C28452001E1257 /* group */ = {
-			isa = PBXGroup;
-			children = (
-				3D3928CE21BF8F31001E1257 /* KFGroupViewController.h */,
-				3D3928CF21BF8F31001E1257 /* KFGroupViewController.m */,
-			);
-			path = group;
-			sourceTree = "<group>";
-		};
-		3D39293C21C2845F001E1257 /* queue */ = {
-			isa = PBXGroup;
-			children = (
-				3D3928E921C25E9E001E1257 /* KFQueueViewController.h */,
-				3D3928EA21C25E9E001E1257 /* KFQueueViewController.m */,
-			);
-			path = queue;
-			sourceTree = "<group>";
-		};
-		3D39293D21C28464001E1257 /* thread */ = {
-			isa = PBXGroup;
-			children = (
-				3D3928EC21C25EAB001E1257 /* KFThreadViewController.h */,
-				3D3928ED21C25EAB001E1257 /* KFThreadViewController.m */,
-			);
-			path = thread;
-			sourceTree = "<group>";
-		};
-		3D39293E21C2846A001E1257 /* setting */ = {
-			isa = PBXGroup;
-			children = (
-				3DCB17732267FC7300E8FB16 /* KFSettingViewController.h */,
-				3DCB17742267FC7300E8FB16 /* KFSettingViewController.m */,
-			);
-			path = setting;
-			sourceTree = "<group>";
-		};
-		3D3B7C2D21CA35E2001FE199 /* apis */ = {
-			isa = PBXGroup;
-			children = (
-				3D3B7C2E21CA3613001FE199 /* BDApisTableViewController.h */,
-				3D3B7C2F21CA3613001FE199 /* BDApisTableViewController.m */,
-			);
-			path = apis;
-			sourceTree = "<group>";
-		};
-		3D47629621D1CA020034BF83 /* notice */ = {
-			isa = PBXGroup;
-			children = (
-				3D47629721D1CA190034BF83 /* KFNoticeViewController.h */,
-				3D47629821D1CA190034BF83 /* KFNoticeViewController.m */,
-			);
-			path = notice;
-			sourceTree = "<group>";
-		};
-		3D4C0B0B2131314F0083C8F9 /* im */ = {
-			isa = PBXGroup;
-			children = (
-				3D3928E721C25E50001E1257 /* controllers */,
-				3D4C0B0D2131314F0083C8F9 /* KFIMApiViewController.h */,
-				3D4C0B0C2131314F0083C8F9 /* KFIMApiViewController.m */,
-			);
-			path = im;
 			sourceTree = "<group>";
 		};
 		3D5489C41FC515CF003117B4 = {
@@ -600,46 +399,11 @@
 		3D548A3E1FC518A3003117B4 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3D548A481FC52125003117B4 /* common */,
-				3D3B7C2D21CA35E2001FE199 /* apis */,
-				3D4C0B0B2131314F0083C8F9 /* im */,
-				3D548A401FC518AF003117B4 /* kefu */,
+				3DAB3C6627EDE8800078A56E /* apis */,
+				3DAB3C1E27EDE87F0078A56E /* common */,
+				3DAB3C5827EDE87F0078A56E /* kefu */,
 			);
 			path = controllers;
-			sourceTree = "<group>";
-		};
-		3D548A401FC518AF003117B4 /* kefu */ = {
-			isa = PBXGroup;
-			children = (
-				3D3928E821C25E5F001E1257 /* controllers */,
-				3D548A411FC51906003117B4 /* KFKeFuApiViewController.h */,
-				3D548A421FC51906003117B4 /* KFKeFuApiViewController.m */,
-			);
-			path = kefu;
-			sourceTree = "<group>";
-		};
-		3D548A481FC52125003117B4 /* common */ = {
-			isa = PBXGroup;
-			children = (
-				3D2BBD102426EA7300751D28 /* Configuration */,
-				3D2BBCFA2426EA7200751D28 /* Controllers */,
-				3D2BBD092426EA7300751D28 /* Utils */,
-				3D548A491FC52374003117B4 /* KFIntroViewController.h */,
-				3D548A4A1FC52374003117B4 /* KFIntroViewController.m */,
-				3DD32EF82262B24C0049FB24 /* KFScanViewController.h */,
-				3DD32EF92262B24C0049FB24 /* KFScanViewController.m */,
-				3DE6FD852235007B006F1329 /* KFQRCodeViewController.h */,
-				3DE6FD862235007B006F1329 /* KFQRCodeViewController.m */,
-				3D3958A0224CC2E2000E88EE /* KFServerViewController.h */,
-				3D3958A1224CC2E2000E88EE /* KFServerViewController.m */,
-				3DCB176C2267F20900E8FB16 /* KFAppRateViewController.h */,
-				3DCB176D2267F20900E8FB16 /* KFAppRateViewController.m */,
-				3DCB176F2267F21D00E8FB16 /* KFAppUpgrateViewController.h */,
-				3DCB17702267F21D00E8FB16 /* KFAppUpgrateViewController.m */,
-				3D2BBD2F2426EBA800751D28 /* QDSingleImagePickerPreviewViewController.h */,
-				3D2BBD2E2426EBA800751D28 /* QDSingleImagePickerPreviewViewController.m */,
-			);
-			path = common;
 			sourceTree = "<group>";
 		};
 		3D5606E9205FB662000E770C /* views */ = {
@@ -654,6 +418,137 @@
 			);
 			path = views;
 			sourceTree = "<group>";
+		};
+		3DAB3C1E27EDE87F0078A56E /* common */ = {
+			isa = PBXGroup;
+			children = (
+				3DAB3C1F27EDE87F0078A56E /* QMUIInteractiveDebugger */,
+				3DAB3C2627EDE87F0078A56E /* KFServerViewController.h */,
+				3DAB3C2727EDE87F0078A56E /* Configuration */,
+				3DAB3C3527EDE87F0078A56E /* KFAppRateViewController.m */,
+				3DAB3C3627EDE87F0078A56E /* KFAppUpgrateViewController.h */,
+				3DAB3C3727EDE87F0078A56E /* QDSingleImagePickerPreviewViewController.m */,
+				3DAB3C3827EDE87F0078A56E /* KFNavigationController.m */,
+				3DAB3C3927EDE87F0078A56E /* Utils */,
+				3DAB3C4027EDE87F0078A56E /* KFIntroViewController.m */,
+				3DAB3C4127EDE87F0078A56E /* KFServerViewController.m */,
+				3DAB3C4227EDE87F0078A56E /* KFAppRateViewController.h */,
+				3DAB3C4327EDE87F0078A56E /* KFAppUpgrateViewController.m */,
+				3DAB3C4427EDE87F0078A56E /* Controllers */,
+				3DAB3C5527EDE87F0078A56E /* KFIntroViewController.h */,
+				3DAB3C5627EDE87F0078A56E /* KFNavigationController.h */,
+				3DAB3C5727EDE87F0078A56E /* QDSingleImagePickerPreviewViewController.h */,
+			);
+			name = common;
+			path = demo/Controllers/common;
+			sourceTree = SOURCE_ROOT;
+		};
+		3DAB3C1F27EDE87F0078A56E /* QMUIInteractiveDebugger */ = {
+			isa = PBXGroup;
+			children = (
+				3DAB3C2027EDE87F0078A56E /* QMUIInteractiveDebugger.m */,
+				3DAB3C2127EDE87F0078A56E /* QMUIInteractiveDebugPanelViewController.h */,
+				3DAB3C2227EDE87F0078A56E /* QMUIInteractiveDebugPanelItem.m */,
+				3DAB3C2327EDE87F0078A56E /* QMUIInteractiveDebugger.h */,
+				3DAB3C2427EDE87F0078A56E /* QMUIInteractiveDebugPanelViewController.m */,
+				3DAB3C2527EDE87F0078A56E /* QMUIInteractiveDebugPanelItem.h */,
+			);
+			path = QMUIInteractiveDebugger;
+			sourceTree = "<group>";
+		};
+		3DAB3C2727EDE87F0078A56E /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				3DAB3C2827EDE87F0078A56E /* QMUIConfigurationTemplateGrass.h */,
+				3DAB3C2927EDE87F0078A56E /* QMUIConfigurationTemplateDark.m */,
+				3DAB3C2A27EDE87F0078A56E /* QMUIConfigurationTemplateGrapefruit.h */,
+				3DAB3C2B27EDE87F0078A56E /* QDThemeManager.m */,
+				3DAB3C2C27EDE87F0078A56E /* QMUIConfigurationTemplatePinkRose.m */,
+				3DAB3C2D27EDE87F0078A56E /* QMUIConfigurationTemplate.h */,
+				3DAB3C2E27EDE87F0078A56E /* QMUIConfigurationTemplateGrass.m */,
+				3DAB3C2F27EDE87F0078A56E /* QMUIConfigurationTemplateDark.h */,
+				3DAB3C3027EDE87F0078A56E /* QDThemeProtocol.h */,
+				3DAB3C3127EDE87F0078A56E /* QMUIConfigurationTemplateGrapefruit.m */,
+				3DAB3C3227EDE87F0078A56E /* QDThemeManager.h */,
+				3DAB3C3327EDE87F0078A56E /* QMUIConfigurationTemplatePinkRose.h */,
+				3DAB3C3427EDE87F0078A56E /* QMUIConfigurationTemplate.m */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		3DAB3C3927EDE87F0078A56E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3DAB3C3A27EDE87F0078A56E /* UIImageEffects.h */,
+				3DAB3C3B27EDE87F0078A56E /* QDCommonUI.h */,
+				3DAB3C3C27EDE87F0078A56E /* QDUIHelper.m */,
+				3DAB3C3D27EDE87F0078A56E /* UIImageEffects.m */,
+				3DAB3C3E27EDE87F0078A56E /* QDCommonUI.m */,
+				3DAB3C3F27EDE87F0078A56E /* QDUIHelper.h */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		3DAB3C4427EDE87F0078A56E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3DAB3C4527EDE87F0078A56E /* QDCommonGroupListViewController.m */,
+				3DAB3C4627EDE87F0078A56E /* QDTabBarViewController.h */,
+				3DAB3C4727EDE87F0078A56E /* QDCommonListViewController.h */,
+				3DAB3C4827EDE87F0078A56E /* QDCommonViewController.m */,
+				3DAB3C4927EDE87F0078A56E /* QDNavigationController.h */,
+				3DAB3C4A27EDE87F0078A56E /* QDCommonTableViewController.h */,
+				3DAB3C4B27EDE87F0078A56E /* QDCommonGridViewController.m */,
+				3DAB3C4C27EDE87F0078A56E /* QDStyleSelectableTableViewController.m */,
+				3DAB3C4D27EDE87F0078A56E /* QDTabBarViewController.m */,
+				3DAB3C4E27EDE87F0078A56E /* QDCommonGroupListViewController.h */,
+				3DAB3C4F27EDE87F0078A56E /* QDCommonListViewController.m */,
+				3DAB3C5027EDE87F0078A56E /* QDCommonGridViewController.h */,
+				3DAB3C5127EDE87F0078A56E /* QDCommonViewController.h */,
+				3DAB3C5227EDE87F0078A56E /* QDNavigationController.m */,
+				3DAB3C5327EDE87F0078A56E /* QDCommonTableViewController.m */,
+				3DAB3C5427EDE87F0078A56E /* QDStyleSelectableTableViewController.h */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3DAB3C5827EDE87F0078A56E /* kefu */ = {
+			isa = PBXGroup;
+			children = (
+				3DAB3C5927EDE87F0078A56E /* KFKeFuApiViewController.m */,
+				3DAB3C5A27EDE87F0078A56E /* controllers */,
+				3DAB3C6527EDE87F0078A56E /* KFKeFuApiViewController.h */,
+			);
+			name = kefu;
+			path = demo/Controllers/kefu;
+			sourceTree = SOURCE_ROOT;
+		};
+		3DAB3C5A27EDE87F0078A56E /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3DAB3C5B27EDE87F0078A56E /* KFChatViewController.h */,
+				3DAB3C5C27EDE87F0078A56E /* KFVisitorThreadViewController.m */,
+				3DAB3C5D27EDE87F0078A56E /* KFStatusViewController.m */,
+				3DAB3C5E27EDE87F0078A56E /* KFUserinfoViewController.h */,
+				3DAB3C5F27EDE87F0078A56E /* KFSupportViewController.h */,
+				3DAB3C6027EDE87F0078A56E /* KFChatViewController.m */,
+				3DAB3C6127EDE87F0078A56E /* KFStatusViewController.h */,
+				3DAB3C6227EDE87F0078A56E /* KFVisitorThreadViewController.h */,
+				3DAB3C6327EDE87F0078A56E /* KFUserinfoViewController.m */,
+				3DAB3C6427EDE87F0078A56E /* KFSupportViewController.m */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		3DAB3C6627EDE8800078A56E /* apis */ = {
+			isa = PBXGroup;
+			children = (
+				3DAB3C6727EDE8800078A56E /* BDApisTableViewController.h */,
+				3DAB3C6827EDE8800078A56E /* BDApisTableViewController.m */,
+			);
+			name = apis;
+			path = demo/Controllers/apis;
+			sourceTree = SOURCE_ROOT;
 		};
 		3DCA9C5F21F6094700E63998 /* vendors */ = {
 			isa = PBXGroup;
@@ -699,15 +594,6 @@
 				3DCB17652267813C00E8FB16 /* SWScannerView.h */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		3DCB17722267FC3200E8FB16 /* profile */ = {
-			isa = PBXGroup;
-			children = (
-				3D39293F21C28595001E1257 /* KFProfileViewController.h */,
-				3D39294021C28595001E1257 /* KFProfileViewController.m */,
-			);
-			path = profile;
 			sourceTree = "<group>";
 		};
 		3DE934A922DC999D00CE1C91 /* TimeLine */ = {
@@ -1151,7 +1037,6 @@
 				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
 				"${BUILT_PRODUCTS_DIR}/M80AttributedLabel/M80AttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/MGSwipeTableCell/MGSwipeTableCell.framework",
-				"${BUILT_PRODUCTS_DIR}/MQTTClient/MQTTClient.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework",
@@ -1159,7 +1044,6 @@
 				"${BUILT_PRODUCTS_DIR}/SJBaseVideoPlayer/SJBaseVideoPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/SJUIKit/SJUIKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SJVideoPlayer/SJVideoPlayer.framework",
-				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
 				"${PODS_ROOT}/bytedesk-core/frameworks/cocoapods/bytedesk-core.framework",
 			);
@@ -1171,7 +1055,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M80AttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGSwipeTableCell.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MQTTClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QMUIKit.framework",
@@ -1179,7 +1062,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SJBaseVideoPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SJUIKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SJVideoPlayer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/bytedesk-core.framework",
 			);
@@ -1195,90 +1077,81 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DAB3C7427EDE8800078A56E /* KFNavigationController.m in Sources */,
 				3DE9351822DC9BD600CE1C91 /* MLEmojiLabel.m in Sources */,
+				3DAB3C7E27EDE8800078A56E /* QDStyleSelectableTableViewController.m in Sources */,
+				3DAB3C7927EDE8800078A56E /* KFServerViewController.m in Sources */,
+				3DAB3C7027EDE8800078A56E /* QMUIConfigurationTemplateGrapefruit.m in Sources */,
+				3DAB3C8227EDE8800078A56E /* QDCommonTableViewController.m in Sources */,
 				3DE934D022DC999D00CE1C91 /* SDTimeLineTableViewController.m in Sources */,
-				3D2BBD2D2426EA7300751D28 /* QMUIConfigurationTemplate.m in Sources */,
-				3D548A571FC524D6003117B4 /* KFUserinfoViewController.m in Sources */,
-				3D3928F821C280C8001E1257 /* KFContactSelectViewController.m in Sources */,
 				3DE934D622DC999D00CE1C91 /* SDTimeLineCellCommentView.m in Sources */,
 				3DE9351D22DC9BD600CE1C91 /* MLLinkLabel.m in Sources */,
 				3DE9352222DC9BD600CE1C91 /* MLLabel.m in Sources */,
+				3DAB3C7C27EDE8800078A56E /* QDCommonViewController.m in Sources */,
+				3DAB3C6D27EDE8800078A56E /* QDThemeManager.m in Sources */,
 				3DE9351A22DC9BD600CE1C91 /* NSMutableAttributedString+MLLabel.m in Sources */,
+				3DAB3C7F27EDE8800078A56E /* QDTabBarViewController.m in Sources */,
+				3DAB3C6A27EDE8800078A56E /* QMUIInteractiveDebugPanelItem.m in Sources */,
 				3DE934D322DC999D00CE1C91 /* SDBaseRefreshView.m in Sources */,
-				3D548A5D1FC5251B003117B4 /* KFVisitorThreadViewController.m in Sources */,
-				3D2BBD262426EA7300751D28 /* UIImageEffects.m in Sources */,
 				3DE934D922DC999D00CE1C91 /* SDTimeLineCell.m in Sources */,
-				3DE6FD872235007B006F1329 /* KFQRCodeViewController.m in Sources */,
-				3DD32EFA2262B24C0049FB24 /* KFScanViewController.m in Sources */,
+				3DAB3C7B27EDE8800078A56E /* QDCommonGroupListViewController.m in Sources */,
+				3DAB3C8127EDE8800078A56E /* QDNavigationController.m in Sources */,
 				3D39293521C28310001E1257 /* KFQueueTableViewCell.m in Sources */,
 				3DE9351F22DC9BD600CE1C91 /* MLTextAttachment.m in Sources */,
 				3DE934DB22DC999D00CE1C91 /* SDWeiXinPhotoContainerView.m in Sources */,
-				3D47629921D1CA190034BF83 /* KFNoticeViewController.m in Sources */,
+				3DAB3C7127EDE8800078A56E /* QMUIConfigurationTemplate.m in Sources */,
 				3D39293621C28310001E1257 /* KFContactTableViewCell.m in Sources */,
 				3DE934D722DC999D00CE1C91 /* SDTimeLineRefreshFooter.m in Sources */,
-				3D2BBD2B2426EA7300751D28 /* QMUIConfigurationTemplateGrass.m in Sources */,
 				3DE9352F22DC9BFF00CE1C91 /* SDBrowserImageView.m in Sources */,
+				3DAB3C7A27EDE8800078A56E /* KFAppUpgrateViewController.m in Sources */,
 				3DE934D422DC999D00CE1C91 /* SDTimeLineCellModel.m in Sources */,
+				3DAB3C6E27EDE8800078A56E /* QMUIConfigurationTemplatePinkRose.m in Sources */,
 				3DCB176B2267813C00E8FB16 /* SWScannerView.m in Sources */,
-				3D3928F721C280C8001E1257 /* KFDetailViewController.m in Sources */,
 				3DE934D822DC999D00CE1C91 /* SDTimeLineTableHeaderView.m in Sources */,
-				3DCB176E2267F20900E8FB16 /* KFAppRateViewController.m in Sources */,
-				3D548A5A1FC524EC003117B4 /* KFStatusViewController.m in Sources */,
 				3DE9351C22DC9BD600CE1C91 /* NSAttributedString+MLLabel.m in Sources */,
+				3DAB3C6927EDE8800078A56E /* QMUIInteractiveDebugger.m in Sources */,
 				3DE9351B22DC9BD600CE1C91 /* NSString+MLLabel.m in Sources */,
 				3DE9351E22DC9BD600CE1C91 /* NSAttributedString+MLExpression.m in Sources */,
-				3D2BBD292426EA7300751D28 /* QDThemeManager.m in Sources */,
-				3D3928D021BF8F31001E1257 /* KFGroupViewController.m in Sources */,
+				3DAB3C6F27EDE8800078A56E /* QMUIConfigurationTemplateGrass.m in Sources */,
 				3DCB17672267813C00E8FB16 /* SWQRCodeConfig.m in Sources */,
 				3D39293A21C2831A001E1257 /* KFUtils.m in Sources */,
+				3DAB3C7227EDE8800078A56E /* KFAppRateViewController.m in Sources */,
 				3D5606EC205FB699000E770C /* KFThreadTableViewCell.m in Sources */,
-				3D2BBD282426EA7300751D28 /* QMUIConfigurationTemplateDark.m in Sources */,
-				3D3823D921CF5BE800AB12AD /* KFFriendViewController.m in Sources */,
-				3D2BBD272426EA7300751D28 /* QDCommonUI.m in Sources */,
-				3D391BEA22869B5000D03C04 /* KFMomentViewController.m in Sources */,
-				3D2BBD212426EA7300751D28 /* QDTabBarViewController.m in Sources */,
 				3DE9352322DC9BD600CE1C91 /* MLLabelLayoutManager.m in Sources */,
 				3DE934EA22DC9A1700CE1C91 /* SDRefreshFooterView.m in Sources */,
 				3DE9351922DC9BD600CE1C91 /* TTTAttributedLabel.m in Sources */,
-				3DCB17712267F21D00E8FB16 /* KFAppUpgrateViewController.m in Sources */,
-				3D2BBD2A2426EA7300751D28 /* QMUIConfigurationTemplatePinkRose.m in Sources */,
-				3D548A431FC51906003117B4 /* KFKeFuApiViewController.m in Sources */,
 				3DE9352E22DC9BFF00CE1C91 /* SDWaitingView.m in Sources */,
-				3D548A4B1FC52374003117B4 /* KFIntroViewController.m in Sources */,
 				3D5489E01FC515CF003117B4 /* main.m in Sources */,
-				3D548A541FC524B1003117B4 /* KFChatViewController.m in Sources */,
+				3DAB3C8927EDE8800078A56E /* BDApisTableViewController.m in Sources */,
 				3DE934EB22DC9A1700CE1C91 /* SDRefreshView.m in Sources */,
-				3D3928EE21C25EAB001E1257 /* KFThreadViewController.m in Sources */,
-				3DCB17752267FC7300E8FB16 /* KFSettingViewController.m in Sources */,
 				3DE934D122DC999D00CE1C91 /* SDBaseTableViewController.m in Sources */,
-				3D2BBD232426EA7300751D28 /* QDNavigationController.m in Sources */,
-				3D3B7C3021CA3613001FE199 /* BDApisTableViewController.m in Sources */,
-				3DCA9C6D21F60FE800E63998 /* KFSupportViewController.m in Sources */,
+				3DAB3C8527EDE8800078A56E /* KFStatusViewController.m in Sources */,
 				3DE9352D22DC9BFF00CE1C91 /* SDPhotoBrowser.m in Sources */,
-				3D2BBD242426EA7300751D28 /* QDCommonTableViewController.m in Sources */,
-				3D2BBD1F2426EA7300751D28 /* QDCommonViewController.m in Sources */,
+				3DAB3C8827EDE8800078A56E /* KFSupportViewController.m in Sources */,
+				3DAB3C8627EDE8800078A56E /* KFChatViewController.m in Sources */,
+				3DAB3C7827EDE8800078A56E /* KFIntroViewController.m in Sources */,
+				3DAB3C7D27EDE8800078A56E /* QDCommonGridViewController.m in Sources */,
 				3DE9351422DC9BD600CE1C91 /* LEETheme.m in Sources */,
 				3DE934D222DC999D00CE1C91 /* SDBaseNavigationController.m in Sources */,
-				3D39294121C28595001E1257 /* KFProfileViewController.m in Sources */,
-				3D3958A2224CC2E2000E88EE /* KFServerViewController.m in Sources */,
+				3DAB3C7327EDE8800078A56E /* QDSingleImagePickerPreviewViewController.m in Sources */,
 				3DE9352122DC9BD600CE1C91 /* MLExpressionManager.m in Sources */,
+				3DAB3C7527EDE8800078A56E /* QDUIHelper.m in Sources */,
 				3DE9352022DC9BD600CE1C91 /* NSString+MLExpression.m in Sources */,
-				3D2BBD302426EBA800751D28 /* QDSingleImagePickerPreviewViewController.m in Sources */,
+				3DAB3C8027EDE8800078A56E /* QDCommonListViewController.m in Sources */,
 				3DE934DA22DC999D00CE1C91 /* SDTimeLineRefreshHeader.m in Sources */,
-				3D2BBD222426EA7300751D28 /* QDCommonListViewController.m in Sources */,
 				3D5489D21FC515CF003117B4 /* AppDelegate.m in Sources */,
+				3DAB3C6B27EDE8800078A56E /* QMUIInteractiveDebugPanelViewController.m in Sources */,
+				3DAB3C6C27EDE8800078A56E /* QMUIConfigurationTemplateDark.m in Sources */,
 				3DCB17692267813C00E8FB16 /* SWQRCodeViewController.m in Sources */,
-				3D2BBD252426EA7300751D28 /* QDUIHelper.m in Sources */,
 				3DE934D522DC999D00CE1C91 /* SDTimeLineCellOperationMenu.m in Sources */,
+				3DAB3C8727EDE8800078A56E /* KFUserinfoViewController.m in Sources */,
+				3DAB3C8327EDE8800078A56E /* KFKeFuApiViewController.m in Sources */,
+				3DAB3C7627EDE8800078A56E /* UIImageEffects.m in Sources */,
 				3DCB17682267813C00E8FB16 /* SWQRCodeManager.m in Sources */,
-				3D2BBD1E2426EA7300751D28 /* QDCommonGroupListViewController.m in Sources */,
-				3D3928EB21C25E9E001E1257 /* KFQueueViewController.m in Sources */,
-				3D3928CD21BF8F20001E1257 /* KFContactViewController.m in Sources */,
-				3D2BBD2C2426EA7300751D28 /* QMUIConfigurationTemplateGrapefruit.m in Sources */,
-				3D4C0B0E213131500083C8F9 /* KFIMApiViewController.m in Sources */,
-				3D2BBD202426EA7300751D28 /* QDCommonGridViewController.m in Sources */,
+				3DAB3C8427EDE8800078A56E /* KFVisitorThreadViewController.m in Sources */,
 				3DE934E722DC9A1700CE1C91 /* SDRefreshHeaderView.m in Sources */,
 				3DE934E922DC9A1700CE1C91 /* UIView+SDExtension.m in Sources */,
+				3DAB3C7727EDE8800078A56E /* QDCommonUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1443,13 +1316,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = demo/demo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = L5F47963M2;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/demo/PrefixHeader.pch";
 				INFOPLIST_FILE = demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.5.4;
+				MARKETING_VERSION = 2.5.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedesk.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1463,13 +1336,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = demo/demo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = L5F47963M2;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/demo/PrefixHeader.pch";
 				INFOPLIST_FILE = demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.5.4;
+				MARKETING_VERSION = 2.5.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedesk.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

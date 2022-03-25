@@ -36,7 +36,7 @@
     [super viewDidLayoutSubviews];
     self.scrollView.frame = self.view.bounds;
     
-    CGFloat gridViewWidth = CGRectGetWidth(self.scrollView.bounds) - UIEdgeInsetsGetHorizontalValue(self.scrollView.qmui_safeAreaInsets);
+    CGFloat gridViewWidth = CGRectGetWidth(self.scrollView.bounds) - UIEdgeInsetsGetHorizontalValue(self.scrollView.safeAreaInsets);
     
     if (CGRectGetWidth(self.view.bounds) <= [QMUIHelper screenSizeFor55Inch].width) {
         self.gridView.columnCount = 3;
@@ -72,14 +72,14 @@
         }
     }
     
-    self.gridView.frame = CGRectMake(self.scrollView.qmui_safeAreaInsets.left, 0, gridViewWidth, QMUIViewSelfSizingHeight);
+    self.gridView.frame = CGRectMake(self.scrollView.safeAreaInsets.left, 0, gridViewWidth, QMUIViewSelfSizingHeight);
     self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.gridView.frame), CGRectGetMaxY(self.gridView.frame));
 }
 
 - (QDCommonGridButton *)generateButtonAtIndex:(NSInteger)index {
     NSString *keyName = self.dataSource.allKeys[index];
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:keyName attributes:@{NSForegroundColorAttributeName: UIColor.qd_descriptionTextColor, NSFontAttributeName: UIFontMake(11), NSParagraphStyleAttributeName: [NSMutableParagraphStyle qmui_paragraphStyleWithLineHeight:12 lineBreakMode:NSLineBreakByTruncatingTail textAlignment:NSTextAlignmentCenter]}];
-    UIImage *image = (UIImage *)[self.dataSource objectForKey:keyName];
+    UIImage *image = (UIImage *)self.dataSource[keyName];
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     
     QDCommonGridButton *button = [[QDCommonGridButton alloc] init];
@@ -87,11 +87,11 @@
     [button setAttributedTitle:attributedString forState:UIControlStateNormal];
     [button setImage:image forState:UIControlStateNormal];
     button.tag = index;
-    [button addTarget:self action:@selector(handleGirdButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(handleGridButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
     return button;
 }
 
-- (void)handleGirdButtonEvent:(QDCommonGridButton *)button {
+- (void)handleGridButtonEvent:(QDCommonGridButton *)button {
     NSString *keyName = self.dataSource.allKeys[button.tag];
     [self didSelectCellWithTitle:keyName];
 }
@@ -137,7 +137,7 @@
     
     self.imageView.center = CGPointMake(center.x, center.y - 12);
     
-    self.titleLabel.frame = CGRectFlatMake(self.contentEdgeInsets.left, center.y + PreferredValueForiPhone(27, 27, 21, 21), contentSize.width, QMUIViewSelfSizingHeight);
+    self.titleLabel.frame = CGRectFlatMake(self.contentEdgeInsets.left, center.y + 27, contentSize.width, QMUIViewSelfSizingHeight);
 }
 
 @end

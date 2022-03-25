@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -46,9 +46,9 @@ typedef NS_ENUM(NSUInteger, QMUIModalPresentationAnimationStyle) {
 @optional
 
 /**
- *  是否应该隐藏浮层，会在调用`hideWithAnimated:completion:`时，以及点击背景遮罩时被调用。默认为YES。
- *  @param  controller  当前的modalController
- *  @return 是否允许隐藏，YES表示允许隐藏，NO表示不允许隐藏
+ *  是否应该隐藏浮层，默认为YES，会在代码主动调用隐藏，或点击背景遮罩时询问。
+ *  @param  controller  当前的 modalController
+ *  @return 是否允许隐藏，YES 表示允许隐藏，NO 表示不允许隐藏
  */
 - (BOOL)shouldHideModalPresentationViewController:(QMUIModalPresentationViewController *)controller;
 
@@ -136,6 +136,18 @@ typedef NS_ENUM(NSUInteger, QMUIModalPresentationAnimationStyle) {
  *  @warning 当设置了`layoutBlock`属性时，此属性不生效
  */
 @property(nonatomic, assign) CGFloat maximumContentViewWidth UI_APPEARANCE_SELECTOR;
+
+/**
+ 如果 modal 是以 window 形式显示的话，通过这个属性可以获取内部实际在用的 window 对象。
+ */
+@property(nullable, nonatomic, strong, readonly) UIWindow *window;
+
+/**
+ 如果 modal 是以 window 形式显示的话，控制在 modal 显示时是否要自动把 App 主界面置灰。
+ 默认为 YES。
+ 该属性在非 window 形式显示的情况下无意义。
+ */
+@property(nonatomic, assign) BOOL shouldDimmedAppAutomatically;
 
 /**
  *  背景遮罩，默认为一个普通的`UIView`，背景色为`UIColorMask`，可设置为自己的view，注意`dimmingView`的大小将会盖满整个控件。

@@ -24,6 +24,7 @@
 @interface KFChatViewController ()
 
 @property(nonatomic, strong) NSArray *apisArray;
+@property(nonatomic, strong) NSString *unreadCount;
 
 @end
 
@@ -33,7 +34,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //
-    self.apisArray = @[@"工作组会话Push:",
+    self.apisArray = @[@"未读消息数:",
+                       @"工作组会话Push:",
                        @"工作组会话Present:",
                        @"指定坐席Push:",
                        @"指定坐席Present:",
@@ -43,6 +45,7 @@
 //                       @"前置选择Present:",
                        @"默认机器人Push:",
                        @"默认机器人Present:",];
+    [self getUnreadCountVisitor];
 }
 
 #pragma mark - Table view data source
@@ -87,6 +90,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return 3;
+    }
     return 2;
 }
 
@@ -103,12 +109,16 @@
     //
     if (indexPath.section == 0) {
         cell.textLabel.text = [self.apisArray objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = kDefaultWorkGroupWid;
+        if (indexPath.row == 0) {
+            cell.detailTextLabel.text = _unreadCount;
+        } else {
+            cell.detailTextLabel.text = kDefaultWorkGroupWid;
+        }
     } else if (indexPath.section == 1){
-        cell.textLabel.text = [self.apisArray objectAtIndex:indexPath.row+2];
+        cell.textLabel.text = [self.apisArray objectAtIndex:indexPath.row+3];
         cell.detailTextLabel.text = kDefaultAgentUid;
     } else if (indexPath.section == 2){
-        cell.textLabel.text = [self.apisArray objectAtIndex:indexPath.row+4];
+        cell.textLabel.text = [self.apisArray objectAtIndex:indexPath.row+5];
         cell.detailTextLabel.text = kDefaultAgentUid;
     }
 //    else if (indexPath.section == 3) {
@@ -116,7 +126,7 @@
 //        cell.detailTextLabel.text = kPreWorkGroupWid;
 //    }
     else if (indexPath.section == 3) {
-        cell.textLabel.text = [self.apisArray objectAtIndex:indexPath.row+6];
+        cell.textLabel.text = [self.apisArray objectAtIndex:indexPath.row+7];
         cell.detailTextLabel.text = kRobotWorkGroupWid;
     }
     
@@ -130,6 +140,9 @@
     if (indexPath.section == 0) {
         //
         if (indexPath.row == 0) {
+            //
+            [self getUnreadCountVisitor];
+        } else if (indexPath.row == 1) {
             // push工作组会话
             [BDUIApis pushWorkGroupChat:self.navigationController withWorkGroupWid:kDefaultWorkGroupWid withTitle:title];
         } else {
@@ -196,6 +209,17 @@
         }
     }
     
+}
+
+- (void) getUnreadCountVisitor {
+    
+    [BDCoreApis getUreadCountVisitorWithResultSuccess:^(NSDictionary *dict) {
+        NSNumber *unreadCount = dict[@"data"];
+        self.unreadCount = [unreadCount stringValue];
+        [self.tableView reloadData];
+    } resultFailed:^(NSError *error) {
+        
+    }];
 }
 
 

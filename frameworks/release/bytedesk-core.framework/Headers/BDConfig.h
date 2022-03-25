@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BDConfig : NSObject
 
++ (BOOL)isDebug;
+
 + (BOOL)isTlsConnection;
 
 + (BOOL)isWebSocketWssConnection;

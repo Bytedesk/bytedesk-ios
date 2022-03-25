@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -11,7 +11,6 @@
 //  QMUIKit
 //
 //  Created by MoLice on 2020/6/28.
-//  Copyright © 2020 QMUI Team. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -48,6 +47,15 @@ typedef NS_ENUM(NSUInteger, QMUIViewBorderLocation) {
 
 /// 边框的大小，默认为PixelOne。请注意修改 qmui_borderPosition 的值以将边框显示出来。
 @property(nonatomic, assign) IBInspectable CGFloat qmui_borderWidth;
+
+/**
+ 边框的偏移，默认为 UIEdgeInsetsZero，当某个方向的值为正值，则边框会往内缩，负值则边框会往外拓。但对于不同的边框线，borderInsets 的 top/left/bottom/right 会对应不同的方向，具体如下：
+ 1. 对于 QMUIViewBorderPositionTop 而言，边框从左往右绘制。所以 left 正值则边框的左端点往右缩（右端点不变），right 正值则边框的右端点往左缩（左端点不变）。top 正值则边框往下偏移，bottom 正值则边框往上偏移。
+ 2. 对于 QMUIViewBorderPositionLeft 而言，边框从下往上绘制。所以 left 正值则边框的底端点往上缩（顶端点不变），right 正值则边框的顶端点往底缩（底端点不变）。top 正值则边框往右偏移，bottom 正值则边框往左偏移。
+ 3. 对于 QMUIViewBorderPositionBottom 而言，边框从右下往左下绘制。所以 left 正值则边框的右下端点往左缩（左端点不变），right 正值则边框的左下端点往右缩（右端点不变）。top 正值则边框往上偏移，bottom 正值则边框往下偏移。
+ 4. 对于 QMUIViewBorderPositionRight 而言，边框从上往下绘制。所以 left 正值则边框的顶端点往下缩（底端点不变），right 正值则边框的底端点往上缩（顶端点不变）。top 正值则边框往左偏移，bottom 正值则边框往右偏移。
+ */
+@property(nonatomic, assign) IBInspectable UIEdgeInsets qmui_borderInsets;
 
 /// 边框的颜色，默认为UIColorSeparator。请注意修改 qmui_borderPosition 的值以将边框显示出来。
 @property(nullable, nonatomic, strong) IBInspectable UIColor *qmui_borderColor;

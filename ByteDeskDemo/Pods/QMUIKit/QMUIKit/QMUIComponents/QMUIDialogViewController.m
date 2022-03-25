@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -453,11 +453,7 @@ const NSInteger QMUIDialogSelectionViewControllerSelectedItemIndexNone = -1;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.alwaysBounceVertical = NO;
-    if (@available(iOS 11, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    } else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     
     // 因为要根据 tableView sizeThatFits: 算出 dialog 的高度，所以禁用 estimated 特性，不然算出来结果不准确
     self.tableView.estimatedRowHeight = 0;
@@ -662,11 +658,7 @@ const NSInteger QMUIDialogSelectionViewControllerSelectedItemIndexNone = -1;
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.scrollsToTop = NO;
     self.scrollView.clipsToBounds = YES;
-    if (@available(iOS 11, *)) {
-        self.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    } else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
+    self.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     self.contentView = self.scrollView;
     self.scrollView.backgroundColor = self.contentViewBackgroundColor;
 }
@@ -723,7 +715,7 @@ const NSInteger QMUIDialogSelectionViewControllerSelectedItemIndexNone = -1;
     [super viewDidLayoutSubviews];
     // 全部基于 contentView 布局即可
     
-    NSAssert(self.mutableTitleLabels.count == self.mutableTextFields.count && self.mutableTextFields.count == self.mutableSeparatorLayers.count, @"%@ 里的标题、输入框、分隔线数量不匹配", NSStringFromClass(self.class));
+    QMUIAssert(self.mutableTitleLabels.count == self.mutableTextFields.count && self.mutableTextFields.count == self.mutableSeparatorLayers.count, NSStringFromClass(self.class), @"标题、输入框、分隔线的数量不匹配");
     
     CGFloat minY = 0;
     
@@ -929,7 +921,7 @@ const NSInteger QMUIDialogSelectionViewControllerSelectedItemIndexNone = -1;
         }
     }
     
-    CGFloat contentHeight = textFieldLabelHeight + textFieldHeight + separatorHeight + UIEdgeInsetsGetVerticalValue(self.scrollView.qmui_contentInset);
+    CGFloat contentHeight = textFieldLabelHeight + textFieldHeight + separatorHeight + UIEdgeInsetsGetVerticalValue(self.scrollView.adjustedContentInset);
     CGFloat contentViewVerticalMargin = UIEdgeInsetsGetVerticalValue(self.contentViewMargins);
     
     BOOL isFooterViewShowing = self.footerView && !self.footerView.hidden;

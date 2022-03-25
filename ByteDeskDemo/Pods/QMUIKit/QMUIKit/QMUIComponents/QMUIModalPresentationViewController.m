@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -50,7 +50,7 @@
 
 @interface QMUIModalPresentationViewController ()<QMUIKeyboardManagerDelegate>
 
-@property(nonatomic, strong) QMUIModalPresentationWindow *containerWindow;
+@property(nonatomic, strong, readwrite) QMUIModalPresentationWindow *window;
 @property(nonatomic, weak) UIWindow *previousKeyWindow;
 
 @property(nonatomic, assign, readwrite, getter=isVisible) BOOL visible;
@@ -74,6 +74,7 @@
 @property(nonatomic, strong) UITapGestureRecognizer *dimmingViewTapGestureRecognizer;
 @property(nonatomic, strong) QMUIKeyboardManager *keyboardManager;
 @property(nonatomic, assign) CGFloat keyboardHeight;
+@property(nonatomic, assign) BOOL avoidKeyboardLayout;
 @end
 
 @implementation QMUIModalPresentationViewController
@@ -95,6 +96,7 @@
 - (void)didInitialize {
     [self qmui_applyAppearance];
     
+    self.shouldDimmedAppAutomatically = YES;
     self.onlyRespondsToKeyboardEventFromDescendantViews = YES;
     self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     self.modalPresentationStyle = UIModalPresentationCustom;
@@ -120,7 +122,7 @@
 }
 
 - (void)dealloc {
-    self.containerWindow = nil;
+    self.window = nil;
 }
 
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods {
@@ -158,8 +160,6 @@
         animated = self.appearAnimated;
     }
     
-    self.keyboardManager.delegateEnabled = YES;
-    
     if (self.contentViewController) {
         [self.contentViewController beginAppearanceTransition:YES animated:animated];
     }
@@ -168,10 +168,6 @@
     self.viewWillAppearByPresentedViewController = [self isShowingPresentedViewController];
     if (self.viewWillAppearByPresentedViewController) {
         return;
-    }
-    
-    if (self.isShownInWindowMode) {
-        [QMUIHelper dimmedApplicationWindow];
     }
     
     void (^didShownCompletion)(BOOL finished) = ^(BOOL finished) {
@@ -199,6 +195,12 @@
                 contentViewFrame = self.contentView.frame;
             }
             self.showingAnimation(self.dimmingView, self.view.bounds, self.keyboardHeight, contentViewFrame, didShownCompletion);
+            
+            if (self.shouldDimmedAppAutomatically) {
+                [UIView animateWithDuration:.25 delay:0 options:QMUIViewAnimationOptionsCurveOut animations:^{
+                    [QMUIHelper dimmedApplicationWindow];
+                } completion:nil];
+            }
         } else {
             self.contentView.frame = contentViewFrame;
             [self.contentView setNeedsLayout];
@@ -207,6 +209,9 @@
             [self showingAnimationWithCompletion:didShownCompletion];
         }
     } else {
+        if (self.shouldDimmedAppAutomatically) {
+            [QMUIHelper dimmedApplicationWindow];
+        }
         CGRect contentViewFrame = [self contentViewFrameForShowing];
         self.contentView.frame = contentViewFrame;
         [self.view addSubview:self.contentView];
@@ -248,8 +253,8 @@
         }
     }
     
-    // 在降下键盘前取消对键盘事件的监听，从而避免键盘影响隐藏浮层的动画
-    self.keyboardManager.delegateEnabled = NO;
+    // 先更新标志位再 endEditing，保证键盘降下时不触发 updateLayout，从而避免影响 hidingAnimation 的动画
+    self.avoidKeyboardLayout = YES;
     [self.view endEditing:YES];
     
     if (self.contentViewController) {
@@ -261,15 +266,11 @@
         return;
     }
     
-    if (self.isShownInWindowMode) {
-        [QMUIHelper resetDimmedApplicationWindow];
-    }
-    
     void (^didHiddenCompletion)(BOOL finished) = ^(BOOL finished) {
         
         if (self.shownInWindowMode) {
             // 恢复 keyWindow 之前做一下检查，避免这个问题 https://github.com/Tencent/QMUI_iOS/issues/90
-            if (UIApplication.sharedApplication.keyWindow == self.containerWindow) {
+            if (UIApplication.sharedApplication.keyWindow == self.window) {
                 if (self.previousKeyWindow.hidden) {
                     // 保护了这个 issue 记录的情况，避免主 window 丢失 keyWindow https://github.com/Tencent/QMUI_iOS/issues/315
                     [UIApplication.sharedApplication.delegate.window makeKeyWindow];
@@ -277,8 +278,8 @@
                     [self.previousKeyWindow makeKeyWindow];
                 }
             }
-            self.containerWindow.hidden = YES;
-            self.containerWindow.rootViewController = nil;
+            self.window.hidden = YES;
+            self.window.rootViewController = nil;
             self.previousKeyWindow = nil;
             [self endAppearanceTransition];
         }
@@ -301,6 +302,7 @@
         }
         
         self.visible = NO;
+        self.avoidKeyboardLayout = NO;
         
         if ([self.delegate respondsToSelector:@selector(didHideModalPresentationViewController:)]) {
             [self.delegate didHideModalPresentationViewController:self];
@@ -317,10 +319,18 @@
     if (animated) {
         if (self.hidingAnimation) {
             self.hidingAnimation(self.dimmingView, self.view.bounds, self.keyboardHeight, didHiddenCompletion);
+            if (self.shouldDimmedAppAutomatically) {
+                [UIView animateWithDuration:.25 delay:0 options:QMUIViewAnimationOptionsCurveIn animations:^{
+                    [QMUIHelper resetDimmedApplicationWindow];
+                } completion:nil];
+            }
         } else {
             [self hidingAnimationWithCompletion:didHiddenCompletion];
         }
     } else {
+        if (self.shouldDimmedAppAutomatically) {
+            [QMUIHelper resetDimmedApplicationWindow];
+        }
         didHiddenCompletion(YES);
     }
 }
@@ -340,6 +350,10 @@
         [self.view setNeedsLayout];
         [self.view layoutIfNeeded];
     }
+}
+
+- (BOOL)shouldDimmedAppAutomatically {
+    return _shouldDimmedAppAutomatically && self.isShownInWindowMode;
 }
 
 #pragma mark - Dimming View
@@ -397,24 +411,27 @@
             }
         } sender:tapGestureRecognizer];
     } else if (self.shownInPresentedMode) {
+        // 这里仅屏蔽点击遮罩时的 dismiss，如果是代码手动调用 dismiss 的，在 UIViewController(QMUIModalPresentationViewController) 里会通过重写 dismiss 方法来屏蔽。
+        // 为什么不能统一交给 UIViewController(QMUIModalPresentationViewController) 里屏蔽，是因为点击遮罩触发的 dismiss 要调用 willHideByDimmingViewTappedBlock，而 UIViewController 那边不知道此次 dismiss 是否由点击遮罩触发的，所以分开两边写。
+        if ([self.delegate respondsToSelector:@selector(shouldHideModalPresentationViewController:)] && ![self.delegate shouldHideModalPresentationViewController:self]) {
+            return;
+        }
         if (self.willHideByDimmingViewTappedBlock) {
             self.willHideByDimmingViewTappedBlock();
         }
+        
         [self dismissViewControllerAnimated:YES completion:^{
             if (self.didHideByDimmingViewTappedBlock) {
                 self.didHideByDimmingViewTappedBlock();
             }
         }];
     } else if (self.shownInSubviewMode) {
-        if (self.willHideByDimmingViewTappedBlock) {
-            self.willHideByDimmingViewTappedBlock();
-        }
         __weak __typeof(self)weakSelf = self;
         [self hideInView:self.view.superview animated:YES completion:^(BOOL finished) {
             if (weakSelf.didHideByDimmingViewTappedBlock) {
                 weakSelf.didHideByDimmingViewTappedBlock();
             }
-        }];
+        } sender:tapGestureRecognizer];
     }
 }
 
@@ -435,9 +452,12 @@
     if (self.animationStyle == QMUIModalPresentationAnimationStyleFade) {
         self.dimmingView.alpha = 0.0;
         self.contentView.alpha = 0.0;
-        [UIView animateWithDuration:.2 delay:0.0 options:QMUIViewAnimationOptionsCurveOut animations:^{
+        [UIView animateWithDuration:.25 delay:0.0 options:QMUIViewAnimationOptionsCurveOut animations:^{
             self.dimmingView.alpha = 1.0;
             self.contentView.alpha = 1.0;
+            if (self.shouldDimmedAppAutomatically) {
+                [QMUIHelper dimmedApplicationWindow];
+            }
         } completion:^(BOOL finished) {
             if (completion) {
                 completion(finished);
@@ -447,9 +467,12 @@
     } else if (self.animationStyle == QMUIModalPresentationAnimationStylePopup) {
         self.dimmingView.alpha = 0.0;
         self.contentView.transform = CGAffineTransformMakeScale(0, 0);
-        [UIView animateWithDuration:.3 delay:0.0 options:QMUIViewAnimationOptionsCurveOut animations:^{
+        [UIView animateWithDuration:.25 delay:0.0 options:QMUIViewAnimationOptionsCurveOut animations:^{
             self.dimmingView.alpha = 1.0;
-            self.contentView.transform = CGAffineTransformMakeScale(1, 1);
+            self.contentView.transform = CGAffineTransformIdentity;
+            if (self.shouldDimmedAppAutomatically) {
+                [QMUIHelper dimmedApplicationWindow];
+            }
         } completion:^(BOOL finished) {
             self.contentView.transform = CGAffineTransformIdentity;
             if (completion) {
@@ -460,9 +483,12 @@
     } else if (self.animationStyle == QMUIModalPresentationAnimationStyleSlide) {
         self.dimmingView.alpha = 0.0;
         self.contentView.transform = CGAffineTransformMakeTranslation(0, CGRectGetHeight(self.view.bounds) - CGRectGetMinY(self.contentView.frame));
-        [UIView animateWithDuration:.3 delay:0.0 options:QMUIViewAnimationOptionsCurveOut animations:^{
+        [UIView animateWithDuration:.25 delay:0.0 options:QMUIViewAnimationOptionsCurveOut animations:^{
             self.dimmingView.alpha = 1.0;
             self.contentView.transform = CGAffineTransformIdentity;
+            if (self.shouldDimmedAppAutomatically) {
+                [QMUIHelper dimmedApplicationWindow];
+            }
         } completion:^(BOOL finished) {
             if (completion) {
                 completion(finished);
@@ -479,21 +505,24 @@
     self.appearAnimated = animated;
     self.appearCompletionBlock = completion;
     self.previousKeyWindow = UIApplication.sharedApplication.keyWindow;
-    if (!self.containerWindow) {
-        self.containerWindow = [[QMUIModalPresentationWindow alloc] init];
-        self.containerWindow.windowLevel = UIWindowLevelQMUIAlertView;
-        self.containerWindow.backgroundColor = UIColorClear;// 避免横竖屏旋转时出现黑色
-        [self updateContainerWindowStatusBarCapture];
+    if (!self.window) {
+        self.window = [[QMUIModalPresentationWindow alloc] init];
+        self.window.windowLevel = UIWindowLevelQMUIAlertView;
+        self.window.backgroundColor = UIColorClear;// 避免横竖屏旋转时出现黑色
+        [self updateWindowStatusBarCapture];
     }
-    self.containerWindow.rootViewController = self;
-    [self.containerWindow makeKeyAndVisible];
+    self.window.rootViewController = self;
+    [self.window makeKeyAndVisible];
 }
 
 - (void)hidingAnimationWithCompletion:(void (^)(BOOL))completion {
     if (self.animationStyle == QMUIModalPresentationAnimationStyleFade) {
-        [UIView animateWithDuration:.2 delay:0.0 options:QMUIViewAnimationOptionsCurveOut animations:^{
+        [UIView animateWithDuration:.25 delay:0.0 options:QMUIViewAnimationOptionsCurveOut animations:^{
             self.dimmingView.alpha = 0.0;
             self.contentView.alpha = 0.0;
+            if (self.shouldDimmedAppAutomatically) {
+                [QMUIHelper resetDimmedApplicationWindow];
+            }
         } completion:^(BOOL finished) {
             if (completion) {
                 self.dimmingView.alpha = 1.0;
@@ -502,9 +531,12 @@
             }
         }];
     } else if (self.animationStyle == QMUIModalPresentationAnimationStylePopup) {
-        [UIView animateWithDuration:.3 delay:0.0 options:QMUIViewAnimationOptionsCurveOut animations:^{
+        [UIView animateWithDuration:.25 delay:0.0 options:QMUIViewAnimationOptionsCurveOut animations:^{
             self.dimmingView.alpha = 0.0;
-            self.contentView.transform = CGAffineTransformMakeScale(0.0, 0.0);
+            self.contentView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+            if (self.shouldDimmedAppAutomatically) {
+                [QMUIHelper resetDimmedApplicationWindow];
+            }
         } completion:^(BOOL finished) {
             if (completion) {
                 self.dimmingView.alpha = 1.0;
@@ -513,9 +545,12 @@
             }
         }];
     } else if (self.animationStyle == QMUIModalPresentationAnimationStyleSlide) {
-        [UIView animateWithDuration:.3 delay:0.0 options:QMUIViewAnimationOptionsCurveOut animations:^{
+        [UIView animateWithDuration:.25 delay:0.0 options:QMUIViewAnimationOptionsCurveOut animations:^{
             self.dimmingView.alpha = 0.0;
             self.contentView.transform = CGAffineTransformMakeTranslation(0, CGRectGetHeight(self.view.bounds) - CGRectGetMinY(self.contentView.frame));
+            if (self.shouldDimmedAppAutomatically) {
+                [QMUIHelper resetDimmedApplicationWindow];
+            }
         } completion:^(BOOL finished) {
             if (completion) {
                 self.dimmingView.alpha = 1.0;
@@ -568,8 +603,28 @@
 }
 
 - (void)hideInView:(UIView *)view animated:(BOOL)animated completion:(void (^)(BOOL))completion {
+    [self hideInView:view animated:animated completion:completion sender:nil];
+}
+
+- (void)hideInView:(UIView *)view animated:(BOOL)animated completion:(void (^)(BOOL))completion sender:(id)sender {
     if (!self.visible) return;
+    
+    BOOL shouldHide = YES;
+    if ([self.delegate respondsToSelector:@selector(shouldHideModalPresentationViewController:)]) {
+        shouldHide = [self.delegate shouldHideModalPresentationViewController:self];
+    }
+    if (!shouldHide) {
+        return;
+    }
+    
     self.willHideInView = YES;
+    
+    if (sender == self.dimmingViewTapGestureRecognizer) {
+        if (self.willHideByDimmingViewTappedBlock) {
+            self.willHideByDimmingViewTappedBlock();
+        }
+    }
+    
     self.disappearCompletionBlock = completion;
     [self beginAppearanceTransition:NO animated:animated];
     if (animated) {
@@ -594,7 +649,7 @@
 }
 
 - (BOOL)isShownInWindowMode {
-    return !!self.containerWindow;
+    return !!self.window;
 }
 
 - (BOOL)isShownInPresentedMode {
@@ -621,7 +676,9 @@
     CGFloat keyboardHeight = [keyboardUserInfo heightInView:self.view];
     if (self.keyboardHeight != keyboardHeight) {
         self.keyboardHeight = keyboardHeight;
-        [self updateLayout];
+        if (!self.avoidKeyboardLayout) {
+            [self updateLayout];
+        }
     }
 }
 
@@ -645,19 +702,19 @@
 
 - (void)setQmui_prefersStatusBarHiddenBlock:(BOOL (^)(void))qmui_prefersStatusBarHiddenBlock {
     [super setQmui_prefersStatusBarHiddenBlock:qmui_prefersStatusBarHiddenBlock];
-    [self updateContainerWindowStatusBarCapture];
+    [self updateWindowStatusBarCapture];
 }
 
 - (void)setQmui_preferredStatusBarStyleBlock:(UIStatusBarStyle (^)(void))qmui_preferredStatusBarStyleBlock {
     [super setQmui_preferredStatusBarStyleBlock:qmui_preferredStatusBarStyleBlock];
-    [self updateContainerWindowStatusBarCapture];
+    [self updateWindowStatusBarCapture];
 }
 
-- (void)updateContainerWindowStatusBarCapture {
-    if (!self.containerWindow) return;
+- (void)updateWindowStatusBarCapture {
+    if (!self.window) return;
     // 当以 window 的方式显示浮层时，状态栏交给 QMUIModalPresentationViewController 控制
-    self.containerWindow.qmui_capturesStatusBarAppearance = self.qmui_prefersStatusBarHiddenBlock || self.qmui_preferredStatusBarStyleBlock;
-    if (self.containerWindow.qmui_capturesStatusBarAppearance) {
+    self.window.qmui_capturesStatusBarAppearance = self.qmui_prefersStatusBarHiddenBlock || self.qmui_preferredStatusBarStyleBlock;
+    if (self.window.qmui_capturesStatusBarAppearance) {
         [self setNeedsStatusBarAppearanceUpdate];
     }
 }
@@ -770,5 +827,35 @@
 @implementation UIViewController (QMUIModalPresentationViewController)
 
 QMUISynthesizeIdWeakProperty(qmui_modalPresentationViewController, setQmui_modalPresentationViewController)
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        // present 方式显示的 modal，通过拦截 dismiss 方法来实现 shouldHide 的 delegate。注意以 window 方式显示的 modal，在 window.rootViewController = nil 时系统默认也会调用 dismiss，此时要通过 isShownInPresentedMode 区分开。
+        OverrideImplementation([UIViewController class], @selector(dismissViewControllerAnimated:completion:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^(UIViewController *selfObject, BOOL firstArgv, id secondArgv) {
+                
+                QMUIModalPresentationViewController *modal = nil;
+                if ([selfObject.presentedViewController isKindOfClass:QMUIModalPresentationViewController.class]) {
+                    modal = (QMUIModalPresentationViewController *)selfObject.presentedViewController;
+                } else if ([selfObject isKindOfClass:QMUIModalPresentationViewController.class] && !selfObject.presentedViewController && selfObject.presentingViewController.presentedViewController == selfObject) {
+                    modal = (QMUIModalPresentationViewController *)selfObject;
+                }
+                if ([modal.delegate respondsToSelector:@selector(shouldHideModalPresentationViewController:)] && modal.isShownInPresentedMode) {
+                    BOOL shouldHide = [modal.delegate shouldHideModalPresentationViewController:modal];
+                    if (!shouldHide) {
+                        return;
+                    }
+                }
+                
+                // call super
+                void (*originSelectorIMP)(id, SEL, BOOL, id);
+                originSelectorIMP = (void (*)(id, SEL, BOOL, id))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, firstArgv, secondArgv);
+            };
+        });
+    });
+}
 
 @end

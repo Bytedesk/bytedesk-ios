@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -40,6 +40,12 @@ typedef NS_OPTIONS(NSUInteger, QMUIViewControllerVisibleState) {
 
 @interface UIViewController (QMUI)
 
+/// 当前 UIViewController.class 是否为系统默认的几个 container viewController（也即 UINavigationController、UITabBarController、UISplitViewController）。
+@property(class, nonatomic, assign, readonly) BOOL qmui_isSystemContainerViewController;
+
+/// 当前 UIViewController 是否为系统默认的几个 container viewController（也即 UINavigationController、UITabBarController、UISplitViewController）。
+@property(nonatomic, assign, readonly) BOOL qmui_isSystemContainerViewController;
+
 /** 获取和自身处于同一个UINavigationController里的上一个UIViewController */
 @property(nullable, nonatomic, weak, readonly) UIViewController *qmui_previousViewController;
 
@@ -65,6 +71,11 @@ typedef NS_OPTIONS(NSUInteger, QMUIViewControllerVisibleState) {
  *  是否应该响应一些UI相关的通知，例如 UIKeyboardNotification、UIMenuControllerNotification等，因为有可能当前界面已经被切走了（push到其他界面），但仍可能收到通知，所以在响应通知之前都应该做一下这个判断
  */
 - (BOOL)qmui_isViewLoadedAndVisible;
+
+/**
+ 判断当前 viewController 是否为传入的 viewController 本身，或是其“子控制器” （childViewController）、孙子控制器（即 childViewController 的 childViewController ...）
+ */
+- (BOOL)qmui_isDescendantOfViewController:(UIViewController *)viewController;
 
 /**
  获取当前 viewController 所处的的生命周期阶段（也即 viewDidLoad/viewWillApear/viewDidAppear/viewWillDisappear/viewDidDisappear）
@@ -109,7 +120,7 @@ typedef NS_OPTIONS(NSUInteger, QMUIViewControllerVisibleState) {
 @property(nullable, nonatomic, copy) UIStatusBarAnimation (^qmui_preferredStatusBarUpdateAnimationBlock)(void);
 
 /// 提供一个 block 可以方便地控制全面屏设备屏幕底部的 Home Indicator 的显隐，适用于无法重写父类方法的场景。默认不实现这个 block 则不干预显隐。
-@property(nullable, nonatomic, copy) BOOL (^qmui_prefersHomeIndicatorAutoHiddenBlock)(void) API_AVAILABLE(ios(11.0));
+@property(nullable, nonatomic, copy) BOOL (^qmui_prefersHomeIndicatorAutoHiddenBlock)(void);
 
 /**
  获取当前 viewController 的 statusBar 显隐状态，与系统 prefersStatusBarHidden 的区别在于，系统的方法在对 containerViewController（例如 UITabBarController、UINavigationController 等）调用时，返回的是 containerViewController 自身的 prefersStatusBarHidden 的值，但真正决定 statusBar 显隐的是该 containerViewController 的 childViewControllerForStatusBarHidden 的 prefersStatusBarHidden 的值，所以只有用 qmui_prefersStatusBarHidden 才能拿到真正的值。

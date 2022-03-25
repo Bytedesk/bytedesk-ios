@@ -10,15 +10,9 @@
 
 @implementation QMUIConfigurationTemplate
 
-static UIImage *disclosureIndicatorImage;
-static UIImage *disclosureIndicatorImageDark;
-
 #pragma mark - <QMUIConfigurationTemplateProtocol>
 
 - (void)applyConfigurationTemplate {
-    
-    if (!disclosureIndicatorImage) disclosureIndicatorImage = [UIImage qmui_imageWithShape:QMUIImageShapeDisclosureIndicator size:CGSizeMake(6, 10) lineWidth:1 tintColor:UIColorGray7];
-    if (!disclosureIndicatorImageDark) disclosureIndicatorImageDark = [UIImage qmui_imageWithShape:QMUIImageShapeDisclosureIndicator size:CGSizeMake(6, 10) lineWidth:1 tintColor:UIColorMake(98, 100, 104)];
     
     // === 修改配置值 === //
     
@@ -40,7 +34,7 @@ static UIImage *disclosureIndicatorImageDark;
     QMUICMI.backgroundColor = UIColor.qd_backgroundColor;                                     // UIColorForBackground : 界面背景色，默认用于 QMUICommonViewController.view 的背景色
     QMUICMI.maskDarkColor = UIColorMakeWithRGBA(0, 0, 0, .35f);                 // UIColorMask : 深色的背景遮罩，默认用于 QMAlertController、QMUIDialogViewController 等弹出控件的遮罩
     QMUICMI.maskLightColor = UIColorMakeWithRGBA(255, 255, 255, .5f);           // UIColorMaskWhite : 浅色的背景遮罩，QMUIKit 里默认没用到，只是占个位
-    QMUICMI.separatorColor = UIColor.qd_separatorColor;                          // UIColorSeparator : 全局默认的分割线颜色，默认用于列表分隔线颜色、UIView (QMUI_Border) 分隔线颜色
+    QMUICMI.separatorColor = UIColor.qd_separatorColor;                          // UIColorSeparator : 全局默认的分割线颜色，默认用于列表分隔线颜色、UIView (QMUIBorder) 分隔线颜色
     QMUICMI.separatorDashedColor = UIColorMake(17, 17, 17);                     // UIColorSeparatorDashed : 全局默认的虚线分隔线的颜色，默认 QMUIKit 暂时没用到
     QMUICMI.placeholderColor = UIColor.qd_placeholderColor;                                    // UIColorPlaceholder，全局的输入框的 placeholder 颜色，默认用于 QMUITextField、QMUITextView，不影响系统 UIKit 的输入框
     
@@ -49,6 +43,11 @@ static UIImage *disclosureIndicatorImageDark;
     QMUICMI.testColorGreen = UIColorMakeWithRGBA(0, 255, 0, .3);
     QMUICMI.testColorBlue = UIColorMakeWithRGBA(0, 0, 255, .3);
     
+#pragma mark - QMUILog
+    QMUICMI.shouldPrintDefaultLog = YES;                                        // ShouldPrintDefaultLog : 是否允许输出 QMUILogLevelDefault 级别的 log
+    QMUICMI.shouldPrintInfoLog = YES;                                           // ShouldPrintInfoLog : 是否允许输出 QMUILogLevelInfo 级别的 log
+    QMUICMI.shouldPrintWarnLog = YES;                                           // ShouldPrintInfoLog : 是否允许输出 QMUILogLevelWarn 级别的 log
+    QMUICMI.shouldPrintQMUIWarnLogToConsole = YES;                              // ShouldPrintQMUIWarnLogToConsole : 是否在出现 QMUILogWarn 时自动把这些 log 以 QMUIConsole 的方式显示到设备屏幕上
     
 #pragma mark - UIControl
     
@@ -60,20 +59,9 @@ static UIImage *disclosureIndicatorImageDark;
     QMUICMI.buttonDisabledAlpha = UIControlDisabledAlpha;                       // ButtonDisabledAlpha : QMUIButton 在 disabled 时的 alpha，不影响系统的 UIButton
     QMUICMI.buttonTintColor = UIColor.qd_tintColor;                              // ButtonTintColor : QMUIButton 默认的 tintColor，不影响系统的 UIButton
     
-    QMUICMI.ghostButtonColorBlue = UIColorBlue;                                 // GhostButtonColorBlue : QMUIGhostButtonColorBlue 的颜色
-    QMUICMI.ghostButtonColorRed = UIColorRed;                                   // GhostButtonColorRed : QMUIGhostButtonColorRed 的颜色
-    QMUICMI.ghostButtonColorGreen = UIColorGreen;                               // GhostButtonColorGreen : QMUIGhostButtonColorGreen 的颜色
-    QMUICMI.ghostButtonColorGray = UIColorGray;                                 // GhostButtonColorGray : QMUIGhostButtonColorGray 的颜色
-    QMUICMI.ghostButtonColorWhite = UIColorWhite;                               // GhostButtonColorWhite : QMUIGhostButtonColorWhite 的颜色
-    
-    QMUICMI.fillButtonColorBlue = UIColorBlue;                                  // FillButtonColorBlue : QMUIFillButtonColorBlue 的颜色
-    QMUICMI.fillButtonColorRed = UIColorRed;                                    // FillButtonColorRed : QMUIFillButtonColorRed 的颜色
-    QMUICMI.fillButtonColorGreen = UIColorGreen;                                // FillButtonColorGreen : QMUIFillButtonColorGreen 的颜色
-    QMUICMI.fillButtonColorGray = UIColorGray;                                  // FillButtonColorGray : QMUIFillButtonColorGray 的颜色
-    QMUICMI.fillButtonColorWhite = UIColorWhite;                                // FillButtonColorWhite : QMUIFillButtonColorWhite 的颜色
-    
     
 #pragma mark - TextInput
+    QMUICMI.textFieldTextColor = UIColor.qd_titleTextColor;                     // TextFieldTextColor : QMUITextField、QMUITextView 的 textColor，不影响 UIKit 的输入框
     QMUICMI.textFieldTintColor = UIColor.qd_tintColor;                          // TextFieldTintColor : QMUITextField、QMUITextView 的 tintColor，不影响 UIKit 的输入框
     QMUICMI.textFieldTextInsets = UIEdgeInsetsMake(0, 7, 0, 7);                 // TextFieldTextInsets : QMUITextField 的内边距，不影响 UITextField
     QMUICMI.keyboardAppearance = UIKeyboardAppearanceDefault;                   // KeyboardAppearance : UITextView、UITextField、UISearchBar 的 keyboardAppearance
@@ -81,65 +69,88 @@ static UIImage *disclosureIndicatorImageDark;
 #pragma mark - UISwitch
     QMUICMI.switchOnTintColor = UIColor.qd_tintColor;                           // SwitchOnTintColor : UISwitch 打开时的背景色（除了圆点外的其他颜色）
     QMUICMI.switchOffTintColor =  UIColor.qd_separatorColor;                    // SwitchOffTintColor : UISwitch 关闭时的背景色（除了圆点外的其他颜色）
-    QMUICMI.switchTintColor = SwitchOnTintColor;                                // SwitchTintColor : UISwitch 关闭时的周围边框颜色
     QMUICMI.switchThumbTintColor = nil;                                         // SwitchThumbTintColor : UISwitch 中间的操控圆点的颜色
     
 #pragma mark - NavigationBar
     
+    if (@available(iOS 15.0, *)) {
+        QMUICMI.navBarUsesStandardAppearanceOnly = YES;                         // NavBarUsesStandardAppearanceOnly : 对于 iOS 15 的系统，UINavigationBar 的样式分为滚动前和滚动后，虽然系统的注释里说了如果没设置 scrollEdgeAppearance 则会用 standardAppearance 代替，但实际运行效果是 scrollEdgeAppearance 默认并不会保持与 standardAppearance 一致，所以这里提供一个开关，允许你在打开开关时让 QMUI 帮你同步 standardAppearance 的值，以使 App 保持与 iOS 14 相同的效果。如需打开该开关，请保证在其他 NavBar 开关之前设置。
+    }
+    QMUICMI.navBarContainerClasses = @[QMUINavigationController.class];         // NavBarContainerClasses : NavigationBar 系列开关被用于 UIAppearance 时的生效范围（默认情况下除了用于 UIAppearance 外，还用于实现了 QMUINavigationControllerAppearanceDelegate 的 UIViewController），默认为 nil。当赋值为 nil 或者空数组时等效于 @[UINavigationController.class]，也即对所有 UINavigationBar 生效，包括系统的通讯录（ContactsUI.framework)、打印等。当值不为空时，获取 UINavigationBar 的 appearance 请使用 UINavigationBar.qmui_appearanceConfigured 方法代替系统的 UINavigationBar.appearance。请保证这个配置项先于其他任意 NavBar 配置项执行。
     QMUICMI.navBarHighlightedAlpha = 0.2f;                                      // NavBarHighlightedAlpha : QMUINavigationButton 在 highlighted 时的 alpha
     QMUICMI.navBarDisabledAlpha = 0.2f;                                         // NavBarDisabledAlpha : QMUINavigationButton 在 disabled 时的 alpha
-    QMUICMI.navBarButtonFont = UIFontMake(17);                                  // NavBarButtonFont : QMUINavigationButtonTypeNormal 的字体（由于系统存在一些 bug，这个属性默认不对 UIBarButtonItem 生效）
-    QMUICMI.navBarButtonFontBold = UIFontBoldMake(17);                          // NavBarButtonFontBold : QMUINavigationButtonTypeBold 的字体
-    QMUICMI.navBarBackgroundImage = [UIImageMake(@"navigationbar_background") resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 1) resizingMode:UIImageResizingModeStretch];   // NavBarBackgroundImage : UINavigationBar 的背景图，注意 navigationBar 的高度会受多个因素（是否全面屏、是否使用了 navigationItem.prompt、是否将 UISearchBar 作为 titleView）的影响，要检查各种情况是否都显示正常。
+    QMUICMI.navBarButtonFont = UIFontMake(17);                                  // NavBarButtonFont : UINavigationBar 里 UIBarButtonItem 以及 QMUINavigationButtonTypeNormal 的字体
+    QMUICMI.navBarButtonFontBold = UIFontBoldMake(17);                          // NavBarButtonFontBold : iOS 15 及以后用于设置 UINavigationBar 里 Done 类型的 UIBarButtonItem 以及 QMUINavigationButtonTypeBold 的字体，iOS 14 及以前只对后者生效
+    QMUICMI.navBarBackgroundImage = UIImage.qd_navigationBarBackgroundImage;    // NavBarBackgroundImage : UINavigationBar 的背景图，注意 navigationBar 的高度会受多个因素（是否全面屏、是否使用了 navigationItem.prompt、是否将 UISearchBar 作为 titleView）的影响，要检查各种情况是否都显示正常。
+    if (@available(iOS 15.0, *)) {
+        QMUICMI.navBarRemoveBackgroundEffectAutomatically = YES;                // NavBarRemoveBackgroundEffectAutomatically : iOS 15 及以后，QMUI 里的 UINavigationBar 使用的是 UINavigationBarAppearance 来设置样式，新方式默认是 backgroundImage 和 backgroundEffect 共存的，而 iOS 14 及以前的旧方式，一旦设置了 backgroundImage 则 backgroundEffect 自动会被移除，因此提供该开关允许业务将行为回退到 iOS 14 及以前的效果。默认为 NO。
+    }
     QMUICMI.navBarShadowImage = nil;                                            // NavBarShadowImage : UINavigationBar.shadowImage，也即导航栏底部那条分隔线，配合 NavBarShadowImageColor 使用。
-    QMUICMI.navBarShadowImageColor = UIColorClear;                              // NavBarShadowImageColor : UINavigationBar.shadowImage 的颜色，如果为 nil，则显示系统默认 shadowImage，如果为全透明，则不显示 shadowImage，如果为除了 nil 和全透明外的其他颜色，则会将这个颜色叠加到 NavBarShadowImage 上显示出来，如果不存在 NavBarShadowImage，则使用一张 1px 高的图片作为默认图。
+    QMUICMI.navBarShadowImageColor = UIColorClear;                              // NavBarShadowImageColor : UINavigationBar.shadowImage 的颜色，如果为 nil，则使用 NavBarShadowImage 的值，如果 NavBarShadowImage 也为 nil，则使用系统默认的分隔线。如果不为 nil，而 NavBarShadowImage 为 nil，则自动创建一张 1px 高的图并将其设置为 NavBarShadowImageColor 的颜色然后设置上去，如果 NavBarShadowImage 不为 nil 且 renderingMode 不为 UIImageRenderingModeAlwaysOriginal，则将 NavBarShadowImage 设置为 NavBarShadowImageColor 的颜色然后设置上去。
     QMUICMI.navBarBarTintColor = nil;                                           // NavBarBarTintColor : UINavigationBar.barTintColor，也即背景色
     QMUICMI.navBarStyle = UIBarStyleDefault;                                    // NavBarStyle : UINavigationBar 的 barStyle
-    QMUICMI.navBarTintColor = UIColorWhite;                                     // NavBarTintColor : QMUINavigationBar 的 tintColor，也即导航栏上面的按钮颜色
+    QMUICMI.navBarTintColor = UIColorWhite;                                     // NavBarTintColor : NavBarContainerClasses 里的 UINavigationBar 的 tintColor，也即导航栏上面的按钮颜色
     QMUICMI.navBarTitleColor = NavBarTintColor;                                 // NavBarTitleColor : UINavigationBar 的标题颜色，以及 QMUINavigationTitleView 的默认文字颜色
-//    QMUICMI.navBarTitleColor = [UIColor blackColor];
     QMUICMI.navBarTitleFont = UIFontBoldMake(17);                               // NavBarTitleFont : UINavigationBar 的标题字体，以及 QMUINavigationTitleView 的默认字体
-    QMUICMI.navBarLargeTitleColor = nil;                                        // NavBarLargeTitleColor : UINavigationBar 在大标题模式下的标题颜色，仅在 iOS 11 之后才有效
-    QMUICMI.navBarLargeTitleFont = nil;                                         // NavBarLargeTitleFont : UINavigationBar 在大标题模式下的标题字体，仅在 iOS 11 之后才有效
+    QMUICMI.navBarLargeTitleColor = nil;                                        // NavBarLargeTitleColor : UINavigationBar 在大标题模式下的标题颜色
+    QMUICMI.navBarLargeTitleFont = nil;                                         // NavBarLargeTitleFont : UINavigationBar 在大标题模式下的标题字体
     QMUICMI.navBarBackButtonTitlePositionAdjustment = UIOffsetZero;             // NavBarBarBackButtonTitlePositionAdjustment : 导航栏返回按钮的文字偏移
-    QMUICMI.sizeNavBarBackIndicatorImageAutomatically = YES;                    // SizeNavBarBackIndicatorImageAutomatically : 是否要自动调整 NavBarBackIndicatorImage 的 size 为 (13, 21)
-    QMUICMI.navBarBackIndicatorImage = [UIImage qmui_imageWithShape:QMUIImageShapeNavBack size:CGSizeMake(12, 20) tintColor:NavBarTintColor];                                     // NavBarBackIndicatorImage : 导航栏的返回按钮的图片，图片尺寸建议为(13, 21)，否则最终的图片位置无法与系统原生的位置保持一致
-    QMUICMI.navBarCloseButtonImage = [UIImage qmui_imageWithShape:QMUIImageShapeNavClose size:CGSizeMake(16, 16) tintColor:NavBarTintColor];     // NavBarCloseButtonImage : QMUINavigationButton 用到的 × 的按钮图片
+    QMUICMI.sizeNavBarBackIndicatorImageAutomatically = NO;                    // SizeNavBarBackIndicatorImageAutomatically : 是否要自动调整 NavBarBackIndicatorImage 的 size 为 (13, 21)
+    QMUICMI.navBarBackIndicatorImage = UIImage.qd_navigationBarBackIndicatorImage;                                     // NavBarBackIndicatorImage : 导航栏的返回按钮的图片，图片尺寸建议为(13, 21)，否则最终的图片位置无法与系统原生的位置保持一致
+    QMUICMI.navBarCloseButtonImage = UIImage.qd_navigationBarCloseImage;     // NavBarCloseButtonImage : QMUINavigationButton 用到的 × 的按钮图片
     
     QMUICMI.navBarLoadingMarginRight = 3;                                       // NavBarLoadingMarginRight : QMUINavigationTitleView 里左边 loading 的右边距
     QMUICMI.navBarAccessoryViewMarginLeft = 5;                                  // NavBarAccessoryViewMarginLeft : QMUINavigationTitleView 里右边 accessoryView 的左边距
     QMUICMI.navBarActivityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;// NavBarActivityIndicatorViewStyle : QMUINavigationTitleView 里左边 loading 的主题
-    QMUICMI.navBarAccessoryViewTypeDisclosureIndicatorImage = [[UIImage qmui_imageWithShape:QMUIImageShapeTriangle size:CGSizeMake(8, 5) tintColor:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];     // NavBarAccessoryViewTypeDisclosureIndicatorImage : QMUINavigationTitleView 右边箭头的图片
+    QMUICMI.navBarAccessoryViewTypeDisclosureIndicatorImage = UIImage.qd_navigationBarDisclosureIndicatorImage;     // NavBarAccessoryViewTypeDisclosureIndicatorImage : QMUINavigationTitleView 右边箭头的图片
+
     
 #pragma mark - TabBar
     
-    QMUICMI.tabBarBackgroundImage = [[UIImage qmui_imageWithColor:UIColorMake(249, 249, 249)] resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1)];   // TabBarBackgroundImage : UITabBar 的背景图，建议使用 resizableImage，否则在 UITabBar (NavigationController) 的 setBackgroundImage: 里会每次都视为 image 发生了变化（isEqual: 为 NO）
-    QMUICMI.tabBarBarTintColor = nil;                                           // TabBarBarTintColor : UITabBar 的 barTintColor
+    if (@available(iOS 15.0, *)) {
+        QMUICMI.tabBarUsesStandardAppearanceOnly = YES;                          // TabBarUsesStandardAppearanceOnly : 对于 iOS 15 的系统，UITabBar 的样式分为滚动前和滚动后，虽然系统的注释里说了如果没设置 scrollEdgeAppearance 则会用 standardAppearance 代替，但实际运行效果是 scrollEdgeAppearance 默认并不会保持与 standardAppearance 一致，所以这里提供一个开关，允许你在打开开关时让 QMUI 帮你同步 standardAppearance 的值，以使 App 保持与 iOS 14 相同的效果。如需打开该开关，请保证在其他 NavBar 开关之前设置。
+    }
+    QMUICMI.tabBarContainerClasses = nil;                                       // TabBarContainerClasses : TabBar 系列开关的生效范围，默认为 nil，当赋值为 nil 或者空数组时等效于 @[UITabBarController.class]，也即对所有 UITabBar 生效。当值不为空时，获取 UITabBar 的 appearance 请使用 UITabBar.qmui_appearanceConfigured 方法代替系统的 UITabBar.appearance。请保证这个配置项先于其他任意 TabBar 配置项执行。
+    QMUICMI.tabBarBackgroundImage = nil;                                        // TabBarBackgroundImage : UITabBar 的背景图，建议使用 resizableImage，否则在 UITabBar (NavigationController) 的 setBackgroundImage: 里会每次都视为 image 发生了变化（isEqual: 为 NO）
+    if (@available(iOS 15.0, *)) {
+        QMUICMI.tabBarRemoveBackgroundEffectAutomatically = YES;                // TabBarRemoveBackgroundEffectAutomatically : iOS 15 及以后，QMUI 里的 UITabBar 使用的是 UITabBarAppearance 来设置样式，新方式默认是 backgroundImage 和 backgroundEffect 共存的，而 iOS 14 及以前的旧方式，一旦设置了 backgroundImage 则 backgroundEffect 自动会被移除，因此提供该开关允许业务将行为回退到 iOS 14 及以前的效果。默认为 NO。
+    }
+    QMUICMI.tabBarBarTintColor = nil;                                           // TabBarBarTintColor : UITabBar 的 barTintColor，如果需要看到磨砂效果则应该提供半透明的色值
     QMUICMI.tabBarShadowImageColor = UIColorSeparator;                          // TabBarShadowImageColor : UITabBar 的 shadowImage 的颜色，会自动创建一张 1px 高的图片
     QMUICMI.tabBarStyle = UIBarStyleDefault;                                    // TabBarStyle : UITabBar 的 barStyle
-    QMUICMI.tabBarItemTitleFont = nil;                                          // TabBarItemTitleFont : UITabBarItem 的标题字体
+    QMUICMI.tabBarItemTitleFont = UIFontMake(10);                               // TabBarItemTitleFont : UITabBarItem 的标题字体
+    QMUICMI.tabBarItemTitleFontSelected = nil;                                  // TabBarItemTitleFontSelected : 选中的 UITabBarItem 的标题字体
     QMUICMI.tabBarItemTitleColor = UIColor.qd_descriptionTextColor;             // TabBarItemTitleColor : 未选中的 UITabBarItem 的标题颜色
     QMUICMI.tabBarItemTitleColorSelected = UIColor.qd_tintColor;                // TabBarItemTitleColorSelected : 选中的 UITabBarItem 的标题颜色
-    QMUICMI.tabBarItemImageColor = TabBarItemTitleColor;                        // TabBarItemImageColor : UITabBarItem 未选中时的图片颜色
+    QMUICMI.tabBarItemImageColor = TabBarItemTitleColor;                        // TabBarItemImageColor : UITabBarItem 未选中时的图片颜色（该配置项在 iOS 12 及以下的系统对 QMUIThemeImage 无效，请自行在 provider 内处理颜色。注意非选中状态的图片需要指定为 UIImageRenderingModeAlwaysOriginal，系统限制如此）
     QMUICMI.tabBarItemImageColorSelected = TabBarItemTitleColorSelected;        // TabBarItemImageColorSelected : UITabBarItem 选中时的图片颜色
+
     
 #pragma mark - Toolbar
     
+    if (@available(iOS 15.0, *)) {
+        QMUICMI.toolBarUsesStandardAppearanceOnly = YES;                          // ToolBarUsesStandardAppearanceOnly : 对于 iOS 15 的系统，UIToolbar 的样式分为滚动前和滚动后，虽然系统的注释里说了如果没设置 scrollEdgeAppearance 则会用 standardAppearance 代替，但实际运行效果是 scrollEdgeAppearance 默认并不会保持与 standardAppearance 一致，所以这里提供一个开关，允许你在打开开关时让 QMUI 帮你同步 standardAppearance 的值，以使 App 保持与 iOS 14 相同的效果。如需打开该开关，请保证在其他 NavBar 开关之前设置。
+    }
+    QMUICMI.toolBarContainerClasses = @[QMUINavigationController.class];        // ToolBarContainerClasses : ToolBar 系列开关的生效范围，默认为 nil，当赋值为 nil 或者空数组时等效于 @[UINavigationController.class]，也即对所有 UIToolbar 生效。当值不为空时，获取 UIToolbar 的 appearance 请使用 UIToolbar.qmui_appearanceConfigured 方法代替系统的 UIToolbar.appearance。请保证这个配置项先于其他任意 ToolBar 配置项执行。
     QMUICMI.toolBarHighlightedAlpha = 0.4f;                                     // ToolBarHighlightedAlpha : QMUIToolbarButton 在 highlighted 状态下的 alpha
     QMUICMI.toolBarDisabledAlpha = 0.4f;                                        // ToolBarDisabledAlpha : QMUIToolbarButton 在 disabled 状态下的 alpha
-    QMUICMI.toolBarTintColor = UIColor.qd_tintColor;                            // ToolBarTintColor : UIToolbar 的 tintColor，以及 QMUIToolbarButton normal 状态下的文字颜色
+    QMUICMI.toolBarTintColor = UIColor.qd_tintColor;                            // ToolBarTintColor : NavBarContainerClasses 里的 UIToolbar 的 tintColor，以及 QMUIToolbarButton normal 状态下的文字颜色
     QMUICMI.toolBarTintColorHighlighted = [ToolBarTintColor colorWithAlphaComponent:ToolBarHighlightedAlpha];   // ToolBarTintColorHighlighted : QMUIToolbarButton 在 highlighted 状态下的文字颜色
     QMUICMI.toolBarTintColorDisabled = [ToolBarTintColor colorWithAlphaComponent:ToolBarDisabledAlpha];         // ToolBarTintColorDisabled : QMUIToolbarButton 在 disabled 状态下的文字颜色
-    QMUICMI.toolBarBackgroundImage = nil;                                       // ToolBarBackgroundImage : UIToolbar 的背景图
-    QMUICMI.toolBarBarTintColor = nil;                                          // ToolBarBarTintColor : UIToolbar 的 tintColor
-    QMUICMI.toolBarShadowImageColor = UIColorSeparator;                         // ToolBarShadowImageColor : UIToolbar 的 shadowImage 的颜色，会自动创建一张 1px 高的图片
-    QMUICMI.toolBarStyle = UIBarStyleDefault;                                   // ToolBarStyle : UIToolbar 的 barStyle
+    QMUICMI.toolBarBackgroundImage = nil;                                       // ToolBarBackgroundImage : NavBarContainerClasses 里的 UIToolbar 的背景图
+    if (@available(iOS 15.0, *)) {
+        QMUICMI.toolBarRemoveBackgroundEffectAutomatically = YES;                // ToolBarRemoveBackgroundEffectAutomatically : iOS 15 及以后，QMUI 里的 UIToolbar 使用的是 UIToolbarAppearance 来设置样式，新方式默认是 backgroundImage 和 backgroundEffect 共存的，而 iOS 14 及以前的旧方式，一旦设置了 backgroundImage 则 backgroundEffect 自动会被移除，因此提供该开关允许业务将行为回退到 iOS 14 及以前的效果。默认为 NO。
+    }
+    QMUICMI.toolBarBarTintColor = nil;                                          // ToolBarBarTintColor : NavBarContainerClasses 里的 UIToolbar 的 tintColor
+    QMUICMI.toolBarShadowImageColor = UIColorSeparator;                         // ToolBarShadowImageColor : NavBarContainerClasses 里的 UIToolbar 的 shadowImage 的颜色，会自动创建一张 1px 高的图片
+    QMUICMI.toolBarStyle = UIBarStyleDefault;                                   // ToolBarStyle : NavBarContainerClasses 里的 UIToolbar 的 barStyle
     QMUICMI.toolBarButtonFont = UIFontMake(17);                                 // ToolBarButtonFont : QMUIToolbarButton 的字体
     
 #pragma mark - SearchBar
     
     QMUICMI.searchBarTextFieldBackgroundImage = UIImage.qd_searchBarTextFieldBackgroundImage;       // SearchBarTextFieldBackgroundImage : QMUISearchBar 里的文本框的背景图，图片高度会决定输入框的高度
     QMUICMI.searchBarTextFieldBorderColor = nil;                                // SearchBarTextFieldBorderColor : QMUISearchBar 里的文本框的边框颜色
+    QMUICMI.searchBarTextFieldCornerRadius = 4.0;                               // SearchBarTextFieldCornerRadius : QMUISearchBar 里的文本框的圆角大小，-1 表示圆角大小为输入框高度的一半
     QMUICMI.searchBarBackgroundImage = UIImage.qd_searchBarBackgroundImage;     // SearchBarBackgroundImage : 搜索框的背景图，如果需要设置底部分隔线的颜色也请绘制到图片里
     QMUICMI.searchBarTintColor = UIColor.qd_tintColor;                          // SearchBarTintColor : QMUISearchBar 的 tintColor，也即上面的操作控件的主题色
     QMUICMI.searchBarTextColor = UIColor.qd_titleTextColor;                                  // SearchBarTextColor : QMUISearchBar 里的文本框的文字颜色
@@ -149,12 +160,11 @@ static UIImage *disclosureIndicatorImageDark;
         }
         return UIColorMake(136, 136, 143);
     }];             // SearchBarPlaceholderColor : QMUISearchBar 里的文本框的 placeholder 颜色
-    QMUICMI.searchBarFont = nil;                                                // SearchBarFont : QMUISearchBar 里的文本框的文字字体及 placeholder 的字体
+    QMUICMI.searchBarFont = UIFontMake(15);                                                // SearchBarFont : QMUISearchBar 里的文本框的文字字体及 placeholder 的字体
     QMUICMI.searchBarSearchIconImage = nil;                                     // SearchBarSearchIconImage : QMUISearchBar 里的放大镜 icon
     QMUICMI.searchBarClearIconImage = nil;                                      // SearchBarClearIconImage : QMUISearchBar 里的文本框输入文字时右边的清空按钮的图片
-    QMUICMI.searchBarTextFieldCornerRadius = 4.0;                               // SearchBarTextFieldCornerRadius : QMUISearchBar 里的文本框的圆角大小，-1 表示圆角大小为输入框高度的一半
     
-#pragma mark - TableView / TableViewCell
+#pragma mark - Plain TableView
     
     QMUICMI.tableViewEstimatedHeightEnabled = YES;                              // TableViewEstimatedHeightEnabled : 是否要开启全局 QMUITableView 和 UITableView 的 estimatedRow(Section/Footer)Height
     
@@ -170,11 +180,9 @@ static UIImage *disclosureIndicatorImageDark;
     QMUICMI.tableViewCellBackgroundColor = UIColorForBackground;                 // TableViewCellBackgroundColor : QMUITableViewCell 的背景色
     QMUICMI.tableViewCellSelectedBackgroundColor = UIColor.qd_backgroundColorHighlighted;  // TableViewCellSelectedBackgroundColor : QMUITableViewCell 点击时的背景色
     QMUICMI.tableViewCellWarningBackgroundColor = UIColorYellow;                // TableViewCellWarningBackgroundColor : QMUITableViewCell 用于表示警告时的背景色，备用
-    QMUICMI.tableViewCellDisclosureIndicatorImage = [UIImage qmui_imageWithThemeProvider:^UIImage * _Nonnull(__kindof QMUIThemeManager * _Nonnull manager, NSString * _Nullable identifier, NSObject<QDThemeProtocol> * _Nullable theme) {
-        return [identifier isEqualToString:QDThemeIdentifierDark] ? disclosureIndicatorImageDark : disclosureIndicatorImage;
-    }];    // TableViewCellDisclosureIndicatorImage : QMUITableViewCell 当 accessoryType 为 UITableViewCellAccessoryDisclosureIndicator 时的箭头的图片
-    QMUICMI.tableViewCellCheckmarkImage = [UIImage qmui_imageWithShape:QMUIImageShapeCheckmark size:CGSizeMake(15, 12) tintColor:UIColor.qd_tintColor];  // TableViewCellCheckmarkImage : QMUITableViewCell 当 accessoryType 为 UITableViewCellAccessoryCheckmark 时的打钩的图片
-    QMUICMI.tableViewCellDetailButtonImage = [UIImage qmui_imageWithShape:QMUIImageShapeDetailButtonImage size:CGSizeMake(20, 20) tintColor:UIColor.qd_tintColor]; // TableViewCellDetailButtonImage : QMUITableViewCell 当 accessoryType 为 UITableViewCellAccessoryDetailButton 或 UITableViewCellAccessoryDetailDisclosureButton 时右边的 i 按钮图片
+    QMUICMI.tableViewCellDisclosureIndicatorImage = UIImage.qd_tableViewCellDisclosureIndicatorImage;    // TableViewCellDisclosureIndicatorImage : QMUITableViewCell 当 accessoryType 为 UITableViewCellAccessoryDisclosureIndicator 时的箭头的图片
+    QMUICMI.tableViewCellCheckmarkImage = UIImage.qd_tableViewCellCheckmarkImage;  // TableViewCellCheckmarkImage : QMUITableViewCell 当 accessoryType 为 UITableViewCellAccessoryCheckmark 时的打钩的图片
+    QMUICMI.tableViewCellDetailButtonImage = UIImage.qd_tableViewCellDetailButtonImage; // TableViewCellDetailButtonImage : QMUITableViewCell 当 accessoryType 为 UITableViewCellAccessoryDetailButton 或 UITableViewCellAccessoryDetailDisclosureButton 时右边的 i 按钮图片
     QMUICMI.tableViewCellSpacingBetweenDetailButtonAndDisclosureIndicator = 12; // TableViewCellSpacingBetweenDetailButtonAndDisclosureIndicator : 列表 cell 右边的 i 按钮和向右箭头之间的间距（仅当两者都使用了自定义图片并且同时显示时才生效）
     
     QMUICMI.tableViewSectionHeaderBackgroundColor = UIColor.qd_separatorColor;                         // TableViewSectionHeaderBackgroundColor : Plain 类型的 QMUITableView sectionHeader 的背景色
@@ -187,6 +195,12 @@ static UIImage *disclosureIndicatorImageDark;
     QMUICMI.tableViewSectionFooterAccessoryMargins = UIEdgeInsetsMake(0, 15, 0, 0);                     // TableViewSectionFooterAccessoryMargins : Plain 类型的 QMUITableView sectionFooter accessoryView 的间距
     QMUICMI.tableViewSectionHeaderContentInset = UIEdgeInsetsMake(4, 15, 4, 15);                        // TableViewSectionHeaderContentInset : Plain 类型的 QMUITableView sectionHeader 里的内容的 padding
     QMUICMI.tableViewSectionFooterContentInset = UIEdgeInsetsMake(4, 15, 4, 15);                        // TableViewSectionFooterContentInset : Plain 类型的 QMUITableView sectionFooter 里的内容的 padding
+    if (@available(iOS 15, *)) {
+        QMUICMI.tableViewSectionHeaderTopPadding = 0;                       // TableViewSectionHeaderTopPadding : Plain 类型的 QMUITableView 在 iOS 15 上的 sectionHeaderTopPadding 值，仅当存在 sectionHeader 时才有效，系统的默认值为 UITableViewAutomaticDimension，表现出来是22pt的空隙
+    }
+
+    
+#pragma mark - Grouped TableView
     
     QMUICMI.tableViewGroupedBackgroundColor = [UIColor qmui_colorWithThemeProvider:^UIColor * _Nonnull(__kindof QMUIThemeManager * _Nonnull manager, NSString * _Nullable identifier, NSObject<QDThemeProtocol> * _Nullable theme) {
         if ([identifier isEqualToString:QDThemeIdentifierDark]) {
@@ -194,57 +208,89 @@ static UIImage *disclosureIndicatorImageDark;
         }
         return UIColorMake(246, 246, 246);
     }];       // TableViewGroupedBackgroundColor : Grouped 类型的 QMUITableView 的背景色
+    QMUICMI.tableViewGroupedSeparatorColor = TableViewSeparatorColor;                                   // TableViewGroupedSeparatorColor : Grouped 类型的 QMUITableView 分隔线颜色
     QMUICMI.tableViewGroupedCellTitleLabelColor = TableViewCellTitleLabelColor;                         // TableViewGroupedCellTitleLabelColor : Grouped 类型的 QMUITableView cell 里的标题颜色
     QMUICMI.tableViewGroupedCellDetailLabelColor = TableViewCellDetailLabelColor;                       // TableViewGroupedCellDetailLabelColor : Grouped 类型的 QMUITableView cell 里的副标题颜色
-    QMUICMI.tableViewGroupedCellBackgroundColor = UIColor.qd_backgroundColorLighten;                         // TableViewGroupedCellBackgroundColor : Grouped 类型的 QMUITableView cell 背景色
+    QMUICMI.tableViewGroupedCellBackgroundColor = UIColor.qd_backgroundColorLighten;                    // TableViewGroupedCellBackgroundColor : Grouped 类型的 QMUITableView cell 背景色
     QMUICMI.tableViewGroupedCellSelectedBackgroundColor = TableViewCellSelectedBackgroundColor;         // TableViewGroupedCellSelectedBackgroundColor : Grouped 类型的 QMUITableView cell 点击时的背景色
     QMUICMI.tableViewGroupedCellWarningBackgroundColor = TableViewCellWarningBackgroundColor;           // tableViewGroupedCellWarningBackgroundColor : Grouped 类型的 QMUITableView cell 在提醒状态下的背景色
     QMUICMI.tableViewGroupedSectionHeaderFont = UIFontMake(12);                                         // TableViewGroupedSectionHeaderFont : Grouped 类型的 QMUITableView sectionHeader 里的文字字体
     QMUICMI.tableViewGroupedSectionFooterFont = UIFontMake(12);                                         // TableViewGroupedSectionFooterFont : Grouped 类型的 QMUITableView sectionFooter 里的文字字体
     QMUICMI.tableViewGroupedSectionHeaderTextColor = UIColorGrayDarken;                                 // TableViewGroupedSectionHeaderTextColor : Grouped 类型的 QMUITableView sectionHeader 里的文字颜色
-    QMUICMI.tableViewGroupedSectionFooterTextColor = UIColorGray;                                       // TableViewGroupedSectionFooterTextColor : Grouped 类型的 QMUITableView sectionFooter 里的文字颜色
-    QMUICMI.tableViewGroupedSectionHeaderAccessoryMargins = UIEdgeInsetsMake(0, 15, 0, 0);                     // TableViewGroupedSectionHeaderAccessoryMargins : Grouped 类型的 QMUITableView sectionHeader accessoryView 的间距
-    QMUICMI.tableViewGroupedSectionFooterAccessoryMargins = UIEdgeInsetsMake(0, 15, 0, 0);                     // TableViewGroupedSectionFooterAccessoryMargins : Grouped 类型的 QMUITableView sectionFooter accessoryView 的间距
-    QMUICMI.tableViewGroupedSectionHeaderDefaultHeight = UITableViewAutomaticDimension;                 // TableViewGroupedSectionHeaderDefaultHeight : Grouped 类型的 QMUITableView sectionHeader 的默认高度（也即没使用自定义的 sectionHeaderView 时的高度），注意如果不需要间距，请用 CGFLOAT_MIN
-    QMUICMI.tableViewGroupedSectionFooterDefaultHeight = UITableViewAutomaticDimension;                 // TableViewGroupedSectionFooterDefaultHeight : Grouped 类型的 QMUITableView sectionFooter 的默认高度（也即没使用自定义的 sectionFooterView 时的高度），注意如果不需要间距，请用 CGFLOAT_MIN
-    QMUICMI.tableViewGroupedSectionHeaderContentInset = UIEdgeInsetsMake(16, PreferredValueForiPhone(20, 15, 15, 15), 8, PreferredValueForiPhone(20, 15, 15, 15));    // TableViewGroupedSectionHeaderContentInset : Grouped 类型的 QMUITableView sectionHeader 里的内容的 padding
-    QMUICMI.tableViewGroupedSectionFooterContentInset = UIEdgeInsetsMake(8, 15, 2, 15);                 // TableViewGroupedSectionFooterContentInset : Grouped 类型的 QMUITableView sectionFooter 里的内容的 padding
+    QMUICMI.tableViewGroupedSectionFooterTextColor = TableViewGroupedSectionHeaderTextColor;                                       // TableViewGroupedSectionFooterTextColor : Grouped 类型的 QMUITableView sectionFooter 里的文字颜色
+    QMUICMI.tableViewGroupedSectionHeaderAccessoryMargins = UIEdgeInsetsMake(0, 15, 0, 0);              // TableViewGroupedSectionHeaderAccessoryMargins : Grouped 类型的 QMUITableView sectionHeader accessoryView 的间距
+    QMUICMI.tableViewGroupedSectionFooterAccessoryMargins = UIEdgeInsetsMake(0, 15, 0, 0);              // TableViewGroupedSectionFooterAccessoryMargins : Grouped 类型的 QMUITableView sectionFooter accessoryView 的间距
+    QMUICMI.tableViewGroupedSectionHeaderDefaultHeight = 20;                 // TableViewGroupedSectionHeaderDefaultHeight : Grouped 类型的 QMUITableView sectionHeader 的默认高度（也即没使用自定义的 sectionHeaderView 时的高度），注意如果不需要间距，请用 CGFLOAT_MIN
+    QMUICMI.tableViewGroupedSectionFooterDefaultHeight = 0;                 // TableViewGroupedSectionFooterDefaultHeight : Grouped 类型的 QMUITableView sectionFooter 的默认高度（也即没使用自定义的 sectionFooterView 时的高度），注意如果不需要间距，请用 CGFLOAT_MIN
+    QMUICMI.tableViewGroupedSectionHeaderContentInset = UIEdgeInsetsMake(16, PreferredValueForVisualDevice(20, 15), 8, PreferredValueForVisualDevice(20, 15));    // TableViewGroupedSectionHeaderContentInset : Grouped 类型的 QMUITableView sectionHeader 里的内容的 padding
+    QMUICMI.tableViewGroupedSectionFooterContentInset = UIEdgeInsetsMake(8, TableViewGroupedSectionHeaderContentInset.left, 2, TableViewGroupedSectionHeaderContentInset.right);                 // TableViewGroupedSectionFooterContentInset : Grouped 类型的 QMUITableView sectionFooter 里的内容的 padding
+    if (@available(iOS 15, *)) {
+        QMUICMI.tableViewGroupedSectionHeaderTopPadding = 0;                       // TableViewGroupedSectionHeaderTopPadding : Grouped 类型的 QMUITableView 在 iOS 15 上的 sectionHeaderTopPadding 值，仅当存在 sectionHeader 时才有效，系统的默认值为 UITableViewAutomaticDimension，表现出来是0。
+    }
+    
+#pragma mark - InsetGrouped TableView
+    QMUICMI.tableViewInsetGroupedCornerRadius = 10;                                                     // TableViewInsetGroupedCornerRadius : InsetGrouped 类型的 UITableView 内 cell 的圆角值
+    QMUICMI.tableViewInsetGroupedHorizontalInset = PreferredValueForVisualDevice(20, 15);               // TableViewInsetGroupedHorizontalInset: InsetGrouped 类型的 UITableView 内的左右缩进值
+    QMUICMI.tableViewInsetGroupedBackgroundColor = TableViewGroupedBackgroundColor;                                                 // TableViewInsetGroupedBackgroundColor : InsetGrouped 类型的 UITableView 的背景色
+    QMUICMI.tableViewInsetGroupedSeparatorColor = TableViewGroupedSeparatorColor;                                   // TableViewInsetGroupedSeparatorColor : InsetGrouped 类型的 QMUITableView 分隔线颜色
+    QMUICMI.tableViewInsetGroupedCellTitleLabelColor = TableViewGroupedCellTitleLabelColor;                         // TableViewInsetGroupedCellTitleLabelColor : InsetGrouped 类型的 QMUITableView cell 里的标题颜色
+    QMUICMI.tableViewInsetGroupedCellDetailLabelColor = TableViewGroupedCellDetailLabelColor;                       // TableViewInsetGroupedCellDetailLabelColor : InsetGrouped 类型的 QMUITableView cell 里的副标题颜色
+    QMUICMI.tableViewInsetGroupedCellBackgroundColor = TableViewGroupedCellBackgroundColor;                         // TableViewInsetGroupedCellBackgroundColor : InsetGrouped 类型的 QMUITableView cell 背景色
+    QMUICMI.tableViewInsetGroupedCellSelectedBackgroundColor = TableViewGroupedCellSelectedBackgroundColor;         // TableViewInsetGroupedCellSelectedBackgroundColor : InsetGrouped 类型的 QMUITableView cell 点击时的背景色
+    QMUICMI.tableViewInsetGroupedCellWarningBackgroundColor = TableViewGroupedCellWarningBackgroundColor;           // TableViewInsetGroupedCellWarningBackgroundColor : InsetGrouped 类型的 QMUITableView cell 在提醒状态下的背景色
+    QMUICMI.tableViewInsetGroupedSectionHeaderFont = TableViewGroupedSectionHeaderFont;                                         // TableViewInsetGroupedSectionHeaderFont : InsetGrouped 类型的 QMUITableView sectionHeader 里的文字字体
+    QMUICMI.tableViewInsetGroupedSectionFooterFont = TableViewGroupedSectionFooterFont;                                         // TableViewInsetGroupedSectionFooterFont : InsetGrouped 类型的 QMUITableView sectionFooter 里的文字字体
+    QMUICMI.tableViewInsetGroupedSectionHeaderTextColor = TableViewGroupedSectionHeaderTextColor;                                 // TableViewInsetGroupedSectionHeaderTextColor : InsetGrouped 类型的 QMUITableView sectionHeader 里的文字颜色
+    QMUICMI.tableViewInsetGroupedSectionFooterTextColor = TableViewGroupedSectionFooterTextColor;                                       // TableViewInsetGroupedSectionFooterTextColor : InsetGrouped 类型的 QMUITableView sectionFooter 里的文字颜色
+    QMUICMI.tableViewInsetGroupedSectionHeaderAccessoryMargins = TableViewGroupedSectionHeaderAccessoryMargins;                     // TableViewInsetGroupedSectionHeaderAccessoryMargins : InsetGrouped 类型的 QMUITableView sectionHeader accessoryView 的间距
+    QMUICMI.tableViewInsetGroupedSectionFooterAccessoryMargins = TableViewGroupedSectionFooterAccessoryMargins;                     // TableViewInsetGroupedSectionFooterAccessoryMargins : InsetGrouped 类型的 QMUITableView sectionFooter accessoryView 的间距
+    QMUICMI.tableViewInsetGroupedSectionHeaderDefaultHeight = TableViewGroupedSectionHeaderDefaultHeight;                 // TableViewInsetGroupedSectionHeaderDefaultHeight : InsetGrouped 类型的 QMUITableView sectionHeader 的默认高度（也即没使用自定义的 sectionHeaderView 时的高度），注意如果不需要间距，请用 CGFLOAT_MIN
+    QMUICMI.tableViewInsetGroupedSectionFooterDefaultHeight = TableViewGroupedSectionFooterDefaultHeight;                 // TableViewInsetGroupedSectionFooterDefaultHeight : InsetGrouped 类型的 QMUITableView sectionFooter 的默认高度（也即没使用自定义的 sectionFooterView 时的高度），注意如果不需要间距，请用 CGFLOAT_MIN
+    QMUICMI.tableViewInsetGroupedSectionHeaderContentInset = TableViewGroupedSectionHeaderContentInset;                // TableViewInsetGroupedSectionHeaderContentInset : InsetGrouped 类型的 QMUITableView sectionHeader 里的内容的 padding
+    QMUICMI.tableViewInsetGroupedSectionFooterContentInset = TableViewGroupedSectionFooterContentInset;                 // TableViewInsetGroupedSectionFooterContentInset : InsetGrouped 类型的 QMUITableView sectionFooter 里的内容的 padding
+    if (@available(iOS 15, *)) {
+        QMUICMI.tableViewInsetGroupedSectionHeaderTopPadding = 0;                       // TableViewInsetGroupedSectionHeaderTopPadding : InsetGrouped 类型的 QMUITableView 在 iOS 15 上的 sectionHeaderTopPadding 值，仅当存在 sectionHeader 时才有效，系统的默认值为 UITableViewAutomaticDimension，表现出来是0。
+    }
     
 #pragma mark - UIWindowLevel
     QMUICMI.windowLevelQMUIAlertView = UIWindowLevelAlert - 4.0;                // UIWindowLevelQMUIAlertView : QMUIModalPresentationViewController、QMUIPopupContainerView 里使用的 UIWindow 的 windowLevel
-    
-#pragma mark - QMUILog
-    QMUICMI.shouldPrintDefaultLog = YES;                                        // ShouldPrintDefaultLog : 是否允许输出 QMUILogLevelDefault 级别的 log
-    QMUICMI.shouldPrintInfoLog = YES;                                           // ShouldPrintInfoLog : 是否允许输出 QMUILogLevelInfo 级别的 log
-    QMUICMI.shouldPrintWarnLog = YES;                                           // ShouldPrintInfoLog : 是否允许输出 QMUILogLevelWarn 级别的 log
+    QMUICMI.windowLevelQMUIConsole = 1;                                         // UIWindowLevelQMUIConsole : QMUIConsole 内部的 UIWindow 的 windowLevel
     
 #pragma mark - QMUIBadge
     
-    QMUICMI.badgeBackgroundColor = UIColorRed;                                  // BadgeBackgroundColor : UIBarButtoItem、UITabBarItem 上的未读数的背景色
-    QMUICMI.badgeTextColor = UIColorWhite;                                      // BadgeTextColor : UIBarButtoItem、UITabBarItem 上的未读数的文字颜色
-    QMUICMI.badgeFont = UIFontBoldMake(11);                                     // BadgeFont : UIBarButtoItem、UITabBarItem 上的未读数的字体
-    QMUICMI.badgeContentEdgeInsets = UIEdgeInsetsMake(2, 4, 2, 4);              // BadgeContentEdgeInsets : UIBarButtoItem、UITabBarItem 上的未读数与圆圈之间的 padding
-    QMUICMI.badgeCenterOffset = CGPointMake(14, -10);                           // BadgeCenterOffset : UIBarButtoItem、UITabBarItem 上的未读数相对于 item 中心的偏移
-    QMUICMI.badgeCenterOffsetLandscape = CGPointMake(16, -7);                   // BadgeCenterOffsetLandscape : UIBarButtoItem、UITabBarItem 上的未读数在横屏下相对于 item 中心的偏移
+    QMUICMI.badgeBackgroundColor = UIColorRed;                                  // BadgeBackgroundColor : QMUIBadge 上的未读数的背景色
+    QMUICMI.badgeTextColor = UIColorWhite;                                      // BadgeTextColor : QMUIBadge 上的未读数的文字颜色
+    QMUICMI.badgeFont = UIFontBoldMake(11);                                     // BadgeFont : QMUIBadge 上的未读数的字体
+    QMUICMI.badgeContentEdgeInsets = UIEdgeInsetsMake(2, 4, 2, 4);              // BadgeContentEdgeInsets : QMUIBadge 上的未读数与圆圈之间的 padding
+    QMUICMI.badgeOffset = CGPointMake(-9, 11);                                  // BadgeOffset : QMUIBadge 上的未读数相对于目标 view 右上角的偏移
+    QMUICMI.badgeOffsetLandscape = CGPointMake(-9, 6);                          // BadgeOffsetLandscape : QMUIBadge 上的未读数在横屏下相对于目标 view 右上角的偏移
+    BeginIgnoreDeprecatedWarning
+    QMUICMI.badgeCenterOffset = CGPointMake(14, -10);                           // BadgeCenterOffset : QMUIBadge 未读数相对于目标 view 中心的偏移
+    QMUICMI.badgeCenterOffsetLandscape = CGPointMake(16, -7);                   // BadgeCenterOffsetLandscape : QMUIBadge 未读数在横屏下相对于目标 view 中心的偏移
+    EndIgnoreDeprecatedWarning
     
-    QMUICMI.updatesIndicatorColor = UIColorRed;                                 // UpdatesIndicatorColor : UIBarButtoItem、UITabBarItem 上的未读红点的颜色
-    QMUICMI.updatesIndicatorSize = CGSizeMake(7, 7);                            // UpdatesIndicatorSize : UIBarButtoItem、UITabBarItem 上的未读红点的大小
-    QMUICMI.updatesIndicatorCenterOffset = CGPointMake(14, -10);                // UpdatesIndicatorCenterOffset : UIBarButtoItem、UITabBarItem 上的未读红点相对于 item 中心的偏移
-    QMUICMI.updatesIndicatorCenterOffsetLandscape = CGPointMake(14, -10);       // UpdatesIndicatorCenterOffsetLandscape : UIBarButtoItem、UITabBarItem 上的未读红点在横屏下相对于 item 中心的偏移
+    QMUICMI.updatesIndicatorColor = UIColorRed;                                 // UpdatesIndicatorColor : QMUIBadge 上的未读红点的颜色
+    QMUICMI.updatesIndicatorSize = CGSizeMake(7, 7);                            // UpdatesIndicatorSize : QMUIBadge 上的未读红点的大小
+    QMUICMI.updatesIndicatorOffset = CGPointMake(4, UpdatesIndicatorSize.height);// UpdatesIndicatorOffset : QMUIBadge 未读红点相对于目标 view 右上角的偏移
+    QMUICMI.updatesIndicatorOffsetLandscape = UpdatesIndicatorOffset;           // UpdatesIndicatorOffsetLandscape : QMUIBadge 未读红点在横屏下相对于目标 view 右上角的偏移
+    BeginIgnoreDeprecatedWarning
+    QMUICMI.updatesIndicatorCenterOffset = CGPointMake(14, -10);                // UpdatesIndicatorCenterOffset : QMUIBadge 未读红点相对于目标 view 中心的偏移
+    QMUICMI.updatesIndicatorCenterOffsetLandscape = CGPointMake(14, -10);       // UpdatesIndicatorCenterOffsetLandscape : QMUIBadge 未读红点在横屏下相对于目标 view 中心点的偏移
+    EndIgnoreDeprecatedWarning
     
 #pragma mark - Others
     
     QMUICMI.automaticCustomNavigationBarTransitionStyle = NO;                   // AutomaticCustomNavigationBarTransitionStyle : 界面 push/pop 时是否要自动根据两个界面的 barTintColor/backgroundImage/shadowImage 的样式差异来决定是否使用自定义的导航栏效果
     QMUICMI.supportedOrientationMask = UIInterfaceOrientationMaskAll;           // SupportedOrientationMask : 默认支持的横竖屏方向
     QMUICMI.automaticallyRotateDeviceOrientation = YES;                         // AutomaticallyRotateDeviceOrientation : 是否在界面切换或 viewController.supportedOrientationMask 发生变化时自动旋转屏幕
-    QMUICMI.statusbarStyleLightInitially = YES;                                 // StatusbarStyleLightInitially : 默认的状态栏内容是否使用白色，默认为 NO，也即黑色
+    QMUICMI.defaultStatusBarStyle = UIStatusBarStyleLightContent;               // DefaultStatusBarStyle : 默认的状态栏样式，默认值为 UIStatusBarStyleDefault，也即在 iOS 12 及以前是黑色文字，iOS 13 及以后会自动根据当前 App 是否处于 Dark Mode 切换颜色。如果你希望固定为白色，请设置为 UIStatusBarStyleLightContent，固定黑色则设置为 QMUIStatusBarStyleDarkContent。
     QMUICMI.needsBackBarButtonItemTitle = NO;                                   // NeedsBackBarButtonItemTitle : 全局是否需要返回按钮的 title，不需要则只显示一个返回image
     QMUICMI.hidesBottomBarWhenPushedInitially = YES;                            // HidesBottomBarWhenPushedInitially : QMUICommonViewController.hidesBottomBarWhenPushed 的初始值，默认为 NO，以保持与系统默认值一致，但通常建议改为 YES，因为一般只有 tabBar 首页那几个界面要求为 NO
     QMUICMI.preventConcurrentNavigationControllerTransitions = YES;             // PreventConcurrentNavigationControllerTransitions : 自动保护 QMUINavigationController 在上一次 push/pop 尚未结束的时候就进行下一次 push/pop 的行为，避免产生 crash
     QMUICMI.navigationBarHiddenInitially = NO;                                  // NavigationBarHiddenInitially : QMUINavigationControllerDelegate preferredNavigationBarHidden 的初始值，默认为NO
     QMUICMI.shouldFixTabBarTransitionBugInIPhoneX = YES;                        // ShouldFixTabBarTransitionBugInIPhoneX : 是否需要自动修复 iOS 11 下，iPhone X 的设备在 push 界面时，tabBar 会瞬间往上跳的 bug
-    QMUICMI.shouldFixTabBarButtonBugForAll = NO;                                // ShouldFixTabBarButtonBugForAll : 是否要对 iOS 12.1.1 及以后的版本也修复手势返回时 tabBarButton 布局错误的 bug(issue #410)，默认为 NO
-    QMUICMI.shouldPrintQMUIWarnLogToConsole = YES;                              // ShouldPrintQMUIWarnLogToConsole : 是否在出现 QMUILogWarn 时自动把这些 log 以 QMUIConsole 的方式显示到设备屏幕上
+    QMUICMI.shouldFixTabBarSafeAreaInsetsBug = YES;                             // ShouldFixTabBarSafeAreaInsetsBug : 是否要对 iOS 11 及以后的版本修复当存在 UITabBar 时，UIScrollView 的 inset.bottom 可能错误的 bug（issue #218 #934），默认为 YES
+    QMUICMI.shouldFixSearchBarMaskViewLayoutBug = YES;                          // ShouldFixSearchBarMaskViewLayoutBug : 是否自动修复 UISearchController.searchBar 被当作 tableHeaderView 使用时可能出现的布局 bug(issue #950)
     QMUICMI.sendAnalyticsToQMUITeam = YES;                                      // SendAnalyticsToQMUITeam : 是否允许在 DEBUG 模式下上报 Bundle Identifier 和 Display Name 给 QMUI 统计用
     QMUICMI.dynamicPreferredValueForIPad = NO;                                  // DynamicPreferredValueForIPad : 当 iPad 处于 Slide Over 或 Split View 分屏模式下，宏 `PreferredValueForXXX` 是否把 iPad 视为某种屏幕宽度近似的 iPhone 来取值。
     if (@available(iOS 13.0, *)) {
@@ -292,7 +338,7 @@ static UIImage *disclosureIndicatorImageDark;
 }
 
 - (UIColor *)themeDescriptionTextColor {
-    return UIColorGray6;
+    return UIColorGray5;
 }
 
 - (UIColor *)themePlaceholderColor {

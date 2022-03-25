@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -67,8 +67,8 @@
 }
 
 - (void)configureItems {
-    NSInteger globalItemIndex = 0;
-    NSInteger separatorIndex = 0;
+    __block NSInteger globalItemIndex = 0;
+    __block NSInteger separatorIndex = 0;
     
     // 移除所有 item
     [self.scrollView qmui_removeAllSubviews];
@@ -79,36 +79,34 @@
         layer.hidden = YES;
     }];
     
-    for (NSInteger section = 0, sectionCount = self.itemSections.count; section < sectionCount; section ++) {
-        NSArray<QMUIPopupMenuBaseItem *> *items = self.itemSections[section];
-        for (NSInteger row = 0, rowCount = items.count; row < rowCount; row ++) {
-            QMUIPopupMenuBaseItem *item = items[row];
-            item.menuView = self;
-            [item updateAppearance];
-            if (self.itemConfigurationHandler) {
-                self.itemConfigurationHandler(self, item, section, row);
+    [self enumerateItemsWithBlock:^(QMUIPopupMenuBaseItem *item, NSInteger section, NSInteger sectionCount, NSInteger row, NSInteger rowCount) {
+        item.menuView = self;
+        [item updateAppearance];
+        if (self.itemConfigurationHandler) {
+            self.itemConfigurationHandler(self, item, section, row);
+        }
+        [self.scrollView addSubview:item];
+        
+        // 配置分隔线，注意每一个 section 里的最后一行是不显示分隔线的
+        BOOL shouldShowItemSeparator = self.shouldShowItemSeparator && row < rowCount - 1;
+        if (shouldShowItemSeparator) {
+            CALayer *separatorLayer = nil;
+            if (separatorIndex < self.itemSeparatorLayers.count) {
+                separatorLayer = self.itemSeparatorLayers[separatorIndex];
+            } else {
+                separatorLayer = [CALayer qmui_separatorLayer];
+                [self.scrollView.layer addSublayer:separatorLayer];
+                [self.itemSeparatorLayers addObject:separatorLayer];
             }
-            [self.scrollView addSubview:item];
-            
-            // 配置分隔线，注意每一个 section 里的最后一行是不显示分隔线的
-            BOOL shouldShowItemSeparator = self.shouldShowItemSeparator && row < rowCount - 1;
-            if (shouldShowItemSeparator) {
-                CALayer *separatorLayer = nil;
-                if (separatorIndex < self.itemSeparatorLayers.count) {
-                    separatorLayer = self.itemSeparatorLayers[separatorIndex];
-                } else {
-                    separatorLayer = [CALayer qmui_separatorLayer];
-                    [self.scrollView.layer addSublayer:separatorLayer];
-                    [self.itemSeparatorLayers addObject:separatorLayer];
-                }
-                separatorLayer.hidden = NO;
-                separatorLayer.backgroundColor = self.itemSeparatorColor.CGColor;
-                separatorIndex++;
-            }
-            
-            globalItemIndex++;
+            separatorLayer.hidden = NO;
+            separatorLayer.backgroundColor = self.itemSeparatorColor.CGColor;
+            separatorIndex++;
         }
         
+        globalItemIndex++;
+    }];
+    
+    for (NSInteger section = 0, sectionCount = self.itemSections.count; section < sectionCount; section ++) {
         BOOL shouldShowSectionSeparator = self.shouldShowSectionSeparator && section < sectionCount - 1;
         if (shouldShowSectionSeparator) {
             CALayer *separatorLayer = nil;
@@ -149,6 +147,38 @@
     }];
 }
 
+- (void)setItemTitleFont:(UIFont *)itemTitleFont {
+    _itemTitleFont = itemTitleFont;
+    [self enumerateItemsWithBlock:^(QMUIPopupMenuBaseItem *item, NSInteger section, NSInteger sectionCount, NSInteger row, NSInteger rowCount) {
+        [item updateAppearance];
+    }];
+}
+
+- (void)setItemTitleColor:(UIColor *)itemTitleColor {
+    _itemTitleColor = itemTitleColor;
+    [self enumerateItemsWithBlock:^(QMUIPopupMenuBaseItem *item, NSInteger section, NSInteger sectionCount, NSInteger row, NSInteger rowCount) {
+        [item updateAppearance];
+    }];
+}
+
+- (void)setPadding:(UIEdgeInsets)padding {
+    _padding = padding;
+    [self enumerateItemsWithBlock:^(QMUIPopupMenuBaseItem *item, NSInteger section, NSInteger sectionCount, NSInteger row, NSInteger rowCount) {
+        [item updateAppearance];
+    }];
+}
+
+- (void)enumerateItemsWithBlock:(void (^)(QMUIPopupMenuBaseItem *item, NSInteger section, NSInteger sectionCount, NSInteger row, NSInteger rowCount))block {
+    if (!block) return;
+    for (NSInteger section = 0, sectionCount = self.itemSections.count; section < sectionCount; section ++) {
+        NSArray<QMUIPopupMenuBaseItem *> *items = self.itemSections[section];
+        for (NSInteger row = 0, rowCount = items.count; row < rowCount; row ++) {
+            QMUIPopupMenuBaseItem *item = items[row];
+            block(item, section, sectionCount, row, rowCount);
+        }
+    }
+}
+
 #pragma mark - (UISubclassingHooks)
 
 - (void)didInitialize {
@@ -159,9 +189,7 @@
     self.scrollView.scrollsToTop = NO;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
-    if (@available(iOS 11, *)) {
-        self.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
+    self.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     [self.contentView addSubview:self.scrollView];
     
     self.itemSeparatorLayers = [[NSMutableArray alloc] init];
@@ -174,8 +202,16 @@
     __block CGFloat width = 0;
     __block CGFloat height = UIEdgeInsetsGetVerticalValue(self.padding);
     [self.itemSections qmui_enumerateNestedArrayWithBlock:^(__kindof QMUIPopupMenuBaseItem *item, BOOL *stop) {
-        height += item.height >= 0 ? item.height : self.itemHeight;
-        CGSize itemSize = [item sizeThatFits:CGSizeMake(size.width, height)];
+        CGSize itemSize = [item sizeThatFits:CGSizeMake(size.width, CGFLOAT_MAX)];
+        CGFloat itemHeight = item.height;
+        if (itemHeight < 0) {
+            itemHeight = self.itemHeight;
+        }
+        // QMUIViewSelfSizingHeight
+        if (isinf(itemHeight)) {
+            itemHeight = itemSize.height;
+        }
+        height += itemHeight;
         width = MAX(width, MIN(itemSize.width, size.width));
     }];
     size.width = width;
@@ -194,7 +230,14 @@
         NSArray<QMUIPopupMenuBaseItem *> *items = self.itemSections[section];
         for (NSInteger row = 0, rowCount = items.count; row < rowCount; row ++) {
             QMUIPopupMenuBaseItem *item = items[row];
-            item.frame = CGRectMake(0, minY, contentWidth, item.height >= 0 ? item.height : self.itemHeight);
+            CGFloat itemHeight = item.height;
+            if (itemHeight < 0) {
+                itemHeight = self.itemHeight;
+            }
+            if (isinf(itemHeight)) {
+                itemHeight = [item sizeThatFits:CGSizeMake(contentWidth, CGFLOAT_MAX)].height;
+            }
+            item.frame = CGRectMake(0, minY, contentWidth, itemHeight);
             minY = CGRectGetMaxY(item.frame);
             
             if (self.shouldShowItemSeparator && row < rowCount - 1) {

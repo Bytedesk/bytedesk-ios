@@ -11,8 +11,9 @@
 //#import "KFDSMessageModel.h"
 #import "KFDSUConstants.h"
 
-@import AFNetworking;
+//@import AFNetworking;
 //#import <AFNetworking/UIImageView+AFNetworking.h>
+#import "../../vendors/UIKit+AFNetworking/UIImageView+AFNetworking.h"
 
 @interface BDMsgVideoContentView ()
 
@@ -52,8 +53,8 @@
 //    return YES;
 //}
 
-- (void)refresh:(BDMessageModel *)data{
-    [super refresh:data];
+- (void)refresh:(BDMessageModel *)data isAgent:(BOOL)agent{
+    [super refresh:data isAgent:agent];
 //    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, self.model.video_or_short_url);
     
     // TODO: 图片大小按照图片长宽比例显示

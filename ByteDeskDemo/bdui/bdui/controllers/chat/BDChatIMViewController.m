@@ -25,6 +25,7 @@
 #import "KFRecordVoiceViewHUD.h"
 #import "WBiCloudManager.h"
 #import "KFUIUtils.h"
+//#import "QMUIDropdownNotification.h"
 
 #import <HCSStarRatingView/HCSStarRatingView.h>
 
@@ -84,6 +85,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 @property(nonatomic, strong) UIRefreshControl *mRefreshControl;
 @property(nonatomic, strong) NSMutableArray<BDMessageModel *> *mMessageArray;
+@property(nonatomic, strong) NSMutableArray *mOnlineAgentsArray;
 
 //@property(nonatomic, strong) UIView *parentView;
 @property(nonatomic, assign) NSInteger mGetMessageFromChannelPage;
@@ -397,7 +399,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 }
 
 - (void)handleRightBarButtonItemClicked:(id)sender {
-    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+//    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+    UIView *parentView = self.navigationController.view;
     
     // 访客端
     if (self.mIsVisitor) {
@@ -417,6 +420,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             self.popupAtBarButtonItem.shouldShowItemSeparator = YES;
 //            self.popupAtBarButtonItem.tintColor = UIColor.qd_tintColor;
             self.popupAtBarButtonItem.items = @[
+                //
                 [QMUIPopupMenuButtonItem itemWithImage:nil title:@"用户信息" handler:^(QMUIPopupMenuButtonItem * _Nonnull aItem) {
                     [self.popupAtBarButtonItem hideWithAnimated:YES];
                     // 客户信息 + 用户设备信息
@@ -430,30 +434,58 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                     }];
                 }],
 //                TODO: 弹窗选择在线的客服
-//                [QMUIPopupMenuButtonItem itemWithImage:nil title:@"转接会话" handler:^(QMUIPopupMenuButtonItem * _Nonnull aItem) {
-//                    [self.popupAtBarButtonItem hideWithAnimated:YES];
-//                    // 转接会话
-//                    // TODO: 弹窗选择在线的客服
-//                    [BDCoreApis getOnlineAgents:0 withSize:100 resultSuccess:^(NSDictionary *dict) {
-//                        //
-//
-//                    } resultFailed:^(NSError *error) {
-//
-//                    }];
-//                }],
+                [QMUIPopupMenuButtonItem itemWithImage:nil title:@"转接会话" handler:^(QMUIPopupMenuButtonItem * _Nonnull aItem) {
+                    [self.popupAtBarButtonItem hideWithAnimated:YES];
+                    // 转接会话
+                    // TODO: 弹窗选择在线的客服
+                    [BDCoreApis getOnlineAgents:0 withSize:100 resultSuccess:^(NSDictionary *dict) {
+                        //
+                        NSNumber *numberOfElements = dict[@"data"][@"numberOfElements"];
+                        if ([numberOfElements intValue] > 0) {
+                            //
+                            NSMutableArray *agentsArray = dict[@"data"][@"content"];
+                            for (NSDictionary *agentDict in agentsArray) {
+                                BDContactModel *contact = [[BDContactModel alloc] initWithDictionary:agentDict];
+                                [self.mOnlineAgentsArray addObject:contact];
+                            }
+                            //
+                            [self showRadioSelectionDialogViewController:self.mOnlineAgentsArray];
+                            
+                        } else {
+                            [QMUITips showError:@"当前无其他客服在线" inView:parentView hideAfterDelay:2.0f];
+                        }
+                    } resultFailed:^(NSError *error) {
+
+                    }];
+                }],
                 [QMUIPopupMenuButtonItem itemWithImage:nil title:@"邀请评价" handler:^(QMUIPopupMenuButtonItem * _Nonnull aItem) {
                     [self.popupAtBarButtonItem hideWithAnimated:YES];
                     // 邀请评价
-                    NSString *localId = [[NSUUID UUID] UUIDString];
-                    [[BDMQTTApis sharedInstance] sendInviteRateMessageProtobuf:localId content:@"邀请评价" thread:self.mThreadModel];
+                    QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"邀请" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
+                        // 邀请评价
+                        NSString *localId = [[NSUUID UUID] UUIDString];
+                        [[BDMQTTApis sharedInstance] sendInviteRateMessageProtobuf:localId content:@"邀请评价" thread:self.mThreadModel];
+                    }];
+                    QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"提示" message:@"确定要邀请评价？" preferredStyle:QMUIAlertControllerStyleAlert];
+                    [alertController addCancelAction];
+                    [alertController addAction:action2];
+                    [alertController showWithAnimated:YES];
+                    
                 }],
                 [QMUIPopupMenuButtonItem itemWithImage:nil title:@"发送表单" handler:^(QMUIPopupMenuButtonItem * _Nonnull aItem) {
                     [self.popupAtBarButtonItem hideWithAnimated:YES];
                     // 发送表单
-                    // TODO: 弹窗选择字段
-                    NSString *localId = [[NSUUID UUID] UUIDString];
-                    NSString *formContent = @"{ 'form': [ '姓名', '手机' ]}";
-                    [[BDMQTTApis sharedInstance] sendFormRequestMessageProtobuf:localId content:formContent thread:self.mThreadModel];
+                    QMUIAlertAction *action2 = [QMUIAlertAction actionWithTitle:@"发送" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
+                        // TODO: 弹窗选择字段
+                        NSString *localId = [[NSUUID UUID] UUIDString];
+                        NSString *formContent = @"{ 'form': [ '姓名', '手机' ]}";
+                        [[BDMQTTApis sharedInstance] sendFormRequestMessageProtobuf:localId content:formContent thread:self.mThreadModel];
+                    }];
+                    QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"提示" message:@"确定要发送表单？" preferredStyle:QMUIAlertControllerStyleAlert];
+                    [alertController addCancelAction];
+                    [alertController addAction:action2];
+                    [alertController showWithAnimated:YES];
+                    
                 }],
                 [QMUIPopupMenuButtonItem itemWithImage:nil title:@"关闭会话" handler:^(QMUIPopupMenuButtonItem * _Nonnull aItem) {
                     [self.popupAtBarButtonItem hideWithAnimated:YES];
@@ -476,17 +508,22 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                     // 拉入黑名单
                     QMUIAlertController *alertController = [QMUIAlertController alertControllerWithTitle:@"提示" message:@"请输入拉黑理由" preferredStyle:QMUIAlertControllerStyleAlert];
                     [alertController addAction:[QMUIAlertAction actionWithTitle:@"确定" style:QMUIAlertActionStyleDestructive handler:^(__kindof QMUIAlertController * _Nonnull aAlertController, QMUIAlertAction * _Nonnull action) {
-                        // TODO: 备注内容
-                        NSString *uid = [self.mThreadModel.topic componentsSeparatedByString:@"/"][1];
-                        [BDCoreApis addBlock:uid withNote:@"添加备注" resultSuccess:^(NSDictionary *dict) {
+                        // 备注内容
+                        QMUITextField *noteTextField = alertController.textFields[0];
+                        NSString *uid = [self.mThreadModel.topic componentsSeparatedByString:@"/"][1]; // 访客uid
+                        NSString *uuid = [self.mThreadModel.topic componentsSeparatedByString:@"/"][0]; // 技能组wid或指定客服uid
+                        [BDCoreApis addBlock:uid withNote:[noteTextField text] withType:self.mThreadType withUuid:uuid resultSuccess:^(NSDictionary *dict) {
                             //
+                            [QMUITips showSucceed:@"拉黑成功" inView:self.view hideAfterDelay:2];
                         } resultFailed:^(NSError *error) {
                             //
+                            [QMUITips showError:@"拉黑失败" inView:self.view hideAfterDelay:2];
                         }];
                     }]];
                     [alertController addCancelAction];
                     [alertController addTextFieldWithConfigurationHandler:^(QMUITextField * _Nonnull textField) {
-                        textField.placeholder = @"拉黑理由";
+//                        textField.placeholder = @"拉黑理由";
+                        textField.text = @"垃圾用户";
                     }];
                     [alertController showWithAnimated:YES];
                     
@@ -498,14 +535,12 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
                 self.popupAtBarButtonItem.sourceBarItem = self.navigationItem.rightBarButtonItem;
                 [self.popupAtBarButtonItem showWithAnimated:YES];
             }
-            
 //            // 客服会话
 //            QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
 //            }];
 //            QMUIAlertAction *closeAction = [QMUIAlertAction actionWithTitle:@"关闭" style:QMUIAlertActionStyleDestructive handler:^(QMUIAlertController *aAlertController, QMUIAlertAction *action) {
 //                // 客服关闭会话
 //                [BDCoreApis agentCloseThread:self.mThreadModel.tid resultSuccess:^(NSDictionary *dict) {
-//
 //                    NSNumber *status_code = [dict objectForKey:@"status_code"];
 //                    if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
 //                        // 关闭成功
@@ -548,6 +583,32 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             [self.navigationController pushViewController:groupViewController animated:YES];
         }
     }
+}
+
+// TODO: 选择一个当前在线客服
+- (void)showRadioSelectionDialogViewController:(NSMutableArray *)agentsArray {
+    
+    NSMutableArray *agents = [[NSMutableArray alloc] init];
+    for (BDContactModel *contact in agentsArray) {
+        [agents addObject:contact.real_name];
+    }
+    QMUIDialogSelectionViewController *dialogViewController = [[QMUIDialogSelectionViewController alloc] init];
+    dialogViewController.title = @"请选择要转接的客服";
+    dialogViewController.items = agents;
+    [dialogViewController addCancelButtonWithText:@"取消" block:nil];
+    [dialogViewController addSubmitButtonWithText:@"确定" block:^(QMUIDialogViewController *aDialogViewController) {
+        QMUIDialogSelectionViewController *d = (QMUIDialogSelectionViewController *)aDialogViewController;
+        if (d.selectedItemIndex == QMUIDialogSelectionViewControllerSelectedItemIndexNone) {
+            [QMUITips showError:@"请至少选一个" inView:d.qmui_modalPresentationViewController.view hideAfterDelay:1.2];
+            return;
+        }
+        BDContactModel *contact = [agentsArray objectAtIndex:d.selectedItemIndex];
+        DDLogInfo(@"selected: %@, %@",contact.real_name, contact.uid);
+        // 发送消息, TODO: 自定义附言
+        NSString *topic = contact.uid;
+        [[BDMQTTApis sharedInstance] sendTransferMessageProtobufThread:self.mThreadModel transferTopic:topic transferContent:@"转接会话"];
+    }];
+    [dialogViewController show];
 }
 
 #pragma mark - <QMUITableViewDataSource, QMUITableViewDelegate>
@@ -605,7 +666,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             cell.delegate = self;
         }
         //
-        [cell initWithMessageModel:messageModel];
+        [cell initWithMessageModelAgent:messageModel];
         cell.tag = indexPath.row;
         // 存储id最小的
         if ([messageModel.server_id integerValue] < self.mLastMessageId) {
@@ -743,9 +804,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 - (void)updateCurrentThread {
     NSString *preTid = [BDSettings getCurrentTid];
     [BDCoreApis updateCurrentThread:preTid currentTid:self.mUid resultSuccess:^(NSDictionary *dict) {
-        
         [BDSettings setCurrentTid:self.mUid];
-        
     } resultFailed:^(NSError *error) {
         DDLogError(@"updateCurrentThread %@", error);
         if (error) {
@@ -820,7 +879,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 #pragma mark - UIScrollViewDelegate
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+//    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
     [self.view endEditing:YES];
     
@@ -973,12 +1032,88 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 //    [[BDMQTTApis sharedInstance] sendTextMessage:content toTid:self.mUid localId:localId sessionType:self.mThreadType];
     
     [[BDMQTTApis sharedInstance] sendTextMessageProtobuf:localId content:content thread:self.mThreadModel];
+    //
 //    [[BDMQTTApis sharedInstance] sendTextMessageProtobuf:localId content:content
 //        tid:self.mUid topic:self.mThreadModel.topic threadType:self.mThreadType threadNickname:self.mThreadModel.nickname threadAvatar:self.mThreadModel.avatar];
-    
     // 加密之后发送
 //     [[BDMarsApis sharedInstance] sendMessage:content topic:self.mUid];
+}
 
+//
+-(void)sendImageMessage:(NSString *)imageUrl {
+    
+    NSString *localId = [[NSUUID UUID] UUIDString];
+    // 插入本地消息
+    BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertImageMessageLocal:self.mUid withWorkGroupWid:self.mWorkGroupWid withContent:imageUrl withLocalId:localId withSessionType:self.mThreadType];
+    DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.image_url);
+    
+    // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
+    NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
+    [self.mMessageArray addObject:messageModel];
+    
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView endUpdates];
+    [self tableViewScrollToBottom:YES];
+    //
+    [[BDMQTTApis sharedInstance] sendImageMessageProtobuf:localId content:imageUrl thread:self.mThreadModel];
+}
+
+-(void)sendFileMessage:(NSString *)fileUrl {
+    
+    NSString *localId = [[NSUUID UUID] UUIDString];
+    // 插入本地消息
+    BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertFileMessageLocal:self.mUid withWorkGroupWid:self.mWorkGroupWid withContent:fileUrl withLocalId:localId withSessionType:self.mThreadType withFormat:@"" withFileName:@"" withFileSize:@""];
+    DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.image_url);
+    
+    // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
+    NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
+    [self.mMessageArray addObject:messageModel];
+    
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView endUpdates];
+    [self tableViewScrollToBottom:YES];
+    //
+    [[BDMQTTApis sharedInstance] sendFileMessageProtobuf:localId content:fileUrl thread:self.mThreadModel];
+}
+
+-(void)sendVoiceMessage:(NSString *)voiceUrl {
+    
+    NSString *localId = [[NSUUID UUID] UUIDString];
+    // 插入本地消息
+    BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertVoiceMessageLocal:self.mUid withWorkGroupWid:self.mWorkGroupWid withContent:voiceUrl withLocalId:localId withSessionType:self.mThreadType withVoiceLength:0 withFormat:@""];
+    DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.image_url);
+    
+    // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
+    NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
+    [self.mMessageArray addObject:messageModel];
+    
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView endUpdates];
+    [self tableViewScrollToBottom:YES];
+    //
+    [[BDMQTTApis sharedInstance] sendVoiceMessageProtobuf:localId content:voiceUrl thread:self.mThreadModel];
+}
+
+-(void)sendVideoMessage:(NSString *)videoUrl {
+    
+    NSString *localId = [[NSUUID UUID] UUIDString];
+    // 插入本地消息
+    BDMessageModel *messageModel = [[BDDBApis sharedInstance] insertVideoMessageLocal:self.mUid withWorkGroupWid:self.mWorkGroupWid withContent:videoUrl withLocalId:localId withSessionType:self.mThreadType];
+    DDLogInfo(@"%s %@ %@", __PRETTY_FUNCTION__, localId, messageModel.image_url);
+    
+    // TODO: 立刻更新UI，插入消息到界面并显示发送状态 activity indicator
+    NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:[self.mMessageArray count] inSection:0];
+    [self.mMessageArray addObject:messageModel];
+    
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:[NSMutableArray arrayWithObjects:insertIndexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView endUpdates];
+    [self tableViewScrollToBottom:YES];
+    //
+    [[BDMQTTApis sharedInstance] sendVideoMessageProtobuf:localId content:videoUrl thread:self.mThreadModel];
 }
 
 //
@@ -1422,35 +1557,36 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             [self tableViewScrollToBottom:YES];
             
             // 同步发送文件消息
-            [BDCoreApis sendFileMessage:fileUrl toTid:self.mUid localId:localId sessionType:self.mThreadType format:fileType fileName:fileName fileSize:fileSize resultSuccess:^(NSDictionary *dict) {
-                DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
-                //
-                NSNumber *status_code = [dict objectForKey:@"status_code"];
-                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
-                    // 发送成功
-
-                    // 服务器返回自定义消息本地id
-                    NSString *localId = dict[@"data"][@"localId"];
-                    DDLogInfo(@"callback localId: %@", localId);
-
-                    // TODO：更新发送状态，隐藏activity indicator
-
-                } else {
-                    // 修改本地消息发送状态为error
-                    [[BDDBApis sharedInstance] updateMessageError:localId];
-                    //
-                    NSString *message = dict[@"message"];
-                    DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
-                    [QMUITips showError:message inView:self.view hideAfterDelay:2];
-                }
-
-            } resultFailed:^(NSError *error) {
-                DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-                if (error) {
-                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
-                }
-            }];
-            
+            [[BDMQTTApis sharedInstance] sendFileMessageProtobuf:localId content:fileUrl thread:self.mThreadModel];
+//            [BDCoreApis sendFileMessage:fileUrl toTid:self.mUid localId:localId sessionType:self.mThreadType format:fileType fileName:fileName fileSize:fileSize resultSuccess:^(NSDictionary *dict) {
+//                DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);
+//                //
+//                NSNumber *status_code = [dict objectForKey:@"status_code"];
+//                if ([status_code isEqualToNumber:[NSNumber numberWithInt:200]]) {
+//                    // 发送成功
+//
+//                    // 服务器返回自定义消息本地id
+//                    NSString *localId = dict[@"data"][@"localId"];
+//                    DDLogInfo(@"callback localId: %@", localId);
+//
+//                    // TODO：更新发送状态，隐藏activity indicator
+//
+//                } else {
+//                    // 修改本地消息发送状态为error
+//                    [[BDDBApis sharedInstance] updateMessageError:localId];
+//                    //
+//                    NSString *message = dict[@"message"];
+//                    DDLogError(@"%s %@", __PRETTY_FUNCTION__, message);
+//                    [QMUITips showError:message inView:self.view hideAfterDelay:2];
+//                }
+//
+//            } resultFailed:^(NSError *error) {
+//                DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+//                if (error) {
+//                    [QMUITips showError:error.localizedDescription inView:self.view hideAfterDelay:3];
+//                }
+//            }];
+//
         } else {
             [QMUITips showError:@"发送文件错误" inView:self.view hideAfterDelay:2];
         }
@@ -1527,7 +1663,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 - (void)avatarClicked:(BDMessageModel *)messageModel {
     DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, messageModel.avatar);
     //
-    if (![messageModel isSend]) {
+    if (![messageModel isSend] && ![messageModel isClientSystem]) {
         // 客户信息 + 用户设备信息
         NSString *uid = [self.mThreadModel.topic componentsSeparatedByString:@"/"][1];
         BDVisitorInfoViewController *visitorInfoViewController = [[BDVisitorInfoViewController alloc] init];
@@ -2313,7 +2449,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     NSMutableDictionary *dict = [notification object];
     NSString *localId = dict[@"localId"];
     NSString *status = dict[@"status"];
-    DDLogInfo(@"%s localId %@, status %@", __PRETTY_FUNCTION__, localId, status);
+//    DDLogInfo(@"%s localId %@, status %@", __PRETTY_FUNCTION__, localId, status);
     //
     [self reloadCellDataStatus:localId status:status];
 }
@@ -2473,7 +2609,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     [self.view endEditing:YES];
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     //
-    BDCuwViewController *cuwViewController = [[BDCuwViewController alloc] init];
+    BDCuwViewController *cuwViewController = [[BDCuwViewController alloc] initWithStyle:UITableViewStyleGrouped];
     cuwViewController.delegate = self;
     QMUINavigationController *cuwNavigationController = [[QMUINavigationController alloc] initWithRootViewController:cuwViewController];
     [self presentViewController:cuwNavigationController animated:YES completion:^{
@@ -2834,6 +2970,28 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     }
 }
 
+# pragma mark 显示下拉消息提示
+
+- (void) showTopDownNotification {
+    
+//    QMUIDropdownNotification *notification = [QMUIDropdownNotification notificationWithViewClass:QMUIDropdownNotificationView.class configuration:^(QMUIDropdownNotificationView * _Nonnull view) {
+////        view.imageView.image = [UIImage qmui_imageWithColor:UIColor.qd_tintColor size:CGSizeMake(16, 16) cornerRadius:1.5];
+//
+//        view.titleLabel.text = @"王者荣耀给你发了一条私信";
+////        view.titleLabel.textColor = UIColor.qd_titleTextColor;
+//
+//        view.descriptionLabel.text = @"又输了？点击查看主播的视频教程学学再去玩吧。";
+////        view.descriptionLabel.textColor = UIColor.qd_mainTextColor;
+////        view.backgroundView.effect = UIVisualEffect.qd_standardBlurEffect;
+//
+//        view.backgroundView.qmui_foregroundColor = nil;
+//    }];
+//    notification.didTouchBlock = ^(__kindof QMUIDropdownNotification * _Nonnull notification) {
+//        [notification hide];
+//    };
+//    [notification show];
+}
+
 #pragma mark - BDGroupProfileViewControllerDelegate, BDContactProfileViewControllerDelegate
 
 -(void)clearMessages {
@@ -2844,9 +3002,24 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
 
 #pragma mark - BDCuwViewControllerDelegate
 
--(void)cuwSelected:(NSString *)content {
-    DDLogInfo(@"cuw %@", content);
-    [self sendTextMessage:content];
+-(void)cuwSelected:(NSDictionary *)dict {
+    DDLogInfo(@"cuw %@, %@", dict[@"type"], dict[@"content"]);
+    NSString *type = dict[@"type"];
+    NSString *content = dict[@"content"];
+    if ([type isEqualToString:@"text"]) {
+        [self sendTextMessage:content];
+    } else if ([type isEqualToString:@"image"]) {
+        [self sendImageMessage:content];
+    } else if ([type isEqualToString:@"file"]) {
+        [self sendFileMessage:content];
+    } else if ([type isEqualToString:@"voice"]) {
+        [self sendVoiceMessage:content];
+    } else if ([type isEqualToString:@"video"]) {
+        [self sendVideoMessage:content];
+    } else {
+        // TODO: 其他类型
+        [QMUITips showError:@"暂不支持此消息类型" inView:self.view hideAfterDelay:2.0f];
+    }
 }
 
 @end

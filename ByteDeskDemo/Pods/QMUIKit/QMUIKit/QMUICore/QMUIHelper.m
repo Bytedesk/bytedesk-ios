@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -26,6 +26,26 @@
 
 const CGPoint QMUIBadgeInvalidateOffset = {-1000, -1000};
 NSString *const kQMUIResourcesBundleName = @"QMUIResources";
+
+@interface _QMUIPortraitViewController : UIViewController
+@end
+
+@implementation _QMUIPortraitViewController
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+@end
+
+@interface QMUIHelper ()
+
+@property(nonatomic, assign) BOOL shouldPreventAppearanceUpdating;
+@end
 
 @implementation QMUIHelper (Bundle)
 
@@ -201,22 +221,17 @@ static CGFloat pixelOne = -1.0f;
 
 + (void)inspectContextSize:(CGSize)size {
     if (!CGSizeIsValidated(size)) {
-        NSAssert(NO, @"QMUI CGPostError, %@:%d %s, 非法的size：%@\n%@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, __PRETTY_FUNCTION__, NSStringFromCGSize(size), [NSThread callStackSymbols]);
+        QMUIAssert(NO, @"QMUIHelper (UIGraphic)", @"QMUI CGPostError, %@:%d %s, 非法的size：%@\n%@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, __PRETTY_FUNCTION__, NSStringFromCGSize(size), [NSThread callStackSymbols]);
     }
 }
 
-+ (void)inspectContextIfInvalidatedInDebugMode:(CGContextRef)context {
++ (BOOL)inspectContextIfInvalidated:(CGContextRef)context {
     if (!context) {
-        // crash了就找zhoon或者molice
-        NSAssert(NO, @"QMUI CGPostError, %@:%d %s, 非法的context：%@\n%@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, __PRETTY_FUNCTION__, context, [NSThread callStackSymbols]);
+        // crash 了就找 molice
+        QMUIAssert(NO, @"QMUIHelper (UIGraphic)", @"QMUI CGPostError, %@:%d %s, 非法的context：%@\n%@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, __PRETTY_FUNCTION__, context, [NSThread callStackSymbols]);
+        return NO;
     }
-}
-
-+ (BOOL)inspectContextIfInvalidatedInReleaseMode:(CGContextRef)context {
-    if (context) {
-        return YES;
-    }
-    return NO;
+    return YES;
 }
 
 @end
@@ -284,7 +299,15 @@ static CGFloat pixelOne = -1.0f;
             @"iPhone12,3" : @"iPhone 11 Pro",
             @"iPhone12,5" : @"iPhone 11 Pro Max",
             @"iPhone12,8" : @"iPhone SE (2nd generation)",
-
+            @"iPhone13,1" : @"iPhone 12 mini",
+            @"iPhone13,2" : @"iPhone 12",
+            @"iPhone13,3" : @"iPhone 12 Pro",
+            @"iPhone13,4" : @"iPhone 12 Pro Max",
+            @"iPhone14,4" : @"iPhone 13 mini",
+            @"iPhone14,5" : @"iPhone 13",
+            @"iPhone14,2" : @"iPhone 13 Pro",
+            @"iPhone14,3" : @"iPhone 13 Pro Max",
+            
             @"iPad1,1" : @"iPad 1",
             @"iPad2,1" : @"iPad 2 (WiFi)",
             @"iPad2,2" : @"iPad 2 (GSM)",
@@ -342,6 +365,20 @@ static CGFloat pixelOne = -1.0f;
             @"iPad11,2" : @"iPad mini (5th generation)",
             @"iPad11,3" : @"iPad Air (3rd generation)",
             @"iPad11,4" : @"iPad Air (3rd generation)",
+            @"iPad11,6" : @"iPad (WiFi)",
+            @"iPad11,7" : @"iPad (Cellular)",
+            @"iPad13,1" : @"iPad Air (4th generation)",
+            @"iPad13,2" : @"iPad Air (4th generation)",
+            @"iPad13,4" : @"iPad Pro (11 inch, 3rd generation)",
+            @"iPad13,5" : @"iPad Pro (11 inch, 3rd generation)",
+            @"iPad13,6" : @"iPad Pro (11 inch, 3rd generation)",
+            @"iPad13,7" : @"iPad Pro (11 inch, 3rd generation)",
+            @"iPad13,8" : @"iPad Pro (12.9 inch, 5th generation)",
+            @"iPad13,9" : @"iPad Pro (12.9 inch, 5th generation)",
+            @"iPad13,10" : @"iPad Pro (12.9 inch, 5th generation)",
+            @"iPad13,11" : @"iPad Pro (12.9 inch, 5th generation)",
+            @"iPad14,1" : @"iPad mini (6th generation)",
+            @"iPad14,2" : @"iPad mini (6th generation)",
             
             @"iPod1,1" : @"iPod touch 1",
             @"iPod2,1" : @"iPod touch 2",
@@ -372,13 +409,23 @@ static CGFloat pixelOne = -1.0f;
             @"Watch5,2" : @"Apple Watch Series 5 44mm",
             @"Watch5,3" : @"Apple Watch Series 5 40mm (LTE)",
             @"Watch5,4" : @"Apple Watch Series 5 44mm (LTE)",
+            @"Watch5,9" : @"Apple Watch SE 40mm",
+            @"Watch5,10" : @"Apple Watch SE 44mm",
+            @"Watch5,11" : @"Apple Watch SE 40mm",
+            @"Watch5,12" : @"Apple Watch SE 44mm",
+            @"Watch6,1"  : @"Apple Watch Series 6 40mm",
+            @"Watch6,2"  : @"Apple Watch Series 6 44mm",
+            @"Watch6,3"  : @"Apple Watch Series 6 40mm",
+            @"Watch6,4"  : @"Apple Watch Series 6 44mm",
             
             @"AudioAccessory1,1" : @"HomePod",
             @"AudioAccessory1,2" : @"HomePod",
+            @"AudioAccessory5,1" : @"HomePod mini",
             
             @"AirPods1,1" : @"AirPods (1st generation)",
             @"AirPods2,1" : @"AirPods (2nd generation)",
-
+            @"iProd8,1"   : @"AirPods Pro",
+            
             @"AppleTV2,1" : @"Apple TV 2",
             @"AppleTV3,1" : @"Apple TV 3",
             @"AppleTV3,2" : @"Apple TV 3",
@@ -431,47 +478,63 @@ static NSInteger isSimulator = -1;
     return isSimulator > 0;
 }
 
+
++ (BOOL)isMac {
+    if (@available(iOS 14.0, *)) {
+        return [NSProcessInfo processInfo].isiOSAppOnMac || [NSProcessInfo processInfo].isMacCatalystApp;
+    }
+    if (@available(iOS 13.0, *)) {
+        return [NSProcessInfo processInfo].isMacCatalystApp;
+    }
+    return NO;
+}
+
 static NSInteger isNotchedScreen = -1;
 + (BOOL)isNotchedScreen {
-    if (@available(iOS 11, *)) {
-        if (isNotchedScreen < 0) {
-            if (@available(iOS 12.0, *)) {
-                /*
-                 检测方式解释/测试要点：
-                 1. iOS 11 与 iOS 12 可能行为不同，所以要分别测试。
-                 2. 与触发 [QMUIHelper isNotchedScreen] 方法时的进程有关，例如 https://github.com/Tencent/QMUI_iOS/issues/482#issuecomment-456051738 里提到的 [NSObject performSelectorOnMainThread:withObject:waitUntilDone:NO] 就会导致较多的异常。
-                 3. iOS 12 下，在非第2点里提到的情况下，iPhone、iPad 均可通过 UIScreen -_peripheryInsets 方法的返回值区分，但如果满足了第2点，则 iPad 无法使用这个方法，这种情况下要依赖第4点。
-                 4. iOS 12 下，不管是否满足第2点，不管是什么设备类型，均可以通过一个满屏的 UIWindow 的 rootViewController.view.frame.origin.y 的值来区分，如果是非全面屏，这个值必定为20，如果是全面屏，则可能是24或44等不同的值。但由于创建 UIWindow、UIViewController 等均属于较大消耗，所以只在前面的步骤无法区分的情况下才会使用第4点。
-                 5. 对于第4点，经测试与当前设备的方向、是否有勾选 project 里的 General - Hide status bar、当前是否处于来电模式的状态栏这些都没关系。
-                 */
-                SEL peripheryInsetsSelector = NSSelectorFromString([NSString stringWithFormat:@"_%@%@", @"periphery", @"Insets"]);
-                UIEdgeInsets peripheryInsets = UIEdgeInsetsZero;
-                [[UIScreen mainScreen] qmui_performSelector:peripheryInsetsSelector withPrimitiveReturnValue:&peripheryInsets];
+    if (isNotchedScreen < 0) {
+        if (@available(iOS 12.0, *)) {
+            /*
+             检测方式解释/测试要点：
+             1. iOS 11 与 iOS 12 可能行为不同，所以要分别测试。
+             2. 与触发 [QMUIHelper isNotchedScreen] 方法时的进程有关，例如 https://github.com/Tencent/QMUI_iOS/issues/482#issuecomment-456051738 里提到的 [NSObject performSelectorOnMainThread:withObject:waitUntilDone:NO] 就会导致较多的异常。
+             3. iOS 12 下，在非第2点里提到的情况下，iPhone、iPad 均可通过 UIScreen -_peripheryInsets 方法的返回值区分，但如果满足了第2点，则 iPad 无法使用这个方法，这种情况下要依赖第4点。
+             4. iOS 12 下，不管是否满足第2点，不管是什么设备类型，均可以通过一个满屏的 UIWindow 的 rootViewController.view.frame.origin.y 的值来区分，如果是非全面屏，这个值必定为20，如果是全面屏，则可能是24或44等不同的值。但由于创建 UIWindow、UIViewController 等均属于较大消耗，所以只在前面的步骤无法区分的情况下才会使用第4点。
+             5. 对于第4点，经测试与当前设备的方向、是否有勾选 project 里的 General - Hide status bar、当前是否处于来电模式的状态栏这些都没关系。
+             */
+            SEL peripheryInsetsSelector = NSSelectorFromString([NSString stringWithFormat:@"_%@%@", @"periphery", @"Insets"]);
+            UIEdgeInsets peripheryInsets = UIEdgeInsetsZero;
+            [[UIScreen mainScreen] qmui_performSelector:peripheryInsetsSelector withPrimitiveReturnValue:&peripheryInsets];
+            if (peripheryInsets.bottom <= 0) {
+                UIWindow *window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+                peripheryInsets = window.safeAreaInsets;
                 if (peripheryInsets.bottom <= 0) {
-                    UIWindow *window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
-                    peripheryInsets = window.safeAreaInsets;
-                    if (peripheryInsets.bottom <= 0) {
-                        UIViewController *viewController = [UIViewController new];
-                        window.rootViewController = viewController;
-                        if (CGRectGetMinY(viewController.view.frame) > 20) {
-                            peripheryInsets.bottom = 1;
-                        }
+                    // 使用一个强制竖屏的 rootViewController，避免一个仅支持竖屏的 App 在横屏启动时会受这里创建的 window 的影响，导致状态栏、safeAreaInsets 等错乱
+                    // https://github.com/Tencent/QMUI_iOS/issues/1263
+                    _QMUIPortraitViewController *viewController = [_QMUIPortraitViewController new];
+                    window.rootViewController = viewController;
+                    if (CGRectGetMinY(viewController.view.frame) > 20) {
+                        peripheryInsets.bottom = 1;
                     }
                 }
-                isNotchedScreen = peripheryInsets.bottom > 0 ? 1 : 0;
-            } else {
-                isNotchedScreen = [QMUIHelper is58InchScreen] ? 1 : 0;
             }
+            isNotchedScreen = peripheryInsets.bottom > 0 ? 1 : 0;
+        } else {
+            isNotchedScreen = [QMUIHelper is58InchScreen] ? 1 : 0;
         }
-    } else {
-        isNotchedScreen = 0;
     }
-    
     return isNotchedScreen > 0;
 }
 
 + (BOOL)isRegularScreen {
-    return [self isIPad] || (!IS_ZOOMEDMODE && ([self is65InchScreen] || [self is61InchScreen] || [self is55InchScreen]));
+    return [self isIPad] || (!IS_ZOOMEDMODE && ([self is67InchScreen] || [self is65InchScreen] || [self is61InchScreen] || [self is55InchScreen]));
+}
+
+static NSInteger is67InchScreen = -1;
++ (BOOL)is67InchScreen {
+    if (is67InchScreen < 0) {
+        is67InchScreen = (DEVICE_WIDTH == self.screenSizeFor67Inch.width && DEVICE_HEIGHT == self.screenSizeFor67Inch.height) ? 1 : 0;
+    }
+    return is67InchScreen > 0;
 }
 
 static NSInteger is65InchScreen = -1;
@@ -479,9 +542,17 @@ static NSInteger is65InchScreen = -1;
     if (is65InchScreen < 0) {
         // Since iPhone XS Max、iPhone 11 Pro Max and iPhone XR share the same resolution, we have to distinguish them using the model identifiers
         // 由于 iPhone XS Max、iPhone 11 Pro Max 这两款机型和 iPhone XR 的屏幕宽高是一致的，我们通过机器 Identifier 加以区别
-        is65InchScreen = (DEVICE_WIDTH == self.screenSizeFor65Inch.width && DEVICE_HEIGHT == self.screenSizeFor65Inch.height && ([[QMUIHelper deviceModel] isEqualToString:@"iPhone11,4"] || [[QMUIHelper deviceModel] isEqualToString:@"iPhone11,6"] || [[QMUIHelper deviceModel] isEqualToString:@"iPhone12,5"])) ? 1 : 0;
+        is65InchScreen = (DEVICE_WIDTH == self.screenSizeFor65Inch.width && DEVICE_HEIGHT == self.screenSizeFor65Inch.height && !QMUIHelper.is61InchScreen) ? 1 : 0;
     }
     return is65InchScreen > 0;
+}
+
+static NSInteger is61InchScreenAndiPhone12Later = -1;
++ (BOOL)is61InchScreenAndiPhone12Later {
+    if (is61InchScreenAndiPhone12Later < 0) {
+        is61InchScreenAndiPhone12Later = (DEVICE_WIDTH == self.screenSizeFor61InchAndiPhone12Later.width && DEVICE_HEIGHT == self.screenSizeFor61InchAndiPhone12Later.height) ? 1 : 0;
+    }
+    return is61InchScreenAndiPhone12Later > 0;
 }
 
 static NSInteger is61InchScreen = -1;
@@ -510,6 +581,14 @@ static NSInteger is55InchScreen = -1;
     return is55InchScreen > 0;
 }
 
+static NSInteger is54InchScreen = -1;
++ (BOOL)is54InchScreen {
+    if (is54InchScreen < 0) {
+        is54InchScreen = (DEVICE_WIDTH == self.screenSizeFor54Inch.width && DEVICE_HEIGHT == self.screenSizeFor54Inch.height) ? 1 : 0;
+    }
+    return is54InchScreen > 0;
+}
+
 static NSInteger is47InchScreen = -1;
 + (BOOL)is47InchScreen {
     if (is47InchScreen < 0) {
@@ -534,8 +613,16 @@ static NSInteger is35InchScreen = -1;
     return is35InchScreen > 0;
 }
 
++ (CGSize)screenSizeFor67Inch {
+    return CGSizeMake(428, 926);
+}
+
 + (CGSize)screenSizeFor65Inch {
     return CGSizeMake(414, 896);
+}
+
++ (CGSize)screenSizeFor61InchAndiPhone12Later {
+    return CGSizeMake(390, 844);
 }
 
 + (CGSize)screenSizeFor61Inch {
@@ -548,6 +635,10 @@ static NSInteger is35InchScreen = -1;
 
 + (CGSize)screenSizeFor55Inch {
     return CGSizeMake(414, 736);
+}
+
++ (CGSize)screenSizeFor54Inch {
+    return CGSizeMake(375, 812);
 }
 
 + (CGSize)screenSizeFor47Inch {
@@ -587,26 +678,136 @@ static CGFloat preferredLayoutWidth = -1;
     }
     
     if ([self isIPad]) {
-        return UIEdgeInsetsMake(0, 0, 20, 0);
+        return UIEdgeInsetsMake(24, 0, 20, 0);
     }
     
-    UIInterfaceOrientation orientation = UIApplication.sharedApplication.statusBarOrientation;
+    static NSDictionary<NSString *, NSDictionary<NSNumber *, NSValue *> *> *dict;
+    if (!dict) {
+        dict = @{
+            // iPhone 13 mini
+            @"iPhone14,4": @{
+                @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(50, 0, 34, 0)],
+                @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 50, 21, 50)],
+            },
+            @"iPhone14,4-Zoom": @{
+                @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(43, 0, 29, 0)],
+                @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 43, 21, 43)],
+            },
+            // iPhone 13
+            @"iPhone14,5": @{
+                @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(47, 0, 34, 0)],
+                @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 47, 21, 47)],
+            },
+            @"iPhone14,5-Zoom": @{
+                @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(39, 0, 28, 0)],
+                @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 39, 21, 39)],
+            },
+            // iPhone 13 Pro
+            @"iPhone14,2": @{
+                @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(47, 0, 34, 0)],
+                @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 47, 21, 47)],
+            },
+            @"iPhone14,2-Zoom": @{
+                @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(39, 0, 28, 0)],
+                @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 39, 21, 39)],
+            },
+            // iPhone 13 Pro Max
+            @"iPhone14,3": @{
+                @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(47, 0, 34, 0)],
+                @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 47, 21, 47)],
+            },
+            @"iPhone14,3-Zoom": @{
+                @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(41, 0, 29 + 2.0 / 3.0, 0)],
+                @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 41, 21, 41)],
+            },
+            
+            
+            // iPhone 12 mini
+            @"iPhone13,1": @{
+                    @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(50, 0, 34, 0)],
+                    @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 50, 21, 50)],
+            },
+            @"iPhone13,1-Zoom": @{
+                    @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(43, 0, 29, 0)],
+                    @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 43, 21, 43)],
+            },
+            // iPhone 12
+            @"iPhone13,2": @{
+                    @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(47, 0, 34, 0)],
+                    @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 47, 21, 47)],
+            },
+            @"iPhone13,2-Zoom": @{
+                    @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(39, 0, 28, 0)],
+                    @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 39, 21, 39)],
+            },
+            // iPhone 12 Pro
+            @"iPhone13,3": @{
+                    @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(47, 0, 34, 0)],
+                    @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 47, 21, 47)],
+            },
+            @"iPhone13,3-Zoom": @{
+                    @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(39, 0, 28, 0)],
+                    @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 39, 21, 39)],
+            },
+            // iPhone 12 Pro Max
+            @"iPhone13,4": @{
+                    @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(47, 0, 34, 0)],
+                    @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 47, 21, 47)],
+            },
+            @"iPhone13,4-Zoom": @{
+                    @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(41, 0, 29 + 2.0 / 3.0, 0)],
+                    @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 41, 21, 41)],
+            },
+            
+            
+            // iPhone 11
+            @"iPhone12,1": @{
+                    @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(48, 0, 34, 0)],
+                    @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 48, 21, 48)],
+            },
+            @"iPhone12,1-Zoom": @{
+                    @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(44, 0, 31, 0)],
+                    @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 44, 21, 44)],
+            },
+            // iPhone 11 Pro Max
+            @"iPhone12,5": @{
+                    @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(44, 0, 34, 0)],
+                    @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 44, 21, 44)],
+            },
+            @"iPhone12,5-Zoom": @{
+                    @(UIInterfaceOrientationPortrait): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(40, 0, 30 + 2.0 / 3.0, 0)],
+                    @(UIInterfaceOrientationLandscapeLeft): [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 40, 21, 40)],
+            },
+        };
+    }
     
+    NSString *deviceKey = [QMUIHelper deviceModel];
+    if (!dict[deviceKey]) {
+        deviceKey = @"iPhone14,2";// 默认按最新的 iPhone 13 Pro 处理，因为新出的设备肯定更大概率与上一代设备相似
+    }
+    if ([QMUIHelper isZoomedMode]) {
+        deviceKey = [NSString stringWithFormat:@"%@-Zoom", deviceKey];
+    }
+    
+    NSNumber *orientationKey = nil;
+    UIInterfaceOrientation orientation = UIApplication.sharedApplication.statusBarOrientation;
     switch (orientation) {
-        case UIInterfaceOrientationPortrait:
-            return UIEdgeInsetsMake(44, 0, 34, 0);
-            
-        case UIInterfaceOrientationPortraitUpsideDown:
-            return UIEdgeInsetsMake(34, 0, 44, 0);
-            
         case UIInterfaceOrientationLandscapeLeft:
         case UIInterfaceOrientationLandscapeRight:
-            return UIEdgeInsetsMake(0, 44, 21, 44);
-            
-        case UIInterfaceOrientationUnknown:
+            orientationKey = @(UIInterfaceOrientationLandscapeLeft);
+            break;
         default:
-            return UIEdgeInsetsMake(44, 0, 34, 0);
+            orientationKey = @(UIInterfaceOrientationPortrait);
+            break;
     }
+    
+    UIEdgeInsets insets = dict[deviceKey][orientationKey].UIEdgeInsetsValue;
+    if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
+        insets = UIEdgeInsetsMake(insets.bottom, insets.left, insets.top, insets.right);
+    } else if (orientation == UIInterfaceOrientationLandscapeRight) {
+        insets = UIEdgeInsetsMake(insets.top, insets.right, insets.bottom, insets.left);
+    }
+    return insets;
 }
 
 static NSInteger isHighPerformanceDevice = -1;
@@ -666,7 +867,7 @@ static NSInteger isHighPerformanceDevice = -1;
 
 + (void)resetDimmedApplicationWindow {
     UIWindow *window = UIApplication.sharedApplication.delegate.window;
-    window.tintAdjustmentMode = UIViewTintAdjustmentModeNormal;
+    window.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
     [window tintColorDidChange];
 }
 
@@ -675,6 +876,23 @@ static NSInteger isHighPerformanceDevice = -1;
         return UIStatusBarStyleDarkContent;
     else
         return UIStatusBarStyleDefault;
+}
+
+- (void)handleAppWillEnterForeground:(NSNotification *)notification {
+    QMUIHelper.sharedInstance.shouldPreventAppearanceUpdating = NO;
+}
+
+- (void)handleAppEnterBackground:(NSNotification *)notification {
+    QMUIHelper.sharedInstance.shouldPreventAppearanceUpdating = YES;
+}
+
++ (BOOL)canUpdateAppearance {
+    // 当配置表被触发时，尚未走到 handleAppDidFinishLaunching，而由于 Objective-C 的 BOOL 类型默认是 NO，所以这里刚好会返回 YES。至于 App 完全启动完成后，就由 notification 的回调来管理 shouldPreventAppearanceUpdating 的值。
+    BOOL shouldPrevent = QMUIHelper.sharedInstance.shouldPreventAppearanceUpdating;
+    if (shouldPrevent) {
+        return NO;
+    }
+    return YES;
 }
 
 @end
@@ -745,6 +963,9 @@ static NSInteger isHighPerformanceDevice = -1;
         [[NSNotificationCenter defaultCenter] addObserver:instance selector:@selector(handleKeyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:instance selector:@selector(handleAppSizeWillChange:) name:QMUIAppSizeWillChangeNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:instance selector:@selector(handleDeviceOrientationNotification:) name:UIDeviceOrientationDidChangeNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:instance selector:@selector(handleAppWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:instance selector:@selector(handleAppEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     });
     return instance;
 }

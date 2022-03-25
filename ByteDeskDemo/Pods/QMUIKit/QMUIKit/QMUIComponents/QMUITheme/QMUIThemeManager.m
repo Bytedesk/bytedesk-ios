@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -28,15 +28,6 @@ NSString *const QMUIThemeDidChangeNotification = @"QMUIThemeDidChangeNotificatio
 @end
 
 @implementation QMUIThemeManager
-
-+ (instancetype)sharedInstance {
-    static dispatch_once_t onceToken;
-    static QMUIThemeManager *instance = nil;
-    dispatch_once(&onceToken,^{
-        instance = [[self allocWithZone:NULL] init];
-    });
-    return instance;
-}
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -83,7 +74,7 @@ NSString *const QMUIThemeDidChangeNotification = @"QMUIThemeDidChangeNotificatio
         [self addThemeIdentifier:currentThemeIdentifier theme:theme];
     }
     
-    NSAssert([self._themeIdentifiers containsObject:currentThemeIdentifier], @"%@ should be added to QMUIThemeManager.themes before it becomes current theme identifier.", currentThemeIdentifier);
+    QMUIAssert([self._themeIdentifiers containsObject:currentThemeIdentifier], @"QMUIThemeManager", @"%@ should be added to QMUIThemeManager.themes before it becomes current theme identifier.", currentThemeIdentifier);
     
     BOOL themeChanged = _currentThemeIdentifier && ![_currentThemeIdentifier isEqual:currentThemeIdentifier];
     
@@ -101,7 +92,7 @@ NSString *const QMUIThemeDidChangeNotification = @"QMUIThemeDidChangeNotificatio
         [self addThemeIdentifier:identifier theme:currentTheme];
     }
     
-    NSAssert([self._themes containsObject:currentTheme], @"%@ should be added to QMUIThemeManager.themes before it becomes current theme.", currentTheme);
+    QMUIAssert([self._themes containsObject:currentTheme], @"QMUIThemeManager", @"%@ should be added to QMUIThemeManager.themes before it becomes current theme.", currentTheme);
     
     BOOL themeChanged = _currentTheme && ![_currentTheme isEqual:currentTheme];
     
@@ -134,8 +125,8 @@ NSString *const QMUIThemeDidChangeNotification = @"QMUIThemeDidChangeNotificatio
 }
 
 - (void)addThemeIdentifier:(NSObject<NSCopying> *)identifier theme:(NSObject *)theme {
-    NSAssert(![self._themeIdentifiers containsObject:identifier], @"unable to add duplicate theme identifier");
-    NSAssert(![self._themes containsObject:theme], @"unable to add duplicate theme");
+    QMUIAssert(![self._themeIdentifiers containsObject:identifier], @"QMUIThemeManager", @"unable to add duplicate theme identifier");
+    QMUIAssert(![self._themes containsObject:theme], @"QMUIThemeManager", @"unable to add duplicate theme");
     
     [self._themeIdentifiers addObject:identifier];
     [self._themes addObject:theme];

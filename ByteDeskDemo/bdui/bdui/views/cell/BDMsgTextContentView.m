@@ -46,8 +46,8 @@
 //    return YES;
 //}
 
-- (void)refresh:(BDMessageModel *)data {
-    [super refresh:data];
+- (void)refresh:(BDMessageModel *)data isAgent:(BOOL)agent{
+    [super refresh:data isAgent:agent];
 //    DDLogInfo(@"%s, type: %@, content: %@", __PRETTY_FUNCTION__, self.model.type, self.model.content);
 
     NSString *text = self.model.content;

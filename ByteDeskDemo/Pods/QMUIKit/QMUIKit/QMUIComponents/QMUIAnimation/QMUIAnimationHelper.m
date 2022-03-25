@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -21,6 +21,18 @@
 #define SpringDefaultInitialVelocity 0.0
 
 @implementation QMUIAnimationHelper
+
++ (CGFloat)bounceFromValue:(CGFloat)fromValue toValue:(CGFloat)toValue time:(CGFloat)time coeff:(CGFloat)coeff {
+    // 以下算法来源于社区：
+    // How UIScrollView works: https://medium.com/@esskeetit/how-uiscrollview-works-e418adc47060
+    // Grant Paul's Twitter: https://twitter.com/chpwn/status/285540192096497664
+    coeff = coeff == -1 ? 0.55 : coeff;// 0.55 为系统 UIScrollView 的默认系数，这里我们也将其作为我们的默认系数
+    CGFloat d = toValue;
+    CGFloat x = (d - fromValue) * time;
+    CGFloat result = fromValue + d + 1.0 - (1.0 / (coeff * x / d + 1)) * d;
+//    NSLog(@"[%.2f-%.2f], coeff = %.2f, x = %.2f, result = %.2f", fromValue, d, coeff, x, result);
+    return result;
+}
 
 + (id)interpolateFromValue:(id)fromValue
                    toValue:(id)toValue

@@ -42,3 +42,4 @@ FOUNDATION_EXPORT const unsigned char bdcoreVersionString[];
 #import <bytedesk-core/BDArticleModel.h>
 #import <bytedesk-core/BDFeedbackModel.h>
 #import <bytedesk-core/BDTicketModel.h>
+#import <bytedesk-core/BDTodoModel.h>

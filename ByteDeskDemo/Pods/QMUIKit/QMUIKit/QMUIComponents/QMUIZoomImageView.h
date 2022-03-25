@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -20,7 +20,6 @@
 @class QMUIZoomImageView;
 @class QMUIEmptyView;
 @class QMUIButton;
-@class QMUISlider;
 @class QMUIZoomImageViewVideoToolbar;
 @class QMUIPieProgressView;
 
@@ -95,7 +94,7 @@
 // @see QMUIZoomImageViewVideoToolbar
 @property(nonatomic, strong, readonly) QMUIZoomImageViewVideoToolbar *videoToolbar;
 
-// 视频底部控制条的 margins，会在此基础上自动叠加 QMUIZoomImageView.qmui_safeAreaInsets，因此无需考虑在 iPhone X 下的兼容
+// 视频底部控制条的 margins，会在此基础上自动叠加 QMUIZoomImageView.safeAreaInsets，因此无需考虑在 iPhone X 下的兼容
 // 默认值为 {0, 25, 25, 18}
 @property(nonatomic, assign) UIEdgeInsets videoToolbarMargins UI_APPEARANCE_SELECTOR;
 
@@ -163,7 +162,7 @@
 
 @property(nonatomic, strong, readonly) QMUIButton *playButton;
 @property(nonatomic, strong, readonly) QMUIButton *pauseButton;
-@property(nonatomic, strong, readonly) QMUISlider *slider;
+@property(nonatomic, strong, readonly) UISlider *slider;
 @property(nonatomic, strong, readonly) UILabel *sliderLeftLabel;
 @property(nonatomic, strong, readonly) UILabel *sliderRightLabel;
 

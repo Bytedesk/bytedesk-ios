@@ -36,11 +36,12 @@
     return self;
 }
 
-- (void)refresh:(BDMessageModel*)data{
+- (void)refresh:(BDMessageModel*)data isAgent:(BOOL)agent {
     _model = data;
+    _isAgent = agent;
     
-    [_bubbleImageView setImage:[self chatBubbleImageForState:UIControlStateNormal outgoing:[_model isSend]]];
-    [_bubbleImageView setHighlightedImage:[self chatBubbleImageForState:UIControlStateHighlighted outgoing:[_model isSend]]];
+    [_bubbleImageView setImage:[self chatBubbleImageForState:UIControlStateNormal isSend:[_model isSend] isAgent:agent isClientSystem:[_model isClientSystem]]];
+    [_bubbleImageView setHighlightedImage:[self chatBubbleImageForState:UIControlStateHighlighted isSend:[_model isSend] isAgent:agent isClientSystem:[_model isClientSystem]]];
     _bubbleImageView.frame = self.bounds;
     
 //    if ([_model.status isEqualToString:BD_MESSAGE_STATUS_SENDING]) {
@@ -125,10 +126,17 @@
 
 #pragma mark - Private
 
-- (UIImage *)chatBubbleImageForState:(UIControlState)state outgoing:(BOOL)outgoing{
+- (UIImage *)chatBubbleImageForState:(UIControlState)state isSend:(BOOL)send isAgent:(BOOL)agent isClientSystem:(BOOL)system{
 
     NSString *imageName = @"";
-    if (outgoing) {
+    if (agent && system) {
+        if (state == UIControlStateNormal) {
+            imageName = @"SenderTextNodeBkg";
+        }
+        else {
+            imageName = @"SenderTextNodeBkgHL";
+        }
+    } else if (send) {
         if (state == UIControlStateNormal) {
             imageName = @"SenderTextNodeBkg";
         }

@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -70,7 +70,7 @@
 
 // 返回最接近平均列宽的值，保证其为整数，因此所有columnWidth加起来可能比总宽度要小
 - (CGFloat)stretchColumnWidth {
-    return floor((CGRectGetWidth(self.bounds) - self.separatorWidth * (self.columnCount - 1)) / self.columnCount);
+    return floor((CGRectGetWidth(self.bounds) - UIEdgeInsetsGetHorizontalValue(self.padding) - self.separatorWidth * (self.columnCount - 1)) / self.columnCount);
 }
 
 - (NSInteger)rowCount {
@@ -81,6 +81,7 @@
 - (CGSize)sizeThatFits:(CGSize)size {
     NSInteger rowCount = [self rowCount];
     CGFloat totalHeight = rowCount * self.rowHeight + (rowCount - 1) * self.separatorWidth;
+    totalHeight += UIEdgeInsetsGetVerticalValue(self.padding);
     size.height = totalHeight;
     return size;
 }
@@ -109,15 +110,15 @@
                 BOOL isLastRow = row == rowCount - 1;
                 
                 UIView *subview = self.subviews[index];
-                CGRect subviewFrame = CGRectMake(columnWidth * column + self.separatorWidth * column, rowHeight * row + self.separatorWidth * row, columnWidth, rowHeight);
+                CGRect subviewFrame = CGRectMake(columnWidth * column + self.separatorWidth * column + self.padding.left, rowHeight * row + self.separatorWidth * row + self.padding.top, columnWidth, rowHeight);
                 
                 if (isLastColumn) {
                     // 每行最后一个item要占满剩余空间，否则可能因为strecthColumnWidth不精确导致右边漏空白
-                    subviewFrame.size.width = size.width - columnWidth * (self.columnCount - 1) - self.separatorWidth * (self.columnCount - 1);
+                    subviewFrame.size.width = size.width - UIEdgeInsetsGetHorizontalValue(self.padding) - columnWidth * (self.columnCount - 1) - self.separatorWidth * (self.columnCount - 1);
                 }
                 if (isLastRow) {
                     // 最后一行的item要占满剩余空间，避免一些计算偏差
-                    subviewFrame.size.height = size.height - rowHeight * (rowCount - 1) - self.separatorWidth * (rowCount - 1);
+                    subviewFrame.size.height = size.height - UIEdgeInsetsGetVerticalValue(self.padding) - rowHeight * (rowCount - 1) - self.separatorWidth * (rowCount - 1);
                 }
                 
                 subview.frame = subviewFrame;

@@ -7,8 +7,31 @@
 //
 
 #import "QDUIHelper.h"
+#import "QMUIInteractiveDebugger.h"
 
 @implementation QDUIHelper
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIControl class], @selector(initWithFrame:), CGRect, UIControl *, ^UIControl *(UIControl *selfObject, CGRect firstArgv, UIControl * originReturnValue) {
+            ({
+                NSArray<Class> *controlClasses = @[
+                    NSClassFromString(@"_UIButtonBarButton"),// iOS 11 及以后的 UIBarButtonItem 按钮
+                    QMUIButton.class,
+                    QMUINavigationButton.class
+                ];
+                for (Class className in controlClasses) {
+                    if ([selfObject isKindOfClass:className]) {
+                        originReturnValue.qmui_preventsRepeatedTouchUpInsideEvent = YES;
+                        break;
+                    }
+                }
+            });
+            return originReturnValue;
+        });
+    });
+}
 
 + (void)forceInterfaceOrientationPortrait {
     [QMUIHelper rotateToDeviceOrientation:UIDeviceOrientationPortrait];
@@ -93,6 +116,24 @@
 
 @end
 
+@implementation QDUIHelper (QMUIPopupContainerView)
+
++ (void)customPopupAppearance {
+    QMUIPopupContainerView *popup = QMUIPopupContainerView.appearance;
+    popup.backgroundColor = UIColor.qd_backgroundColor;
+    popup.borderColor = UIColor.qd_separatorColor;
+    popup.maskViewBackgroundColor = [UIColor qmui_colorWithThemeProvider:^UIColor * _Nonnull(__kindof QMUIThemeManager * _Nonnull manager, NSString * _Nullable identifier, __kindof NSObject<QDThemeProtocol> * _Nullable theme) {
+        return [identifier isEqual:QDThemeIdentifierDark] ? UIColorMask : UIColorMaskWhite;
+    }];
+    
+    QMUIPopupMenuView *menuView = QMUIPopupMenuView.appearance;
+    menuView.itemSeparatorColor = UIColor.qd_separatorColor;
+    menuView.sectionSeparatorColor = UIColor.qd_separatorColor;
+    menuView.itemTitleColor = UIColor.qd_tintColor;
+}
+
+@end
+
 @implementation QDUIHelper (UITabBarItem)
 
 + (UITabBarItem *)tabBarItemWithTitle:(NSString *)title image:(UIImage *)image selectedImage:(UIImage *)selectedImage tag:(NSInteger)tag {
@@ -120,13 +161,30 @@
 + (QMUIButton *)generateLightBorderedButton {
     QMUIButton *button = [[QMUIButton alloc] qmui_initWithSize:CGSizeMake(200, 40)];
     button.titleLabel.font = UIFontBoldMake(14);
-    [button setTitleColor:UIColor.qd_tintColor forState:UIControlStateNormal];
-    button.backgroundColor = [UIColor.qd_tintColor qmui_transitionToColor:UIColorWhite progress:.9];
-    button.highlightedBackgroundColor = [UIColor.qd_tintColor qmui_transitionToColor:UIColorWhite progress:.75];// 高亮时的背景色
-    button.layer.borderColor = [button.backgroundColor qmui_transitionToColor:UIColor.qd_tintColor progress:.5].CGColor;
+    button.tintColorAdjustsTitleAndImage = UIColor.qd_tintColor;
+    button.backgroundColor = [UIColor qmui_colorWithThemeProvider:^UIColor * _Nonnull(__kindof QMUIThemeManager * _Nonnull manager, __kindof NSObject<NSCopying> * _Nullable identifier, __kindof NSObject * _Nullable theme) {
+        return [UIColor.qd_tintColor qmui_transitionToColor:UIColor.qd_backgroundColor progress:.9];
+    }];
+    button.highlightedBackgroundColor = [UIColor qmui_colorWithThemeProvider:^UIColor * _Nonnull(__kindof QMUIThemeManager * _Nonnull manager, __kindof NSObject<NSCopying> * _Nullable identifier, __kindof NSObject * _Nullable theme) {
+        return [UIColor.qd_tintColor qmui_transitionToColor:UIColor.qd_backgroundColor progress:.75];
+    }];// 高亮时的背景色
+    button.layer.borderColor = [UIColor qmui_colorWithThemeProvider:^UIColor * _Nonnull(__kindof QMUIThemeManager * _Nonnull manager, __kindof NSObject<NSCopying> * _Nullable identifier, __kindof NSObject * _Nullable theme) {
+        return [button.backgroundColor qmui_transitionToColor:UIColor.qd_tintColor progress:.5];
+    }].CGColor;
     button.layer.borderWidth = 1;
     button.layer.cornerRadius = 4;
-    button.highlightedBorderColor = [button.backgroundColor qmui_transitionToColor:UIColor.qd_tintColor progress:.9];// 高亮时的边框颜色
+    button.highlightedBorderColor = [UIColor qmui_colorWithThemeProvider:^UIColor * _Nonnull(__kindof QMUIThemeManager * _Nonnull manager, __kindof NSObject<NSCopying> * _Nullable identifier, __kindof NSObject * _Nullable theme) {
+        return [button.backgroundColor qmui_transitionToColor:UIColor.qd_tintColor progress:.9];
+    }];// 高亮时的边框颜色
+    return button;
+}
+
++ (QMUIButton *)generateGhostButtonWithColor:(UIColor *)color {
+    QMUIButton *button = [[QMUIButton alloc] init];
+    [button setTitleColor:color forState:UIControlStateNormal];
+    button.layer.borderColor = color.CGColor;
+    button.layer.borderWidth = 1;
+    button.cornerRadius = QMUIButtonCornerRadiusAdjustsBounds;
     return button;
 }
 
@@ -135,7 +193,21 @@
 
 @implementation QDUIHelper (Emotion)
 
-NSString *const QMUIEmotionString = @"01-[微笑];02-[开心];03-[生气];04-[委屈];05-[亲亲];06-[坏笑];07-[鄙视];08-[啊]";
+NSString *const QMUIEmotionString =
+@"01-[微笑];02-[开心];03-[生气];04-[委屈];05-[亲亲];06-[坏笑];07-[鄙视];08-[啊]\
+01-[微笑];02-[开心];03-[生气];04-[委屈];05-[亲亲];06-[坏笑];07-[鄙视];08-[啊]\
+01-[微笑];02-[开心];03-[生气];04-[委屈];05-[亲亲];06-[坏笑];07-[鄙视];08-[啊]\
+01-[微笑];02-[开心];03-[生气];04-[委屈];05-[亲亲];06-[坏笑];07-[鄙视];08-[啊]\
+01-[微笑];02-[开心];03-[生气];04-[委屈];05-[亲亲];06-[坏笑];07-[鄙视];08-[啊]\
+01-[微笑];02-[开心];03-[生气];04-[委屈];05-[亲亲];06-[坏笑];07-[鄙视];08-[啊]\
+01-[微笑];02-[开心];03-[生气];04-[委屈];05-[亲亲];06-[坏笑];07-[鄙视];08-[啊]\
+01-[微笑];02-[开心];03-[生气];04-[委屈];05-[亲亲];06-[坏笑];07-[鄙视];08-[啊]\
+01-[微笑];02-[开心];03-[生气];04-[委屈];05-[亲亲];06-[坏笑];07-[鄙视];08-[啊]\
+01-[微笑];02-[开心];03-[生气];04-[委屈];05-[亲亲];06-[坏笑];07-[鄙视];08-[啊]\
+01-[微笑];02-[开心];03-[生气];04-[委屈];05-[亲亲];06-[坏笑];07-[鄙视];08-[啊]\
+01-[微笑];02-[开心];03-[生气];04-[委屈];05-[亲亲];06-[坏笑];07-[鄙视];08-[啊]\
+01-[微笑];02-[开心];03-[生气];04-[委屈];05-[亲亲];06-[坏笑];07-[鄙视];08-[啊]\
+";
 
 static NSArray<QMUIEmotion *> *QMUIEmotionArray;
 
@@ -227,6 +299,32 @@ static NSArray<QMUIEmotion *> *QMUIEmotionArray;
         CGGradientRelease(gradient);
     }];
     return [resultImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 1) resizingMode:UIImageResizingModeStretch];
+}
+
+@end
+
+@implementation QDUIHelper (Debug)
+
++ (QMUIInteractiveDebugPanelViewController *)generateDebugViewControllerWithTitle:(NSString *)title items:(NSArray<QMUIInteractiveDebugPanelItem *> *)items {
+    QMUIInteractiveDebugPanelViewController *vc = [[QMUIInteractiveDebugPanelViewController alloc] init];
+    vc.title = title;
+    [items enumerateObjectsUsingBlock:^(QMUIInteractiveDebugPanelItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [vc addDebugItem:obj];
+    }];
+    vc.styleConfiguration = ^(QMUIInteractiveDebugPanelViewController * _Nonnull viewController) {
+        viewController.view.backgroundColor = UIColor.qd_backgroundColorLighten;
+        viewController.view.layer.borderColor = UIColor.qd_separatorColor.CGColor;
+        viewController.titleLabel.textColor = UIColor.qd_titleTextColor;
+        [viewController.debugItems enumerateObjectsUsingBlock:^(QMUIInteractiveDebugPanelItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            obj.titleLabel.textColor = UIColor.qd_titleTextColor;
+            obj.actionView.tintColor = UIColor.qd_tintColor;
+            if ([obj.actionView isKindOfClass:UITextField.class]) {
+                ((UITextField *)obj.actionView).textColor = UIColor.qd_titleTextColor;
+                ((UITextField *)obj.actionView).qmui_borderColor = UIColor.qd_separatorColor;
+            }
+        }];
+    };
+    return vc;
 }
 
 @end

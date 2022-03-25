@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -24,6 +24,7 @@
 #import "CALayer+QMUI.h"
 #import "QMUIKeyboardManager.h"
 #import "QMUIAppearance.h"
+#import "QMUILabel.h"
 
 static NSUInteger alertControllerCount = 0;
 
@@ -187,8 +188,8 @@ static NSUInteger alertControllerCount = 0;
 
 @property(nonatomic, strong) CALayer *extendLayer;
 
-@property(nonatomic, strong) UILabel *titleLabel;
-@property(nonatomic, strong) UILabel *messageLabel;
+@property(nonatomic, strong) QMUILabel *titleLabel;
+@property(nonatomic, strong) QMUILabel *messageLabel;
 @property(nonatomic, strong) QMUIAlertAction *cancelAction;
 
 @property(nonatomic, strong) NSMutableArray<QMUIAlertAction *> *alertActions;
@@ -1038,7 +1039,7 @@ static NSUInteger alertControllerCount = 0;
 - (void)setTitle:(NSString *)title {
     _title = title;
     if (!self.titleLabel) {
-        self.titleLabel = [[UILabel alloc] init];
+        self.titleLabel = [[QMUILabel alloc] init];
         self.titleLabel.numberOfLines = 0;
         [self.headerScrollView addSubview:self.titleLabel];
     }
@@ -1064,7 +1065,7 @@ static NSUInteger alertControllerCount = 0;
 - (void)setMessage:(NSString *)message {
     _message = message;
     if (!self.messageLabel) {
-        self.messageLabel = [[UILabel alloc] init];
+        self.messageLabel = [[QMUILabel alloc] init];
         self.messageLabel.numberOfLines = 0;
         [self.headerScrollView addSubview:self.messageLabel];
     }
@@ -1187,9 +1188,7 @@ static NSUInteger alertControllerCount = 0;
     if (!_headerScrollView) {
         _headerScrollView = [[UIScrollView alloc] init];
         _headerScrollView.scrollsToTop = NO;
-        if (@available(iOS 11, *)) {
-            _headerScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        }
+        _headerScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         [self updateHeaderBackgrondColor];
     }
     return _headerScrollView;
@@ -1199,9 +1198,7 @@ static NSUInteger alertControllerCount = 0;
     if (!_buttonScrollView) {
         _buttonScrollView = [[UIScrollView alloc] init];
         _buttonScrollView.scrollsToTop = NO;
-        if (@available(iOS 11, *)) {
-            _buttonScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        }
+        _buttonScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     return _buttonScrollView;
 }

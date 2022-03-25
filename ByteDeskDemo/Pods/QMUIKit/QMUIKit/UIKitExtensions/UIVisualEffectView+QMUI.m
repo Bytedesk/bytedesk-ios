@@ -1,9 +1,16 @@
+/**
+ * Tencent is pleased to support the open source community by making QMUI_iOS available.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
+ * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ * http://opensource.org/licenses/MIT
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ */
+
 //
 //  UIVisualEffectView+QMUI.m
 //  QMUIKit
 //
 //  Created by MoLice on 2020/7/15.
-//  Copyright © 2020 QMUI Team. All rights reserved.
 //
 
 #import "UIVisualEffectView+QMUI.h"
@@ -56,8 +63,14 @@ static char kAssociatedObjectKey_foregroundColor;
         self.qmuive_foregroundLayer = [CALayer layer];
         [self.qmuive_foregroundLayer qmui_removeDefaultAnimations];
         [self.layer addSublayer:self.qmuive_foregroundLayer];
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIAccessibilityReduceTransparencyStatusDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleReduceTransparencyStatusDidChangeNotification:) name:UIAccessibilityReduceTransparencyStatusDidChangeNotification object:nil];
     }
     if (self.qmuive_foregroundLayer) {
+        if (UIAccessibilityIsReduceTransparencyEnabled()) {
+            qmui_foregroundColor = [qmui_foregroundColor colorWithAlphaComponent:1];
+        }
         self.qmuive_foregroundLayer.backgroundColor = qmui_foregroundColor.CGColor;
         self.qmuive_foregroundLayer.hidden = !qmui_foregroundColor;
         [self qmuive_updateSubviews];
@@ -95,6 +108,12 @@ static char kAssociatedObjectKey_foregroundColor;
     }
 }
 
+- (void)handleReduceTransparencyStatusDidChangeNotification:(NSNotification *)notification {
+    if (self.qmui_foregroundColor) {
+        self.qmui_foregroundColor = self.qmui_foregroundColor;
+    }
+}
+
 @end
 
 @implementation UIView (QMUI_VisualEffectView)
@@ -102,7 +121,7 @@ static char kAssociatedObjectKey_foregroundColor;
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        id (^block)(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) = ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+        OverrideImplementation(NSClassFromString(@"_UIVisualEffectSubview"), @selector(setHidden:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, BOOL firstArgv) {
                 
                 if (selfObject.qmuive_keepHidden) {
@@ -114,10 +133,7 @@ static char kAssociatedObjectKey_foregroundColor;
                 originSelectorIMP = (void (*)(id, SEL, BOOL))originalIMPProvider();
                 originSelectorIMP(selfObject, originCMD, firstArgv);
             };
-        };
-        // iOS 10 这两个 class 都有，iOS 11 开始只用第一个，后面那个不存在了
-        OverrideImplementation(NSClassFromString(@"_UIVisualEffectSubview"), @selector(setHidden:), block);
-        OverrideImplementation(NSClassFromString(@"_UIVisualEffectFilterView"), @selector(setHidden:), block);
+        });
     });
 }
 

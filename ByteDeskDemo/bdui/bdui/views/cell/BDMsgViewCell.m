@@ -22,9 +22,9 @@
 #import "BDRedPacketTableViewCell.h"
 #import "BDCommodityTableViewCell.h"
 
-
-@import AFNetworking;
+//@import AFNetworking;
 //#import <AFNetworking/UIImageView+AFNetworking.h>
+#import "../../vendors/UIKit+AFNetworking/UIImageView+AFNetworking.h"
 
 #define AVATAR_WIDTH_HEIGHT       40.0f
 #define TIMESTAMp_HEIGHT          20.0f
@@ -50,6 +50,15 @@
 
 - (void)initWithMessageModel:(BDMessageModel *)messageModel {
     _messageModel = messageModel;
+    _isAgent = FALSE;
+    
+    [self addSubviews];
+    [self setNeedsLayout];
+}
+
+- (void)initWithMessageModelAgent:(BDMessageModel *)messageModel {
+    _messageModel = messageModel;
+    _isAgent = TRUE;
     
     [self addSubviews];
     [self setNeedsLayout];
@@ -216,7 +225,6 @@
     [self.contentView addSubview:self.statusLabel];
 }
 
-
 - (QMUILabel *)timestampLabel {
     if (!_timestampLabel) {
         _timestampLabel = [QMUILabel new];
@@ -319,7 +327,9 @@
 - (void)layoutAvatarImageView {
 //    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
-    if ([_messageModel isSend]) {
+    if (_isAgent && [_messageModel isClientSystem]) {
+        _avatarImageView.frame = CGRectMake(KFDSScreen.width - 50, TIMESTAMp_HEIGHT, AVATAR_WIDTH_HEIGHT, AVATAR_WIDTH_HEIGHT);
+    } else if ([_messageModel isSend]) {
         _avatarImageView.frame = CGRectMake(KFDSScreen.width - 50, TIMESTAMp_HEIGHT, AVATAR_WIDTH_HEIGHT, AVATAR_WIDTH_HEIGHT);
     }
     else {
@@ -330,18 +340,20 @@
 
 - (void)layoutNicknameLabel {
     
-    if ([_messageModel isSend]) {
+    if (_isAgent && [_messageModel isClientSystem]) {
+        _nicknameLabel.frame = CGRectZero;
+    } else if ([_messageModel isSend]) {
         _nicknameLabel.frame = CGRectZero;
     }
     else {
-        _nicknameLabel.frame = CGRectMake(50, TIMESTAMp_HEIGHT, 100, 20);
+        _nicknameLabel.frame = CGRectMake(50, TIMESTAMp_HEIGHT, 200, 20);
         _nicknameLabel.text = _messageModel.nickname;
     }
 }
 
 - (void)layoutContentView {
     //
-    [_bubbleView refresh:_messageModel];
+    [_bubbleView refresh:_messageModel isAgent:_isAgent];
     [_bubbleView setNeedsLayout];
 }
 

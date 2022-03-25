@@ -36,6 +36,7 @@
 @interface BDMsgBaseContentView : UIControl
 
 @property (nonatomic, strong, readonly)  BDMessageModel   *model;
+@property (nonatomic, assign) BOOL isAgent;
 
 @property (nonatomic, strong) UIImageView * bubbleImageView;
 
@@ -56,7 +57,7 @@
  *
  *  @param data 刷新数据
  */
-- (void)refresh:(BDMessageModel*)data;
+- (void)refresh:(BDMessageModel*)data isAgent:(BOOL)agent;
 
 
 ///**
@@ -79,10 +80,8 @@
  *  聊天气泡图
  *
  *  @param state    目前的按压状态
- *  @param outgoing 是否是发出去的消息
- *
  */
-- (UIImage *)chatBubbleImageForState:(UIControlState)state outgoing:(BOOL)outgoing;
+- (UIImage *)chatBubbleImageForState:(UIControlState)state isSend:(BOOL)send isAgent:(BOOL)agent isClientSystem:(BOOL)system;
 
 
 @end

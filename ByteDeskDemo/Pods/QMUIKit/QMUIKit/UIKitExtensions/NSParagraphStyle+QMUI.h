@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -16,10 +16,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface NSMutableParagraphStyle (QMUI)
+@interface NSParagraphStyle (QMUI)
 
 /**
- *  快速创建一个NSMutableParagraphStyle，等同于`qmui_paragraphStyleWithLineHeight:lineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentLeft`
+ *  快速创建一个NSMutableParagraphStyle，等同于`qmui_paragraphStyleWithLineHeight:lineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentLeft`。
+ *  注意 NSParagraphStyle.lineBreakMode 默认值为 NSLineBreakByWordWrapping，而 UILabel.lineBreakMode 默认值为 NSLineBreakByTruncatingTail。如果 UILabel.attributedText 里显式设置了 NSParagraphStyle，则 UILabel.lineBreakMode 返回的值会由 attributedText 里的 NSParagraphStyle.lineBreakMode 决定。
  *  @param  lineHeight      行高
  *  @return 一个NSMutableParagraphStyle对象
  */

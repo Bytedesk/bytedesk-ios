@@ -9,8 +9,8 @@
 #import "BDApisTableViewController.h"
 #import <SafariServices/SafariServices.h>
 
-#import "KFScanViewController.h"
-#import "KFQRCodeViewController.h"
+//#import "KFScanViewController.h"
+//#import "KFQRCodeViewController.h"
 #import "KFServerViewController.h"
 
 // 客服接口演示
@@ -462,8 +462,13 @@
  */
 - (void)notifyMessageAdd:(NSNotification *)notification {
     BDMessageModel *messageModel = [notification object];
-    DDLogInfo(@"%s type:%@, content:%@", __PRETTY_FUNCTION__, messageModel.type, messageModel.content);
+    DDLogInfo(@"%s type:%@", __PRETTY_FUNCTION__, messageModel.type);
     // TODO: 监听到新消息之后，开发者可自行处理
+    if ([messageModel.type isEqual:@"text"]) {
+        DDLogInfo(@"%s content:%@", __PRETTY_FUNCTION__, messageModel.content);
+    } else if ([messageModel.type isEqual:@"image"]) {
+        DDLogInfo(@"%s imageurl:%@", __PRETTY_FUNCTION__, messageModel.image_url);
+    }
 }
 /**
  监听账号异地登录通知

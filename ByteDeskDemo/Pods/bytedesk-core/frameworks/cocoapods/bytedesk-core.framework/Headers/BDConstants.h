@@ -252,6 +252,7 @@
 #define BD_MESSAGE_TYPE_NOTIFICATION_THREAD             @"notification_thread"  // 新会话thread
 #define BD_MESSAGE_TYPE_NOTIFICATION_THREAD_REENTRY     @"notification_thread_reentry" // 重新进入会话
 #define BD_MESSAGE_TYPE_NOTIFICATION_TICKET             @"notification_ticket"  // 新建工单
+#define BD_MESSAGE_TYPE_NOTIFICATION_FEEDBACK           @"notification_feedback"  // 意见反馈
 #define BD_MESSAGE_TYPE_NOTIFICATION_QUEUE              @"notification_queue"    // 排队通知类型
 // 排队中离开
 #define BD_MESSAGE_TYPE_NOTIFICATION_QUEUE_LEAVE        @"notification_queue_leave"
@@ -291,7 +292,13 @@
 // 消息撤回
 #define BD_MESSAGE_TYPE_NOTIFICATION_RECALL             @"notification_recall"
 // 消息被拒绝
-#define BD_MESSAGE_TYPE_NOTIFICATION_BLOCK              @"notification_block";
+#define BD_MESSAGE_TYPE_NOTIFICATION_BLOCK              @"notification_block"
+// 浏览
+#define BD_MESSAGE_TYPE_NOTIFICATION_BROWSE             @"notification_browse"
+// 非会话类消息通知
+#define BD_MESSAGE_TYPE_NOTIFICATION_NOTICE             @"notification_notice"
+// 频道通知
+#define BD_MESSAGE_TYPE_NOTIFICATION_CHANNEL            @"notification_channel"
 // 消息回执：收到消息之后回复给消息发送方
 #define BD_MESSAGE_TYPE_NOTIFICATION_RECEIPT            @"notification_receipt"
 // 踢掉其他客户端

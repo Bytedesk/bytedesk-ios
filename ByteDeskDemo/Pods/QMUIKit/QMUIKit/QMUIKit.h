@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -13,7 +13,7 @@
 #ifndef QMUIKit_h
 #define QMUIKit_h
 
-static NSString * const QMUI_VERSION = @"4.2.1";
+static NSString * const QMUI_VERSION = @"4.4.3";
 
 #if __has_include("CAAnimation+QMUI.h")
 #import "CAAnimation+QMUI.h"
@@ -183,16 +183,8 @@ static NSString * const QMUI_VERSION = @"4.2.1";
 #import "QMUIEmptyView.h"
 #endif
 
-#if __has_include("QMUIFillButton.h")
-#import "QMUIFillButton.h"
-#endif
-
 #if __has_include("QMUIFloatLayoutView.h")
 #import "QMUIFloatLayoutView.h"
-#endif
-
-#if __has_include("QMUIGhostButton.h")
-#import "QMUIGhostButton.h"
 #endif
 
 #if __has_include("QMUIGridView.h")
@@ -241,10 +233,6 @@ static NSString * const QMUI_VERSION = @"4.2.1";
 
 #if __has_include("QMUILabel.h")
 #import "QMUILabel.h"
-#endif
-
-#if __has_include("QMUILinkButton.h")
-#import "QMUILinkButton.h"
 #endif
 
 #if __has_include("QMUILog+QMUIConsole.h")
@@ -359,10 +347,6 @@ static NSString * const QMUI_VERSION = @"4.2.1";
 #import "QMUISegmentedControl.h"
 #endif
 
-#if __has_include("QMUISlider.h")
-#import "QMUISlider.h"
-#endif
-
 #if __has_include("QMUIStaticTableViewCellData.h")
 #import "QMUIStaticTableViewCellData.h"
 #endif
@@ -439,10 +423,6 @@ static NSString * const QMUI_VERSION = @"4.2.1";
 #import "QMUIToolbarButton.h"
 #endif
 
-#if __has_include("QMUIVisualEffectView.h")
-#import "QMUIVisualEffectView.h"
-#endif
-
 #if __has_include("QMUIWeakObjectContainer.h")
 #import "QMUIWeakObjectContainer.h"
 #endif
@@ -459,6 +439,10 @@ static NSString * const QMUI_VERSION = @"4.2.1";
 #import "UIActivityIndicatorView+QMUI.h"
 #endif
 
+#if __has_include("UIApplication+QMUI.h")
+#import "UIApplication+QMUI.h"
+#endif
+
 #if __has_include("UIBarItem+QMUI.h")
 #import "UIBarItem+QMUI.h"
 #endif
@@ -471,6 +455,10 @@ static NSString * const QMUI_VERSION = @"4.2.1";
 #import "UIBezierPath+QMUI.h"
 #endif
 
+#if __has_include("UIBlurEffect+QMUI.h")
+#import "UIBlurEffect+QMUI.h"
+#endif
+
 #if __has_include("UIButton+QMUI.h")
 #import "UIButton+QMUI.h"
 #endif
@@ -481,6 +469,10 @@ static NSString * const QMUI_VERSION = @"4.2.1";
 
 #if __has_include("UICollectionView+QMUICellSizeKeyCache.h")
 #import "UICollectionView+QMUICellSizeKeyCache.h"
+#endif
+
+#if __has_include("UICollectionViewCell+QMUI.h")
+#import "UICollectionViewCell+QMUI.h"
 #endif
 
 #if __has_include("UIColor+QMUI.h")
@@ -531,16 +523,16 @@ static NSString * const QMUI_VERSION = @"4.2.1";
 #import "UINavigationBar+QMUI.h"
 #endif
 
-#if __has_include("UINavigationBar+Transition.h")
-#import "UINavigationBar+Transition.h"
-#endif
-
 #if __has_include("UINavigationController+NavigationBarTransition.h")
 #import "UINavigationController+NavigationBarTransition.h"
 #endif
 
 #if __has_include("UINavigationController+QMUI.h")
 #import "UINavigationController+QMUI.h"
+#endif
+
+#if __has_include("UINavigationItem+QMUI.h")
+#import "UINavigationItem+QMUI.h"
 #endif
 
 #if __has_include("UIScrollView+QMUI.h")
@@ -553,6 +545,10 @@ static NSString * const QMUI_VERSION = @"4.2.1";
 
 #if __has_include("UISearchController+QMUI.h")
 #import "UISearchController+QMUI.h"
+#endif
+
+#if __has_include("UISlider+QMUI.h")
+#import "UISlider+QMUI.h"
 #endif
 
 #if __has_include("UISwitch+QMUI.h")
@@ -597,6 +593,10 @@ static NSString * const QMUI_VERSION = @"4.2.1";
 
 #if __has_include("UITextView+QMUI.h")
 #import "UITextView+QMUI.h"
+#endif
+
+#if __has_include("UIToolbar+QMUI.h")
+#import "UIToolbar+QMUI.h"
 #endif
 
 #if __has_include("UITraitCollection+QMUI.h")

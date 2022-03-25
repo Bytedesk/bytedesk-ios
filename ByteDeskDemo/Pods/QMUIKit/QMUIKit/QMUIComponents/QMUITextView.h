@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -32,6 +32,12 @@
  *  @see maximumTextLength
  */
 - (BOOL)textViewShouldReturn:(QMUITextView *)textView;
+
+/**
+ 由于 maximumTextLength 的实现方式导致业务无法再重写自己的 shouldChangeCharacters，否则会丢失 maximumTextLength 的功能。所以这里提供一个额外的 delegate，在 QMUI 内部逻辑返回 YES 的时候会再询问一次这个 delegate，从而给业务提供一个机会去限制自己的输入内容。如果 QMUI 内部逻辑本身就返回 NO（例如超过了 maximumTextLength 的长度），则不会触发这个方法。
+ 当输入被这个方法拦截时，由于拦截逻辑是业务自己写的，业务能轻松获取到这个拦截的时机，所以此时不会调用 textView:didPreventTextChangeInRange:replacementText:。如果有类似 tips 之类的操作，可以直接在 return NO 之前处理。
+ */
+- (BOOL)textView:(QMUITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text originalValue:(BOOL)originalValue;
 
 /**
  *  配合 `maximumTextLength` 属性使用，在输入文字超过限制时被调用（此时文字已被自动裁剪到符合最大长度要求）。

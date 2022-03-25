@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -70,24 +70,17 @@
     if (QMUICMIActivated) {
         self.hidesBottomBarWhenPushed = HidesBottomBarWhenPushedInitially;
         self.qmui_preferredStatusBarStyleBlock = ^UIStatusBarStyle{
-            return StatusbarStyleLightInitially ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
+            return DefaultStatusBarStyle;
         };
     }
     
-    if (@available(iOS 11.0, *)) {
-        self.qmui_prefersHomeIndicatorAutoHiddenBlock = ^BOOL{
-            return NO;
-        };
-    }
+    self.qmui_prefersHomeIndicatorAutoHiddenBlock = ^BOOL{
+        return NO;
+    };
 
     
     // 动态字体notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contentSizeCategoryDidChanged:) name:UIContentSizeCategoryDidChangeNotification object:nil];
-}
-
-- (void)setTitle:(NSString *)title {
-    [super setTitle:title];
-    self.titleView.title = title;
 }
 
 - (void)viewDidLoad {
@@ -117,10 +110,8 @@
     [super viewDidAppear:animated];
     // fix iOS 11 and later, shouldHideKeyboardWhenTouchInView: will not work when calling becomeFirstResponder in UINavigationController.rootViewController.viewDidLoad
     // https://github.com/Tencent/QMUI_iOS/issues/495
-    if (@available(iOS 11.0, *)) {
-        if (self.hideKeyboardManager && [QMUIKeyboardManager isKeyboardVisible]) {
-            self.hideKeyboardTapGestureRecognizer.enabled = YES;
-        }
+    if (self.hideKeyboardManager && [QMUIKeyboardManager isKeyboardVisible]) {
+        self.hideKeyboardTapGestureRecognizer.enabled = YES;
     }
 }
 
@@ -254,23 +245,23 @@
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
     if (!navigationBar) return;
     
-    if ([self respondsToSelector:@selector(navigationBarBackgroundImage)]) {
-        [navigationBar setBackgroundImage:[self navigationBarBackgroundImage] forBarMetrics:UIBarMetricsDefault];
+    if ([self respondsToSelector:@selector(qmui_navigationBarBackgroundImage)]) {
+        [navigationBar setBackgroundImage:[self qmui_navigationBarBackgroundImage] forBarMetrics:UIBarMetricsDefault];
     }
-    if ([self respondsToSelector:@selector(navigationBarBarTintColor)]) {
-        navigationBar.barTintColor = [self navigationBarBarTintColor];
+    if ([self respondsToSelector:@selector(qmui_navigationBarBarTintColor)]) {
+        navigationBar.barTintColor = [self qmui_navigationBarBarTintColor];
     }
-    if ([self respondsToSelector:@selector(navigationBarStyle)]) {
-        navigationBar.barStyle = [self navigationBarStyle];
+    if ([self respondsToSelector:@selector(qmui_navigationBarStyle)]) {
+        navigationBar.barStyle = [self qmui_navigationBarStyle];
     }
-    if ([self respondsToSelector:@selector(navigationBarShadowImage)]) {
-        navigationBar.shadowImage = [self navigationBarShadowImage];
+    if ([self respondsToSelector:@selector(qmui_navigationBarShadowImage)]) {
+        navigationBar.shadowImage = [self qmui_navigationBarShadowImage];
     }
-    if ([self respondsToSelector:@selector(navigationBarTintColor)]) {
-        navigationBar.tintColor = [self navigationBarTintColor];
+    if ([self respondsToSelector:@selector(qmui_navigationBarTintColor)]) {
+        navigationBar.tintColor = [self qmui_navigationBarTintColor];
     }
-    if ([self respondsToSelector:@selector(titleViewTintColor)]) {
-        self.titleView.tintColor = [self titleViewTintColor];
+    if ([self respondsToSelector:@selector(qmui_titleViewTintColor)]) {
+        self.titleView.tintColor = [self qmui_titleViewTintColor];
     }
 }
 

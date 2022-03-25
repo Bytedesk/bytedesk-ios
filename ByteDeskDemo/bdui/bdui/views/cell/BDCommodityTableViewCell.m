@@ -7,7 +7,8 @@
 //
 
 #import "BDCommodityTableViewCell.h"
-@import AFNetworking;
+//@import AFNetworking;
+#import "../../vendors/UIKit+AFNetworking/UIImageView+AFNetworking.h"
 
 @interface BDCommodityTableViewCell ()
 

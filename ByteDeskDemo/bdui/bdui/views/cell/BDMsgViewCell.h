@@ -59,10 +59,13 @@
 @property (nonatomic, strong) KFDSBadgeView               *audioUnplayedIcon;         //语音未读红点
 @property (nonatomic, strong) QMUILabel                   *statusLabel;               //已读状态
 @property (nonatomic, strong) BDMessageModel              *messageModel;
+@property (nonatomic, assign) BOOL                        isAgent;
 
 @property(nonatomic, assign) id<KFDSMsgViewCellDelegate>  delegate;
 
 - (void)initWithMessageModel:(BDMessageModel *)messageModel;
+
+- (void)initWithMessageModelAgent:(BDMessageModel *)messageModel;
 
 @end
 

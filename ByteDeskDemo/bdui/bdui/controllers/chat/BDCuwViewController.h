@@ -6,17 +6,18 @@
 //  Copyright © 2020 KeFuDaShi. All rights reserved.
 //
 
-#import <QMUIKit/QMUIKit.h>
+//#import <QMUIKit/QMUIKit.h>
+#import <UIKit/UITableViewController.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol BDCuwViewControllerDelegate <NSObject>
 
--(void)cuwSelected:(NSString *)content;
+-(void)cuwSelected:(NSDictionary *)dict;
 
 @end
 
-@interface BDCuwViewController : QMUICommonTableViewController
+@interface BDCuwViewController : UITableViewController
 
 @property (nonatomic, weak) id<BDCuwViewControllerDelegate> delegate;
 

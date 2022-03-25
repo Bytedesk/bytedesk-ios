@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -15,8 +15,10 @@
 
 #import "NSString+QMUI.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "QMUICore.h"
 #import "NSArray+QMUI.h"
 #import "NSCharacterSet+QMUI.h"
+#import "QMUIStringPrivate.h"
 
 @implementation NSString (QMUI)
 
@@ -68,13 +70,18 @@
 }
 
 - (NSString *)qmui_capitalizedString {
-    if (self.length)
+    if (self.length) {
+        NSRange range = [self rangeOfComposedCharacterSequenceAtIndex:0];
+        if (range.length > 1) {
+            return self;// 说明这个字符没法大写
+        }
         return [NSString stringWithFormat:@"%@%@", [self substringToIndex:1].uppercaseString, [self substringFromIndex:1]].copy;
+    }
     return nil;
 }
 
 + (NSString *)hexLetterStringWithInteger:(NSInteger)integer {
-    NSAssert(integer < 16, @"要转换的数必须是16进制里的个位数，也即小于16，但你传给我是%@", @(integer));
+    QMUIAssert(integer < 16, @"NSString (QMUI)", @"%s 参数仅接受小于16的值，当前传入的是 %@", __func__, @(integer));
     
     NSString *letter = nil;
     switch (integer) {
@@ -153,6 +160,49 @@
     return modifiedString;
 }
 
+- (NSString *)qmui_stringMatchedByPattern:(NSString *)pattern {
+    return [self qmui_stringMatchedByPattern:pattern groupIndex:0];
+}
+
+- (NSString *)qmui_stringMatchedByPattern:(NSString *)pattern groupIndex:(NSInteger)index {
+    if (pattern.length <= 0 || index < 0) return nil;
+    
+    NSRegularExpression *regx = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:nil];
+    NSTextCheckingResult *result = [regx firstMatchInString:self options:NSMatchingReportCompletion range:NSMakeRange(0, self.length)];
+    if (result.numberOfRanges > index) {
+        NSRange range = [result rangeAtIndex:index];
+        return [self substringWithRange:range];
+    }
+    return nil;
+}
+
+- (NSString *)qmui_stringMatchedByPattern:(NSString *)pattern groupName:(NSString *)name {
+    if (pattern.length <= 0) return nil;
+    
+    NSRegularExpression *regx = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:nil];
+    NSTextCheckingResult *result = [regx firstMatchInString:self options:NSMatchingReportCompletion range:NSMakeRange(0, self.length)];
+    if (result.numberOfRanges > 1) {
+        NSRange range = [result rangeWithName:name];
+        QMUIAssert(range.location != NSNotFound, @"NSString (QMUI)", @"%s, 不存在名为 %@ 的 group name", __func__, name);
+        if (range.location != NSNotFound) {
+            return [self substringWithRange:range];
+        }
+    }
+    
+    return nil;
+}
+
+- (NSString *)qmui_stringByReplacingPattern:(NSString *)pattern withString:(NSString *)replacement {
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:&error];
+    if (error) {
+        return self;
+    }
+    return [regex stringByReplacingMatchesInString:self options:NSMatchingReportCompletion range:NSMakeRange(0, self.length) withTemplate:replacement];
+}
+
+#pragma mark - <QMUIStringProtocol>
+
 - (NSUInteger)qmui_lengthWhenCountingNonASCIICharacterAsTwo {
     NSUInteger length = 0;
     for (NSUInteger i = 0, l = self.length; i < l; i++) {
@@ -166,135 +216,51 @@
     return length;
 }
 
-- (NSUInteger)transformIndexToDefaultModeWithIndex:(NSUInteger)index {
-    CGFloat strlength = 0.f;
-    NSUInteger i = 0;
-    for (i = 0; i < self.length; i++) {
-        unichar character = [self characterAtIndex:i];
-        if (isascii(character)) {
-            strlength += 1;
-        } else {
-            strlength += 2;
-        }
-        if (strlength >= index + 1) return i;
-    }
-    return 0;
+- (instancetype)qmui_substringAvoidBreakingUpCharacterSequencesFromIndex:(NSUInteger)index lessValue:(BOOL)lessValue countingNonASCIICharacterAsTwo:(BOOL)countingNonASCIICharacterAsTwo {
+    return [QMUIStringPrivate substring:self avoidBreakingUpCharacterSequencesFromIndex:index lessValue:lessValue countingNonASCIICharacterAsTwo:countingNonASCIICharacterAsTwo];
 }
 
-- (NSRange)transformRangeToDefaultModeWithRange:(NSRange)range {
-    CGFloat strlength = 0.f;
-    NSRange resultRange = NSMakeRange(NSNotFound, 0);
-    NSUInteger i = 0;
-    for (i = 0; i < self.length; i++) {
-        unichar character = [self characterAtIndex:i];
-        if (isascii(character)) {
-            strlength += 1;
-        } else {
-            strlength += 2;
-        }
-        if (strlength >= range.location + 1) {
-            if (resultRange.location == NSNotFound) {
-                resultRange.location = i;
-            }
-            
-            if (range.length > 0 && strlength >= NSMaxRange(range)) {
-                resultRange.length = i - resultRange.location + (strlength == NSMaxRange(range) ? 1 : 0);
-                return resultRange;
-            }
-        }
-    }
-    return resultRange;
-}
-
-- (NSString *)qmui_substringAvoidBreakingUpCharacterSequencesFromIndex:(NSUInteger)index lessValue:(BOOL)lessValue countingNonASCIICharacterAsTwo:(BOOL)countingNonASCIICharacterAsTwo {
-    NSAssert(index < self.length, @"index out of bounds");
-    if (index >= self.length) return @"";
-    index = countingNonASCIICharacterAsTwo ? [self transformIndexToDefaultModeWithIndex:index] : index;
-    NSRange range = [self rangeOfComposedCharacterSequenceAtIndex:index];
-    BOOL matchedCharacterSequence = range.length > 1;
-    return [self substringFromIndex:matchedCharacterSequence && lessValue ? NSMaxRange(range) : range.location];
-}
-
-- (NSString *)qmui_substringAvoidBreakingUpCharacterSequencesFromIndex:(NSUInteger)index {
+- (instancetype)qmui_substringAvoidBreakingUpCharacterSequencesFromIndex:(NSUInteger)index {
     return [self qmui_substringAvoidBreakingUpCharacterSequencesFromIndex:index lessValue:YES countingNonASCIICharacterAsTwo:NO];
 }
 
-- (NSString *)qmui_substringAvoidBreakingUpCharacterSequencesToIndex:(NSUInteger)index lessValue:(BOOL)lessValue countingNonASCIICharacterAsTwo:(BOOL)countingNonASCIICharacterAsTwo {
-    NSAssert(index <= self.length, @"index out of bounds");
-    if (index == 0 || index > self.length) return @"";
-    index = countingNonASCIICharacterAsTwo ? [self transformIndexToDefaultModeWithIndex:index] : index;
-    NSRange range = [self rangeOfComposedCharacterSequenceAtIndex:index - 1];
-    BOOL matchedCharacterSequence = range.length > 1;
-    return [self substringToIndex:matchedCharacterSequence && lessValue ? range.location + 1 : NSMaxRange(range)];
+- (instancetype)qmui_substringAvoidBreakingUpCharacterSequencesToIndex:(NSUInteger)index lessValue:(BOOL)lessValue countingNonASCIICharacterAsTwo:(BOOL)countingNonASCIICharacterAsTwo {
+    return [QMUIStringPrivate substring:self avoidBreakingUpCharacterSequencesToIndex:index lessValue:lessValue countingNonASCIICharacterAsTwo:countingNonASCIICharacterAsTwo];
 }
 
-- (NSString *)qmui_substringAvoidBreakingUpCharacterSequencesToIndex:(NSUInteger)index {
+- (instancetype)qmui_substringAvoidBreakingUpCharacterSequencesToIndex:(NSUInteger)index {
     return [self qmui_substringAvoidBreakingUpCharacterSequencesToIndex:index lessValue:YES countingNonASCIICharacterAsTwo:NO];
 }
 
-- (NSString *)qmui_substringAvoidBreakingUpCharacterSequencesWithRange:(NSRange)range lessValue:(BOOL)lessValue countingNonASCIICharacterAsTwo:(BOOL)countingNonASCIICharacterAsTwo {
-    range = countingNonASCIICharacterAsTwo ? [self transformRangeToDefaultModeWithRange:range] : range;
-    NSRange characterSequencesRange = lessValue ? [self downRoundRangeOfComposedCharacterSequencesForRange:range] : [self rangeOfComposedCharacterSequencesForRange:range];
-    NSString *resultString = [self substringWithRange:characterSequencesRange];
-    return resultString;
+- (instancetype)qmui_substringAvoidBreakingUpCharacterSequencesWithRange:(NSRange)range lessValue:(BOOL)lessValue countingNonASCIICharacterAsTwo:(BOOL)countingNonASCIICharacterAsTwo {
+    return [QMUIStringPrivate substring:self avoidBreakingUpCharacterSequencesWithRange:range lessValue:lessValue countingNonASCIICharacterAsTwo:countingNonASCIICharacterAsTwo];
 }
 
-- (NSString *)qmui_substringAvoidBreakingUpCharacterSequencesWithRange:(NSRange)range {
+- (instancetype)qmui_substringAvoidBreakingUpCharacterSequencesWithRange:(NSRange)range {
     return [self qmui_substringAvoidBreakingUpCharacterSequencesWithRange:range lessValue:YES countingNonASCIICharacterAsTwo:NO];
 }
 
-- (NSRange)downRoundRangeOfComposedCharacterSequencesForRange:(NSRange)range {
-    if (range.length == 0) {
-        return range;
-    }
-    
-    NSRange resultRange = [self rangeOfComposedCharacterSequencesForRange:range];
-    if (NSMaxRange(resultRange) > NSMaxRange(range)) {
-        return [self downRoundRangeOfComposedCharacterSequencesForRange:NSMakeRange(range.location, range.length - 1)];
-    }
-    return resultRange;
+- (instancetype)qmui_stringByRemoveCharacterAtIndex:(NSUInteger)index {
+    return [QMUIStringPrivate string:self avoidBreakingUpCharacterSequencesByRemoveCharacterAtIndex:index];
 }
 
-- (NSString *)qmui_stringByRemoveCharacterAtIndex:(NSUInteger)index {
-    NSRange rangeForRemove = [self rangeOfComposedCharacterSequenceAtIndex:index];
-    NSString *resultString = [self stringByReplacingCharactersInRange:rangeForRemove withString:@""];
-    return resultString;
-}
-
-- (NSString *)qmui_stringByRemoveLastCharacter {
+- (instancetype)qmui_stringByRemoveLastCharacter {
     return [self qmui_stringByRemoveCharacterAtIndex:self.length - 1];
-}
-
-- (NSString *)qmui_stringMatchedByPattern:(NSString *)pattern {
-    NSRange range = [self rangeOfString:pattern options:NSRegularExpressionSearch|NSCaseInsensitiveSearch];
-    if (range.location != NSNotFound) {
-        return [self substringWithRange:range];
-    }
-    return nil;
-}
-
-- (NSString *)qmui_stringByReplacingPattern:(NSString *)pattern withString:(NSString *)replacement {
-    NSError *error = nil;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:&error];
-    if (error) {
-        return self;
-    }
-    return [regex stringByReplacingMatchesInString:self options:NSMatchingReportCompletion range:NSMakeRange(0, self.length) withTemplate:replacement];
 }
 
 @end
 
 @implementation NSString (QMUI_StringFormat)
 
-+ (instancetype)qmui_stringWithNSInteger:(NSInteger)integerValue {
++ (NSString *)qmui_stringWithNSInteger:(NSInteger)integerValue {
     return @(integerValue).stringValue;
 }
 
-+ (instancetype)qmui_stringWithCGFloat:(CGFloat)floatValue {
++ (NSString *)qmui_stringWithCGFloat:(CGFloat)floatValue {
     return [NSString qmui_stringWithCGFloat:floatValue decimal:2];
 }
 
-+ (instancetype)qmui_stringWithCGFloat:(CGFloat)floatValue decimal:(NSUInteger)decimal {
++ (NSString *)qmui_stringWithCGFloat:(CGFloat)floatValue decimal:(NSUInteger)decimal {
     NSString *formatString = [NSString stringWithFormat:@"%%.%@f", @(decimal)];
     return [NSString stringWithFormat:formatString, floatValue];
 }

@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -46,6 +46,11 @@ NS_ASSUME_NONNULL_BEGIN
  @return 当前主题下的实际图片，由 provider 返回
 */
 + (UIImage *)qmui_imageWithThemeManagerName:(__kindof NSObject<NSCopying> *)name provider:(UIImage *(^)(__kindof QMUIThemeManager *manager, __kindof NSObject<NSCopying> * _Nullable identifier, __kindof NSObject * _Nullable theme))provider;
+
+/**
+ 内部用，标志 QMUIThemeImage 对 UIImage (QMUI) 里使用动态颜色生成动态图片的适配 hook 是否已生效。例如在配置表这种“加载时机特别早”的场景，此时 UIImage (QMUITheme) +load 方法尚未被调用，这些 hook 还没生效，此时如果你使用 [UIImage qmui_imageWithTintColor:dynamicColor] 得到的 image 是无法自动响应 theme 切换的。
+ */
+@property(class, nonatomic, assign) BOOL qmui_generatorSupportsDynamicColor;
 
 @end
 

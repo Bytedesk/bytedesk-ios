@@ -107,6 +107,11 @@
 // 是否是系统通知类型消息
 - (BOOL)isNotification;
 
+// 是否是机器人消息类型
+- (BOOL)isRobot;
+
+- (BOOL)isClientSystem;
+
 @end
 
 

@@ -13,7 +13,7 @@
 #import <AVFoundation/AVFoundation.h>
 //#import "VoiceConverter.h"
 
-@import AFNetworking;
+//@import AFNetworking;
 
 @interface BDMsgVoiceContentView ()<AVAudioPlayerDelegate>
 
@@ -93,8 +93,8 @@
 //    return YES;
 //}
 
-- (void)refresh:(BDMessageModel *)data{
-    [super refresh:data];
+- (void)refresh:(BDMessageModel *)data isAgent:(BOOL)agent{
+    [super refresh:data isAgent:agent];
 //    DDLogInfo(@"%s voice_url:%@ length:%@", __PRETTY_FUNCTION__, self.model.voice_url, self.model.length);
     
     // TODO: 图片大小按照图片长宽比例显示

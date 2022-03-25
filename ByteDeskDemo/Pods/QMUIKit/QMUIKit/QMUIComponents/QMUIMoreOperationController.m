@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -192,10 +192,10 @@ static NSInteger const kQMUIMoreOperationItemViewTagOffset = 999;
     [self.mutableScrollViews enumerateObjectsUsingBlock:^(UIScrollView * _Nonnull scrollView, NSUInteger idx, BOOL * _Nonnull stop) {
         scrollView.frame = CGRectMake(self.contentPaddings.left, layoutY, contentWidth, CGRectGetHeight(scrollView.frame));
         
-        // 要保护 safeAreaInsets 的区域，而这里不使用 scrollView.qmui_safeAreaInsets 是因为此时 scrollView 的 safeAreaInsets 仍然为 0，但 scrollView.superview.safeAreaInsets 已经正确了，所以使用 scrollView.superview 也即 self.view 的
+        // 要保护 safeAreaInsets 的区域，而这里不使用 scrollView.safeAreaInsets 是因为此时 scrollView 的 safeAreaInsets 仍然为 0，但 scrollView.superview.safeAreaInsets 已经正确了，所以使用 scrollView.superview 也即 self.view 的
         // 底部的 insets 暂不考虑
-//        UIEdgeInsets scrollViewSafeAreaInsets = scrollView.qmui_safeAreaInsets;
-        UIEdgeInsets scrollViewSafeAreaInsets = UIEdgeInsetsMake(fmax(self.view.qmui_safeAreaInsets.top - scrollView.qmui_top, 0), fmax(self.view.qmui_safeAreaInsets.left - scrollView.qmui_left, 0), 0, fmax(self.view.qmui_safeAreaInsets.right - (self.view.qmui_width - scrollView.qmui_right), 0));
+//        UIEdgeInsets scrollViewSafeAreaInsets = scrollView.safeAreaInsets;
+        UIEdgeInsets scrollViewSafeAreaInsets = UIEdgeInsetsMake(fmax(self.view.safeAreaInsets.top - scrollView.qmui_top, 0), fmax(self.view.safeAreaInsets.left - scrollView.qmui_left, 0), 0, fmax(self.view.safeAreaInsets.right - (self.view.qmui_width - scrollView.qmui_right), 0));
         
         NSArray<QMUIMoreOperationItemView *> *itemSection = self.mutableItems[idx];
         QMUIMoreOperationItemView *exampleItemView = itemSection.firstObject;
@@ -248,7 +248,7 @@ static NSInteger const kQMUIMoreOperationItemViewTagOffset = 999;
     
     __weak __typeof(modalPresentationViewController)weakModalController = modalPresentationViewController;
     modalPresentationViewController.layoutBlock = ^(CGRect containerBounds, CGFloat keyboardHeight, CGRect contentViewDefaultFrame) {
-        weakModalController.contentView.qmui_frameApplyTransform = CGRectSetY(contentViewDefaultFrame, CGRectGetHeight(containerBounds) - weakModalController.contentViewMargins.bottom - CGRectGetHeight(contentViewDefaultFrame) - weakModalController.view.qmui_safeAreaInsets.bottom);
+        weakModalController.contentView.qmui_frameApplyTransform = CGRectSetY(contentViewDefaultFrame, CGRectGetHeight(containerBounds) - weakModalController.contentViewMargins.bottom - CGRectGetHeight(contentViewDefaultFrame) - weakModalController.view.safeAreaInsets.bottom);
     };
     modalPresentationViewController.showingAnimation = ^(UIView *dimmingView, CGRect containerBounds, CGFloat keyboardHeight, CGRect contentViewFrame, void(^completion)(BOOL finished)) {
         
@@ -421,9 +421,7 @@ static NSInteger const kQMUIMoreOperationItemViewTagOffset = 999;
     scrollView.qmui_borderColor = self.scrollViewSeparatorColor;
     scrollView.qmui_borderPosition = (self.scrollViewSeparatorColor && index != 0) ? QMUIViewBorderPositionTop : QMUIViewBorderPositionNone;
     scrollView.scrollsToTop = NO;
-    if (@available(iOS 11, *)) {
-        scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
+    scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     scrollView.contentInset = self.scrollViewContentInsets;
     [scrollView qmui_scrollToTopForce:YES animated:NO];
     return scrollView;

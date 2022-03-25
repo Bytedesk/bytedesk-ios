@@ -47,6 +47,11 @@
 
 @end
 
+@interface QDUIHelper (QMUIPopupContainerView)
+
++ (void)customPopupAppearance;
+@end
+
 
 @interface QDUIHelper (UITabBarItem)
 
@@ -59,7 +64,7 @@
 
 + (QMUIButton *)generateDarkFilledButton;
 + (QMUIButton *)generateLightBorderedButton;
-
++ (QMUIButton *)generateGhostButtonWithColor:(UIColor *)color;
 @end
 
 
@@ -89,6 +94,14 @@
 @interface QDUIHelper (Theme)
 
 + (UIImage *)navigationBarBackgroundImageWithThemeColor:(UIColor *)color;
+@end
+
+@class QMUIInteractiveDebugPanelViewController;
+@class QMUIInteractiveDebugPanelItem;
+
+@interface QDUIHelper (Debug)
+
++ (QMUIInteractiveDebugPanelViewController *)generateDebugViewControllerWithTitle:(NSString *)title items:(NSArray<QMUIInteractiveDebugPanelItem *> *)items;
 @end
 
 

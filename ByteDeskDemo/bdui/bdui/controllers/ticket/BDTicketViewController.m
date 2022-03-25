@@ -15,7 +15,8 @@
 #import "BDTicketRecordViewController.h"
 
 #import "BDSingleImagePickerPreviewViewController.h"
-#import <AFNetworking/UIImageView+AFNetworking.h>
+//#import <AFNetworking/UIImageView+AFNetworking.h>
+//#import "<#header#>"
 
 #import <bytedesk-core/bdcore.h>
 
@@ -165,7 +166,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
             imageViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
         }
         // Configure the view for the selected state
-        [imageViewCell.imageView setImageWithURL:[NSURL URLWithString:self.mFileUrl] placeholderImage:[UIImage imageNamed:@"AlbumAddBtn.png" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
+//        [imageViewCell.imageView setImageWithURL:[NSURL URLWithString:self.mFileUrl] placeholderImage:[UIImage imageNamed:@"AlbumAddBtn.png" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
         imageViewCell.imageView.userInteractionEnabled = YES;
         
         UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(presentViewController:)];

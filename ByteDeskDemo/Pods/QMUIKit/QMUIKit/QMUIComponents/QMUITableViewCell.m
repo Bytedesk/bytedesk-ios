@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -42,7 +42,7 @@
 
 - (instancetype)initForTableView:(UITableView *)tableView withStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self.initByTableView = YES;
-    if (self = [self initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+    if (self = [self initWithStyle:style reuseIdentifier:reuseIdentifier]) {// 这里需要调用 self 的 initWithStyle，而不是 super，目的是为了让业务在重写 init 方法时可以沿用系统默认的思路，去重写 initWithStyle:reuseIdentifier:，但在 vc 里使用 cell 时又可以直接调用 initForTableView:withStyle:。
         self.parentTableView = tableView;
         [self didInitializeWithStyle:style];// 因为设置了 parentTableView，样式可能都需要变，所以这里重新执行一次 didInitializeWithStyle: 里的 qmui_styledAsQMUITableViewCell
     }
@@ -220,7 +220,7 @@
         UIImage *indicatorImage = TableViewCellDisclosureIndicatorImage;
         
         if (detailButtonImage) {
-            NSAssert(!!indicatorImage, @"TableViewCellDetailButtonImage 和 TableViewCellDisclosureIndicatorImage 必须同时使用，但目前后者为 nil");
+            QMUIAssert(!!indicatorImage, NSStringFromClass(self.class), @"TableViewCellDetailButtonImage 和 TableViewCellDisclosureIndicatorImage 必须同时使用，但目前后者为 nil");
             [self initDefaultDetailDisclosureViewIfNeeded];
             [self initDefaultAccessoryButtonIfNeeded];
             [self.defaultAccessoryButton setImage:detailButtonImage forState:UIControlStateNormal];
@@ -232,7 +232,7 @@
         }
         
         if (indicatorImage) {
-            NSAssert(!!detailButtonImage, @"TableViewCellDetailButtonImage 和 TableViewCellDisclosureIndicatorImage 必须同时使用，但目前前者为 nil");
+            QMUIAssert(!!detailButtonImage, NSStringFromClass(self.class), @"TableViewCellDetailButtonImage 和 TableViewCellDisclosureIndicatorImage 必须同时使用，但目前前者为 nil");
             [self initDefaultDetailDisclosureViewIfNeeded];
             [self initDefaultAccessoryImageViewIfNeeded];
             self.defaultAccessoryImageView.image = indicatorImage;

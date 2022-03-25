@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -24,12 +24,6 @@
 NSNotificationName const QMUIAppSizeWillChangeNotification = @"QMUIAppSizeWillChangeNotification";
 NSString *const QMUIPrecedingAppSizeUserInfoKey = @"QMUIPrecedingAppSizeUserInfoKey";
 NSString *const QMUIFollowingAppSizeUserInfoKey = @"QMUIFollowingAppSizeUserInfoKey";
-
-@interface UIViewController ()
-
-@property(nonatomic, strong) UINavigationBar *transitionNavigationBar;// by molice 对应 UIViewController (NavigationBarTransition) 里的 transitionNavigationBar，为了让这个属性在这里可以被访问到，有点 hack，具体请查看 https://github.com/Tencent/QMUI_iOS/issues/268
-
-@end
 
 @implementation UIViewController (QMUI)
 
@@ -85,84 +79,67 @@ QMUISynthesizeIdCopyProperty(qmui_prefersHomeIndicatorAutoHiddenBlock, setQmui_p
         
         // 修复 iOS 11 及以后，UIScrollView 无法自动适配不透明的 tabBar，导致底部 inset 错误的问题
         // https://github.com/Tencent/QMUI_iOS/issues/218
-        if (@available(iOS 11, *)) {
-            if (!QMUICMIActivated || ShouldFixTabBarSafeAreaInsetsBug) {
-                OverrideImplementation([UIViewController class], NSSelectorFromString([NSString stringWithFormat:@"_%@:%@:%@:",@"setContentOverlayInsets", @"andLeftMargin", @"rightMargin"]), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-                    return ^(UIViewController *selfObject, UIEdgeInsets insets, CGFloat leftMargin, CGFloat rightMargin) {
+        if (!QMUICMIActivated || ShouldFixTabBarSafeAreaInsetsBug) {
+            // -[UIViewController _setContentOverlayInsets:andLeftMargin:rightMargin:]
+            OverrideImplementation([UIViewController class], NSSelectorFromString([NSString stringWithFormat:@"_%@:%@:%@:",@"setContentOverlayInsets", @"andLeftMargin", @"rightMargin"]), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+                return ^(UIViewController *selfObject, UIEdgeInsets insets, CGFloat leftMargin, CGFloat rightMargin) {
 
-                        UITabBarController *tabBarController = selfObject.tabBarController;
-                        UITabBar *tabBar = tabBarController.tabBar;
-                        if (tabBarController
-                            && tabBar
-                            && selfObject.navigationController.parentViewController == tabBarController
-                            && selfObject.parentViewController == selfObject.navigationController // 过滤掉那些自己添加的 childViewController 的情况
-                            && !tabBar.hidden
-                            && !selfObject.hidesBottomBarWhenPushed
-                            && selfObject.isViewLoaded) {
-                            CGRect viewRectInTabBarController = [selfObject.view convertRect:selfObject.view.bounds toView:tabBarController.view];
+                    UITabBarController *tabBarController = selfObject.tabBarController;
+                    UITabBar *tabBar = tabBarController.tabBar;
+                    if (tabBarController
+                        && tabBar
+                        && selfObject.navigationController.parentViewController == tabBarController
+                        && selfObject.parentViewController == selfObject.navigationController // 过滤掉那些自己添加的 childViewController 的情况
+                        && !tabBar.hidden
+                        && !selfObject.hidesBottomBarWhenPushed
+                        && selfObject.isViewLoaded) {
+                        CGRect viewRectInTabBarController = [selfObject.view convertRect:selfObject.view.bounds toView:tabBarController.view];
 
-                            // 发现在 iOS 13.3 及以下，在 extendedLayoutIncludesOpaqueBars = YES 的情况下，理论上任何时候 vc.view 都应该撑满整个 tabBarController.view，但从没带 tabBar 的界面 pop 到带 tabBar 的界面过程中，navController.view.height 会被改得小一点，导致 safeAreaInsets.bottom 出现错误的中间值，引发 UIScrollView.contentInset 的错误变化，后续就算 contentInset 恢复正确，contentOffset 也无法恢复，所以这里直接过滤掉中间的错误值
-                            // （但无法保证每个场景下这样的值都是错的，或许某些少见的场景里，navController.view.height 就是不会铺满整个 tabBarController.view.height 呢？）
-                            // https://github.com/Tencent/QMUI_iOS/issues/934
-                            if (@available(iOS 13.4, *)) {
-                            } else {
-                                if ((
-                                     (!tabBar.translucent && selfObject.extendedLayoutIncludesOpaqueBars)
-                                     || tabBar.translucent
-                                     )
-                                    && selfObject.edgesForExtendedLayout & UIRectEdgeBottom
-                                    && !CGFloatEqualToFloat(CGRectGetHeight(viewRectInTabBarController), CGRectGetHeight(tabBarController.view.bounds))) {
-                                    return;
-                                }
+                        // 发现在 iOS 13.3 及以下，在 extendedLayoutIncludesOpaqueBars = YES 的情况下，理论上任何时候 vc.view 都应该撑满整个 tabBarController.view，但从没带 tabBar 的界面 pop 到带 tabBar 的界面过程中，navController.view.height 会被改得小一点，导致 safeAreaInsets.bottom 出现错误的中间值，引发 UIScrollView.contentInset 的错误变化，后续就算 contentInset 恢复正确，contentOffset 也无法恢复，所以这里直接过滤掉中间的错误值
+                        // （但无法保证每个场景下这样的值都是错的，或许某些少见的场景里，navController.view.height 就是不会铺满整个 tabBarController.view.height 呢？）
+                        // https://github.com/Tencent/QMUI_iOS/issues/934
+                        if (@available(iOS 13.4, *)) {
+                        } else {
+                            if ((
+                                 (!tabBar.translucent && selfObject.extendedLayoutIncludesOpaqueBars)
+                                 || tabBar.translucent
+                                 )
+                                && selfObject.edgesForExtendedLayout & UIRectEdgeBottom
+                                && !CGFloatEqualToFloat(CGRectGetHeight(viewRectInTabBarController), CGRectGetHeight(tabBarController.view.bounds))) {
+                                return;
                             }
-
-                            // pop 转场动画过程中有些时候 tabBar 尚未被加到 view 层级树里，所以这里做个判断，避免出现 convertRect 警告
-                            CGRect barRectInTabBarController = tabBar.window ? [tabBar convertRect:tabBar.bounds toView:tabBarController.view] : tabBar.frame;
-                            CGFloat correctInsetBottom = MAX(CGRectGetMaxY(viewRectInTabBarController) - CGRectGetMinY(barRectInTabBarController), 0);
-                            insets.bottom = correctInsetBottom;
                         }
 
-                        // call super
-                        void (*originSelectorIMP)(id, SEL, UIEdgeInsets, CGFloat, CGFloat);
-                        originSelectorIMP = (void (*)(id, SEL, UIEdgeInsets, CGFloat, CGFloat))originalIMPProvider();
-                        originSelectorIMP(selfObject, originCMD, insets, leftMargin, rightMargin);
-                    };
-                });
-            }
+                        // pop 转场动画过程中有些时候 tabBar 尚未被加到 view 层级树里，所以这里做个判断，避免出现 convertRect 警告
+                        CGRect barRectInTabBarController = tabBar.window ? [tabBar convertRect:tabBar.bounds toView:tabBarController.view] : tabBar.frame;
+                        CGFloat correctInsetBottom = MAX(CGRectGetMaxY(viewRectInTabBarController) - CGRectGetMinY(barRectInTabBarController), 0);
+                        insets.bottom = correctInsetBottom;
+                    }
+
+                    // call super
+                    void (*originSelectorIMP)(id, SEL, UIEdgeInsets, CGFloat, CGFloat);
+                    originSelectorIMP = (void (*)(id, SEL, UIEdgeInsets, CGFloat, CGFloat))originalIMPProvider();
+                    originSelectorIMP(selfObject, originCMD, insets, leftMargin, rightMargin);
+                };
+            });
         }
         
-        if (@available(iOS 11.0, *)) {
-            // iOS 11 及以后不 override prefersStatusBarHidden 而是通过私有方法来实现，是因为系统会先通过 +[UIViewController doesOverrideViewControllerMethod:inBaseClass:] 方法来判断当前的 UIViewController 有没有重写 prefersStatusBarHidden 方法，有的话才会去调用 prefersStatusBarHidden，而如果我们用 swizzle 的方式去重写 prefersStatusBarHidden，系统依然会认为你没有重写该方法，于是不会调用，于是 block 无效。对于 iOS 10 及以前的系统没有这种逻辑，所以没问题。
-            // 特别的，只有 hidden 操作有这种逻辑，而 style、animation 等操作不管在哪个 iOS 版本里都是没有这种逻辑的
-            OverrideImplementation([UIViewController class], NSSelectorFromString(@"_preferredStatusBarVisibility"), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-                return ^NSInteger(UIViewController *selfObject) {
-                    // 为了保证重写 prefersStatusBarHidden 的优先级比 block 高，这里要判断一下 qmui_hasOverrideUIKitMethod 的值
-                    if (![selfObject qmui_hasOverrideUIKitMethod:@selector(prefersStatusBarHidden)] && selfObject.qmui_prefersStatusBarHiddenBlock) {
-                        return selfObject.qmui_prefersStatusBarHiddenBlock() ? 1 : 2;// 系统返回的 1 表示隐藏，2 表示显示，0 不清楚含义
-                    }
+        // iOS 11 及以后不 override prefersStatusBarHidden 而是通过私有方法来实现，是因为系统会先通过 +[UIViewController doesOverrideViewControllerMethod:inBaseClass:] 方法来判断当前的 UIViewController 有没有重写 prefersStatusBarHidden 方法，有的话才会去调用 prefersStatusBarHidden，而如果我们用 swizzle 的方式去重写 prefersStatusBarHidden，系统依然会认为你没有重写该方法，于是不会调用，于是 block 无效。对于 iOS 10 及以前的系统没有这种逻辑，所以没问题。
+        // 特别的，只有 hidden 操作有这种逻辑，而 style、animation 等操作不管在哪个 iOS 版本里都是没有这种逻辑的
+        OverrideImplementation([UIViewController class], NSSelectorFromString(@"_preferredStatusBarVisibility"), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^NSInteger(UIViewController *selfObject) {
+                // 为了保证重写 prefersStatusBarHidden 的优先级比 block 高，这里要判断一下 qmui_hasOverrideUIKitMethod 的值
+                if (![selfObject qmui_hasOverrideUIKitMethod:@selector(prefersStatusBarHidden)] && selfObject.qmui_prefersStatusBarHiddenBlock) {
+                    return selfObject.qmui_prefersStatusBarHiddenBlock() ? 1 : 2;// 系统返回的 1 表示隐藏，2 表示显示，0 不清楚含义
+                }
 
-                    // call super
-                    NSInteger (*originSelectorIMP)(id, SEL);
-                    originSelectorIMP = (NSInteger (*)(id, SEL))originalIMPProvider();
-                    NSInteger result = originSelectorIMP(selfObject, originCMD);
-                    return result;
-                };
-            });
-        } else {
-            OverrideImplementation([UIViewController class], @selector(prefersStatusBarHidden), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-                return ^BOOL(UIViewController *selfObject) {
-                    if (selfObject.qmui_prefersStatusBarHiddenBlock) {
-                        return selfObject.qmui_prefersStatusBarHiddenBlock();
-                    }
-
-                    // call super
-                    BOOL (*originSelectorIMP)(id, SEL);
-                    originSelectorIMP = (BOOL (*)(id, SEL))originalIMPProvider();
-                    BOOL result = originSelectorIMP(selfObject, originCMD);
-                    return result;
-                };
-            });
-        }
+                // call super
+                NSInteger (*originSelectorIMP)(id, SEL);
+                originSelectorIMP = (NSInteger (*)(id, SEL))originalIMPProvider();
+                NSInteger result = originSelectorIMP(selfObject, originCMD);
+                return result;
+            };
+        });
         
         OverrideImplementation([UIViewController class], @selector(preferredStatusBarStyle), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^UIStatusBarStyle(UIViewController *selfObject) {
@@ -192,25 +169,27 @@ QMUISynthesizeIdCopyProperty(qmui_prefersHomeIndicatorAutoHiddenBlock, setQmui_p
             };
         });
         
-        if (@available(iOS 11.0, *)) {
-            OverrideImplementation([UIViewController class], @selector(prefersHomeIndicatorAutoHidden), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-                return ^BOOL(UIViewController *selfObject) {
-                    if (selfObject.qmui_prefersHomeIndicatorAutoHiddenBlock) {
-                        return selfObject.qmui_prefersHomeIndicatorAutoHiddenBlock();
-                    }
-                    
-                    // call super
-                    BOOL (*originSelectorIMP)(id, SEL);
-                    originSelectorIMP = (BOOL (*)(id, SEL))originalIMPProvider();
-                    BOOL result = originSelectorIMP(selfObject, originCMD);
-                    return result;
-                };
-            });
-        }
+        OverrideImplementation([UIViewController class], @selector(prefersHomeIndicatorAutoHidden), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^BOOL(UIViewController *selfObject) {
+                if (selfObject.qmui_prefersHomeIndicatorAutoHiddenBlock) {
+                    return selfObject.qmui_prefersHomeIndicatorAutoHiddenBlock();
+                }
+                
+                // call super
+                BOOL (*originSelectorIMP)(id, SEL);
+                originSelectorIMP = (BOOL (*)(id, SEL))originalIMPProvider();
+                BOOL result = originSelectorIMP(selfObject, originCMD);
+                return result;
+            };
+        });
     });
 }
 
 - (NSString *)qmuivc_description {
+    if (![NSThread isMainThread]) {
+        return [self qmuivc_description];
+    }
+    
     NSString *result = [NSString stringWithFormat:@"%@\nsuperclass:\t\t\t\t%@\ntitle:\t\t\t\t\t%@\nview:\t\t\t\t\t%@", [self qmuivc_description], NSStringFromClass(self.superclass), self.title, [self isViewLoaded] ? self.view : nil];
     
     if ([self isKindOfClass:[UINavigationController class]]) {
@@ -239,6 +218,19 @@ QMUISynthesizeIdCopyProperty(qmui_prefersHomeIndicatorAutoHiddenBlock, setQmui_p
     return [string copy];
 }
 
++ (BOOL)qmui_isSystemContainerViewController {
+    for (Class clz in @[UINavigationController.class, UITabBarController.class, UISplitViewController.class]) {
+        if ([self isSubclassOfClass:clz]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (BOOL)qmui_isSystemContainerViewController {
+    return self.class.qmui_isSystemContainerViewController;
+}
+
 static char kAssociatedObjectKey_visibleState;
 - (void)setQmui_visibleState:(QMUIViewControllerVisibleState)qmui_visibleState {
     BOOL valueChanged = self.qmui_visibleState != qmui_visibleState;
@@ -253,9 +245,10 @@ static char kAssociatedObjectKey_visibleState;
 }
 
 - (UIViewController *)qmui_previousViewController {
-    if (self.navigationController.viewControllers && self.navigationController.viewControllers.count > 1 && self.navigationController.topViewController == self) {
-        NSUInteger count = self.navigationController.viewControllers.count;
-        return (UIViewController *)[self.navigationController.viewControllers objectAtIndex:count - 2];
+    NSArray<UIViewController *> *viewControllers = self.navigationController.viewControllers;
+    NSUInteger index = [viewControllers indexOfObject:self];
+    if (index != NSNotFound && index > 0) {
+        return viewControllers[index - 1];
     }
     return nil;
 }
@@ -263,7 +256,7 @@ static char kAssociatedObjectKey_visibleState;
 - (NSString *)qmui_previousViewControllerTitle {
     UIViewController *previousViewController = [self qmui_previousViewController];
     if (previousViewController) {
-        return previousViewController.title;
+        return previousViewController.title ?: previousViewController.navigationItem.title;
     }
     return nil;
 }
@@ -416,6 +409,10 @@ static char kAssociatedObjectKey_visibleState;
     if (!self.tabBarController.tabBar || self.tabBarController.tabBar.hidden) {
         return 0;
     }
+    if (self.hidesBottomBarWhenPushed && self.navigationController.qmui_rootViewController != self) {
+        return 0;
+    }
+    
     CGRect tabBarFrame = CGRectIntersection(self.view.bounds, [self.view convertRect:self.tabBarController.tabBar.frame fromView:self.tabBarController.tabBar.superview]);
     
     // 两个 rect 如果不存在交集，CGRectIntersection 计算结果可能为非法的 rect，所以这里做个保护
@@ -442,24 +439,33 @@ static char kAssociatedObjectKey_visibleState;
 }
 
 - (BOOL)qmui_prefersLargeTitleDisplayed {
-    if (@available(iOS 11.0, *)) {
-        NSAssert(self.navigationController, @"必现在 navigationController 栈内才能正确判断");
-        UINavigationBar *navigationBar = self.navigationController.navigationBar;
-        if (!navigationBar.prefersLargeTitles) {
-            return NO;
-        }
-        if (self.navigationItem.largeTitleDisplayMode == UINavigationItemLargeTitleDisplayModeAlways) {
+    QMUIAssert(self.navigationController, @"UIViewController (QMUI)", @"%s 必现在 navigationController 栈内才能正确判断", __func__);
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    if (!navigationBar.prefersLargeTitles) {
+        return NO;
+    }
+    if (self.navigationItem.largeTitleDisplayMode == UINavigationItemLargeTitleDisplayModeAlways) {
+        return YES;
+    } else if (self.navigationItem.largeTitleDisplayMode == UINavigationItemLargeTitleDisplayModeNever) {
+        return NO;
+    } else if (self.navigationItem.largeTitleDisplayMode == UINavigationItemLargeTitleDisplayModeAutomatic) {
+        if (self.navigationController.viewControllers.firstObject == self) {
             return YES;
-        } else if (self.navigationItem.largeTitleDisplayMode == UINavigationItemLargeTitleDisplayModeNever) {
-            return NO;
-        } else if (self.navigationItem.largeTitleDisplayMode == UINavigationItemLargeTitleDisplayModeAutomatic) {
-            if (self.navigationController.viewControllers.firstObject == self) {
-                return YES;
-            } else {
-                UIViewController *previousViewController = self.navigationController.viewControllers[[self.navigationController.viewControllers indexOfObject:self] - 1];
-                return previousViewController.qmui_prefersLargeTitleDisplayed == YES;
-            }
+        } else {
+            UIViewController *previousViewController = self.navigationController.viewControllers[[self.navigationController.viewControllers indexOfObject:self] - 1];
+            return previousViewController.qmui_prefersLargeTitleDisplayed == YES;
         }
+    }
+    return NO;
+}
+
+- (BOOL)qmui_isDescendantOfViewController:(UIViewController *)viewController {
+    UIViewController *parentViewController = self;
+    while (parentViewController) {
+        if (parentViewController == viewController) {
+            return YES;
+        }
+        parentViewController = parentViewController.parentViewController;
     }
     return NO;
 }

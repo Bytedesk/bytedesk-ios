@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -37,14 +37,14 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  在 iOS 11 及之后的版本，此属性将返回系统已有的 self.safeAreaInsets。在之前的版本此属性返回 UIEdgeInsetsZero
  */
-@property(nonatomic, assign, readonly) UIEdgeInsets qmui_safeAreaInsets;
+@property(nonatomic, assign, readonly) UIEdgeInsets qmui_safeAreaInsets DEPRECATED_MSG_ATTRIBUTE("请使用系统的 UIView.safeAreaInsets，QMUI 4.4.0 已不再支持 iOS 10，没必要提供该兼容性之的接口了，后续会删除。");
 
 /**
  有修改过 tintColor，则不会再受 superview.tintColor 的影响
  */
 @property(nonatomic, assign, readonly) BOOL qmui_tintColorCustomized;
 
-/// 响应区域需要改变的大小，负值表示往外扩大，正值表示往内缩小
+/// 响应区域需要改变的大小，负值表示往外扩大，正值表示往内缩小。特别地，如果对 UISlider 使用，则扩大的是圆点的区域。
 @property(nonatomic,assign) UIEdgeInsets qmui_outsideEdge;
 
 /**
@@ -197,6 +197,17 @@ extern const CGFloat QMUIViewSelfSizingHeight;
 /// 等价于 CGRectGetHeight(frame)
 @property(nonatomic, assign) CGFloat qmui_height;
 
+/// 等价于 self.frame.size
+@property(nonatomic, assign) CGSize qmui_size;
+
+extern const CGSize QMUIViewFixedSizeNone;
+
+/// 把当前 view 的大小设置为某个值并且固定下来（保证 setFrame:、setBounds: 等操作也无法影响它的 size），sizeThatFits: 返回的结果也以这个为准（但如果业务重写了就以业务的为准）
+/// 默认为 QMUIViewFixedSizeNone，也即不处理（如果你设置过 fixedSize，后续又希望去掉这个特性，也可把 fixedSize 赋值为 QMUIViewFixedSizeNone 来清空）。
+/// @example 例如 UIButton 的 imageView 是无法固定大小的，但如果你要把一张网络上下载的图（大小 不确定）作为 image 放到 button 里，就可以用 qmui_fixedSize 将 imageView 限制为某个尺寸，从而兼容不同的网络图片。
+/// @warning 内部使用 qmui_sizeThatFitsBlock 实现（因为某些系统的 View 重写了 UIView 的 sizeThatFits，为了保证 qmui_fixedSize 生效，只能用 qmui_sizeThatFitsBlock），所以不要同时使用两者。
+@property(nonatomic, assign) CGSize qmui_fixedSize;
+
 /// 保持其他三个边缘的位置不变的情况下，将顶边缘拓展到某个指定的位置，注意高度会跟随变化。
 @property(nonatomic, assign) CGFloat qmui_extendToTop;
 
@@ -243,8 +254,6 @@ extern const CGFloat QMUIViewSelfSizingHeight;
 @property(nonatomic, assign) BOOL qmui_shouldShowDebugColor;
 /// 是否每个view的背景色随机，如果不随机则统一使用半透明红色，默认NO
 @property(nonatomic, assign) BOOL qmui_needsDifferentDebugColor;
-/// 标记一个view是否已经被添加了debug背景色，外部一般不使用
-@property(nonatomic, assign, readonly) BOOL qmui_hasDebugColor;
 
 @end
 

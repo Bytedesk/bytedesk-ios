@@ -9,7 +9,8 @@
 #import "BDGroupMemberTableViewCell.h"
 #import <bytedesk-core/bdcore.h>
 
-@import AFNetworking;
+//@import AFNetworking;
+#import "../../vendors/UIKit+AFNetworking/UIImageView+AFNetworking.h"
 
 #define LBScreen [UIScreen mainScreen].bounds.size
 

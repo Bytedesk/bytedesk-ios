@@ -58,7 +58,7 @@ pod 'CocoaLumberjack'
 
 # 集成萝卜丝核心协议库 core
 
-pod 'bytedesk-core', '2.5.4'
+pod 'bytedesk-core', '2.5.7'
 ```
 
 添加 bdui 相关 pod
@@ -86,7 +86,7 @@ pod 'CocoaLumberjack'
 
 # 集成核心协议库 core
 
-pod 'bytedesk-core', '2.5.4'
+pod 'bytedesk-core', '2.5.7'
 
 target 'bduiTests' do
 end

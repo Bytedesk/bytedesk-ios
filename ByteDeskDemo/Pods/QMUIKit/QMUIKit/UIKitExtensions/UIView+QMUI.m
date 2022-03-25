@@ -1,6 +1,6 @@
 /**
  * Tencent is pleased to support the open source community by making QMUI_iOS available.
- * Copyright (C) 2016-2020 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2016-2021 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  * http://opensource.org/licenses/MIT
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
@@ -23,59 +23,18 @@
 #import "QMUILog.h"
 #import "QMUIWeakObjectContainer.h"
 
-@interface UIView ()
-
-/// QMUI_Debug
-@property(nonatomic, assign, readwrite) BOOL qmui_hasDebugColor;
-@end
-
-
 @implementation UIView (QMUI)
 
-QMUISynthesizeUIEdgeInsetsProperty(qmui_outsideEdge, setQmui_outsideEdge)
 QMUISynthesizeBOOLProperty(qmui_tintColorCustomized, setQmui_tintColorCustomized)
 QMUISynthesizeIdCopyProperty(qmui_frameWillChangeBlock, setQmui_frameWillChangeBlock)
 QMUISynthesizeIdCopyProperty(qmui_frameDidChangeBlock, setQmui_frameDidChangeBlock)
-QMUISynthesizeIdCopyProperty(qmui_tintColorDidChangeBlock, setQmui_tintColorDidChangeBlock)
-QMUISynthesizeIdCopyProperty(qmui_hitTestBlock, setQmui_hitTestBlock)
 
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
-        OverrideImplementation([UIView class], @selector(pointInside:withEvent:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-            return ^BOOL(UIControl *selfObject, CGPoint point, UIEvent *event) {
-                
-                if (!UIEdgeInsetsEqualToEdgeInsets(selfObject.qmui_outsideEdge, UIEdgeInsetsZero)) {
-                    CGRect rect = UIEdgeInsetsInsetRect(selfObject.bounds, selfObject.qmui_outsideEdge);
-                    BOOL result = CGRectContainsPoint(rect, point);
-                    return result;
-                }
-                
-                // call super
-                BOOL (*originSelectorIMP)(id, SEL, CGPoint, UIEvent *);
-                originSelectorIMP = (BOOL (*)(id, SEL, CGPoint, UIEvent *))originalIMPProvider();
-                BOOL result = originSelectorIMP(selfObject, originCMD, point, event);
-                return result;
-            };
-        });
-        
         ExtendImplementationOfVoidMethodWithSingleArgument([UIView class], @selector(setTintColor:), UIColor *, ^(UIView *selfObject, UIColor *tintColor) {
             selfObject.qmui_tintColorCustomized = !!tintColor;
-        });
-        
-        ExtendImplementationOfVoidMethodWithoutArguments([UIView class], @selector(tintColorDidChange), ^(UIView *selfObject) {
-            if (selfObject.qmui_tintColorDidChangeBlock) {
-                selfObject.qmui_tintColorDidChangeBlock(selfObject);
-            }
-        });
-        
-        ExtendImplementationOfNonVoidMethodWithTwoArguments([UIView class], @selector(hitTest:withEvent:), CGPoint, UIEvent *, UIView *, ^UIView *(UIView *selfObject, CGPoint point, UIEvent *event, UIView *originReturnValue) {
-            if (selfObject.qmui_hitTestBlock) {
-                UIView *view = selfObject.qmui_hitTestBlock(point, event, originReturnValue);
-                return view;
-            }
-            return originReturnValue;
         });
         
         // 这个私有方法在 view 被调用 becomeFirstResponder 并且处于 window 上时，才会被调用，所以比 becomeFirstResponder 更适合用来检测
@@ -105,14 +64,114 @@ QMUISynthesizeIdCopyProperty(qmui_hitTestBlock, setQmui_hitTestBlock)
 }
 
 - (UIEdgeInsets)qmui_safeAreaInsets {
-    if (@available(iOS 11.0, *)) {
-        return self.safeAreaInsets;
-    }
-    return UIEdgeInsetsZero;
+    return self.safeAreaInsets;
 }
 
 - (void)qmui_removeAllSubviews {
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+}
+
+static char kAssociatedObjectKey_outsideEdge;
+- (void)setQmui_outsideEdge:(UIEdgeInsets)qmui_outsideEdge {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_outsideEdge, @(qmui_outsideEdge), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    if (!UIEdgeInsetsEqualToEdgeInsets(qmui_outsideEdge, UIEdgeInsetsZero)) {
+        [QMUIHelper executeBlock:^{
+            OverrideImplementation([UIView class], @selector(pointInside:withEvent:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+                return ^BOOL(UIControl *selfObject, CGPoint point, UIEvent *event) {
+                    
+                    if (!UIEdgeInsetsEqualToEdgeInsets(selfObject.qmui_outsideEdge, UIEdgeInsetsZero)) {
+                        CGRect rect = UIEdgeInsetsInsetRect(selfObject.bounds, selfObject.qmui_outsideEdge);
+                        BOOL result = CGRectContainsPoint(rect, point);
+                        return result;
+                    }
+                    
+                    // call super
+                    BOOL (*originSelectorIMP)(id, SEL, CGPoint, UIEvent *);
+                    originSelectorIMP = (BOOL (*)(id, SEL, CGPoint, UIEvent *))originalIMPProvider();
+                    BOOL result = originSelectorIMP(selfObject, originCMD, point, event);
+                    return result;
+                };
+            });
+        } oncePerIdentifier:@"UIView (QMUI) outsideEdge"];
+        
+        if ([self isKindOfClass:UISlider.class]) {
+            [QMUIHelper executeBlock:^{
+                if (@available(iOS 14.0, *)) {
+                    // -[_UISlideriOSVisualElement thumbHitEdgeInsets]
+                    OverrideImplementation(NSClassFromString(@"_UISlideriOSVisualElement"), NSSelectorFromString(@"thumbHitEdgeInsets"), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+                        return ^UIEdgeInsets(UIView *selfObject) {
+                            // call super
+                            UIEdgeInsets (*originSelectorIMP)(id, SEL);
+                            originSelectorIMP = (UIEdgeInsets (*)(id, SEL))originalIMPProvider();
+                            UIEdgeInsets result = originSelectorIMP(selfObject, originCMD);
+                            
+                            UISlider *slider = (UISlider *)selfObject.superview;
+                            if ([slider isKindOfClass:UISlider.class] && !UIEdgeInsetsEqualToEdgeInsets(slider.qmui_outsideEdge, UIEdgeInsetsZero)) {
+                                result = UIEdgeInsetsConcat(result, slider.qmui_outsideEdge);
+                            }
+                            return result;
+                        };
+                    });
+                } else {
+                    // -[UISlider _thumbHitEdgeInsets]
+                    OverrideImplementation([UISlider class], NSSelectorFromString(@"_thumbHitEdgeInsets"), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+                        return ^UIEdgeInsets(UISlider *selfObject) {
+                            // call super
+                            UIEdgeInsets (*originSelectorIMP)(id, SEL);
+                            originSelectorIMP = (UIEdgeInsets (*)(id, SEL))originalIMPProvider();
+                            UIEdgeInsets result = originSelectorIMP(selfObject, originCMD);
+                            
+                            if (!UIEdgeInsetsEqualToEdgeInsets(selfObject.qmui_outsideEdge, UIEdgeInsetsZero)) {
+                                result = UIEdgeInsetsConcat(result, selfObject.qmui_outsideEdge);
+                            }
+                            return result;
+                        };
+                    });
+                }
+            } oncePerIdentifier:@"UIView (QMUI) outsideEdge slider"];
+        }
+    }
+}
+
+- (UIEdgeInsets)qmui_outsideEdge {
+    return [((NSNumber *)objc_getAssociatedObject(self, &kAssociatedObjectKey_outsideEdge)) UIEdgeInsetsValue];
+}
+
+static char kAssociatedObjectKey_tintColorDidChangeBlock;
+- (void)setQmui_tintColorDidChangeBlock:(void (^)(__kindof UIView * _Nonnull))qmui_tintColorDidChangeBlock {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_tintColorDidChangeBlock, qmui_tintColorDidChangeBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    if (qmui_tintColorDidChangeBlock) {
+        [QMUIHelper executeBlock:^{
+            ExtendImplementationOfVoidMethodWithoutArguments([UIView class], @selector(tintColorDidChange), ^(UIView *selfObject) {
+                if (selfObject.qmui_tintColorDidChangeBlock) {
+                    selfObject.qmui_tintColorDidChangeBlock(selfObject);
+                }
+            });
+        } oncePerIdentifier:@"UIView (QMUI) tintColorDidChangeBlock"];
+    }
+}
+
+- (void (^)(__kindof UIView * _Nonnull))qmui_tintColorDidChangeBlock {
+    return (void (^)(__kindof UIView * _Nonnull))objc_getAssociatedObject(self, &kAssociatedObjectKey_tintColorDidChangeBlock);
+}
+
+static char kAssociatedObjectKey_hitTestBlock;
+- (void)setQmui_hitTestBlock:(__kindof UIView * _Nonnull (^)(CGPoint, UIEvent * _Nonnull, __kindof UIView * _Nonnull))qmui_hitTestBlock {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_hitTestBlock, qmui_hitTestBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    [QMUIHelper executeBlock:^{
+        ExtendImplementationOfNonVoidMethodWithTwoArguments([UIView class], @selector(hitTest:withEvent:), CGPoint, UIEvent *, UIView *, ^UIView *(UIView *selfObject, CGPoint point, UIEvent *event, UIView *originReturnValue) {
+            if (selfObject.qmui_hitTestBlock) {
+                UIView *view = selfObject.qmui_hitTestBlock(point, event, originReturnValue);
+                return view;
+            }
+            return originReturnValue;
+        });
+    } oncePerIdentifier:@"UIView (QMUI) hitTestBlock"];
+}
+
+- (__kindof UIView * _Nonnull (^)(CGPoint, UIEvent * _Nonnull, __kindof UIView * _Nonnull))qmui_hitTestBlock {
+    return (__kindof UIView * _Nonnull (^)(CGPoint, UIEvent * _Nonnull, __kindof UIView * _Nonnull))objc_getAssociatedObject(self, &kAssociatedObjectKey_hitTestBlock);
 }
 
 - (CGPoint)qmui_convertPoint:(CGPoint)point toView:(nullable UIView *)view {
@@ -261,13 +320,7 @@ static char kAssociatedObjectKey_viewController;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         ExtendImplementationOfVoidMethodWithoutArguments([UIViewController class], @selector(viewDidLoad), ^(UIViewController *selfObject) {
-            if (@available(iOS 11.0, *)) {
-                selfObject.view.qmui_viewController = selfObject;
-            } else {
-                // 临时修复 iOS 10.0.2 上在输入框内切换输入法可能引发死循环的 bug，待查
-                // https://github.com/Tencent/QMUI_iOS/issues/471
-                ((UIView *)[selfObject qmui_valueForKey:@"_view"]).qmui_viewController = selfObject;
-            }
+            selfObject.view.qmui_viewController = selfObject;
         });
     });
 }
@@ -327,6 +380,7 @@ static char kAssociatedObjectKey_viewController;
 
 
 const CGFloat QMUIViewSelfSizingHeight = INFINITY;
+const CGSize QMUIViewFixedSizeNone = {-1, -1};
 
 @implementation UIView (QMUI_Layout)
 
@@ -337,6 +391,10 @@ const CGFloat QMUIViewSelfSizingHeight = INFINITY;
         OverrideImplementation([UIView class], @selector(setFrame:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, CGRect frame) {
                 
+                if (!CGSizeEqualToSize(selfObject.qmui_fixedSize, QMUIViewFixedSizeNone)) {
+                    frame.size = selfObject.qmui_fixedSize;
+                }
+                
                 // QMUIViewSelfSizingHeight 的功能
                 if (frame.size.width > 0 && isinf(frame.size.height)) {
                     CGFloat height = flat([selfObject sizeThatFits:CGSizeMake(CGRectGetWidth(frame), CGFLOAT_MAX)].height);
@@ -345,10 +403,7 @@ const CGFloat QMUIViewSelfSizingHeight = INFINITY;
                 
                 // 对非法的 frame，Debug 下中 assert，Release 下会将其中的 NaN 改为 0，避免 crash
                 if (CGRectIsNaN(frame)) {
-                    QMUILogWarn(@"UIView (QMUI)", @"%@ setFrame:%@，参数包含 NaN，已被拦截并处理为 0。%@", selfObject, NSStringFromCGRect(frame), [NSThread callStackSymbols]);
-                    if (QMUICMIActivated && !ShouldPrintQMUIWarnLogToConsole) {
-                        NSAssert(NO, @"UIView setFrame: 出现 NaN");
-                    }
+                    QMUIAssert(NO, @"UIView (QMUI)", @"%@ setFrame:%@，参数包含 NaN，已被拦截并处理为 0。%@", selfObject, NSStringFromCGRect(frame), [NSThread callStackSymbols]);
                     if (!IS_DEBUG) {
                         frame = CGRectSafeValue(frame);
                     }
@@ -373,6 +428,10 @@ const CGFloat QMUIViewSelfSizingHeight = INFINITY;
         
         OverrideImplementation([UIView class], @selector(setBounds:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, CGRect bounds) {
+                
+                if (!CGSizeEqualToSize(selfObject.qmui_fixedSize, QMUIViewFixedSizeNone)) {
+                    bounds.size = selfObject.qmui_fixedSize;
+                }
                 
                 CGRect precedingFrame = selfObject.frame;
                 CGRect precedingBounds = selfObject.bounds;
@@ -489,6 +548,37 @@ const CGFloat QMUIViewSelfSizingHeight = INFINITY;
     self.frame = CGRectSetHeight(self.frame, height);
 }
 
+- (CGSize)qmui_size {
+    return self.frame.size;
+}
+
+- (void)setQmui_size:(CGSize)qmui_size {
+    self.frame = CGRectSetSize(self.frame, qmui_size);
+}
+
+static char kAssociatedObjectKey_fixedSize;
+- (void)setQmui_fixedSize:(CGSize)qmui_fixedSize {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_fixedSize, @(qmui_fixedSize), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    if (!CGSizeEqualToSize(qmui_fixedSize, QMUIViewFixedSizeNone)) {
+        self.qmui_sizeThatFitsBlock = ^CGSize(__kindof UIView * _Nonnull view, CGSize size, CGSize superResult) {
+            if (!CGSizeEqualToSize(view.qmui_fixedSize, QMUIViewFixedSizeNone)) {
+                return view.qmui_fixedSize;
+            }
+            return superResult;
+        };
+        self.qmui_size = qmui_fixedSize;
+    }
+}
+
+- (CGSize)qmui_fixedSize {
+    NSNumber *result = objc_getAssociatedObject(self, &kAssociatedObjectKey_fixedSize);
+    if (!result) {
+        return QMUIViewFixedSizeNone;
+    }
+    return result.CGSizeValue;
+}
+
 - (CGFloat)qmui_extendToTop {
     return self.qmui_top;
 }
@@ -573,27 +663,25 @@ const CGFloat QMUIViewSelfSizingHeight = INFINITY;
 @implementation UIView (QMUI_Debug)
 
 QMUISynthesizeBOOLProperty(qmui_needsDifferentDebugColor, setQmui_needsDifferentDebugColor)
-QMUISynthesizeBOOLProperty(qmui_hasDebugColor, setQmui_hasDebugColor)
-
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        ExtendImplementationOfVoidMethodWithoutArguments([UIView class], @selector(layoutSubviews), ^(UIView *selfObject) {
-            if (selfObject.qmui_shouldShowDebugColor) {
-                selfObject.qmui_hasDebugColor = YES;
-                selfObject.backgroundColor = [selfObject debugColor];
-                [selfObject renderColorWithSubviews:selfObject.subviews];
-            }
-        });
-    });
-}
 
 static char kAssociatedObjectKey_shouldShowDebugColor;
 - (void)setQmui_shouldShowDebugColor:(BOOL)qmui_shouldShowDebugColor {
     objc_setAssociatedObject(self, &kAssociatedObjectKey_shouldShowDebugColor, @(qmui_shouldShowDebugColor), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     if (qmui_shouldShowDebugColor) {
-        [self setNeedsLayout];
+        [QMUIHelper executeBlock:^{
+            ExtendImplementationOfVoidMethodWithoutArguments([UIView class], @selector(layoutSubviews), ^(UIView *selfObject) {
+                if (selfObject.qmui_shouldShowDebugColor) {
+                    selfObject.backgroundColor = [selfObject debugColor];
+                    [selfObject renderColorWithSubviews:selfObject.subviews];
+                } else if (objc_getAssociatedObject(selfObject, &kAssociatedObjectKey_shouldShowDebugColor)) {
+                    // 设置过 qmui_shouldShowDebugColor，但当前的值为 NO 的情况，则无脑清空所有背景色（可能会把业务自己设置的背景色去掉，由于是调试功能，无所谓）
+                    selfObject.backgroundColor = nil;
+                    [selfObject renderColorWithSubviews:selfObject.subviews];
+                }
+            });
+        } oncePerIdentifier:@"UIView (QMUIDebug) shouldShowDebugColor"];
     }
+    [self setNeedsLayout];
 }
 - (BOOL)qmui_shouldShowDebugColor {
     BOOL flag = [objc_getAssociatedObject(self, &kAssociatedObjectKey_shouldShowDebugColor) boolValue];
@@ -605,6 +693,16 @@ static char kAssociatedObjectKey_layoutSubviewsBlock;
     objc_setAssociatedObject(self, &kAssociatedObjectKey_layoutSubviewsBlock, qmui_layoutSubviewsBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
     Class viewClass = self.class;
     [QMUIHelper executeBlock:^{
+        // iOS 14 及以上，iPad 悬浮键盘，项目里 hook 了 -[UIView layoutSubviews] 的同时为输入框设置 inputAccessoryView，则输入框聚焦时会触发系统布局死循环
+        // 实测只有 iOS 14 有这种问题，iOS 13、15 都没有，但现网又有用户反馈 iOS 15 也有问题，暂且放开 iOS 15
+        // https://github.com/Tencent/QMUI_iOS/issues/1247
+        // https://km.woa.com/group/24897/articles/show/456340
+        if (IOS_VERSION >= 14.0 && IS_IPAD && viewClass == UIView.class) {
+            IMP layoutSubviewsIMPForUIKit = class_getMethodImplementation(UIView.class, @selector(layoutSubviews));
+            SEL layoutSubviewSEL =  @selector(layoutSubviews);
+            const char * typeEncoding = method_getTypeEncoding(class_getInstanceMethod(UIView.class, layoutSubviewSEL));
+            class_addMethod(NSClassFromString(@"UIInputSetHostView"), layoutSubviewSEL, layoutSubviewsIMPForUIKit, typeEncoding);
+        }
         ExtendImplementationOfVoidMethodWithoutArguments(viewClass, @selector(layoutSubviews), ^(__kindof UIView *selfObject) {
             if (selfObject.qmui_layoutSubviewsBlock && [selfObject isMemberOfClass:viewClass]) {
                 selfObject.qmui_layoutSubviewsBlock(selfObject);
@@ -640,15 +738,19 @@ static char kAssociatedObjectKey_sizeThatFitsBlock;
 }
 
 - (void)renderColorWithSubviews:(NSArray *)subviews {
+    // 只处理第一级 subviews
     for (UIView *view in subviews) {
         if ([view isKindOfClass:[UIStackView class]]) {
             UIStackView *stackView = (UIStackView *)view;
             [self renderColorWithSubviews:stackView.arrangedSubviews];
         }
-        view.qmui_hasDebugColor = YES;
         view.qmui_shouldShowDebugColor = self.qmui_shouldShowDebugColor;
         view.qmui_needsDifferentDebugColor = self.qmui_needsDifferentDebugColor;
-        view.backgroundColor = [self debugColor];
+        if (view.qmui_shouldShowDebugColor) {
+            view.backgroundColor = [view debugColor];
+        } else {
+            view.backgroundColor = nil;
+        }
     }
 }
 
