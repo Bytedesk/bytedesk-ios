@@ -23,6 +23,7 @@
 //#import "KFTicketViewController.h"
 #import "KFAppRateViewController.h"
 #import "KFAppUpgrateViewController.h"
+#import "KFSwitchViewController.h"
 
 #import <bytedesk-core/bdcore.h>
 #import <bytedesk-ui/bdui.h>
@@ -73,8 +74,7 @@
                            @"意见反馈",
                            @"帮助中心",
                            @"网页会话",
-//                           @"引导应用商店好评(TODO)",
-//                           @"引导新版本升级(TODO)"
+                           @"切换用户"
                            ];
 
     // 监听消息通知
@@ -195,18 +195,14 @@
         } else if (indexPath.row == 7) {
             // 网页形式接入
             // 注意: 登录后台->客服->技能组/账号->获取代码 获取相应URL
-            NSURL *url = [NSURL URLWithString:@"https://www.bytedesk.com/chat?sub=vip&uid=201808221551193&wid=201807171659201&type=workGroup&aid=&ph=ph"];
+            NSURL *url = [NSURL URLWithString:@"https://chat.kefux.cn/chat/h5/index.html?sub=vip&uid=201808221551193&wid=201807171659201&type=workGroup&aid=&ph=ph"];
             SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:url];
             safariVC.delegate = self;
             // 建议
             [self presentViewController:safariVC animated:YES completion:nil];
             return;
         } else if (indexPath.row == 8) {
-            // TODO: 应用商店评价
-            viewController = [[KFAppRateViewController alloc] initWithStyle:UITableViewStyleGrouped];
-        } else {
-            // TODO: 引导升级
-            viewController = [[KFAppUpgrateViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            viewController = [[KFSwitchViewController alloc] initWithStyle:UITableViewStyleGrouped];
         }
         viewController.title = [self.kefuApisArray objectAtIndex:indexPath.row];
         viewController.hidesBottomBarWhenPushed = YES;

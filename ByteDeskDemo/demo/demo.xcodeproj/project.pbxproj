@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3D0DB22B21CC607C002ACB3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D0DB22D21CC607C002ACB3E /* InfoPlist.strings */; };
+		3D2270232869FE7C001D0B96 /* KFSwitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2270212869FE7C001D0B96 /* KFSwitchViewController.m */; };
 		3D38CC30225179A100BA2668 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D38CC2F225179A100BA2668 /* CloudKit.framework */; };
 		3D39293521C28310001E1257 /* KFQueueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D39293321C28310001E1257 /* KFQueueTableViewCell.m */; };
 		3D39293621C28310001E1257 /* KFContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D39293421C28310001E1257 /* KFContactTableViewCell.m */; };
@@ -133,6 +134,8 @@
 		3ABA9625A7F4C1A519864722 /* Pods_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D0DB22C21CC607C002ACB3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3D0DB22E21CC607E002ACB3E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		3D2270212869FE7C001D0B96 /* KFSwitchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFSwitchViewController.m; sourceTree = "<group>"; };
+		3D2270222869FE7C001D0B96 /* KFSwitchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFSwitchViewController.h; sourceTree = "<group>"; };
 		3D38CC2F225179A100BA2668 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		3D39293121C28310001E1257 /* KFQueueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFQueueTableViewCell.h; sourceTree = "<group>"; };
 		3D39293221C28310001E1257 /* KFContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFContactTableViewCell.h; sourceTree = "<group>"; };
@@ -527,15 +530,17 @@
 			isa = PBXGroup;
 			children = (
 				3DAB3C5B27EDE87F0078A56E /* KFChatViewController.h */,
-				3DAB3C5C27EDE87F0078A56E /* KFVisitorThreadViewController.m */,
-				3DAB3C5D27EDE87F0078A56E /* KFStatusViewController.m */,
-				3DAB3C5E27EDE87F0078A56E /* KFUserinfoViewController.h */,
-				3DAB3C5F27EDE87F0078A56E /* KFSupportViewController.h */,
 				3DAB3C6027EDE87F0078A56E /* KFChatViewController.m */,
-				3DAB3C6127EDE87F0078A56E /* KFStatusViewController.h */,
-				3DAB3C6227EDE87F0078A56E /* KFVisitorThreadViewController.h */,
+				3DAB3C5E27EDE87F0078A56E /* KFUserinfoViewController.h */,
 				3DAB3C6327EDE87F0078A56E /* KFUserinfoViewController.m */,
+				3DAB3C6127EDE87F0078A56E /* KFStatusViewController.h */,
+				3DAB3C5D27EDE87F0078A56E /* KFStatusViewController.m */,
+				3DAB3C6227EDE87F0078A56E /* KFVisitorThreadViewController.h */,
+				3DAB3C5C27EDE87F0078A56E /* KFVisitorThreadViewController.m */,
+				3DAB3C5F27EDE87F0078A56E /* KFSupportViewController.h */,
 				3DAB3C6427EDE87F0078A56E /* KFSupportViewController.m */,
+				3D2270222869FE7C001D0B96 /* KFSwitchViewController.h */,
+				3D2270212869FE7C001D0B96 /* KFSwitchViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -1094,6 +1099,7 @@
 				3DAB3C6A27EDE8800078A56E /* QMUIInteractiveDebugPanelItem.m in Sources */,
 				3DE934D322DC999D00CE1C91 /* SDBaseRefreshView.m in Sources */,
 				3DE934D922DC999D00CE1C91 /* SDTimeLineCell.m in Sources */,
+				3D2270232869FE7C001D0B96 /* KFSwitchViewController.m in Sources */,
 				3DAB3C7B27EDE8800078A56E /* QDCommonGroupListViewController.m in Sources */,
 				3DAB3C8127EDE8800078A56E /* QDNavigationController.m in Sources */,
 				3D39293521C28310001E1257 /* KFQueueTableViewCell.m in Sources */,
@@ -1316,13 +1322,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = demo/demo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = L5F47963M2;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/demo/PrefixHeader.pch";
 				INFOPLIST_FILE = demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.5.7;
+				MARKETING_VERSION = 2.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedesk.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1336,13 +1342,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = demo/demo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = L5F47963M2;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/demo/PrefixHeader.pch";
 				INFOPLIST_FILE = demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.5.7;
+				MARKETING_VERSION = 2.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedesk.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

@@ -37,9 +37,9 @@
 // 客服设置接待状态
 @property(nonatomic, strong) NSString *accept_status;
 // false 为离职禁止登录，true 为在职
-@property(nonatomic, strong) NSNumber *is_enabled;
+@property(nonatomic, assign) bool is_enabled;
 // 是否是机器人, 默认非机器人
-@property(nonatomic, strong) NSNumber *is_robot;
+@property(nonatomic, assign) bool is_robot;
 //// 进入页面欢迎语
 //@property(nonatomic, strong) NSString *welcome_tip;
 //// 是否自动回复

@@ -64,7 +64,7 @@ github "AFNetworking/AFNetworking" ~> 4.0
 | 4.x | iOS 9 | macOS 10.10 | watchOS 2.0 | tvOS 9.0 | Xcode 11+ is required. |
 | 3.x | iOS 7 | OS X 10.9 | watchOS 2.0 | tvOS 9.0 | Xcode 7+ is required. `NSURLConnectionOperation` support has been removed. |
 | 2.6 -> 2.6.3 | iOS 7 | OS X 10.9 | watchOS 2.0 | n/a | Xcode 7+ is required. |
-| 2.0 -> 2.5.7 | iOS 6 | OS X 10.8 | n/a | n/a | Xcode 5+ is required. `NSURLSession` subspec requires iOS 7 or OS X 10.9. |
+| 2.0 -> 2.6.0 | iOS 6 | OS X 10.8 | n/a | n/a | Xcode 5+ is required. `NSURLSession` subspec requires iOS 7 or OS X 10.9. |
 | 1.x | iOS 5 | Mac OS X 10.7 | n/a | n/a |
 | 0.10.x | iOS 4 | Mac OS X 10.6 | n/a | n/a |
 

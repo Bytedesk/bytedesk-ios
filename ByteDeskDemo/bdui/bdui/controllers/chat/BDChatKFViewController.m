@@ -1566,7 +1566,6 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPh
     //
     [[BDMQTTApis sharedInstance] sendCommodityMessageProtobuf:localId content:content thread:self.mThreadModel];
     
-
 //    // 同步发送消息
 //    [BDCoreApis sendCommodityMessage:content toTid:self.mTidOrUidOrGid localId:localId sessionType:self.mThreadType resultSuccess:^(NSDictionary *dict) {
 //        DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, dict);

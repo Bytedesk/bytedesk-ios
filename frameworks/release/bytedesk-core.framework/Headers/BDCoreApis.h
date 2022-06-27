@@ -20,6 +20,62 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 #pragma mark - 访客端接口
 
 /**
+ 访客登录: 包含自动注册默认用户
+
+ @param appkey appkey
+ @param subdomain 企业号
+ @param success 成功回调
+ @param failed 失败回调
+ */
++ (void) init:(NSString *)appkey
+    withSubdomain:(NSString *)subdomain
+    resultSuccess:(SuccessCallbackBlock)success
+    resultFailed:(FailedCallbackBlock)failed;
+
+/**
+
+ @param appKey appkey
+ @param subdomain 企业号
+ @param success 成功回调
+ @param failed 失败回调
+ */
++ (void) initWithUsername:(NSString *)username
+        withAppkey:(NSString *)appKey
+        withSubdomain:(NSString *)subdomain
+        resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
+
+/**
+
+ @param appKey appkey
+ @param subdomain 企业号
+ @param success 成功回调
+ @param failed 失败回调
+ */
++ (void) initWithUsername:(NSString *)username
+        withNickname:(NSString *)nickname
+        withAppkey:(NSString *)appKey
+        withSubdomain:(NSString *)subdomain
+        resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
+
+/**
+
+ @param appKey appkey
+ @param subdomain 企业号
+ @param success 成功回调
+ @param failed 失败回调
+ */
++ (void) initWithUsername:(NSString *)username
+        withNickname:(NSString *)nickname
+        withAvatar:(NSString *)avatar
+        withAppkey:(NSString *)appKey
+        withSubdomain:(NSString *)subdomain
+        resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
+
+
+/**
  普通用户注册
 
  @param username 用户名
@@ -46,6 +102,25 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  */
 + (void)registerUser:(NSString *)username
         withNickname:(NSString *)nickname
+        withPassword:(NSString *)password
+       withSubDomain:(NSString *)subDomain
+       resultSuccess:(SuccessCallbackBlock)success
+        resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 普通用户注册接口，自定义subDomain
+
+ @param username 用户名
+ @param nickname 昵称
+ @param avatar 头像
+ @param password 密码
+ @param subDomain 企业号，主要用于多租户平台，如SaaS；其他情况可写死为 ‘vip’
+ @param success 成功回调
+ @param failed 失败回调
+ */
++ (void)registerUser:(NSString *)username
+        withNickname:(NSString *)nickname
+          withAvatar:(NSString *)avatar
         withPassword:(NSString *)password
        withSubDomain:(NSString *)subDomain
        resultSuccess:(SuccessCallbackBlock)success
@@ -188,6 +263,14 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @return true/false
  */
 + (BOOL)loginAsVisitor;
+
++ (void) loginWithUsername:(NSString *)username
+              withPassword:(NSString *)password
+                withAppkey:(NSString *)appkey
+              withSubdomain:(NSString *)subdomain
+                   withRole:(NSString *)role
+                resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
 
 /**
  客服首次登录，需要提供相关信息
@@ -590,7 +673,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success 成功回调
  @param failed 失败回调
  */
-+ (void)updateProfile:(NSString *)nickname
++ (void)updateNickname:(NSString *)nickname
         resultSuccess:(SuccessCallbackBlock)success
          resultFailed:(FailedCallbackBlock)failed;
 
@@ -619,6 +702,34 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 + (void)setAcceptStatus:(NSString *)acceptStatus
           resultSuccess:(SuccessCallbackBlock)success
            resultFailed:(FailedCallbackBlock)failed;
+
+
+/**
+ 获取客服代码
+ */
++ (void)getChatCodeResultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 更新欢迎语
+ */
++ (void)updateWelcomeTip:(NSString *)welcomeTip
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 更新密码
+ */
++ (void)updatePassword:(NSString *)password
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 更新个性签名
+ */
++ (void)updateDescription:(NSString *)description
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
 
 /**
  <#Description#>
@@ -1155,7 +1266,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success 成功回调
  @param failed 失败回调
  */
-+ (void)unBlock:(NSString *)uid
++ (void)unBlock:(NSString *)bid
   resultSuccess:(SuccessCallbackBlock)success
    resultFailed:(FailedCallbackBlock)failed;
 
@@ -1827,9 +1938,6 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param aid 指定坐席 客服uid
  @param mobile 手机
  @param email 邮箱
- @param nickname 昵称
- @param location 所属区域
- @param country 意向国家
  @param content 留言内容
  @param success 成功回调
  @param failed 失败回调
@@ -1839,12 +1947,22 @@ typedef void (^FailedCallbackBlock)(NSError *error);
         withAgentUid:(NSString *)aid
           withMobile:(NSString *)mobile
            withEmail:(NSString *)email
-        withNickname:(NSString *)nickname
-        withLocation:(NSString *)location
-         withCountry:(NSString *)country
+//        withNickname:(NSString *)nickname
+//        withLocation:(NSString *)location
+//         withCountry:(NSString *)country
          withContent:(NSString *)content
        resultSuccess:(SuccessCallbackBlock)success
         resultFailed:(FailedCallbackBlock)failed;
+
++ (void)getLeaveMessagesPage:(NSUInteger)page
+             withSize:(NSUInteger)size
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
++ (void)replyLeaveMessage:(NSString *)lid
+             withContent:(NSString *)content
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
 
 #pragma mark - 常用语
 

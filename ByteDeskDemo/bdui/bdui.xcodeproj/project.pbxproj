@@ -2335,7 +2335,7 @@
 			baseConfigurationReference = 9843616BE4D9F5EDACD39B8E /* Pods-bytedesk-ui.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEFINES_MODULE = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = L5F47963M2;
@@ -2354,7 +2354,7 @@
 					"$(PROJECT_DIR)/bdui/vendors/arm/lib",
 					"$(PROJECT_DIR)/bdui/vendors/MLAudioRecorder/amr_en_de/lib",
 				);
-				MARKETING_VERSION = 2.5.7;
+				MARKETING_VERSION = 2.6.0;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -2395,7 +2395,7 @@
 			baseConfigurationReference = 771383C0F6BD1BAE336079CD /* Pods-bytedesk-ui.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEFINES_MODULE = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = L5F47963M2;
@@ -2414,7 +2414,7 @@
 					"$(PROJECT_DIR)/bdui/vendors/arm/lib",
 					"$(PROJECT_DIR)/bdui/vendors/MLAudioRecorder/amr_en_de/lib",
 				);
-				MARKETING_VERSION = 2.5.7;
+				MARKETING_VERSION = 2.6.0;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",

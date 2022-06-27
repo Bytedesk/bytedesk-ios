@@ -34,14 +34,14 @@ target 'demo' do
     pod 'SDAutoLayout', '~> 2.2.1'
 
     # 集成核心协议库core
-    pod 'bytedesk-core', '2.5.7'
+    pod 'bytedesk-core', '2.6.0'
 
     # 集成UI界面库
 #   第一种集成方式：将bdui项目集成到自己项目中，并添加依赖，可自定义界面
 #   参考文档 https://github.com/Bytedesk/bytedesk-ios/wiki/5%E5%88%86%E9%92%9F%E9%9B%86%E6%88%90%E8%87%AA%E5%AE%9A%E4%B9%89UI
 
 #   第二种集成方式：直接使用pod
-#    pod 'bytedesk-ui', '2.5.7'
+#    pod 'bytedesk-ui', '2.6.0'
 
 end
 
@@ -72,7 +72,7 @@ target 'bytedesk-ui' do
     pod 'HCSStarRatingView', '~> 1.5'
     
     # 集成核心协议库core
-    pod 'bytedesk-core', '2.5.7'
+    pod 'bytedesk-core', '2.6.0'
 
     target 'bduiTests' do
     end

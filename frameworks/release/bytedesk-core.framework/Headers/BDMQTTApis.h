@@ -50,7 +50,7 @@
 /// @param threadType 会话类型
 /// @param threadNickname 会话昵称
 /// @param threadAvatar 会话头像
-- (void)sendMessageProtobuf:(NSString *)mid type:(NSString *)type content:(NSString *)content tid:(NSString *)tId topic:(NSString *)topic threadType:(NSString *)threadType threadNickname:(NSString *)threadNickname threadAvatar:(NSString *)threadAvatar extraParam:(ExtraParam *)extraParam;
+- (void)sendMessageProtobuf:(NSString *)mid type:(NSString *)type content:(NSString *)content tid:(NSString *)tId topic:(NSString *)topic threadType:(NSString *)threadType threadNickname:(NSString *)threadNickname threadAvatar:(NSString *)threadAvatar threadClient:(NSString *)threadClient extraParam:(ExtraParam *)extraParam;
 
 //
 - (void)sendMessageProtobuf:(NSString *)mid type:(NSString *)type content:(NSString *)content thread:(BDThreadModel *)thread extraParam:(ExtraParam *)extraParam;

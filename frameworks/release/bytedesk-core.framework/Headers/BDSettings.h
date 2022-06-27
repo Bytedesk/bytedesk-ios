@@ -20,6 +20,7 @@
 #define BD_DESCRIPTION            @"bd_description"
 #define BD_ACCEPTSTATUS           @"bd_acceptstatus"
 #define BD_AUTOREPLYCONTENT       @"bd_autoreplycontent"
+#define BD_WELCOMETIP             @"bd_welcometip"
 #define BD_STATUS                 @"bd_status"
 #define BD_CURRENT_TID            @"bd_current_tid"
 #define BD_DEVICE_TOKEN           @"bd_device_token"
@@ -218,6 +219,21 @@
  @param autoreply <#autoreply description#>
  */
 + (void)setAutoReplyContent:(NSString *)autoreply;
+
+/**
+ <#Description#>
+
+ @return <#return value description#>
+ */
++ (NSString *)getWelcomeTip;
+
+/**
+ <#Description#>
+
+ @param autoreply <#autoreply description#>
+ */
++ (void)setWelcomeTip:(NSString *)welcomeTip;
+
 
 /**
  <#Description#>

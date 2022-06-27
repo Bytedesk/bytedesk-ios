@@ -101,7 +101,8 @@
     DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     
     if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_TEXT] ||
-        [_messageModel.type isEqualToString:BD_MESSAGE_TYPE_ROBOT]) {
+        [_messageModel.type isEqualToString:BD_MESSAGE_TYPE_ROBOT]||
+        [_messageModel.type isEqualToString:BD_MESSAGE_TYPE_ROBOTV2]) {
         //
         [[UIPasteboard generalPasteboard] setString:_messageModel.content];
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_IMAGE]) {
@@ -202,7 +203,7 @@
     } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_RED_PACKET]) {
         //
         _bubbleView = [[BDRedPacketTableViewCell alloc] initMessageContentView];
-    } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_ROBOT]) {
+    } else if ([_messageModel.type isEqualToString:BD_MESSAGE_TYPE_ROBOT] || [_messageModel.type isEqualToString:BD_MESSAGE_TYPE_ROBOTV2]) {
         //
         _bubbleView = [[BDMsgRobotContentView alloc] initMessageContentView];
     } else {

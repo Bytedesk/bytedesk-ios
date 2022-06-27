@@ -45,6 +45,25 @@ typedef void (^FailedCallbackBlock)(NSError *error);
            resultFailed:(FailedCallbackBlock)failed;
 
 /**
+注册自定义普通用户：用于IM
+
+ @param username <#username description#>
+ @param nickname <#nickname description#>
+ @param avatar 头像
+ @param password <#password description#>
+ @param subDomain <#subDomain description#>
+ @param success 成功回调函数
+ @param failed 失败回调函数
+ */
+- (void)registerUser:(NSString *)username
+           withNickname:(NSString *)nickname
+             withAvatar:(NSString *)avatar
+           withPassword:(NSString *)password
+          withSubDomain:(NSString *)subDomain
+          resultSuccess:(SuccessCallbackBlock)success
+           resultFailed:(FailedCallbackBlock)failed;
+
+/**
  普通用户注册接口，自定义subDomain
  
  @param email 邮箱
@@ -560,7 +579,7 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param success 成功回调函数
  @param failed 失败回调函数
  */
-- (void)updateProfile:(NSString *)nickname
+- (void)updateNickname:(NSString *)nickname
              resultSuccess:(SuccessCallbackBlock)success
               resultFailed:(FailedCallbackBlock)failed;
 
@@ -578,6 +597,8 @@ typedef void (^FailedCallbackBlock)(NSError *error);
                resultSuccess:(SuccessCallbackBlock)success
                 resultFailed:(FailedCallbackBlock)failed;
 
+
+
 /**
  <#Description#>
 
@@ -588,6 +609,33 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (void)setAcceptStatus:(NSString *)acceptStatus
                resultSuccess:(SuccessCallbackBlock)success
                 resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 获取客服代码
+ */
+- (void)getChatCodeResultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 更新欢迎语
+ */
+- (void)updateWelcomeTip:(NSString *)welcomeTip
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 更新密码
+ */
+- (void)updatePassword:(NSString *)password
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ 更新个性签名
+ */
+- (void)updateDescription:(NSString *)description
+             resultSuccess:(SuccessCallbackBlock)success
+              resultFailed:(FailedCallbackBlock)failed;
 
 /**
  <#Description#>
@@ -1139,19 +1187,6 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 /**
  <#Description#>
 
- @param page <#page description#>
- @param size <#size description#>
- @param success 成功回调函数
- @param failed 失败回调函数
- */
-- (void)getBlocksPage:(NSUInteger)page
-             withSize:(NSUInteger)size
-        resultSuccess:(SuccessCallbackBlock)success
-         resultFailed:(FailedCallbackBlock)failed;
-
-/**
- <#Description#>
-
  @param uid <#uid description#>
  @param success 成功回调函数
  @param failed 失败回调函数
@@ -1258,6 +1293,19 @@ typedef void (^FailedCallbackBlock)(NSError *error);
 - (void)unshield:(NSString *)uid
  resultSuccess:(SuccessCallbackBlock)success
     resultFailed:(FailedCallbackBlock)failed;
+
+/**
+ <#Description#>
+
+ @param page <#page description#>
+ @param size <#size description#>
+ @param success 成功回调函数
+ @param failed 失败回调函数
+ */
+- (void)getBlocksPage:(NSUInteger)page
+             withSize:(NSUInteger)size
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
 
 /**
  <#Description#>
@@ -1660,9 +1708,6 @@ typedef void (^FailedCallbackBlock)(NSError *error);
  @param aid <#aid description#>
  @param mobile <#mobile description#>
  @param email <#email description#>
- @param nickname <#nickname description#>
- @param location <#location description#>
- @param country <#country description#>
  @param content <#content description#>
  @param success 成功回调函数
  @param failed 失败回调函数
@@ -1672,12 +1717,22 @@ typedef void (^FailedCallbackBlock)(NSError *error);
         withAgentUid:(NSString *)aid
           withMobile:(NSString *)mobile
            withEmail:(NSString *)email
-        withNickname:(NSString *)nickname
-        withLocation:(NSString *)location
-         withCountry:(NSString *)country
+//        withNickname:(NSString *)nickname
+//        withLocation:(NSString *)location
+//         withCountry:(NSString *)country
          withContent:(NSString *)content
        resultSuccess:(SuccessCallbackBlock)success
         resultFailed:(FailedCallbackBlock)failed;
+
+- (void)getLeaveMessagesPage:(NSUInteger)page
+             withSize:(NSUInteger)size
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
+
+- (void)replyLeaveMessage:(NSString *)lid
+             withContent:(NSString *)content
+        resultSuccess:(SuccessCallbackBlock)success
+         resultFailed:(FailedCallbackBlock)failed;
 
 #pragma mark - 工单系统
 

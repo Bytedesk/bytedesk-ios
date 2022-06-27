@@ -234,6 +234,7 @@
 #define BD_MESSAGE_TYPE_LINK                @"link"    // 链接消息类型
 #define BD_MESSAGE_TYPE_EVENT               @"event"  // 事件消息类型
 #define BD_MESSAGE_TYPE_ROBOT               @"robot"  // 智能问答
+#define BD_MESSAGE_TYPE_ROBOTV2             @"robotv2"  // 智能问答
 #define BD_MESSAGE_TYPE_QUESTIONNAIRE       @"questionnaire"   // 调查问卷
 #define BD_MESSAGE_TYPE_WORKGROUP           @"workGroup"   // 选择工作组
 #define BD_MESSAGE_TYPE_NOTIFICATION        @"notification"    // 通知消息类型
