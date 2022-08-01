@@ -12,7 +12,7 @@
 // 第二步：添加头文件
 #import <bytedesk-core/bdcore.h>
 
-// 管理后台：https://www.bytedesk.com/antv/user/login
+// 管理后台：https://www.bytedesk.com/admin/#/antv/user/login
 //获取appkey：登录后台->客服管理->渠道管理->添加app->appkey列
 #define DEFAULT_TEST_APPKEY @"a3f79509-5cb6-4185-8df9-b1ce13d3c655"
 //获取subDomain，也即企业号：登录后台->客服管理->客服账号->企业号列

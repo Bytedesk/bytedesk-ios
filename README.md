@@ -6,7 +6,7 @@
 
 ## 准备工作
 
-- [注册账号](https://www.bytedesk.com/antv/user/login)
+- [注册账号](https://www.bytedesk.com/admin/#/antv/user/login)
 - [登录后台](https://www.bytedesk.com/admin#/login)
 - 分配应用：登录后台->客服管理->渠道管理->添加 App
 
