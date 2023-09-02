@@ -1,6 +1,6 @@
 # 萝卜丝 · IM + 云客服
 
-## 此库之后仅做维护，不再更新，请移步至新版 [Objective-C](https://github.com/Bytedesk/bytedesk-oc/) 和 [Swift](https://github.com/Bytedesk/bytedesk-swift/)
+## 此库之后仅做维护，不再更新，请移步至新版 [开源Objective-C客服SDK](https://github.com/Bytedesk/bytedesk-oc/) 和 [开源Swift客服SDK](https://github.com/Bytedesk/bytedesk-swift/)
 
 - 致力于提供稳定、可扩展、定制化的客户服务一站式平台
 - [官方网站](https://www.bytedesk.com)
